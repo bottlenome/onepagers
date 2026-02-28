@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnePagers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #334155;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      border-color: #60a5fa;
+    }
+    .card h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .card .tag {
+      display: inline-block;
+      background: #334155;
+      color: #93c5fd;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+    .card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>OnePagers</h1>
+  <p class="subtitle">1ページで完結するツール &amp; ゲーム集</p>
+
+  <div class="grid">
+    <a class="card" href="counter/index.html">
+      <span class="tag">tool</span>
+      <h2>Counter</h2>
+      <p>シンプルなカウンター。+/- ボタンとリセット機能付き。</p>
+    </a>
+
+    <!-- 新しいプロジェクトはここに追加 -->
+  </div>
+</body>
+</html>

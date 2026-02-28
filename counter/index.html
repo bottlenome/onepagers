@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter - OnePagers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .back { color: #60a5fa; text-decoration: none; font-size: 0.9rem; }
+    .back:hover { text-decoration: underline; }
+    h1 { font-size: 1.5rem; }
+    .count {
+      font-size: 6rem;
+      font-weight: bold;
+      font-variant-numeric: tabular-nums;
+      min-width: 4ch;
+      text-align: center;
+    }
+    .buttons { display: flex; gap: 1rem; }
+    button {
+      font-size: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.1s;
+    }
+    button:active { transform: scale(0.95); }
+    .dec { background: #ef4444; color: #fff; }
+    .inc { background: #22c55e; color: #fff; }
+    .reset { background: #334155; color: #94a3b8; font-size: 1rem; padding: 0.5rem 1.2rem; }
+  </style>
+</head>
+<body>
+  <a class="back" href="../index.html">&larr; OnePagers</a>
+  <h1>Counter</h1>
+  <div class="count" id="count">0</div>
+  <div class="buttons">
+    <button class="dec" onclick="update(-1)">-</button>
+    <button class="inc" onclick="update(+1)">+</button>
+  </div>
+  <button class="reset" onclick="reset()">Reset</button>
+
+  <script>
+    let count = 0;
+    const el = document.getElementById('count');
+    function update(n) { count += n; el.textContent = count; }
+    function reset() { count = 0; el.textContent = count; }
+  </script>
+</body>
+</html>
