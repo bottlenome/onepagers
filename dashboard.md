@@ -2,6 +2,8 @@
 
 1ページで完結するツール & ゲームを管理するリポジトリ。
 
+公開サイト: https://bottlenome.github.io/onepagers/
+
 ## ディレクトリ構成
 
 ```
