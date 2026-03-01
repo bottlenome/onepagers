@@ -71,9 +71,14 @@ function handleAction(action, p1, p2) {
     case 'movetown':
       moveTo({ type:'town', id:p1 });
       break;
-    case 'movefield':
-      moveTo({ type:'field', area:p1, layer:parseInt(p2) });
+    case 'movefield': {
+      const destArea = p1;
+      const destLayer = parseInt(p2);
+      moveTo({ type:'field', area:destArea, layer:destLayer });
+      const mon = spawnMonster(destArea, destLayer);
+      if (mon) { saveGame(); startBattle(mon); }
       break;
+    }
 
     // --- フィールド ---
     case 'explore':
@@ -163,6 +168,7 @@ function handleAction(action, p1, p2) {
     case 'dojobchange':
       if (p1 === G.player.jobId) { addLog('現在の職業と同じです', 'system'); render(); break; }
       if (G.jobChangeAdvanced && G.player.level < 15) { addLog('Lv.15以上必要です', 'danger'); render(); break; }
+      if (G.jobChangeAdvanced && JOBS[G.player.jobId].type === 'advanced') { addLog('上級職からは転職できません。下級職に戻してから転職してください。', 'danger'); render(); break; }
       changeJob(G.player, p1);
       addLog(`${JOBS[p1].name}に転職した！`, 'lvup');
       saveGame();

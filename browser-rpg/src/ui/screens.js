@@ -265,6 +265,7 @@ function screenStatus() {
 function screenJobChange() {
   const p = G.player;
   const advanced = G.jobChangeAdvanced;
+  const isCurrentAdvanced = JOBS[p.jobId].type === 'advanced';
   const available = Object.entries(JOBS).filter(([id, j]) => {
     if (advanced) return j.type === 'advanced' && p.level >= 15;
     return j.type === 'basic';
@@ -276,8 +277,8 @@ function screenJobChange() {
       <p class="text-muted mb-1">${advanced
         ? 'レベル・ステータスはそのまま上級職に転職できます。'
         : '転職するとLv.1に戻ります。ステータスの70%を引き継ぎます。'}</p>
-      ${!advanced && p.level < 1 ? '' : ''}
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
+      ${advanced && isCurrentAdvanced ? '<p class="text-danger">上級職からは転職できません。下級職に戻してから転職してください。</p>' : ''}
     </div>
     <div class="job-grid">
       ${available.map(([id,j]) => `
