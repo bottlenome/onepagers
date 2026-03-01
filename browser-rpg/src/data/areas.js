@@ -124,6 +124,7 @@ const TOWN_FACILITIES = {
     { id:'status',    icon:'📊', label:'ステータス' },
   ],
   castle: [
+    { id:'inn',       icon:'🏨', label:'宿屋',   cost:100 },
     { id:'bank',      icon:'🏦', label:'銀行' },
     { id:'warehouse', icon:'📦', label:'倉庫' },
     { id:'social_arena', icon:'🏟️', label:'闘技場(対人)', plugin:true },

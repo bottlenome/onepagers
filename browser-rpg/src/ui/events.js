@@ -82,6 +82,7 @@ function handleAction(action, p1, p2) {
 
     // --- フィールド ---
     case 'explore':
+      G.battle = null;
       explore();
       break;
     case 'screen':
@@ -117,6 +118,23 @@ function handleAction(action, p1, p2) {
       if (G.player.location.type === 'town') setScreen('town');
       else setScreen('field');
       break;
+    case 'battleend-status':
+      G.battle = null;
+      pushScreen('status');
+      break;
+    case 'battleend-movetown':
+      G.battle = null;
+      moveTo({ type:'town', id:p1 });
+      break;
+    case 'battleend-movefield': {
+      G.battle = null;
+      const destArea2 = p1;
+      const destLayer2 = parseInt(p2);
+      moveTo({ type:'field', area:destArea2, layer:destLayer2 });
+      const mon2 = spawnMonster(destArea2, destLayer2);
+      if (mon2) { saveGame(); startBattle(mon2); }
+      break;
+    }
 
     // --- ショップ ---
     case 'shoptab':

@@ -98,7 +98,35 @@ function screenField() {
 function screenBattle() {
   if (!G.battle) return '<p>...</p>';
   const e = G.battle.enemy;
+  const p = G.player;
   const hpPct = Math.max(0, e.hp / e.maxHp * 100);
+  const isArena = e.arena;
+
+  // 戦闘終了後のボタン群
+  let afterBtns;
+  if (isArena || p.location.type === 'town') {
+    afterBtns = `<button class="btn primary" data-a="battleend">続ける</button>`;
+  } else {
+    const { area, layer } = p.location;
+    const exits = getFieldExits(area, layer);
+    const showHidden = area === 'old_castle' && layer === 25 &&
+      (p.bossDefeats.old_castle_boss_defeats || 0) >= 10;
+    afterBtns = `
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn primary" data-a="explore">探索する</button>
+        <button class="btn" data-a="battleend-status">ステータス</button>
+      </div>
+      <div class="sep"></div>
+      <h3>移動</h3>
+      <div class="btn-row">
+        ${exits.map(ex => {
+          if (ex.type === 'town') return `<button class="btn small" data-a="battleend-movetown" data-p="${ex.id}">${ex.label}</button>`;
+          return `<button class="btn small" data-a="battleend-movefield" data-p="${ex.area}" data-p2="${ex.layer}">${ex.label}</button>`;
+        }).join('')}
+        ${showHidden ? '<button class="btn small danger" data-a="battleend-movefield" data-p="old_castle_hidden" data-p2="25">隠し通路へ…</button>' : ''}
+      </div>`;
+  }
+
   return `
     <div class="battle-enemy">
       <div class="emoji">${e.emoji}</div>
@@ -114,8 +142,8 @@ function screenBattle() {
     <div class="battle-log" id="battle-log">
       ${G.battle.log.map(l => `<div class="bl ${l.cls}">${l.msg}</div>`).join('')}
     </div>
-    <div class="text-center mt-1">
-      <button class="btn primary hidden" id="battle-continue" data-a="battleend">続ける</button>
+    <div class="hidden" id="battle-continue">
+      ${afterBtns}
     </div>`;
 }
 
