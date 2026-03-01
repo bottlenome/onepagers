@@ -1,0 +1,3166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブラウザクエスト - OnePagers</title>
+<style>
+/* ═══════════════════════════════════════
+   ブラウザクエスト - CSS
+   ═══════════════════════════════════════ */
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --border: #334155;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #60a5fa;
+  --hp: #22c55e;
+  --mp: #818cf8;
+  --gold: #fbbf24;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warn: #f59e0b;
+  --phys: #f97316;
+  --mag: #a78bfa;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+#app {
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header (Player info bar) --- */
+#hdr {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.hdr-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.hdr-name { font-weight: bold; color: var(--accent); }
+.hdr-job { color: var(--muted); }
+.hdr-gold { color: var(--gold); font-weight: bold; }
+.hdr-loc { color: var(--muted); font-size: 0.75rem; }
+.hdr-bars { display: flex; gap: 8px; margin-top: 4px; }
+.bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+}
+.bar-label { width: 22px; text-align: right; font-weight: bold; }
+.bar-label.hp { color: var(--hp); }
+.bar-label.mp { color: var(--mp); }
+.bar-track {
+  flex: 1;
+  height: 10px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.3s;
+}
+.bar-fill.hp { background: var(--hp); }
+.bar-fill.mp { background: var(--mp); }
+.bar-fill.exp { background: var(--accent); }
+.bar-num { width: 70px; font-size: 0.7rem; color: var(--muted); text-align: right; }
+
+/* --- Main content --- */
+#main {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+}
+
+/* --- Log --- */
+#log {
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+}
+.log-entry { padding: 1px 0; border-left: 3px solid var(--border); padding-left: 8px; margin: 2px 0; }
+.log-entry.system { border-color: var(--muted); color: var(--muted); }
+.log-entry.battle { border-color: var(--phys); }
+.log-entry.magic { border-color: var(--mag); }
+.log-entry.heal { border-color: var(--hp); color: var(--hp); }
+.log-entry.reward { border-color: var(--gold); color: var(--gold); }
+.log-entry.danger { border-color: var(--danger); color: var(--danger); }
+.log-entry.levelup { border-color: var(--accent); color: var(--accent); font-weight: bold; }
+
+/* --- Back link --- */
+.back {
+  display: inline-block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+.back:hover { color: var(--accent); }
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  min-height: 44px;
+}
+.btn:hover { border-color: var(--accent); background: #263347; }
+.btn:active { transform: scale(0.97); }
+.btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+.btn.primary:hover { background: #1d4ed8; }
+.btn.danger { background: #dc2626; border-color: #dc2626; color: #fff; }
+.btn.danger:hover { background: #b91c1c; }
+.btn.gold { background: #d97706; border-color: #d97706; color: #fff; }
+.btn.gold:hover { background: #b45309; }
+.btn.small { padding: 6px 12px; font-size: 0.8rem; min-height: 36px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+
+/* --- Cards / Panels --- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.panel h3 { font-size: 0.95rem; margin-bottom: 8px; color: var(--accent); }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+.facility-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.facility-btn:hover { border-color: var(--accent); background: #263347; }
+.facility-btn .icon { font-size: 1.5rem; }
+.facility-btn .label { font-size: 0.8rem; }
+
+/* --- Title screen --- */
+.title-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+}
+.title-screen .icon { font-size: 4rem; margin-bottom: 12px; }
+.title-screen h1 { font-size: 2rem; margin-bottom: 4px; }
+.title-screen .sub { color: var(--muted); margin-bottom: 32px; }
+.title-screen .btn-row { flex-direction: column; width: 200px; }
+
+/* --- Naming screen --- */
+.naming { max-width: 400px; margin: 40px auto; text-align: center; }
+.naming input {
+  width: 100%;
+  padding: 10px;
+  background: var(--border);
+  border: 1px solid var(--muted);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  margin: 12px 0;
+  text-align: center;
+}
+.naming input:focus { outline: none; border-color: var(--accent); }
+.job-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0; }
+.job-card {
+  padding: 12px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+}
+.job-card:hover { border-color: var(--accent); }
+.job-card.selected { border-color: var(--accent); background: #1e3a5f; }
+.job-card .name { font-weight: bold; margin-bottom: 4px; }
+.job-card .desc { font-size: 0.75rem; color: var(--muted); }
+.job-card .stats { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+/* --- Field screen --- */
+.field-info {
+  text-align: center;
+  padding: 16px 0;
+}
+.field-info .area-name { font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+.field-info .layer { font-size: 0.9rem; color: var(--muted); }
+
+/* --- Battle screen --- */
+.battle-enemy {
+  text-align: center;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.battle-enemy .emoji { font-size: 3rem; }
+.battle-enemy .name { font-size: 1.1rem; font-weight: bold; margin: 4px 0; }
+.battle-log {
+  background: #0c1222;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px;
+  min-height: 120px;
+  max-height: 250px;
+  overflow-y: auto;
+  font-size: 0.82rem;
+  margin: 8px 0;
+}
+.battle-log .bl { padding: 2px 0; }
+.bl.p-atk { color: var(--phys); }
+.bl.p-mag { color: var(--mag); }
+.bl.p-heal { color: var(--hp); }
+.bl.e-atk { color: var(--danger); }
+.bl.sys { color: var(--muted); }
+.bl.reward { color: var(--gold); }
+.bl.lvup { color: var(--accent); font-weight: bold; }
+
+/* --- Shop / list screens --- */
+.shop-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+.shop-item:last-child { border-bottom: none; }
+.shop-item .info { flex: 1; }
+.shop-item .name { font-size: 0.9rem; }
+.shop-item .detail { font-size: 0.75rem; color: var(--muted); }
+.shop-item .price { color: var(--gold); font-weight: bold; font-size: 0.85rem; white-space: nowrap; }
+
+/* --- Status tabs --- */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-color: var(--accent); }
+
+/* --- Stats table --- */
+.stat-table { width: 100%; font-size: 0.85rem; }
+.stat-table td { padding: 4px 8px; }
+.stat-table .label { color: var(--muted); width: 60px; }
+.stat-table .val { font-weight: bold; }
+.stat-table .bonus { color: var(--hp); font-size: 0.75rem; }
+
+/* --- Equipment slots --- */
+.equip-slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.equip-slot .slot-label { color: var(--muted); font-size: 0.8rem; width: 60px; }
+.equip-slot .slot-item { flex: 1; font-size: 0.85rem; }
+.equip-slot .slot-empty { color: var(--muted); font-style: italic; }
+.durability { font-size: 0.7rem; }
+.dur-ok { color: var(--hp); }
+.dur-warn { color: var(--warn); }
+.dur-danger { color: var(--danger); }
+
+/* --- Enhancement / crafting --- */
+.recipe-item {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: var(--bg);
+}
+.recipe-item .recipe-name { font-weight: bold; margin-bottom: 4px; }
+.recipe-item .recipe-mats { font-size: 0.8rem; color: var(--muted); }
+.recipe-item .recipe-rate { font-size: 0.8rem; }
+.rate-high { color: var(--hp); }
+.rate-mid { color: var(--warn); }
+.rate-low { color: var(--danger); }
+
+/* --- Misc --- */
+.text-center { text-align: center; }
+.text-muted { color: var(--muted); }
+.text-gold { color: var(--gold); }
+.text-accent { color: var(--accent); }
+.text-danger { color: var(--danger); }
+.text-success { color: var(--success); }
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.hidden { display: none !important; }
+.sep { border-top: 1px solid var(--border); margin: 10px 0; }
+h2 { font-size: 1.1rem; margin-bottom: 10px; }
+.msg-box {
+  padding: 16px;
+  text-align: center;
+  background: var(--panel);
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  #app { font-size: 14px; }
+  .card-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .job-grid { grid-template-columns: 1fr; }
+  .hdr-top { font-size: 0.78rem; }
+  .btn { padding: 8px 14px; font-size: 0.85rem; }
+  .battle-enemy .emoji { font-size: 2.5rem; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="hdr"></header>
+  <main id="main"></main>
+  <footer id="log"></footer>
+</div>
+<script>
+'use strict';
+/* ═══════════════════════════════════════
+   定数
+   ═══════════════════════════════════════ */
+const STAT_KEYS = ['hp','mp','atk','def','matk','mdef','spd'];
+const STAT_NAMES = { hp:'HP', mp:'MP', atk:'攻撃', def:'防御', matk:'魔攻', mdef:'魔防', spd:'速さ' };
+const INIT_STATS = { hp:35, mp:10, atk:5, def:5, matk:5, mdef:5, spd:5 };
+const MAX_LEVEL = 30;
+const MAX_ENHANCE = 10;
+const ENHANCE_BONUS = { weapon:2, armor:2 }; // +N per enhancement level
+const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.05];
+const CARRY_RATIO_BASIC = 0.7;    // 下級職転職時の引き継ぎ率
+const CARRY_RATIO_ADVANCED = 0.5; // 上級職転職時の引き継ぎ率
+const INVENTORY_MAX = 30;
+const STRATEGIES = [
+  { id:'aggressive', name:'がんがんいこうぜ', desc:'最強スキルで攻撃優先' },
+  { id:'balanced',   name:'おまかせ',         desc:'バランスよく戦う' },
+  { id:'careful',    name:'いのちだいじに',   desc:'回復を優先する' },
+  { id:'physical',   name:'じゅもんつかうな', desc:'通常攻撃とアイテムのみ' },
+];
+const SAVE_KEY = 'onepagers-browser-rpg';
+/* ═══════════════════════════════════════
+   職業データ
+   base: レベルアップ時の確定成長値
+   rate: レベルアップ時のボーナス+1確率 (隠しパラメータ)
+   skills: 上級職のみ [{lv, id}]
+   ═══════════════════════════════════════ */
+const JOBS = {
+  warrior: {
+    name:'戦士', type:'basic',
+    desc:'高いHPと攻撃力を持つ前衛職',
+    base:{ hp:5, mp:0, atk:2, def:2, matk:0, mdef:0, spd:1 },
+    rate:{ hp:.80, mp:.20, atk:.50, def:.50, matk:.10, mdef:.15, spd:.30 },
+  },
+  mage: {
+    name:'魔法使い', type:'basic',
+    desc:'強力な魔法で攻撃する後衛職',
+    base:{ hp:3, mp:3, atk:0, def:0, matk:2, mdef:2, spd:0 },
+    rate:{ hp:.40, mp:.80, atk:.10, def:.15, matk:.70, mdef:.60, spd:.25 },
+  },
+  priest: {
+    name:'僧侶', type:'basic',
+    desc:'回復魔法を使えるバランス型',
+    base:{ hp:4, mp:2, atk:1, def:1, matk:1, mdef:2, spd:0 },
+    rate:{ hp:.60, mp:.70, atk:.30, def:.35, matk:.40, mdef:.60, spd:.25 },
+  },
+  thief: {
+    name:'盗賊', type:'basic',
+    desc:'素早さに優れた軽快な職業',
+    base:{ hp:3, mp:1, atk:2, def:1, matk:0, mdef:0, spd:3 },
+    rate:{ hp:.50, mp:.30, atk:.55, def:.20, matk:.15, mdef:.20, spd:.80 },
+  },
+  knight: {
+    name:'騎士', type:'advanced',
+    desc:'鉄壁の守りを誇る上級戦士',
+    base:{ hp:6, mp:1, atk:3, def:3, matk:0, mdef:1, spd:0 },
+    rate:{ hp:.95, mp:.30, atk:.65, def:.75, matk:.10, mdef:.35, spd:.20 },
+    skills:[{lv:3,id:'shield_bash'},{lv:8,id:'power_strike'},{lv:15,id:'iron_wall'},{lv:25,id:'devastating_blow'}],
+  },
+  archmage: {
+    name:'魔導士', type:'advanced',
+    desc:'最強の攻撃魔法を操る魔術師',
+    base:{ hp:3, mp:4, atk:0, def:0, matk:3, mdef:2, spd:0 },
+    rate:{ hp:.45, mp:.90, atk:.10, def:.15, matk:.85, mdef:.70, spd:.20 },
+    skills:[{lv:3,id:'fireball'},{lv:8,id:'blizzard'},{lv:15,id:'thunder'},{lv:25,id:'meteor'}],
+  },
+  paladin: {
+    name:'聖騎士', type:'advanced',
+    desc:'攻守回復のオールラウンダー',
+    base:{ hp:5, mp:2, atk:2, def:2, matk:1, mdef:2, spd:0 },
+    rate:{ hp:.80, mp:.60, atk:.50, def:.55, matk:.35, mdef:.55, spd:.25 },
+    skills:[{lv:3,id:'holy_light'},{lv:8,id:'divine_shield'},{lv:15,id:'judgment'},{lv:25,id:'sacred_blade'}],
+  },
+  ninja: {
+    name:'忍者', type:'advanced',
+    desc:'圧倒的な速さと一撃必殺の暗殺者',
+    base:{ hp:4, mp:1, atk:3, def:1, matk:0, mdef:1, spd:4 },
+    rate:{ hp:.55, mp:.35, atk:.70, def:.25, matk:.15, mdef:.25, spd:.90 },
+    skills:[{lv:3,id:'shadow_strike'},{lv:8,id:'smoke_bomb'},{lv:15,id:'twin_strike'},{lv:25,id:'fatal_blow'}],
+  },
+  sage: {
+    name:'賢者', type:'advanced',
+    desc:'攻撃魔法と回復魔法を両立する知者',
+    base:{ hp:3, mp:3, atk:0, def:1, matk:2, mdef:2, spd:1 },
+    rate:{ hp:.50, mp:.75, atk:.10, def:.30, matk:.75, mdef:.70, spd:.30 },
+    skills:[{lv:3,id:'heal'},{lv:8,id:'fire'},{lv:15,id:'ice'},{lv:25,id:'holy'}],
+  },
+};
+/* ═══════════════════════════════════════
+   スキルデータ
+   type: physical / magical / hybrid / heal / buff
+   power: ダメージ倍率 or 回復割合
+   cost: MP消費
+   ═══════════════════════════════════════ */
+const SKILLS = {
+  // --- 装備スキル (武器サブタイプ) ---
+  slash:       { name:'斬撃',     type:'physical', power:1.5, cost:3,  desc:'剣で力強く斬りつける' },
+  magic_bolt:  { name:'魔弾',     type:'magical',  power:1.5, cost:5,  desc:'魔力の弾を放つ' },
+  quick_stab:  { name:'急所突き', type:'physical', power:1.3, cost:2,  crit:0.3, desc:'急所を狙って突く' },
+  arrow_rain:  { name:'矢の雨',   type:'physical', power:1.4, cost:4,  desc:'矢を連射する' },
+
+  // --- 装備スキル (防具サブタイプ) ---
+  guard:         { name:'ガード',     type:'buff', effect:'guard',    cost:0, desc:'身を守り被ダメージ半減' },
+  evasion:       { name:'回避姿勢',   type:'buff', effect:'evade',    cost:0, desc:'回避に専念する' },
+  magic_barrier: { name:'魔法障壁',   type:'buff', effect:'mbarrier', cost:8, desc:'魔法ダメージを軽減' },
+
+  // --- 装備スキル (アクセサリーサブタイプ) ---
+  power_charge: { name:'力溜め',   type:'buff',     effect:'atkup',  cost:0,  desc:'次の攻撃力2倍' },
+  protect:      { name:'守護',     type:'buff',     effect:'defup',  cost:0,  desc:'防御力を一時上昇' },
+  focus:        { name:'精神集中', type:'buff',     effect:'matkup', cost:0,  desc:'次の魔法攻撃力2倍' },
+  gale:         { name:'疾風',     type:'physical', power:1.2, cost:2, first:true, desc:'先制の素早い一撃' },
+  vitality:     { name:'生命力',   type:'heal',     power:0.2, cost:0, desc:'HPを20%回復' },
+  dragon_breath:{ name:'竜の息吹', type:'magical',  power:2.0, cost:15, desc:'竜の炎で焼き尽くす' },
+
+  // --- 騎士スキル ---
+  shield_bash:      { name:'シールドバッシュ', type:'physical', power:1.5, cost:5,  stun:0.3, desc:'盾で殴り気絶させる' },
+  power_strike:     { name:'パワーストライク', type:'physical', power:2.0, cost:8,  desc:'渾身の一撃' },
+  iron_wall:        { name:'鉄壁',             type:'buff',     effect:'ironwall', cost:10, desc:'防御力大幅アップ' },
+  devastating_blow: { name:'壊滅撃',           type:'physical', power:3.0, cost:15, desc:'全てを砕く必殺の一撃' },
+
+  // --- 魔導士スキル ---
+  fireball: { name:'ファイアボール', type:'magical', power:2.0, cost:8,  desc:'炎の玉を放つ' },
+  blizzard: { name:'ブリザード',     type:'magical', power:2.0, cost:12, desc:'氷の嵐を起こす' },
+  thunder:  { name:'サンダー',       type:'magical', power:2.5, cost:15, desc:'雷を落とす' },
+  meteor:   { name:'メテオ',         type:'magical', power:4.0, cost:30, desc:'隕石を降らせる' },
+
+  // --- 聖騎士スキル ---
+  holy_light:    { name:'ホーリーライト', type:'heal',    power:0.3,  cost:8,  desc:'聖なる光でHP回復' },
+  divine_shield: { name:'聖なる盾',       type:'buff',    effect:'invincible', cost:12, desc:'1度だけ攻撃無効' },
+  judgment:      { name:'ジャッジメント', type:'hybrid',  power:2.0,  cost:20, desc:'聖なる裁きを下す' },
+  sacred_blade:  { name:'聖剣',           type:'hybrid',  power:3.0,  cost:25, desc:'聖なる力を纏った一撃' },
+
+  // --- 忍者スキル ---
+  shadow_strike: { name:'影斬り', type:'physical', power:1.5, cost:5,  first:true, desc:'影から斬りつける' },
+  smoke_bomb:    { name:'煙幕',   type:'buff',     effect:'smoke', cost:10, desc:'煙幕で攻撃を回避' },
+  twin_strike:   { name:'二刀流', type:'physical', power:1.2, cost:12, hits:2, desc:'二回連続攻撃' },
+  fatal_blow:    { name:'必殺',   type:'physical', power:4.0, cost:20, crit:0.5, desc:'一撃必殺を狙う' },
+
+  // --- 賢者スキル ---
+  heal: { name:'ヒール',   type:'heal',    power:0.5,  cost:10, desc:'HPを大きく回復' },
+  fire: { name:'ファイア', type:'magical', power:1.8,  cost:6,  desc:'炎で攻撃' },
+  ice:  { name:'アイス',   type:'magical', power:2.0,  cost:10, desc:'氷で攻撃' },
+  holy: { name:'ホーリー', type:'magical', power:3.5,  cost:25, healPct:0.3, desc:'聖なる光で攻撃しHP回復' },
+};
+
+// 装備サブタイプ → スキルID マッピング
+const SUBTYPE_SKILL = {
+  sword:'slash', staff:'magic_bolt', dagger:'quick_stab', bow:'arrow_rain',
+  heavy:'guard', light:'evasion', robe:'magic_barrier',
+  power:'power_charge', guard_acc:'protect', magic_acc:'focus',
+  speed:'gale', hp_acc:'vitality', dragon:'dragon_breath',
+};
+/* ═══════════════════════════════════════
+   装備データ
+   slot: weapon / armor / accessory
+   sub: サブタイプ (スキル決定用)
+   dur: 耐久値 (weaponのみ)
+   s: ステータスボーナス
+   g: 成長率ボーナス (隠しパラメータ)
+   ═══════════════════════════════════════ */
+const EQUIPS = {};
+[
+  // --- 武器: 剣 ---
+  //  id                  name          slot     sub     price dur  stats                    growthBonus
+  ['wooden_stick',       '木の棒',     'weapon','sword', 10,   15, {atk:2},                 {}],
+  ['copper_sword',       '銅の剣',     'weapon','sword', 50,   25, {atk:5},                 {atk:.05}],
+  ['iron_sword',         '鉄の剣',     'weapon','sword', 200,  35, {atk:10},                {atk:.08}],
+  ['steel_sword',        '鋼の剣',     'weapon','sword', 500,  45, {atk:18},                {atk:.10}],
+  ['mithril_sword',      'ミスリルの剣','weapon','sword',1500, 60, {atk:30},                {atk:.12}],
+  ['legendary_sword',    '伝説の剣',   'weapon','sword', 0,   100, {atk:50},                {atk:.15}],
+
+  // --- 武器: 短剣 ---
+  ['dagger',             'ダガー',     'weapon','dagger', 30,  20, {atk:3,spd:2},           {spd:.05}],
+  ['ninja_blade',        '忍者刀',     'weapon','dagger', 500, 30, {atk:12,spd:5},          {atk:.05,spd:.08}],
+
+  // --- 武器: 杖 ---
+  ['wooden_staff',       '木の杖',     'weapon','staff',  15,  15, {matk:3},                {}],
+  ['magic_staff',        '魔法の杖',   'weapon','staff', 200,  30, {matk:10},               {matk:.08}],
+  ['sage_staff',         '賢者の杖',   'weapon','staff', 700,  40, {matk:18},               {matk:.10}],
+  ['spirit_staff',       '精霊の杖',   'weapon','staff',1200,  50, {matk:25,mdef:8},        {matk:.12}],
+
+  // --- 武器: 弓 ---
+  ['elf_bow',            'エルフの弓', 'weapon','bow',  1200,  50, {atk:25,spd:8},          {atk:.08,spd:.08}],
+
+  // --- 防具: 重装 ---
+  ['cloth',              '布の服',     'armor','light',   10, 0, {def:2},                   {}],
+  ['leather',            '皮の鎧',     'armor','light',   80, 0, {def:5},                   {def:.05}],
+  ['chainmail',          '鎖帷子',     'armor','heavy',  300, 0, {def:12},                  {def:.08}],
+  ['iron_armor',         '鉄の鎧',     'armor','heavy',  700, 0, {def:20},                  {def:.10}],
+  ['mithril_armor',      'ミスリルの鎧','armor','heavy', 2000, 0, {def:30,mdef:10},         {def:.12}],
+  ['spirit_armor',       '精霊の鎧',   'armor','heavy', 1500, 0, {def:25,mdef:15},         {def:.08,mdef:.08}],
+
+  // --- 防具: ローブ ---
+  ['robe',               'ローブ',     'armor','robe',    60, 0, {def:3,mdef:5},            {mdef:.05}],
+  ['magic_robe',         '魔法のローブ','armor','robe',   400, 0, {def:6,mdef:12},          {mdef:.08}],
+  ['elf_robe',           'エルフのローブ','armor','robe', 1200, 0, {def:15,mdef:20},        {mdef:.10}],
+
+  // --- 防具: 軽装 ---
+  ['ninja_garb',         '忍び装束',   'armor','light',  350, 0, {def:8,spd:5},             {spd:.05}],
+
+  // --- アクセサリー ---
+  ['power_ring',         '力の指輪',   'accessory','power',     200, 0, {atk:5},            {atk:.05}],
+  ['guard_ring',         '守りの指輪', 'accessory','guard_acc', 200, 0, {def:5},             {def:.05}],
+  ['magic_amulet',       '魔力の首飾り','accessory','magic_acc', 200, 0, {matk:5},           {matk:.05}],
+  ['swift_boots',        '疾風のブーツ','accessory','speed',    200, 0, {spd:5},             {spd:.05}],
+  ['hp_ring',            'HP指輪',     'accessory','hp_acc',    300, 0, {hp:30},             {hp:.05}],
+  ['dragon_amulet',      '竜の首飾り', 'accessory','dragon',      0, 0, {atk:3,def:3,matk:3,mdef:3,spd:3}, {atk:.05,def:.05,matk:.05,mdef:.05,spd:.05}],
+].forEach(([id,name,slot,sub,price,dur,s,g]) => {
+  EQUIPS[id] = { id, name, slot, sub, price, dur, s, g };
+});
+
+// 装備オブジェクト生成 (インベントリ用)
+function createEquip(baseId, enhancement) {
+  const base = EQUIPS[baseId];
+  if (!base) return null;
+  return {
+    baseId,
+    enhancement: enhancement || 0,
+    durability: base.dur,
+    maxDurability: base.dur,
+  };
+}
+/* ═══════════════════════════════════════
+   アイテムデータ
+   type: consumable / material
+   healHp/healMp: 回復量 (0=なし, -1=全回復)
+   ═══════════════════════════════════════ */
+const ITEMS = {};
+[
+  // id              name            type          price  healHp healMp  desc
+  ['herb',          '薬草',         'consumable',  10,    30,    0,   'HPを30回復'],
+  ['hi_herb',       '上薬草',       'consumable',  50,   100,    0,   'HPを100回復'],
+  ['elixir',        '万能薬',       'consumable', 500,    -1,   -1,   'HP・MP全回復'],
+  ['magic_water',   '魔法の水',     'consumable',  20,     0,   30,   'MPを30回復'],
+  ['antidote',      '毒消し',       'consumable',   8,     0,    0,   '毒を治療'],
+  ['tent',          'テント',       'consumable', 100,    -1,   -1,   'HP・MP全回復(フィールド用)'],
+  ['world_branch',  '世界樹の枝',   'consumable', 300,    -1,   -1,   'HP・MP全回復+状態治療'],
+  // --- 素材 ---
+  ['copper_ore',    '銅鉱石',       'material',    15,     0,    0,   '鍛冶の素材'],
+  ['iron_ore',      '鉄鉱石',       'material',    40,     0,    0,   '鍛冶の素材'],
+  ['mithril_ore',   'ミスリル鉱石', 'material',   150,     0,    0,   '鍛冶の素材'],
+  ['dragon_scale',  '竜鱗',         'material',   500,     0,    0,   '伝説の素材'],
+  ['spirit_stone',  '精霊石',       'material',   200,     0,    0,   '合成の素材'],
+  ['dark_crystal',  '闇の結晶',     'material',   300,     0,    0,   '高位合成の素材'],
+].forEach(([id,name,type,price,healHp,healMp,desc]) => {
+  ITEMS[id] = { id, name, type, price, healHp, healMp, desc };
+});
+/* ═══════════════════════════════════════
+   モンスターデータ
+   area: 出現エリアID
+   minLv/maxLv: 出現レベル範囲
+   special: 特殊攻撃スキルID (null=なし)
+   drops: [{id, rate}] 追加ドロップ
+   ═══════════════════════════════════════ */
+const MONSTER_POOL = [
+  // --- 草原 (grassland) 1-15 ---
+  { name:'スライム',     emoji:'🟢', area:'grassland', minLv:1,  maxLv:3,  special:null, drops:[] },
+  { name:'コボルト',     emoji:'👹', area:'grassland', minLv:1,  maxLv:4,  special:null, drops:[] },
+  { name:'大カブト',     emoji:'🪲', area:'grassland', minLv:2,  maxLv:5,  special:null, drops:[] },
+  { name:'狼',           emoji:'🐺', area:'grassland', minLv:3,  maxLv:6,  special:null, drops:[] },
+  { name:'オーク',       emoji:'👺', area:'grassland', minLv:5,  maxLv:9,  special:null, drops:[] },
+  { name:'ゴブリン',     emoji:'👾', area:'grassland', minLv:5,  maxLv:8,  special:null, drops:[] },
+  { name:'大蛇',         emoji:'🐍', area:'grassland', minLv:7,  maxLv:11, special:null, drops:[] },
+  { name:'バンディット', emoji:'🗡️', area:'grassland', minLv:8,  maxLv:12, special:null, drops:[] },
+  { name:'リザードマン', emoji:'🦎', area:'grassland', minLv:10, maxLv:13, special:null, drops:[] },
+  { name:'ハーピー',     emoji:'🦅', area:'grassland', minLv:11, maxLv:14, special:null, drops:[] },
+  { name:'トロール',     emoji:'🧌', area:'grassland', minLv:13, maxLv:15, special:null, drops:[] },
+  { name:'グリフォン',   emoji:'🦁', area:'grassland', minLv:14, maxLv:15, special:null, drops:[] },
+
+  // --- 山道 (mountain) 11-20 ---
+  { name:'ロックゴーレム', emoji:'🪨', area:'mountain', minLv:11, maxLv:15, special:null, drops:[] },
+  { name:'コカトリス',     emoji:'🐓', area:'mountain', minLv:11, maxLv:14, special:null, drops:[] },
+  { name:'ガーゴイル',     emoji:'🗿', area:'mountain', minLv:12, maxLv:16, special:null, drops:[] },
+  { name:'ワイバーン',     emoji:'🐉', area:'mountain', minLv:14, maxLv:18, special:null, drops:[] },
+  { name:'マンティコア',   emoji:'🦂', area:'mountain', minLv:16, maxLv:20, special:null, drops:[] },
+  { name:'山賊頭',         emoji:'⚔️', area:'mountain', minLv:17, maxLv:20, special:null, drops:[] },
+
+  // --- 鉱山 (mine) 21-30 ダンジョン ---
+  { name:'スケルトン',     emoji:'💀', area:'mine', minLv:21, maxLv:24, special:null, drops:[{id:'copper_ore',rate:.30}] },
+  { name:'ダークナイト',   emoji:'🖤', area:'mine', minLv:21, maxLv:25, special:null, drops:[{id:'iron_ore',rate:.25}] },
+  { name:'ミミック',       emoji:'📦', area:'mine', minLv:22, maxLv:26, special:null, drops:[{id:'iron_ore',rate:.30}] },
+  { name:'デーモン',       emoji:'😈', area:'mine', minLv:24, maxLv:28, special:null, drops:[{id:'mithril_ore',rate:.12}] },
+  { name:'ケルベロス',     emoji:'🐕', area:'mine', minLv:25, maxLv:29, special:null, drops:[{id:'mithril_ore',rate:.15}] },
+  { name:'ドラゴンゾンビ', emoji:'🦴', area:'mine', minLv:27, maxLv:29, special:null, drops:[{id:'mithril_ore',rate:.20}] },
+
+  // --- 迷いの森 (lost_forest) 16-25 ---
+  { name:'トレント',       emoji:'🌳', area:'lost_forest', minLv:16, maxLv:19, special:null, drops:[{id:'world_branch',rate:.05}] },
+  { name:'フェアリー',     emoji:'🧚', area:'lost_forest', minLv:17, maxLv:20, special:null, drops:[{id:'spirit_stone',rate:.08}] },
+  { name:'ダークエルフ',   emoji:'🧝', area:'lost_forest', minLv:18, maxLv:22, special:null, drops:[] },
+  { name:'ユニコーン',     emoji:'🦄', area:'lost_forest', minLv:20, maxLv:23, special:null, drops:[{id:'spirit_stone',rate:.10}] },
+  { name:'オーガ',         emoji:'👹', area:'lost_forest', minLv:22, maxLv:25, special:null, drops:[] },
+  { name:'キメラ',         emoji:'🐲', area:'lost_forest', minLv:23, maxLv:25, special:null, drops:[] },
+
+  // --- 魔の森 (demon_forest) 26-30 ダンジョン ---
+  { name:'デーモンロード', emoji:'😈', area:'demon_forest', minLv:26, maxLv:28, special:null, drops:[{id:'dark_crystal',rate:.15}] },
+  { name:'ヴァンパイア',   emoji:'🧛', area:'demon_forest', minLv:27, maxLv:29, special:null, drops:[{id:'dark_crystal',rate:.15}] },
+  { name:'リッチ',         emoji:'☠️', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20}] },
+  { name:'ダークドラゴン', emoji:'🐉', area:'demon_forest', minLv:29, maxLv:30, special:'fireball', drops:[] },
+  { name:'堕天使',         emoji:'👼', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'spirit_stone',rate:.15}] },
+
+  // --- 荒野の道 (wasteland) 11-25 ---
+  { name:'サンドワーム',   emoji:'🪱', area:'wasteland', minLv:11, maxLv:15, special:null, drops:[] },
+  { name:'スコーピオン',   emoji:'🦂', area:'wasteland', minLv:12, maxLv:16, special:null, drops:[] },
+  { name:'デスクロウ',     emoji:'🦅', area:'wasteland', minLv:14, maxLv:18, special:null, drops:[] },
+  { name:'サンドゴーレム', emoji:'🏜️', area:'wasteland', minLv:16, maxLv:20, special:null, drops:[] },
+  { name:'バジリスク',     emoji:'🐍', area:'wasteland', minLv:18, maxLv:22, special:null, drops:[] },
+  { name:'デスナイト',     emoji:'⚔️', area:'wasteland', minLv:20, maxLv:25, special:null, drops:[] },
+  { name:'サンドドラゴン', emoji:'🐉', area:'wasteland', minLv:22, maxLv:25, special:'fireball', drops:[] },
+
+  // --- 古城 (old_castle) 15-25 ダンジョン ---
+  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:15, maxLv:19, special:null, drops:[{id:'iron_ore',rate:.20}] },
+  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:16, maxLv:20, special:null, drops:[] },
+  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:18, maxLv:22, special:null, drops:[] },
+  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:20, maxLv:24, special:null, drops:[{id:'dark_crystal',rate:.10}] },
+  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:22, maxLv:25, special:'blizzard', drops:[] },
+
+  // --- 古城・隠し (old_castle_hidden) 25-35 ---
+  { name:'ファントム',     emoji:'👻', area:'old_castle_hidden', minLv:25, maxLv:28, special:null, drops:[] },
+  { name:'デスロード',     emoji:'💀', area:'old_castle_hidden', minLv:27, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20}] },
+  { name:'エンシェントナイト',emoji:'🗡️', area:'old_castle_hidden', minLv:29, maxLv:32, special:'power_strike', drops:[] },
+  { name:'伝説の魔術師',   emoji:'🧙', area:'old_castle_hidden', minLv:30, maxLv:34, special:'meteor', drops:[] },
+  { name:'堕落の騎士',     emoji:'🖤', area:'old_castle_hidden', minLv:32, maxLv:35, special:'devastating_blow', drops:[] },
+
+  // --- ラストダンジョン (last_dungeon) 25-35 ---
+  { name:'カオスナイト',   emoji:'⚔️', area:'last_dungeon', minLv:25, maxLv:28, special:null, drops:[] },
+  { name:'ベヒーモス',     emoji:'🦏', area:'last_dungeon', minLv:27, maxLv:30, special:null, drops:[] },
+  { name:'キングケルベロス',emoji:'🐕', area:'last_dungeon', minLv:28, maxLv:31, special:null, drops:[] },
+  { name:'アークデーモン',  emoji:'😈', area:'last_dungeon', minLv:30, maxLv:33, special:'thunder', drops:[{id:'dark_crystal',rate:.25}] },
+  { name:'混沌竜',         emoji:'🐉', area:'last_dungeon', minLv:32, maxLv:35, special:'fireball', drops:[{id:'dragon_scale',rate:.10}] },
+];
+
+// ボスデータ (通常の計算式ではなく固定ステータス)
+const BOSSES = {
+  mine_30: {
+    name:'ドラゴン', emoji:'🐲', level:30, boss:true,
+    hp:500, maxHp:500, atk:100, def:60, matk:80, mdef:50, spd:40,
+    special:'fireball', drops:[{id:'dragon_scale',rate:1.0}],
+    title:'ドラゴンスレイヤー',
+  },
+  demon_forest_30: {
+    name:'堕ちたエルフ王', emoji:'👑', level:30, boss:true,
+    hp:600, maxHp:600, atk:90, def:70, matk:110, mdef:80, spd:55,
+    special:'holy', drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
+    title:'エルフの救世主',
+  },
+  old_castle_25: {
+    name:'古城の主', emoji:'🏰', level:25, boss:true,
+    hp:400, maxHp:400, atk:80, def:55, matk:70, mdef:50, spd:35,
+    special:'power_strike', drops:[{id:'dark_crystal',rate:1.0}],
+    title:'古城の解放者',
+    defeatKey:'old_castle_boss_defeats',
+  },
+  old_castle_hidden_35: {
+    name:'伝説のプレイヤーたち', emoji:'⚔️', level:35, boss:true,
+    hp:900, maxHp:900, atk:130, def:90, matk:120, mdef:85, spd:65,
+    special:'sacred_blade', drops:[],
+    title:'真の勇者',
+  },
+  last_dungeon_35: {
+    name:'魔神', emoji:'👿', level:35, boss:true,
+    hp:1000, maxHp:1000, atk:140, def:100, matk:140, mdef:100, spd:60,
+    special:'meteor', drops:[],
+    title:'世界の救世主',
+  },
+};
+
+// 通常モンスターのステータス計算
+function calcMonsterStats(level) {
+  return {
+    hp: level * 10 + 10,
+    maxHp: level * 10 + 10,
+    atk: Math.floor(level * 3 + 2),
+    def: level * 2,
+    matk: level * 2,
+    mdef: level * 2,
+    spd: level * 2 + 2,
+  };
+}
+
+// モンスター生成
+function spawnMonster(areaId, layer) {
+  // ボスチェック
+  const bossKey = areaId + '_' + layer;
+  if (BOSSES[bossKey]) return { ...BOSSES[bossKey] };
+
+  const pool = MONSTER_POOL.filter(m => m.area === areaId && m.minLv <= layer && m.maxLv >= layer);
+  if (pool.length === 0) {
+    // フォールバック: 最も近いモンスターを使う
+    const all = MONSTER_POOL.filter(m => m.area === areaId);
+    if (all.length === 0) return null;
+    pool.push(all[Math.floor(Math.random() * all.length)]);
+  }
+  const tmpl = pool[Math.floor(Math.random() * pool.length)];
+  const stats = calcMonsterStats(layer);
+  return {
+    name: tmpl.name,
+    emoji: tmpl.emoji,
+    level: layer,
+    ...stats,
+    boss: false,
+    special: tmpl.special,
+    drops: tmpl.drops || [],
+  };
+}
+/* ═══════════════════════════════════════
+   エリア・マップ定義
+   ═══════════════════════════════════════ */
+const AREA_INFO = {
+  grassland:         { name:'草原',       minLv:1,  maxLv:15, dungeon:false },
+  mountain:          { name:'山道',       minLv:11, maxLv:20, dungeon:false },
+  mine:              { name:'鉱山',       minLv:21, maxLv:30, dungeon:true  },
+  lost_forest:       { name:'迷いの森',   minLv:16, maxLv:25, dungeon:false },
+  demon_forest:      { name:'魔の森',     minLv:26, maxLv:30, dungeon:true  },
+  wasteland:         { name:'荒野の道',   minLv:11, maxLv:25, dungeon:false },
+  old_castle:        { name:'古城',       minLv:15, maxLv:25, dungeon:true  },
+  old_castle_hidden: { name:'古城・深層', minLv:25, maxLv:35, dungeon:true  },
+  last_dungeon:      { name:'ラストダンジョン', minLv:25, maxLv:35, dungeon:true },
+};
+
+const TOWN_INFO = {
+  town1:      { name:'始まりの町', layer:1  },
+  porttown:   { name:'港町',       layer:10 },
+  castle:     { name:'城',         layer:15 },
+  minetown:   { name:'鉱山の町',   layer:20 },
+  elfvillage: { name:'エルフの里', layer:25 },
+  lasttown:   { name:'最後の街',   layer:25 },
+};
+
+// フィールド→町 接続 (この階層にいると町に入れる)
+const FIELD_TOWN_MAP = {
+  'grassland_1':  'town1',
+  'grassland_10': 'porttown',
+  'grassland_15': 'castle',
+  'mountain_20':  'minetown',
+  'lost_forest_25': 'elfvillage',
+  'wasteland_25': 'lasttown',
+};
+
+// 町の出口一覧
+const TOWN_EXITS = {
+  town1:      [{ area:'grassland', layer:1,  label:'草原 階層1へ' }],
+  porttown:   [
+    { area:'grassland', layer:11, label:'草原 階層11へ' },
+    { area:'mountain',  layer:11, label:'山道 階層11へ' },
+    { area:'grassland', layer:10, label:'草原 階層10へ(戻る)' },
+  ],
+  castle:     [
+    { area:'grassland',   layer:15, label:'草原 階層15へ' },
+    { area:'lost_forest', layer:16, label:'迷いの森 階層16へ' },
+    { area:'wasteland',   layer:11, label:'荒野の道 階層11へ' },
+  ],
+  minetown:   [
+    { area:'mountain', layer:19, label:'山道 階層19へ(戻る)' },
+    { area:'mine',     layer:21, label:'鉱山 階層21へ' },
+  ],
+  elfvillage: [
+    { area:'lost_forest',  layer:24, label:'迷いの森 階層24へ(戻る)' },
+    { area:'demon_forest', layer:26, label:'魔の森 階層26へ' },
+  ],
+  lasttown:   [
+    { area:'wasteland',    layer:24, label:'荒野の道 階層24へ(戻る)' },
+    { area:'last_dungeon', layer:25, label:'ラストダンジョン 階層25へ' },
+  ],
+};
+
+// フィールドの接続ルール (area, layer) → 移動可能な先
+function getFieldExits(area, layer) {
+  const info = AREA_INFO[area];
+  if (!info) return [];
+  const exits = [];
+
+  // 町への入口
+  const townKey = area + '_' + layer;
+  if (FIELD_TOWN_MAP[townKey]) {
+    const tid = FIELD_TOWN_MAP[townKey];
+    exits.push({ type:'town', id:tid, label:TOWN_INFO[tid].name + 'に入る' });
+  }
+
+  // 古城入口 (荒野の道 階層15から)
+  if (area === 'wasteland' && layer === 15) {
+    exits.push({ type:'field', area:'old_castle', layer:15, label:'古城に入る' });
+  }
+
+  // 古城→隠し通路 (条件付き)
+  if (area === 'old_castle' && layer === 25) {
+    // 隠し通路は古城ボス10回撃破後に出現
+    exits.push({ type:'field', area:'old_castle', layer:24, label:'古城 階層24へ戻る' });
+    // 隠し通路判定は render 時に G.player を見て追加
+  }
+
+  // 前進
+  if (layer < info.maxLv) {
+    exits.push({ type:'field', area, layer:layer+1, label:info.name+' 階層'+(layer+1)+'へ進む' });
+  }
+  // 後退
+  if (layer > info.minLv) {
+    exits.push({ type:'field', area, layer:layer-1, label:info.name+' 階層'+(layer-1)+'へ戻る' });
+  }
+
+  // エリア端からの帰還
+  if (area === 'mountain'    && layer === 11) exits.push({ type:'town', id:'porttown', label:'港町へ戻る' });
+  if (area === 'mine'        && layer === 21) exits.push({ type:'town', id:'minetown', label:'鉱山の町へ戻る' });
+  if (area === 'lost_forest' && layer === 16) exits.push({ type:'town', id:'castle', label:'城へ戻る' });
+  if (area === 'demon_forest'&& layer === 26) exits.push({ type:'town', id:'elfvillage', label:'エルフの里へ戻る' });
+  if (area === 'wasteland'   && layer === 11) exits.push({ type:'town', id:'castle', label:'城へ戻る' });
+  if (area === 'old_castle'  && layer === 15) exits.push({ type:'field', area:'wasteland', layer:15, label:'荒野の道へ戻る' });
+  if (area === 'old_castle_hidden' && layer === 25) exits.push({ type:'field', area:'old_castle', layer:25, label:'古城 階層25へ戻る' });
+  if (area === 'last_dungeon'&& layer === 25) exits.push({ type:'town', id:'lasttown', label:'最後の街へ戻る' });
+
+  return exits;
+}
+
+// 町の施設一覧
+const TOWN_FACILITIES = {
+  town1: [
+    { id:'inn',      icon:'🏨', label:'宿屋',   cost:10 },
+    { id:'shop',     icon:'🏪', label:'よろずや', shopId:'town1_general' },
+    { id:'jobchange', icon:'🔄', label:'転職場',  advanced:false },
+    { id:'status',   icon:'📊', label:'ステータス' },
+  ],
+  porttown: [
+    { id:'inn',       icon:'🏨', label:'宿屋',       cost:30 },
+    { id:'shop',      icon:'⚔️', label:'武器屋',     shopId:'port_weapon' },
+    { id:'shop',      icon:'🛡️', label:'防具屋',     shopId:'port_armor' },
+    { id:'shop',      icon:'🧪', label:'アイテム屋', shopId:'port_item' },
+    { id:'jobchange', icon:'⬆️', label:'上級職転職場', advanced:true },
+    { id:'arena',     icon:'🏟️', label:'闘技場' },
+    { id:'status',    icon:'📊', label:'ステータス' },
+  ],
+  castle: [
+    { id:'bank',      icon:'🏦', label:'銀行' },
+    { id:'warehouse', icon:'📦', label:'倉庫' },
+    { id:'social_arena', icon:'🏟️', label:'闘技場(対人)', plugin:true },
+    { id:'social_tavern', icon:'🍺', label:'酒場', plugin:true },
+    { id:'status',    icon:'📊', label:'ステータス' },
+  ],
+  minetown: [
+    { id:'inn',       icon:'🏨', label:'宿屋',   cost:50 },
+    { id:'shop',      icon:'🏪', label:'よろずや', shopId:'mine_general' },
+    { id:'blacksmith', icon:'🔨', label:'鍛冶屋' },
+    { id:'status',    icon:'📊', label:'ステータス' },
+  ],
+  elfvillage: [
+    { id:'shop',       icon:'⚔️', label:'武器屋',   shopId:'elf_weapon' },
+    { id:'shop',       icon:'🛡️', label:'防具屋',   shopId:'elf_armor' },
+    { id:'shop',       icon:'🧪', label:'アイテム屋', shopId:'elf_item' },
+    { id:'synthesis',  icon:'⚗️', label:'合成屋' },
+    { id:'enhancement', icon:'✨', label:'強化所' },
+    { id:'status',     icon:'📊', label:'ステータス' },
+  ],
+  lasttown: [
+    { id:'inn',   icon:'🏨', label:'宿屋',       cost:80 },
+    { id:'shop',  icon:'⚔️', label:'武器屋',     shopId:'last_weapon' },
+    { id:'shop',  icon:'🛡️', label:'防具屋',     shopId:'last_armor' },
+    { id:'shop',  icon:'🧪', label:'アイテム屋', shopId:'last_item' },
+    { id:'status', icon:'📊', label:'ステータス' },
+  ],
+};
+/* ═══════════════════════════════════════
+   ショップ品揃え
+   各ショップIDに対応する商品リスト
+   items: [{id, isEquip}]
+   ═══════════════════════════════════════ */
+const SHOPS = {
+  town1_general: {
+    name: 'よろずや',
+    items: [
+      { id:'wooden_stick', isEquip:true },
+      { id:'copper_sword', isEquip:true },
+      { id:'dagger',       isEquip:true },
+      { id:'wooden_staff', isEquip:true },
+      { id:'cloth',        isEquip:true },
+      { id:'leather',      isEquip:true },
+      { id:'robe',         isEquip:true },
+      { id:'herb',         isEquip:false },
+      { id:'antidote',     isEquip:false },
+    ],
+  },
+  port_weapon: {
+    name: '武器屋',
+    items: [
+      { id:'iron_sword',   isEquip:true },
+      { id:'ninja_blade',  isEquip:true },
+      { id:'magic_staff',  isEquip:true },
+    ],
+  },
+  port_armor: {
+    name: '防具屋',
+    items: [
+      { id:'chainmail',   isEquip:true },
+      { id:'ninja_garb',  isEquip:true },
+      { id:'magic_robe',  isEquip:true },
+    ],
+  },
+  port_item: {
+    name: 'アイテム屋',
+    items: [
+      { id:'herb',        isEquip:false },
+      { id:'hi_herb',     isEquip:false },
+      { id:'magic_water', isEquip:false },
+      { id:'antidote',    isEquip:false },
+      { id:'tent',        isEquip:false },
+    ],
+  },
+  mine_general: {
+    name: 'よろずや',
+    items: [
+      { id:'steel_sword',   isEquip:true },
+      { id:'sage_staff',    isEquip:true },
+      { id:'iron_armor',    isEquip:true },
+      { id:'mithril_sword', isEquip:true },
+      { id:'mithril_armor', isEquip:true },
+      { id:'power_ring',    isEquip:true },
+      { id:'guard_ring',    isEquip:true },
+      { id:'magic_amulet',  isEquip:true },
+      { id:'swift_boots',   isEquip:true },
+      { id:'hp_ring',       isEquip:true },
+      { id:'hi_herb',       isEquip:false },
+      { id:'elixir',        isEquip:false },
+      { id:'magic_water',   isEquip:false },
+      { id:'tent',          isEquip:false },
+    ],
+  },
+  elf_weapon: {
+    name: '武器屋',
+    items: [
+      { id:'elf_bow',       isEquip:true },
+      { id:'spirit_staff',  isEquip:true },
+      { id:'mithril_sword', isEquip:true },
+    ],
+  },
+  elf_armor: {
+    name: '防具屋',
+    items: [
+      { id:'elf_robe',     isEquip:true },
+      { id:'spirit_armor', isEquip:true },
+      { id:'mithril_armor', isEquip:true },
+    ],
+  },
+  elf_item: {
+    name: 'アイテム屋',
+    items: [
+      { id:'hi_herb',      isEquip:false },
+      { id:'elixir',       isEquip:false },
+      { id:'magic_water',  isEquip:false },
+      { id:'tent',         isEquip:false },
+    ],
+  },
+  last_weapon: {
+    name: '武器屋',
+    items: [
+      { id:'mithril_sword', isEquip:true },
+      { id:'spirit_staff',  isEquip:true },
+      { id:'elf_bow',       isEquip:true },
+    ],
+  },
+  last_armor: {
+    name: '防具屋',
+    items: [
+      { id:'mithril_armor', isEquip:true },
+      { id:'spirit_armor',  isEquip:true },
+      { id:'elf_robe',      isEquip:true },
+    ],
+  },
+  last_item: {
+    name: 'アイテム屋',
+    items: [
+      { id:'elixir',       isEquip:false },
+      { id:'hi_herb',      isEquip:false },
+      { id:'magic_water',  isEquip:false },
+      { id:'tent',         isEquip:false },
+      { id:'world_branch', isEquip:false },
+    ],
+  },
+};
+/* ═══════════════════════════════════════
+   レシピデータ
+   ═══════════════════════════════════════ */
+
+// 合成レシピ (エルフの里)
+// inputs: [itemId, itemId] 消費される。失敗時も消費
+// output: { id, isEquip } 成功時に獲得
+// rate: 成功率
+const SYNTH_RECIPES = [
+  { inputs:['herb','herb'],             output:{id:'hi_herb',isEquip:false},      rate:0.80, desc:'薬草×2 → 上薬草' },
+  { inputs:['hi_herb','magic_water'],   output:{id:'elixir',isEquip:false},       rate:0.65, desc:'上薬草+魔法の水 → 万能薬' },
+  { inputs:['spirit_stone','magic_water'], output:{id:'world_branch',isEquip:false}, rate:0.70, desc:'精霊石+魔法の水 → 世界樹の枝' },
+  { inputs:['power_ring','magic_amulet'], output:{id:'dragon_amulet',isEquip:true}, rate:0.40, desc:'力の指輪+魔力の首飾り → 竜の首飾り' },
+  { inputs:['dark_crystal','spirit_stone'], output:{id:'legendary_sword',isEquip:true}, rate:0.30, desc:'闇の結晶+精霊石 → 伝説の剣' },
+  { inputs:['dark_crystal','dark_crystal'], output:{id:'dragon_amulet',isEquip:true}, rate:0.35, desc:'闇の結晶×2 → 竜の首飾り' },
+];
+
+// 鍛冶レシピ (鉱山の町)
+// inputs: [{id, count}] 素材消費。失敗時も消費
+// output: 装備ID
+// fee: ゴールド手数料
+const SMITH_RECIPES = [
+  { inputs:[{id:'copper_ore',count:2}],                      output:'copper_sword',  rate:0.90, fee:20,   desc:'銅鉱石×2 → 銅の剣' },
+  { inputs:[{id:'copper_ore',count:3}],                      output:'chainmail',     rate:0.85, fee:40,   desc:'銅鉱石×3 → 鎖帷子' },
+  { inputs:[{id:'iron_ore',count:2}],                        output:'iron_sword',    rate:0.85, fee:80,   desc:'鉄鉱石×2 → 鉄の剣' },
+  { inputs:[{id:'iron_ore',count:3}],                        output:'iron_armor',    rate:0.80, fee:150,  desc:'鉄鉱石×3 → 鉄の鎧' },
+  { inputs:[{id:'iron_ore',count:2},{id:'copper_ore',count:1}], output:'steel_sword', rate:0.80, fee:150, desc:'鉄鉱石×2+銅鉱石 → 鋼の剣' },
+  { inputs:[{id:'mithril_ore',count:2}],                     output:'mithril_sword', rate:0.70, fee:300,  desc:'ミスリル鉱石×2 → ミスリルの剣' },
+  { inputs:[{id:'mithril_ore',count:3}],                     output:'mithril_armor', rate:0.65, fee:500,  desc:'ミスリル鉱石×3 → ミスリルの鎧' },
+  { inputs:[{id:'dragon_scale',count:1},{id:'mithril_ore',count:2}], output:'legendary_sword', rate:0.40, fee:1000, desc:'竜鱗+ミスリル鉱石×2 → 伝説の剣' },
+];
+/* ═══════════════════════════════════════
+   闘技場データ (港町NPC戦)
+   ═══════════════════════════════════════ */
+const ARENA_ENTRY_FEE = 100;
+const ARENA_OPPONENTS = [
+  { name:'見習い剣士',   emoji:'🗡️', level:15 },
+  { name:'魔法戦士',     emoji:'🔮', level:18 },
+  { name:'熟練の騎士',   emoji:'🛡️', level:21 },
+  { name:'闘士',         emoji:'💪', level:24 },
+  { name:'剣聖',         emoji:'⚔️', level:27 },
+  { name:'闘技場王',     emoji:'👑', level:30 },
+];
+
+// 闘技場モンスター生成
+function createArenaOpponent(index) {
+  const opp = ARENA_OPPONENTS[index];
+  if (!opp) return null;
+  const stats = calcMonsterStats(opp.level);
+  // 闘技場の相手は少し強め
+  return {
+    name: opp.name,
+    emoji: opp.emoji,
+    level: opp.level,
+    hp: Math.floor(stats.hp * 1.3),
+    maxHp: Math.floor(stats.hp * 1.3),
+    atk: Math.floor(stats.atk * 1.2),
+    def: Math.floor(stats.def * 1.2),
+    matk: Math.floor(stats.matk * 1.2),
+    mdef: Math.floor(stats.mdef * 1.2),
+    spd: stats.spd,
+    boss: false,
+    special: null,
+    drops: [],
+    arena: true,
+  };
+}
+/* ═══════════════════════════════════════
+   ゲーム状態管理
+   ═══════════════════════════════════════ */
+const G = {
+  screen: 'title',       // 現在の画面
+  screenStack: [],       // 画面履歴 (戻る用)
+  player: null,          // プレイヤーデータ
+  battle: null,          // 戦闘中のデータ
+  log: [],               // ゲームログ
+  shopId: null,          // 現在開いてるショップ
+  shopTab: 'buy',        // buy / sell
+  statusTab: 'stats',    // stats / equip / items / skills
+  settings: {
+    battleSpeed: 600,
+    strategy: 'balanced',
+  },
+};
+
+function newPlayer(name, jobId) {
+  return {
+    name,
+    jobId,
+    level: 1,
+    exp: 0,
+    hp: 0, mp: 0,             // 現在値 (init後に設定)
+    baseStats: { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 },
+    growthStats: { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 },
+    gold: 100,
+    bankGold: 0,
+    equipment: { weapon:null, armor:null, accessory:null },
+    // equipObj: 装備中のオブジェクト {baseId, enhancement, durability, maxDurability}
+    equipObjs: { weapon:null, armor:null, accessory:null },
+    items: [],            // [{id, count}] 消耗品・素材
+    equipBag: [],         // [{baseId, enhancement, durability, maxDurability}] 装備バッグ
+    warehouse: [],        // [{id, count}] アイテム倉庫
+    warehouseEquips: [],  // 装備倉庫
+    location: { type:'town', id:'town1' },
+    lastTown: 'town1',
+    titles: [],
+    bossDefeats: {},      // bossKey: count
+    arenaProgress: 0,
+    arenaUndefeated: true,
+    jobHistory: [],       // 経験済み職業
+  };
+}
+
+// 画面遷移
+function pushScreen(screen) {
+  G.screenStack.push(G.screen);
+  G.screen = screen;
+  render();
+}
+
+function popScreen() {
+  G.screen = G.screenStack.pop() || 'town';
+  render();
+}
+
+function setScreen(screen) {
+  G.screenStack = [];
+  G.screen = screen;
+  render();
+}
+
+// ログ
+function addLog(msg, cls) {
+  cls = cls || 'system';
+  G.log.push({ msg, cls, t: Date.now() });
+  if (G.log.length > 80) G.log.splice(0, G.log.length - 60);
+}
+
+// ユーティリティ
+function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+/* ═══════════════════════════════════════
+   ステータス計算・成長システム
+   ═══════════════════════════════════════ */
+
+// 装備なしの素のステータス
+function calcNakedStats(p) {
+  const s = {};
+  for (const k of STAT_KEYS) {
+    s[k] = INIT_STATS[k] + (p.baseStats[k] || 0) + (p.growthStats[k] || 0);
+  }
+  return s;
+}
+
+// 装備込みの完全ステータス
+function calcStats(p) {
+  const s = calcNakedStats(p);
+  for (const slot of ['weapon','armor','accessory']) {
+    const eo = p.equipObjs[slot];
+    if (!eo) continue;
+    const base = EQUIPS[eo.baseId];
+    if (!base) continue;
+    for (const [k,v] of Object.entries(base.s)) {
+      s[k] = (s[k] || 0) + v;
+    }
+    // 強化ボーナス
+    if (eo.enhancement > 0) {
+      if (slot === 'weapon') s.atk += eo.enhancement * ENHANCE_BONUS.weapon;
+      if (slot === 'armor')  s.def += eo.enhancement * ENHANCE_BONUS.armor;
+    }
+  }
+  return { maxHp:s.hp, maxMp:s.mp, atk:s.atk, def:s.def, matk:s.matk, mdef:s.mdef, spd:s.spd };
+}
+
+// 成長率取得 (隠しパラメータ: 職業 + 装備)
+function getGrowthRates(p) {
+  const job = JOBS[p.jobId];
+  const rates = {};
+  for (const k of STAT_KEYS) rates[k] = job.rate[k] || 0;
+  // 装備の成長率ボーナス
+  for (const slot of ['weapon','armor','accessory']) {
+    const eo = p.equipObjs[slot];
+    if (!eo) continue;
+    const base = EQUIPS[eo.baseId];
+    if (!base || !base.g) continue;
+    for (const [k,v] of Object.entries(base.g)) {
+      rates[k] = Math.min(0.95, (rates[k] || 0) + v);
+    }
+  }
+  return rates;
+}
+
+// レベルアップ処理
+function processLevelUp(p) {
+  const job = JOBS[p.jobId];
+  const rates = getGrowthRates(p);
+  const gains = {};
+  for (const k of STAT_KEYS) {
+    let g = job.base[k] || 0;
+    if (Math.random() < (rates[k] || 0)) g += 1; // 隠し成長ボーナス
+    p.growthStats[k] = (p.growthStats[k] || 0) + g;
+    gains[k] = g;
+  }
+  p.level++;
+  const st = calcStats(p);
+  p.hp = Math.min(p.hp + gains.hp, st.maxHp);
+  p.mp = Math.min(p.mp + gains.mp, st.maxMp);
+  return gains;
+}
+
+// 経験値関連
+function expForNextLevel(level) { return level * 10; }
+
+function calcExpGain(playerLv, monsterLv) {
+  const diff = Math.abs(playerLv - monsterLv);
+  if (diff > 5) return 0;
+  return Math.max(1, Math.floor(15 + monsterLv - diff * 4));
+}
+
+// 転職処理
+function changeJob(p, newJobId) {
+  const isBasic = JOBS[newJobId].type === 'basic';
+  const ratio = isBasic ? CARRY_RATIO_BASIC : CARRY_RATIO_ADVANCED;
+  const naked = calcNakedStats(p);
+  const newBase = {};
+  for (const k of STAT_KEYS) {
+    // INIT_STATSを除いた成長分だけを引き継ぐ
+    const grown = (naked[k] || 0) - INIT_STATS[k];
+    newBase[k] = Math.floor(grown * ratio);
+  }
+  p.baseStats = newBase;
+  p.growthStats = { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 };
+  if (!p.jobHistory.includes(p.jobId)) p.jobHistory.push(p.jobId);
+  p.jobId = newJobId;
+  p.level = 1;
+  p.exp = 0;
+  const st = calcStats(p);
+  p.hp = st.maxHp;
+  p.mp = st.maxMp;
+}
+
+// 利用可能スキル一覧
+function getAvailableSkills(p) {
+  const skills = [];
+  const job = JOBS[p.jobId];
+  // 上級職スキル
+  if (job.skills) {
+    for (const js of job.skills) {
+      if (p.level >= js.lv) skills.push(js.id);
+    }
+  }
+  // 装備スキル
+  for (const slot of ['weapon','armor','accessory']) {
+    const eo = p.equipObjs[slot];
+    if (!eo) continue;
+    const base = EQUIPS[eo.baseId];
+    if (!base) continue;
+    const skillId = SUBTYPE_SKILL[base.sub];
+    if (skillId && !skills.includes(skillId)) skills.push(skillId);
+  }
+  return skills;
+}
+/* ═══════════════════════════════════════
+   戦闘システム (自動戦闘)
+   ═══════════════════════════════════════ */
+
+function startBattle(enemy) {
+  G.battle = {
+    enemy,
+    log: [],
+    over: false,
+    won: false,
+    turn: 0,
+    playerEffects: [],  // [{id, turns}]
+    enemyEffects: [],
+  };
+  G.screen = 'battle';
+  render();
+  runBattle();
+}
+
+function addBattleLog(msg, cls) {
+  cls = cls || 'sys';
+  G.battle.log.push({ msg, cls });
+  updateBattleLog();
+}
+
+function updateBattleLog() {
+  const el = document.getElementById('battle-log');
+  if (!el) return;
+  el.innerHTML = G.battle.log.map(e => `<div class="bl ${e.cls}">${e.msg}</div>`).join('');
+  el.scrollTop = el.scrollHeight;
+  // ヘッダー更新
+  document.getElementById('hdr').innerHTML = renderHeader();
+  // 敵HP更新
+  const ehp = document.getElementById('enemy-hp');
+  if (ehp && G.battle.enemy) {
+    const e = G.battle.enemy;
+    const pct = Math.max(0, e.hp / e.maxHp * 100);
+    ehp.style.width = pct + '%';
+  }
+  const ehpNum = document.getElementById('enemy-hp-num');
+  if (ehpNum && G.battle.enemy) {
+    ehpNum.textContent = Math.max(0, G.battle.enemy.hp) + '/' + G.battle.enemy.maxHp;
+  }
+}
+
+async function runBattle() {
+  const p = G.player;
+  const e = G.battle.enemy;
+  const spd = G.settings.battleSpeed;
+
+  addBattleLog(`${e.emoji} ${e.name} Lv.${e.level} が現れた！`, 'sys');
+  await delay(spd);
+
+  while (!G.battle.over) {
+    G.battle.turn++;
+    const pStats = calcStats(p);
+    const playerFirst = pStats.spd >= e.spd;
+
+    if (playerFirst) {
+      await doPlayerAction(p, e, pStats);
+      if (G.battle.over) break;
+      await doEnemyAction(p, e, pStats);
+    } else {
+      await doEnemyAction(p, e, pStats);
+      if (G.battle.over) break;
+      await doPlayerAction(p, e, pStats);
+    }
+  }
+}
+
+async function doPlayerAction(p, e, pStats) {
+  const spd = G.settings.battleSpeed;
+  // 効果チェック
+  if (hasEffect(G.battle.playerEffects, 'stun')) {
+    addBattleLog(`${p.name}は動けない！`, 'sys');
+    tickEffects(G.battle.playerEffects);
+    await delay(spd);
+    return;
+  }
+
+  const action = selectPlayerAction(p, e, pStats);
+
+  if (action.type === 'item') {
+    const item = ITEMS[action.id];
+    removeItem(p, action.id, 1);
+    if (item.healHp) {
+      const amt = item.healHp === -1 ? pStats.maxHp : item.healHp;
+      p.hp = Math.min(p.hp + amt, pStats.maxHp);
+    }
+    if (item.healMp) {
+      const amt = item.healMp === -1 ? pStats.maxMp : item.healMp;
+      p.mp = Math.min(p.mp + amt, pStats.maxMp);
+    }
+    addBattleLog(`${p.name}は${item.name}を使った！`, 'p-heal');
+  } else if (action.type === 'skill') {
+    const sk = SKILLS[action.id];
+    p.mp -= sk.cost;
+    executeSkill(p, e, pStats, sk, action.id, true);
+  } else if (action.type === 'defend') {
+    G.battle.playerEffects.push({ id:'guard', turns:1 });
+    addBattleLog(`${p.name}は身を守っている！`, 'sys');
+  } else {
+    // 通常攻撃
+    const dmg = calcPhysDamage(pStats.atk, e.def);
+    const crit = Math.random() < 0.05;
+    const finalDmg = crit ? dmg * 2 : dmg;
+    e.hp -= finalDmg;
+    addBattleLog(`${p.name}の攻撃！${finalDmg}のダメージ！${crit ? '会心の一撃！' : ''}`, 'p-atk');
+  }
+  await delay(spd);
+  checkBattleEnd(p, e);
+  tickEffects(G.battle.playerEffects);
+}
+
+async function doEnemyAction(p, e, pStats) {
+  const spd = G.settings.battleSpeed;
+  if (hasEffect(G.battle.enemyEffects, 'stun')) {
+    addBattleLog(`${e.name}は動けない！`, 'sys');
+    tickEffects(G.battle.enemyEffects);
+    await delay(spd);
+    return;
+  }
+  // 特殊攻撃 (30%の確率)
+  if (e.special && Math.random() < 0.30) {
+    const sk = SKILLS[e.special];
+    if (sk) {
+      const isMag = sk.type === 'magical' || sk.type === 'hybrid';
+      const power = sk.power || 1.5;
+      const dmg = isMag
+        ? calcMagDamage(e.matk * power, pStats.mdef)
+        : calcPhysDamage(e.atk * power, pStats.def);
+      const reduced = applyDefenseEffects(dmg, G.battle.playerEffects, isMag);
+      p.hp -= reduced;
+      addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
+      await delay(spd);
+      checkBattleEnd(p, e);
+      tickEffects(G.battle.enemyEffects);
+      return;
+    }
+  }
+  // 通常攻撃
+  const dmg = calcPhysDamage(e.atk, pStats.def);
+  const reduced = applyDefenseEffects(dmg, G.battle.playerEffects, false);
+  p.hp -= reduced;
+  addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
+  await delay(spd);
+  checkBattleEnd(p, e);
+  tickEffects(G.battle.enemyEffects);
+}
+
+function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
+  const prefix = isPlayer ? G.player.name : G.battle.enemy.name;
+  const atkCls = isPlayer ? 'p-atk' : 'e-atk';
+  const magCls = isPlayer ? 'p-mag' : 'e-atk';
+  const healCls = isPlayer ? 'p-heal' : 'sys';
+
+  if (sk.type === 'physical') {
+    const baseDmg = calcPhysDamage(userStats.atk * sk.power, target.def || calcStats(target).def || 0);
+    const hits = sk.hits || 1;
+    let totalDmg = 0;
+    const crit = Math.random() < (sk.crit || 0.05);
+    for (let i = 0; i < hits; i++) {
+      let d = crit ? baseDmg * 2 : baseDmg;
+      if (!isPlayer) d = applyDefenseEffects(d, G.battle.playerEffects, false);
+      totalDmg += d;
+    }
+    if (isPlayer) { G.battle.enemy.hp -= totalDmg; }
+    else { G.player.hp -= totalDmg; }
+    addBattleLog(`${prefix}の${sk.name}！${totalDmg}のダメージ！${crit?'会心！':''}`, atkCls);
+    if (sk.stun && Math.random() < sk.stun) {
+      const effects = isPlayer ? G.battle.enemyEffects : G.battle.playerEffects;
+      effects.push({ id:'stun', turns:1 });
+      addBattleLog(`${isPlayer ? G.battle.enemy.name : G.player.name}は気絶した！`, 'sys');
+    }
+  } else if (sk.type === 'magical') {
+    const dmg = calcMagDamage(userStats.matk * sk.power, target.mdef || 0);
+    const finalDmg = isPlayer ? dmg : applyDefenseEffects(dmg, G.battle.playerEffects, true);
+    if (isPlayer) { G.battle.enemy.hp -= finalDmg; }
+    else { G.player.hp -= finalDmg; }
+    addBattleLog(`${prefix}の${sk.name}！${finalDmg}のダメージ！`, magCls);
+    if (sk.healPct && isPlayer) {
+      const heal = Math.floor(calcStats(G.player).maxHp * sk.healPct);
+      G.player.hp = Math.min(G.player.hp + heal, calcStats(G.player).maxHp);
+      addBattleLog(`HPが${heal}回復した！`, 'p-heal');
+    }
+  } else if (sk.type === 'hybrid') {
+    const pDmg = calcPhysDamage(userStats.atk * sk.power, target.def || 0);
+    const mDmg = calcMagDamage(userStats.matk * sk.power, target.mdef || 0);
+    const total = Math.floor((pDmg + mDmg) / 2);
+    if (isPlayer) { G.battle.enemy.hp -= total; }
+    else { G.player.hp -= applyDefenseEffects(total, G.battle.playerEffects, false); }
+    addBattleLog(`${prefix}の${sk.name}！${total}のダメージ！`, atkCls);
+  } else if (sk.type === 'heal') {
+    const st = calcStats(G.player);
+    const amt = Math.floor(st.maxHp * sk.power);
+    G.player.hp = Math.min(G.player.hp + amt, st.maxHp);
+    addBattleLog(`${prefix}の${sk.name}！HPが${amt}回復！`, healCls);
+  } else if (sk.type === 'buff') {
+    const effects = isPlayer ? G.battle.playerEffects : G.battle.enemyEffects;
+    effects.push({ id:sk.effect, turns:3 });
+    addBattleLog(`${prefix}の${sk.name}！`, 'sys');
+  }
+}
+
+// AI: プレイヤー行動選択
+function selectPlayerAction(p, e, pStats) {
+  const skills = getAvailableSkills(p);
+  const hpRatio = p.hp / pStats.maxHp;
+  const strat = G.settings.strategy;
+
+  // 利用可能スキル (MP足りるもの)
+  const usable = skills.filter(id => SKILLS[id] && p.mp >= SKILLS[id].cost);
+  const heals = usable.filter(id => SKILLS[id].type === 'heal');
+  const attacks = usable
+    .filter(id => ['physical','magical','hybrid'].includes(SKILLS[id].type))
+    .sort((a,b) => (SKILLS[b].power||0) - (SKILLS[a].power||0));
+  const healItem = findHealItem(p);
+
+  switch (strat) {
+    case 'aggressive':
+      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      if (attacks.length) return { type:'skill', id:attacks[0] };
+      return { type:'attack' };
+    case 'careful':
+      if (hpRatio < 0.5 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.4 && healItem) return { type:'item', id:healItem };
+      if (attacks.length) return { type:'skill', id:attacks[Math.floor(attacks.length/2)] };
+      return { type:'attack' };
+    case 'physical':
+      if (hpRatio < 0.2 && healItem) return { type:'item', id:healItem };
+      const phys = attacks.filter(id => SKILLS[id].type === 'physical');
+      if (phys.length) return { type:'skill', id:phys[0] };
+      return { type:'attack' };
+    default: // balanced
+      if (hpRatio < 0.3 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.25 && healItem) return { type:'item', id:healItem };
+      if (attacks.length) return { type:'skill', id:attacks[0] };
+      return { type:'attack' };
+  }
+}
+
+function findHealItem(p) {
+  for (const id of ['elixir','world_branch','hi_herb','herb']) {
+    if (hasItem(p, id, 1)) return id;
+  }
+  return null;
+}
+
+// ダメージ計算
+function calcPhysDamage(atk, def) {
+  return Math.max(1, Math.floor(atk - def * 0.5) + rand(-2, 2));
+}
+function calcMagDamage(matk, mdef) {
+  return Math.max(1, Math.floor(matk - mdef * 0.5) + rand(-2, 2));
+}
+
+// 防御効果適用
+function applyDefenseEffects(dmg, effects, isMagic) {
+  if (hasEffect(effects, 'invincible')) {
+    removeEffect(effects, 'invincible');
+    return 0;
+  }
+  if (hasEffect(effects, 'guard')) dmg = Math.floor(dmg * 0.5);
+  if (hasEffect(effects, 'ironwall')) dmg = Math.floor(dmg * 0.3);
+  if (hasEffect(effects, 'smoke') && Math.random() < 0.5) return 0;
+  if (hasEffect(effects, 'evade') && Math.random() < 0.5) return 0;
+  if (isMagic && hasEffect(effects, 'mbarrier')) dmg = Math.floor(dmg * 0.5);
+  return Math.max(1, dmg);
+}
+
+// 効果管理
+function hasEffect(effects, id) { return effects.some(e => e.id === id); }
+function removeEffect(effects, id) {
+  const idx = effects.findIndex(e => e.id === id);
+  if (idx >= 0) effects.splice(idx, 1);
+}
+function tickEffects(effects) {
+  for (let i = effects.length - 1; i >= 0; i--) {
+    effects[i].turns--;
+    if (effects[i].turns <= 0) effects.splice(i, 1);
+  }
+}
+
+// 戦闘終了チェック
+function checkBattleEnd(p, e) {
+  if (e.hp <= 0) {
+    e.hp = 0;
+    G.battle.over = true;
+    G.battle.won = true;
+    handleVictory(p, e);
+  } else if (p.hp <= 0) {
+    p.hp = 0;
+    G.battle.over = true;
+    G.battle.won = false;
+    handleDefeat(p, e);
+  }
+}
+
+async function handleVictory(p, e) {
+  const spd = G.settings.battleSpeed;
+  addBattleLog(`${e.name}を倒した！`, 'reward');
+  await delay(spd);
+
+  // EXP
+  const exp = e.boss ? Math.floor(e.level * 5) : calcExpGain(p.level, e.level);
+  if (exp > 0) {
+    p.exp += exp;
+    addBattleLog(`経験値${exp}を獲得！`, 'reward');
+  }
+
+  // ゴールド
+  const gold = e.boss ? e.level * 30 : e.level * 3 + rand(0, e.level * 2);
+  p.gold += gold;
+  addBattleLog(`${gold}Gを獲得！`, 'reward');
+  await delay(spd);
+
+  // ドロップ
+  if (e.drops) {
+    for (const d of e.drops) {
+      if (Math.random() < d.rate) {
+        addItemToPlayer(p, d.id, 1);
+        const info = ITEMS[d.id] || EQUIPS[d.id];
+        addBattleLog(`${info ? info.name : d.id}を手に入れた！`, 'reward');
+        await delay(spd);
+      }
+    }
+  }
+
+  // ダンジョン宝箱
+  const areaId = p.location.type === 'field' ? p.location.area : null;
+  const isDungeon = areaId && AREA_INFO[areaId] && AREA_INFO[areaId].dungeon;
+  if (isDungeon && !e.boss && Math.random() < 0.15) {
+    const chest = openTreasureChest(e.level);
+    addBattleLog(`宝箱を発見！${chest}`, 'reward');
+    await delay(spd);
+  }
+
+  // ボス称号
+  if (e.boss && e.title && !p.titles.includes(e.title)) {
+    p.titles.push(e.title);
+    addBattleLog(`称号「${e.title}」を獲得！`, 'lvup');
+    await delay(spd);
+  }
+
+  // ボス撃破カウント
+  if (e.boss && e.defeatKey) {
+    p.bossDefeats[e.defeatKey] = (p.bossDefeats[e.defeatKey] || 0) + 1;
+  }
+
+  // レベルアップ
+  while (p.exp >= expForNextLevel(p.level) && p.level < MAX_LEVEL) {
+    p.exp -= expForNextLevel(p.level);
+    const gains = processLevelUp(p);
+    addBattleLog(`レベルアップ！Lv.${p.level-1} → Lv.${p.level}`, 'lvup');
+    const parts = STAT_KEYS.filter(k => gains[k] > 0).map(k => STAT_NAMES[k]+'+'+gains[k]);
+    if (parts.length) addBattleLog(parts.join(' '), 'lvup');
+    // 新スキル習得チェック
+    const job = JOBS[p.jobId];
+    if (job.skills) {
+      for (const js of job.skills) {
+        if (js.lv === p.level) {
+          addBattleLog(`${SKILLS[js.id].name}を習得した！`, 'lvup');
+        }
+      }
+    }
+    await delay(spd);
+  }
+
+  // 武器耐久値減少
+  degradeWeapon(p);
+
+  saveGame();
+  // 戻るボタン表示
+  const cont = document.getElementById('battle-continue');
+  if (cont) cont.classList.remove('hidden');
+}
+
+async function handleDefeat(p, e) {
+  addBattleLog(`${p.name}は力尽きた…`, 'danger');
+  await delay(800);
+  addBattleLog('最後に訪れた町で目を覚ました…', 'sys');
+  p.hp = 1;
+  p.location = { type:'town', id: p.lastTown || 'town1' };
+  saveGame();
+  const cont = document.getElementById('battle-continue');
+  if (cont) cont.classList.remove('hidden');
+}
+
+// 宝箱
+function openTreasureChest(level) {
+  const r = Math.random();
+  if (r < 0.5) {
+    const g = level * 10 + rand(0, level * 5);
+    G.player.gold += g;
+    return `${g}G入っていた！`;
+  } else if (r < 0.8) {
+    const items = ['herb','hi_herb','magic_water','tent'];
+    const id = items[rand(0, items.length-1)];
+    addItemToPlayer(G.player, id, 1);
+    return `${ITEMS[id].name}が入っていた！`;
+  } else {
+    const rare = ['mithril_ore','spirit_stone','dark_crystal'];
+    const id = rare[rand(0, rare.length-1)];
+    addItemToPlayer(G.player, id, 1);
+    return `${ITEMS[id].name}が入っていた！`;
+  }
+}
+
+// 武器耐久値減少
+function degradeWeapon(p) {
+  const wep = p.equipObjs.weapon;
+  if (!wep || wep.maxDurability === 0) return;
+  wep.durability--;
+  if (wep.durability <= 0) {
+    const name = EQUIPS[wep.baseId].name;
+    p.equipObjs.weapon = null;
+    addBattleLog(`${name}が壊れた！`, 'danger');
+    addLog(`${name}が壊れた！`, 'danger');
+  }
+}
+/* ═══════════════════════════════════════
+   経済システム (ショップ・銀行・倉庫)
+   ═══════════════════════════════════════ */
+
+// --- アイテム操作 ---
+function hasItem(p, id, count) {
+  const slot = p.items.find(i => i.id === id);
+  return slot && slot.count >= count;
+}
+
+function addItemToPlayer(p, id, count) {
+  const slot = p.items.find(i => i.id === id);
+  if (slot) { slot.count += count; }
+  else { p.items.push({ id, count }); }
+}
+
+function removeItem(p, id, count) {
+  const slot = p.items.find(i => i.id === id);
+  if (!slot) return false;
+  slot.count -= count;
+  if (slot.count <= 0) p.items.splice(p.items.indexOf(slot), 1);
+  return true;
+}
+
+// --- ショップ購入 ---
+function buyShopItem(shopItemDef) {
+  const p = G.player;
+  if (shopItemDef.isEquip) {
+    const eq = EQUIPS[shopItemDef.id];
+    if (!eq) return;
+    if (p.gold < eq.price) { addLog('ゴールドが足りない！', 'danger'); return; }
+    p.gold -= eq.price;
+    p.equipBag.push(createEquip(shopItemDef.id, 0));
+    addLog(`${eq.name}を購入した！`, 'reward');
+  } else {
+    const item = ITEMS[shopItemDef.id];
+    if (!item) return;
+    if (p.gold < item.price) { addLog('ゴールドが足りない！', 'danger'); return; }
+    p.gold -= item.price;
+    addItemToPlayer(p, shopItemDef.id, 1);
+    addLog(`${item.name}を購入した！`, 'reward');
+  }
+  saveGame();
+  render();
+}
+
+// --- ショップ売却 ---
+function sellItem(itemId, isEquip, bagIndex) {
+  const p = G.player;
+  if (isEquip) {
+    if (bagIndex < 0 || bagIndex >= p.equipBag.length) return;
+    const eo = p.equipBag[bagIndex];
+    const base = EQUIPS[eo.baseId];
+    const price = Math.floor(base.price * 0.5);
+    p.gold += price;
+    p.equipBag.splice(bagIndex, 1);
+    addLog(`${equipName(eo)}を${price}Gで売却した`, 'reward');
+  } else {
+    const item = ITEMS[itemId];
+    if (!item || !hasItem(p, itemId, 1)) return;
+    const price = Math.floor(item.price * 0.5);
+    p.gold += price;
+    removeItem(p, itemId, 1);
+    addLog(`${item.name}を${price}Gで売却した`, 'reward');
+  }
+  saveGame();
+  render();
+}
+
+// --- 装備 ---
+function equipItem(bagIndex) {
+  const p = G.player;
+  if (bagIndex < 0 || bagIndex >= p.equipBag.length) return;
+  const eo = p.equipBag[bagIndex];
+  const base = EQUIPS[eo.baseId];
+  const slot = base.slot;
+  // 今装備中のものをバッグに戻す
+  if (p.equipObjs[slot]) {
+    p.equipBag.push(p.equipObjs[slot]);
+  }
+  p.equipObjs[slot] = eo;
+  p.equipBag.splice(bagIndex, 1);
+  const st = calcStats(p);
+  p.hp = Math.min(p.hp, st.maxHp);
+  p.mp = Math.min(p.mp, st.maxMp);
+  addLog(`${equipName(eo)}を装備した`, 'system');
+  saveGame();
+  render();
+}
+
+function unequipItem(slot) {
+  const p = G.player;
+  if (!p.equipObjs[slot]) return;
+  p.equipBag.push(p.equipObjs[slot]);
+  p.equipObjs[slot] = null;
+  const st = calcStats(p);
+  p.hp = Math.min(p.hp, st.maxHp);
+  p.mp = Math.min(p.mp, st.maxMp);
+  addLog('装備を外した', 'system');
+  saveGame();
+  render();
+}
+
+// --- 宿屋 ---
+function stayAtInn(cost) {
+  const p = G.player;
+  if (p.gold < cost) { addLog('ゴールドが足りない！', 'danger'); render(); return; }
+  p.gold -= cost;
+  const st = calcStats(p);
+  p.hp = st.maxHp;
+  p.mp = st.maxMp;
+  addLog(`宿屋に泊まった。HP・MPが全回復した！(${cost}G)`, 'heal');
+  saveGame();
+  render();
+}
+
+// --- アイテム使用 ---
+function useItemFromInventory(itemId) {
+  const p = G.player;
+  const item = ITEMS[itemId];
+  if (!item || !hasItem(p, itemId, 1)) return;
+  if (item.type !== 'consumable') { addLog('このアイテムは使えない', 'danger'); render(); return; }
+  if (item.healHp === 0 && item.healMp === 0) { addLog('今は使えない', 'danger'); render(); return; }
+  removeItem(p, itemId, 1);
+  const st = calcStats(p);
+  if (item.healHp) {
+    const amt = item.healHp === -1 ? st.maxHp : item.healHp;
+    p.hp = Math.min(p.hp + amt, st.maxHp);
+  }
+  if (item.healMp) {
+    const amt = item.healMp === -1 ? st.maxMp : item.healMp;
+    p.mp = Math.min(p.mp + amt, st.maxMp);
+  }
+  addLog(`${item.name}を使った！`, 'heal');
+  saveGame();
+  render();
+}
+
+// --- 銀行 ---
+function bankDeposit(amount) {
+  const p = G.player;
+  if (amount <= 0 || p.gold < amount) return;
+  const fee = Math.max(1, Math.floor(amount * 0.05));
+  const total = amount + fee;
+  if (p.gold < total) { addLog(`手数料込み${total}G必要（手数料${fee}G）`, 'danger'); render(); return; }
+  p.gold -= total;
+  p.bankGold += amount;
+  addLog(`${amount}Gを預けた（手数料${fee}G）`, 'reward');
+  saveGame();
+  render();
+}
+
+function bankWithdraw(amount) {
+  const p = G.player;
+  if (amount <= 0 || p.bankGold < amount) return;
+  p.bankGold -= amount;
+  p.gold += amount;
+  addLog(`${amount}Gを引き出した`, 'reward');
+  saveGame();
+  render();
+}
+
+// --- 倉庫 ---
+function warehouseStore(itemId, isEquip, bagIndex) {
+  const p = G.player;
+  const fee = 10;
+  if (p.gold < fee) { addLog('手数料10Gが必要', 'danger'); render(); return; }
+  p.gold -= fee;
+  if (isEquip) {
+    const eo = p.equipBag.splice(bagIndex, 1)[0];
+    p.warehouseEquips.push(eo);
+    addLog(`${equipName(eo)}を預けた`, 'system');
+  } else {
+    if (!hasItem(p, itemId, 1)) return;
+    removeItem(p, itemId, 1);
+    const ws = p.warehouse.find(i => i.id === itemId);
+    if (ws) ws.count++; else p.warehouse.push({ id:itemId, count:1 });
+    addLog(`${(ITEMS[itemId]||{}).name||itemId}を預けた`, 'system');
+  }
+  saveGame();
+  render();
+}
+
+function warehouseRetrieve(itemId, isEquip, whIndex) {
+  const p = G.player;
+  if (isEquip) {
+    const eo = p.warehouseEquips.splice(whIndex, 1)[0];
+    p.equipBag.push(eo);
+    addLog(`${equipName(eo)}を引き出した`, 'system');
+  } else {
+    const ws = p.warehouse.find(i => i.id === itemId);
+    if (!ws || ws.count <= 0) return;
+    ws.count--;
+    if (ws.count <= 0) p.warehouse.splice(p.warehouse.indexOf(ws), 1);
+    addItemToPlayer(p, itemId, 1);
+    addLog(`${(ITEMS[itemId]||{}).name||itemId}を引き出した`, 'system');
+  }
+  saveGame();
+  render();
+}
+
+// --- ヘルパー ---
+function equipName(eo) {
+  const base = EQUIPS[eo.baseId];
+  let n = base ? base.name : eo.baseId;
+  if (eo.enhancement > 0) n += '+' + eo.enhancement;
+  return n;
+}
+
+function equipStatText(eo) {
+  const base = EQUIPS[eo.baseId];
+  if (!base) return '';
+  const parts = [];
+  for (const [k,v] of Object.entries(base.s)) {
+    let total = v;
+    if (eo.enhancement > 0) {
+      if (base.slot === 'weapon' && k === 'atk') total += eo.enhancement * ENHANCE_BONUS.weapon;
+      if (base.slot === 'armor' && k === 'def') total += eo.enhancement * ENHANCE_BONUS.armor;
+    }
+    parts.push(STAT_NAMES[k] + '+' + total);
+  }
+  return parts.join(' ');
+}
+/* ═══════════════════════════════════════
+   クラフトシステム (鍛冶・合成・強化)
+   ═══════════════════════════════════════ */
+
+// --- 鍛冶 (鉱山の町) ---
+
+// 作成可能かチェック
+function canSmith(recipe) {
+  const p = G.player;
+  if (p.gold < recipe.fee) return false;
+  for (const inp of recipe.inputs) {
+    if (!hasItem(p, inp.id, inp.count)) return false;
+  }
+  return true;
+}
+
+// 鍛冶実行
+function doSmith(recipeIndex) {
+  const recipe = SMITH_RECIPES[recipeIndex];
+  if (!recipe || !canSmith(recipe)) { addLog('素材かゴールドが足りない', 'danger'); render(); return; }
+  const p = G.player;
+  // 素材・手数料消費
+  p.gold -= recipe.fee;
+  for (const inp of recipe.inputs) {
+    removeItem(p, inp.id, inp.count);
+  }
+  // 成否判定
+  if (Math.random() < recipe.rate) {
+    const eq = createEquip(recipe.output, 0);
+    p.equipBag.push(eq);
+    const base = EQUIPS[recipe.output];
+    addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+  } else {
+    addLog('鍛冶失敗…素材は失われた。', 'danger');
+  }
+  saveGame();
+  render();
+}
+
+// --- 修理 (鍛冶屋) ---
+function canRepair(eo) {
+  if (!eo || eo.maxDurability === 0) return false;
+  return eo.durability < eo.maxDurability;
+}
+
+function getRepairCost(eo) {
+  const base = EQUIPS[eo.baseId];
+  return Math.max(5, Math.floor(base.price * 0.2));
+}
+
+function doRepair(slot) {
+  const p = G.player;
+  const eo = (slot === 'bag') ? null : p.equipObjs[slot];
+  // bagから修理する場合は別途処理
+  if (!eo || !canRepair(eo)) { addLog('修理の必要がない', 'system'); render(); return; }
+  const cost = getRepairCost(eo);
+  if (p.gold < cost) { addLog('ゴールドが足りない', 'danger'); render(); return; }
+  p.gold -= cost;
+  // 最大耐久値を5%減少 (修理のたびに劣化)
+  eo.maxDurability = Math.max(1, Math.floor(eo.maxDurability * 0.95));
+  eo.durability = eo.maxDurability;
+  addLog(`${equipName(eo)}を修理した（${cost}G, 最大耐久${eo.maxDurability}）`, 'system');
+  saveGame();
+  render();
+}
+
+function doRepairBag(bagIndex) {
+  const p = G.player;
+  const eo = p.equipBag[bagIndex];
+  if (!eo || !canRepair(eo)) { addLog('修理の必要がない', 'system'); render(); return; }
+  const cost = getRepairCost(eo);
+  if (p.gold < cost) { addLog('ゴールドが足りない', 'danger'); render(); return; }
+  p.gold -= cost;
+  eo.maxDurability = Math.max(1, Math.floor(eo.maxDurability * 0.95));
+  eo.durability = eo.maxDurability;
+  addLog(`${equipName(eo)}を修理した（${cost}G, 最大耐久${eo.maxDurability}）`, 'system');
+  saveGame();
+  render();
+}
+
+// --- 合成 (エルフの里) ---
+function canSynth(recipe) {
+  const p = G.player;
+  for (const id of recipe.inputs) {
+    if (!hasItem(p, id, 1)) return false;
+  }
+  return true;
+}
+
+function doSynth(recipeIndex) {
+  const recipe = SYNTH_RECIPES[recipeIndex];
+  if (!recipe || !canSynth(recipe)) { addLog('素材が足りない', 'danger'); render(); return; }
+  const p = G.player;
+  // 素材消費 (失敗時も消費)
+  for (const id of recipe.inputs) {
+    removeItem(p, id, 1);
+  }
+  if (Math.random() < recipe.rate) {
+    if (recipe.output.isEquip) {
+      p.equipBag.push(createEquip(recipe.output.id, 0));
+      addLog(`合成成功！${EQUIPS[recipe.output.id].name}を作成した！`, 'reward');
+    } else {
+      addItemToPlayer(p, recipe.output.id, recipe.outputCount || 1);
+      addLog(`合成成功！${ITEMS[recipe.output.id].name}を作成した！`, 'reward');
+    }
+  } else {
+    addLog('合成失敗…素材は失われた。', 'danger');
+  }
+  saveGame();
+  render();
+}
+
+// --- 強化 (エルフの里) ---
+function getEnhanceCost(eo) {
+  const base = EQUIPS[eo.baseId];
+  return Math.floor(base.price * (eo.enhancement + 1) * 0.3);
+}
+
+function getEnhanceRate(eo) {
+  if (eo.enhancement >= MAX_ENHANCE) return 0;
+  return ENHANCE_RATES[eo.enhancement] || 0;
+}
+
+// 強化対象: 装備中 or バッグから (weapon/armor のみ)
+function canEnhance(eo) {
+  if (!eo) return false;
+  const base = EQUIPS[eo.baseId];
+  if (!base) return false;
+  if (base.slot !== 'weapon' && base.slot !== 'armor') return false;
+  if (eo.enhancement >= MAX_ENHANCE) return false;
+  return true;
+}
+
+function doEnhance(source, index) {
+  // source: 'equipped_weapon', 'equipped_armor', 'bag'
+  const p = G.player;
+  let eo, slot, bagIdx;
+
+  if (source === 'equipped_weapon') {
+    eo = p.equipObjs.weapon; slot = 'weapon';
+  } else if (source === 'equipped_armor') {
+    eo = p.equipObjs.armor; slot = 'armor';
+  } else {
+    bagIdx = index;
+    eo = p.equipBag[bagIdx];
+  }
+
+  if (!eo || !canEnhance(eo)) { addLog('この装備は強化できない', 'danger'); render(); return; }
+  const cost = getEnhanceCost(eo);
+  if (p.gold < cost) { addLog('ゴールドが足りない', 'danger'); render(); return; }
+
+  const rate = getEnhanceRate(eo);
+  const name = equipName(eo);
+  p.gold -= cost;
+
+  if (Math.random() < rate) {
+    eo.enhancement++;
+    addLog(`強化成功！${name} → ${equipName(eo)}！`, 'reward');
+  } else {
+    // 失敗: 装備破壊
+    if (slot) {
+      p.equipObjs[slot] = null;
+    } else {
+      p.equipBag.splice(bagIdx, 1);
+    }
+    addLog(`強化失敗…${name}は壊れてしまった！`, 'danger');
+  }
+  const st = calcStats(p);
+  p.hp = Math.min(p.hp, st.maxHp);
+  p.mp = Math.min(p.mp, st.maxMp);
+  saveGame();
+  render();
+}
+/* ═══════════════════════════════════════
+   ナビゲーション・移動
+   ═══════════════════════════════════════ */
+
+function moveTo(loc) {
+  const p = G.player;
+  p.location = loc;
+  if (loc.type === 'town') {
+    p.lastTown = loc.id;
+    G.screen = 'town';
+    saveGame();
+  } else {
+    G.screen = 'field';
+  }
+  render();
+}
+
+function explore() {
+  const p = G.player;
+  if (p.location.type !== 'field') return;
+  const { area, layer } = p.location;
+  const monster = spawnMonster(area, layer);
+  if (!monster) { addLog('モンスターは現れなかった', 'system'); return; }
+  saveGame(); // 戦闘前にセーブ
+  startBattle(monster);
+}
+
+function enterArena() {
+  const p = G.player;
+  if (p.gold < ARENA_ENTRY_FEE) { addLog('参加費100Gが必要', 'danger'); render(); return; }
+  const opp = createArenaOpponent(p.arenaProgress);
+  if (!opp) { addLog('闘技場の全対戦者に勝利済み', 'system'); render(); return; }
+  p.gold -= ARENA_ENTRY_FEE;
+  opp.arena = true;
+  // 闘技場戦闘開始
+  startBattle(opp);
+}
+
+// 闘技場戦闘後の処理 (combat.jsのhandleVictory/Defeatで呼ばれる想定)
+// → handleVictory 内で arena フラグを確認して処理
+// 上書きではなく、handleVictory 内で arena チェックを行う
+
+function locationName(loc) {
+  if (!loc) return '';
+  if (loc.type === 'town') return TOWN_INFO[loc.id] ? TOWN_INFO[loc.id].name : loc.id;
+  if (loc.type === 'field') {
+    const info = AREA_INFO[loc.area];
+    return (info ? info.name : loc.area) + ' 階層' + loc.layer;
+  }
+  return '';
+}
+/* ═══════════════════════════════════════
+   セーブ・ロード
+   ═══════════════════════════════════════ */
+
+function saveGame() {
+  try {
+    const data = {
+      version: 1,
+      player: G.player,
+      settings: G.settings,
+    };
+    localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+  } catch (e) {
+    console.warn('Save failed:', e);
+  }
+}
+
+function loadGame() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return false;
+    const data = JSON.parse(raw);
+    if (!data.player) return false;
+    G.player = data.player;
+    G.settings = data.settings || G.settings;
+    // マイグレーション: 古いセーブデータの互換性
+    if (!G.player.equipObjs) G.player.equipObjs = { weapon:null, armor:null, accessory:null };
+    if (!G.player.equipBag) G.player.equipBag = [];
+    if (!G.player.warehouse) G.player.warehouse = [];
+    if (!G.player.warehouseEquips) G.player.warehouseEquips = [];
+    if (!G.player.bossDefeats) G.player.bossDefeats = {};
+    if (!G.player.jobHistory) G.player.jobHistory = [];
+    if (!G.player.titles) G.player.titles = [];
+    if (G.player.bankGold === undefined) G.player.bankGold = 0;
+    return true;
+  } catch (e) {
+    console.warn('Load failed:', e);
+    return false;
+  }
+}
+
+function deleteSave() {
+  localStorage.removeItem(SAVE_KEY);
+}
+
+function hasSave() {
+  return !!localStorage.getItem(SAVE_KEY);
+}
+/* ═══════════════════════════════════════
+   UIコンポーネント (再利用可能パーツ)
+   ═══════════════════════════════════════ */
+
+function renderHeader() {
+  if (!G.player) return '<div class="hdr-top"><span class="hdr-name">ブラウザクエスト</span></div>';
+  const p = G.player;
+  const st = calcStats(p);
+  const job = JOBS[p.jobId];
+  const hpPct = Math.max(0, p.hp / st.maxHp * 100);
+  const mpPct = Math.max(0, p.mp / st.maxMp * 100);
+  const expPct = p.level >= MAX_LEVEL ? 100 : (p.exp / expForNextLevel(p.level) * 100);
+
+  return `
+    <div class="hdr-top">
+      <span><span class="hdr-name">${esc(p.name)}</span> <span class="hdr-job">Lv.${p.level} ${job.name}</span></span>
+      <span class="hdr-gold">${p.gold.toLocaleString()}G</span>
+    </div>
+    <div class="hdr-bars">
+      <div class="bar-wrap">
+        <span class="bar-label hp">HP</span>
+        <div class="bar-track"><div class="bar-fill hp" style="width:${hpPct}%"></div></div>
+        <span class="bar-num">${p.hp}/${st.maxHp}</span>
+      </div>
+      <div class="bar-wrap">
+        <span class="bar-label mp">MP</span>
+        <div class="bar-track"><div class="bar-fill mp" style="width:${mpPct}%"></div></div>
+        <span class="bar-num">${p.mp}/${st.maxMp}</span>
+      </div>
+    </div>
+    <div style="margin-top:2px">
+      <div class="bar-wrap">
+        <span class="bar-label" style="color:var(--accent);width:28px">EXP</span>
+        <div class="bar-track"><div class="bar-fill exp" style="width:${expPct}%"></div></div>
+        <span class="bar-num">${p.level>=MAX_LEVEL?'MAX':p.exp+'/'+expForNextLevel(p.level)}</span>
+      </div>
+    </div>
+    <div class="hdr-loc">${locationName(p.location)}</div>`;
+}
+
+function renderLog() {
+  if (G.log.length === 0) return '';
+  return G.log.slice(-15).map(e => `<div class="log-entry ${e.cls}">${e.msg}</div>`).join('');
+}
+
+// HP バー (ミニ)
+function miniBar(current, max, cls) {
+  const pct = Math.max(0, current / max * 100);
+  return `<div class="bar-track" style="height:6px"><div class="bar-fill ${cls}" style="width:${pct}%"></div></div>`;
+}
+
+// 耐久値表示
+function durabilityText(eo) {
+  if (!eo || eo.maxDurability === 0) return '';
+  const ratio = eo.durability / eo.maxDurability;
+  const cls = ratio > 0.5 ? 'dur-ok' : ratio > 0.2 ? 'dur-warn' : 'dur-danger';
+  return `<span class="durability ${cls}">[耐久 ${eo.durability}/${eo.maxDurability}]</span>`;
+}
+
+// 成功率表示
+function rateText(rate) {
+  const pct = Math.floor(rate * 100);
+  const cls = pct >= 70 ? 'rate-high' : pct >= 40 ? 'rate-mid' : 'rate-low';
+  return `<span class="${cls}">${pct}%</span>`;
+}
+
+// エスケープ
+function esc(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+// 戻るボタン
+function backBtn(label) {
+  label = label || '戻る';
+  return `<button class="btn small" data-a="back">&larr; ${label}</button>`;
+}
+/* ═══════════════════════════════════════
+   画面レンダリング
+   ═══════════════════════════════════════ */
+
+// --- タイトル画面 ---
+function screenTitle() {
+  const canContinue = hasSave();
+  return `
+    <div class="title-screen">
+      <a class="back" href="../index.html">&larr; OnePagers</a>
+      <div class="icon">⚔️</div>
+      <h1>ブラウザクエスト</h1>
+      <p class="sub">転職・スキル・自動戦闘RPG</p>
+      <div class="btn-row">
+        <button class="btn primary" data-a="newgame">はじめから</button>
+        ${canContinue ? '<button class="btn" data-a="continue">つづきから</button>' : ''}
+      </div>
+    </div>`;
+}
+
+// --- 名前・職業選択 ---
+function screenNaming() {
+  const jobs = Object.entries(JOBS).filter(([,j]) => j.type === 'basic');
+  return `
+    <div class="naming">
+      <h2>冒険者の名前を入力</h2>
+      <input type="text" id="name-input" maxlength="8" placeholder="なまえ" value="勇者">
+      <h2 class="mt-2">職業を選択</h2>
+      <div class="job-grid">
+        ${jobs.map(([id,j]) => `
+          <div class="job-card" data-a="selectjob" data-p="${id}" id="jc-${id}">
+            <div class="name">${j.name}</div>
+            <div class="desc">${j.desc}</div>
+            <div class="stats">${STAT_KEYS.map(k => STAT_NAMES[k]+':'+j.base[k]).join(' ')}</div>
+          </div>`).join('')}
+      </div>
+      <button class="btn primary mt-2" data-a="startgame" id="btn-start" disabled>冒険に出発！</button>
+    </div>`;
+}
+
+// --- 町画面 ---
+function screenTown() {
+  const p = G.player;
+  const tid = p.location.id;
+  const town = TOWN_INFO[tid];
+  const facilities = TOWN_FACILITIES[tid] || [];
+  const exits = TOWN_EXITS[tid] || [];
+
+  return `
+    <h2>${town ? town.name : tid}</h2>
+    <div class="card-grid">
+      ${facilities.map((f,i) => `
+        <div class="facility-btn" data-a="facility" data-p="${f.id}" data-p2="${f.shopId||f.cost||f.advanced||''}" data-p3="${i}">
+          <div class="icon">${f.icon}</div>
+          <div class="label">${f.label}</div>
+        </div>`).join('')}
+    </div>
+    <div class="sep"></div>
+    <h3>移動</h3>
+    <div class="btn-row">
+      ${exits.map(e => `<button class="btn small" data-a="movefield" data-p="${e.area}" data-p2="${e.layer}">${e.label}</button>`).join('')}
+    </div>`;
+}
+
+// --- フィールド画面 ---
+function screenField() {
+  const p = G.player;
+  const { area, layer } = p.location;
+  const info = AREA_INFO[area];
+  const exits = getFieldExits(area, layer);
+
+  // 古城隠し通路判定
+  const showHidden = area === 'old_castle' && layer === 25 &&
+    (p.bossDefeats.old_castle_boss_defeats || 0) >= 10;
+
+  return `
+    <div class="field-info">
+      <div class="area-name">${info ? info.name : area}</div>
+      <div class="layer">階層 ${layer}</div>
+      ${info && info.dungeon ? '<div class="text-muted" style="font-size:0.8rem">ダンジョン</div>' : ''}
+    </div>
+    <div class="btn-row" style="justify-content:center">
+      <button class="btn primary" data-a="explore">探索する</button>
+      <button class="btn" data-a="screen" data-p="status">ステータス</button>
+    </div>
+    <div class="sep"></div>
+    <h3>移動</h3>
+    <div class="btn-row">
+      ${exits.map(e => {
+        if (e.type === 'town') return `<button class="btn small" data-a="movetown" data-p="${e.id}">${e.label}</button>`;
+        return `<button class="btn small" data-a="movefield" data-p="${e.area}" data-p2="${e.layer}">${e.label}</button>`;
+      }).join('')}
+      ${showHidden ? '<button class="btn small danger" data-a="movefield" data-p="old_castle_hidden" data-p2="25">隠し通路へ…</button>' : ''}
+    </div>`;
+}
+
+// --- 戦闘画面 ---
+function screenBattle() {
+  if (!G.battle) return '<p>...</p>';
+  const e = G.battle.enemy;
+  const hpPct = Math.max(0, e.hp / e.maxHp * 100);
+  return `
+    <div class="battle-enemy">
+      <div class="emoji">${e.emoji}</div>
+      <div class="name">${e.name} Lv.${e.level}${e.boss?' [BOSS]':''}</div>
+      <div style="max-width:200px;margin:4px auto">
+        <div class="bar-track"><div class="bar-fill hp" id="enemy-hp" style="width:${hpPct}%"></div></div>
+        <div class="text-muted" style="font-size:0.75rem" id="enemy-hp-num">${Math.max(0,e.hp)}/${e.maxHp}</div>
+      </div>
+    </div>
+    <div class="btn-row" style="justify-content:center">
+      <button class="btn small" data-a="battlespeed">${G.settings.battleSpeed <= 200 ? '通常速度' : '高速'}</button>
+    </div>
+    <div class="battle-log" id="battle-log">
+      ${G.battle.log.map(l => `<div class="bl ${l.cls}">${l.msg}</div>`).join('')}
+    </div>
+    <div class="text-center mt-1">
+      <button class="btn primary hidden" id="battle-continue" data-a="battleend">続ける</button>
+    </div>`;
+}
+
+// --- ショップ画面 ---
+function screenShop() {
+  const shop = SHOPS[G.shopId];
+  if (!shop) return backBtn() + '<p>ショップが見つからない</p>';
+  const p = G.player;
+
+  let itemsHtml = '';
+  if (G.shopTab === 'buy') {
+    itemsHtml = shop.items.map((si, i) => {
+      const info = si.isEquip ? EQUIPS[si.id] : ITEMS[si.id];
+      if (!info) return '';
+      const price = info.price;
+      const canBuy = p.gold >= price;
+      const detail = si.isEquip ? equipStatSummary(si.id) : info.desc;
+      return `<div class="shop-item">
+        <div class="info"><div class="name">${info.name}</div><div class="detail">${detail}</div></div>
+        <div class="price">${price}G</div>
+        <button class="btn small${canBuy?'':' disabled'}" data-a="buy" data-p="${i}" ${canBuy?'':'disabled'}>購入</button>
+      </div>`;
+    }).join('');
+  } else {
+    // 売却: アイテム
+    const sellItems = p.items.filter(it => (ITEMS[it.id] || {}).price > 0).map(it => {
+      const info = ITEMS[it.id];
+      return `<div class="shop-item">
+        <div class="info"><div class="name">${info.name} x${it.count}</div></div>
+        <div class="price">${Math.floor(info.price*0.5)}G</div>
+        <button class="btn small" data-a="sell" data-p="${it.id}" data-p2="item">売却</button>
+      </div>`;
+    }).join('');
+    const sellEquips = p.equipBag.map((eo, i) => {
+      const base = EQUIPS[eo.baseId];
+      return `<div class="shop-item">
+        <div class="info"><div class="name">${equipName(eo)}</div><div class="detail">${equipStatText(eo)}</div></div>
+        <div class="price">${Math.floor(base.price*0.5)}G</div>
+        <button class="btn small" data-a="sell" data-p="${i}" data-p2="equip">売却</button>
+      </div>`;
+    }).join('');
+    itemsHtml = sellItems + sellEquips;
+    if (!itemsHtml) itemsHtml = '<p class="text-muted text-center">売れるものがない</p>';
+  }
+
+  return `
+    ${backBtn()}
+    <h2>${shop.name}</h2>
+    <div class="tabs">
+      <div class="tab ${G.shopTab==='buy'?'active':''}" data-a="shoptab" data-p="buy">購入</div>
+      <div class="tab ${G.shopTab==='sell'?'active':''}" data-a="shoptab" data-p="sell">売却</div>
+    </div>
+    <div class="panel">${itemsHtml}</div>`;
+}
+
+function equipStatSummary(eqId) {
+  const eq = EQUIPS[eqId];
+  if (!eq) return '';
+  const parts = Object.entries(eq.s).map(([k,v]) => STAT_NAMES[k]+'+'+v);
+  if (eq.dur > 0) parts.push('耐久'+eq.dur);
+  return parts.join(' ');
+}
+
+// --- ステータス画面 ---
+function screenStatus() {
+  const p = G.player;
+  const st = calcStats(p);
+  const job = JOBS[p.jobId];
+  const tab = G.statusTab;
+
+  let content = '';
+  if (tab === 'stats') {
+    content = `
+      <table class="stat-table">
+        ${STAT_KEYS.filter(k=>k!=='hp'&&k!=='mp').map(k =>
+          `<tr><td class="label">${STAT_NAMES[k]}</td><td class="val">${st[k]}</td></tr>`
+        ).join('')}
+      </table>
+      <div class="mt-1 text-muted" style="font-size:0.8rem">
+        職業: ${job.name} | 経験済: ${p.jobHistory.map(j=>JOBS[j].name).join(', ')||'なし'}<br>
+        称号: ${p.titles.join(', ')||'なし'}
+      </div>`;
+  } else if (tab === 'equip') {
+    content = ['weapon','armor','accessory'].map(slot => {
+      const eo = p.equipObjs[slot];
+      const slotName = {weapon:'武器',armor:'防具',accessory:'アクセサリー'}[slot];
+      if (!eo) return `<div class="equip-slot"><span class="slot-label">${slotName}</span><span class="slot-empty">なし</span></div>`;
+      return `<div class="equip-slot">
+        <span class="slot-label">${slotName}</span>
+        <span class="slot-item">${equipName(eo)} ${durabilityText(eo)}<br><span class="text-muted" style="font-size:0.75rem">${equipStatText(eo)}</span></span>
+        <button class="btn small" data-a="unequip" data-p="${slot}">外す</button>
+      </div>`;
+    }).join('') +
+    '<div class="sep"></div><h3>装備バッグ</h3>' +
+    (p.equipBag.length === 0 ? '<p class="text-muted">なし</p>' :
+      p.equipBag.map((eo,i) => {
+        const base = EQUIPS[eo.baseId];
+        return `<div class="shop-item">
+          <div class="info"><div class="name">${equipName(eo)} ${durabilityText(eo)}</div><div class="detail">${equipStatText(eo)}</div></div>
+          <button class="btn small" data-a="equip" data-p="${i}">装備</button>
+        </div>`;
+      }).join(''));
+  } else if (tab === 'items') {
+    content = p.items.length === 0 ? '<p class="text-muted">アイテムなし</p>' :
+      p.items.map(it => {
+        const info = ITEMS[it.id];
+        if (!info) return '';
+        const canUse = info.type === 'consumable' && (info.healHp || info.healMp);
+        return `<div class="shop-item">
+          <div class="info"><div class="name">${info.name} x${it.count}</div><div class="detail">${info.desc}</div></div>
+          ${canUse ? `<button class="btn small" data-a="useitem" data-p="${it.id}">使う</button>` : ''}
+        </div>`;
+      }).join('');
+  } else if (tab === 'skills') {
+    const skills = getAvailableSkills(p);
+    content = skills.length === 0 ? '<p class="text-muted">スキルなし</p>' :
+      skills.map(id => {
+        const sk = SKILLS[id];
+        if (!sk) return '';
+        return `<div class="shop-item">
+          <div class="info"><div class="name">${sk.name}</div><div class="detail">${sk.desc} | MP${sk.cost||0}</div></div>
+        </div>`;
+      }).join('');
+  }
+
+  // 作戦選択
+  const stratHtml = STRATEGIES.map(s =>
+    `<button class="btn small ${G.settings.strategy===s.id?'primary':''}" data-a="strategy" data-p="${s.id}">${s.name}</button>`
+  ).join('');
+
+  return `
+    ${backBtn()}
+    <h2>ステータス</h2>
+    <div class="tabs">
+      <div class="tab ${tab==='stats'?'active':''}" data-a="statustab" data-p="stats">能力</div>
+      <div class="tab ${tab==='equip'?'active':''}" data-a="statustab" data-p="equip">装備</div>
+      <div class="tab ${tab==='items'?'active':''}" data-a="statustab" data-p="items">持ち物</div>
+      <div class="tab ${tab==='skills'?'active':''}" data-a="statustab" data-p="skills">スキル</div>
+    </div>
+    <div class="panel">${content}</div>
+    <div class="sep"></div>
+    <h3>作戦</h3>
+    <div class="btn-row">${stratHtml}</div>`;
+}
+
+// --- 転職画面 ---
+function screenJobChange() {
+  const p = G.player;
+  const advanced = G.jobChangeAdvanced;
+  const available = Object.entries(JOBS).filter(([id, j]) => {
+    if (advanced) return j.type === 'advanced' && p.level >= 15;
+    return j.type === 'basic';
+  });
+  const ratio = advanced ? CARRY_RATIO_ADVANCED : CARRY_RATIO_BASIC;
+  const ratioText = advanced ? '50%' : '70%';
+
+  return `
+    ${backBtn()}
+    <h2>${advanced ? '上級職転職場' : '転職場'}</h2>
+    <div class="panel">
+      <p class="text-muted mb-1">転職するとLv.1に戻ります。ステータスの${ratioText}を引き継ぎます。</p>
+      ${!advanced && p.level < 1 ? '' : ''}
+      ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
+    </div>
+    <div class="job-grid">
+      ${available.map(([id,j]) => `
+        <div class="job-card" data-a="dojobchange" data-p="${id}">
+          <div class="name">${j.name}${id===p.jobId?' (現在)':''}</div>
+          <div class="desc">${j.desc}</div>
+          <div class="stats">${STAT_KEYS.map(k => STAT_NAMES[k]+':'+j.base[k]).join(' ')}</div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// --- 宿屋画面 ---
+function screenInn() {
+  const cost = G.innCost || 10;
+  const p = G.player;
+  const st = calcStats(p);
+  const full = p.hp >= st.maxHp && p.mp >= st.maxMp;
+  return `
+    ${backBtn()}
+    <h2>宿屋</h2>
+    <div class="msg-box">
+      <p>一晩${cost}Gで泊まれます。HP・MPが全回復します。</p>
+      <p class="mt-1">HP: ${p.hp}/${st.maxHp} | MP: ${p.mp}/${st.maxMp}</p>
+      <button class="btn primary mt-2 ${full || p.gold < cost ? 'disabled' : ''}"
+        data-a="doinn" data-p="${cost}"
+        ${full || p.gold < cost ? 'disabled' : ''}>
+        ${full ? '全回復済み' : p.gold < cost ? 'ゴールド不足' : `泊まる (${cost}G)`}
+      </button>
+    </div>`;
+}
+
+// --- 闘技場画面 ---
+function screenArena() {
+  const p = G.player;
+  const prog = p.arenaProgress;
+  const opp = ARENA_OPPONENTS[prog];
+  const allDone = !opp;
+
+  return `
+    ${backBtn()}
+    <h2>闘技場</h2>
+    <div class="panel">
+      <p class="text-muted">参加費: ${ARENA_ENTRY_FEE}G | 勝利賞金: 対戦相手Lv×20G</p>
+      <p class="text-muted">全勝で称号獲得！負けると最初から。</p>
+      ${p.arenaUndefeated ? '<p class="text-success">現在無敗</p>' : '<p class="text-danger">再挑戦中</p>'}
+    </div>
+    <h3>進捗: ${prog}/${ARENA_OPPONENTS.length}</h3>
+    ${ARENA_OPPONENTS.map((o,i) => `
+      <div class="shop-item">
+        <div class="info">
+          <div class="name">${o.emoji} ${o.name} Lv.${o.level}</div>
+          <div class="detail">賞金: ${o.level*20}G</div>
+        </div>
+        <span>${i < prog ? '✅' : i === prog ? '⚔️' : '🔒'}</span>
+      </div>`).join('')}
+    ${allDone
+      ? '<div class="msg-box"><p class="text-success">全対戦者に勝利！</p></div>'
+      : `<button class="btn primary mt-1" data-a="doarena" ${p.gold<ARENA_ENTRY_FEE?'disabled':''}>挑戦する (${ARENA_ENTRY_FEE}G)</button>`
+    }`;
+}
+
+// --- 銀行画面 ---
+function screenBank() {
+  const p = G.player;
+  return `
+    ${backBtn()}
+    <h2>銀行</h2>
+    <div class="panel">
+      <p>所持金: <span class="text-gold">${p.gold.toLocaleString()}G</span></p>
+      <p>預金: <span class="text-gold">${p.bankGold.toLocaleString()}G</span></p>
+      <p class="text-muted" style="font-size:0.8rem">預入手数料: 5%</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn" data-a="bankdeposit" data-p="100" ${p.gold<105?'disabled':''}>100G預ける</button>
+      <button class="btn" data-a="bankdeposit" data-p="1000" ${p.gold<1050?'disabled':''}>1000G預ける</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn" data-a="bankwithdraw" data-p="100" ${p.bankGold<100?'disabled':''}>100G引き出す</button>
+      <button class="btn" data-a="bankwithdraw" data-p="1000" ${p.bankGold<1000?'disabled':''}>1000G引き出す</button>
+    </div>`;
+}
+
+// --- 倉庫画面 ---
+function screenWarehouse() {
+  const p = G.player;
+  // 預ける
+  const storeItems = p.items.map(it => {
+    const info = ITEMS[it.id];
+    return `<div class="shop-item">
+      <div class="info"><div class="name">${info?info.name:it.id} x${it.count}</div></div>
+      <button class="btn small" data-a="whstore" data-p="${it.id}" data-p2="item">預ける(10G)</button>
+    </div>`;
+  }).join('');
+  const storeEquips = p.equipBag.map((eo,i) =>
+    `<div class="shop-item">
+      <div class="info"><div class="name">${equipName(eo)}</div></div>
+      <button class="btn small" data-a="whstore" data-p="${i}" data-p2="equip">預ける(10G)</button>
+    </div>`).join('');
+  // 引き出す
+  const retItems = p.warehouse.map(it => {
+    const info = ITEMS[it.id];
+    return `<div class="shop-item">
+      <div class="info"><div class="name">${info?info.name:it.id} x${it.count}</div></div>
+      <button class="btn small" data-a="whretrieve" data-p="${it.id}" data-p2="item">引き出す</button>
+    </div>`;
+  }).join('');
+  const retEquips = p.warehouseEquips.map((eo,i) =>
+    `<div class="shop-item">
+      <div class="info"><div class="name">${equipName(eo)}</div></div>
+      <button class="btn small" data-a="whretrieve" data-p="${i}" data-p2="equip">引き出す</button>
+    </div>`).join('');
+
+  return `
+    ${backBtn()}
+    <h2>倉庫</h2>
+    <div class="panel"><p class="text-muted">預け手数料: 1個10G / 引き出し無料</p></div>
+    <h3>預ける</h3>
+    <div class="panel">${storeItems}${storeEquips || '<p class="text-muted">なし</p>'}</div>
+    <h3>引き出す</h3>
+    <div class="panel">${retItems}${retEquips || '<p class="text-muted">なし</p>'}</div>`;
+}
+
+// --- 鍛冶屋画面 ---
+function screenBlacksmith() {
+  const p = G.player;
+  // 製造
+  const craftHtml = SMITH_RECIPES.map((r,i) => {
+    const can = canSmith(r);
+    const outEq = EQUIPS[r.output];
+    return `<div class="recipe-item">
+      <div class="recipe-name">${outEq?outEq.name:r.output}</div>
+      <div class="recipe-mats">${r.desc} | ${r.fee}G</div>
+      <div class="recipe-rate">成功率: ${rateText(r.rate)}</div>
+      <button class="btn small mt-1 ${can?'':'disabled'}" data-a="dosmith" data-p="${i}" ${can?'':'disabled'}>製造</button>
+    </div>`;
+  }).join('');
+
+  // 修理
+  const repairTargets = [];
+  if (p.equipObjs.weapon && canRepair(p.equipObjs.weapon)) {
+    const eo = p.equipObjs.weapon;
+    repairTargets.push(`<div class="shop-item">
+      <div class="info"><div class="name">${equipName(eo)} ${durabilityText(eo)}</div></div>
+      <div class="price">${getRepairCost(eo)}G</div>
+      <button class="btn small" data-a="dorepair" data-p="weapon">修理</button>
+    </div>`);
+  }
+  p.equipBag.forEach((eo,i) => {
+    if (canRepair(eo)) {
+      repairTargets.push(`<div class="shop-item">
+        <div class="info"><div class="name">${equipName(eo)} ${durabilityText(eo)}</div></div>
+        <div class="price">${getRepairCost(eo)}G</div>
+        <button class="btn small" data-a="dorepairbag" data-p="${i}">修理</button>
+      </div>`);
+    }
+  });
+
+  return `
+    ${backBtn()}
+    <h2>鍛冶屋</h2>
+    <h3>製造</h3>
+    <div class="panel">${craftHtml}</div>
+    <h3>修理</h3>
+    <div class="panel">
+      <p class="text-muted mb-1">修理のたびに最大耐久値が5%低下します</p>
+      ${repairTargets.length ? repairTargets.join('') : '<p class="text-muted">修理が必要な武器なし</p>'}
+    </div>`;
+}
+
+// --- 合成屋画面 ---
+function screenSynthesis() {
+  const synthHtml = SYNTH_RECIPES.map((r,i) => {
+    const can = canSynth(r);
+    return `<div class="recipe-item">
+      <div class="recipe-name">${r.desc}</div>
+      <div class="recipe-rate">成功率: ${rateText(r.rate)} <span class="text-danger" style="font-size:0.75rem">失敗で素材消失</span></div>
+      <button class="btn small mt-1 ${can?'':'disabled'}" data-a="dosynth" data-p="${i}" ${can?'':'disabled'}>合成</button>
+    </div>`;
+  }).join('');
+
+  return `
+    ${backBtn()}
+    <h2>合成屋</h2>
+    <div class="panel"><p class="text-muted">2つのアイテムを合成して新しいアイテムを作ります。失敗すると両方失われます。</p></div>
+    <div class="panel">${synthHtml}</div>`;
+}
+
+// --- 強化所画面 ---
+function screenEnhancement() {
+  const p = G.player;
+  const targets = [];
+
+  // 装備中の武器・防具
+  for (const slot of ['weapon','armor']) {
+    const eo = p.equipObjs[slot];
+    if (eo && canEnhance(eo)) {
+      const cost = getEnhanceCost(eo);
+      const rate = getEnhanceRate(eo);
+      targets.push(`<div class="recipe-item">
+        <div class="recipe-name">${equipName(eo)} → +${eo.enhancement+1}</div>
+        <div class="recipe-mats">${equipStatText(eo)}</div>
+        <div class="recipe-rate">成功率: ${rateText(rate)} | ${cost}G <span class="text-danger" style="font-size:0.75rem">失敗で装備消滅</span></div>
+        <button class="btn small mt-1 ${p.gold>=cost?'':'disabled'}" data-a="doenhance" data-p="equipped_${slot}" ${p.gold>=cost?'':'disabled'}>強化</button>
+      </div>`);
+    }
+  }
+  // バッグ内装備
+  p.equipBag.forEach((eo,i) => {
+    if (canEnhance(eo)) {
+      const cost = getEnhanceCost(eo);
+      const rate = getEnhanceRate(eo);
+      targets.push(`<div class="recipe-item">
+        <div class="recipe-name">${equipName(eo)} → +${eo.enhancement+1}</div>
+        <div class="recipe-mats">${equipStatText(eo)}</div>
+        <div class="recipe-rate">成功率: ${rateText(rate)} | ${cost}G <span class="text-danger" style="font-size:0.75rem">失敗で装備消滅</span></div>
+        <button class="btn small mt-1 ${p.gold>=cost?'':'disabled'}" data-a="doenhance" data-p="bag" data-p2="${i}" ${p.gold>=cost?'':'disabled'}>強化</button>
+      </div>`);
+    }
+  });
+
+  return `
+    ${backBtn()}
+    <h2>強化所</h2>
+    <div class="panel"><p class="text-muted">武器・防具を強化します（最大+${MAX_ENHANCE}）。強化値が高いほど失敗しやすくなり、失敗すると装備が壊れます。</p></div>
+    ${targets.length ? targets.join('') : '<p class="text-muted text-center">強化可能な装備がありません</p>'}`;
+}
+/* ═══════════════════════════════════════
+   イベントハンドリング
+   ═══════════════════════════════════════ */
+
+let selectedJob = null;
+
+function setupEvents() {
+  document.getElementById('main').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-a]');
+    if (!btn) return;
+    const action = btn.dataset.a;
+    const p1 = btn.dataset.p;
+    const p2 = btn.dataset.p2;
+    handleAction(action, p1, p2);
+  });
+}
+
+function handleAction(action, p1, p2) {
+  const p = G.player;
+  switch (action) {
+    // --- タイトル ---
+    case 'newgame':
+      G.screen = 'naming';
+      selectedJob = null;
+      render();
+      break;
+    case 'continue':
+      if (loadGame()) {
+        G.screen = p ? (G.player.location.type === 'town' ? 'town' : 'field') : 'title';
+        if (G.player && G.player.location.type === 'town') G.screen = 'town';
+        else if (G.player) G.screen = 'field';
+        render();
+      }
+      break;
+
+    // --- 名前・職業選択 ---
+    case 'selectjob':
+      selectedJob = p1;
+      document.querySelectorAll('.job-card').forEach(el => el.classList.remove('selected'));
+      const jc = document.getElementById('jc-' + p1);
+      if (jc) jc.classList.add('selected');
+      const startBtn = document.getElementById('btn-start');
+      if (startBtn) startBtn.disabled = false;
+      break;
+    case 'startgame': {
+      const nameInput = document.getElementById('name-input');
+      const name = nameInput ? nameInput.value.trim() : '勇者';
+      if (!name || !selectedJob) break;
+      G.player = newPlayer(name, selectedJob);
+      // 初期装備
+      G.player.equipObjs.weapon = createEquip('wooden_stick', 0);
+      G.player.equipObjs.armor = createEquip('cloth', 0);
+      // 初期アイテム
+      addItemToPlayer(G.player, 'herb', 3);
+      // HP/MP設定
+      const st = calcStats(G.player);
+      G.player.hp = st.maxHp;
+      G.player.mp = st.maxMp;
+      addLog('冒険が始まった！', 'system');
+      saveGame();
+      setScreen('town');
+      break;
+    }
+
+    // --- 町施設 ---
+    case 'facility':
+      handleFacility(p1, p2);
+      break;
+
+    // --- 移動 ---
+    case 'movetown':
+      moveTo({ type:'town', id:p1 });
+      break;
+    case 'movefield':
+      moveTo({ type:'field', area:p1, layer:parseInt(p2) });
+      break;
+
+    // --- フィールド ---
+    case 'explore':
+      explore();
+      break;
+    case 'screen':
+      pushScreen(p1);
+      break;
+
+    // --- 戦闘 ---
+    case 'battlespeed':
+      G.settings.battleSpeed = G.settings.battleSpeed <= 200 ? 600 : 200;
+      render();
+      break;
+    case 'battleend':
+      // 闘技場の結果処理
+      if (G.battle && G.battle.enemy && G.battle.enemy.arena) {
+        if (G.battle.won) {
+          const prize = G.battle.enemy.level * 20;
+          G.player.gold += prize;
+          G.player.arenaProgress++;
+          addLog(`闘技場勝利！賞金${prize}Gを獲得！`, 'reward');
+          if (G.player.arenaProgress >= ARENA_OPPONENTS.length && G.player.arenaUndefeated) {
+            if (!G.player.titles.includes('闘技場の覇者')) {
+              G.player.titles.push('闘技場の覇者');
+              addLog('称号「闘技場の覇者」を獲得！', 'lvup');
+            }
+          }
+        } else {
+          G.player.arenaProgress = 0;
+          G.player.arenaUndefeated = false;
+        }
+        saveGame();
+      }
+      G.battle = null;
+      if (G.player.location.type === 'town') setScreen('town');
+      else setScreen('field');
+      break;
+
+    // --- ショップ ---
+    case 'shoptab':
+      G.shopTab = p1;
+      render();
+      break;
+    case 'buy': {
+      const shop = SHOPS[G.shopId];
+      if (shop) buyShopItem(shop.items[parseInt(p1)]);
+      break;
+    }
+    case 'sell':
+      if (p2 === 'equip') sellItem(null, true, parseInt(p1));
+      else sellItem(p1, false, 0);
+      break;
+
+    // --- 装備 ---
+    case 'equip':
+      equipItem(parseInt(p1));
+      break;
+    case 'unequip':
+      unequipItem(p1);
+      break;
+
+    // --- アイテム使用 ---
+    case 'useitem':
+      useItemFromInventory(p1);
+      break;
+
+    // --- ステータスタブ ---
+    case 'statustab':
+      G.statusTab = p1;
+      render();
+      break;
+
+    // --- 作戦 ---
+    case 'strategy':
+      G.settings.strategy = p1;
+      saveGame();
+      render();
+      break;
+
+    // --- 宿屋 ---
+    case 'doinn':
+      stayAtInn(parseInt(p1));
+      break;
+
+    // --- 転職 ---
+    case 'dojobchange':
+      if (p1 === G.player.jobId) { addLog('現在の職業と同じです', 'system'); render(); break; }
+      if (G.jobChangeAdvanced && G.player.level < 15) { addLog('Lv.15以上必要です', 'danger'); render(); break; }
+      changeJob(G.player, p1);
+      addLog(`${JOBS[p1].name}に転職した！`, 'lvup');
+      saveGame();
+      render();
+      break;
+
+    // --- 闘技場 ---
+    case 'doarena':
+      enterArena();
+      break;
+
+    // --- 銀行 ---
+    case 'bankdeposit':
+      bankDeposit(parseInt(p1));
+      break;
+    case 'bankwithdraw':
+      bankWithdraw(parseInt(p1));
+      break;
+
+    // --- 倉庫 ---
+    case 'whstore':
+      if (p2 === 'equip') warehouseStore(null, true, parseInt(p1));
+      else warehouseStore(p1, false, 0);
+      break;
+    case 'whretrieve':
+      if (p2 === 'equip') warehouseRetrieve(null, true, parseInt(p1));
+      else warehouseRetrieve(p1, false, 0);
+      break;
+
+    // --- 鍛冶 ---
+    case 'dosmith':
+      doSmith(parseInt(p1));
+      break;
+    case 'dorepair':
+      doRepair(p1);
+      break;
+    case 'dorepairbag':
+      doRepairBag(parseInt(p1));
+      break;
+
+    // --- 合成 ---
+    case 'dosynth':
+      doSynth(parseInt(p1));
+      break;
+
+    // --- 強化 ---
+    case 'doenhance':
+      doEnhance(p1, parseInt(p2));
+      break;
+
+    // --- 戻る ---
+    case 'back':
+      popScreen();
+      break;
+  }
+}
+
+function handleFacility(facilityId, param) {
+  switch (facilityId) {
+    case 'inn':
+      G.innCost = parseInt(param) || 10;
+      pushScreen('inn');
+      break;
+    case 'shop':
+      G.shopId = param;
+      G.shopTab = 'buy';
+      pushScreen('shop');
+      break;
+    case 'jobchange':
+      G.jobChangeAdvanced = (param === 'true');
+      pushScreen('jobchange');
+      break;
+    case 'arena':
+      pushScreen('arena');
+      break;
+    case 'bank':
+      pushScreen('bank');
+      break;
+    case 'warehouse':
+      pushScreen('warehouse');
+      break;
+    case 'blacksmith':
+      pushScreen('blacksmith');
+      break;
+    case 'synthesis':
+      pushScreen('synthesis');
+      break;
+    case 'enhancement':
+      pushScreen('enhancement');
+      break;
+    case 'status':
+      pushScreen('status');
+      break;
+    case 'social_arena':
+    case 'social_tavern':
+      addLog('この機能は今後のアップデートで追加予定です', 'system');
+      render();
+      break;
+  }
+}
+/* ═══════════════════════════════════════
+   レンダリングエンジン
+   ═══════════════════════════════════════ */
+
+function render() {
+  document.getElementById('hdr').innerHTML = renderHeader();
+  document.getElementById('main').innerHTML = renderScreen();
+  document.getElementById('log').innerHTML = renderLog();
+  // ログ自動スクロール
+  const logEl = document.getElementById('log');
+  if (logEl) logEl.scrollTop = logEl.scrollHeight;
+}
+
+function renderScreen() {
+  switch (G.screen) {
+    case 'title':       return screenTitle();
+    case 'naming':      return screenNaming();
+    case 'town':        return screenTown();
+    case 'field':       return screenField();
+    case 'battle':      return screenBattle();
+    case 'shop':        return screenShop();
+    case 'status':      return screenStatus();
+    case 'jobchange':   return screenJobChange();
+    case 'inn':         return screenInn();
+    case 'arena':       return screenArena();
+    case 'bank':        return screenBank();
+    case 'warehouse':   return screenWarehouse();
+    case 'blacksmith':  return screenBlacksmith();
+    case 'synthesis':   return screenSynthesis();
+    case 'enhancement': return screenEnhancement();
+    default:            return '<p class="text-center text-muted">画面が見つかりません</p>';
+  }
+}
+/* ═══════════════════════════════════════
+   プラグインシステム (ソーシャル機能拡張用)
+   ═══════════════════════════════════════ */
+const PluginAPI = {
+  plugins: [],
+  register(plugin) {
+    this.plugins.push(plugin);
+    if (plugin.init) plugin.init();
+    console.log(`[Plugin] ${plugin.name} registered`);
+  },
+  getExtraFacilities(townId) {
+    return this.plugins.flatMap(p =>
+      (p.facilities && p.facilities[townId]) || []
+    );
+  },
+  renderScreen(screenId) {
+    for (const p of this.plugins) {
+      if (p.screens && p.screens[screenId]) return p.screens[screenId]();
+    }
+    return null;
+  },
+};
+
+// --- 酒場プラグイン (スタブ) ---
+// PluginAPI.register({
+//   name: '酒場',
+//   facilities: { castle: [{ id:'tavern', icon:'🍺', label:'酒場' }] },
+//   screens: { tavern: () => '<h2>酒場</h2><p>チャット機能は今後実装予定です</p>' },
+// });
+
+// --- 対人闘技場プラグイン (スタブ) ---
+// PluginAPI.register({
+//   name: '対人闘技場',
+//   facilities: { castle: [{ id:'pvp_arena', icon:'🏟️', label:'対人闘技場' }] },
+//   screens: { pvp_arena: () => '<h2>対人闘技場</h2><p>PvP機能は今後実装予定です</p>' },
+// });
+/* ═══════════════════════════════════════
+   メイン初期化
+   ═══════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  setupEvents();
+  G.screen = 'title';
+  render();
+});
+</script></body></html>
