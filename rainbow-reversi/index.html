@@ -22,7 +22,7 @@
     h1 {
       font-size: 1.6rem;
       margin: 0.5rem 0;
-      background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #4ade80, #38bdf8, #a78bfa);
+      background: linear-gradient(90deg, #0072B2, #E69F00, #CC79A7, #009E73);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -118,6 +118,7 @@
       width: 80%;
       height: 80%;
       border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
       position: absolute;
       animation: popIn 0.25s ease-out;
     }
@@ -135,7 +136,7 @@
       text-align: center;
     }
     .message.rainbow {
-      background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #4ade80, #38bdf8, #a78bfa);
+      background: linear-gradient(90deg, #0072B2, #E69F00, #CC79A7, #009E73);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -159,9 +160,9 @@
   <div id="setup">
     <p>プレイヤー人数を選んでね</p>
     <div class="player-btns">
-      <button onclick="startGame(2)" style="border-color:#f87171">2人</button>
-      <button onclick="startGame(3)" style="border-color:#facc15">3人</button>
-      <button onclick="startGame(4)" style="border-color:#4ade80">4人</button>
+      <button onclick="startGame(2)" style="border-color:#0072B2">2人</button>
+      <button onclick="startGame(3)" style="border-color:#E69F00">3人</button>
+      <button onclick="startGame(4)" style="border-color:#CC79A7">4人</button>
     </div>
   </div>
 
@@ -177,12 +178,36 @@
     const EMPTY = 0;
     const DIRS = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
 
+    /* Okabe-Ito colorblind-safe palette + distinct patterns */
     const COLORS = [
-      { name: '赤',  color: '#ef4444', light: '#fca5a5' },
-      { name: '橙',  color: '#f97316', light: '#fdba74' },
-      { name: '黄',  color: '#eab308', light: '#fde047' },
-      { name: '緑',  color: '#22c55e', light: '#86efac' },
+      { name: '青',  color: '#0072B2', pattern: 'solid' },
+      { name: '橙',  color: '#E69F00', pattern: 'stripes' },
+      { name: '紫',  color: '#CC79A7', pattern: 'cross' },
+      { name: '緑',  color: '#009E73', pattern: 'dots' },
     ];
+
+    function getPieceBackground(info) {
+      const c = info.color;
+      switch (info.pattern) {
+        case 'stripes':
+          return {
+            bg: `repeating-linear-gradient(0deg, rgba(255,255,255,0.45) 0px, rgba(255,255,255,0.45) 2px, transparent 2px, transparent 6px), ${c}`,
+            size: 'auto'
+          };
+        case 'cross':
+          return {
+            bg: `repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0px, rgba(255,255,255,0.35) 2px, transparent 2px, transparent 8px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.35) 0px, rgba(255,255,255,0.35) 2px, transparent 2px, transparent 8px), ${c}`,
+            size: 'auto'
+          };
+        case 'dots':
+          return {
+            bg: `radial-gradient(circle 2px, rgba(255,255,255,0.5) 1px, transparent 2px), ${c}`,
+            size: '8px 8px'
+          };
+        default:
+          return { bg: c, size: 'auto' };
+      }
+    }
 
     let board, numPlayers, currentTurn, gameOver;
 
@@ -337,8 +362,9 @@
         div.className = 'player-info';
         div.style.background = isCurrent ? info.color + '22' : 'transparent';
         div.style.borderColor = isCurrent ? info.color : 'transparent';
+        const bg = getPieceBackground(info);
         div.innerHTML =
-          `<span class="player-disc" style="background:conic-gradient(${info.color},${info.light},${info.color})"></span>` +
+          `<span class="player-disc" style="background:${bg.bg};background-size:${bg.size}"></span>` +
           `<span style="color:${info.color}">${info.name}</span>` +
           `<span>${count}</span>`;
         el.appendChild(div);
@@ -357,7 +383,9 @@
             const info = COLORS[p - 1];
             const piece = document.createElement('div');
             piece.className = 'piece';
-            piece.style.background = `conic-gradient(${info.color}, ${info.light}, ${info.color})`;
+            const bg = getPieceBackground(info);
+            piece.style.background = bg.bg;
+            piece.style.backgroundSize = bg.size;
             piece.style.boxShadow = `0 2px 6px ${info.color}55`;
             cell.appendChild(piece);
           } else if (!gameOver && getFlips(r, c, currentTurn).length > 0) {
