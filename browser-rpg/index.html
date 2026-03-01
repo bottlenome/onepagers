@@ -1708,7 +1708,10 @@ async function handleDefeat(p, e) {
   p.location = { type:'town', id: p.lastTown || 'town1' };
   saveGame();
   const cont = document.getElementById('battle-continue');
-  if (cont) cont.classList.remove('hidden');
+  if (cont) {
+    cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+    cont.classList.remove('hidden');
+  }
 }
 
 // 宝箱
