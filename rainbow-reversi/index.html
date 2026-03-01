@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>虹色リバーシ - OnePagers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      user-select: none;
+    }
+    .back { color: #60a5fa; text-decoration: none; font-size: 0.9rem; align-self: flex-start; }
+    .back:hover { text-decoration: underline; }
+    h1 {
+      font-size: 1.6rem;
+      margin: 0.5rem 0;
+      background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #4ade80, #38bdf8, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 0.75rem 0;
+      font-size: 1rem;
+    }
+    .score { display: flex; align-items: center; gap: 0.4rem; }
+    .score .disc {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .disc-warm {
+      background: conic-gradient(#f87171, #fb923c, #facc15, #f87171);
+    }
+    .disc-cool {
+      background: conic-gradient(#4ade80, #38bdf8, #a78bfa, #4ade80);
+    }
+    .turn-label {
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .turn-warm { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
+    .turn-cool { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 2px;
+      background: #1e293b;
+      border: 3px solid #334155;
+      border-radius: 8px;
+      padding: 2px;
+      width: min(80vw, 480px);
+      height: min(80vw, 480px);
+    }
+    .cell {
+      background: #065f46;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      aspect-ratio: 1;
+    }
+    .cell:hover { background: #047857; }
+    .cell.hint::after {
+      content: '';
+      width: 30%;
+      height: 30%;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+    }
+    .cell .piece {
+      width: 80%;
+      height: 80%;
+      border-radius: 50%;
+      position: absolute;
+      transition: transform 0.4s;
+    }
+    .cell .piece.flip {
+      transform: rotateY(180deg);
+    }
+    .piece.warm {
+      background: conic-gradient(#f87171, #fb923c, #facc15, #f87171);
+      box-shadow: 0 2px 8px rgba(251, 146, 60, 0.4);
+    }
+    .piece.cool {
+      background: conic-gradient(#4ade80, #38bdf8, #a78bfa, #4ade80);
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
+    }
+    .piece.pop {
+      animation: popIn 0.3s ease-out;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .message {
+      margin-top: 0.75rem;
+      font-size: 1.1rem;
+      min-height: 1.5em;
+      font-weight: bold;
+    }
+    .message.rainbow {
+      background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #4ade80, #38bdf8, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn {
+      margin-top: 0.75rem;
+      padding: 0.6rem 1.6rem;
+      border: none;
+      border-radius: 8px;
+      background: #334155;
+      color: #e2e8f0;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .btn:hover { background: #475569; }
+  </style>
+</head>
+<body>
+  <a class="back" href="../index.html">&larr; OnePagers</a>
+  <h1>虹色リバーシ</h1>
+
+  <div class="info">
+    <div class="score"><span class="disc disc-warm"></span><span id="score1">2</span></div>
+    <div class="turn-label" id="turnLabel">🔴 Warm の番</div>
+    <div class="score"><span class="disc disc-cool"></span><span id="score2">2</span></div>
+  </div>
+
+  <div class="board" id="board"></div>
+  <div class="message" id="message"></div>
+  <button class="btn" onclick="init()">もう一度</button>
+
+  <script>
+    const EMPTY = 0, P1 = 1, P2 = 2;
+    const DIRS = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+    let board, turn, gameOver;
+
+    function init() {
+      board = Array.from({length: 8}, () => Array(8).fill(EMPTY));
+      board[3][3] = P2; board[3][4] = P1;
+      board[4][3] = P1; board[4][4] = P2;
+      turn = P1;
+      gameOver = false;
+      document.getElementById('message').textContent = '';
+      document.getElementById('message').classList.remove('rainbow');
+      render();
+    }
+
+    function inBounds(r, c) { return r >= 0 && r < 8 && c >= 0 && c < 8; }
+
+    function getFlips(b, r, c, player) {
+      if (b[r][c] !== EMPTY) return [];
+      const opp = player === P1 ? P2 : P1;
+      let allFlips = [];
+      for (const [dr, dc] of DIRS) {
+        let flips = [];
+        let nr = r + dr, nc = c + dc;
+        while (inBounds(nr, nc) && b[nr][nc] === opp) {
+          flips.push([nr, nc]);
+          nr += dr; nc += dc;
+        }
+        if (flips.length > 0 && inBounds(nr, nc) && b[nr][nc] === player) {
+          allFlips.push(...flips);
+        }
+      }
+      return allFlips;
+    }
+
+    function hasValidMove(player) {
+      for (let r = 0; r < 8; r++)
+        for (let c = 0; c < 8; c++)
+          if (getFlips(board, r, c, player).length > 0) return true;
+      return false;
+    }
+
+    function play(r, c) {
+      if (gameOver) return;
+      const flips = getFlips(board, r, c, turn);
+      if (flips.length === 0) return;
+
+      board[r][c] = turn;
+      for (const [fr, fc] of flips) board[fr][fc] = turn;
+
+      const opp = turn === P1 ? P2 : P1;
+      if (hasValidMove(opp)) {
+        turn = opp;
+      } else if (hasValidMove(turn)) {
+        document.getElementById('message').textContent =
+          `${opp === P1 ? 'Warm' : 'Cool'} はパス！`;
+      } else {
+        gameOver = true;
+      }
+      render();
+      if (gameOver) showResult();
+    }
+
+    function showResult() {
+      let s1 = 0, s2 = 0;
+      for (let r = 0; r < 8; r++)
+        for (let c = 0; c < 8; c++) {
+          if (board[r][c] === P1) s1++;
+          if (board[r][c] === P2) s2++;
+        }
+      const msg = document.getElementById('message');
+      msg.classList.add('rainbow');
+      if (s1 > s2) msg.textContent = `Warm の勝ち！ (${s1} - ${s2})`;
+      else if (s2 > s1) msg.textContent = `Cool の勝ち！ (${s2} - ${s1})`;
+      else msg.textContent = `引き分け！ (${s1} - ${s2})`;
+    }
+
+    function render() {
+      const el = document.getElementById('board');
+      el.innerHTML = '';
+      let s1 = 0, s2 = 0;
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          if (board[r][c] !== EMPTY) {
+            const piece = document.createElement('div');
+            piece.className = 'piece ' + (board[r][c] === P1 ? 'warm' : 'cool');
+            cell.appendChild(piece);
+          } else if (!gameOver && getFlips(board, r, c, turn).length > 0) {
+            cell.classList.add('hint');
+          }
+          cell.addEventListener('click', () => play(r, c));
+          el.appendChild(cell);
+          if (board[r][c] === P1) s1++;
+          if (board[r][c] === P2) s2++;
+        }
+      }
+      document.getElementById('score1').textContent = s1;
+      document.getElementById('score2').textContent = s2;
+      const label = document.getElementById('turnLabel');
+      if (turn === P1) {
+        label.textContent = 'Warm の番';
+        label.className = 'turn-label turn-warm';
+      } else {
+        label.textContent = 'Cool の番';
+        label.className = 'turn-label turn-cool';
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
