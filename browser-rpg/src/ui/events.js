@@ -120,6 +120,8 @@ function handleAction(action, p1, p2) {
       break;
     case 'battleend-status':
       G.battle = null;
+      G.screen = G.player.location.type === 'town' ? 'town' : 'field';
+      G.screenStack = [];
       pushScreen('status');
       break;
     case 'battleend-movetown':
