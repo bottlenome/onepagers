@@ -26,6 +26,7 @@ onepagers/
 |-------------|------|------|------|
 | [counter](counter/index.html) | tool | done | シンプルなカウンター |
 | [虹色リバーシ](rainbow-reversi/index.html) | game | done | 虹色グラデーションの駒で最大4人対戦できるリバーシ |
+| [Loveless Chronicle](browser-rpg/index.html) | game | wip | 転職・スキル・自動戦闘が楽しめるRPGブラウザゲーム |
 
 ## 新規プロジェクト追加手順
 
