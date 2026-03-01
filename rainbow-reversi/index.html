@@ -87,7 +87,6 @@
 
     .board {
       display: grid;
-      grid-template-columns: repeat(10, 1fr);
       gap: 2px;
       background: #1e293b;
       border: 3px solid #334155;
@@ -95,6 +94,34 @@
       padding: 2px;
       width: min(88vw, 500px);
       aspect-ratio: 1;
+    }
+
+    /* Size selector */
+    .size-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .size-selector span { color: #94a3b8; font-size: 0.95rem; }
+    .size-btns {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .size-btns button {
+      padding: 0.3rem 0.7rem;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      background: #1e293b;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .size-btns button:hover { border-color: #60a5fa; }
+    .size-btns button.active {
+      border-color: #60a5fa;
+      background: #1e3a5f;
     }
     .cell {
       background: #065f46;
@@ -164,6 +191,14 @@
       <button onclick="startGame(3)" style="border-color:#E69F00">3人</button>
       <button onclick="startGame(4)" style="border-color:#CC79A7">4人</button>
     </div>
+    <div class="size-selector">
+      <span>盤面サイズ:</span>
+      <div class="size-btns" id="sizeBtns">
+        <button onclick="selectSize(6)">6×6</button>
+        <button onclick="selectSize(8)" class="active">8×8</button>
+        <button onclick="selectSize(10)">10×10</button>
+      </div>
+    </div>
   </div>
 
   <div id="game">
@@ -174,7 +209,7 @@
   </div>
 
   <script>
-    const SIZE = 10;
+    let SIZE = 8;
     const EMPTY = 0;
     const DIRS = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
 
@@ -211,6 +246,13 @@
 
     let board, numPlayers, currentTurn, gameOver;
 
+    function selectSize(s) {
+      SIZE = s;
+      document.querySelectorAll('#sizeBtns button').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === `${s}×${s}`);
+      });
+    }
+
     function startGame(n) {
       numPlayers = n;
       currentTurn = 1;
@@ -218,6 +260,7 @@
       setupBoard();
       document.getElementById('setup').style.display = 'none';
       document.getElementById('game').style.display = 'flex';
+      document.getElementById('board').style.gridTemplateColumns = `repeat(${SIZE}, 1fr)`;
       document.getElementById('message').textContent = '';
       document.getElementById('message').classList.remove('rainbow');
       render();
@@ -229,15 +272,16 @@
     }
 
     /* Initial placement: two rows in the center, interleaved.
-       Row 4: P1, P2, ..., PN
-       Row 5: shifted by ceil(N/2) so no player is directly below itself.
+       Row mid-1: P1, P2, ..., PN
+       Row mid: shifted by ceil(N/2) so no player is directly below itself.
        Random rotation for fairness. */
     function setupBoard() {
       board = Array.from({length: SIZE}, () => Array(SIZE).fill(EMPTY));
+      const mid = Math.floor(SIZE / 2);
 
       if (numPlayers === 2) {
-        board[4][4] = 2; board[4][5] = 1;
-        board[5][4] = 1; board[5][5] = 2;
+        board[mid - 1][mid - 1] = 2; board[mid - 1][mid] = 1;
+        board[mid][mid - 1] = 1;     board[mid][mid] = 2;
         return;
       }
 
@@ -246,8 +290,8 @@
       const offset = Math.floor(Math.random() * numPlayers);
 
       for (let i = 0; i < numPlayers; i++) {
-        board[4][startCol + i] = ((i + offset) % numPlayers) + 1;
-        board[5][startCol + i] = (((i + shift) + offset) % numPlayers) + 1;
+        board[mid - 1][startCol + i] = ((i + offset) % numPlayers) + 1;
+        board[mid][startCol + i] = (((i + shift) + offset) % numPlayers) + 1;
       }
     }
 
