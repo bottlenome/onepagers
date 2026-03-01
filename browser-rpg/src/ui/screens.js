@@ -269,14 +269,13 @@ function screenJobChange() {
     if (advanced) return j.type === 'advanced' && p.level >= 15;
     return j.type === 'basic';
   });
-  const ratio = advanced ? CARRY_RATIO_ADVANCED : CARRY_RATIO_BASIC;
-  const ratioText = advanced ? '50%' : '70%';
-
   return `
     ${backBtn()}
     <h2>${advanced ? '上級職転職場' : '転職場'}</h2>
     <div class="panel">
-      <p class="text-muted mb-1">転職するとLv.1に戻ります。ステータスの${ratioText}を引き継ぎます。</p>
+      <p class="text-muted mb-1">${advanced
+        ? 'レベル・ステータスはそのまま上級職に転職できます。'
+        : '転職するとLv.1に戻ります。ステータスの70%を引き継ぎます。'}</p>
       ${!advanced && p.level < 1 ? '' : ''}
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
     </div>

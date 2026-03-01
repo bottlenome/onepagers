@@ -79,20 +79,22 @@ function calcExpGain(playerLv, monsterLv) {
 // 転職処理
 function changeJob(p, newJobId) {
   const isBasic = JOBS[newJobId].type === 'basic';
-  const ratio = isBasic ? CARRY_RATIO_BASIC : CARRY_RATIO_ADVANCED;
-  const naked = calcNakedStats(p);
-  const newBase = {};
-  for (const k of STAT_KEYS) {
-    // INIT_STATSを除いた成長分だけを引き継ぐ
-    const grown = (naked[k] || 0) - INIT_STATS[k];
-    newBase[k] = Math.floor(grown * ratio);
-  }
-  p.baseStats = newBase;
-  p.growthStats = { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 };
   if (!p.jobHistory.includes(p.jobId)) p.jobHistory.push(p.jobId);
+  if (isBasic) {
+    // 下級職転職: Lv.1に戻り、成長分の70%を引き継ぐ
+    const naked = calcNakedStats(p);
+    const newBase = {};
+    for (const k of STAT_KEYS) {
+      const grown = (naked[k] || 0) - INIT_STATS[k];
+      newBase[k] = Math.floor(grown * CARRY_RATIO_BASIC);
+    }
+    p.baseStats = newBase;
+    p.growthStats = { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 };
+    p.level = 1;
+    p.exp = 0;
+  }
+  // 上級職転職: レベル・ステータスそのまま
   p.jobId = newJobId;
-  p.level = 1;
-  p.exp = 0;
   const st = calcStats(p);
   p.hp = st.maxHp;
   p.mp = st.maxMp;
