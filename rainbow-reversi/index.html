@@ -26,54 +26,84 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .info {
+
+    /* Setup screen */
+    #setup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    #setup p { color: #94a3b8; font-size: 1.1rem; }
+    .player-btns {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .player-btns button {
+      width: 64px; height: 64px;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      background: #1e293b;
+      color: #e2e8f0;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .player-btns button:hover {
+      transform: scale(1.1);
+      border-color: #60a5fa;
+    }
+
+    /* Game screen */
+    #game { display: none; flex-direction: column; align-items: center; }
+
+    .players {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .player-info {
       display: flex;
       align-items: center;
-      gap: 2rem;
-      margin: 0.75rem 0;
-      font-size: 1rem;
+      gap: 0.35rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      font-size: 0.85rem;
+      font-weight: bold;
+      transition: border-color 0.2s, opacity 0.2s;
     }
-    .score { display: flex; align-items: center; gap: 0.4rem; }
-    .score .disc {
-      width: 20px; height: 20px;
+    .player-disc {
+      width: 18px; height: 18px;
       border-radius: 50%;
       display: inline-block;
     }
-    .disc-warm {
-      background: conic-gradient(#f87171, #fb923c, #facc15, #f87171);
-    }
-    .disc-cool {
-      background: conic-gradient(#4ade80, #38bdf8, #a78bfa, #4ade80);
-    }
-    .turn-label {
-      padding: 0.3rem 0.8rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: bold;
-    }
-    .turn-warm { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
-    .turn-cool { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
 
     .board {
       display: grid;
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(10, 1fr);
       gap: 2px;
       background: #1e293b;
       border: 3px solid #334155;
       border-radius: 8px;
       padding: 2px;
-      width: min(80vw, 480px);
-      height: min(80vw, 480px);
+      width: min(88vw, 500px);
+      aspect-ratio: 1;
     }
     .cell {
       background: #065f46;
-      border-radius: 3px;
+      border-radius: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       position: relative;
-      aspect-ratio: 1;
     }
     .cell:hover { background: #047857; }
     .cell.hint::after {
@@ -81,40 +111,28 @@
       width: 30%;
       height: 30%;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.18);
+      position: absolute;
     }
-    .cell .piece {
+    .piece {
       width: 80%;
       height: 80%;
       border-radius: 50%;
       position: absolute;
-      transition: transform 0.4s;
-    }
-    .cell .piece.flip {
-      transform: rotateY(180deg);
-    }
-    .piece.warm {
-      background: conic-gradient(#f87171, #fb923c, #facc15, #f87171);
-      box-shadow: 0 2px 8px rgba(251, 146, 60, 0.4);
-    }
-    .piece.cool {
-      background: conic-gradient(#4ade80, #38bdf8, #a78bfa, #4ade80);
-      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.4);
-    }
-    .piece.pop {
-      animation: popIn 0.3s ease-out;
+      animation: popIn 0.25s ease-out;
     }
     @keyframes popIn {
       0% { transform: scale(0); }
-      70% { transform: scale(1.15); }
+      70% { transform: scale(1.12); }
       100% { transform: scale(1); }
     }
 
     .message {
-      margin-top: 0.75rem;
-      font-size: 1.1rem;
-      min-height: 1.5em;
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      min-height: 1.4em;
       font-weight: bold;
+      text-align: center;
     }
     .message.rainbow {
       background: linear-gradient(90deg, #f87171, #fb923c, #facc15, #4ade80, #38bdf8, #a78bfa);
@@ -122,13 +140,13 @@
       -webkit-text-fill-color: transparent;
     }
     .btn {
-      margin-top: 0.75rem;
-      padding: 0.6rem 1.6rem;
+      margin-top: 0.6rem;
+      padding: 0.5rem 1.4rem;
       border: none;
       border-radius: 8px;
       background: #334155;
       color: #e2e8f0;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
     }
     .btn:hover { background: #475569; }
@@ -138,46 +156,90 @@
   <a class="back" href="../index.html">&larr; OnePagers</a>
   <h1>虹色リバーシ</h1>
 
-  <div class="info">
-    <div class="score"><span class="disc disc-warm"></span><span id="score1">2</span></div>
-    <div class="turn-label" id="turnLabel">🔴 Warm の番</div>
-    <div class="score"><span class="disc disc-cool"></span><span id="score2">2</span></div>
+  <div id="setup">
+    <p>プレイヤー人数を選んでね</p>
+    <div class="player-btns">
+      <button onclick="startGame(2)" style="border-color:#f87171">2人</button>
+      <button onclick="startGame(3)" style="border-color:#facc15">3人</button>
+      <button onclick="startGame(4)" style="border-color:#4ade80">4人</button>
+    </div>
   </div>
 
-  <div class="board" id="board"></div>
-  <div class="message" id="message"></div>
-  <button class="btn" onclick="init()">もう一度</button>
+  <div id="game">
+    <div class="players" id="players"></div>
+    <div class="board" id="board"></div>
+    <div class="message" id="message"></div>
+    <button class="btn" onclick="backToSetup()">人数を変える</button>
+  </div>
 
   <script>
-    const EMPTY = 0, P1 = 1, P2 = 2;
+    const SIZE = 10;
+    const EMPTY = 0;
     const DIRS = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
-    let board, turn, gameOver;
 
-    function init() {
-      board = Array.from({length: 8}, () => Array(8).fill(EMPTY));
-      board[3][3] = P2; board[3][4] = P1;
-      board[4][3] = P1; board[4][4] = P2;
-      turn = P1;
+    const COLORS = [
+      { name: '赤',  color: '#ef4444', light: '#fca5a5' },
+      { name: '橙',  color: '#f97316', light: '#fdba74' },
+      { name: '黄',  color: '#eab308', light: '#fde047' },
+      { name: '緑',  color: '#22c55e', light: '#86efac' },
+    ];
+
+    let board, numPlayers, currentTurn, gameOver;
+
+    function startGame(n) {
+      numPlayers = n;
+      currentTurn = 1;
       gameOver = false;
+      setupBoard();
+      document.getElementById('setup').style.display = 'none';
+      document.getElementById('game').style.display = 'flex';
       document.getElementById('message').textContent = '';
       document.getElementById('message').classList.remove('rainbow');
       render();
     }
 
-    function inBounds(r, c) { return r >= 0 && r < 8 && c >= 0 && c < 8; }
+    function backToSetup() {
+      document.getElementById('setup').style.display = 'flex';
+      document.getElementById('game').style.display = 'none';
+    }
 
-    function getFlips(b, r, c, player) {
-      if (b[r][c] !== EMPTY) return [];
-      const opp = player === P1 ? P2 : P1;
+    /* Initial placement: two rows in the center, interleaved.
+       Row 4: P1, P2, ..., PN
+       Row 5: shifted by ceil(N/2) so no player is directly below itself.
+       Random rotation for fairness. */
+    function setupBoard() {
+      board = Array.from({length: SIZE}, () => Array(SIZE).fill(EMPTY));
+
+      if (numPlayers === 2) {
+        board[4][4] = 2; board[4][5] = 1;
+        board[5][4] = 1; board[5][5] = 2;
+        return;
+      }
+
+      const startCol = Math.floor((SIZE - numPlayers) / 2);
+      const shift = Math.ceil(numPlayers / 2);
+      const offset = Math.floor(Math.random() * numPlayers);
+
+      for (let i = 0; i < numPlayers; i++) {
+        board[4][startCol + i] = ((i + offset) % numPlayers) + 1;
+        board[5][startCol + i] = (((i + shift) + offset) % numPlayers) + 1;
+      }
+    }
+
+    function inBounds(r, c) { return r >= 0 && r < SIZE && c >= 0 && c < SIZE; }
+
+    /* Multi-player flip: sandwich any non-empty non-self pieces */
+    function getFlips(r, c, player) {
+      if (board[r][c] !== EMPTY) return [];
       let allFlips = [];
       for (const [dr, dc] of DIRS) {
         let flips = [];
         let nr = r + dr, nc = c + dc;
-        while (inBounds(nr, nc) && b[nr][nc] === opp) {
+        while (inBounds(nr, nc) && board[nr][nc] !== EMPTY && board[nr][nc] !== player) {
           flips.push([nr, nc]);
           nr += dr; nc += dc;
         }
-        if (flips.length > 0 && inBounds(nr, nc) && b[nr][nc] === player) {
+        if (flips.length > 0 && inBounds(nr, nc) && board[nr][nc] === player) {
           allFlips.push(...flips);
         }
       }
@@ -185,81 +247,127 @@
     }
 
     function hasValidMove(player) {
-      for (let r = 0; r < 8; r++)
-        for (let c = 0; c < 8; c++)
-          if (getFlips(board, r, c, player).length > 0) return true;
+      for (let r = 0; r < SIZE; r++)
+        for (let c = 0; c < SIZE; c++)
+          if (getFlips(r, c, player).length > 0) return true;
       return false;
+    }
+
+    function countPieces(player) {
+      let n = 0;
+      for (let r = 0; r < SIZE; r++)
+        for (let c = 0; c < SIZE; c++)
+          if (board[r][c] === player) n++;
+      return n;
     }
 
     function play(r, c) {
       if (gameOver) return;
-      const flips = getFlips(board, r, c, turn);
+      const flips = getFlips(r, c, currentTurn);
       if (flips.length === 0) return;
 
-      board[r][c] = turn;
-      for (const [fr, fc] of flips) board[fr][fc] = turn;
+      board[r][c] = currentTurn;
+      for (const [fr, fc] of flips) board[fr][fc] = currentTurn;
 
-      const opp = turn === P1 ? P2 : P1;
-      if (hasValidMove(opp)) {
-        turn = opp;
-      } else if (hasValidMove(turn)) {
-        document.getElementById('message').textContent =
-          `${opp === P1 ? 'Warm' : 'Cool'} はパス！`;
-      } else {
-        gameOver = true;
+      advanceTurn();
+    }
+
+    /* Pass rule: skip players who can't move.
+       Game ends when NO player can move. */
+    function advanceTurn() {
+      let passMessages = [];
+      let next = currentTurn;
+
+      for (let i = 0; i < numPlayers; i++) {
+        next = (next % numPlayers) + 1;
+        if (hasValidMove(next)) {
+          currentTurn = next;
+          if (passMessages.length) {
+            document.getElementById('message').textContent = passMessages.join('  ');
+          } else {
+            document.getElementById('message').textContent = '';
+          }
+          render();
+          return;
+        }
+        if (next !== currentTurn) {
+          passMessages.push(`${COLORS[next - 1].name} はパス`);
+        }
       }
+
+      /* Nobody can move (including current player on wrap-around) */
+      gameOver = true;
       render();
-      if (gameOver) showResult();
+      showResult();
     }
 
     function showResult() {
-      let s1 = 0, s2 = 0;
-      for (let r = 0; r < 8; r++)
-        for (let c = 0; c < 8; c++) {
-          if (board[r][c] === P1) s1++;
-          if (board[r][c] === P2) s2++;
-        }
+      let scores = [];
+      for (let p = 1; p <= numPlayers; p++) {
+        scores.push({ p, count: countPieces(p) });
+      }
+      scores.sort((a, b) => b.count - a.count);
+
       const msg = document.getElementById('message');
       msg.classList.add('rainbow');
-      if (s1 > s2) msg.textContent = `Warm の勝ち！ (${s1} - ${s2})`;
-      else if (s2 > s1) msg.textContent = `Cool の勝ち！ (${s2} - ${s1})`;
-      else msg.textContent = `引き分け！ (${s1} - ${s2})`;
+
+      if (scores[0].count === scores[1].count) {
+        msg.textContent = '引き分け！ ' + scores.map(s => `${COLORS[s.p-1].name}:${s.count}`).join(' ');
+      } else {
+        const w = scores[0];
+        msg.textContent = `${COLORS[w.p-1].name} の勝ち！ ` +
+          scores.map(s => `${COLORS[s.p-1].name}:${s.count}`).join(' ');
+      }
     }
 
+    /* ---- Rendering ---- */
     function render() {
+      renderPlayers();
+      renderBoard();
+    }
+
+    function renderPlayers() {
+      const el = document.getElementById('players');
+      el.innerHTML = '';
+      for (let p = 1; p <= numPlayers; p++) {
+        const info = COLORS[p - 1];
+        const count = countPieces(p);
+        const isCurrent = p === currentTurn && !gameOver;
+        const div = document.createElement('div');
+        div.className = 'player-info';
+        div.style.background = isCurrent ? info.color + '22' : 'transparent';
+        div.style.borderColor = isCurrent ? info.color : 'transparent';
+        div.innerHTML =
+          `<span class="player-disc" style="background:conic-gradient(${info.color},${info.light},${info.color})"></span>` +
+          `<span style="color:${info.color}">${info.name}</span>` +
+          `<span>${count}</span>`;
+        el.appendChild(div);
+      }
+    }
+
+    function renderBoard() {
       const el = document.getElementById('board');
       el.innerHTML = '';
-      let s1 = 0, s2 = 0;
-      for (let r = 0; r < 8; r++) {
-        for (let c = 0; c < 8; c++) {
+      for (let r = 0; r < SIZE; r++) {
+        for (let c = 0; c < SIZE; c++) {
           const cell = document.createElement('div');
           cell.className = 'cell';
           if (board[r][c] !== EMPTY) {
+            const p = board[r][c];
+            const info = COLORS[p - 1];
             const piece = document.createElement('div');
-            piece.className = 'piece ' + (board[r][c] === P1 ? 'warm' : 'cool');
+            piece.className = 'piece';
+            piece.style.background = `conic-gradient(${info.color}, ${info.light}, ${info.color})`;
+            piece.style.boxShadow = `0 2px 6px ${info.color}55`;
             cell.appendChild(piece);
-          } else if (!gameOver && getFlips(board, r, c, turn).length > 0) {
+          } else if (!gameOver && getFlips(r, c, currentTurn).length > 0) {
             cell.classList.add('hint');
           }
           cell.addEventListener('click', () => play(r, c));
           el.appendChild(cell);
-          if (board[r][c] === P1) s1++;
-          if (board[r][c] === P2) s2++;
         }
       }
-      document.getElementById('score1').textContent = s1;
-      document.getElementById('score2').textContent = s2;
-      const label = document.getElementById('turnLabel');
-      if (turn === P1) {
-        label.textContent = 'Warm の番';
-        label.className = 'turn-label turn-warm';
-      } else {
-        label.textContent = 'Cool の番';
-        label.className = 'turn-label turn-cool';
-      }
     }
-
-    init();
   </script>
 </body>
 </html>
