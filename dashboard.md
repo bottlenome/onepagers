@@ -7,12 +7,14 @@
 ```
 onepagers/
 ├── index.html              # 公開用ダッシュボード (HTML)
-├── dashboard.md            # プロジェクト管理用 (このファイル)
+├── dashboard.md            # 全体のプロジェクト管理 (このファイル)
 ├── docs/
-│   └── tasks/              # タスク管理用ドキュメント
-│       └── *.md
+│   └── tasks/              # リポジトリ全体のタスク
 ├── <project>/
-│   └── index.html          # 1ページ完結のツール/ゲーム
+│   ├── index.html          # 1ページ完結のツール/ゲーム
+│   ├── dashboard.md        # プロジェクト個別の管理用
+│   └── docs/
+│       └── tasks/*.md      # プロジェクト個別のタスク
 └── .gitignore
 ```
 
@@ -25,6 +27,7 @@ onepagers/
 ## 新規プロジェクト追加手順
 
 1. `<project名>/index.html` を作成（1ファイルで完結させる）
-2. `index.html` のグリッドにカードを追加
-3. このファイルのプロジェクト一覧テーブルに行を追加
-4. 必要に応じて `docs/tasks/<project名>.md` にタスクを記録
+2. `<project名>/dashboard.md` を作成（プロジェクト概要・タスク管理）
+3. `<project名>/docs/tasks/` を作成（詳細タスク用）
+4. ルートの `index.html` のグリッドにカードを追加
+5. このファイルのプロジェクト一覧テーブルに行を追加
