@@ -23,7 +23,7 @@ onepagers/
 | プロジェクト | 種別 | 状態 | 説明 |
 |-------------|------|------|------|
 | [counter](counter/index.html) | tool | done | シンプルなカウンター |
-| [虹色リバーシ](rainbow-reversi/index.html) | game | done | 虹色グラデーション駒のリバーシ |
+| [虹色リバーシ](rainbow-reversi/index.html) | game | done | 虹色グラデーションの駒で最大4人対戦できるリバーシ |
 
 ## 新規プロジェクト追加手順
 
