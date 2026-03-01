@@ -9,7 +9,7 @@ function screenTitle() {
     <div class="title-screen">
       <a class="back" href="../index.html">&larr; OnePagers</a>
       <div class="icon">⚔️</div>
-      <h1>ブラウザクエスト</h1>
+      <h1>Loveless Chronicle</h1>
       <p class="sub">転職・スキル・自動戦闘RPG</p>
       <div class="btn-row">
         <button class="btn primary" data-a="newgame">はじめから</button>

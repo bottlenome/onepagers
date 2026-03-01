@@ -1,5 +1,5 @@
 #!/bin/bash
-# ブラウザクエスト ビルドスクリプト
+# Loveless Chronicle ビルドスクリプト
 # src/ 以下のファイルを結合して index.html を生成する
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -12,7 +12,7 @@ cat <<'HTMLHEAD' > "$OUT"
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ブラウザクエスト - OnePagers</title>
+<title>Loveless Chronicle - OnePagers</title>
 <style>
 HTMLHEAD
 

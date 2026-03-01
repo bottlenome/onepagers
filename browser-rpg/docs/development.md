@@ -1,4 +1,4 @@
-# ブラウザクエスト 開発ガイド
+# Loveless Chronicle 開発ガイド
 
 ## ビルド
 
@@ -148,4 +148,4 @@ PluginAPI.register({
 | ビルドエラー `No such file` | ソースファイルのパスが変更された | `build.sh` のパスを修正 |
 | テストで `ReferenceError` | `eval()` 内の `const` スコープ問題 | テストコードを IIFE 内に記述する |
 | ゲームが真っ白 | JS構文エラー | ブラウザのDevToolsコンソールでエラーを確認 |
-| セーブデータ破損 | `save.js` のバージョン不一致 | `localStorage.removeItem('browserquest_save')` で初期化 |
+| セーブデータ破損 | `save.js` のバージョン不一致 | `localStorage.removeItem('onepagers-browser-rpg')` で初期化 |

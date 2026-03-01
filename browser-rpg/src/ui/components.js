@@ -3,7 +3,7 @@
    ═══════════════════════════════════════ */
 
 function renderHeader() {
-  if (!G.player) return '<div class="hdr-top"><span class="hdr-name">ブラウザクエスト</span></div>';
+  if (!G.player) return '<div class="hdr-top"><span class="hdr-name">Loveless Chronicle</span></div>';
   const p = G.player;
   const st = calcStats(p);
   const job = JOBS[p.jobId];
