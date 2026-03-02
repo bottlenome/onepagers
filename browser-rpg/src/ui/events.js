@@ -169,6 +169,21 @@ function handleAction(action, p1, p2) {
       G.settings.battleSpeed = G.settings.battleSpeed <= 200 ? 600 : 200;
       render();
       break;
+    case 'battlestrategy':
+      G.settings.strategy = p1;
+      document.querySelectorAll('[data-a="battlestrategy"]').forEach(btn => {
+        if (btn.dataset.p === p1) btn.classList.add('primary');
+        else btn.classList.remove('primary');
+      });
+      break;
+    case 'battlespecial':
+      if (G.battle && !G.battle.specialUsed && !G.battle.specialReady) {
+        G.battle.specialReady = true;
+        addBattleLog(`${G.player.name}は力を溜めている…！`, 'lvup');
+        const specBtn = document.getElementById('btn-special');
+        if (specBtn) specBtn.disabled = true;
+      }
+      break;
     case 'demo_continue':
       // デモバトル→名前入力画面へ
       G.demo = false;

@@ -11,10 +11,9 @@ const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.0
 const CARRY_RATIO_BASIC = 0.5;    // 下級職転職時の引き継ぎ率
 const INVENTORY_MAX = 30;
 const STRATEGIES = [
-  { id:'aggressive', name:'がんがんいこうぜ', desc:'最強スキルで攻撃優先' },
-  { id:'balanced',   name:'おまかせ',         desc:'バランスよく戦う' },
-  { id:'careful',    name:'いのちだいじに',   desc:'回復を優先する' },
-  { id:'physical',   name:'じゅもんつかうな', desc:'通常攻撃とアイテムのみ' },
+  { id:'aggressive', name:'猛攻', desc:'最強スキル優先・ほぼ回復しない' },
+  { id:'balanced',   name:'標準', desc:'バランスよく戦う' },
+  { id:'careful',    name:'堅守', desc:'回復を優先・安全重視' },
 ];
 const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';

@@ -398,10 +398,9 @@ const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.0
 const CARRY_RATIO_BASIC = 0.5;    // 下級職転職時の引き継ぎ率
 const INVENTORY_MAX = 30;
 const STRATEGIES = [
-  { id:'aggressive', name:'がんがんいこうぜ', desc:'最強スキルで攻撃優先' },
-  { id:'balanced',   name:'おまかせ',         desc:'バランスよく戦う' },
-  { id:'careful',    name:'いのちだいじに',   desc:'回復を優先する' },
-  { id:'physical',   name:'じゅもんつかうな', desc:'通常攻撃とアイテムのみ' },
+  { id:'aggressive', name:'猛攻', desc:'最強スキル優先・ほぼ回復しない' },
+  { id:'balanced',   name:'標準', desc:'バランスよく戦う' },
+  { id:'careful',    name:'堅守', desc:'回復を優先・安全重視' },
 ];
 const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';
@@ -1445,6 +1444,8 @@ function startBattle(enemy) {
     turn: 0,
     playerEffects: [],  // [{id, turns}]
     enemyEffects: [],
+    specialUsed: false,
+    specialReady: false,
   };
   G.screen = 'battle';
   render();
@@ -1525,6 +1526,37 @@ async function doPlayerAction(p, e, pStats) {
     addBattleLog(`${p.name}は動けない！`, 'sys');
     tickEffects(G.battle.playerEffects);
     await delay(spd);
+    return;
+  }
+
+  // 必殺技チェック
+  if (G.battle.specialReady) {
+    G.battle.specialReady = false;
+    G.battle.specialUsed = true;
+    G.battle.playerEffects.push({ id:'vulnerable', turns:2 });
+
+    const skills = getAvailableSkills(p);
+    const allAttacks = skills
+      .filter(id => SKILLS[id] && ['physical','magical','hybrid'].includes(SKILLS[id].type))
+      .sort((a,b) => (SKILLS[b].power||0) - (SKILLS[a].power||0));
+
+    addBattleLog('— 必殺技発動！ —', 'lvup');
+    if (allAttacks.length) {
+      const sk = SKILLS[allAttacks[0]];
+      const savedMp = p.mp;
+      executeSkill(p, e, pStats, sk, allAttacks[0], true);
+      p.mp = savedMp;
+    } else {
+      const dmg = calcPhysDamage(pStats.atk * 2, e.def);
+      e.hp -= dmg;
+      addBattleLog(`${p.name}の渾身の一撃！${dmg}のダメージ！`, 'p-atk');
+    }
+    addBattleLog('しかし隙が生じた…！', 'danger');
+    await delay(spd);
+    checkBattleEnd(p, e);
+    tickEffects(G.battle.playerEffects);
+    const specBtn = document.getElementById('btn-special');
+    if (specBtn) specBtn.classList.add('hidden');
     return;
   }
 
@@ -1674,21 +1706,18 @@ function selectPlayerAction(p, e, pStats) {
 
   switch (strat) {
     case 'aggressive':
-      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      // 猛攻: 瀕死でのみ回復、常に最強スキル
+      if (hpRatio < 0.15 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.1 && healItem) return { type:'item', id:healItem };
       if (attacks.length) return { type:'skill', id:attacks[0] };
       return { type:'attack' };
     case 'careful':
-      if (hpRatio < 0.5 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.4 && healItem) return { type:'item', id:healItem };
+      // 堅守: 早めに回復、中程度の攻撃
+      if (hpRatio < 0.6 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.5 && healItem) return { type:'item', id:healItem };
       if (attacks.length) return { type:'skill', id:attacks[Math.floor(attacks.length/2)] };
       return { type:'attack' };
-    case 'physical':
-      if (hpRatio < 0.2 && healItem) return { type:'item', id:healItem };
-      const phys = attacks.filter(id => SKILLS[id].type === 'physical');
-      if (phys.length) return { type:'skill', id:phys[0] };
-      return { type:'attack' };
-    default: // balanced
+    default: // balanced (標準) — 'physical' など旧作戦もここにフォールバック
       if (hpRatio < 0.3 && heals.length) return { type:'skill', id:heals[0] };
       if (hpRatio < 0.25 && healItem) return { type:'item', id:healItem };
       if (attacks.length) return { type:'skill', id:attacks[0] };
@@ -1722,6 +1751,7 @@ function applyDefenseEffects(dmg, effects, isMagic) {
   if (hasEffect(effects, 'smoke') && Math.random() < 0.5) return 0;
   if (hasEffect(effects, 'evade') && Math.random() < 0.5) return 0;
   if (isMagic && hasEffect(effects, 'mbarrier')) dmg = Math.floor(dmg * 0.5);
+  if (hasEffect(effects, 'vulnerable')) dmg = Math.floor(dmg * 2);
   return Math.max(1, dmg);
 }
 
@@ -1762,9 +1792,11 @@ async function handleVictory(p, e) {
   if (G.demo) {
     addBattleLog('勝利！', 'lvup');
     await delay(spd * 2);
+    G.battle.continueOverride = '<button class="btn primary" data-a="battleend">続ける</button>';
+    G.battle.showContinue = true;
     const cont = document.getElementById('battle-continue');
     if (cont) {
-      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.innerHTML = G.battle.continueOverride;
       cont.classList.remove('hidden');
     }
     return;
@@ -1860,6 +1892,7 @@ async function handleVictory(p, e) {
 
   saveGame();
   // 戻るボタン表示
+  G.battle.showContinue = true;
   const cont = document.getElementById('battle-continue');
   if (cont) cont.classList.remove('hidden');
 }
@@ -1872,9 +1905,11 @@ async function handleDefeat(p, e) {
   if (G.demo) {
     addBattleLog('…だが、諦めない。', 'sys');
     await delay(600);
+    G.battle.continueOverride = '<button class="btn primary" data-a="battleend">続ける</button>';
+    G.battle.showContinue = true;
     const cont = document.getElementById('battle-continue');
     if (cont) {
-      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.innerHTML = G.battle.continueOverride;
       cont.classList.remove('hidden');
     }
     return;
@@ -1895,9 +1930,11 @@ async function handleDefeat(p, e) {
   p.hp = 1;
   p.location = { type:'town', id: p.lastTown || 'town1' };
   saveGame();
+  G.battle.continueOverride = '<button class="btn primary" data-a="battleend">続ける</button>';
+  G.battle.showContinue = true;
   const cont = document.getElementById('battle-continue');
   if (cont) {
-    cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+    cont.innerHTML = G.battle.continueOverride;
     cont.classList.remove('hidden');
   }
 }
@@ -2710,20 +2747,26 @@ function screenBattle() {
   return `
     <div class="battle-enemy">
       <div class="emoji">${e.emoji}</div>
-      <div class="name">${e.name} Lv.${e.level}${e.boss?' [BOSS]':''}</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px">
+        <div class="name">${e.name} Lv.${e.level}${e.boss?' [BOSS]':''}</div>
+        <button class="btn small" style="font-size:0.7rem;padding:2px 6px" data-a="battlespeed">${G.settings.battleSpeed <= 200 ? '通常速度' : '高速'}</button>
+      </div>
       <div style="max-width:200px;margin:4px auto">
         <div class="bar-track"><div class="bar-fill hp" id="enemy-hp" style="width:${hpPct}%"></div></div>
         <div class="text-muted" style="font-size:0.75rem" id="enemy-hp-num">${Math.max(0,e.hp)}/${e.maxHp}</div>
       </div>
     </div>
-    <div class="btn-row" style="justify-content:center">
-      <button class="btn small" data-a="battlespeed">${G.settings.battleSpeed <= 200 ? '通常速度' : '高速'}</button>
+    <div class="btn-row" style="justify-content:center;gap:4px;margin:4px 0">
+      ${STRATEGIES.map(s =>
+        `<button class="btn small ${G.settings.strategy===s.id?'primary':''}" style="font-size:0.75rem;padding:2px 8px" data-a="battlestrategy" data-p="${s.id}">${s.name}</button>`
+      ).join('')}
+      ${!G.battle.specialUsed ? `<button class="btn small danger" style="font-size:0.75rem;padding:2px 8px" id="btn-special" data-a="battlespecial" ${G.battle.specialReady?'disabled':''}>必殺</button>` : ''}
     </div>
     <div class="battle-log" id="battle-log">
       ${G.battle.log.map(l => `<div class="bl ${l.cls}">${l.msg}</div>`).join('')}
     </div>
-    <div class="hidden" id="battle-continue">
-      ${afterBtns}
+    <div class="${G.battle.showContinue ? '' : 'hidden'}" id="battle-continue">
+      ${G.battle.continueOverride || afterBtns}
     </div>`;
 }
 
@@ -2905,7 +2948,7 @@ function screenJobChange() {
     <div class="panel">
       <p class="text-muted mb-1">${advanced
         ? 'レベル・ステータスはそのまま上級職に転職できます。'
-        : '転職するとLv.1に戻ります。ステータスの50%を引き継ぎます。'}</p>
+        : '転職するとLv.1に戻りますが、鍛えた力の一部は身体に残ります。'}</p>
       ${!advanced ? '<p class="text-muted" style="font-size:0.8rem;margin-top:4px">「幾度も転職を繰り返した者だけが到達できる境地がある、と聞く…」<br>「レベル1に戻っても、お前の体に刻まれた力は消えはしない」</p>' : ''}
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
       ${advanced && isCurrentAdvanced ? '<p class="text-danger">上級職からは転職できません。下級職に戻してから転職してください。</p>' : ''}
@@ -3335,6 +3378,21 @@ function handleAction(action, p1, p2) {
     case 'battlespeed':
       G.settings.battleSpeed = G.settings.battleSpeed <= 200 ? 600 : 200;
       render();
+      break;
+    case 'battlestrategy':
+      G.settings.strategy = p1;
+      document.querySelectorAll('[data-a="battlestrategy"]').forEach(btn => {
+        if (btn.dataset.p === p1) btn.classList.add('primary');
+        else btn.classList.remove('primary');
+      });
+      break;
+    case 'battlespecial':
+      if (G.battle && !G.battle.specialUsed && !G.battle.specialReady) {
+        G.battle.specialReady = true;
+        addBattleLog(`${G.player.name}は力を溜めている…！`, 'lvup');
+        const specBtn = document.getElementById('btn-special');
+        if (specBtn) specBtn.disabled = true;
+      }
       break;
     case 'demo_continue':
       // デモバトル→名前入力画面へ
