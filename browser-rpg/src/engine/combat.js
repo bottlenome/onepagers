@@ -328,9 +328,11 @@ async function handleVictory(p, e) {
   if (G.demo) {
     addBattleLog('勝利！', 'lvup');
     await delay(spd * 2);
+    G.battle.continueOverride = '<button class="btn primary" data-a="battleend">続ける</button>';
+    G.battle.showContinue = true;
     const cont = document.getElementById('battle-continue');
     if (cont) {
-      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.innerHTML = G.battle.continueOverride;
       cont.classList.remove('hidden');
     }
     return;
@@ -426,6 +428,7 @@ async function handleVictory(p, e) {
 
   saveGame();
   // 戻るボタン表示
+  G.battle.showContinue = true;
   const cont = document.getElementById('battle-continue');
   if (cont) cont.classList.remove('hidden');
 }
@@ -438,9 +441,11 @@ async function handleDefeat(p, e) {
   if (G.demo) {
     addBattleLog('…だが、諦めない。', 'sys');
     await delay(600);
+    G.battle.continueOverride = '<button class="btn primary" data-a="battleend">続ける</button>';
+    G.battle.showContinue = true;
     const cont = document.getElementById('battle-continue');
     if (cont) {
-      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.innerHTML = G.battle.continueOverride;
       cont.classList.remove('hidden');
     }
     return;
@@ -461,9 +466,11 @@ async function handleDefeat(p, e) {
   p.hp = 1;
   p.location = { type:'town', id: p.lastTown || 'town1' };
   saveGame();
+  G.battle.continueOverride = '<button class="btn primary" data-a="battleend">続ける</button>';
+  G.battle.showContinue = true;
   const cont = document.getElementById('battle-continue');
   if (cont) {
-    cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+    cont.innerHTML = G.battle.continueOverride;
     cont.classList.remove('hidden');
   }
 }

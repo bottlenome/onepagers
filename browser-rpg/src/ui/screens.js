@@ -153,8 +153,8 @@ function screenBattle() {
     <div class="battle-log" id="battle-log">
       ${G.battle.log.map(l => `<div class="bl ${l.cls}">${l.msg}</div>`).join('')}
     </div>
-    <div class="hidden" id="battle-continue">
-      ${afterBtns}
+    <div class="${G.battle.showContinue ? '' : 'hidden'}" id="battle-continue">
+      ${G.battle.continueOverride || afterBtns}
     </div>`;
 }
 
