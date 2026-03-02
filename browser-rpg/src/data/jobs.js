@@ -7,25 +7,29 @@
 const JOBS = {
   warrior: {
     name:'戦士', type:'basic',
-    desc:'高いHPと攻撃力を持つ前衛職',
+    desc:'高いHPと攻撃力を持つ前衛職。鍛えるほど体力の伸びが著しい',
+    passive:{ id:'dmg_reduce', name:'頑強', value:0.10, desc:'被ダメージ10%軽減' },
     base:{ hp:5, mp:0, atk:2, def:2, matk:0, mdef:0, spd:1 },
     rate:{ hp:.80, mp:.20, atk:.50, def:.50, matk:.10, mdef:.15, spd:.30 },
   },
   mage: {
     name:'魔法使い', type:'basic',
-    desc:'強力な魔法で攻撃する後衛職',
+    desc:'強力な魔法で攻撃する後衛職。魔力の成長が目覚ましい',
+    passive:{ id:'mp_regen', name:'魔力の奔流', value:1, desc:'毎ターンMP1回復' },
     base:{ hp:3, mp:3, atk:0, def:0, matk:2, mdef:2, spd:0 },
     rate:{ hp:.40, mp:.80, atk:.10, def:.15, matk:.70, mdef:.60, spd:.25 },
   },
   priest: {
     name:'僧侶', type:'basic',
-    desc:'回復魔法を使えるバランス型',
+    desc:'回復魔法を使えるバランス型。精神力の伸びに優れる',
+    passive:{ id:'post_heal', name:'祝福', value:0.10, desc:'戦闘勝利後HP10%回復' },
     base:{ hp:4, mp:2, atk:1, def:1, matk:1, mdef:2, spd:0 },
     rate:{ hp:.60, mp:.70, atk:.30, def:.35, matk:.40, mdef:.60, spd:.25 },
   },
   thief: {
     name:'盗賊', type:'basic',
-    desc:'素早さに優れた軽快な職業',
+    desc:'素早さに優れた軽快な職業。鍛えるほど速さが際立つ',
+    passive:{ id:'drop_bonus', name:'宝探し', value:0.05, desc:'ドロップ率+5%' },
     base:{ hp:3, mp:1, atk:2, def:1, matk:0, mdef:0, spd:3 },
     rate:{ hp:.50, mp:.30, atk:.55, def:.20, matk:.15, mdef:.20, spd:.80 },
   },

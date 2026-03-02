@@ -38,6 +38,7 @@ const SHOPS = {
       { id:'magic_water', isEquip:false },
       { id:'antidote',    isEquip:false },
       { id:'tent',        isEquip:false },
+      { id:'warp_scroll', isEquip:false },
     ],
   },
   mine_general: {

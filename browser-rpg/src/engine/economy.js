@@ -120,6 +120,25 @@ function useItemFromInventory(itemId) {
   const item = ITEMS[itemId];
   if (!item || !hasItem(p, itemId, 1)) return;
   if (item.type !== 'consumable') { addLog('このアイテムは使えない', 'danger'); render(); return; }
+
+  // 転移の巻物: 特殊処理
+  if (itemId === 'warp_scroll') {
+    if (p.location.type !== 'field') {
+      addLog('フィールドでのみ使用できる', 'danger'); render(); return;
+    }
+    const area = p.location.area;
+    const deepest = (p.deepestLayers || {})[area] || p.location.layer;
+    if (deepest <= p.location.layer) {
+      addLog('これ以上先に進んだことがない', 'system'); render(); return;
+    }
+    removeItem(p, 'warp_scroll', 1);
+    addLog(`転移の巻物を使った！階層${deepest}へ転移した！`, 'reward');
+    moveTo({ type:'field', area, layer: deepest });
+    const mon = spawnMonster(area, deepest);
+    if (mon) { saveGame(); startBattle(mon); }
+    return;
+  }
+
   if (item.healHp === 0 && item.healMp === 0) { addLog('今は使えない', 'danger'); render(); return; }
   removeItem(p, itemId, 1);
   const st = calcStats(p);

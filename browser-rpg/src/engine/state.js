@@ -14,6 +14,7 @@ const G = {
     battleSpeed: 600,
     strategy: 'balanced',
   },
+  demo: false,             // デモバトル中フラグ
 };
 
 function newPlayer(name, jobId) {
@@ -41,7 +42,30 @@ function newPlayer(name, jobId) {
     arenaProgress: 0,
     arenaUndefeated: true,
     jobHistory: [],       // 経験済み職業
+    jobChangeCount: 0,        // 転職回数
+    postTransferLevelUp: false, // 転職後初回レベルアップフラグ
+    firstBattle: true,        // 初回戦闘フラグ（格上遭遇用）
+    deepestLayers: {},        // { areaId: maxLayer } 最深到達階層
   };
+}
+
+// デモバトル用プレイヤー生成
+function createDemoPlayer() {
+  const p = newPlayer('伝説の勇者', 'knight');
+  p.level = 30;
+  p.baseStats = {hp:84,mp:2,atk:36,def:36,matk:1,mdef:2,spd:18};
+  p.growthStats = {hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5};
+  p.equipObjs.weapon = createEquip('legendary_sword', 0);
+  p.equipObjs.armor = createEquip('mithril_armor', 0);
+  p.equipObjs.accessory = createEquip('dragon_amulet', 0);
+  addItemToPlayer(p, 'elixir', 3);
+  p.gold = 0;
+  p.location = {type:'field', area:'mine', layer:30};
+  p.lastTown = 'minetown';
+  const st = calcStats(p);
+  p.hp = st.maxHp;
+  p.mp = st.maxMp;
+  return p;
 }
 
 // 画面遷移

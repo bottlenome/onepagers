@@ -64,11 +64,15 @@ function handleAction(action, p1, p2) {
   const p = G.player;
   switch (action) {
     // --- タイトル ---
-    case 'newgame':
-      G.screen = 'naming';
+    case 'newgame': {
+      // デモバトル開始: Lv30騎士 vs ドラゴン
+      G.demo = true;
+      G.player = createDemoPlayer();
+      const demoEnemy = { ...BOSSES['mine_30'] };
       selectedJob = null;
-      render();
+      startBattle(demoEnemy);
       break;
+    }
     case 'continue':
       if (loadGame()) {
         G.screen = p ? (G.player.location.type === 'town' ? 'town' : 'field') : 'title';
@@ -165,7 +169,23 @@ function handleAction(action, p1, p2) {
       G.settings.battleSpeed = G.settings.battleSpeed <= 200 ? 600 : 200;
       render();
       break;
+    case 'demo_continue':
+      // デモバトル→名前入力画面へ
+      G.demo = false;
+      G.player = null;
+      G.battle = null;
+      G.screen = 'naming';
+      selectedJob = null;
+      render();
+      break;
     case 'battleend':
+      // デモバトル終了→遷移画面
+      if (G.demo) {
+        G.battle = null;
+        G.screen = 'demo_transition';
+        render();
+        break;
+      }
       // 闘技場の結果処理
       if (G.battle && G.battle.enemy && G.battle.enemy.arena) {
         if (G.battle.won) {
@@ -368,6 +388,9 @@ function handleFacility(facilityId, param) {
       break;
     case 'enhancement':
       pushScreen('enhancement');
+      break;
+    case 'guild':
+      pushScreen('guild');
       break;
     case 'status':
       pushScreen('status');
