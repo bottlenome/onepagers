@@ -4,6 +4,51 @@
 
 let selectedJob = null;
 
+// デバッグキャラプリセット (特定の名前で開始すると使える)
+const DEBUG_PRESETS = {
+  // ドラゴン戦テスト: 2ループ戦士→騎士 + 伝説の剣 + ミスリル鎧
+  'DRAGON': {
+    jobId:'knight', baseStats:{hp:84,mp:2,atk:36,def:36,matk:1,mdef:2,spd:18},
+    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    weapon:'legendary_sword', armor:'mithril_armor', accessory:'dragon_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'minetown'}, lastTown:'minetown',
+  },
+  // エルフ王戦テスト: 4ループ戦士→騎士 (魔防+攻撃特化)
+  'ELFKING': {
+    jobId:'knight', baseStats:{hp:147,mp:4,atk:63,def:63,matk:1,mdef:3,spd:32},
+    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    weapon:'legendary_sword', armor:'spirit_armor', accessory:'dragon_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'elfvillage'}, lastTown:'elfvillage',
+  },
+  // 古城の主戦テスト: 4ループ僧侶→聖騎士 (魔攻+防御特化)
+  'CASTLE': {
+    jobId:'paladin', baseStats:{hp:116,mp:68,atk:32,def:34,matk:35,mdef:65,spd:6},
+    growthStats:{hp:168,mp:75,atk:72,def:73,matk:39,mdef:73,spd:7},
+    weapon:'spirit_staff', armor:'spirit_armor', accessory:'magic_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'lasttown'}, lastTown:'lasttown',
+  },
+  // 魔神戦テスト: 10ループ僧侶→聖騎士 (HP+魔防+防御特化)
+  'DEMON': {
+    jobId:'paladin', baseStats:{hp:132,mp:77,atk:36,def:38,matk:39,mdef:74,spd:6},
+    growthStats:{hp:168,mp:75,atk:72,def:73,matk:39,mdef:73,spd:7},
+    weapon:'legendary_sword', armor:'mithril_armor', accessory:'dragon_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'lasttown'}, lastTown:'lasttown',
+  },
+  // 古城隠しボス戦テスト: 20ループ戦士→騎士 + 装備+5
+  'LEGEND': {
+    jobId:'knight', baseStats:{hp:168,mp:5,atk:72,def:72,matk:2,mdef:4,spd:37},
+    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    weapon:'legendary_sword', armor:'mithril_armor', accessory:'dragon_amulet',
+    weaponEnhance:5, armorEnhance:5,
+    location:{type:'town',id:'lasttown'}, lastTown:'lasttown',
+    bossDefeats:{old_castle_boss_defeats:10},
+  },
+};
+
 function setupEvents() {
   document.getElementById('main').addEventListener('click', (e) => {
     const btn = e.target.closest('[data-a]');
@@ -47,19 +92,44 @@ function handleAction(action, p1, p2) {
       const nameInput = document.getElementById('name-input');
       const name = nameInput ? nameInput.value.trim() : '勇者';
       if (!name || !selectedJob) break;
-      G.player = newPlayer(name, selectedJob);
-      // 初期装備
-      G.player.equipObjs.weapon = createEquip('wooden_stick', 0);
-      G.player.equipObjs.armor = createEquip('cloth', 0);
-      // 初期アイテム
-      addItemToPlayer(G.player, 'herb', 3);
-      // HP/MP設定
-      const st = calcStats(G.player);
-      G.player.hp = st.maxHp;
-      G.player.mp = st.maxMp;
-      addLog('冒険が始まった！', 'system');
-      saveGame();
-      setScreen('town');
+      const preset = DEBUG_PRESETS[name];
+      if (preset) {
+        // デバッグキャラ: プリセットのステータスで開始
+        G.player = newPlayer(name, preset.jobId);
+        G.player.level = 30;
+        G.player.baseStats = { ...preset.baseStats };
+        G.player.growthStats = { ...preset.growthStats };
+        G.player.equipObjs.weapon = createEquip(preset.weapon, preset.weaponEnhance || 0);
+        G.player.equipObjs.armor = createEquip(preset.armor, preset.armorEnhance || 0);
+        if (preset.accessory) G.player.equipObjs.accessory = createEquip(preset.accessory, 0);
+        addItemToPlayer(G.player, 'tent', 99);
+        addItemToPlayer(G.player, 'elixir', 10);
+        addItemToPlayer(G.player, 'hi_herb', 10);
+        G.player.gold = 99999;
+        G.player.location = { ...preset.location };
+        G.player.lastTown = preset.lastTown;
+        if (preset.bossDefeats) G.player.bossDefeats = { ...preset.bossDefeats };
+        // 上級職スキルをすべて習得済み扱い (Lv30)
+        if (!G.player.jobHistory.includes(selectedJob)) G.player.jobHistory.push(selectedJob);
+        const st = calcStats(G.player);
+        G.player.hp = st.maxHp;
+        G.player.mp = st.maxMp;
+        addLog('デバッグキャラ「' + name + '」で冒険開始！', 'lvup');
+        saveGame();
+        setScreen(G.player.location.type === 'town' ? 'town' : 'field');
+      } else {
+        // 通常のゲーム開始
+        G.player = newPlayer(name, selectedJob);
+        G.player.equipObjs.weapon = createEquip('wooden_stick', 0);
+        G.player.equipObjs.armor = createEquip('cloth', 0);
+        addItemToPlayer(G.player, 'herb', 3);
+        const st = calcStats(G.player);
+        G.player.hp = st.maxHp;
+        G.player.mp = st.maxMp;
+        addLog('冒険が始まった！', 'system');
+        saveGame();
+        setScreen('town');
+      }
       break;
     }
 

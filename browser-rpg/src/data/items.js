@@ -20,6 +20,9 @@ const ITEMS = {};
   ['dragon_scale',  '竜鱗',         'material',   500,     0,    0,   '伝説の素材'],
   ['spirit_stone',  '精霊石',       'material',   200,     0,    0,   '合成の素材'],
   ['dark_crystal',  '闇の結晶',     'material',   300,     0,    0,   '高位合成の素材'],
+  ['orichalcum',    'オリハルコン', 'material',   800,     0,    0,   '最強の鍛冶素材'],
+  ['cursed_bone',   '呪われた骨',   'material',   250,     0,    0,   '古城の素材'],
+  ['phantom_cloth', '幻影の布',     'material',   350,     0,    0,   '古城深層の素材'],
 ].forEach(([id,name,type,price,healHp,healMp,desc]) => {
   ITEMS[id] = { id, name, type, price, healHp, healMp, desc };
 });

@@ -304,7 +304,7 @@ function screenJobChange() {
     <div class="panel">
       <p class="text-muted mb-1">${advanced
         ? 'レベル・ステータスはそのまま上級職に転職できます。'
-        : '転職するとLv.1に戻ります。ステータスの70%を引き継ぎます。'}</p>
+        : '転職するとLv.1に戻ります。ステータスの50%を引き継ぎます。'}</p>
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
       ${advanced && isCurrentAdvanced ? '<p class="text-danger">上級職からは転職できません。下級職に戻してから転職してください。</p>' : ''}
     </div>

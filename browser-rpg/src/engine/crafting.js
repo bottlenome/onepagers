@@ -97,8 +97,11 @@ function doRepairBag(bagIndex) {
 // --- 合成 (エルフの里) ---
 function canSynth(recipe) {
   const p = G.player;
-  for (const id of recipe.inputs) {
-    if (!hasItem(p, id, 1)) return false;
+  // 同素材の重複を正しくカウント
+  const counts = {};
+  for (const id of recipe.inputs) counts[id] = (counts[id] || 0) + 1;
+  for (const id of Object.keys(counts)) {
+    if (!hasItem(p, id, counts[id])) return false;
   }
   return true;
 }
