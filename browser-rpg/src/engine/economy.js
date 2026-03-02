@@ -219,5 +219,8 @@ function equipStatText(eo) {
     }
     parts.push(STAT_NAMES[k] + '+' + total);
   }
+  if (eo.grantedSkill && SKILLS[eo.grantedSkill]) {
+    parts.push('★' + SKILLS[eo.grantedSkill].name);
+  }
   return parts.join(' ');
 }
