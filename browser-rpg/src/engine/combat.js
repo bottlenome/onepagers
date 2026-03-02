@@ -48,12 +48,28 @@ async function runBattle() {
   const e = G.battle.enemy;
   const spd = G.settings.battleSpeed;
 
+  if (G.demo) {
+    addBattleLog('--- 遠い未来の戦いの記憶… ---', 'sys');
+    await delay(spd);
+  }
   addBattleLog(`${e.emoji} ${e.name} Lv.${e.level} が現れた！`, 'sys');
   await delay(spd);
 
   while (!G.battle.over) {
     G.battle.turn++;
+    // デモバトル: 最大15ターンで打ち切り
+    if (G.demo && G.battle.turn > 15) {
+      G.battle.over = true;
+      G.battle.won = true;
+      handleVictory(p, e);
+      break;
+    }
     const pStats = calcStats(p);
+    // 魔法使いパッシブ: 毎ターンMP回復
+    const mpPassive = JOBS[p.jobId].passive;
+    if (mpPassive && mpPassive.id === 'mp_regen') {
+      p.mp = Math.min(p.mp + mpPassive.value, pStats.maxMp);
+    }
     const playerFirst = pStats.spd >= e.spd;
 
     if (playerFirst) {
@@ -129,7 +145,10 @@ async function doEnemyAction(p, e, pStats) {
       const dmg = isMag
         ? calcMagDamage(e.matk * power, pStats.mdef)
         : calcPhysDamage(e.atk * power, pStats.def);
-      const reduced = applyDefenseEffects(dmg, G.battle.playerEffects, isMag);
+      let reduced = applyDefenseEffects(dmg, G.battle.playerEffects, isMag);
+      // 戦士パッシブ: 被ダメ軽減
+      const psvS = JOBS[G.player.jobId].passive;
+      if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
       await delay(spd);
@@ -140,7 +159,10 @@ async function doEnemyAction(p, e, pStats) {
   }
   // 通常攻撃
   const dmg = calcPhysDamage(e.atk, pStats.def);
-  const reduced = applyDefenseEffects(dmg, G.battle.playerEffects, false);
+  let reduced = applyDefenseEffects(dmg, G.battle.playerEffects, false);
+  // 戦士パッシブ: 被ダメ軽減
+  const psvN = JOBS[G.player.jobId].passive;
+  if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
   await delay(spd);
@@ -302,6 +324,28 @@ async function handleVictory(p, e) {
   addBattleLog(`${e.name}を倒した！`, 'reward');
   await delay(spd);
 
+  // デモバトル: 報酬処理スキップ
+  if (G.demo) {
+    addBattleLog('勝利！', 'lvup');
+    await delay(spd * 2);
+    const cont = document.getElementById('battle-continue');
+    if (cont) {
+      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.classList.remove('hidden');
+    }
+    return;
+  }
+
+  // 僧侶パッシブ: 戦闘勝利後HP回復
+  const priestPsv = JOBS[p.jobId].passive;
+  if (priestPsv && priestPsv.id === 'post_heal') {
+    const stH = calcStats(p);
+    const healAmt = Math.floor(stH.maxHp * priestPsv.value);
+    p.hp = Math.min(p.hp + healAmt, stH.maxHp);
+    addBattleLog(`祝福の力でHPが${healAmt}回復した`, 'p-heal');
+    await delay(spd);
+  }
+
   // EXP
   const exp = e.boss ? Math.floor(e.level * 5) : calcExpGain(p.level, e.level);
   if (exp > 0) {
@@ -317,8 +361,10 @@ async function handleVictory(p, e) {
 
   // ドロップ
   if (e.drops) {
+    const thiefPsv = JOBS[p.jobId].passive;
+    const dropBonus = (thiefPsv && thiefPsv.id === 'drop_bonus') ? thiefPsv.value : 0;
     for (const d of e.drops) {
-      if (Math.random() < d.rate) {
+      if (Math.random() < d.rate + dropBonus) {
         addItemToPlayer(p, d.id, 1);
         const info = ITEMS[d.id] || EQUIPS[d.id];
         addBattleLog(`${info ? info.name : d.id}を手に入れた！`, 'reward');
@@ -351,10 +397,18 @@ async function handleVictory(p, e) {
   // レベルアップ
   while (p.exp >= expForNextLevel(p.level) && p.level < MAX_LEVEL) {
     p.exp -= expForNextLevel(p.level);
-    const gains = processLevelUp(p);
+    const { gains, bonuses } = processLevelUp(p);
     addBattleLog(`レベルアップ！Lv.${p.level-1} → Lv.${p.level}`, 'lvup');
-    const parts = STAT_KEYS.filter(k => gains[k] > 0).map(k => STAT_NAMES[k]+'+'+gains[k]);
+    const parts = STAT_KEYS.filter(k => gains[k] > 0).map(k => {
+      if (bonuses[k]) return `<span class="bonus-growth">${STAT_NAMES[k]}+${gains[k]} ★</span>`;
+      return STAT_NAMES[k]+'+'+gains[k];
+    });
     if (parts.length) addBattleLog(parts.join(' '), 'lvup');
+    // 転職後初回レベルアップメッセージ
+    if (p.postTransferLevelUp && (p.jobChangeCount || 0) > 0) {
+      addBattleLog('以前の経験が体に染み付いている…前より強い気がする', 'sys');
+      p.postTransferLevelUp = false;
+    }
     // 新スキル習得チェック
     const job = JOBS[p.jobId];
     if (job.skills) {
@@ -379,6 +433,30 @@ async function handleVictory(p, e) {
 async function handleDefeat(p, e) {
   addBattleLog(`${p.name}は力尽きた…`, 'danger');
   await delay(800);
+
+  // デモバトル: ペナルティなし
+  if (G.demo) {
+    addBattleLog('…だが、諦めない。', 'sys');
+    await delay(600);
+    const cont = document.getElementById('battle-continue');
+    if (cont) {
+      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.classList.remove('hidden');
+    }
+    return;
+  }
+
+  // ゴールドペナルティ
+  const lostGold = Math.floor(p.gold * DEATH_GOLD_PENALTY);
+  if (lostGold > 0) {
+    p.gold -= lostGold;
+    addBattleLog(`${lostGold}Gを落としてしまった…`, 'danger');
+    await delay(400);
+  }
+  if (p.bankGold > 0) {
+    addBattleLog(`銀行の預金${p.bankGold.toLocaleString()}Gは無事だ`, 'sys');
+    await delay(400);
+  }
   addBattleLog('最後に訪れた町で目を覚ました…', 'sys');
   p.hp = 1;
   p.location = { type:'town', id: p.lastTown || 'town1' };

@@ -268,6 +268,7 @@ body {
 .bl.sys { color: var(--muted); }
 .bl.reward { color: var(--gold); }
 .bl.lvup { color: var(--accent); font-weight: bold; }
+.bonus-growth { color: var(--gold); font-weight: bold; }
 
 /* --- Shop / list screens --- */
 .shop-item {
@@ -402,6 +403,7 @@ const STRATEGIES = [
   { id:'careful',    name:'いのちだいじに',   desc:'回復を優先する' },
   { id:'physical',   name:'じゅもんつかうな', desc:'通常攻撃とアイテムのみ' },
 ];
+const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';
 /* ═══════════════════════════════════════
    職業データ
@@ -412,25 +414,29 @@ const SAVE_KEY = 'onepagers-browser-rpg';
 const JOBS = {
   warrior: {
     name:'戦士', type:'basic',
-    desc:'高いHPと攻撃力を持つ前衛職',
+    desc:'高いHPと攻撃力を持つ前衛職。鍛えるほど体力の伸びが著しい',
+    passive:{ id:'dmg_reduce', name:'頑強', value:0.10, desc:'被ダメージ10%軽減' },
     base:{ hp:5, mp:0, atk:2, def:2, matk:0, mdef:0, spd:1 },
     rate:{ hp:.80, mp:.20, atk:.50, def:.50, matk:.10, mdef:.15, spd:.30 },
   },
   mage: {
     name:'魔法使い', type:'basic',
-    desc:'強力な魔法で攻撃する後衛職',
+    desc:'強力な魔法で攻撃する後衛職。魔力の成長が目覚ましい',
+    passive:{ id:'mp_regen', name:'魔力の奔流', value:1, desc:'毎ターンMP1回復' },
     base:{ hp:3, mp:3, atk:0, def:0, matk:2, mdef:2, spd:0 },
     rate:{ hp:.40, mp:.80, atk:.10, def:.15, matk:.70, mdef:.60, spd:.25 },
   },
   priest: {
     name:'僧侶', type:'basic',
-    desc:'回復魔法を使えるバランス型',
+    desc:'回復魔法を使えるバランス型。精神力の伸びに優れる',
+    passive:{ id:'post_heal', name:'祝福', value:0.10, desc:'戦闘勝利後HP10%回復' },
     base:{ hp:4, mp:2, atk:1, def:1, matk:1, mdef:2, spd:0 },
     rate:{ hp:.60, mp:.70, atk:.30, def:.35, matk:.40, mdef:.60, spd:.25 },
   },
   thief: {
     name:'盗賊', type:'basic',
-    desc:'素早さに優れた軽快な職業',
+    desc:'素早さに優れた軽快な職業。鍛えるほど速さが際立つ',
+    passive:{ id:'drop_bonus', name:'宝探し', value:0.05, desc:'ドロップ率+5%' },
     base:{ hp:3, mp:1, atk:2, def:1, matk:0, mdef:0, spd:3 },
     rate:{ hp:.50, mp:.30, atk:.55, def:.20, matk:.15, mdef:.20, spd:.80 },
   },
@@ -660,6 +666,8 @@ const ITEMS = {};
   ['antidote',      '毒消し',       'consumable',   8,     0,    0,   '毒を治療'],
   ['tent',          'テント',       'consumable', 100,    -1,   -1,   'HP・MP全回復(フィールド用)'],
   ['world_branch',  '世界樹の枝',   'consumable', 300,    -1,   -1,   'HP・MP全回復+状態治療'],
+  // --- 特殊 ---
+  ['warp_scroll',  '転移の巻物',   'consumable',  50,     0,    0,   '探索済みの最深階層へ瞬間移動する'],
   // --- 素材 ---
   ['copper_ore',    '銅鉱石',       'material',    15,     0,    0,   '鍛冶の素材'],
   ['iron_ore',      '鉄鉱石',       'material',    40,     0,    0,   '鍛冶の素材'],
@@ -955,6 +963,7 @@ const TOWN_FACILITIES = {
     { id:'inn',      icon:'🏨', label:'宿屋',   cost:10 },
     { id:'shop',     icon:'🏪', label:'よろずや', shopId:'town1_general' },
     { id:'jobchange', icon:'🔄', label:'転職場',  advanced:false },
+    { id:'guild',    icon:'🏛️', label:'冒険者ギルド' },
     { id:'status',   icon:'📊', label:'ステータス' },
   ],
   porttown: [
@@ -1037,6 +1046,7 @@ const SHOPS = {
       { id:'magic_water', isEquip:false },
       { id:'antidote',    isEquip:false },
       { id:'tent',        isEquip:false },
+      { id:'warp_scroll', isEquip:false },
     ],
   },
   mine_general: {
@@ -1197,6 +1207,7 @@ const G = {
     battleSpeed: 600,
     strategy: 'balanced',
   },
+  demo: false,             // デモバトル中フラグ
 };
 
 function newPlayer(name, jobId) {
@@ -1224,7 +1235,30 @@ function newPlayer(name, jobId) {
     arenaProgress: 0,
     arenaUndefeated: true,
     jobHistory: [],       // 経験済み職業
+    jobChangeCount: 0,        // 転職回数
+    postTransferLevelUp: false, // 転職後初回レベルアップフラグ
+    firstBattle: true,        // 初回戦闘フラグ（格上遭遇用）
+    deepestLayers: {},        // { areaId: maxLayer } 最深到達階層
   };
+}
+
+// デモバトル用プレイヤー生成
+function createDemoPlayer() {
+  const p = newPlayer('伝説の勇者', 'knight');
+  p.level = 30;
+  p.baseStats = {hp:84,mp:2,atk:36,def:36,matk:1,mdef:2,spd:18};
+  p.growthStats = {hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5};
+  p.equipObjs.weapon = createEquip('legendary_sword', 0);
+  p.equipObjs.armor = createEquip('mithril_armor', 0);
+  p.equipObjs.accessory = createEquip('dragon_amulet', 0);
+  addItemToPlayer(p, 'elixir', 3);
+  p.gold = 0;
+  p.location = {type:'field', area:'mine', layer:30};
+  p.lastTown = 'minetown';
+  const st = calcStats(p);
+  p.hp = st.maxHp;
+  p.mp = st.maxMp;
+  return p;
 }
 
 // 画面遷移
@@ -1312,9 +1346,11 @@ function processLevelUp(p) {
   const job = JOBS[p.jobId];
   const rates = getGrowthRates(p);
   const gains = {};
+  const bonuses = {};
   for (const k of STAT_KEYS) {
     let g = job.base[k] || 0;
-    if (Math.random() < (rates[k] || 0)) g += 1; // 隠し成長ボーナス
+    const gotBonus = Math.random() < (rates[k] || 0);
+    if (gotBonus) { g += 1; bonuses[k] = true; }
     p.growthStats[k] = (p.growthStats[k] || 0) + g;
     gains[k] = g;
   }
@@ -1322,7 +1358,7 @@ function processLevelUp(p) {
   const st = calcStats(p);
   p.hp = Math.min(p.hp + gains.hp, st.maxHp);
   p.mp = Math.min(p.mp + gains.mp, st.maxMp);
-  return gains;
+  return { gains, bonuses };
 }
 
 // 経験値関連
@@ -1366,6 +1402,8 @@ function changeJob(p, newJobId) {
     }
   }
   p.jobId = newJobId;
+  p.jobChangeCount = (p.jobChangeCount || 0) + 1;
+  p.postTransferLevelUp = true;
   const st = calcStats(p);
   p.hp = st.maxHp;
   p.mp = st.maxMp;
@@ -1444,12 +1482,28 @@ async function runBattle() {
   const e = G.battle.enemy;
   const spd = G.settings.battleSpeed;
 
+  if (G.demo) {
+    addBattleLog('--- 遠い未来の戦いの記憶… ---', 'sys');
+    await delay(spd);
+  }
   addBattleLog(`${e.emoji} ${e.name} Lv.${e.level} が現れた！`, 'sys');
   await delay(spd);
 
   while (!G.battle.over) {
     G.battle.turn++;
+    // デモバトル: 最大15ターンで打ち切り
+    if (G.demo && G.battle.turn > 15) {
+      G.battle.over = true;
+      G.battle.won = true;
+      handleVictory(p, e);
+      break;
+    }
     const pStats = calcStats(p);
+    // 魔法使いパッシブ: 毎ターンMP回復
+    const mpPassive = JOBS[p.jobId].passive;
+    if (mpPassive && mpPassive.id === 'mp_regen') {
+      p.mp = Math.min(p.mp + mpPassive.value, pStats.maxMp);
+    }
     const playerFirst = pStats.spd >= e.spd;
 
     if (playerFirst) {
@@ -1525,7 +1579,10 @@ async function doEnemyAction(p, e, pStats) {
       const dmg = isMag
         ? calcMagDamage(e.matk * power, pStats.mdef)
         : calcPhysDamage(e.atk * power, pStats.def);
-      const reduced = applyDefenseEffects(dmg, G.battle.playerEffects, isMag);
+      let reduced = applyDefenseEffects(dmg, G.battle.playerEffects, isMag);
+      // 戦士パッシブ: 被ダメ軽減
+      const psvS = JOBS[G.player.jobId].passive;
+      if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
       await delay(spd);
@@ -1536,7 +1593,10 @@ async function doEnemyAction(p, e, pStats) {
   }
   // 通常攻撃
   const dmg = calcPhysDamage(e.atk, pStats.def);
-  const reduced = applyDefenseEffects(dmg, G.battle.playerEffects, false);
+  let reduced = applyDefenseEffects(dmg, G.battle.playerEffects, false);
+  // 戦士パッシブ: 被ダメ軽減
+  const psvN = JOBS[G.player.jobId].passive;
+  if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
   await delay(spd);
@@ -1698,6 +1758,28 @@ async function handleVictory(p, e) {
   addBattleLog(`${e.name}を倒した！`, 'reward');
   await delay(spd);
 
+  // デモバトル: 報酬処理スキップ
+  if (G.demo) {
+    addBattleLog('勝利！', 'lvup');
+    await delay(spd * 2);
+    const cont = document.getElementById('battle-continue');
+    if (cont) {
+      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.classList.remove('hidden');
+    }
+    return;
+  }
+
+  // 僧侶パッシブ: 戦闘勝利後HP回復
+  const priestPsv = JOBS[p.jobId].passive;
+  if (priestPsv && priestPsv.id === 'post_heal') {
+    const stH = calcStats(p);
+    const healAmt = Math.floor(stH.maxHp * priestPsv.value);
+    p.hp = Math.min(p.hp + healAmt, stH.maxHp);
+    addBattleLog(`祝福の力でHPが${healAmt}回復した`, 'p-heal');
+    await delay(spd);
+  }
+
   // EXP
   const exp = e.boss ? Math.floor(e.level * 5) : calcExpGain(p.level, e.level);
   if (exp > 0) {
@@ -1713,8 +1795,10 @@ async function handleVictory(p, e) {
 
   // ドロップ
   if (e.drops) {
+    const thiefPsv = JOBS[p.jobId].passive;
+    const dropBonus = (thiefPsv && thiefPsv.id === 'drop_bonus') ? thiefPsv.value : 0;
     for (const d of e.drops) {
-      if (Math.random() < d.rate) {
+      if (Math.random() < d.rate + dropBonus) {
         addItemToPlayer(p, d.id, 1);
         const info = ITEMS[d.id] || EQUIPS[d.id];
         addBattleLog(`${info ? info.name : d.id}を手に入れた！`, 'reward');
@@ -1747,10 +1831,18 @@ async function handleVictory(p, e) {
   // レベルアップ
   while (p.exp >= expForNextLevel(p.level) && p.level < MAX_LEVEL) {
     p.exp -= expForNextLevel(p.level);
-    const gains = processLevelUp(p);
+    const { gains, bonuses } = processLevelUp(p);
     addBattleLog(`レベルアップ！Lv.${p.level-1} → Lv.${p.level}`, 'lvup');
-    const parts = STAT_KEYS.filter(k => gains[k] > 0).map(k => STAT_NAMES[k]+'+'+gains[k]);
+    const parts = STAT_KEYS.filter(k => gains[k] > 0).map(k => {
+      if (bonuses[k]) return `<span class="bonus-growth">${STAT_NAMES[k]}+${gains[k]} ★</span>`;
+      return STAT_NAMES[k]+'+'+gains[k];
+    });
     if (parts.length) addBattleLog(parts.join(' '), 'lvup');
+    // 転職後初回レベルアップメッセージ
+    if (p.postTransferLevelUp && (p.jobChangeCount || 0) > 0) {
+      addBattleLog('以前の経験が体に染み付いている…前より強い気がする', 'sys');
+      p.postTransferLevelUp = false;
+    }
     // 新スキル習得チェック
     const job = JOBS[p.jobId];
     if (job.skills) {
@@ -1775,6 +1867,30 @@ async function handleVictory(p, e) {
 async function handleDefeat(p, e) {
   addBattleLog(`${p.name}は力尽きた…`, 'danger');
   await delay(800);
+
+  // デモバトル: ペナルティなし
+  if (G.demo) {
+    addBattleLog('…だが、諦めない。', 'sys');
+    await delay(600);
+    const cont = document.getElementById('battle-continue');
+    if (cont) {
+      cont.innerHTML = '<button class="btn primary" data-a="battleend">続ける</button>';
+      cont.classList.remove('hidden');
+    }
+    return;
+  }
+
+  // ゴールドペナルティ
+  const lostGold = Math.floor(p.gold * DEATH_GOLD_PENALTY);
+  if (lostGold > 0) {
+    p.gold -= lostGold;
+    addBattleLog(`${lostGold}Gを落としてしまった…`, 'danger');
+    await delay(400);
+  }
+  if (p.bankGold > 0) {
+    addBattleLog(`銀行の預金${p.bankGold.toLocaleString()}Gは無事だ`, 'sys');
+    await delay(400);
+  }
   addBattleLog('最後に訪れた町で目を覚ました…', 'sys');
   p.hp = 1;
   p.location = { type:'town', id: p.lastTown || 'town1' };
@@ -1940,6 +2056,25 @@ function useItemFromInventory(itemId) {
   const item = ITEMS[itemId];
   if (!item || !hasItem(p, itemId, 1)) return;
   if (item.type !== 'consumable') { addLog('このアイテムは使えない', 'danger'); render(); return; }
+
+  // 転移の巻物: 特殊処理
+  if (itemId === 'warp_scroll') {
+    if (p.location.type !== 'field') {
+      addLog('フィールドでのみ使用できる', 'danger'); render(); return;
+    }
+    const area = p.location.area;
+    const deepest = (p.deepestLayers || {})[area] || p.location.layer;
+    if (deepest <= p.location.layer) {
+      addLog('これ以上先に進んだことがない', 'system'); render(); return;
+    }
+    removeItem(p, 'warp_scroll', 1);
+    addLog(`転移の巻物を使った！階層${deepest}へ転移した！`, 'reward');
+    moveTo({ type:'field', area, layer: deepest });
+    const mon = spawnMonster(area, deepest);
+    if (mon) { saveGame(); startBattle(mon); }
+    return;
+  }
+
   if (item.healHp === 0 && item.healMp === 0) { addLog('今は使えない', 'danger'); render(); return; }
   removeItem(p, itemId, 1);
   const st = calcStats(p);
@@ -2249,6 +2384,11 @@ function moveTo(loc) {
     saveGame();
   } else {
     G.screen = 'field';
+    // 最深到達階層を記録
+    if (!p.deepestLayers) p.deepestLayers = {};
+    if ((p.deepestLayers[loc.area] || 0) < loc.layer) {
+      p.deepestLayers[loc.area] = loc.layer;
+    }
   }
   render();
 }
@@ -2257,6 +2397,20 @@ function explore() {
   const p = G.player;
   if (p.location.type !== 'field') return;
   const { area, layer } = p.location;
+
+  // 初回強制エンカウント: 格上モンスター
+  if (p.firstBattle) {
+    p.firstBattle = false;
+    const strongMon = spawnMonster('grassland', 8);
+    if (strongMon) {
+      strongMon.name = '凶暴な' + strongMon.name;
+      addLog('！？ 強い敵が現れた！', 'danger');
+      saveGame();
+      startBattle(strongMon);
+      return;
+    }
+  }
+
   const monster = spawnMonster(area, layer);
   if (!monster) { addLog('モンスターは現れなかった', 'system'); return; }
   saveGame(); // 戦闘前にセーブ
@@ -2433,6 +2587,16 @@ function screenTitle() {
     </div>`;
 }
 
+// --- デモ遷移画面 ---
+function screenDemoTransition() {
+  return `
+    <div class="title-screen">
+      <p class="sub" style="margin-top:2rem">…それは、まだ遠い未来の話。</p>
+      <p class="text-muted" style="margin-top:1rem">いつか、あなたもこの境地へ辿り着くだろう。</p>
+      <button class="btn primary mt-2" data-a="demo_continue">冒険を始める</button>
+    </div>`;
+}
+
 // --- 名前・職業選択 ---
 function screenNaming() {
   const jobs = Object.entries(JOBS).filter(([,j]) => j.type === 'basic');
@@ -2447,6 +2611,7 @@ function screenNaming() {
             <div class="name">${j.name}</div>
             <div class="desc">${j.desc}</div>
             <div class="stats">${STAT_KEYS.map(k => STAT_NAMES[k]+':'+j.base[k]).join(' ')}</div>
+            ${j.passive ? `<div class="text-muted" style="font-size:0.75rem;margin-top:2px">固有: ${j.passive.name} - ${j.passive.desc}</div>` : ''}
           </div>`).join('')}
       </div>
       <button class="btn primary mt-2" data-a="startgame" id="btn-start" disabled>冒険に出発！</button>
@@ -2575,7 +2740,22 @@ function screenShop() {
       if (!info) return '';
       const price = info.price;
       const canBuy = p.gold >= price;
-      const detail = si.isEquip ? equipStatSummary(si.id) : info.desc;
+      let detail = si.isEquip ? equipStatSummary(si.id) : info.desc;
+      // 装備比較
+      if (si.isEquip) {
+        const eq = EQUIPS[si.id];
+        const slot = eq.slot;
+        const current = p.equipObjs[slot];
+        if (current) {
+          const curEq = EQUIPS[current.baseId];
+          const diffs = STAT_KEYS.map(k => {
+            const diff = (eq.s[k]||0) - (curEq.s[k]||0);
+            if (diff === 0) return null;
+            return diff > 0 ? `<span class="text-success">${STAT_NAMES[k]}+${diff}</span>` : `<span class="text-danger">${STAT_NAMES[k]}${diff}</span>`;
+          }).filter(Boolean);
+          if (diffs.length) detail += '<br>現装備比較: ' + diffs.join(' ');
+        }
+      }
       return `<div class="shop-item">
         <div class="info"><div class="name">${info.name}</div><div class="detail">${detail}</div></div>
         <div class="price">${price}G</div>
@@ -2639,6 +2819,7 @@ function screenStatus() {
       </table>
       <div class="mt-1 text-muted" style="font-size:0.8rem">
         職業: ${job.name} | 経験済: ${p.jobHistory.map(j=>JOBS[j].name).join(', ')||'なし'}<br>
+        転職回数: ${p.jobChangeCount || 0}回<br>
         称号: ${p.titles.join(', ')||'なし'}
       </div>`;
   } else if (tab === 'equip') {
@@ -2666,9 +2847,14 @@ function screenStatus() {
       p.items.map(it => {
         const info = ITEMS[it.id];
         if (!info) return '';
-        const canUse = info.type === 'consumable' && (info.healHp || info.healMp);
+        const canUse = info.type === 'consumable' && (info.healHp || info.healMp || it.id === 'warp_scroll');
+        let desc = info.desc;
+        if (it.id === 'warp_scroll' && p.location.type === 'field') {
+          const deepest = (p.deepestLayers || {})[p.location.area] || p.location.layer;
+          desc += ` (現在エリア最深: 階層${deepest})`;
+        }
         return `<div class="shop-item">
-          <div class="info"><div class="name">${info.name} x${it.count}</div><div class="detail">${info.desc}</div></div>
+          <div class="info"><div class="name">${info.name} x${it.count}</div><div class="detail">${desc}</div></div>
           ${canUse ? `<button class="btn small" data-a="useitem" data-p="${it.id}">使う</button>` : ''}
         </div>`;
       }).join('');
@@ -2720,6 +2906,7 @@ function screenJobChange() {
       <p class="text-muted mb-1">${advanced
         ? 'レベル・ステータスはそのまま上級職に転職できます。'
         : '転職するとLv.1に戻ります。ステータスの50%を引き継ぎます。'}</p>
+      ${!advanced ? '<p class="text-muted" style="font-size:0.8rem;margin-top:4px">「幾度も転職を繰り返した者だけが到達できる境地がある、と聞く…」<br>「レベル1に戻っても、お前の体に刻まれた力は消えはしない」</p>' : ''}
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
       ${advanced && isCurrentAdvanced ? '<p class="text-danger">上級職からは転職できません。下級職に戻してから転職してください。</p>' : ''}
     </div>
@@ -2909,6 +3096,36 @@ function screenSynthesis() {
     <div class="panel">${synthHtml}</div>`;
 }
 
+// --- 冒険者ギルド画面 ---
+function screenGuild() {
+  const p = G.player;
+  const guildBosses = [
+    { key:'mine_30', area:'鉱山 階層30', hint:'腕に覚えのある者向け' },
+    { key:'demon_forest_30', area:'魔の森 階層30', hint:'相当な実力が必要' },
+    { key:'old_castle_25', area:'古城 階層25', hint:'相当な実力が必要' },
+    { key:'last_dungeon_35', area:'ラストダンジョン 階層35', hint:'世界最強の脅威' },
+  ];
+  const bossHtml = guildBosses.map(gb => {
+    const boss = BOSSES[gb.key];
+    if (!boss) return '';
+    const defeated = (p.bossDefeats[boss.defeatKey || gb.key] || 0) > 0;
+    return `<div class="shop-item">
+      <div class="info">
+        <div class="name">${defeated ? boss.emoji : '❓'} ${defeated ? boss.name : '???'} ${defeated ? 'Lv.'+boss.level : ''}</div>
+        <div class="detail">${gb.area} | ${defeated ? '撃破済' : gb.hint}</div>
+      </div>
+      <span>${defeated ? '✅' : '🔒'}</span>
+    </div>`;
+  }).join('');
+
+  return `
+    ${backBtn()}
+    <h2>冒険者ギルド</h2>
+    <div class="panel"><p class="text-muted">各地で報告されている強大な敵の情報を掲示している。</p></div>
+    <h3>討伐対象</h3>
+    <div class="panel">${bossHtml}</div>`;
+}
+
 // --- 強化所画面 ---
 function screenEnhancement() {
   const p = G.player;
@@ -3014,11 +3231,15 @@ function handleAction(action, p1, p2) {
   const p = G.player;
   switch (action) {
     // --- タイトル ---
-    case 'newgame':
-      G.screen = 'naming';
+    case 'newgame': {
+      // デモバトル開始: Lv30騎士 vs ドラゴン
+      G.demo = true;
+      G.player = createDemoPlayer();
+      const demoEnemy = { ...BOSSES['mine_30'] };
       selectedJob = null;
-      render();
+      startBattle(demoEnemy);
       break;
+    }
     case 'continue':
       if (loadGame()) {
         G.screen = p ? (G.player.location.type === 'town' ? 'town' : 'field') : 'title';
@@ -3115,7 +3336,23 @@ function handleAction(action, p1, p2) {
       G.settings.battleSpeed = G.settings.battleSpeed <= 200 ? 600 : 200;
       render();
       break;
+    case 'demo_continue':
+      // デモバトル→名前入力画面へ
+      G.demo = false;
+      G.player = null;
+      G.battle = null;
+      G.screen = 'naming';
+      selectedJob = null;
+      render();
+      break;
     case 'battleend':
+      // デモバトル終了→遷移画面
+      if (G.demo) {
+        G.battle = null;
+        G.screen = 'demo_transition';
+        render();
+        break;
+      }
       // 闘技場の結果処理
       if (G.battle && G.battle.enemy && G.battle.enemy.arena) {
         if (G.battle.won) {
@@ -3319,6 +3556,9 @@ function handleFacility(facilityId, param) {
     case 'enhancement':
       pushScreen('enhancement');
       break;
+    case 'guild':
+      pushScreen('guild');
+      break;
     case 'status':
       pushScreen('status');
       break;
@@ -3359,6 +3599,8 @@ function renderScreen() {
     case 'blacksmith':  return screenBlacksmith();
     case 'synthesis':   return screenSynthesis();
     case 'enhancement': return screenEnhancement();
+    case 'guild':       return screenGuild();
+    case 'demo_transition': return screenDemoTransition();
     default:            return '<p class="text-center text-muted">画面が見つかりません</p>';
   }
 }

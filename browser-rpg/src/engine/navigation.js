@@ -11,6 +11,11 @@ function moveTo(loc) {
     saveGame();
   } else {
     G.screen = 'field';
+    // 最深到達階層を記録
+    if (!p.deepestLayers) p.deepestLayers = {};
+    if ((p.deepestLayers[loc.area] || 0) < loc.layer) {
+      p.deepestLayers[loc.area] = loc.layer;
+    }
   }
   render();
 }
@@ -19,6 +24,20 @@ function explore() {
   const p = G.player;
   if (p.location.type !== 'field') return;
   const { area, layer } = p.location;
+
+  // 初回強制エンカウント: 格上モンスター
+  if (p.firstBattle) {
+    p.firstBattle = false;
+    const strongMon = spawnMonster('grassland', 8);
+    if (strongMon) {
+      strongMon.name = '凶暴な' + strongMon.name;
+      addLog('！？ 強い敵が現れた！', 'danger');
+      saveGame();
+      startBattle(strongMon);
+      return;
+    }
+  }
+
   const monster = spawnMonster(area, layer);
   if (!monster) { addLog('モンスターは現れなかった', 'system'); return; }
   saveGame(); // 戦闘前にセーブ

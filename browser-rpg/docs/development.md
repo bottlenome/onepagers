@@ -59,12 +59,12 @@ bash build.sh && node test.js
 
 | 項目 | 確認内容 |
 |------|----------|
-| データ定義数 | Jobs: 9, Skills: 33, Equips: 29, Items: 13, Monsters: 57, Bosses: 5 |
+| データ定義数 | Jobs: 10, Skills: 37, Equips: 37, Items: 17, Monsters: 57, Bosses: 5 |
 | プレイヤー生成 | `newPlayer()` + 初期装備 + `calcStats()` |
 | モンスター生成 | `spawnMonster()` でエリア・階層に応じたモンスター出現 |
 | 経験値計算 | `calcExpGain()` / `expForNextLevel()` |
 | 成長率取得 | `getGrowthRates()` で職業+装備の合算確率 |
-| レベルアップ | `processLevelUp()` で確定成長+確率成長 |
+| レベルアップ | `processLevelUp()` で確定成長+確率成長（戻り値: `{ gains, bonuses }`） |
 | マップ移動 | `getFieldExits()` でエリア間の接続確認 |
 
 ### テスト追加方法

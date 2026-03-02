@@ -18,6 +18,16 @@ function screenTitle() {
     </div>`;
 }
 
+// --- デモ遷移画面 ---
+function screenDemoTransition() {
+  return `
+    <div class="title-screen">
+      <p class="sub" style="margin-top:2rem">…それは、まだ遠い未来の話。</p>
+      <p class="text-muted" style="margin-top:1rem">いつか、あなたもこの境地へ辿り着くだろう。</p>
+      <button class="btn primary mt-2" data-a="demo_continue">冒険を始める</button>
+    </div>`;
+}
+
 // --- 名前・職業選択 ---
 function screenNaming() {
   const jobs = Object.entries(JOBS).filter(([,j]) => j.type === 'basic');
@@ -32,6 +42,7 @@ function screenNaming() {
             <div class="name">${j.name}</div>
             <div class="desc">${j.desc}</div>
             <div class="stats">${STAT_KEYS.map(k => STAT_NAMES[k]+':'+j.base[k]).join(' ')}</div>
+            ${j.passive ? `<div class="text-muted" style="font-size:0.75rem;margin-top:2px">固有: ${j.passive.name} - ${j.passive.desc}</div>` : ''}
           </div>`).join('')}
       </div>
       <button class="btn primary mt-2" data-a="startgame" id="btn-start" disabled>冒険に出発！</button>
@@ -160,7 +171,22 @@ function screenShop() {
       if (!info) return '';
       const price = info.price;
       const canBuy = p.gold >= price;
-      const detail = si.isEquip ? equipStatSummary(si.id) : info.desc;
+      let detail = si.isEquip ? equipStatSummary(si.id) : info.desc;
+      // 装備比較
+      if (si.isEquip) {
+        const eq = EQUIPS[si.id];
+        const slot = eq.slot;
+        const current = p.equipObjs[slot];
+        if (current) {
+          const curEq = EQUIPS[current.baseId];
+          const diffs = STAT_KEYS.map(k => {
+            const diff = (eq.s[k]||0) - (curEq.s[k]||0);
+            if (diff === 0) return null;
+            return diff > 0 ? `<span class="text-success">${STAT_NAMES[k]}+${diff}</span>` : `<span class="text-danger">${STAT_NAMES[k]}${diff}</span>`;
+          }).filter(Boolean);
+          if (diffs.length) detail += '<br>現装備比較: ' + diffs.join(' ');
+        }
+      }
       return `<div class="shop-item">
         <div class="info"><div class="name">${info.name}</div><div class="detail">${detail}</div></div>
         <div class="price">${price}G</div>
@@ -224,6 +250,7 @@ function screenStatus() {
       </table>
       <div class="mt-1 text-muted" style="font-size:0.8rem">
         職業: ${job.name} | 経験済: ${p.jobHistory.map(j=>JOBS[j].name).join(', ')||'なし'}<br>
+        転職回数: ${p.jobChangeCount || 0}回<br>
         称号: ${p.titles.join(', ')||'なし'}
       </div>`;
   } else if (tab === 'equip') {
@@ -251,9 +278,14 @@ function screenStatus() {
       p.items.map(it => {
         const info = ITEMS[it.id];
         if (!info) return '';
-        const canUse = info.type === 'consumable' && (info.healHp || info.healMp);
+        const canUse = info.type === 'consumable' && (info.healHp || info.healMp || it.id === 'warp_scroll');
+        let desc = info.desc;
+        if (it.id === 'warp_scroll' && p.location.type === 'field') {
+          const deepest = (p.deepestLayers || {})[p.location.area] || p.location.layer;
+          desc += ` (現在エリア最深: 階層${deepest})`;
+        }
         return `<div class="shop-item">
-          <div class="info"><div class="name">${info.name} x${it.count}</div><div class="detail">${info.desc}</div></div>
+          <div class="info"><div class="name">${info.name} x${it.count}</div><div class="detail">${desc}</div></div>
           ${canUse ? `<button class="btn small" data-a="useitem" data-p="${it.id}">使う</button>` : ''}
         </div>`;
       }).join('');
@@ -305,6 +337,7 @@ function screenJobChange() {
       <p class="text-muted mb-1">${advanced
         ? 'レベル・ステータスはそのまま上級職に転職できます。'
         : '転職するとLv.1に戻ります。ステータスの50%を引き継ぎます。'}</p>
+      ${!advanced ? '<p class="text-muted" style="font-size:0.8rem;margin-top:4px">「幾度も転職を繰り返した者だけが到達できる境地がある、と聞く…」<br>「レベル1に戻っても、お前の体に刻まれた力は消えはしない」</p>' : ''}
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
       ${advanced && isCurrentAdvanced ? '<p class="text-danger">上級職からは転職できません。下級職に戻してから転職してください。</p>' : ''}
     </div>
@@ -492,6 +525,36 @@ function screenSynthesis() {
     <h2>合成屋</h2>
     <div class="panel"><p class="text-muted">2つのアイテムを合成して新しいアイテムを作ります。失敗すると両方失われます。</p></div>
     <div class="panel">${synthHtml}</div>`;
+}
+
+// --- 冒険者ギルド画面 ---
+function screenGuild() {
+  const p = G.player;
+  const guildBosses = [
+    { key:'mine_30', area:'鉱山 階層30', hint:'腕に覚えのある者向け' },
+    { key:'demon_forest_30', area:'魔の森 階層30', hint:'相当な実力が必要' },
+    { key:'old_castle_25', area:'古城 階層25', hint:'相当な実力が必要' },
+    { key:'last_dungeon_35', area:'ラストダンジョン 階層35', hint:'世界最強の脅威' },
+  ];
+  const bossHtml = guildBosses.map(gb => {
+    const boss = BOSSES[gb.key];
+    if (!boss) return '';
+    const defeated = (p.bossDefeats[boss.defeatKey || gb.key] || 0) > 0;
+    return `<div class="shop-item">
+      <div class="info">
+        <div class="name">${defeated ? boss.emoji : '❓'} ${defeated ? boss.name : '???'} ${defeated ? 'Lv.'+boss.level : ''}</div>
+        <div class="detail">${gb.area} | ${defeated ? '撃破済' : gb.hint}</div>
+      </div>
+      <span>${defeated ? '✅' : '🔒'}</span>
+    </div>`;
+  }).join('');
+
+  return `
+    ${backBtn()}
+    <h2>冒険者ギルド</h2>
+    <div class="panel"><p class="text-muted">各地で報告されている強大な敵の情報を掲示している。</p></div>
+    <h3>討伐対象</h3>
+    <div class="panel">${bossHtml}</div>`;
 }
 
 // --- 強化所画面 ---

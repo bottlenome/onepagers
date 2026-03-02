@@ -16,4 +16,5 @@ const STRATEGIES = [
   { id:'careful',    name:'いのちだいじに',   desc:'回復を優先する' },
   { id:'physical',   name:'じゅもんつかうな', desc:'通常攻撃とアイテムのみ' },
 ];
+const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';

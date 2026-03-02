@@ -28,6 +28,8 @@ function renderScreen() {
     case 'blacksmith':  return screenBlacksmith();
     case 'synthesis':   return screenSynthesis();
     case 'enhancement': return screenEnhancement();
+    case 'guild':       return screenGuild();
+    case 'demo_transition': return screenDemoTransition();
     default:            return '<p class="text-center text-muted">画面が見つかりません</p>';
   }
 }

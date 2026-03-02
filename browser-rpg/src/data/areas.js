@@ -117,6 +117,7 @@ const TOWN_FACILITIES = {
     { id:'inn',      icon:'🏨', label:'宿屋',   cost:10 },
     { id:'shop',     icon:'🏪', label:'よろずや', shopId:'town1_general' },
     { id:'jobchange', icon:'🔄', label:'転職場',  advanced:false },
+    { id:'guild',    icon:'🏛️', label:'冒険者ギルド' },
     { id:'status',   icon:'📊', label:'ステータス' },
   ],
   porttown: [

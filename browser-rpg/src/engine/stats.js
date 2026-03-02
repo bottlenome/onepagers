@@ -54,9 +54,11 @@ function processLevelUp(p) {
   const job = JOBS[p.jobId];
   const rates = getGrowthRates(p);
   const gains = {};
+  const bonuses = {};
   for (const k of STAT_KEYS) {
     let g = job.base[k] || 0;
-    if (Math.random() < (rates[k] || 0)) g += 1; // 隠し成長ボーナス
+    const gotBonus = Math.random() < (rates[k] || 0);
+    if (gotBonus) { g += 1; bonuses[k] = true; }
     p.growthStats[k] = (p.growthStats[k] || 0) + g;
     gains[k] = g;
   }
@@ -64,7 +66,7 @@ function processLevelUp(p) {
   const st = calcStats(p);
   p.hp = Math.min(p.hp + gains.hp, st.maxHp);
   p.mp = Math.min(p.mp + gains.mp, st.maxMp);
-  return gains;
+  return { gains, bonuses };
 }
 
 // 経験値関連
@@ -108,6 +110,8 @@ function changeJob(p, newJobId) {
     }
   }
   p.jobId = newJobId;
+  p.jobChangeCount = (p.jobChangeCount || 0) + 1;
+  p.postTransferLevelUp = true;
   const st = calcStats(p);
   p.hp = st.maxHp;
   p.mp = st.maxMp;

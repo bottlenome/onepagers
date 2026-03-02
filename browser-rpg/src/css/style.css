@@ -261,6 +261,7 @@ body {
 .bl.sys { color: var(--muted); }
 .bl.reward { color: var(--gold); }
 .bl.lvup { color: var(--accent); font-weight: bold; }
+.bonus-growth { color: var(--gold); font-weight: bold; }
 
 /* --- Shop / list screens --- */
 .shop-item {

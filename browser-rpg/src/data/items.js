@@ -13,6 +13,8 @@ const ITEMS = {};
   ['antidote',      '毒消し',       'consumable',   8,     0,    0,   '毒を治療'],
   ['tent',          'テント',       'consumable', 100,    -1,   -1,   'HP・MP全回復(フィールド用)'],
   ['world_branch',  '世界樹の枝',   'consumable', 300,    -1,   -1,   'HP・MP全回復+状態治療'],
+  // --- 特殊 ---
+  ['warp_scroll',  '転移の巻物',   'consumable',  50,     0,    0,   '探索済みの最深階層へ瞬間移動する'],
   // --- 素材 ---
   ['copper_ore',    '銅鉱石',       'material',    15,     0,    0,   '鍛冶の素材'],
   ['iron_ore',      '鉄鉱石',       'material',    40,     0,    0,   '鍛冶の素材'],

@@ -99,6 +99,60 @@
 - `src/data/monsters.js` — 新モンスター追加
 - `src/data/areas.js` — エリア接続変更
 
+### 8. 町施設の追加
+**読むファイル:**
+- `src/data/areas.js` — `TOWN_FACILITIES` で既存施設の構造を確認
+- `src/ui/screens.js` — 既存の施設画面関数（例: `screenGuild()`）
+- `src/ui/render.js` — `renderScreen()` のswitch文
+- `src/ui/events.js` — `handleFacility()` のswitch文
+
+**編集ファイル:**
+- `src/data/areas.js` — `TOWN_FACILITIES` の該当町に施設追加
+- `src/ui/screens.js` — 新画面関数を追加
+- `src/ui/render.js` — `renderScreen()` にcaseを追加
+- `src/ui/events.js` — `handleFacility()` にcaseを追加
+
+### 9. 下級職パッシブの変更
+**読むファイル:**
+- `src/data/jobs.js` — 各職業の `passive` フィールド（`id`, `name`, `value`, `desc`）
+- `src/engine/combat.js` — パッシブ適用箇所（`doEnemyAction`: 戦士, `runBattle`: 魔法使い, `handleVictory`: 僧侶・盗賊）
+
+**編集ファイル:**
+- `src/data/jobs.js` — `passive` の値やIDを変更
+- `src/engine/combat.js` — パッシブIDで分岐するコードを変更
+
+**パッシブ適用箇所マップ:**
+| パッシブID | 適用箇所 | 関数 |
+|-----------|---------|------|
+| `dmg_reduce` | 敵攻撃の最終ダメージ計算 | `doEnemyAction()` |
+| `mp_regen` | ターン開始時のMP回復 | `runBattle()` |
+| `post_heal` | 勝利後のHP回復 | `handleVictory()` |
+| `drop_bonus` | ドロップ判定の確率加算 | `handleVictory()` |
+
+### 10. デモバトルの変更
+**読むファイル:**
+- `src/engine/state.js` — `createDemoPlayer()` でデモキャラのステータス確認
+- `src/engine/combat.js` — `G.demo` フラグによる分岐（`runBattle`, `handleVictory`, `handleDefeat`）
+- `src/ui/events.js` — `newgame`・`battleend`・`demo_continue` アクション
+
+**編集ファイル:**
+- `src/engine/state.js` — `createDemoPlayer()` のステータス変更
+- `src/engine/combat.js` — デモバトルのターン制限・演出変更
+- `src/ui/screens.js` — `screenDemoTransition()` の遷移画面テキスト
+- `src/ui/events.js` — デモバトルのフロー変更
+
+### 11. 特殊アイテム（転移の巻物等）の追加
+**読むファイル:**
+- `src/data/items.js` — アイテム定義フォーマット
+- `src/engine/economy.js` — `useItemFromInventory()` の特殊処理分岐
+- `src/ui/screens.js` — `screenStatus()` のアイテムタブ（`warp_scroll` の特殊表示）
+
+**編集ファイル:**
+- `src/data/items.js` — 新アイテム定義
+- `src/data/shops.js` — 販売店追加
+- `src/engine/economy.js` — `useItemFromInventory()` に特殊処理分岐を追加
+- `src/ui/screens.js` — アイテムタブの `canUse` 条件と説明文を追加
+
 ---
 
 ## 計算式リファレンス

@@ -44,8 +44,9 @@ const testCode = js + `
   console.log('Growth rates:', JSON.stringify(rates));
 
   // Test level up
-  var gains = processLevelUp(p);
-  console.log('LevelUp gains:', JSON.stringify(gains));
+  var luResult = processLevelUp(p);
+  console.log('LevelUp gains:', JSON.stringify(luResult.gains));
+  if (!luResult.gains || !luResult.bonuses) throw new Error('processLevelUp should return {gains, bonuses}');
 
   // Test field exits
   var exits = getFieldExits('grassland', 5);
