@@ -394,7 +394,7 @@ const MAX_LEVEL = 30;
 const MAX_ENHANCE = 10;
 const ENHANCE_BONUS = { weapon:2, armor:2 }; // +N per enhancement level
 const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.05];
-const CARRY_RATIO_BASIC = 0.7;    // 下級職転職時の引き継ぎ率
+const CARRY_RATIO_BASIC = 0.5;    // 下級職転職時の引き継ぎ率
 const INVENTORY_MAX = 30;
 const STRATEGIES = [
   { id:'aggressive', name:'がんがんいこうぜ', desc:'最強スキルで攻撃優先' },
@@ -568,6 +568,7 @@ const EQUIPS = {};
   ['steel_sword',        '鋼の剣',     'weapon','sword', 500,  45, {atk:18},                {atk:.10}],
   ['mithril_sword',      'ミスリルの剣','weapon','sword',1500, 60, {atk:30},                {atk:.12}],
   ['legendary_sword',    '伝説の剣',   'weapon','sword', 0,   100, {atk:50},                {atk:.15}],
+  ['orichalcum_sword',   'オリハルコンの剣','weapon','sword',0,  0, {atk:60},                {atk:.18}],
 
   // --- 武器: 短剣 ---
   ['dagger',             'ダガー',     'weapon','dagger', 30,  20, {atk:3,spd:2},           {spd:.05}],
@@ -578,6 +579,7 @@ const EQUIPS = {};
   ['magic_staff',        '魔法の杖',   'weapon','staff', 200,  30, {matk:10},               {matk:.08}],
   ['sage_staff',         '賢者の杖',   'weapon','staff', 700,  40, {matk:18},               {matk:.10}],
   ['spirit_staff',       '精霊の杖',   'weapon','staff',1200,  50, {matk:25,mdef:8},        {matk:.12}],
+  ['demon_staff',        '魔王の杖',   'weapon','staff',   0,   0, {matk:40,mdef:12},       {matk:.15}],
 
   // --- 武器: 弓 ---
   ['elf_bow',            'エルフの弓', 'weapon','bow',  1200,  50, {atk:25,spd:8},          {atk:.08,spd:.08}],
@@ -589,11 +591,13 @@ const EQUIPS = {};
   ['iron_armor',         '鉄の鎧',     'armor','heavy',  700, 0, {def:20},                  {def:.10}],
   ['mithril_armor',      'ミスリルの鎧','armor','heavy', 2000, 0, {def:30,mdef:10},         {def:.12}],
   ['spirit_armor',       '精霊の鎧',   'armor','heavy', 1500, 0, {def:25,mdef:15},         {def:.08,mdef:.08}],
+  ['orichalcum_armor',   'オリハルコンの鎧','armor','heavy',  0, 0, {def:40,mdef:15},        {def:.15}],
 
   // --- 防具: ローブ ---
   ['robe',               'ローブ',     'armor','robe',    60, 0, {def:3,mdef:5},            {mdef:.05}],
   ['magic_robe',         '魔法のローブ','armor','robe',   400, 0, {def:6,mdef:12},          {mdef:.08}],
   ['elf_robe',           'エルフのローブ','armor','robe', 1200, 0, {def:15,mdef:20},        {mdef:.10}],
+  ['demon_robe',         '魔王のローブ', 'armor','robe',    0, 0, {def:20,mdef:35},        {mdef:.15}],
 
   // --- 防具: 軽装 ---
   ['ninja_garb',         '忍び装束',   'armor','light',  350, 0, {def:8,spd:5},             {spd:.05}],
@@ -605,6 +609,14 @@ const EQUIPS = {};
   ['swift_boots',        '疾風のブーツ','accessory','speed',    200, 0, {spd:5},             {spd:.05}],
   ['hp_ring',            'HP指輪',     'accessory','hp_acc',    300, 0, {hp:30},             {hp:.05}],
   ['dragon_amulet',      '竜の首飾り', 'accessory','dragon',      0, 0, {atk:3,def:3,matk:3,mdef:3,spd:3}, {atk:.05,def:.05,matk:.05,mdef:.05,spd:.05}],
+
+  // --- 古城系装備 ---
+  ['cursed_sword',       '呪われた剣', 'weapon','sword', 0, 80, {atk:35,matk:10},        {atk:.10,matk:.05}],
+  ['cursed_armor',       '呪われた鎧', 'armor','heavy',  0,  0, {def:22,mdef:18},        {def:.10,mdef:.08}],
+
+  // --- 古城深層系装備 ---
+  ['phantom_blade',      '幻影の刃',   'weapon','dagger',0, 60, {atk:30,spd:10,matk:10}, {atk:.10,spd:.10}],
+  ['phantom_armor',      '幻影の鎧',   'armor','light',  0,  0, {def:20,mdef:20,spd:8},  {def:.08,mdef:.08,spd:.05}],
 ].forEach(([id,name,slot,sub,price,dur,s,g]) => {
   EQUIPS[id] = { id, name, slot, sub, price, dur, s, g };
 });
@@ -642,6 +654,9 @@ const ITEMS = {};
   ['dragon_scale',  '竜鱗',         'material',   500,     0,    0,   '伝説の素材'],
   ['spirit_stone',  '精霊石',       'material',   200,     0,    0,   '合成の素材'],
   ['dark_crystal',  '闇の結晶',     'material',   300,     0,    0,   '高位合成の素材'],
+  ['orichalcum',    'オリハルコン', 'material',   800,     0,    0,   '最強の鍛冶素材'],
+  ['cursed_bone',   '呪われた骨',   'material',   250,     0,    0,   '古城の素材'],
+  ['phantom_cloth', '幻影の布',     'material',   350,     0,    0,   '古城深層の素材'],
 ].forEach(([id,name,type,price,healHp,healMp,desc]) => {
   ITEMS[id] = { id, name, type, price, healHp, healMp, desc };
 });
@@ -693,10 +708,10 @@ const MONSTER_POOL = [
 
   // --- 魔の森 (demon_forest) 26-30 ダンジョン ---
   { name:'デーモンロード', emoji:'😈', area:'demon_forest', minLv:26, maxLv:28, special:null, drops:[{id:'dark_crystal',rate:.15}] },
-  { name:'ヴァンパイア',   emoji:'🧛', area:'demon_forest', minLv:27, maxLv:29, special:null, drops:[{id:'dark_crystal',rate:.15}] },
-  { name:'リッチ',         emoji:'☠️', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20}] },
-  { name:'ダークドラゴン', emoji:'🐉', area:'demon_forest', minLv:29, maxLv:30, special:'fireball', drops:[] },
-  { name:'堕天使',         emoji:'👼', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'spirit_stone',rate:.15}] },
+  { name:'ヴァンパイア',   emoji:'🧛', area:'demon_forest', minLv:27, maxLv:29, special:null, drops:[{id:'dark_crystal',rate:.15},{id:'spirit_stone',rate:.08}] },
+  { name:'リッチ',         emoji:'☠️', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20},{id:'spirit_stone',rate:.10}] },
+  { name:'ダークドラゴン', emoji:'🐉', area:'demon_forest', minLv:29, maxLv:30, special:'fireball', drops:[{id:'dark_crystal',rate:.15}] },
+  { name:'堕天使',         emoji:'👼', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'spirit_stone',rate:.15},{id:'dark_crystal',rate:.10}] },
 
   // --- 荒野の道 (wasteland) 11-25 ---
   { name:'サンドワーム',   emoji:'🪱', area:'wasteland', minLv:11, maxLv:15, special:null, drops:[] },
@@ -708,57 +723,63 @@ const MONSTER_POOL = [
   { name:'サンドドラゴン', emoji:'🐉', area:'wasteland', minLv:22, maxLv:25, special:'fireball', drops:[] },
 
   // --- 古城 (old_castle) 21-25 ダンジョン ---
-  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'iron_ore',rate:.20}] },
-  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[] },
-  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:22, maxLv:24, special:null, drops:[] },
-  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:23, maxLv:25, special:null, drops:[{id:'dark_crystal',rate:.10}] },
-  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:24, maxLv:25, special:'blizzard', drops:[] },
+  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'iron_ore',rate:.20},{id:'cursed_bone',rate:.08}] },
+  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'cursed_bone',rate:.10}] },
+  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:22, maxLv:24, special:null, drops:[{id:'cursed_bone',rate:.12}] },
+  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:23, maxLv:25, special:null, drops:[{id:'dark_crystal',rate:.10},{id:'cursed_bone',rate:.10}] },
+  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:24, maxLv:25, special:'blizzard', drops:[{id:'cursed_bone',rate:.15}] },
 
   // --- 古城・隠し (old_castle_hidden) 25-35 ---
-  { name:'ファントム',     emoji:'👻', area:'old_castle_hidden', minLv:25, maxLv:28, special:null, drops:[] },
-  { name:'デスロード',     emoji:'💀', area:'old_castle_hidden', minLv:27, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20}] },
-  { name:'エンシェントナイト',emoji:'🗡️', area:'old_castle_hidden', minLv:29, maxLv:32, special:'power_strike', drops:[] },
-  { name:'伝説の魔術師',   emoji:'🧙', area:'old_castle_hidden', minLv:30, maxLv:34, special:'meteor', drops:[] },
-  { name:'堕落の騎士',     emoji:'🖤', area:'old_castle_hidden', minLv:32, maxLv:35, special:'devastating_blow', drops:[] },
+  { name:'ファントム',     emoji:'👻', area:'old_castle_hidden', minLv:25, maxLv:28, special:null, drops:[{id:'phantom_cloth',rate:.10}] },
+  { name:'デスロード',     emoji:'💀', area:'old_castle_hidden', minLv:27, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20},{id:'phantom_cloth',rate:.08}] },
+  { name:'エンシェントナイト',emoji:'🗡️', area:'old_castle_hidden', minLv:29, maxLv:32, special:'power_strike', drops:[{id:'phantom_cloth',rate:.12}] },
+  { name:'伝説の魔術師',   emoji:'🧙', area:'old_castle_hidden', minLv:30, maxLv:34, special:'meteor', drops:[{id:'phantom_cloth',rate:.15},{id:'spirit_stone',rate:.10}] },
+  { name:'堕落の騎士',     emoji:'🖤', area:'old_castle_hidden', minLv:32, maxLv:35, special:'devastating_blow', drops:[{id:'phantom_cloth',rate:.12},{id:'dark_crystal',rate:.15}] },
 
   // --- ラストダンジョン (last_dungeon) 25-35 ---
-  { name:'カオスナイト',   emoji:'⚔️', area:'last_dungeon', minLv:25, maxLv:28, special:null, drops:[] },
-  { name:'ベヒーモス',     emoji:'🦏', area:'last_dungeon', minLv:27, maxLv:30, special:null, drops:[] },
-  { name:'キングケルベロス',emoji:'🐕', area:'last_dungeon', minLv:28, maxLv:31, special:null, drops:[] },
-  { name:'アークデーモン',  emoji:'😈', area:'last_dungeon', minLv:30, maxLv:33, special:'thunder', drops:[{id:'dark_crystal',rate:.25}] },
-  { name:'混沌竜',         emoji:'🐉', area:'last_dungeon', minLv:32, maxLv:35, special:'fireball', drops:[{id:'dragon_scale',rate:.10}] },
+  { name:'カオスナイト',   emoji:'⚔️', area:'last_dungeon', minLv:25, maxLv:28, special:null, drops:[{id:'orichalcum',rate:.05}] },
+  { name:'ベヒーモス',     emoji:'🦏', area:'last_dungeon', minLv:27, maxLv:30, special:null, drops:[{id:'orichalcum',rate:.06}] },
+  { name:'キングケルベロス',emoji:'🐕', area:'last_dungeon', minLv:28, maxLv:31, special:null, drops:[{id:'orichalcum',rate:.08}] },
+  { name:'アークデーモン',  emoji:'😈', area:'last_dungeon', minLv:30, maxLv:33, special:'thunder', drops:[{id:'dark_crystal',rate:.25},{id:'orichalcum',rate:.10}] },
+  { name:'混沌竜',         emoji:'🐉', area:'last_dungeon', minLv:32, maxLv:35, special:'fireball', drops:[{id:'dragon_scale',rate:.10},{id:'orichalcum',rate:.12}] },
 ];
 
 // ボスデータ (通常の計算式ではなく固定ステータス)
+// 難易度設計: 引き継ぎ率50%での転職ループ回数基準
 const BOSSES = {
+  // 2ループでやっと倒せる (戦士→騎士 + 伝説の剣 + ミスリル鎧)
   mine_30: {
     name:'ドラゴン', emoji:'🐲', level:30, boss:true,
-    hp:500, maxHp:500, atk:100, def:60, matk:80, mdef:50, spd:40,
+    hp:2000, maxHp:2000, atk:150, def:90, matk:80, mdef:70, spd:50,
     special:'fireball', drops:[{id:'dragon_scale',rate:1.0}],
     title:'ドラゴンスレイヤー',
   },
+  // 4ループ・魔防+攻撃特化でやっと倒せる (魔法攻撃が脅威)
   demon_forest_30: {
     name:'堕ちたエルフ王', emoji:'👑', level:30, boss:true,
-    hp:600, maxHp:600, atk:90, def:70, matk:110, mdef:80, spd:55,
-    special:'holy', drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
+    hp:4000, maxHp:4000, atk:180, def:120, matk:110, mdef:120, spd:65,
+    special:'blizzard', drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
     title:'エルフの救世主',
   },
+  // 4ループ・魔攻+防御特化でやっと倒せる (物理が脅威、高DEFで物理攻撃が通りにくい)
   old_castle_25: {
     name:'古城の主', emoji:'🏰', level:25, boss:true,
-    hp:400, maxHp:400, atk:80, def:55, matk:70, mdef:50, spd:35,
+    hp:3000, maxHp:3000, atk:170, def:160, matk:60, mdef:80, spd:50,
     special:'power_strike', drops:[{id:'dark_crystal',rate:1.0}],
     title:'古城の解放者',
     defeatKey:'old_castle_boss_defeats',
   },
+  // 20ループ+装備+5でやっと倒せる (全能力が高い超強敵)
   old_castle_hidden_35: {
     name:'伝説のプレイヤーたち', emoji:'⚔️', level:35, boss:true,
-    hp:900, maxHp:900, atk:130, def:90, matk:120, mdef:85, spd:65,
+    hp:6000, maxHp:6000, atk:180, def:120, matk:100, mdef:200, spd:90,
     special:'sacred_blade', drops:[],
     title:'真の勇者',
   },
+  // 10ループ・HP+魔防+防御特化でやっと倒せる (メテオが超強力)
   last_dungeon_35: {
     name:'魔神', emoji:'👿', level:35, boss:true,
-    hp:1000, maxHp:1000, atk:140, def:100, matk:140, mdef:100, spd:60,
+    hp:5000, maxHp:5000, atk:200, def:120, matk:80, mdef:140, spd:75,
     special:'meteor', drops:[],
     title:'世界の救世主',
   },
@@ -1083,6 +1104,9 @@ const SYNTH_RECIPES = [
   { inputs:['power_ring','magic_amulet'], output:{id:'dragon_amulet',isEquip:true}, rate:0.40, desc:'力の指輪+魔力の首飾り → 竜の首飾り' },
   { inputs:['dark_crystal','spirit_stone'], output:{id:'legendary_sword',isEquip:true}, rate:0.30, desc:'闇の結晶+精霊石 → 伝説の剣' },
   { inputs:['dark_crystal','dark_crystal'], output:{id:'dragon_amulet',isEquip:true}, rate:0.35, desc:'闇の結晶×2 → 竜の首飾り' },
+  // 魔の森素材で魔術師系装備
+  { inputs:['dark_crystal','spirit_stone'], output:{id:'demon_staff',isEquip:true}, rate:0.25, desc:'闇の結晶+精霊石 → 魔王の杖' },
+  { inputs:['spirit_stone','spirit_stone'], output:{id:'demon_robe',isEquip:true}, rate:0.25, desc:'精霊石×2 → 魔王のローブ' },
 ];
 
 // 鍛冶レシピ (鉱山の町)
@@ -1098,6 +1122,15 @@ const SMITH_RECIPES = [
   { inputs:[{id:'mithril_ore',count:2}],                     output:'mithril_sword', rate:0.70, fee:300,  desc:'ミスリル鉱石×2 → ミスリルの剣' },
   { inputs:[{id:'mithril_ore',count:3}],                     output:'mithril_armor', rate:0.65, fee:500,  desc:'ミスリル鉱石×3 → ミスリルの鎧' },
   { inputs:[{id:'dragon_scale',count:1},{id:'mithril_ore',count:2}], output:'legendary_sword', rate:0.40, fee:1000, desc:'竜鱗+ミスリル鉱石×2 → 伝説の剣' },
+  // オリハルコン装備 (ラストダンジョン素材)
+  { inputs:[{id:'orichalcum',count:2},{id:'dragon_scale',count:1}], output:'orichalcum_sword', rate:0.35, fee:2000, desc:'オリハルコン×2+竜鱗 → オリハルコンの剣' },
+  { inputs:[{id:'orichalcum',count:3}],                             output:'orichalcum_armor', rate:0.30, fee:3000, desc:'オリハルコン×3 → オリハルコンの鎧' },
+  // 古城装備 (古城素材)
+  { inputs:[{id:'cursed_bone',count:3}],                             output:'cursed_sword',     rate:0.60, fee:400,  desc:'呪われた骨×3 → 呪われた剣' },
+  { inputs:[{id:'cursed_bone',count:4}],                             output:'cursed_armor',     rate:0.55, fee:600,  desc:'呪われた骨×4 → 呪われた鎧' },
+  // 古城深層装備 (古城深層素材)
+  { inputs:[{id:'phantom_cloth',count:3},{id:'dark_crystal',count:1}], output:'phantom_blade',  rate:0.40, fee:1500, desc:'幻影の布×3+闇の結晶 → 幻影の刃' },
+  { inputs:[{id:'phantom_cloth',count:4}],                            output:'phantom_armor',   rate:0.35, fee:2000, desc:'幻影の布×4 → 幻影の鎧' },
 ];
 /* ═══════════════════════════════════════
    闘技場データ (港町NPC戦)
@@ -2097,8 +2130,11 @@ function doRepairBag(bagIndex) {
 // --- 合成 (エルフの里) ---
 function canSynth(recipe) {
   const p = G.player;
-  for (const id of recipe.inputs) {
-    if (!hasItem(p, id, 1)) return false;
+  // 同素材の重複を正しくカウント
+  const counts = {};
+  for (const id of recipe.inputs) counts[id] = (counts[id] || 0) + 1;
+  for (const id of Object.keys(counts)) {
+    if (!hasItem(p, id, counts[id])) return false;
   }
   return true;
 }
@@ -2670,7 +2706,7 @@ function screenJobChange() {
     <div class="panel">
       <p class="text-muted mb-1">${advanced
         ? 'レベル・ステータスはそのまま上級職に転職できます。'
-        : '転職するとLv.1に戻ります。ステータスの70%を引き継ぎます。'}</p>
+        : '転職するとLv.1に戻ります。ステータスの50%を引き継ぎます。'}</p>
       ${advanced && p.level < 15 ? '<p class="text-danger">上級職にはLv.15以上必要です</p>' : ''}
       ${advanced && isCurrentAdvanced ? '<p class="text-danger">上級職からは転職できません。下級職に戻してから転職してください。</p>' : ''}
     </div>
@@ -2905,6 +2941,51 @@ function screenEnhancement() {
 
 let selectedJob = null;
 
+// デバッグキャラプリセット (特定の名前で開始すると使える)
+const DEBUG_PRESETS = {
+  // ドラゴン戦テスト: 2ループ戦士→騎士 + 伝説の剣 + ミスリル鎧
+  'DRAGON': {
+    jobId:'knight', baseStats:{hp:84,mp:2,atk:36,def:36,matk:1,mdef:2,spd:18},
+    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    weapon:'legendary_sword', armor:'mithril_armor', accessory:'dragon_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'minetown'}, lastTown:'minetown',
+  },
+  // エルフ王戦テスト: 4ループ戦士→騎士 (魔防+攻撃特化)
+  'ELFKING': {
+    jobId:'knight', baseStats:{hp:147,mp:4,atk:63,def:63,matk:1,mdef:3,spd:32},
+    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    weapon:'legendary_sword', armor:'spirit_armor', accessory:'dragon_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'elfvillage'}, lastTown:'elfvillage',
+  },
+  // 古城の主戦テスト: 4ループ僧侶→聖騎士 (魔攻+防御特化)
+  'CASTLE': {
+    jobId:'paladin', baseStats:{hp:116,mp:68,atk:32,def:34,matk:35,mdef:65,spd:6},
+    growthStats:{hp:168,mp:75,atk:72,def:73,matk:39,mdef:73,spd:7},
+    weapon:'spirit_staff', armor:'spirit_armor', accessory:'magic_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'lasttown'}, lastTown:'lasttown',
+  },
+  // 魔神戦テスト: 10ループ僧侶→聖騎士 (HP+魔防+防御特化)
+  'DEMON': {
+    jobId:'paladin', baseStats:{hp:132,mp:77,atk:36,def:38,matk:39,mdef:74,spd:6},
+    growthStats:{hp:168,mp:75,atk:72,def:73,matk:39,mdef:73,spd:7},
+    weapon:'legendary_sword', armor:'mithril_armor', accessory:'dragon_amulet',
+    weaponEnhance:0, armorEnhance:0,
+    location:{type:'town',id:'lasttown'}, lastTown:'lasttown',
+  },
+  // 古城隠しボス戦テスト: 20ループ戦士→騎士 + 装備+5
+  'LEGEND': {
+    jobId:'knight', baseStats:{hp:168,mp:5,atk:72,def:72,matk:2,mdef:4,spd:37},
+    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    weapon:'legendary_sword', armor:'mithril_armor', accessory:'dragon_amulet',
+    weaponEnhance:5, armorEnhance:5,
+    location:{type:'town',id:'lasttown'}, lastTown:'lasttown',
+    bossDefeats:{old_castle_boss_defeats:10},
+  },
+};
+
 function setupEvents() {
   document.getElementById('main').addEventListener('click', (e) => {
     const btn = e.target.closest('[data-a]');
@@ -2948,19 +3029,44 @@ function handleAction(action, p1, p2) {
       const nameInput = document.getElementById('name-input');
       const name = nameInput ? nameInput.value.trim() : '勇者';
       if (!name || !selectedJob) break;
-      G.player = newPlayer(name, selectedJob);
-      // 初期装備
-      G.player.equipObjs.weapon = createEquip('wooden_stick', 0);
-      G.player.equipObjs.armor = createEquip('cloth', 0);
-      // 初期アイテム
-      addItemToPlayer(G.player, 'herb', 3);
-      // HP/MP設定
-      const st = calcStats(G.player);
-      G.player.hp = st.maxHp;
-      G.player.mp = st.maxMp;
-      addLog('冒険が始まった！', 'system');
-      saveGame();
-      setScreen('town');
+      const preset = DEBUG_PRESETS[name];
+      if (preset) {
+        // デバッグキャラ: プリセットのステータスで開始
+        G.player = newPlayer(name, preset.jobId);
+        G.player.level = 30;
+        G.player.baseStats = { ...preset.baseStats };
+        G.player.growthStats = { ...preset.growthStats };
+        G.player.equipObjs.weapon = createEquip(preset.weapon, preset.weaponEnhance || 0);
+        G.player.equipObjs.armor = createEquip(preset.armor, preset.armorEnhance || 0);
+        if (preset.accessory) G.player.equipObjs.accessory = createEquip(preset.accessory, 0);
+        addItemToPlayer(G.player, 'tent', 99);
+        addItemToPlayer(G.player, 'elixir', 10);
+        addItemToPlayer(G.player, 'hi_herb', 10);
+        G.player.gold = 99999;
+        G.player.location = { ...preset.location };
+        G.player.lastTown = preset.lastTown;
+        if (preset.bossDefeats) G.player.bossDefeats = { ...preset.bossDefeats };
+        // 上級職スキルをすべて習得済み扱い (Lv30)
+        if (!G.player.jobHistory.includes(selectedJob)) G.player.jobHistory.push(selectedJob);
+        const st = calcStats(G.player);
+        G.player.hp = st.maxHp;
+        G.player.mp = st.maxMp;
+        addLog('デバッグキャラ「' + name + '」で冒険開始！', 'lvup');
+        saveGame();
+        setScreen(G.player.location.type === 'town' ? 'town' : 'field');
+      } else {
+        // 通常のゲーム開始
+        G.player = newPlayer(name, selectedJob);
+        G.player.equipObjs.weapon = createEquip('wooden_stick', 0);
+        G.player.equipObjs.armor = createEquip('cloth', 0);
+        addItemToPlayer(G.player, 'herb', 3);
+        const st = calcStats(G.player);
+        G.player.hp = st.maxHp;
+        G.player.mp = st.maxMp;
+        addLog('冒険が始まった！', 'system');
+        saveGame();
+        setScreen('town');
+      }
       break;
     }
 

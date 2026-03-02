@@ -13,6 +13,9 @@ const SYNTH_RECIPES = [
   { inputs:['power_ring','magic_amulet'], output:{id:'dragon_amulet',isEquip:true}, rate:0.40, desc:'力の指輪+魔力の首飾り → 竜の首飾り' },
   { inputs:['dark_crystal','spirit_stone'], output:{id:'legendary_sword',isEquip:true}, rate:0.30, desc:'闇の結晶+精霊石 → 伝説の剣' },
   { inputs:['dark_crystal','dark_crystal'], output:{id:'dragon_amulet',isEquip:true}, rate:0.35, desc:'闇の結晶×2 → 竜の首飾り' },
+  // 魔の森素材で魔術師系装備
+  { inputs:['dark_crystal','spirit_stone'], output:{id:'demon_staff',isEquip:true}, rate:0.25, desc:'闇の結晶+精霊石 → 魔王の杖' },
+  { inputs:['spirit_stone','spirit_stone'], output:{id:'demon_robe',isEquip:true}, rate:0.25, desc:'精霊石×2 → 魔王のローブ' },
 ];
 
 // 鍛冶レシピ (鉱山の町)
@@ -28,4 +31,13 @@ const SMITH_RECIPES = [
   { inputs:[{id:'mithril_ore',count:2}],                     output:'mithril_sword', rate:0.70, fee:300,  desc:'ミスリル鉱石×2 → ミスリルの剣' },
   { inputs:[{id:'mithril_ore',count:3}],                     output:'mithril_armor', rate:0.65, fee:500,  desc:'ミスリル鉱石×3 → ミスリルの鎧' },
   { inputs:[{id:'dragon_scale',count:1},{id:'mithril_ore',count:2}], output:'legendary_sword', rate:0.40, fee:1000, desc:'竜鱗+ミスリル鉱石×2 → 伝説の剣' },
+  // オリハルコン装備 (ラストダンジョン素材)
+  { inputs:[{id:'orichalcum',count:2},{id:'dragon_scale',count:1}], output:'orichalcum_sword', rate:0.35, fee:2000, desc:'オリハルコン×2+竜鱗 → オリハルコンの剣' },
+  { inputs:[{id:'orichalcum',count:3}],                             output:'orichalcum_armor', rate:0.30, fee:3000, desc:'オリハルコン×3 → オリハルコンの鎧' },
+  // 古城装備 (古城素材)
+  { inputs:[{id:'cursed_bone',count:3}],                             output:'cursed_sword',     rate:0.60, fee:400,  desc:'呪われた骨×3 → 呪われた剣' },
+  { inputs:[{id:'cursed_bone',count:4}],                             output:'cursed_armor',     rate:0.55, fee:600,  desc:'呪われた骨×4 → 呪われた鎧' },
+  // 古城深層装備 (古城深層素材)
+  { inputs:[{id:'phantom_cloth',count:3},{id:'dark_crystal',count:1}], output:'phantom_blade',  rate:0.40, fee:1500, desc:'幻影の布×3+闇の結晶 → 幻影の刃' },
+  { inputs:[{id:'phantom_cloth',count:4}],                            output:'phantom_armor',   rate:0.35, fee:2000, desc:'幻影の布×4 → 幻影の鎧' },
 ];
