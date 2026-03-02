@@ -60,12 +60,12 @@ const MONSTER_POOL = [
   { name:'デスナイト',     emoji:'⚔️', area:'wasteland', minLv:20, maxLv:25, special:null, drops:[] },
   { name:'サンドドラゴン', emoji:'🐉', area:'wasteland', minLv:22, maxLv:25, special:'fireball', drops:[] },
 
-  // --- 古城 (old_castle) 15-25 ダンジョン ---
-  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:15, maxLv:19, special:null, drops:[{id:'iron_ore',rate:.20}] },
-  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:16, maxLv:20, special:null, drops:[] },
-  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:18, maxLv:22, special:null, drops:[] },
-  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:20, maxLv:24, special:null, drops:[{id:'dark_crystal',rate:.10}] },
-  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:22, maxLv:25, special:'blizzard', drops:[] },
+  // --- 古城 (old_castle) 21-25 ダンジョン ---
+  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'iron_ore',rate:.20}] },
+  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[] },
+  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:22, maxLv:24, special:null, drops:[] },
+  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:23, maxLv:25, special:null, drops:[{id:'dark_crystal',rate:.10}] },
+  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:24, maxLv:25, special:'blizzard', drops:[] },
 
   // --- 古城・隠し (old_castle_hidden) 25-35 ---
   { name:'ファントム',     emoji:'👻', area:'old_castle_hidden', minLv:25, maxLv:28, special:null, drops:[] },
