@@ -14,10 +14,10 @@ const DEBUG_PRESETS = {
     weaponEnhance:0, armorEnhance:0,
     location:{type:'town',id:'minetown'}, lastTown:'minetown',
   },
-  // エルフ王戦テスト: 4ループ戦士→騎士 (魔防+攻撃特化)
+  // エルフ王戦テスト: 4ループ(戦士→僧侶→戦士→僧侶)→ルーンナイト (魔防+攻撃特化)
   'ELFKING': {
-    jobId:'knight', baseStats:{hp:147,mp:4,atk:63,def:63,matk:1,mdef:3,spd:32},
-    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    jobId:'rune_knight', baseStats:{hp:135,mp:50,atk:45,def:46,matk:25,mdef:48,spd:15},
+    growthStats:{hp:181,mp:75,atk:113,def:40,matk:4,mdef:114,spd:5},
     weapon:'legendary_sword', armor:'spirit_armor', accessory:'dragon_amulet',
     weaponEnhance:0, armorEnhance:0,
     location:{type:'town',id:'elfvillage'}, lastTown:'elfvillage',

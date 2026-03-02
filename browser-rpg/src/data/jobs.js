@@ -64,4 +64,11 @@ const JOBS = {
     rate:{ hp:.50, mp:.75, atk:.10, def:.30, matk:.75, mdef:.70, spd:.30 },
     skills:[{lv:3,id:'heal'},{lv:8,id:'fire'},{lv:15,id:'ice'},{lv:25,id:'holy'}],
   },
+  rune_knight: {
+    name:'ルーンナイト', type:'advanced',
+    desc:'符術と剣術を組み合わせた魔法剣士',
+    base:{ hp:5, mp:2, atk:3, def:1, matk:0, mdef:3, spd:0 },
+    rate:{ hp:.75, mp:.40, atk:.60, def:.30, matk:.15, mdef:.65, spd:.20 },
+    skills:[{lv:3,id:'rune_slash'},{lv:8,id:'rune_ward'},{lv:15,id:'rune_strike'},{lv:25,id:'rune_burst'}],
+  },
 };
