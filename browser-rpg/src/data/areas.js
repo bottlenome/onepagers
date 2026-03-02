@@ -7,7 +7,7 @@ const AREA_INFO = {
   mine:              { name:'鉱山',       minLv:21, maxLv:30, dungeon:true  },
   lost_forest:       { name:'迷いの森',   minLv:16, maxLv:25, dungeon:false },
   demon_forest:      { name:'魔の森',     minLv:26, maxLv:30, dungeon:true  },
-  wasteland:         { name:'荒野の道',   minLv:11, maxLv:25, dungeon:false },
+  wasteland:         { name:'荒野の道',   minLv:15, maxLv:25, dungeon:false },
   old_castle:        { name:'古城',       minLv:15, maxLv:25, dungeon:true  },
   old_castle_hidden: { name:'古城・深層', minLv:25, maxLv:35, dungeon:true  },
   last_dungeon:      { name:'ラストダンジョン', minLv:25, maxLv:35, dungeon:true },
@@ -102,6 +102,7 @@ function getFieldExits(area, layer) {
   if (area === 'mine'        && layer === 21) exits.push({ type:'town', id:'minetown', label:'鉱山の町へ戻る' });
   if (area === 'lost_forest' && layer === 16) exits.push({ type:'town', id:'castle', label:'城へ戻る' });
   if (area === 'demon_forest'&& layer === 26) exits.push({ type:'town', id:'elfvillage', label:'エルフの里へ戻る' });
+  if (area === 'wasteland'   && layer === 15) exits.push({ type:'town', id:'castle', label:'城へ戻る' });
   if (area === 'wasteland'   && layer === 16) exits.push({ type:'field', area:'grassland', layer:15, label:'草原 階層15へ戻る' });
   if (area === 'old_castle'  && layer === 15) exits.push({ type:'field', area:'wasteland', layer:15, label:'荒野の道へ戻る' });
   if (area === 'old_castle_hidden' && layer === 25) exits.push({ type:'field', area:'old_castle', layer:25, label:'古城 階層25へ戻る' });

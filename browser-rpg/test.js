@@ -78,6 +78,77 @@ const testCode = js + `
   });
   console.log('Job selection (all basic jobs): OK');
 
+  // === マップ接続整合性テスト ===
+  // 町の出口から到達した先に、元の町(または経由地)へ戻れる経路があるか検証
+  var connErrors = [];
+
+  // 1. 町の出口→フィールド の帰還路チェック
+  Object.keys(TOWN_EXITS).forEach(function(townId) {
+    TOWN_EXITS[townId].forEach(function(exit) {
+      var destExits = getFieldExits(exit.area, exit.layer);
+      // 出口先から元の町に戻れるか(直接 or 隣接階層経由)
+      var canReturn = destExits.some(function(e) {
+        return (e.type === 'town' && e.id === townId) ||
+               (e.type === 'field' && FIELD_TOWN_MAP[e.area + '_' + e.layer] === townId);
+      });
+      if (!canReturn) {
+        connErrors.push(TOWN_INFO[townId].name + ' → ' + AREA_INFO[exit.area].name + ' 階層' + exit.layer + ' から ' + TOWN_INFO[townId].name + ' に戻れない');
+      }
+    });
+  });
+
+  // 2. フィールド間接続の双方向チェック (エリア間接続のみ)
+  var interAreaLinks = [];
+  Object.keys(AREA_INFO).forEach(function(area) {
+    var info = AREA_INFO[area];
+    for (var lv = info.minLv; lv <= info.maxLv; lv++) {
+      var fe = getFieldExits(area, lv);
+      fe.forEach(function(e) {
+        if (e.type === 'field' && e.area !== area) {
+          interAreaLinks.push({ from: area, fromLv: lv, to: e.area, toLv: e.layer });
+        }
+      });
+    }
+  });
+  // 条件付き接続 (ゲーム内条件で出現するため getFieldExits には含まれない)
+  var conditionalLinks = [
+    { from: 'old_castle', fromLv: 25, to: 'old_castle_hidden', toLv: 25 }, // 隠し通路: ボス10回撃破で出現
+  ];
+  function isConditional(from, fromLv, to, toLv) {
+    return conditionalLinks.some(function(c) {
+      return c.from === from && c.fromLv === fromLv && c.to === to && c.toLv === toLv;
+    });
+  }
+  interAreaLinks.forEach(function(link) {
+    var reverseExits = getFieldExits(link.to, link.toLv);
+    var hasReverse = reverseExits.some(function(e) {
+      // フィールドで同エリア内に戻れる or 町に戻れる or 元エリアに戻れる
+      return (e.type === 'field' && e.area === link.from) ||
+             (e.type === 'town');
+    });
+    // 逆方向が条件付きの場合はスキップ
+    if (!hasReverse && !isConditional(link.to, link.toLv, link.from, link.fromLv)) {
+      connErrors.push(AREA_INFO[link.from].name + ' 階層' + link.fromLv + ' → ' + AREA_INFO[link.to].name + ' 階層' + link.toLv + ' に逆方向の接続がない');
+    }
+  });
+
+  // 3. エリア端(minLv)が孤立していないかチェック: minLv に町入口 or 帰還路があるか
+  Object.keys(AREA_INFO).forEach(function(area) {
+    var info = AREA_INFO[area];
+    var minExits = getFieldExits(area, info.minLv);
+    var hasEscape = minExits.some(function(e) {
+      return e.type === 'town' || (e.type === 'field' && e.area !== area);
+    });
+    if (!hasEscape) {
+      connErrors.push(AREA_INFO[area].name + ' 階層' + info.minLv + ' (エリア端) に町/他エリアへの出口がない');
+    }
+  });
+
+  if (connErrors.length > 0) {
+    throw new Error('マップ接続エラー:\\n  ' + connErrors.join('\\n  '));
+  }
+  console.log('Map connectivity check: OK (' + interAreaLinks.length + ' inter-area links verified)');
+
   console.log('\\n✓ All basic tests passed');
 })();
 `;
