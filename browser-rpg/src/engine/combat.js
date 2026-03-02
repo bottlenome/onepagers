@@ -2,6 +2,23 @@
    戦闘システム (自動戦闘)
    ═══════════════════════════════════════ */
 
+function shakeScreen() {
+  const el = document.getElementById('app');
+  if (!el) return;
+  el.classList.remove('shake');
+  void el.offsetWidth;
+  el.classList.add('shake');
+  setTimeout(() => el.classList.remove('shake'), 500);
+}
+function flashRed() {
+  const el = document.getElementById('app');
+  if (!el) return;
+  el.classList.remove('flash-red');
+  void el.offsetWidth;
+  el.classList.add('flash-red');
+  setTimeout(() => el.classList.remove('flash-red'), 500);
+}
+
 function startBattle(enemy) {
   G.battle = {
     enemy,
@@ -87,7 +104,7 @@ async function runBattle() {
 }
 
 async function doPlayerAction(p, e, pStats) {
-  const spd = G.settings.battleSpeed;
+  const spd = G.battle.specialReady ? G.settings.battleSpeed * 2 : G.settings.battleSpeed;
   // 効果チェック
   if (hasEffect(G.battle.playerEffects, 'stun')) {
     addBattleLog(`${p.name}は動けない！`, 'sys');
@@ -108,6 +125,7 @@ async function doPlayerAction(p, e, pStats) {
       .sort((a,b) => (SKILLS[b].power||0) - (SKILLS[a].power||0));
 
     addBattleLog('— 必殺技発動！ —', 'lvup');
+    shakeScreen();
     if (allAttacks.length) {
       const sk = SKILLS[allAttacks[0]];
       const savedMp = p.mp;
@@ -162,7 +180,8 @@ async function doPlayerAction(p, e, pStats) {
 }
 
 async function doEnemyAction(p, e, pStats) {
-  const spd = G.settings.battleSpeed;
+  const spd = G.battle.specialReady ? G.settings.battleSpeed * 2 : G.settings.battleSpeed;
+  const isVuln = hasEffect(G.battle.playerEffects, 'vulnerable');
   if (hasEffect(G.battle.enemyEffects, 'stun')) {
     addBattleLog(`${e.name}は動けない！`, 'sys');
     tickEffects(G.battle.enemyEffects);
@@ -184,6 +203,7 @@ async function doEnemyAction(p, e, pStats) {
       if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
+      if (isVuln) flashRed();
       await delay(spd);
       checkBattleEnd(p, e);
       tickEffects(G.battle.enemyEffects);
@@ -198,6 +218,7 @@ async function doEnemyAction(p, e, pStats) {
   if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
+  if (isVuln) flashRed();
   await delay(spd);
   checkBattleEnd(p, e);
   tickEffects(G.battle.enemyEffects);
@@ -318,7 +339,7 @@ function applyDefenseEffects(dmg, effects, isMagic) {
   if (hasEffect(effects, 'smoke') && Math.random() < 0.5) return 0;
   if (hasEffect(effects, 'evade') && Math.random() < 0.5) return 0;
   if (isMagic && hasEffect(effects, 'mbarrier')) dmg = Math.floor(dmg * 0.5);
-  if (hasEffect(effects, 'vulnerable')) dmg = Math.floor(dmg * 2);
+  if (hasEffect(effects, 'vulnerable')) dmg = Math.floor(dmg * 2.5);
   return Math.max(1, dmg);
 }
 
