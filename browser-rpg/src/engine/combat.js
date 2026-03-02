@@ -120,8 +120,8 @@ async function doEnemyAction(p, e, pStats) {
     await delay(spd);
     return;
   }
-  // 特殊攻撃 (30%の確率)
-  if (e.special && Math.random() < 0.30) {
+  // 特殊攻撃 (ボスごとの発動率, デフォルト30%)
+  if (e.special && Math.random() < (e.specialRate || 0.30)) {
     const sk = SKILLS[e.special];
     if (sk) {
       const isMag = sk.type === 'magical' || sk.type === 'hybrid';

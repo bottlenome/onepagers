@@ -770,8 +770,8 @@ const BOSSES = {
   // 4ループ・魔防+攻撃特化でやっと倒せる (ブリザードが脅威、物理は弱い)
   demon_forest_30: {
     name:'堕ちたエルフ王', emoji:'👑', level:30, boss:true,
-    hp:3500, maxHp:3500, atk:80, def:70, matk:160, mdef:170, spd:65,
-    special:'blizzard', drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
+    hp:4000, maxHp:4000, atk:80, def:70, matk:180, mdef:170, spd:65,
+    special:'blizzard', specialRate:0.45, drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
     title:'エルフの救世主',
   },
   // 4ループ・魔攻+防御特化でやっと倒せる (物理が脅威、高DEFで物理攻撃が通りにくい)
@@ -1516,8 +1516,8 @@ async function doEnemyAction(p, e, pStats) {
     await delay(spd);
     return;
   }
-  // 特殊攻撃 (30%の確率)
-  if (e.special && Math.random() < 0.30) {
+  // 特殊攻撃 (ボスごとの発動率, デフォルト30%)
+  if (e.special && Math.random() < (e.specialRate || 0.30)) {
     const sk = SKILLS[e.special];
     if (sk) {
       const isMag = sk.type === 'magical' || sk.type === 'hybrid';
