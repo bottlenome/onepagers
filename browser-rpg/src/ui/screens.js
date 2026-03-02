@@ -150,6 +150,12 @@ function screenBattle() {
         <div class="text-muted" style="font-size:0.75rem" id="enemy-hp-num">${Math.max(0,e.hp)}/${e.maxHp}</div>
       </div>
     </div>
+    <div class="btn-row" style="justify-content:center;gap:4px;margin:4px 0">
+      ${STRATEGIES.map(s =>
+        `<button class="btn small ${G.settings.strategy===s.id?'primary':''}" style="font-size:0.75rem;padding:2px 8px" data-a="battlestrategy" data-p="${s.id}">${s.name}</button>`
+      ).join('')}
+      ${!G.battle.specialUsed ? `<button class="btn small danger" style="font-size:0.75rem;padding:2px 8px" id="btn-special" data-a="battlespecial" ${G.battle.specialReady?'disabled':''}>必殺</button>` : ''}
+    </div>
     <div class="battle-log" id="battle-log">
       ${G.battle.log.map(l => `<div class="bl ${l.cls}">${l.msg}</div>`).join('')}
     </div>

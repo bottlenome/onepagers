@@ -11,6 +11,8 @@ function startBattle(enemy) {
     turn: 0,
     playerEffects: [],  // [{id, turns}]
     enemyEffects: [],
+    specialUsed: false,
+    specialReady: false,
   };
   G.screen = 'battle';
   render();
@@ -91,6 +93,37 @@ async function doPlayerAction(p, e, pStats) {
     addBattleLog(`${p.name}は動けない！`, 'sys');
     tickEffects(G.battle.playerEffects);
     await delay(spd);
+    return;
+  }
+
+  // 必殺技チェック
+  if (G.battle.specialReady) {
+    G.battle.specialReady = false;
+    G.battle.specialUsed = true;
+    G.battle.playerEffects.push({ id:'vulnerable', turns:2 });
+
+    const skills = getAvailableSkills(p);
+    const allAttacks = skills
+      .filter(id => SKILLS[id] && ['physical','magical','hybrid'].includes(SKILLS[id].type))
+      .sort((a,b) => (SKILLS[b].power||0) - (SKILLS[a].power||0));
+
+    addBattleLog('— 必殺技発動！ —', 'lvup');
+    if (allAttacks.length) {
+      const sk = SKILLS[allAttacks[0]];
+      const savedMp = p.mp;
+      executeSkill(p, e, pStats, sk, allAttacks[0], true);
+      p.mp = savedMp;
+    } else {
+      const dmg = calcPhysDamage(pStats.atk * 2, e.def);
+      e.hp -= dmg;
+      addBattleLog(`${p.name}の渾身の一撃！${dmg}のダメージ！`, 'p-atk');
+    }
+    addBattleLog('しかし隙が生じた…！', 'danger');
+    await delay(spd);
+    checkBattleEnd(p, e);
+    tickEffects(G.battle.playerEffects);
+    const specBtn = document.getElementById('btn-special');
+    if (specBtn) specBtn.classList.add('hidden');
     return;
   }
 
@@ -240,21 +273,18 @@ function selectPlayerAction(p, e, pStats) {
 
   switch (strat) {
     case 'aggressive':
-      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      // 猛攻: 瀕死でのみ回復、常に最強スキル
+      if (hpRatio < 0.15 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.1 && healItem) return { type:'item', id:healItem };
       if (attacks.length) return { type:'skill', id:attacks[0] };
       return { type:'attack' };
     case 'careful':
-      if (hpRatio < 0.5 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.4 && healItem) return { type:'item', id:healItem };
+      // 堅守: 早めに回復、中程度の攻撃
+      if (hpRatio < 0.6 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.5 && healItem) return { type:'item', id:healItem };
       if (attacks.length) return { type:'skill', id:attacks[Math.floor(attacks.length/2)] };
       return { type:'attack' };
-    case 'physical':
-      if (hpRatio < 0.2 && healItem) return { type:'item', id:healItem };
-      const phys = attacks.filter(id => SKILLS[id].type === 'physical');
-      if (phys.length) return { type:'skill', id:phys[0] };
-      return { type:'attack' };
-    default: // balanced
+    default: // balanced (標準) — 'physical' など旧作戦もここにフォールバック
       if (hpRatio < 0.3 && heals.length) return { type:'skill', id:heals[0] };
       if (hpRatio < 0.25 && healItem) return { type:'item', id:healItem };
       if (attacks.length) return { type:'skill', id:attacks[0] };
@@ -288,6 +318,7 @@ function applyDefenseEffects(dmg, effects, isMagic) {
   if (hasEffect(effects, 'smoke') && Math.random() < 0.5) return 0;
   if (hasEffect(effects, 'evade') && Math.random() < 0.5) return 0;
   if (isMagic && hasEffect(effects, 'mbarrier')) dmg = Math.floor(dmg * 0.5);
+  if (hasEffect(effects, 'vulnerable')) dmg = Math.floor(dmg * 2);
   return Math.max(1, dmg);
 }
 
