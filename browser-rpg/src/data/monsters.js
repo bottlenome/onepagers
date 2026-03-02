@@ -92,10 +92,10 @@ const BOSSES = {
     special:'fireball', drops:[{id:'dragon_scale',rate:1.0}],
     title:'ドラゴンスレイヤー',
   },
-  // 4ループ・魔防+攻撃特化でやっと倒せる (魔法攻撃が脅威)
+  // 4ループ・魔防+攻撃特化でやっと倒せる (ブリザードが脅威、物理は弱い)
   demon_forest_30: {
     name:'堕ちたエルフ王', emoji:'👑', level:30, boss:true,
-    hp:4000, maxHp:4000, atk:180, def:120, matk:110, mdef:120, spd:65,
+    hp:3500, maxHp:3500, atk:80, def:70, matk:160, mdef:170, spd:65,
     special:'blizzard', drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
     title:'エルフの救世主',
   },

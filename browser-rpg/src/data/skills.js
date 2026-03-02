@@ -53,6 +53,12 @@ const SKILLS = {
   fire: { name:'ファイア', type:'magical', power:1.8,  cost:6,  desc:'炎で攻撃' },
   ice:  { name:'アイス',   type:'magical', power:2.0,  cost:10, desc:'氷で攻撃' },
   holy: { name:'ホーリー', type:'magical', power:3.5,  cost:25, healPct:0.3, desc:'聖なる光で攻撃しHP回復' },
+
+  // --- ルーンナイトスキル ---
+  rune_slash:  { name:'ルーンスラッシュ', type:'physical', power:1.5, cost:4,  desc:'符術を纏った斬撃' },
+  rune_ward:   { name:'ルーンウォード',   type:'buff',     effect:'mbarrier', cost:5, desc:'魔法防御の符術を展開' },
+  rune_strike: { name:'ルーンストライク', type:'physical', power:2.5, cost:12, desc:'符術で強化した一撃' },
+  rune_burst:  { name:'ルーンバースト',   type:'physical', power:3.5, cost:20, desc:'最大出力の符術斬り' },
 };
 
 // 装備サブタイプ → スキルID マッピング

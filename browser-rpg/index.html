@@ -469,6 +469,13 @@ const JOBS = {
     rate:{ hp:.50, mp:.75, atk:.10, def:.30, matk:.75, mdef:.70, spd:.30 },
     skills:[{lv:3,id:'heal'},{lv:8,id:'fire'},{lv:15,id:'ice'},{lv:25,id:'holy'}],
   },
+  rune_knight: {
+    name:'ルーンナイト', type:'advanced',
+    desc:'符術と剣術を組み合わせた魔法剣士',
+    base:{ hp:5, mp:2, atk:3, def:1, matk:0, mdef:3, spd:0 },
+    rate:{ hp:.75, mp:.40, atk:.60, def:.30, matk:.15, mdef:.65, spd:.20 },
+    skills:[{lv:3,id:'rune_slash'},{lv:8,id:'rune_ward'},{lv:15,id:'rune_strike'},{lv:25,id:'rune_burst'}],
+  },
 };
 /* ═══════════════════════════════════════
    スキルデータ
@@ -525,6 +532,12 @@ const SKILLS = {
   fire: { name:'ファイア', type:'magical', power:1.8,  cost:6,  desc:'炎で攻撃' },
   ice:  { name:'アイス',   type:'magical', power:2.0,  cost:10, desc:'氷で攻撃' },
   holy: { name:'ホーリー', type:'magical', power:3.5,  cost:25, healPct:0.3, desc:'聖なる光で攻撃しHP回復' },
+
+  // --- ルーンナイトスキル ---
+  rune_slash:  { name:'ルーンスラッシュ', type:'physical', power:1.5, cost:4,  desc:'符術を纏った斬撃' },
+  rune_ward:   { name:'ルーンウォード',   type:'buff',     effect:'mbarrier', cost:5, desc:'魔法防御の符術を展開' },
+  rune_strike: { name:'ルーンストライク', type:'physical', power:2.5, cost:12, desc:'符術で強化した一撃' },
+  rune_burst:  { name:'ルーンバースト',   type:'physical', power:3.5, cost:20, desc:'最大出力の符術斬り' },
 };
 
 // 装備サブタイプ → スキルID マッピング
@@ -754,10 +767,10 @@ const BOSSES = {
     special:'fireball', drops:[{id:'dragon_scale',rate:1.0}],
     title:'ドラゴンスレイヤー',
   },
-  // 4ループ・魔防+攻撃特化でやっと倒せる (魔法攻撃が脅威)
+  // 4ループ・魔防+攻撃特化でやっと倒せる (ブリザードが脅威、物理は弱い)
   demon_forest_30: {
     name:'堕ちたエルフ王', emoji:'👑', level:30, boss:true,
-    hp:4000, maxHp:4000, atk:180, def:120, matk:110, mdef:120, spd:65,
+    hp:3500, maxHp:3500, atk:80, def:70, matk:160, mdef:170, spd:65,
     special:'blizzard', drops:[{id:'spirit_stone',rate:1.0},{id:'dark_crystal',rate:1.0}],
     title:'エルフの救世主',
   },
@@ -2951,10 +2964,10 @@ const DEBUG_PRESETS = {
     weaponEnhance:0, armorEnhance:0,
     location:{type:'town',id:'minetown'}, lastTown:'minetown',
   },
-  // エルフ王戦テスト: 4ループ戦士→騎士 (魔防+攻撃特化)
+  // エルフ王戦テスト: 4ループ(戦士→僧侶→戦士→僧侶)→ルーンナイト (魔防+攻撃特化)
   'ELFKING': {
-    jobId:'knight', baseStats:{hp:147,mp:4,atk:63,def:63,matk:1,mdef:3,spd:32},
-    growthStats:{hp:201,mp:37,atk:105,def:108,matk:2,mdef:39,spd:5},
+    jobId:'rune_knight', baseStats:{hp:135,mp:50,atk:45,def:46,matk:25,mdef:48,spd:15},
+    growthStats:{hp:181,mp:75,atk:113,def:40,matk:4,mdef:114,spd:5},
     weapon:'legendary_sword', armor:'spirit_armor', accessory:'dragon_amulet',
     weaponEnhance:0, armorEnhance:0,
     location:{type:'town',id:'elfvillage'}, lastTown:'elfvillage',
