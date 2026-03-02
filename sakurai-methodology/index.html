@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>櫻井政博のゲームデザイン方法論 - OnePagers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.8;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    a.back { color: #60a5fa; text-decoration: none; font-size: 0.9rem; }
+    a.back:hover { text-decoration: underline; }
+    h1 { font-size: 1.8rem; margin: 1rem 0 0.25rem; }
+    .subtitle { color: #94a3b8; margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .meta { color: #64748b; font-size: 0.8rem; margin-bottom: 2rem; }
+
+    /* --- LLM-friendly: 構造化テキストブロック --- */
+    .llm-block {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .llm-block h2 {
+      font-size: 1.15rem;
+      color: #93c5fd;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .llm-block h2 .code {
+      background: #334155;
+      color: #facc15;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .llm-block h3 {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      margin: 1rem 0 0.4rem;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 0.25rem;
+    }
+    .llm-block p, .llm-block li {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .llm-block ul { padding-left: 1.2rem; margin: 0.3rem 0; }
+    .llm-block li { margin-bottom: 0.25rem; }
+
+    .principle {
+      background: #0f172a;
+      border-left: 3px solid #60a5fa;
+      padding: 0.75rem 1rem;
+      margin: 0.75rem 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+    }
+    .principle strong { color: #93c5fd; }
+
+    .video-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .video-tag {
+      background: #334155;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .toc a {
+      display: block;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      color: #93c5fd;
+      font-size: 0.85rem;
+      transition: border-color 0.2s;
+    }
+    .toc a:hover { border-color: #60a5fa; }
+    .toc a .toc-code { color: #facc15; font-weight: 600; margin-right: 0.4rem; }
+
+
+    hr { border: none; border-top: 1px solid #334155; margin: 2rem 0; }
+
+    .footer { text-align: center; color: #64748b; font-size: 0.75rem; margin-top: 2rem; }
+    .footer a { color: #60a5fa; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="../index.html">&larr; OnePagers</a>
+  <h1>櫻井政博のゲームデザイン方法論</h1>
+  <p class="subtitle">YouTube「桜井政博のゲーム作るには」全256話から抽出した設計原則と知見</p>
+  <p class="meta">出典: 桜井政博のゲーム作るには (2022-08 〜 2024-10) ／ 星のカービィ・大乱闘スマッシュブラザーズ シリーズ開発経験に基づく</p>
+
+  <!-- ===== チャンネル概要 ===== -->
+  <div class="llm-block">
+    <h2>チャンネル概要</h2>
+    <p>『星のカービィ』『大乱闘スマッシュブラザーズ』シリーズの生みの親・櫻井政博が、「世界中のゲームの面白さを少しだけ底上げする」ことを目標に開設したYouTubeチャンネル。ゲーム開発の方法論を全14カテゴリ・256本の動画で体系的に解説した。CEDEC AWARDS 2023 ゲームデザイン部門・ビジュアルアーツ部門 最優秀賞、2025年 文化庁芸術選奨新人賞を受賞。</p>
+  </div>
+
+  <!-- ===== 目次 ===== -->
+  <div class="toc">
+    <a href="#cat-a"><span class="toc-code">A</span>仕事の姿勢</a>
+    <a href="#cat-b"><span class="toc-code">B</span>ゲーム性</a>
+    <a href="#cat-c"><span class="toc-code">C</span>企画・ゲーム設計</a>
+    <a href="#cat-d"><span class="toc-code">D</span>仕様</a>
+    <a href="#cat-e"><span class="toc-code">E</span>チーム運営</a>
+    <a href="#cat-f"><span class="toc-code">F</span>グラフィック</a>
+    <a href="#cat-g"><span class="toc-code">G</span>モーション</a>
+    <a href="#cat-h"><span class="toc-code">H</span>エフェクト</a>
+    <a href="#cat-i"><span class="toc-code">I</span>サウンド</a>
+    <a href="#cat-j"><span class="toc-code">J</span>UI</a>
+    <a href="#cat-k"><span class="toc-code">K</span>プログラム・テクニカル</a>
+    <a href="#cat-l"><span class="toc-code">L</span>広報</a>
+    <a href="#cat-m"><span class="toc-code">M</span>雑談</a>
+    <a href="#cat-n"><span class="toc-code">N</span>企画コンセプト</a>
+  </div>
+
+  <hr>
+
+  <!-- ===== 横断的コア原則 ===== -->
+  <div class="llm-block">
+    <h2>横断的コア原則（全カテゴリに通底する思想）</h2>
+
+    <div class="principle">
+      <strong>1. リスクとリターン</strong> — ゲーム性の本質は「かけひき」であり、かけひきとは「リスクを抑えてリターンを得る工夫」である。プレイヤーがリスクを取ることで得られる報酬の大きさが、ゲームの面白さを決定する。ハイリスク・ハイリターンほど達成感があり、ローリスクほど大衆性がある。両方を設計せよ。
+    </div>
+
+    <div class="principle">
+      <strong>2. カービィズム（初心者ファースト）</strong> — 誰でも遊べることと、上級者が極められることは両立できる。操作は直感的に、スキルシーリングは高く。カービィの「飛行」やスマブラの「ボタン+方向」はこの原則の産物。
+    </div>
+
+    <div class="principle">
+      <strong>3. プレイヤー視点</strong> — 「プレイヤーの視点から見る。ゲームプレイの可能性を制限するな」。開発者の都合ではなく、プレイヤーが何を感じ、何を求めるかから設計を始める。
+    </div>
+
+    <div class="principle">
+      <strong>4. プレゼンはスピード</strong> — 贅肉をそぎ落とし、必要なことだけ伝える。これはプレゼンに限らず、UI・チュートリアル・ゲーム体験全体に適用される原則。
+    </div>
+
+    <div class="principle">
+      <strong>5. 遊びの仕事は遊びじゃない</strong> — お金をもらう以上はプロ。好きな仕事ではなく「得意な仕事」としてゲーム作りに向き合い、需要に対して器用に振る舞う。
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ===== A: 仕事の姿勢 ===== -->
+  <div class="llm-block" id="cat-a">
+    <h2><span class="code">A</span>仕事の姿勢 ― Work Ethic <span class="code">23話</span></h2>
+    <p>ゲーム業界で働くうえでの心構え、企画の通し方、プロとしての在り方を扱うカテゴリ。ゲーム開発に限らず、あらゆるクリエイティブ職に通じる普遍的な仕事論。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>プロ意識</strong>: 「遊びの仕事は遊びじゃない」。お金をもらう以上はプロ。どんなジャンルでも課題として取り組み、目的に合ったものを作る</li>
+      <li><strong>伝達の最適化</strong>: プレゼンの価値は「スピード」＝ 無駄がなく必要なことだけがまとまっていること。時間の短さではなく密度</li>
+      <li><strong>説明責任</strong>: 「お客さんに説明できるの？」全ての仕様判断はユーザーに説明できなければならない</li>
+      <li><strong>行動主義</strong>: 「とにかくやれ！！」計画が整ったら一気に突っ込む。完璧を待たない</li>
+      <li><strong>柔軟性</strong>: 「仕様を変えること」に恐れを持たず、より良くなるなら変更を厭わない</li>
+      <li><strong>企画書の技術</strong>: 企画の書き方自体がスキルであり、構造化・可視化が重要</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">A01 遊びの仕事は遊びじゃない</span>
+      <span class="video-tag">A02 プレゼンはスピード</span>
+      <span class="video-tag">A03 お客さんに説明できるの？</span>
+      <span class="video-tag">A04 仕様を変えること</span>
+      <span class="video-tag">A05 企画書の書き方</span>
+      <span class="video-tag">A09 とにかくやれ！！</span>
+      <span class="video-tag">A21 アイデアが出ないとき</span>
+      <span class="video-tag">A22 ケンカはするな</span>
+      <span class="video-tag">A23 上は下で下は上</span>
+    </div>
+  </div>
+
+  <!-- ===== B: ゲーム性 ===== -->
+  <div class="llm-block" id="cat-b">
+    <h2><span class="code">B</span>ゲーム性 ― Game Essence <span class="code">29話</span></h2>
+    <p>ゲームの面白さの根幹＝「かけひき」を理論的に分析するカテゴリ。櫻井理論の中核「リスクとリターン」がここに位置する。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>リスクとリターン</strong>: ゲーム性＝かけひき＝「リスクを抑えてリターンを得る工夫」。これが櫻井ゲーム理論の最重要概念</li>
+      <li><strong>ギュッとしてパッと解消</strong>: 緊張（ギュッ）と解放（パッ）のサイクルがプレイヤーの快感を生む。ストレスと報酬の波形設計</li>
+      <li><strong>ゲーム性以外の面白さ</strong>: 音ゲー・クラフト系など、かけひきに依存しない面白さも存在する。ゲーム性だけがプレイヤーを惹きつけるわけではない</li>
+      <li><strong>ゲーム性と大衆性のトレードオフ</strong>: ゲーム性を上げると一般性は下がる。この関係を意識して対象プレイヤーに合った設計をする</li>
+      <li><strong>対戦ゲームの複雑化</strong>: 対戦は本質的に複雑になる傾向がある。それを管理し適切なレベルに保つのが設計者の仕事</li>
+    </ul>
+
+    <div class="principle">
+      <strong>リスクとリターンの具体例（スペースインベーダー）:</strong> 敵との距離が近い＝ハイリスク・ハイリターン、遠い＝ローリスク・ローリターン。上段の敵ほど高得点だがリスクも大きい。残数が減ると速度が上がりリスクが増大する。「名古屋撃ち」は最大リスクと最大リターンが重なる極限状態。
+    </div>
+
+    <div class="video-list">
+      <span class="video-tag">B01 リスクとリターン</span>
+      <span class="video-tag">B02 ギュッとしてパッと解消</span>
+      <span class="video-tag">B03 RPGのゲーム性</span>
+      <span class="video-tag">B04 ゲーム性以外の面白さ</span>
+      <span class="video-tag">昇龍拳コマンド</span>
+      <span class="video-tag">対戦は複雑になるもの</span>
+      <span class="video-tag">強制感と攻略バランス</span>
+      <span class="video-tag">戦略シミュレーションのゲーム性</span>
+      <span class="video-tag">B16 シューティングのゲーム性</span>
+      <span class="video-tag">B17 ゲーム性を上げると大衆性が下がる</span>
+      <span class="video-tag">B20 「遊び」とは何か</span>
+      <span class="video-tag">B21 原作ものは原作ファーストで</span>
+      <span class="video-tag">B22 アクションゲームのゲーム性</span>
+      <span class="video-tag">B23 「作業」ゲームを面白く</span>
+    </div>
+  </div>
+
+  <!-- ===== C: 企画・ゲーム設計 ===== -->
+  <div class="llm-block" id="cat-c">
+    <h2><span class="code">C</span>企画・ゲーム設計 ― Planning &amp; Game Design <span class="code">30話</span></h2>
+    <p>ゲームのアイデア出し、メカニクスの設計、プレイヤー体験の構築方法を解説するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>フレーム思考</strong>: 「フレームはコマ数」— ゲームは1/60秒単位で動く。この離散的時間感覚がゲーム設計の基盤</li>
+      <li><strong>プレイさせる</strong>: 「とにかくゲームさせてみて」— 説明より体験。プレイヤーに早く触らせることが最善のチュートリアル</li>
+      <li><strong>報酬設計</strong>: 「目の前に吊られたごほうび」— プレイヤーの目の前に常に次のゴールを見せる。見えない報酬はモチベーションにならない</li>
+      <li><strong>クライマックスの前倒し</strong>: 「最初にクライマックスを」— 序盤で最高の体験を提供し、プレイヤーを掴む</li>
+      <li><strong>観戦の楽しみ</strong>: 「応援する楽しみ」— プレイしていない人にとっても楽しいゲームは広がりやすい</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">C01 フレームはコマ数</span>
+      <span class="video-tag">C02 とにかくゲームさせてみて</span>
+      <span class="video-tag">C03 目の前に吊られたごほうび</span>
+      <span class="video-tag">C04 ゲーム作りで食っていくには</span>
+      <span class="video-tag">最初にクライマックスを</span>
+      <span class="video-tag">応援する楽しみ</span>
+    </div>
+  </div>
+
+  <!-- ===== D: 仕様 ===== -->
+  <div class="llm-block" id="cat-d">
+    <h2><span class="code">D</span>仕様 ― Design Specifics <span class="code">18話</span></h2>
+    <p>ゲームの細部実装・操作感・物理的手触りに関する具体的な設計手法を扱うカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>意図的な停止</strong>: 「大事なところはストップ！」— ヒットストップやフリーズフレームで重要な瞬間を強調する。時間操作が手触りを作る</li>
+      <li><strong>触覚フィードバック</strong>: 「物理ボタンに重たさを感じさせる」— デジタル入力にアナログ的な重量感を付与する設計技法</li>
+      <li><strong>ジャンプの仕組み</strong>: ジャンプのカーブ・滞空時間・着地感がアクションゲームの基本手触りを左右する</li>
+      <li><strong>視点制御</strong>: 「注視点をくっつけない」— カメラの注視点をキャラクターに完全追従させない自由度の確保</li>
+      <li><strong>個性の設計</strong>: 「平均と平凡は同じ」— 全てのパラメータが平均的なキャラは没個性。尖りが魅力を生む</li>
+      <li><strong>偶発性の受容</strong>: 「想定外の完成形」— 計画通りでなくても良い結果は受け入れ、活かす柔軟性</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">D01 大事なところはストップ!</span>
+      <span class="video-tag">D02 物理ボタンに重たさを感じさせる</span>
+      <span class="video-tag">D03 ジャンプのしくみ</span>
+      <span class="video-tag">注視点をくっつけない</span>
+      <span class="video-tag">平均と平凡は同じ</span>
+      <span class="video-tag">想定外の完成形</span>
+    </div>
+  </div>
+
+  <!-- ===== E: チーム運営 ===== -->
+  <div class="llm-block" id="cat-e">
+    <h2><span class="code">E</span>チーム運営 ― Team Management <span class="code">15話</span></h2>
+    <p>ゲーム開発チームのコミュニケーション、進行管理、意思決定プロセスに関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>共有ビジョン</strong>: チーム全員がゲームの完成形を具体的にイメージできる状態を作る。言葉だけでなく映像や動作するプロトタイプで伝達する</li>
+      <li><strong>ディレクターの責任</strong>: 最終判断はディレクターが行い、曖昧さを残さない。判断の遅れはチーム全体の停滞につながる</li>
+      <li><strong>仕様伝達の精度</strong>: 口頭指示では情報が欠落する。仕様は文書・図・動画など再参照可能な形式で残す</li>
+      <li><strong>スケジュール管理</strong>: 完成から逆算して工程を組む。「間に合わせる」ではなく「間に合うように設計する」</li>
+      <li><strong>即時伝達</strong>: 「思ったことはすぐに言え」— 問題の報告を遅らせるとコストが膨らむ</li>
+      <li><strong>モニタリング</strong>: 小学生モニターを使ったプレイテスト。対象ユーザーに実際に遊ばせて問題を発見する</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">日報のすすめ</span>
+      <span class="video-tag">決断を先送りにするな</span>
+      <span class="video-tag">小学生モニター</span>
+      <span class="video-tag">思ったことはすぐに言え</span>
+    </div>
+  </div>
+
+  <!-- ===== F: グラフィック ===== -->
+  <div class="llm-block" id="cat-f">
+    <h2><span class="code">F</span>グラフィック ― Graphics <span class="code">20話</span></h2>
+    <p>ゲームの「絵」の作り方、見た目の設計思想、映像表現の技法に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>光を描く</strong>: 「素材を描かず、光を描く」— 物体のテクスチャではなく、光の当たり方・陰影・反射が見た目のリアリティを決定する</li>
+      <li><strong>シルエットの重要性</strong>: キャラクターはシルエットだけで識別できるべき。色を消しても判別できなければ設計が弱い</li>
+      <li><strong>見やすさ優先</strong>: リアルさよりも「ゲームとして見やすいか」を優先する。情報伝達のためのグラフィック</li>
+      <li><strong>カメラワーク</strong>: カメラは「何を見せたいか」を伝えるツール。映画的演出とゲーム的機能のバランス</li>
+      <li><strong>判定の強調</strong>: 「判定のあるものを強調する」— 当たり判定を持つオブジェクトは視覚的に際立たせ、プレイヤーの認識を助ける</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">F01 素材を描かず、光を描く</span>
+      <span class="video-tag">F02 判定のあるものを強調する</span>
+    </div>
+  </div>
+
+  <!-- ===== G: モーション ===== -->
+  <div class="llm-block" id="cat-g">
+    <h2><span class="code">G</span>モーション ― Animation <span class="code">18話</span></h2>
+    <p>キャラクターの動き、アニメーション設計、動作の気持ちよさの作り方に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>モーション指定</strong>: ディレクターはアニメーターに「どう動かしたいか」を具体的に指定する。意図を伝えるのは指示する側の責任</li>
+      <li><strong>予備動作と余韻</strong>: 攻撃の振りかぶり（予備動作）とフォロースルー（余韻）が動きのリアリティと読みやすさを生む</li>
+      <li><strong>待機モーション</strong>: アイドルアニメーションはキャラクターの個性を表現する重要な要素。退屈の回避と世界観の補強</li>
+      <li><strong>フレーム精度</strong>: アクションゲームのモーションは1フレーム単位で調整する。発生フレーム・持続フレーム・後隙フレームの三要素</li>
+      <li><strong>やり過ぎてちょうどよい</strong>: 動きの誇張は実際に画面で見ると丁度良い程度に収まる。控えめにすると目立たない</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">G01 モーション指定の仕方</span>
+      <span class="video-tag">G02 やり過ぎてちょうどよい</span>
+      <span class="video-tag">G10 ダメージモーション</span>
+      <span class="video-tag">G12 表情のアニメーション</span>
+      <span class="video-tag">G14 アニメーションブレンド</span>
+      <span class="video-tag">G16 攻撃判定を常に意識</span>
+    </div>
+  </div>
+
+  <!-- ===== H: エフェクト ===== -->
+  <div class="llm-block" id="cat-h">
+    <h2><span class="code">H</span>エフェクト ― Effects <span class="code">11話</span></h2>
+    <p>ヒットエフェクト、パーティクル、画面効果などの設計方法に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>フィードバックの役割</strong>: エフェクトは「何が起きたか」をプレイヤーに伝える視覚言語。装飾ではなく情報伝達</li>
+      <li><strong>メリハリ</strong>: 全ての行動に派手なエフェクトをつけると情報が埋もれる。重要度に応じた強弱が必要</li>
+      <li><strong>カラーコーディング</strong>: エフェクトの色で種別（攻撃/回復/状態異常）を直感的に伝達する</li>
+    </ul>
+  </div>
+
+  <!-- ===== I: サウンド ===== -->
+  <div class="llm-block" id="cat-i">
+    <h2><span class="code">I</span>サウンド ― Audio <span class="code">14話</span></h2>
+    <p>ゲーム音楽・効果音・音響設計の役割と技法に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>音がゲームを作る</strong>: 同じ映像でも音が変わると体験が劇的に変化する。音は「気持ちよさ」の大部分を担う</li>
+      <li><strong>音の即時性</strong>: 効果音は入力と同時に鳴らなければならない。遅延は操作感を著しく損なう</li>
+      <li><strong>BGMの文脈</strong>: BGMはプレイヤーの感情を誘導するツール。同じ場面でも曲が違えば緊張にも安堵にもなる</li>
+      <li><strong>音量バランス</strong>: 効果音・BGM・環境音のバランスが崩れると体験が破綻する。テストは必ずスピーカーとヘッドフォンの両方で</li>
+    </ul>
+  </div>
+
+  <!-- ===== J: UI ===== -->
+  <div class="llm-block" id="cat-j">
+    <h2><span class="code">J</span>UI ― User Interface <span class="code">15話</span></h2>
+    <p>メニュー設計、HUD、情報表示、プレイヤーへの情報提供方法に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>情報の優先順位</strong>: 全ての情報を同時に表示しない。今プレイヤーが必要としている情報だけを見せる</li>
+      <li><strong>操作の一貫性</strong>: 同じ操作が全画面で同じ結果を返すこと。例外はプレイヤーの混乱を招く</li>
+      <li><strong>視線誘導</strong>: UIは画面のどこに視線を向けるべきかをプレイヤーに自然に教える設計</li>
+      <li><strong>最短導線</strong>: 目的の操作に到達するまでのステップ数を最小化する。メニュー階層の深さは敵</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">わかりやすさとスタイル性</span>
+      <span class="video-tag">文字の大きさ</span>
+      <span class="video-tag">いまどきの親切設計</span>
+    </div>
+  </div>
+
+  <!-- ===== K: プログラム・テクニカル ===== -->
+  <div class="llm-block" id="cat-k">
+    <h2><span class="code">K</span>プログラム・テクニカル ― Programming &amp; Tech <span class="code">9話</span></h2>
+    <p>プログラミング技法、ファイル管理、技術的なゲーム実装に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>技術は手段</strong>: プログラミングはゲームを実現するための道具。技術的に優れたコードより、プレイヤーに正しく伝わる実装を優先する</li>
+      <li><strong>整理整頓</strong>: ファイル管理・命名規則・コード構造は開発効率に直結する。散らかったプロジェクトは遅い</li>
+      <li><strong>デバッグの重要性</strong>: バグはゲーム体験を根本から破壊する。テストとデバッグに十分な時間を確保する</li>
+      <li><strong>最適化の視点</strong>: フレームレートの安定はプレイヤー体験の基盤。処理落ちは操作感を損なう</li>
+    </ul>
+  </div>
+
+  <!-- ===== L: 広報 ===== -->
+  <div class="llm-block" id="cat-l">
+    <h2><span class="code">L</span>広報 ― Marketing <span class="code">9話</span></h2>
+    <p>ゲームの宣伝・プロモーション・伝え方に関するカテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>第一印象の設計</strong>: トレーラーやスクリーンショットの最初の数秒で「何が面白いか」が伝わらなければ失敗</li>
+      <li><strong>ネタバレ管理</strong>: 見せすぎは期待を削ぎ、見せなさすぎは興味を引けない。適切な情報開示量の設計</li>
+      <li><strong>ターゲット意識</strong>: 「誰に向けたゲームか」を明確にし、その層に刺さる言葉と映像で伝える</li>
+    </ul>
+  </div>
+
+  <!-- ===== M: 雑談 ===== -->
+  <div class="llm-block" id="cat-m">
+    <h2><span class="code">M</span>雑談 ― Grab Bag <span class="code">31話</span></h2>
+    <p>ゲーム開発にまつわるこぼれ話、個人的なエピソード、分類しにくいがクリエイターとして重要な話題を扱うカテゴリ。最多カテゴリ。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>幅広いインプット</strong>: ゲーム以外の体験がゲーム作りの引き出しになる。映画・音楽・日常生活のあらゆる体験を意識的に観察する</li>
+      <li><strong>健康管理</strong>: 長時間労働は生産性を下げる。体と心の健康がクリエイティブの基盤</li>
+      <li><strong>愛猫ふくらし</strong>: ゲームと全く関係ない、櫻井家の猫の紹介回も存在。人間味と遊び心の表れ</li>
+    </ul>
+    <div class="video-list">
+      <span class="video-tag">遅延をやっつけろ!</span>
+      <span class="video-tag">ゲームアワード</span>
+      <span class="video-tag">愛猫ふくらし</span>
+    </div>
+  </div>
+
+  <!-- ===== N: 企画コンセプト ===== -->
+  <div class="llm-block" id="cat-n">
+    <h2><span class="code">N</span>企画コンセプト ― Game Concepts <span class="code">13話</span></h2>
+    <p>櫻井が手掛けた各ゲームの企画発想の原点を語るカテゴリ。実際のヒット作がどのように着想され、形になったかのケーススタディ集。リリース順に各ゲームのコンセプト誕生を解説。</p>
+
+    <h3>核心的教訓</h3>
+    <ul>
+      <li><strong>星のカービィの着想</strong>: 「誰でもクリアできるゲーム」という明確なコンセプトから出発。吸い込み・吐き出しはリスクとリターンが表裏一体の設計。飛行能力はリスク軽減の安全弁</li>
+      <li><strong>スマッシュブラザーズの着想</strong>: 格闘ゲームの複雑なコマンドを廃止し「ボタン+方向」で全技を出せる設計。初心者と上級者の共存</li>
+      <li><strong>コンセプトの純度</strong>: 1つのゲームに込めるコンセプトは絞る。「何でもできるゲーム」は「何も際立たないゲーム」</li>
+      <li><strong>逆転の発想</strong>: 既存ジャンルの常識を疑い、「なぜそうなっているのか」を問い直すことで新しい設計が生まれる</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ===== LLM向けサマリ ===== -->
+  <div class="llm-block">
+    <h2>LLM/AI 向け構造化サマリ</h2>
+    <p>以下は、この文書の内容を構造化データとして参照する際のキーポイントです。</p>
+
+    <h3>人物</h3>
+    <ul>
+      <li>櫻井政博 (Masahiro Sakurai) — ゲームデザイナー・ディレクター。ソラ有限会社代表</li>
+      <li>代表作: 星のカービィ (1992〜), 大乱闘スマッシュブラザーズ (1999〜), メテオス, 新・光神話パルテナの鏡</li>
+    </ul>
+
+    <h3>方法論の5本柱</h3>
+    <ul>
+      <li><strong>リスクとリターン</strong>: ゲーム性の本質。かけひきの設計</li>
+      <li><strong>カービィズム</strong>: 初心者が遊べて上級者が極められる両立設計</li>
+      <li><strong>プレイヤー視点</strong>: 開発者都合ではなくユーザー体験起点</li>
+      <li><strong>スピード</strong>: 無駄の排除。UI・プレゼン・体験すべてに適用</li>
+      <li><strong>プロフェッショナリズム</strong>: 遊びの仕事は遊びじゃない</li>
+    </ul>
+
+    <h3>カテゴリ体系 (14区分)</h3>
+    <ul>
+      <li>A:仕事の姿勢 / B:ゲーム性 / C:企画・ゲーム設計 / D:仕様 / E:チーム運営 / F:グラフィック / G:モーション / H:エフェクト / I:サウンド / J:UI / K:プログラム / L:広報 / M:雑談 / N:企画コンセプト</li>
+    </ul>
+
+    <h3>特に引用されやすいキーフレーズ</h3>
+    <ul>
+      <li>「ゲーム性＝かけひき＝リスクを抑えてリターンを得る工夫」</li>
+      <li>「遊びの仕事は遊びじゃない」</li>
+      <li>「プレゼンはスピード」</li>
+      <li>「ギュッとしてパッと解消」</li>
+      <li>「平均と平凡は同じ」</li>
+      <li>「素材を描かず、光を描く」</li>
+      <li>「とにかくやれ！！」</li>
+      <li>「プレイヤーの視点から見る。ゲームプレイの可能性を制限するな」</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="footer">
+    <p>本ページは「桜井政博のゲーム作るには」(YouTube, 2022-2024) の公開情報をもとに方法論を整理したものです。</p>
+    <p>各動画の詳細は <a href="https://www.youtube.com/@sora_sakurai_jp" target="_blank" rel="noopener">公式チャンネル (JP)</a> / <a href="https://www.youtube.com/@saborashi" target="_blank" rel="noopener">公式チャンネル (EN)</a> をご覧ください。</p>
+  </div>
+</div>
+</body>
+</html>
