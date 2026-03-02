@@ -71,9 +71,16 @@ function processLevelUp(p) {
 function expForNextLevel(level) { return level * 10; }
 
 function calcExpGain(playerLv, monsterLv) {
-  const diff = Math.abs(playerLv - monsterLv);
-  if (diff > 5) return 0;
-  return Math.max(1, Math.floor(15 + monsterLv - diff * 4));
+  if (playerLv > monsterLv) {
+    // 高レベルで低い階層: 差が大きいほど経験値減少、差5超で0
+    const diff = playerLv - monsterLv;
+    if (diff > 5) return 0;
+    return Math.max(1, Math.floor(15 + monsterLv - diff * 4));
+  } else {
+    // 低レベルで高い階層: 差が大きいほどボーナス
+    const diff = monsterLv - playerLv;
+    return Math.floor(15 + monsterLv + diff * 2);
+  }
 }
 
 // 転職処理
@@ -92,8 +99,14 @@ function changeJob(p, newJobId) {
     p.growthStats = { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 };
     p.level = 1;
     p.exp = 0;
+  } else {
+    // 上級職転職: ステータスボーナスを付与
+    const advJob = JOBS[newJobId];
+    for (const k of STAT_KEYS) {
+      const bonus = Math.floor((advJob.base[k] || 0) * 3);
+      p.growthStats[k] = (p.growthStats[k] || 0) + bonus;
+    }
   }
-  // 上級職転職: レベル・ステータスそのまま
   p.jobId = newJobId;
   const st = calcStats(p);
   p.hp = st.maxHp;
@@ -118,6 +131,8 @@ function getAvailableSkills(p) {
     if (!base) continue;
     const skillId = SUBTYPE_SKILL[base.sub];
     if (skillId && !skills.includes(skillId)) skills.push(skillId);
+    // 鍛冶で付与された貴重スキル
+    if (eo.grantedSkill && !skills.includes(eo.grantedSkill)) skills.push(eo.grantedSkill);
   }
   return skills;
 }

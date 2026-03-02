@@ -46,15 +46,15 @@ const TOWN_EXITS = {
     { area:'wasteland',   layer:11, label:'荒野の道 階層11へ' },
   ],
   minetown:   [
-    { area:'mountain', layer:19, label:'山道 階層19へ(戻る)' },
+    { area:'mountain', layer:20, label:'山道 階層20へ(戻る)' },
     { area:'mine',     layer:21, label:'鉱山 階層21へ' },
   ],
   elfvillage: [
-    { area:'lost_forest',  layer:24, label:'迷いの森 階層24へ(戻る)' },
+    { area:'lost_forest',  layer:25, label:'迷いの森 階層25へ(戻る)' },
     { area:'demon_forest', layer:26, label:'魔の森 階層26へ' },
   ],
   lasttown:   [
-    { area:'wasteland',    layer:24, label:'荒野の道 階層24へ(戻る)' },
+    { area:'wasteland',    layer:25, label:'荒野の道 階層25へ(戻る)' },
     { area:'last_dungeon', layer:25, label:'ラストダンジョン 階層25へ' },
   ],
 };
@@ -92,6 +92,10 @@ function getFieldExits(area, layer) {
   if (layer > info.minLv) {
     exits.push({ type:'field', area, layer:layer-1, label:info.name+' 階層'+(layer-1)+'へ戻る' });
   }
+
+  // エリア間接続 (町の外のモンスター階層から次エリアへ)
+  if (area === 'lost_forest' && layer === 25) exits.push({ type:'field', area:'demon_forest', layer:26, label:'魔の森 階層26へ' });
+  if (area === 'wasteland'   && layer === 25) exits.push({ type:'field', area:'last_dungeon', layer:25, label:'ラストダンジョン 階層25へ' });
 
   // エリア端からの帰還
   if (area === 'mountain'    && layer === 11) exits.push({ type:'town', id:'porttown', label:'港町へ戻る' });
@@ -138,6 +142,7 @@ const TOWN_FACILITIES = {
     { id:'status',    icon:'📊', label:'ステータス' },
   ],
   elfvillage: [
+    { id:'inn',        icon:'🏨', label:'宿屋',     cost:70 },
     { id:'shop',       icon:'⚔️', label:'武器屋',   shopId:'elf_weapon' },
     { id:'shop',       icon:'🛡️', label:'防具屋',   shopId:'elf_armor' },
     { id:'shop',       icon:'🧪', label:'アイテム屋', shopId:'elf_item' },

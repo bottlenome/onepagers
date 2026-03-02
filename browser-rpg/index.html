@@ -533,6 +533,22 @@ const SUBTYPE_SKILL = {
   power:'power_charge', guard_acc:'protect', magic_acc:'focus',
   speed:'gale', hp_acc:'vitality', dragon:'dragon_breath',
 };
+
+// 鍛冶で稀に付与される貴重スキル
+const SMITH_RARE_SKILLS = {
+  weapon: [
+    { id:'power_strike',  weight:3 },
+    { id:'twin_strike',   weight:2 },
+    { id:'fireball',      weight:2 },
+    { id:'thunder',       weight:1 },
+  ],
+  armor: [
+    { id:'iron_wall',      weight:3 },
+    { id:'divine_shield',  weight:1 },
+    { id:'magic_barrier',  weight:2 },
+  ],
+};
+const SMITH_RARE_SKILL_CHANCE = 0.08; // 8%の確率
 /* ═══════════════════════════════════════
    装備データ
    slot: weapon / armor / accessory
@@ -833,15 +849,15 @@ const TOWN_EXITS = {
     { area:'wasteland',   layer:11, label:'荒野の道 階層11へ' },
   ],
   minetown:   [
-    { area:'mountain', layer:19, label:'山道 階層19へ(戻る)' },
+    { area:'mountain', layer:20, label:'山道 階層20へ(戻る)' },
     { area:'mine',     layer:21, label:'鉱山 階層21へ' },
   ],
   elfvillage: [
-    { area:'lost_forest',  layer:24, label:'迷いの森 階層24へ(戻る)' },
+    { area:'lost_forest',  layer:25, label:'迷いの森 階層25へ(戻る)' },
     { area:'demon_forest', layer:26, label:'魔の森 階層26へ' },
   ],
   lasttown:   [
-    { area:'wasteland',    layer:24, label:'荒野の道 階層24へ(戻る)' },
+    { area:'wasteland',    layer:25, label:'荒野の道 階層25へ(戻る)' },
     { area:'last_dungeon', layer:25, label:'ラストダンジョン 階層25へ' },
   ],
 };
@@ -879,6 +895,10 @@ function getFieldExits(area, layer) {
   if (layer > info.minLv) {
     exits.push({ type:'field', area, layer:layer-1, label:info.name+' 階層'+(layer-1)+'へ戻る' });
   }
+
+  // エリア間接続 (町の外のモンスター階層から次エリアへ)
+  if (area === 'lost_forest' && layer === 25) exits.push({ type:'field', area:'demon_forest', layer:26, label:'魔の森 階層26へ' });
+  if (area === 'wasteland'   && layer === 25) exits.push({ type:'field', area:'last_dungeon', layer:25, label:'ラストダンジョン 階層25へ' });
 
   // エリア端からの帰還
   if (area === 'mountain'    && layer === 11) exits.push({ type:'town', id:'porttown', label:'港町へ戻る' });
@@ -925,6 +945,7 @@ const TOWN_FACILITIES = {
     { id:'status',    icon:'📊', label:'ステータス' },
   ],
   elfvillage: [
+    { id:'inn',        icon:'🏨', label:'宿屋',     cost:70 },
     { id:'shop',       icon:'⚔️', label:'武器屋',   shopId:'elf_weapon' },
     { id:'shop',       icon:'🛡️', label:'防具屋',   shopId:'elf_armor' },
     { id:'shop',       icon:'🧪', label:'アイテム屋', shopId:'elf_item' },
@@ -949,13 +970,9 @@ const SHOPS = {
   town1_general: {
     name: 'よろずや',
     items: [
-      { id:'wooden_stick', isEquip:true },
       { id:'copper_sword', isEquip:true },
-      { id:'dagger',       isEquip:true },
       { id:'wooden_staff', isEquip:true },
-      { id:'cloth',        isEquip:true },
       { id:'leather',      isEquip:true },
-      { id:'robe',         isEquip:true },
       { id:'herb',         isEquip:false },
       { id:'antidote',     isEquip:false },
     ],
@@ -990,18 +1007,10 @@ const SHOPS = {
     name: 'よろずや',
     items: [
       { id:'steel_sword',   isEquip:true },
-      { id:'sage_staff',    isEquip:true },
       { id:'iron_armor',    isEquip:true },
-      { id:'mithril_sword', isEquip:true },
-      { id:'mithril_armor', isEquip:true },
       { id:'power_ring',    isEquip:true },
       { id:'guard_ring',    isEquip:true },
-      { id:'magic_amulet',  isEquip:true },
-      { id:'swift_boots',   isEquip:true },
-      { id:'hp_ring',       isEquip:true },
       { id:'hi_herb',       isEquip:false },
-      { id:'elixir',        isEquip:false },
-      { id:'magic_water',   isEquip:false },
       { id:'tent',          isEquip:false },
     ],
   },
@@ -1272,9 +1281,16 @@ function processLevelUp(p) {
 function expForNextLevel(level) { return level * 10; }
 
 function calcExpGain(playerLv, monsterLv) {
-  const diff = Math.abs(playerLv - monsterLv);
-  if (diff > 5) return 0;
-  return Math.max(1, Math.floor(15 + monsterLv - diff * 4));
+  if (playerLv > monsterLv) {
+    // 高レベルで低い階層: 差が大きいほど経験値減少、差5超で0
+    const diff = playerLv - monsterLv;
+    if (diff > 5) return 0;
+    return Math.max(1, Math.floor(15 + monsterLv - diff * 4));
+  } else {
+    // 低レベルで高い階層: 差が大きいほどボーナス
+    const diff = monsterLv - playerLv;
+    return Math.floor(15 + monsterLv + diff * 2);
+  }
 }
 
 // 転職処理
@@ -1293,8 +1309,14 @@ function changeJob(p, newJobId) {
     p.growthStats = { hp:0, mp:0, atk:0, def:0, matk:0, mdef:0, spd:0 };
     p.level = 1;
     p.exp = 0;
+  } else {
+    // 上級職転職: ステータスボーナスを付与
+    const advJob = JOBS[newJobId];
+    for (const k of STAT_KEYS) {
+      const bonus = Math.floor((advJob.base[k] || 0) * 3);
+      p.growthStats[k] = (p.growthStats[k] || 0) + bonus;
+    }
   }
-  // 上級職転職: レベル・ステータスそのまま
   p.jobId = newJobId;
   const st = calcStats(p);
   p.hp = st.maxHp;
@@ -1319,6 +1341,8 @@ function getAvailableSkills(p) {
     if (!base) continue;
     const skillId = SUBTYPE_SKILL[base.sub];
     if (skillId && !skills.includes(skillId)) skills.push(skillId);
+    // 鍛冶で付与された貴重スキル
+    if (eo.grantedSkill && !skills.includes(eo.grantedSkill)) skills.push(eo.grantedSkill);
   }
   return skills;
 }
@@ -1967,6 +1991,9 @@ function equipStatText(eo) {
     }
     parts.push(STAT_NAMES[k] + '+' + total);
   }
+  if (eo.grantedSkill && SKILLS[eo.grantedSkill]) {
+    parts.push('★' + SKILLS[eo.grantedSkill].name);
+  }
   return parts.join(' ');
 }
 /* ═══════════════════════════════════════
@@ -1998,9 +2025,25 @@ function doSmith(recipeIndex) {
   // 成否判定
   if (Math.random() < recipe.rate) {
     const eq = createEquip(recipe.output, 0);
-    p.equipBag.push(eq);
     const base = EQUIPS[recipe.output];
-    addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+    // 稀に貴重スキルが付与される
+    const slotType = base.slot;
+    const rarePool = SMITH_RARE_SKILLS[slotType];
+    if (rarePool && Math.random() < SMITH_RARE_SKILL_CHANCE) {
+      const totalW = rarePool.reduce((s, e) => s + e.weight, 0);
+      let r = Math.random() * totalW;
+      let picked = rarePool[0].id;
+      for (const entry of rarePool) {
+        r -= entry.weight;
+        if (r <= 0) { picked = entry.id; break; }
+      }
+      eq.grantedSkill = picked;
+      addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+      addLog(`★ 貴重なスキル「${SKILLS[picked].name}」が宿った！`, 'lvup');
+    } else {
+      addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+    }
+    p.equipBag.push(eq);
   } else {
     addLog('鍛冶失敗…素材は失われた。', 'danger');
   }
@@ -3045,8 +3088,27 @@ function handleAction(action, p1, p2) {
       if (p1 === G.player.jobId) { addLog('現在の職業と同じです', 'system'); render(); break; }
       if (G.jobChangeAdvanced && G.player.level < 15) { addLog('Lv.15以上必要です', 'danger'); render(); break; }
       if (G.jobChangeAdvanced && JOBS[G.player.jobId].type === 'advanced') { addLog('上級職からは転職できません。下級職に戻してから転職してください。', 'danger'); render(); break; }
-      changeJob(G.player, p1);
-      addLog(`${JOBS[p1].name}に転職した！`, 'lvup');
+      {
+        const isAdv = JOBS[p1].type === 'advanced';
+        const prevSt = isAdv ? calcStats(G.player) : null;
+        changeJob(G.player, p1);
+        addLog(`${JOBS[p1].name}に転職した！`, 'lvup');
+        if (isAdv && prevSt) {
+          const newSt = calcStats(G.player);
+          const boosts = STAT_KEYS
+            .filter(k => {
+              const prev = k === 'hp' ? prevSt.maxHp : k === 'mp' ? prevSt.maxMp : prevSt[k];
+              const now = k === 'hp' ? newSt.maxHp : k === 'mp' ? newSt.maxMp : newSt[k];
+              return now > prev;
+            })
+            .map(k => {
+              const prev = k === 'hp' ? prevSt.maxHp : k === 'mp' ? prevSt.maxMp : prevSt[k];
+              const now = k === 'hp' ? newSt.maxHp : k === 'mp' ? newSt.maxMp : newSt[k];
+              return STAT_NAMES[k] + '+' + (now - prev);
+            });
+          if (boosts.length) addLog(`ステータスアップ！ ${boosts.join(' ')}`, 'lvup');
+        }
+      }
       saveGame();
       render();
       break;

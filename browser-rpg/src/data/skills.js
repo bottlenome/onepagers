@@ -62,3 +62,19 @@ const SUBTYPE_SKILL = {
   power:'power_charge', guard_acc:'protect', magic_acc:'focus',
   speed:'gale', hp_acc:'vitality', dragon:'dragon_breath',
 };
+
+// 鍛冶で稀に付与される貴重スキル
+const SMITH_RARE_SKILLS = {
+  weapon: [
+    { id:'power_strike',  weight:3 },
+    { id:'twin_strike',   weight:2 },
+    { id:'fireball',      weight:2 },
+    { id:'thunder',       weight:1 },
+  ],
+  armor: [
+    { id:'iron_wall',      weight:3 },
+    { id:'divine_shield',  weight:1 },
+    { id:'magic_barrier',  weight:2 },
+  ],
+};
+const SMITH_RARE_SKILL_CHANCE = 0.08; // 8%の確率

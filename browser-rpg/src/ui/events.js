@@ -189,8 +189,27 @@ function handleAction(action, p1, p2) {
       if (p1 === G.player.jobId) { addLog('現在の職業と同じです', 'system'); render(); break; }
       if (G.jobChangeAdvanced && G.player.level < 15) { addLog('Lv.15以上必要です', 'danger'); render(); break; }
       if (G.jobChangeAdvanced && JOBS[G.player.jobId].type === 'advanced') { addLog('上級職からは転職できません。下級職に戻してから転職してください。', 'danger'); render(); break; }
-      changeJob(G.player, p1);
-      addLog(`${JOBS[p1].name}に転職した！`, 'lvup');
+      {
+        const isAdv = JOBS[p1].type === 'advanced';
+        const prevSt = isAdv ? calcStats(G.player) : null;
+        changeJob(G.player, p1);
+        addLog(`${JOBS[p1].name}に転職した！`, 'lvup');
+        if (isAdv && prevSt) {
+          const newSt = calcStats(G.player);
+          const boosts = STAT_KEYS
+            .filter(k => {
+              const prev = k === 'hp' ? prevSt.maxHp : k === 'mp' ? prevSt.maxMp : prevSt[k];
+              const now = k === 'hp' ? newSt.maxHp : k === 'mp' ? newSt.maxMp : newSt[k];
+              return now > prev;
+            })
+            .map(k => {
+              const prev = k === 'hp' ? prevSt.maxHp : k === 'mp' ? prevSt.maxMp : prevSt[k];
+              const now = k === 'hp' ? newSt.maxHp : k === 'mp' ? newSt.maxMp : newSt[k];
+              return STAT_NAMES[k] + '+' + (now - prev);
+            });
+          if (boosts.length) addLog(`ステータスアップ！ ${boosts.join(' ')}`, 'lvup');
+        }
+      }
       saveGame();
       render();
       break;

@@ -27,9 +27,25 @@ function doSmith(recipeIndex) {
   // 成否判定
   if (Math.random() < recipe.rate) {
     const eq = createEquip(recipe.output, 0);
-    p.equipBag.push(eq);
     const base = EQUIPS[recipe.output];
-    addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+    // 稀に貴重スキルが付与される
+    const slotType = base.slot;
+    const rarePool = SMITH_RARE_SKILLS[slotType];
+    if (rarePool && Math.random() < SMITH_RARE_SKILL_CHANCE) {
+      const totalW = rarePool.reduce((s, e) => s + e.weight, 0);
+      let r = Math.random() * totalW;
+      let picked = rarePool[0].id;
+      for (const entry of rarePool) {
+        r -= entry.weight;
+        if (r <= 0) { picked = entry.id; break; }
+      }
+      eq.grantedSkill = picked;
+      addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+      addLog(`★ 貴重なスキル「${SKILLS[picked].name}」が宿った！`, 'lvup');
+    } else {
+      addLog(`鍛冶成功！${base.name}を作成した！`, 'reward');
+    }
+    p.equipBag.push(eq);
   } else {
     addLog('鍛冶失敗…素材は失われた。', 'danger');
   }
