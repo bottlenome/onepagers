@@ -34,7 +34,7 @@ function handleAction(action, p1, p2) {
       break;
 
     // --- 名前・職業選択 ---
-    case 'selectjob':
+    case 'selectjob': {
       selectedJob = p1;
       document.querySelectorAll('.job-card').forEach(el => el.classList.remove('selected'));
       const jc = document.getElementById('jc-' + p1);
@@ -42,6 +42,7 @@ function handleAction(action, p1, p2) {
       const startBtn = document.getElementById('btn-start');
       if (startBtn) startBtn.disabled = false;
       break;
+    }
     case 'startgame': {
       const nameInput = document.getElementById('name-input');
       const name = nameInput ? nameInput.value.trim() : '勇者';

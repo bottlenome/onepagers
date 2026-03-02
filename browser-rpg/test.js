@@ -51,6 +51,33 @@ const testCode = js + `
   var exits = getFieldExits('grassland', 5);
   console.log('Field exits at grassland 5:', exits.length);
 
+  // Test grassland 15 → wasteland 16 connection
+  var exits15 = getFieldExits('grassland', 15);
+  var toWasteland = exits15.find(function(e){ return e.area === 'wasteland' && e.layer === 16; });
+  if (!toWasteland) throw new Error('grassland 15 -> wasteland 16 connection missing');
+  console.log('Grassland 15 → wasteland 16: OK');
+
+  // Test wasteland 16 → grassland 15 return
+  var wExits16 = getFieldExits('wasteland', 16);
+  var toGrassland = wExits16.find(function(e){ return e.area === 'grassland' && e.layer === 15; });
+  if (!toGrassland) throw new Error('wasteland 16 -> grassland 15 return missing');
+  console.log('Wasteland 16 → grassland 15: OK');
+
+  // Test castle no longer connects to wasteland
+  var castleExits = TOWN_EXITS['castle'];
+  var castleToWasteland = castleExits.find(function(e){ return e.area === 'wasteland'; });
+  if (castleToWasteland) throw new Error('castle should not connect to wasteland directly');
+  console.log('Castle → wasteland removed: OK');
+
+  // Test job selection for all basic jobs
+  var basicJobs = Object.keys(JOBS).filter(function(k){ return JOBS[k].type === 'basic'; });
+  basicJobs.forEach(function(jobId) {
+    var tp = newPlayer('test', jobId);
+    if (tp.jobId !== jobId) throw new Error('Job selection failed: expected ' + jobId + ' got ' + tp.jobId);
+    if (JOBS[tp.jobId].name !== JOBS[jobId].name) throw new Error('Job name mismatch for ' + jobId);
+  });
+  console.log('Job selection (all basic jobs): OK');
+
   console.log('\\n✓ All basic tests passed');
 })();
 `;
