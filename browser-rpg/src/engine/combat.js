@@ -55,6 +55,8 @@ async function runBattle() {
     await delay(spd);
   }
   addBattleLog(`${e.emoji} ${e.name} Lv.${e.level} が現れた！`, 'sys');
+  if (e.def > e.mdef * 1.2) addBattleLog('堅い守り…呪文が効きそうだ', 'sys');
+  else if (e.mdef > e.def * 1.2) addBattleLog('魔力の障壁…力技が有効だ', 'sys');
   await delay(spd);
 
   while (!G.battle.over) {
@@ -87,7 +89,7 @@ async function runBattle() {
 }
 
 async function doPlayerAction(p, e, pStats) {
-  const spd = G.settings.battleSpeed;
+  const spd = G.battle.specialReady ? G.settings.battleSpeed * 2 : G.settings.battleSpeed;
   // 効果チェック
   if (hasEffect(G.battle.playerEffects, 'stun')) {
     addBattleLog(`${p.name}は動けない！`, 'sys');
@@ -162,7 +164,8 @@ async function doPlayerAction(p, e, pStats) {
 }
 
 async function doEnemyAction(p, e, pStats) {
-  const spd = G.settings.battleSpeed;
+  const spd = G.battle.specialReady ? G.settings.battleSpeed * 2 : G.settings.battleSpeed;
+  const isVuln = hasEffect(G.battle.playerEffects, 'vulnerable');
   if (hasEffect(G.battle.enemyEffects, 'stun')) {
     addBattleLog(`${e.name}は動けない！`, 'sys');
     tickEffects(G.battle.enemyEffects);
@@ -184,6 +187,7 @@ async function doEnemyAction(p, e, pStats) {
       if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
+      if (isVuln) flashRed();
       await delay(spd);
       checkBattleEnd(p, e);
       tickEffects(G.battle.enemyEffects);
@@ -198,6 +202,7 @@ async function doEnemyAction(p, e, pStats) {
   if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
+  if (isVuln) flashRed();
   await delay(spd);
   checkBattleEnd(p, e);
   tickEffects(G.battle.enemyEffects);
@@ -272,23 +277,36 @@ function selectPlayerAction(p, e, pStats) {
   const healItem = findHealItem(p);
 
   switch (strat) {
-    case 'aggressive':
-      // 猛攻: 瀕死でのみ回復、常に最強スキル
-      if (hpRatio < 0.15 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.1 && healItem) return { type:'item', id:healItem };
+    case 'physical': {
+      // 力技: 物理スキル優先、攻め重視
+      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      const phys = attacks.filter(id => SKILLS[id].type === 'physical');
+      if (phys.length) return { type:'skill', id:phys[0] };
       if (attacks.length) return { type:'skill', id:attacks[0] };
       return { type:'attack' };
-    case 'careful':
-      // 堅守: 早めに回復、中程度の攻撃
-      if (hpRatio < 0.6 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.5 && healItem) return { type:'item', id:healItem };
-      if (attacks.length) return { type:'skill', id:attacks[Math.floor(attacks.length/2)] };
-      return { type:'attack' };
-    default: // balanced (標準) — 'physical' など旧作戦もここにフォールバック
-      if (hpRatio < 0.3 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.25 && healItem) return { type:'item', id:healItem };
+    }
+    case 'magical': {
+      // 呪文: 魔法スキル優先、攻め重視
+      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      const mags = attacks.filter(id => ['magical','hybrid'].includes(SKILLS[id].type));
+      if (mags.length) return { type:'skill', id:mags[0] };
       if (attacks.length) return { type:'skill', id:attacks[0] };
       return { type:'attack' };
+    }
+    default: {
+      // 万能: 弱点自動判定、安全重視
+      if (hpRatio < 0.4 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.35 && healItem) return { type:'item', id:healItem };
+      const preferMag = e.mdef < e.def;
+      const pref = preferMag
+        ? attacks.filter(id => ['magical','hybrid'].includes(SKILLS[id].type))
+        : attacks.filter(id => SKILLS[id].type === 'physical');
+      if (pref.length) return { type:'skill', id:pref[0] };
+      if (attacks.length) return { type:'skill', id:attacks[0] };
+      return { type:'attack' };
+    }
   }
 }
 

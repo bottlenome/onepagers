@@ -398,9 +398,9 @@ const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.0
 const CARRY_RATIO_BASIC = 0.5;    // 下級職転職時の引き継ぎ率
 const INVENTORY_MAX = 30;
 const STRATEGIES = [
-  { id:'aggressive', name:'猛攻', desc:'最強スキル優先・ほぼ回復しない' },
-  { id:'balanced',   name:'標準', desc:'バランスよく戦う' },
-  { id:'careful',    name:'堅守', desc:'回復を優先・安全重視' },
+  { id:'physical', name:'力技', desc:'物理スキル優先・攻め重視' },
+  { id:'magical',  name:'呪文', desc:'魔法スキル優先・攻め重視' },
+  { id:'balanced', name:'万能', desc:'弱点自動判定・安全重視' },
 ];
 const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';
@@ -686,81 +686,82 @@ const ITEMS = {};
    minLv/maxLv: 出現レベル範囲
    special: 特殊攻撃スキルID (null=なし)
    drops: [{id, rate}] 追加ドロップ
+   resist: 'p'=物理耐性(高DEF/低MDEF→呪文有効), 'm'=魔法耐性(高MDEF/低DEF→力技有効), 省略=均等
    ═══════════════════════════════════════ */
 const MONSTER_POOL = [
   // --- 草原 (grassland) 1-15 ---
   { name:'スライム',     emoji:'🟢', area:'grassland', minLv:1,  maxLv:3,  special:null, drops:[] },
-  { name:'コボルト',     emoji:'👹', area:'grassland', minLv:1,  maxLv:4,  special:null, drops:[] },
-  { name:'大カブト',     emoji:'🪲', area:'grassland', minLv:2,  maxLv:5,  special:null, drops:[] },
+  { name:'コボルト',     emoji:'👹', area:'grassland', minLv:1,  maxLv:4,  special:null, drops:[], resist:'p' },
+  { name:'大カブト',     emoji:'🪲', area:'grassland', minLv:2,  maxLv:5,  special:null, drops:[], resist:'p' },
   { name:'狼',           emoji:'🐺', area:'grassland', minLv:3,  maxLv:6,  special:null, drops:[] },
-  { name:'オーク',       emoji:'👺', area:'grassland', minLv:5,  maxLv:9,  special:null, drops:[] },
-  { name:'ゴブリン',     emoji:'👾', area:'grassland', minLv:5,  maxLv:8,  special:null, drops:[] },
-  { name:'大蛇',         emoji:'🐍', area:'grassland', minLv:7,  maxLv:11, special:null, drops:[] },
+  { name:'オーク',       emoji:'👺', area:'grassland', minLv:5,  maxLv:9,  special:null, drops:[], resist:'p' },
+  { name:'ゴブリン',     emoji:'👾', area:'grassland', minLv:5,  maxLv:8,  special:null, drops:[], resist:'m' },
+  { name:'大蛇',         emoji:'🐍', area:'grassland', minLv:7,  maxLv:11, special:null, drops:[], resist:'m' },
   { name:'バンディット', emoji:'🗡️', area:'grassland', minLv:8,  maxLv:12, special:null, drops:[] },
-  { name:'リザードマン', emoji:'🦎', area:'grassland', minLv:10, maxLv:13, special:null, drops:[] },
-  { name:'ハーピー',     emoji:'🦅', area:'grassland', minLv:11, maxLv:14, special:null, drops:[] },
-  { name:'トロール',     emoji:'🧌', area:'grassland', minLv:13, maxLv:15, special:null, drops:[] },
+  { name:'リザードマン', emoji:'🦎', area:'grassland', minLv:10, maxLv:13, special:null, drops:[], resist:'p' },
+  { name:'ハーピー',     emoji:'🦅', area:'grassland', minLv:11, maxLv:14, special:null, drops:[], resist:'m' },
+  { name:'トロール',     emoji:'🧌', area:'grassland', minLv:13, maxLv:15, special:null, drops:[], resist:'p' },
   { name:'グリフォン',   emoji:'🦁', area:'grassland', minLv:14, maxLv:15, special:null, drops:[] },
 
   // --- 山道 (mountain) 11-20 ---
-  { name:'ロックゴーレム', emoji:'🪨', area:'mountain', minLv:11, maxLv:15, special:null, drops:[] },
-  { name:'コカトリス',     emoji:'🐓', area:'mountain', minLv:11, maxLv:14, special:null, drops:[] },
-  { name:'ガーゴイル',     emoji:'🗿', area:'mountain', minLv:12, maxLv:16, special:null, drops:[] },
+  { name:'ロックゴーレム', emoji:'🪨', area:'mountain', minLv:11, maxLv:15, special:null, drops:[], resist:'p' },
+  { name:'コカトリス',     emoji:'🐓', area:'mountain', minLv:11, maxLv:14, special:null, drops:[], resist:'m' },
+  { name:'ガーゴイル',     emoji:'🗿', area:'mountain', minLv:12, maxLv:16, special:null, drops:[], resist:'p' },
   { name:'ワイバーン',     emoji:'🐉', area:'mountain', minLv:14, maxLv:18, special:null, drops:[] },
-  { name:'マンティコア',   emoji:'🦂', area:'mountain', minLv:16, maxLv:20, special:null, drops:[] },
-  { name:'山賊頭',         emoji:'⚔️', area:'mountain', minLv:17, maxLv:20, special:null, drops:[] },
+  { name:'マンティコア',   emoji:'🦂', area:'mountain', minLv:16, maxLv:20, special:null, drops:[], resist:'m' },
+  { name:'山賊頭',         emoji:'⚔️', area:'mountain', minLv:17, maxLv:20, special:null, drops:[], resist:'p' },
 
   // --- 鉱山 (mine) 21-30 ダンジョン ---
-  { name:'スケルトン',     emoji:'💀', area:'mine', minLv:21, maxLv:24, special:null, drops:[{id:'copper_ore',rate:.30}] },
-  { name:'ダークナイト',   emoji:'🖤', area:'mine', minLv:21, maxLv:25, special:null, drops:[{id:'iron_ore',rate:.25}] },
-  { name:'ミミック',       emoji:'📦', area:'mine', minLv:22, maxLv:26, special:null, drops:[{id:'iron_ore',rate:.30}] },
-  { name:'デーモン',       emoji:'😈', area:'mine', minLv:24, maxLv:28, special:null, drops:[{id:'mithril_ore',rate:.12}] },
+  { name:'スケルトン',     emoji:'💀', area:'mine', minLv:21, maxLv:24, special:null, drops:[{id:'copper_ore',rate:.30}], resist:'m' },
+  { name:'ダークナイト',   emoji:'🖤', area:'mine', minLv:21, maxLv:25, special:null, drops:[{id:'iron_ore',rate:.25}], resist:'p' },
+  { name:'ミミック',       emoji:'📦', area:'mine', minLv:22, maxLv:26, special:null, drops:[{id:'iron_ore',rate:.30}], resist:'p' },
+  { name:'デーモン',       emoji:'😈', area:'mine', minLv:24, maxLv:28, special:null, drops:[{id:'mithril_ore',rate:.12}], resist:'m' },
   { name:'ケルベロス',     emoji:'🐕', area:'mine', minLv:25, maxLv:29, special:null, drops:[{id:'mithril_ore',rate:.15}] },
   { name:'ドラゴンゾンビ', emoji:'🦴', area:'mine', minLv:27, maxLv:29, special:null, drops:[{id:'mithril_ore',rate:.20}] },
 
   // --- 迷いの森 (lost_forest) 16-25 ---
-  { name:'トレント',       emoji:'🌳', area:'lost_forest', minLv:16, maxLv:19, special:null, drops:[{id:'world_branch',rate:.05}] },
-  { name:'フェアリー',     emoji:'🧚', area:'lost_forest', minLv:17, maxLv:20, special:null, drops:[{id:'spirit_stone',rate:.08}] },
-  { name:'ダークエルフ',   emoji:'🧝', area:'lost_forest', minLv:18, maxLv:22, special:null, drops:[] },
-  { name:'ユニコーン',     emoji:'🦄', area:'lost_forest', minLv:20, maxLv:23, special:null, drops:[{id:'spirit_stone',rate:.10}] },
-  { name:'オーガ',         emoji:'👹', area:'lost_forest', minLv:22, maxLv:25, special:null, drops:[] },
+  { name:'トレント',       emoji:'🌳', area:'lost_forest', minLv:16, maxLv:19, special:null, drops:[{id:'world_branch',rate:.05}], resist:'p' },
+  { name:'フェアリー',     emoji:'🧚', area:'lost_forest', minLv:17, maxLv:20, special:null, drops:[{id:'spirit_stone',rate:.08}], resist:'m' },
+  { name:'ダークエルフ',   emoji:'🧝', area:'lost_forest', minLv:18, maxLv:22, special:null, drops:[], resist:'m' },
+  { name:'ユニコーン',     emoji:'🦄', area:'lost_forest', minLv:20, maxLv:23, special:null, drops:[{id:'spirit_stone',rate:.10}], resist:'m' },
+  { name:'オーガ',         emoji:'👹', area:'lost_forest', minLv:22, maxLv:25, special:null, drops:[], resist:'p' },
   { name:'キメラ',         emoji:'🐲', area:'lost_forest', minLv:23, maxLv:25, special:null, drops:[] },
 
   // --- 魔の森 (demon_forest) 26-30 ダンジョン ---
   { name:'デーモンロード', emoji:'😈', area:'demon_forest', minLv:26, maxLv:28, special:null, drops:[{id:'dark_crystal',rate:.15}] },
-  { name:'ヴァンパイア',   emoji:'🧛', area:'demon_forest', minLv:27, maxLv:29, special:null, drops:[{id:'dark_crystal',rate:.15},{id:'spirit_stone',rate:.08}] },
-  { name:'リッチ',         emoji:'☠️', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20},{id:'spirit_stone',rate:.10}] },
-  { name:'ダークドラゴン', emoji:'🐉', area:'demon_forest', minLv:29, maxLv:30, special:'fireball', drops:[{id:'dark_crystal',rate:.15}] },
-  { name:'堕天使',         emoji:'👼', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'spirit_stone',rate:.15},{id:'dark_crystal',rate:.10}] },
+  { name:'ヴァンパイア',   emoji:'🧛', area:'demon_forest', minLv:27, maxLv:29, special:null, drops:[{id:'dark_crystal',rate:.15},{id:'spirit_stone',rate:.08}], resist:'m' },
+  { name:'リッチ',         emoji:'☠️', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20},{id:'spirit_stone',rate:.10}], resist:'m' },
+  { name:'ダークドラゴン', emoji:'🐉', area:'demon_forest', minLv:29, maxLv:30, special:'fireball', drops:[{id:'dark_crystal',rate:.15}], resist:'p' },
+  { name:'堕天使',         emoji:'👼', area:'demon_forest', minLv:28, maxLv:30, special:null, drops:[{id:'spirit_stone',rate:.15},{id:'dark_crystal',rate:.10}], resist:'m' },
 
   // --- 荒野の道 (wasteland) 11-25 ---
   { name:'サンドワーム',   emoji:'🪱', area:'wasteland', minLv:11, maxLv:15, special:null, drops:[] },
   { name:'スコーピオン',   emoji:'🦂', area:'wasteland', minLv:12, maxLv:16, special:null, drops:[] },
-  { name:'デスクロウ',     emoji:'🦅', area:'wasteland', minLv:14, maxLv:18, special:null, drops:[] },
-  { name:'サンドゴーレム', emoji:'🏜️', area:'wasteland', minLv:16, maxLv:20, special:null, drops:[] },
-  { name:'バジリスク',     emoji:'🐍', area:'wasteland', minLv:18, maxLv:22, special:null, drops:[] },
-  { name:'デスナイト',     emoji:'⚔️', area:'wasteland', minLv:20, maxLv:25, special:null, drops:[] },
+  { name:'デスクロウ',     emoji:'🦅', area:'wasteland', minLv:14, maxLv:18, special:null, drops:[], resist:'m' },
+  { name:'サンドゴーレム', emoji:'🏜️', area:'wasteland', minLv:16, maxLv:20, special:null, drops:[], resist:'p' },
+  { name:'バジリスク',     emoji:'🐍', area:'wasteland', minLv:18, maxLv:22, special:null, drops:[], resist:'m' },
+  { name:'デスナイト',     emoji:'⚔️', area:'wasteland', minLv:20, maxLv:25, special:null, drops:[], resist:'p' },
   { name:'サンドドラゴン', emoji:'🐉', area:'wasteland', minLv:22, maxLv:25, special:'fireball', drops:[] },
 
   // --- 古城 (old_castle) 21-25 ダンジョン ---
-  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'iron_ore',rate:.20},{id:'cursed_bone',rate:.08}] },
-  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'cursed_bone',rate:.10}] },
-  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:22, maxLv:24, special:null, drops:[{id:'cursed_bone',rate:.12}] },
-  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:23, maxLv:25, special:null, drops:[{id:'dark_crystal',rate:.10},{id:'cursed_bone',rate:.10}] },
-  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:24, maxLv:25, special:'blizzard', drops:[{id:'cursed_bone',rate:.15}] },
+  { name:'リビングアーマー', emoji:'🛡️', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'iron_ore',rate:.20},{id:'cursed_bone',rate:.08}], resist:'p' },
+  { name:'ゴースト',         emoji:'👻', area:'old_castle', minLv:21, maxLv:23, special:null, drops:[{id:'cursed_bone',rate:.10}], resist:'m' },
+  { name:'デュラハン',       emoji:'🗡️', area:'old_castle', minLv:22, maxLv:24, special:null, drops:[{id:'cursed_bone',rate:.12}], resist:'p' },
+  { name:'ヴァンパイアロード',emoji:'🧛', area:'old_castle', minLv:23, maxLv:25, special:null, drops:[{id:'dark_crystal',rate:.10},{id:'cursed_bone',rate:.10}], resist:'m' },
+  { name:'死霊術師',         emoji:'☠️', area:'old_castle', minLv:24, maxLv:25, special:'blizzard', drops:[{id:'cursed_bone',rate:.15}], resist:'m' },
 
   // --- 古城・隠し (old_castle_hidden) 25-35 ---
-  { name:'ファントム',     emoji:'👻', area:'old_castle_hidden', minLv:25, maxLv:28, special:null, drops:[{id:'phantom_cloth',rate:.10}] },
-  { name:'デスロード',     emoji:'💀', area:'old_castle_hidden', minLv:27, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20},{id:'phantom_cloth',rate:.08}] },
-  { name:'エンシェントナイト',emoji:'🗡️', area:'old_castle_hidden', minLv:29, maxLv:32, special:'power_strike', drops:[{id:'phantom_cloth',rate:.12}] },
-  { name:'伝説の魔術師',   emoji:'🧙', area:'old_castle_hidden', minLv:30, maxLv:34, special:'meteor', drops:[{id:'phantom_cloth',rate:.15},{id:'spirit_stone',rate:.10}] },
-  { name:'堕落の騎士',     emoji:'🖤', area:'old_castle_hidden', minLv:32, maxLv:35, special:'devastating_blow', drops:[{id:'phantom_cloth',rate:.12},{id:'dark_crystal',rate:.15}] },
+  { name:'ファントム',     emoji:'👻', area:'old_castle_hidden', minLv:25, maxLv:28, special:null, drops:[{id:'phantom_cloth',rate:.10}], resist:'m' },
+  { name:'デスロード',     emoji:'💀', area:'old_castle_hidden', minLv:27, maxLv:30, special:null, drops:[{id:'dark_crystal',rate:.20},{id:'phantom_cloth',rate:.08}], resist:'m' },
+  { name:'エンシェントナイト',emoji:'🗡️', area:'old_castle_hidden', minLv:29, maxLv:32, special:'power_strike', drops:[{id:'phantom_cloth',rate:.12}], resist:'p' },
+  { name:'伝説の魔術師',   emoji:'🧙', area:'old_castle_hidden', minLv:30, maxLv:34, special:'meteor', drops:[{id:'phantom_cloth',rate:.15},{id:'spirit_stone',rate:.10}], resist:'m' },
+  { name:'堕落の騎士',     emoji:'🖤', area:'old_castle_hidden', minLv:32, maxLv:35, special:'devastating_blow', drops:[{id:'phantom_cloth',rate:.12},{id:'dark_crystal',rate:.15}], resist:'p' },
 
   // --- ラストダンジョン (last_dungeon) 25-35 ---
-  { name:'カオスナイト',   emoji:'⚔️', area:'last_dungeon', minLv:25, maxLv:28, special:null, drops:[{id:'orichalcum',rate:.05}] },
-  { name:'ベヒーモス',     emoji:'🦏', area:'last_dungeon', minLv:27, maxLv:30, special:null, drops:[{id:'orichalcum',rate:.06}] },
+  { name:'カオスナイト',   emoji:'⚔️', area:'last_dungeon', minLv:25, maxLv:28, special:null, drops:[{id:'orichalcum',rate:.05}], resist:'p' },
+  { name:'ベヒーモス',     emoji:'🦏', area:'last_dungeon', minLv:27, maxLv:30, special:null, drops:[{id:'orichalcum',rate:.06}], resist:'p' },
   { name:'キングケルベロス',emoji:'🐕', area:'last_dungeon', minLv:28, maxLv:31, special:null, drops:[{id:'orichalcum',rate:.08}] },
-  { name:'アークデーモン',  emoji:'😈', area:'last_dungeon', minLv:30, maxLv:33, special:'thunder', drops:[{id:'dark_crystal',rate:.25},{id:'orichalcum',rate:.10}] },
+  { name:'アークデーモン',  emoji:'😈', area:'last_dungeon', minLv:30, maxLv:33, special:'thunder', drops:[{id:'dark_crystal',rate:.25},{id:'orichalcum',rate:.10}], resist:'m' },
   { name:'混沌竜',         emoji:'🐉', area:'last_dungeon', minLv:32, maxLv:35, special:'fireball', drops:[{id:'dragon_scale',rate:.10},{id:'orichalcum',rate:.12}] },
 ];
 
@@ -833,6 +834,9 @@ function spawnMonster(areaId, layer) {
   }
   const tmpl = pool[Math.floor(Math.random() * pool.length)];
   const stats = calcMonsterStats(layer);
+  // 耐性補正: p=物理耐性(呪文有効), m=魔法耐性(力技有効)
+  if (tmpl.resist === 'p') { stats.def = Math.floor(stats.def * 1.4); stats.mdef = Math.floor(stats.mdef * 0.7); }
+  if (tmpl.resist === 'm') { stats.mdef = Math.floor(stats.mdef * 1.4); stats.def = Math.floor(stats.def * 0.7); }
   return {
     name: tmpl.name,
     emoji: tmpl.emoji,
@@ -1488,6 +1492,8 @@ async function runBattle() {
     await delay(spd);
   }
   addBattleLog(`${e.emoji} ${e.name} Lv.${e.level} が現れた！`, 'sys');
+  if (e.def > e.mdef * 1.2) addBattleLog('堅い守り…呪文が効きそうだ', 'sys');
+  else if (e.mdef > e.def * 1.2) addBattleLog('魔力の障壁…力技が有効だ', 'sys');
   await delay(spd);
 
   while (!G.battle.over) {
@@ -1520,7 +1526,7 @@ async function runBattle() {
 }
 
 async function doPlayerAction(p, e, pStats) {
-  const spd = G.settings.battleSpeed;
+  const spd = G.battle.specialReady ? G.settings.battleSpeed * 2 : G.settings.battleSpeed;
   // 効果チェック
   if (hasEffect(G.battle.playerEffects, 'stun')) {
     addBattleLog(`${p.name}は動けない！`, 'sys');
@@ -1595,7 +1601,8 @@ async function doPlayerAction(p, e, pStats) {
 }
 
 async function doEnemyAction(p, e, pStats) {
-  const spd = G.settings.battleSpeed;
+  const spd = G.battle.specialReady ? G.settings.battleSpeed * 2 : G.settings.battleSpeed;
+  const isVuln = hasEffect(G.battle.playerEffects, 'vulnerable');
   if (hasEffect(G.battle.enemyEffects, 'stun')) {
     addBattleLog(`${e.name}は動けない！`, 'sys');
     tickEffects(G.battle.enemyEffects);
@@ -1617,6 +1624,7 @@ async function doEnemyAction(p, e, pStats) {
       if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
+      if (isVuln) flashRed();
       await delay(spd);
       checkBattleEnd(p, e);
       tickEffects(G.battle.enemyEffects);
@@ -1631,6 +1639,7 @@ async function doEnemyAction(p, e, pStats) {
   if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
+  if (isVuln) flashRed();
   await delay(spd);
   checkBattleEnd(p, e);
   tickEffects(G.battle.enemyEffects);
@@ -1705,23 +1714,36 @@ function selectPlayerAction(p, e, pStats) {
   const healItem = findHealItem(p);
 
   switch (strat) {
-    case 'aggressive':
-      // 猛攻: 瀕死でのみ回復、常に最強スキル
-      if (hpRatio < 0.15 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.1 && healItem) return { type:'item', id:healItem };
+    case 'physical': {
+      // 力技: 物理スキル優先、攻め重視
+      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      const phys = attacks.filter(id => SKILLS[id].type === 'physical');
+      if (phys.length) return { type:'skill', id:phys[0] };
       if (attacks.length) return { type:'skill', id:attacks[0] };
       return { type:'attack' };
-    case 'careful':
-      // 堅守: 早めに回復、中程度の攻撃
-      if (hpRatio < 0.6 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.5 && healItem) return { type:'item', id:healItem };
-      if (attacks.length) return { type:'skill', id:attacks[Math.floor(attacks.length/2)] };
-      return { type:'attack' };
-    default: // balanced (標準) — 'physical' など旧作戦もここにフォールバック
-      if (hpRatio < 0.3 && heals.length) return { type:'skill', id:heals[0] };
-      if (hpRatio < 0.25 && healItem) return { type:'item', id:healItem };
+    }
+    case 'magical': {
+      // 呪文: 魔法スキル優先、攻め重視
+      if (hpRatio < 0.2 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.15 && healItem) return { type:'item', id:healItem };
+      const mags = attacks.filter(id => ['magical','hybrid'].includes(SKILLS[id].type));
+      if (mags.length) return { type:'skill', id:mags[0] };
       if (attacks.length) return { type:'skill', id:attacks[0] };
       return { type:'attack' };
+    }
+    default: {
+      // 万能: 弱点自動判定、安全重視
+      if (hpRatio < 0.4 && heals.length) return { type:'skill', id:heals[0] };
+      if (hpRatio < 0.35 && healItem) return { type:'item', id:healItem };
+      const preferMag = e.mdef < e.def;
+      const pref = preferMag
+        ? attacks.filter(id => ['magical','hybrid'].includes(SKILLS[id].type))
+        : attacks.filter(id => SKILLS[id].type === 'physical');
+      if (pref.length) return { type:'skill', id:pref[0] };
+      if (attacks.length) return { type:'skill', id:attacks[0] };
+      return { type:'attack' };
+    }
   }
 }
 
