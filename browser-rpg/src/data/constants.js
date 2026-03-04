@@ -11,9 +11,9 @@ const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.0
 const CARRY_RATIO_BASIC = 0.5;    // 下級職転職時の引き継ぎ率
 const INVENTORY_MAX = 30;
 const STRATEGIES = [
-  { id:'physical', name:'力技', desc:'物理スキル優先・攻め重視' },
-  { id:'magical',  name:'呪文', desc:'魔法スキル優先・攻め重視' },
-  { id:'balanced', name:'万能', desc:'弱点自動判定・安全重視' },
+  { id:'aggressive', name:'猛攻', desc:'物理スキル+30%・回復控えめ' },
+  { id:'balanced',   name:'標準', desc:'ボーナスなし・安全重視' },
+  { id:'careful',    name:'堅守', desc:'魔法スキル+30%・回復控えめ' },
 ];
 const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';
