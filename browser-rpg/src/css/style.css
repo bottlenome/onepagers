@@ -261,6 +261,8 @@ body {
 .bl.sys { color: var(--muted); }
 .bl.reward { color: var(--gold); }
 .bl.lvup { color: var(--accent); font-weight: bold; }
+.bl.resonance { color: var(--gold); font-weight: bold; text-shadow: 0 0 6px rgba(251,191,36,0.5); }
+.bl.resonance-hint { color: var(--warn); font-style: italic; }
 .bonus-growth { color: var(--gold); font-weight: bold; }
 
 /* --- Shop / list screens --- */

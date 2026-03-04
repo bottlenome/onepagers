@@ -150,6 +150,38 @@ const testCode = js + `
   }
   console.log('Map connectivity check: OK (' + interAreaLinks.length + ' inter-area links verified)');
 
+  // === 共鳴システムテスト ===
+  // 装備の共鳴率フィールド確認
+  if (EQUIPS['iron_sword'].res !== 0.10) throw new Error('iron_sword should have res 0.10');
+  if (EQUIPS['wooden_stick'].res !== 0) throw new Error('wooden_stick should have res 0');
+  if (EQUIPS['orichalcum_sword'].res !== 0.25) throw new Error('orichalcum_sword should have res 0.25');
+  // アクセサリーは共鳴なし
+  if (EQUIPS['power_ring'].res !== 0) throw new Error('accessory should have res 0');
+  // 共鳴タイプマッピング
+  if (RESONANCE_TYPE_MAP['sword'] !== 'fury') throw new Error('sword should map to fury');
+  if (RESONANCE_TYPE_MAP['staff'] !== 'surge') throw new Error('staff should map to surge');
+  if (RESONANCE_TYPE_MAP['heavy'] !== 'counter') throw new Error('heavy should map to counter');
+  if (RESONANCE_TYPE_MAP['dagger'] !== 'chain') throw new Error('dagger should map to chain');
+  // 共鳴素材が存在するか
+  if (!ITEMS['shining_scale']) throw new Error('shining_scale item missing');
+  if (!ITEMS['gleaming_ore']) throw new Error('gleaming_ore item missing');
+  if (!ITEMS['spirit_drop']) throw new Error('spirit_drop item missing');
+  if (!ITEMS['grudge_shard']) throw new Error('grudge_shard item missing');
+  // getResonanceInfo テスト
+  var rp = newPlayer('共鳴テスト', 'warrior');
+  rp.equipObjs.weapon = createEquip('iron_sword', 0);
+  rp.equipObjs.armor = createEquip('cloth', 0);
+  var ri = getResonanceInfo(rp);
+  if (!ri) throw new Error('getResonanceInfo should return info for iron_sword');
+  if (ri.type !== 'fury') throw new Error('iron_sword resonance type should be fury, got ' + ri.type);
+  if (ri.rate !== 0.10) throw new Error('iron_sword resonance rate should be 0.10, got ' + ri.rate);
+  // 強化ボーナス確認
+  rp.equipObjs.weapon = createEquip('iron_sword', 5);
+  rp.equipObjs.weapon.enhancement = 5;
+  ri = getResonanceInfo(rp);
+  if (Math.abs(ri.rate - 0.20) > 0.001) throw new Error('iron_sword+5 resonance rate should be 0.20, got ' + ri.rate);
+  console.log('Resonance system: OK');
+
   console.log('\\n✓ All basic tests passed');
 })();
 `;

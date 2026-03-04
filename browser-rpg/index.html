@@ -268,6 +268,8 @@ body {
 .bl.sys { color: var(--muted); }
 .bl.reward { color: var(--gold); }
 .bl.lvup { color: var(--accent); font-weight: bold; }
+.bl.resonance { color: var(--gold); font-weight: bold; text-shadow: 0 0 6px rgba(251,191,36,0.5); }
+.bl.resonance-hint { color: var(--warn); font-style: italic; }
 .bonus-growth { color: var(--gold); font-weight: bold; }
 
 /* --- Shop / list screens --- */
@@ -398,12 +400,40 @@ const ENHANCE_RATES = [0.90, 0.80, 0.70, 0.55, 0.40, 0.30, 0.20, 0.15, 0.10, 0.0
 const CARRY_RATIO_BASIC = 0.5;    // 下級職転職時の引き継ぎ率
 const INVENTORY_MAX = 30;
 const STRATEGIES = [
-  { id:'physical', name:'力技', desc:'物理スキル優先・攻め重視' },
-  { id:'magical',  name:'呪文', desc:'魔法スキル優先・攻め重視' },
-  { id:'balanced', name:'万能', desc:'弱点自動判定・安全重視' },
+  { id:'aggressive', name:'猛攻', desc:'物理スキル+30%・回復控えめ' },
+  { id:'balanced',   name:'標準', desc:'ボーナスなし・安全重視' },
+  { id:'careful',    name:'堅守', desc:'魔法スキル+30%・回復控えめ' },
 ];
 const DEATH_GOLD_PENALTY = 0.15;  // 死亡時に所持金の15%を失う
 const SAVE_KEY = 'onepagers-browser-rpg';
+
+// --- 共鳴システム ---
+// 装備サブタイプ → 共鳴タイプ
+const RESONANCE_TYPE_MAP = {
+  sword:'fury', dagger:'chain', staff:'surge', bow:'chain',
+  heavy:'counter', light:'chain', robe:'surge',
+};
+const RESONANCE_INFO = {
+  fury:    { name:'猛る刃',     turns:3, strat:'aggressive', desc:'猛攻を維持すると武器が共鳴する' },
+  surge:   { name:'魔力の奔流', turns:3, strat:'careful',    desc:'堅守を維持すると魔力が共鳴する' },
+  counter: { name:'反撃の構え', hits:2,  strat:'careful',    desc:'堅守で耐え猛攻に切替えると反撃する' },
+  chain:   { name:'一閃の連鎖', desc:'会心の一撃で追加攻撃が発生する' },
+};
+const RESONANCE_ENHANCE_BONUS = 0.02; // 強化+1ごとの共鳴率加算
+const RESONANCE_DROP_BONUS = 0.15;    // 共鳴発動時のドロップ率加算
+const RESONANCE_CHAIN_DROP_BONUS = 0.10;
+// エリア別 共鳴限定ドロップ
+const RESONANCE_AREA_DROPS = {
+  grassland:    { id:'shining_scale',   rate:0.30 },
+  mountain:     { id:'gleaming_ore',    rate:0.25 },
+  mine:         { id:'gleaming_ore',    rate:0.30 },
+  lost_forest:  { id:'spirit_drop',     rate:0.25 },
+  demon_forest: { id:'spirit_drop',     rate:0.30 },
+  wasteland:    { id:'shining_scale',   rate:0.25 },
+  old_castle:   { id:'grudge_shard',    rate:0.25 },
+  old_castle_hidden: { id:'grudge_shard', rate:0.30 },
+  last_dungeon: { id:'spirit_drop',     rate:0.25 },
+};
 /* ═══════════════════════════════════════
    職業データ
    base: レベルアップ時の確定成長値
@@ -575,68 +605,69 @@ const SMITH_RARE_SKILL_CHANCE = 0.08; // 8%の確率
    dur: 耐久値 (weaponのみ)
    s: ステータスボーナス
    g: 成長率ボーナス (隠しパラメータ)
+   res: 共鳴基本率 (0=共鳴なし)
    ═══════════════════════════════════════ */
 const EQUIPS = {};
 [
   // --- 武器: 剣 ---
-  //  id                  name          slot     sub     price dur  stats                    growthBonus
-  ['wooden_stick',       '木の棒',     'weapon','sword', 10,   15, {atk:2},                 {}],
-  ['copper_sword',       '銅の剣',     'weapon','sword', 50,   25, {atk:5},                 {atk:.05}],
-  ['iron_sword',         '鉄の剣',     'weapon','sword', 200,  35, {atk:10},                {atk:.08}],
-  ['steel_sword',        '鋼の剣',     'weapon','sword', 500,  45, {atk:18},                {atk:.10}],
-  ['mithril_sword',      'ミスリルの剣','weapon','sword',1500, 60, {atk:30},                {atk:.12}],
-  ['legendary_sword',    '伝説の剣',   'weapon','sword', 0,   100, {atk:50},                {atk:.15}],
-  ['orichalcum_sword',   'オリハルコンの剣','weapon','sword',0,  0, {atk:60},                {atk:.18}],
+  //  id                  name          slot     sub     price dur  stats                    growthBonus           res
+  ['wooden_stick',       '木の棒',     'weapon','sword', 10,   15, {atk:2},                 {},                   0],
+  ['copper_sword',       '銅の剣',     'weapon','sword', 50,   25, {atk:5},                 {atk:.05},            .05],
+  ['iron_sword',         '鉄の剣',     'weapon','sword', 200,  35, {atk:10},                {atk:.08},            .10],
+  ['steel_sword',        '鋼の剣',     'weapon','sword', 500,  45, {atk:18},                {atk:.10},            .12],
+  ['mithril_sword',      'ミスリルの剣','weapon','sword',1500, 60, {atk:30},                {atk:.12},            .15],
+  ['legendary_sword',    '伝説の剣',   'weapon','sword', 0,   100, {atk:50},                {atk:.15},            .20],
+  ['orichalcum_sword',   'オリハルコンの剣','weapon','sword',0,  0, {atk:60},                {atk:.18},            .25],
 
   // --- 武器: 短剣 ---
-  ['dagger',             'ダガー',     'weapon','dagger', 30,  20, {atk:3,spd:2},           {spd:.05}],
-  ['ninja_blade',        '忍者刀',     'weapon','dagger', 500, 30, {atk:12,spd:5},          {atk:.05,spd:.08}],
+  ['dagger',             'ダガー',     'weapon','dagger', 30,  20, {atk:3,spd:2},           {spd:.05},            .05],
+  ['ninja_blade',        '忍者刀',     'weapon','dagger', 500, 30, {atk:12,spd:5},          {atk:.05,spd:.08},    .15],
 
   // --- 武器: 杖 ---
-  ['wooden_staff',       '木の杖',     'weapon','staff',  15,  15, {matk:3},                {}],
-  ['magic_staff',        '魔法の杖',   'weapon','staff', 200,  30, {matk:10},               {matk:.08}],
-  ['sage_staff',         '賢者の杖',   'weapon','staff', 700,  40, {matk:18},               {matk:.10}],
-  ['spirit_staff',       '精霊の杖',   'weapon','staff',1200,  50, {matk:25,mdef:8},        {matk:.12}],
-  ['demon_staff',        '魔王の杖',   'weapon','staff',   0,   0, {matk:40,mdef:12},       {matk:.15}],
+  ['wooden_staff',       '木の杖',     'weapon','staff',  15,  15, {matk:3},                {},                   0],
+  ['magic_staff',        '魔法の杖',   'weapon','staff', 200,  30, {matk:10},               {matk:.08},           .10],
+  ['sage_staff',         '賢者の杖',   'weapon','staff', 700,  40, {matk:18},               {matk:.10},           .12],
+  ['spirit_staff',       '精霊の杖',   'weapon','staff',1200,  50, {matk:25,mdef:8},        {matk:.12},           .15],
+  ['demon_staff',        '魔王の杖',   'weapon','staff',   0,   0, {matk:40,mdef:12},       {matk:.15},           .20],
 
   // --- 武器: 弓 ---
-  ['elf_bow',            'エルフの弓', 'weapon','bow',  1200,  50, {atk:25,spd:8},          {atk:.08,spd:.08}],
+  ['elf_bow',            'エルフの弓', 'weapon','bow',  1200,  50, {atk:25,spd:8},          {atk:.08,spd:.08},    .15],
 
   // --- 防具: 重装 ---
-  ['cloth',              '布の服',     'armor','light',   10, 0, {def:2},                   {}],
-  ['leather',            '皮の鎧',     'armor','light',   80, 0, {def:5},                   {def:.05}],
-  ['chainmail',          '鎖帷子',     'armor','heavy',  300, 0, {def:12},                  {def:.08}],
-  ['iron_armor',         '鉄の鎧',     'armor','heavy',  700, 0, {def:20},                  {def:.10}],
-  ['mithril_armor',      'ミスリルの鎧','armor','heavy', 2000, 0, {def:30,mdef:10},         {def:.12}],
-  ['spirit_armor',       '精霊の鎧',   'armor','heavy', 1500, 0, {def:25,mdef:15},         {def:.08,mdef:.08}],
-  ['orichalcum_armor',   'オリハルコンの鎧','armor','heavy',  0, 0, {def:40,mdef:15},        {def:.15}],
+  ['cloth',              '布の服',     'armor','light',   10, 0, {def:2},                   {},                   0],
+  ['leather',            '皮の鎧',     'armor','light',   80, 0, {def:5},                   {def:.05},            .05],
+  ['chainmail',          '鎖帷子',     'armor','heavy',  300, 0, {def:12},                  {def:.08},            .08],
+  ['iron_armor',         '鉄の鎧',     'armor','heavy',  700, 0, {def:20},                  {def:.10},            .10],
+  ['mithril_armor',      'ミスリルの鎧','armor','heavy', 2000, 0, {def:30,mdef:10},         {def:.12},            .15],
+  ['spirit_armor',       '精霊の鎧',   'armor','heavy', 1500, 0, {def:25,mdef:15},         {def:.08,mdef:.08},   .12],
+  ['orichalcum_armor',   'オリハルコンの鎧','armor','heavy',  0, 0, {def:40,mdef:15},        {def:.15},            .25],
 
   // --- 防具: ローブ ---
-  ['robe',               'ローブ',     'armor','robe',    60, 0, {def:3,mdef:5},            {mdef:.05}],
-  ['magic_robe',         '魔法のローブ','armor','robe',   400, 0, {def:6,mdef:12},          {mdef:.08}],
-  ['elf_robe',           'エルフのローブ','armor','robe', 1200, 0, {def:15,mdef:20},        {mdef:.10}],
-  ['demon_robe',         '魔王のローブ', 'armor','robe',    0, 0, {def:20,mdef:35},        {mdef:.15}],
+  ['robe',               'ローブ',     'armor','robe',    60, 0, {def:3,mdef:5},            {mdef:.05},           .05],
+  ['magic_robe',         '魔法のローブ','armor','robe',   400, 0, {def:6,mdef:12},          {mdef:.08},           .10],
+  ['elf_robe',           'エルフのローブ','armor','robe', 1200, 0, {def:15,mdef:20},        {mdef:.10},           .15],
+  ['demon_robe',         '魔王のローブ', 'armor','robe',    0, 0, {def:20,mdef:35},        {mdef:.15},           .20],
 
   // --- 防具: 軽装 ---
-  ['ninja_garb',         '忍び装束',   'armor','light',  350, 0, {def:8,spd:5},             {spd:.05}],
+  ['ninja_garb',         '忍び装束',   'armor','light',  350, 0, {def:8,spd:5},             {spd:.05},            .10],
 
   // --- アクセサリー ---
-  ['power_ring',         '力の指輪',   'accessory','power',     200, 0, {atk:5},            {atk:.05}],
-  ['guard_ring',         '守りの指輪', 'accessory','guard_acc', 200, 0, {def:5},             {def:.05}],
-  ['magic_amulet',       '魔力の首飾り','accessory','magic_acc', 200, 0, {matk:5},           {matk:.05}],
-  ['swift_boots',        '疾風のブーツ','accessory','speed',    200, 0, {spd:5},             {spd:.05}],
-  ['hp_ring',            'HP指輪',     'accessory','hp_acc',    300, 0, {hp:30},             {hp:.05}],
-  ['dragon_amulet',      '竜の首飾り', 'accessory','dragon',      0, 0, {atk:3,def:3,matk:3,mdef:3,spd:3}, {atk:.05,def:.05,matk:.05,mdef:.05,spd:.05}],
+  ['power_ring',         '力の指輪',   'accessory','power',     200, 0, {atk:5},            {atk:.05},            0],
+  ['guard_ring',         '守りの指輪', 'accessory','guard_acc', 200, 0, {def:5},             {def:.05},            0],
+  ['magic_amulet',       '魔力の首飾り','accessory','magic_acc', 200, 0, {matk:5},           {matk:.05},           0],
+  ['swift_boots',        '疾風のブーツ','accessory','speed',    200, 0, {spd:5},             {spd:.05},            0],
+  ['hp_ring',            'HP指輪',     'accessory','hp_acc',    300, 0, {hp:30},             {hp:.05},             0],
+  ['dragon_amulet',      '竜の首飾り', 'accessory','dragon',      0, 0, {atk:3,def:3,matk:3,mdef:3,spd:3}, {atk:.05,def:.05,matk:.05,mdef:.05,spd:.05}, 0],
 
   // --- 古城系装備 ---
-  ['cursed_sword',       '呪われた剣', 'weapon','sword', 0, 80, {atk:35,matk:10},        {atk:.10,matk:.05}],
-  ['cursed_armor',       '呪われた鎧', 'armor','heavy',  0,  0, {def:22,mdef:18},        {def:.10,mdef:.08}],
+  ['cursed_sword',       '呪われた剣', 'weapon','sword', 0, 80, {atk:35,matk:10},        {atk:.10,matk:.05},   .20],
+  ['cursed_armor',       '呪われた鎧', 'armor','heavy',  0,  0, {def:22,mdef:18},        {def:.10,mdef:.08},   .18],
 
   // --- 古城深層系装備 ---
-  ['phantom_blade',      '幻影の刃',   'weapon','dagger',0, 60, {atk:30,spd:10,matk:10}, {atk:.10,spd:.10}],
-  ['phantom_armor',      '幻影の鎧',   'armor','light',  0,  0, {def:20,mdef:20,spd:8},  {def:.08,mdef:.08,spd:.05}],
-].forEach(([id,name,slot,sub,price,dur,s,g]) => {
-  EQUIPS[id] = { id, name, slot, sub, price, dur, s, g };
+  ['phantom_blade',      '幻影の刃',   'weapon','dagger',0, 60, {atk:30,spd:10,matk:10}, {atk:.10,spd:.10},    .20],
+  ['phantom_armor',      '幻影の鎧',   'armor','light',  0,  0, {def:20,mdef:20,spd:8},  {def:.08,mdef:.08,spd:.05}, .18],
+].forEach(([id,name,slot,sub,price,dur,s,g,res]) => {
+  EQUIPS[id] = { id, name, slot, sub, price, dur, s, g, res: res || 0 };
 });
 
 // 装備オブジェクト生成 (インベントリ用)
@@ -677,6 +708,11 @@ const ITEMS = {};
   ['orichalcum',    'オリハルコン', 'material',   800,     0,    0,   '最強の鍛冶素材'],
   ['cursed_bone',   '呪われた骨',   'material',   250,     0,    0,   '古城の素材'],
   ['phantom_cloth', '幻影の布',     'material',   350,     0,    0,   '古城深層の素材'],
+  // --- 共鳴素材 ---
+  ['shining_scale', '光る鱗',       'material',   120,     0,    0,   '共鳴で得られる素材。微かに光を放っている'],
+  ['gleaming_ore',  '輝く鉱石',     'material',   200,     0,    0,   '共鳴で得られる素材。内側から光が漏れている'],
+  ['spirit_drop',   '精霊の雫',     'material',   250,     0,    0,   '共鳴で得られる素材。不思議な温もりを感じる'],
+  ['grudge_shard',  '怨念の欠片',   'material',   300,     0,    0,   '共鳴で得られる素材。暗い光を纏っている'],
 ].forEach(([id,name,type,price,healHp,healMp,desc]) => {
   ITEMS[id] = { id, name, type, price, healHp, healMp, desc };
 });
@@ -1450,6 +1486,16 @@ function startBattle(enemy) {
     enemyEffects: [],
     specialUsed: false,
     specialReady: false,
+    // 共鳴システム
+    resonance: {
+      stratTurns: 0,       // 現在の作戦の連続ターン数
+      lastStrat: null,      // 前ターンの作戦ID
+      dmgTaken: 0,          // 堅守中の累計被ダメージ
+      hitsInCareful: 0,     // 堅守中の被弾回数
+      primed: false,        // 予兆表示済みか
+      triggered: false,     // このバトルで共鳴が発動したか
+      type: null,           // 発動した共鳴タイプ
+    },
   };
   G.screen = 'battle';
   render();
@@ -1511,6 +1557,16 @@ async function runBattle() {
     if (mpPassive && mpPassive.id === 'mp_regen') {
       p.mp = Math.min(p.mp + mpPassive.value, pStats.maxMp);
     }
+    // 共鳴: 作戦の継続ターン数を更新
+    updateResonanceState(G.settings.strategy);
+
+    // 共鳴: 予兆チェック
+    const primeMsg = checkResonancePrime(p);
+    if (primeMsg) {
+      addBattleLog(primeMsg, 'resonance-hint');
+      await delay(spd);
+    }
+
     const playerFirst = pStats.spd >= e.spd;
 
     if (playerFirst) {
@@ -1535,6 +1591,23 @@ async function doPlayerAction(p, e, pStats) {
     return;
   }
 
+  // 共鳴チェック (fury / surge / counter)
+  const resTrigger = checkResonanceTrigger(p, e, pStats);
+  if (resTrigger.fired) {
+    addBattleLog(resTrigger.msg, 'resonance');
+    await delay(spd);
+    // counter: 即座に反撃ダメージ
+    if (resTrigger.type === 'counter' && resTrigger.counterDmg > 0) {
+      e.hp -= resTrigger.counterDmg;
+      addBattleLog(`反撃！${resTrigger.counterDmg}のダメージ！`, 'p-atk');
+      await delay(spd);
+      checkBattleEnd(p, e);
+      if (G.battle.over) { tickEffects(G.battle.playerEffects); return; }
+    }
+  }
+  // 共鳴パワー倍率 (fury/surgeが発動中なら次の攻撃に乗せる)
+  const resPowerMul = (resTrigger.fired && resTrigger.powerMul) ? resTrigger.powerMul : 1.0;
+
   // 必殺技チェック
   if (G.battle.specialReady) {
     G.battle.specialReady = false;
@@ -1550,10 +1623,10 @@ async function doPlayerAction(p, e, pStats) {
     if (allAttacks.length) {
       const sk = SKILLS[allAttacks[0]];
       const savedMp = p.mp;
-      executeSkill(p, e, pStats, sk, allAttacks[0], true);
+      executeSkill(p, e, pStats, sk, allAttacks[0], true, resPowerMul);
       p.mp = savedMp;
     } else {
-      const dmg = calcPhysDamage(pStats.atk * 2, e.def);
+      const dmg = calcPhysDamage(pStats.atk * 2 * resPowerMul, e.def);
       e.hp -= dmg;
       addBattleLog(`${p.name}の渾身の一撃！${dmg}のダメージ！`, 'p-atk');
     }
@@ -1583,17 +1656,24 @@ async function doPlayerAction(p, e, pStats) {
   } else if (action.type === 'skill') {
     const sk = SKILLS[action.id];
     p.mp -= sk.cost;
-    executeSkill(p, e, pStats, sk, action.id, true);
+    executeSkill(p, e, pStats, sk, action.id, true, resPowerMul);
   } else if (action.type === 'defend') {
     G.battle.playerEffects.push({ id:'guard', turns:1 });
     addBattleLog(`${p.name}は身を守っている！`, 'sys');
   } else {
     // 通常攻撃
-    const dmg = calcPhysDamage(pStats.atk, e.def);
+    const dmg = calcPhysDamage(pStats.atk * resPowerMul, e.def);
     const crit = Math.random() < 0.05;
     const finalDmg = crit ? dmg * 2 : dmg;
     e.hp -= finalDmg;
     addBattleLog(`${p.name}の攻撃！${finalDmg}のダメージ！${crit ? '会心の一撃！' : ''}`, 'p-atk');
+    // chain共鳴: クリティカル時に追加攻撃
+    if (crit && checkChainResonance(p)) {
+      addBattleLog(getResonanceTriggerMsg('chain'), 'resonance');
+      const chainDmg = calcPhysDamage(pStats.atk, e.def);
+      e.hp -= chainDmg;
+      addBattleLog(`追加攻撃！${chainDmg}のダメージ！`, 'p-atk');
+    }
   }
   await delay(spd);
   checkBattleEnd(p, e);
@@ -1623,6 +1703,7 @@ async function doEnemyAction(p, e, pStats) {
       const psvS = JOBS[G.player.jobId].passive;
       if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
+      recordResonanceDamage(reduced);
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
       if (isVuln) flashRed();
       await delay(spd);
@@ -1638,6 +1719,7 @@ async function doEnemyAction(p, e, pStats) {
   const psvN = JOBS[G.player.jobId].passive;
   if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
+  recordResonanceDamage(reduced);
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
   if (isVuln) flashRed();
   await delay(spd);
@@ -1645,14 +1727,15 @@ async function doEnemyAction(p, e, pStats) {
   tickEffects(G.battle.enemyEffects);
 }
 
-function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
+function executeSkill(user, target, userStats, sk, skillId, isPlayer, resMul) {
   const prefix = isPlayer ? G.player.name : G.battle.enemy.name;
   const atkCls = isPlayer ? 'p-atk' : 'e-atk';
   const magCls = isPlayer ? 'p-mag' : 'e-atk';
   const healCls = isPlayer ? 'p-heal' : 'sys';
+  const mul = (isPlayer && resMul) ? resMul : 1.0;
 
   if (sk.type === 'physical') {
-    const baseDmg = calcPhysDamage(userStats.atk * sk.power, target.def || calcStats(target).def || 0);
+    const baseDmg = calcPhysDamage(userStats.atk * sk.power * mul, target.def || calcStats(target).def || 0);
     const hits = sk.hits || 1;
     let totalDmg = 0;
     const crit = Math.random() < (sk.crit || 0.05);
@@ -1664,13 +1747,20 @@ function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
     if (isPlayer) { G.battle.enemy.hp -= totalDmg; }
     else { G.player.hp -= totalDmg; }
     addBattleLog(`${prefix}の${sk.name}！${totalDmg}のダメージ！${crit?'会心！':''}`, atkCls);
+    // chain共鳴: スキルクリティカル時にも追加攻撃
+    if (isPlayer && crit && checkChainResonance(G.player)) {
+      addBattleLog(getResonanceTriggerMsg('chain'), 'resonance');
+      const chainDmg = calcPhysDamage(userStats.atk, target.def || 0);
+      G.battle.enemy.hp -= chainDmg;
+      addBattleLog(`追加攻撃！${chainDmg}のダメージ！`, 'p-atk');
+    }
     if (sk.stun && Math.random() < sk.stun) {
       const effects = isPlayer ? G.battle.enemyEffects : G.battle.playerEffects;
       effects.push({ id:'stun', turns:1 });
       addBattleLog(`${isPlayer ? G.battle.enemy.name : G.player.name}は気絶した！`, 'sys');
     }
   } else if (sk.type === 'magical') {
-    const dmg = calcMagDamage(userStats.matk * sk.power, target.mdef || 0);
+    const dmg = calcMagDamage(userStats.matk * sk.power * mul, target.mdef || 0);
     const finalDmg = isPlayer ? dmg : applyDefenseEffects(dmg, G.battle.playerEffects, true);
     if (isPlayer) { G.battle.enemy.hp -= finalDmg; }
     else { G.player.hp -= finalDmg; }
@@ -1681,8 +1771,8 @@ function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
       addBattleLog(`HPが${heal}回復した！`, 'p-heal');
     }
   } else if (sk.type === 'hybrid') {
-    const pDmg = calcPhysDamage(userStats.atk * sk.power, target.def || 0);
-    const mDmg = calcMagDamage(userStats.matk * sk.power, target.mdef || 0);
+    const pDmg = calcPhysDamage(userStats.atk * sk.power * mul, target.def || 0);
+    const mDmg = calcMagDamage(userStats.matk * sk.power * mul, target.mdef || 0);
     const total = Math.floor((pDmg + mDmg) / 2);
     if (isPlayer) { G.battle.enemy.hp -= total; }
     else { G.player.hp -= applyDefenseEffects(total, G.battle.playerEffects, false); }
@@ -1848,16 +1938,32 @@ async function handleVictory(p, e) {
   await delay(spd);
 
   // ドロップ
+  const resTriggered = G.battle.resonance.triggered;
+  const resDropBonus = resTriggered
+    ? (G.battle.resonance.type === 'chain' ? RESONANCE_CHAIN_DROP_BONUS : RESONANCE_DROP_BONUS)
+    : 0;
   if (e.drops) {
     const thiefPsv = JOBS[p.jobId].passive;
     const dropBonus = (thiefPsv && thiefPsv.id === 'drop_bonus') ? thiefPsv.value : 0;
     for (const d of e.drops) {
-      if (Math.random() < d.rate + dropBonus) {
+      if (Math.random() < d.rate + dropBonus + resDropBonus) {
         addItemToPlayer(p, d.id, 1);
         const info = ITEMS[d.id] || EQUIPS[d.id];
         addBattleLog(`${info ? info.name : d.id}を手に入れた！`, 'reward');
         await delay(spd);
       }
+    }
+  }
+
+  // 共鳴限定ドロップ
+  if (resTriggered) {
+    const areaId = p.location.type === 'field' ? p.location.area : null;
+    const resDrop = areaId ? RESONANCE_AREA_DROPS[areaId] : null;
+    if (resDrop && Math.random() < resDrop.rate) {
+      addItemToPlayer(p, resDrop.id, 1);
+      const info = ITEMS[resDrop.id];
+      addBattleLog(`共鳴の力で${info ? info.name : resDrop.id}を手に入れた！`, 'resonance');
+      await delay(spd);
     }
   }
 
@@ -1992,6 +2098,167 @@ function degradeWeapon(p) {
     addBattleLog(`${name}が壊れた！`, 'danger');
     addLog(`${name}が壊れた！`, 'danger');
   }
+}
+
+// ═══════════════════════════════════════
+//  共鳴システム
+// ═══════════════════════════════════════
+
+// 装備から共鳴情報を取得 (武器と防具の両方をチェック、高い方を採用)
+function getResonanceInfo(p) {
+  const slots = ['weapon', 'armor'];
+  let best = null;
+  for (const slot of slots) {
+    const obj = p.equipObjs[slot];
+    if (!obj) continue;
+    const base = EQUIPS[obj.baseId];
+    if (!base || base.res <= 0) continue;
+    const resType = RESONANCE_TYPE_MAP[base.sub];
+    if (!resType) continue;
+    const rate = base.res + (obj.enhancement || 0) * RESONANCE_ENHANCE_BONUS;
+    if (!best || rate > best.rate) {
+      best = { type: resType, rate, equipName: base.name, slot };
+    }
+  }
+  return best;
+}
+
+// 共鳴の予兆メッセージ
+function getResonanceHint(type, equipName) {
+  switch (type) {
+    case 'fury':    return `${equipName}が微かに震えている…`;
+    case 'surge':   return `${equipName}に魔力が集まりつつある…`;
+    case 'counter': return `${equipName}が反撃の機を窺っている…`;
+    case 'chain':   return null; // chainは予兆なし（クリティカル依存）
+  }
+  return null;
+}
+
+// 共鳴発動メッセージ
+function getResonanceTriggerMsg(type) {
+  const info = RESONANCE_INFO[type];
+  return info ? `— 共鳴：${info.name}！ —` : '';
+}
+
+// ターン開始時の共鳴状態更新
+function updateResonanceState(strat) {
+  const res = G.battle.resonance;
+  if (res.triggered) return; // 発動済みなら更新不要
+
+  if (strat === res.lastStrat) {
+    res.stratTurns++;
+  } else {
+    // 作戦切替時: counterの発動チェック用に旧状態を保持
+    res.prevStrat = res.lastStrat;
+    res.prevHitsInCareful = res.hitsInCareful;
+    res.prevDmgTaken = res.dmgTaken;
+    res.stratTurns = 1;
+    res.hitsInCareful = 0;
+    res.dmgTaken = 0;
+  }
+  res.lastStrat = strat;
+}
+
+// 堅守中の被弾を記録
+function recordResonanceDamage(dmg) {
+  const res = G.battle.resonance;
+  if (res.triggered) return;
+  const strat = G.settings.strategy;
+  if (strat === 'careful') {
+    res.hitsInCareful++;
+    res.dmgTaken += dmg;
+  }
+}
+
+// 共鳴発動チェック (プレイヤー行動前に呼ぶ)
+// 戻り値: { fired:bool, type, bonusDmg?, msg }
+function checkResonanceTrigger(p, e, pStats) {
+  const res = G.battle.resonance;
+  if (res.triggered || G.demo) return { fired: false };
+
+  const info = getResonanceInfo(p);
+  if (!info) return { fired: false };
+
+  const strat = G.settings.strategy;
+  const type = info.type;
+
+  // fury: 猛攻3ターン維持
+  if (type === 'fury' && strat === 'aggressive' && res.stratTurns >= 3) {
+    if (Math.random() < info.rate) {
+      res.triggered = true;
+      res.type = type;
+      return { fired: true, type, powerMul: 2.0, msg: getResonanceTriggerMsg(type) };
+    }
+  }
+
+  // surge: 堅守3ターン維持
+  if (type === 'surge' && strat === 'careful' && res.stratTurns >= 3) {
+    if (Math.random() < info.rate) {
+      res.triggered = true;
+      res.type = type;
+      return { fired: true, type, powerMul: 2.0, msg: getResonanceTriggerMsg(type) };
+    }
+  }
+
+  // counter: 堅守で2回被弾後、猛攻に切替えた瞬間
+  if (type === 'counter' && strat === 'aggressive'
+      && res.prevStrat === 'careful' && res.stratTurns === 1
+      && res.prevHitsInCareful >= 2) {
+    if (Math.random() < info.rate) {
+      res.triggered = true;
+      res.type = type;
+      const counterDmg = Math.floor(res.prevDmgTaken * 0.5);
+      return { fired: true, type, counterDmg, msg: getResonanceTriggerMsg(type) };
+    }
+  }
+
+  return { fired: false };
+}
+
+// chain共鳴チェック (クリティカル発生時に呼ぶ)
+function checkChainResonance(p) {
+  const res = G.battle.resonance;
+  if (res.triggered || G.demo) return false;
+
+  const info = getResonanceInfo(p);
+  if (!info || info.type !== 'chain') return false;
+
+  if (Math.random() < info.rate) {
+    res.triggered = true;
+    res.type = 'chain';
+    return true;
+  }
+  return false;
+}
+
+// 共鳴予兆チェック (条件の1歩手前)
+function checkResonancePrime(p) {
+  const res = G.battle.resonance;
+  if (res.triggered || res.primed || G.demo) return null;
+
+  const info = getResonanceInfo(p);
+  if (!info) return null;
+
+  const strat = G.settings.strategy;
+  const type = info.type;
+
+  // fury: 猛攻2ターン目
+  if (type === 'fury' && strat === 'aggressive' && res.stratTurns === 2) {
+    res.primed = true;
+    return getResonanceHint(type, info.equipName);
+  }
+  // surge: 堅守2ターン目
+  if (type === 'surge' && strat === 'careful' && res.stratTurns === 2) {
+    res.primed = true;
+    return getResonanceHint(type, info.equipName);
+  }
+  // counter: 堅守で1回被弾
+  if (type === 'counter' && strat === 'careful' && res.hitsInCareful === 1) {
+    res.primed = true;
+    return getResonanceHint(type, info.equipName);
+  }
+
+  return null;
 }
 /* ═══════════════════════════════════════
    経済システム (ショップ・銀行・倉庫)

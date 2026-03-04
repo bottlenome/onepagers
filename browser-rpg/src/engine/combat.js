@@ -13,6 +13,16 @@ function startBattle(enemy) {
     enemyEffects: [],
     specialUsed: false,
     specialReady: false,
+    // 共鳴システム
+    resonance: {
+      stratTurns: 0,       // 現在の作戦の連続ターン数
+      lastStrat: null,      // 前ターンの作戦ID
+      dmgTaken: 0,          // 堅守中の累計被ダメージ
+      hitsInCareful: 0,     // 堅守中の被弾回数
+      primed: false,        // 予兆表示済みか
+      triggered: false,     // このバトルで共鳴が発動したか
+      type: null,           // 発動した共鳴タイプ
+    },
   };
   G.screen = 'battle';
   render();
@@ -74,6 +84,16 @@ async function runBattle() {
     if (mpPassive && mpPassive.id === 'mp_regen') {
       p.mp = Math.min(p.mp + mpPassive.value, pStats.maxMp);
     }
+    // 共鳴: 作戦の継続ターン数を更新
+    updateResonanceState(G.settings.strategy);
+
+    // 共鳴: 予兆チェック
+    const primeMsg = checkResonancePrime(p);
+    if (primeMsg) {
+      addBattleLog(primeMsg, 'resonance-hint');
+      await delay(spd);
+    }
+
     const playerFirst = pStats.spd >= e.spd;
 
     if (playerFirst) {
@@ -98,6 +118,23 @@ async function doPlayerAction(p, e, pStats) {
     return;
   }
 
+  // 共鳴チェック (fury / surge / counter)
+  const resTrigger = checkResonanceTrigger(p, e, pStats);
+  if (resTrigger.fired) {
+    addBattleLog(resTrigger.msg, 'resonance');
+    await delay(spd);
+    // counter: 即座に反撃ダメージ
+    if (resTrigger.type === 'counter' && resTrigger.counterDmg > 0) {
+      e.hp -= resTrigger.counterDmg;
+      addBattleLog(`反撃！${resTrigger.counterDmg}のダメージ！`, 'p-atk');
+      await delay(spd);
+      checkBattleEnd(p, e);
+      if (G.battle.over) { tickEffects(G.battle.playerEffects); return; }
+    }
+  }
+  // 共鳴パワー倍率 (fury/surgeが発動中なら次の攻撃に乗せる)
+  const resPowerMul = (resTrigger.fired && resTrigger.powerMul) ? resTrigger.powerMul : 1.0;
+
   // 必殺技チェック
   if (G.battle.specialReady) {
     G.battle.specialReady = false;
@@ -113,10 +150,10 @@ async function doPlayerAction(p, e, pStats) {
     if (allAttacks.length) {
       const sk = SKILLS[allAttacks[0]];
       const savedMp = p.mp;
-      executeSkill(p, e, pStats, sk, allAttacks[0], true);
+      executeSkill(p, e, pStats, sk, allAttacks[0], true, resPowerMul);
       p.mp = savedMp;
     } else {
-      const dmg = calcPhysDamage(pStats.atk * 2, e.def);
+      const dmg = calcPhysDamage(pStats.atk * 2 * resPowerMul, e.def);
       e.hp -= dmg;
       addBattleLog(`${p.name}の渾身の一撃！${dmg}のダメージ！`, 'p-atk');
     }
@@ -146,17 +183,24 @@ async function doPlayerAction(p, e, pStats) {
   } else if (action.type === 'skill') {
     const sk = SKILLS[action.id];
     p.mp -= sk.cost;
-    executeSkill(p, e, pStats, sk, action.id, true);
+    executeSkill(p, e, pStats, sk, action.id, true, resPowerMul);
   } else if (action.type === 'defend') {
     G.battle.playerEffects.push({ id:'guard', turns:1 });
     addBattleLog(`${p.name}は身を守っている！`, 'sys');
   } else {
     // 通常攻撃
-    const dmg = calcPhysDamage(pStats.atk, e.def);
+    const dmg = calcPhysDamage(pStats.atk * resPowerMul, e.def);
     const crit = Math.random() < 0.05;
     const finalDmg = crit ? dmg * 2 : dmg;
     e.hp -= finalDmg;
     addBattleLog(`${p.name}の攻撃！${finalDmg}のダメージ！${crit ? '会心の一撃！' : ''}`, 'p-atk');
+    // chain共鳴: クリティカル時に追加攻撃
+    if (crit && checkChainResonance(p)) {
+      addBattleLog(getResonanceTriggerMsg('chain'), 'resonance');
+      const chainDmg = calcPhysDamage(pStats.atk, e.def);
+      e.hp -= chainDmg;
+      addBattleLog(`追加攻撃！${chainDmg}のダメージ！`, 'p-atk');
+    }
   }
   await delay(spd);
   checkBattleEnd(p, e);
@@ -186,6 +230,7 @@ async function doEnemyAction(p, e, pStats) {
       const psvS = JOBS[G.player.jobId].passive;
       if (psvS && psvS.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvS.value)));
       p.hp -= reduced;
+      recordResonanceDamage(reduced);
       addBattleLog(`${e.name}の${sk.name}！${reduced}のダメージ！`, 'e-atk');
       if (isVuln) flashRed();
       await delay(spd);
@@ -201,6 +246,7 @@ async function doEnemyAction(p, e, pStats) {
   const psvN = JOBS[G.player.jobId].passive;
   if (psvN && psvN.id === 'dmg_reduce') reduced = Math.max(1, Math.floor(reduced * (1 - psvN.value)));
   p.hp -= reduced;
+  recordResonanceDamage(reduced);
   addBattleLog(`${e.name}の攻撃！${reduced}のダメージ！`, 'e-atk');
   if (isVuln) flashRed();
   await delay(spd);
@@ -208,14 +254,15 @@ async function doEnemyAction(p, e, pStats) {
   tickEffects(G.battle.enemyEffects);
 }
 
-function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
+function executeSkill(user, target, userStats, sk, skillId, isPlayer, resMul) {
   const prefix = isPlayer ? G.player.name : G.battle.enemy.name;
   const atkCls = isPlayer ? 'p-atk' : 'e-atk';
   const magCls = isPlayer ? 'p-mag' : 'e-atk';
   const healCls = isPlayer ? 'p-heal' : 'sys';
+  const mul = (isPlayer && resMul) ? resMul : 1.0;
 
   if (sk.type === 'physical') {
-    const baseDmg = calcPhysDamage(userStats.atk * sk.power, target.def || calcStats(target).def || 0);
+    const baseDmg = calcPhysDamage(userStats.atk * sk.power * mul, target.def || calcStats(target).def || 0);
     const hits = sk.hits || 1;
     let totalDmg = 0;
     const crit = Math.random() < (sk.crit || 0.05);
@@ -227,13 +274,20 @@ function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
     if (isPlayer) { G.battle.enemy.hp -= totalDmg; }
     else { G.player.hp -= totalDmg; }
     addBattleLog(`${prefix}の${sk.name}！${totalDmg}のダメージ！${crit?'会心！':''}`, atkCls);
+    // chain共鳴: スキルクリティカル時にも追加攻撃
+    if (isPlayer && crit && checkChainResonance(G.player)) {
+      addBattleLog(getResonanceTriggerMsg('chain'), 'resonance');
+      const chainDmg = calcPhysDamage(userStats.atk, target.def || 0);
+      G.battle.enemy.hp -= chainDmg;
+      addBattleLog(`追加攻撃！${chainDmg}のダメージ！`, 'p-atk');
+    }
     if (sk.stun && Math.random() < sk.stun) {
       const effects = isPlayer ? G.battle.enemyEffects : G.battle.playerEffects;
       effects.push({ id:'stun', turns:1 });
       addBattleLog(`${isPlayer ? G.battle.enemy.name : G.player.name}は気絶した！`, 'sys');
     }
   } else if (sk.type === 'magical') {
-    const dmg = calcMagDamage(userStats.matk * sk.power, target.mdef || 0);
+    const dmg = calcMagDamage(userStats.matk * sk.power * mul, target.mdef || 0);
     const finalDmg = isPlayer ? dmg : applyDefenseEffects(dmg, G.battle.playerEffects, true);
     if (isPlayer) { G.battle.enemy.hp -= finalDmg; }
     else { G.player.hp -= finalDmg; }
@@ -244,8 +298,8 @@ function executeSkill(user, target, userStats, sk, skillId, isPlayer) {
       addBattleLog(`HPが${heal}回復した！`, 'p-heal');
     }
   } else if (sk.type === 'hybrid') {
-    const pDmg = calcPhysDamage(userStats.atk * sk.power, target.def || 0);
-    const mDmg = calcMagDamage(userStats.matk * sk.power, target.mdef || 0);
+    const pDmg = calcPhysDamage(userStats.atk * sk.power * mul, target.def || 0);
+    const mDmg = calcMagDamage(userStats.matk * sk.power * mul, target.mdef || 0);
     const total = Math.floor((pDmg + mDmg) / 2);
     if (isPlayer) { G.battle.enemy.hp -= total; }
     else { G.player.hp -= applyDefenseEffects(total, G.battle.playerEffects, false); }
@@ -411,16 +465,32 @@ async function handleVictory(p, e) {
   await delay(spd);
 
   // ドロップ
+  const resTriggered = G.battle.resonance.triggered;
+  const resDropBonus = resTriggered
+    ? (G.battle.resonance.type === 'chain' ? RESONANCE_CHAIN_DROP_BONUS : RESONANCE_DROP_BONUS)
+    : 0;
   if (e.drops) {
     const thiefPsv = JOBS[p.jobId].passive;
     const dropBonus = (thiefPsv && thiefPsv.id === 'drop_bonus') ? thiefPsv.value : 0;
     for (const d of e.drops) {
-      if (Math.random() < d.rate + dropBonus) {
+      if (Math.random() < d.rate + dropBonus + resDropBonus) {
         addItemToPlayer(p, d.id, 1);
         const info = ITEMS[d.id] || EQUIPS[d.id];
         addBattleLog(`${info ? info.name : d.id}を手に入れた！`, 'reward');
         await delay(spd);
       }
+    }
+  }
+
+  // 共鳴限定ドロップ
+  if (resTriggered) {
+    const areaId = p.location.type === 'field' ? p.location.area : null;
+    const resDrop = areaId ? RESONANCE_AREA_DROPS[areaId] : null;
+    if (resDrop && Math.random() < resDrop.rate) {
+      addItemToPlayer(p, resDrop.id, 1);
+      const info = ITEMS[resDrop.id];
+      addBattleLog(`共鳴の力で${info ? info.name : resDrop.id}を手に入れた！`, 'resonance');
+      await delay(spd);
     }
   }
 
@@ -555,4 +625,165 @@ function degradeWeapon(p) {
     addBattleLog(`${name}が壊れた！`, 'danger');
     addLog(`${name}が壊れた！`, 'danger');
   }
+}
+
+// ═══════════════════════════════════════
+//  共鳴システム
+// ═══════════════════════════════════════
+
+// 装備から共鳴情報を取得 (武器と防具の両方をチェック、高い方を採用)
+function getResonanceInfo(p) {
+  const slots = ['weapon', 'armor'];
+  let best = null;
+  for (const slot of slots) {
+    const obj = p.equipObjs[slot];
+    if (!obj) continue;
+    const base = EQUIPS[obj.baseId];
+    if (!base || base.res <= 0) continue;
+    const resType = RESONANCE_TYPE_MAP[base.sub];
+    if (!resType) continue;
+    const rate = base.res + (obj.enhancement || 0) * RESONANCE_ENHANCE_BONUS;
+    if (!best || rate > best.rate) {
+      best = { type: resType, rate, equipName: base.name, slot };
+    }
+  }
+  return best;
+}
+
+// 共鳴の予兆メッセージ
+function getResonanceHint(type, equipName) {
+  switch (type) {
+    case 'fury':    return `${equipName}が微かに震えている…`;
+    case 'surge':   return `${equipName}に魔力が集まりつつある…`;
+    case 'counter': return `${equipName}が反撃の機を窺っている…`;
+    case 'chain':   return null; // chainは予兆なし（クリティカル依存）
+  }
+  return null;
+}
+
+// 共鳴発動メッセージ
+function getResonanceTriggerMsg(type) {
+  const info = RESONANCE_INFO[type];
+  return info ? `— 共鳴：${info.name}！ —` : '';
+}
+
+// ターン開始時の共鳴状態更新
+function updateResonanceState(strat) {
+  const res = G.battle.resonance;
+  if (res.triggered) return; // 発動済みなら更新不要
+
+  if (strat === res.lastStrat) {
+    res.stratTurns++;
+  } else {
+    // 作戦切替時: counterの発動チェック用に旧状態を保持
+    res.prevStrat = res.lastStrat;
+    res.prevHitsInCareful = res.hitsInCareful;
+    res.prevDmgTaken = res.dmgTaken;
+    res.stratTurns = 1;
+    res.hitsInCareful = 0;
+    res.dmgTaken = 0;
+  }
+  res.lastStrat = strat;
+}
+
+// 堅守中の被弾を記録
+function recordResonanceDamage(dmg) {
+  const res = G.battle.resonance;
+  if (res.triggered) return;
+  const strat = G.settings.strategy;
+  if (strat === 'careful') {
+    res.hitsInCareful++;
+    res.dmgTaken += dmg;
+  }
+}
+
+// 共鳴発動チェック (プレイヤー行動前に呼ぶ)
+// 戻り値: { fired:bool, type, bonusDmg?, msg }
+function checkResonanceTrigger(p, e, pStats) {
+  const res = G.battle.resonance;
+  if (res.triggered || G.demo) return { fired: false };
+
+  const info = getResonanceInfo(p);
+  if (!info) return { fired: false };
+
+  const strat = G.settings.strategy;
+  const type = info.type;
+
+  // fury: 猛攻3ターン維持
+  if (type === 'fury' && strat === 'aggressive' && res.stratTurns >= 3) {
+    if (Math.random() < info.rate) {
+      res.triggered = true;
+      res.type = type;
+      return { fired: true, type, powerMul: 2.0, msg: getResonanceTriggerMsg(type) };
+    }
+  }
+
+  // surge: 堅守3ターン維持
+  if (type === 'surge' && strat === 'careful' && res.stratTurns >= 3) {
+    if (Math.random() < info.rate) {
+      res.triggered = true;
+      res.type = type;
+      return { fired: true, type, powerMul: 2.0, msg: getResonanceTriggerMsg(type) };
+    }
+  }
+
+  // counter: 堅守で2回被弾後、猛攻に切替えた瞬間
+  if (type === 'counter' && strat === 'aggressive'
+      && res.prevStrat === 'careful' && res.stratTurns === 1
+      && res.prevHitsInCareful >= 2) {
+    if (Math.random() < info.rate) {
+      res.triggered = true;
+      res.type = type;
+      const counterDmg = Math.floor(res.prevDmgTaken * 0.5);
+      return { fired: true, type, counterDmg, msg: getResonanceTriggerMsg(type) };
+    }
+  }
+
+  return { fired: false };
+}
+
+// chain共鳴チェック (クリティカル発生時に呼ぶ)
+function checkChainResonance(p) {
+  const res = G.battle.resonance;
+  if (res.triggered || G.demo) return false;
+
+  const info = getResonanceInfo(p);
+  if (!info || info.type !== 'chain') return false;
+
+  if (Math.random() < info.rate) {
+    res.triggered = true;
+    res.type = 'chain';
+    return true;
+  }
+  return false;
+}
+
+// 共鳴予兆チェック (条件の1歩手前)
+function checkResonancePrime(p) {
+  const res = G.battle.resonance;
+  if (res.triggered || res.primed || G.demo) return null;
+
+  const info = getResonanceInfo(p);
+  if (!info) return null;
+
+  const strat = G.settings.strategy;
+  const type = info.type;
+
+  // fury: 猛攻2ターン目
+  if (type === 'fury' && strat === 'aggressive' && res.stratTurns === 2) {
+    res.primed = true;
+    return getResonanceHint(type, info.equipName);
+  }
+  // surge: 堅守2ターン目
+  if (type === 'surge' && strat === 'careful' && res.stratTurns === 2) {
+    res.primed = true;
+    return getResonanceHint(type, info.equipName);
+  }
+  // counter: 堅守で1回被弾
+  if (type === 'counter' && strat === 'careful' && res.hitsInCareful === 1) {
+    res.primed = true;
+    return getResonanceHint(type, info.equipName);
+  }
+
+  return null;
 }
