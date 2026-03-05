@@ -22,10 +22,6 @@ function updateBodyBg() {
     body.classList.add('bg-title');
     return;
   }
-  if (G.screen === 'battle') {
-    body.classList.add('bg-battle');
-    return;
-  }
   if (!G.player) return;
 
   const loc = G.player.location;
