@@ -25,6 +25,11 @@ const ITEMS = {};
   ['orichalcum',    'オリハルコン', 'material',   800,     0,    0,   '最強の鍛冶素材'],
   ['cursed_bone',   '呪われた骨',   'material',   250,     0,    0,   '古城の素材'],
   ['phantom_cloth', '幻影の布',     'material',   350,     0,    0,   '古城深層の素材'],
+  // --- 共鳴素材 ---
+  ['shining_scale', '光る鱗',       'material',   120,     0,    0,   '共鳴で得られる素材。微かに光を放っている'],
+  ['gleaming_ore',  '輝く鉱石',     'material',   200,     0,    0,   '共鳴で得られる素材。内側から光が漏れている'],
+  ['spirit_drop',   '精霊の雫',     'material',   250,     0,    0,   '共鳴で得られる素材。不思議な温もりを感じる'],
+  ['grudge_shard',  '怨念の欠片',   'material',   300,     0,    0,   '共鳴で得られる素材。暗い光を纏っている'],
 ].forEach(([id,name,type,price,healHp,healMp,desc]) => {
   ITEMS[id] = { id, name, type, price, healHp, healMp, desc };
 });
