@@ -2,6 +2,23 @@
    戦闘システム (自動戦闘)
    ═══════════════════════════════════════ */
 
+function shakeScreen() {
+  const el = document.getElementById('app');
+  if (!el) return;
+  el.classList.remove('shake');
+  void el.offsetWidth;
+  el.classList.add('shake');
+  setTimeout(() => el.classList.remove('shake'), 500);
+}
+function flashRed() {
+  const el = document.getElementById('app');
+  if (!el) return;
+  el.classList.remove('flash-red');
+  void el.offsetWidth;
+  el.classList.add('flash-red');
+  setTimeout(() => el.classList.remove('flash-red'), 500);
+}
+
 function startBattle(enemy) {
   G.battle = {
     enemy,
@@ -147,6 +164,7 @@ async function doPlayerAction(p, e, pStats) {
       .sort((a,b) => (SKILLS[b].power||0) - (SKILLS[a].power||0));
 
     addBattleLog('— 必殺技発動！ —', 'lvup');
+    shakeScreen();
     if (allAttacks.length) {
       const sk = SKILLS[allAttacks[0]];
       const savedMp = p.mp;
@@ -390,7 +408,7 @@ function applyDefenseEffects(dmg, effects, isMagic) {
   if (hasEffect(effects, 'smoke') && Math.random() < 0.5) return 0;
   if (hasEffect(effects, 'evade') && Math.random() < 0.5) return 0;
   if (isMagic && hasEffect(effects, 'mbarrier')) dmg = Math.floor(dmg * 0.5);
-  if (hasEffect(effects, 'vulnerable')) dmg = Math.floor(dmg * 2);
+  if (hasEffect(effects, 'vulnerable')) dmg = Math.floor(dmg * 2.5);
   return Math.max(1, dmg);
 }
 
