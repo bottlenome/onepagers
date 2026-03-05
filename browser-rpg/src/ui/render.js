@@ -9,6 +9,42 @@ function render() {
   // ログ自動スクロール
   const logEl = document.getElementById('log');
   if (logEl) logEl.scrollTop = logEl.scrollHeight;
+  // エリアに応じた背景切り替え
+  updateBodyBg();
+}
+
+function updateBodyBg() {
+  const body = document.body;
+  const prev = [...body.classList].find(c => c.startsWith('bg-'));
+  if (prev) body.classList.remove(prev);
+
+  if (G.screen === 'title' || G.screen === 'naming') {
+    body.classList.add('bg-title');
+    return;
+  }
+  if (G.screen === 'battle') {
+    body.classList.add('bg-battle');
+    return;
+  }
+  if (!G.player) return;
+
+  const loc = G.player.location;
+  if (loc.type === 'town') {
+    body.classList.add('bg-town');
+  } else if (loc.area) {
+    const areaMap = {
+      grassland: 'bg-grassland',
+      mountain: 'bg-mountain',
+      mine: 'bg-mine',
+      lost_forest: 'bg-forest',
+      demon_forest: 'bg-forest',
+      wasteland: 'bg-wasteland',
+      old_castle: 'bg-castle',
+      old_castle_hidden: 'bg-castle',
+      last_dungeon: 'bg-lastdungeon',
+    };
+    body.classList.add(areaMap[loc.area] || 'bg-title');
+  }
 }
 
 function renderScreen() {
