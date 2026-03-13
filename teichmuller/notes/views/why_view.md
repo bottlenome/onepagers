@@ -15,7 +15,64 @@ ABC予想は「a + b = c（足し算の世界）」と「rad(abc)（掛け算の
 - 環の中では足し算と掛け算は分配法則で絡み合っている: a(b+c) = ab + ac
 - 片方だけを「動かす」操作が、そもそも定義できない
 
-**比喩**: 色（赤/青）と形（丸/四角）が一体になった積み木がある。「色だけ変えて形はそのまま」にしたいが、積み木を壊さないとそれができない。
+**具体例**: 5進数の世界で 7 + 18 = 25 を考える。
+7 も 18 も「5とは無関係」（v₅=0, 単数）なのに、足すと 25=5² で「5が2つ出てくる」。
+足し算が掛け算の構造を変えてしまう。この「絡み合い」がある限り、
+掛け算側（素因数分解）だけを見積もることができない。
+
+→ 詳細な数値例は [numerical_example_view.md](./numerical_example_view.md) を参照。
+
+---
+
+## Q1.5: 「2つの次元」とは具体的に何か？ 分離はどう実現されるのか？
+
+**A**: 数体の環構造は「単数群」と「値群」の2つの次元からなり、分離は4段階で漸進的に構成される。
+
+### 「2つの次元」の正体
+
+p進局所体 k の任意の元 x ≠ 0 は一意に分解できる:
+
+```
+x = p^n × u     (n = v_p(x) ∈ Z,  u ∈ O_k^×)
+    ~~~~   ~~~
+    値群   単数群
+```
+
+- **値群** k×/O_k^× ≅ Z : 「pを何回含むか」= **掛け算的な次元**
+- **単数群** O_k^× : 「pを取り除いた残り」= **足し算的な次元**
+
+（「単数群が足し算的」なのは、単数同士の足し算が値群を変えうるため。
+ 7+18=25=5² のように、単数の足し算が掛け算的構造を生成する。）
+
+### 分離の4段階
+
+| 段階 | 論文の場所 | 何が起きるか | 理解レベル |
+|------|-----------|-------------|-----------|
+| **0** | IUT I §I4 | 「2つの次元がある」と認識する | 発想の理解 |
+| **1** | IUT I §4, §6 | F_l の対称性を F_l^±（加法的）と F_l^⊛（乗法的）に分離 | 近似的な分離 |
+| **2** | IUT I Def 3.8, IUT II §4 | **Θ-リンクで値群だけを繋ぎ、単数群は切断** | 分離の本体 |
+| **3** | IUT III §1 | 対数テータ格子で2つの次元を格子の2方向にする | 分離の完成 |
+
+### 段階2（Θ-リンク）が核心
+
+望月自身の言葉（パノラミック概要より）:
+
+> "The local portions of the deformations [...] are obtained precisely by **dilating the 'one underlying arithmetic dimension' constituted by the value groups** by means of a theta function, while the **'other underlying arithmetic dimension' constituted by the groups of units is left fixed**."
+
+つまり:
+- **値群（掛け算的次元）**: テータ関数で q → q^{j²} に「伸縮」される
+- **単数群（足し算的次元）**: 固定（正確には「別世界に属するので繋がない」）
+
+これは古典タイヒミューラー変形 z = x+iy → ζ = Kx+iy（x方向だけK倍、y方向は固定）の
+**算術版**。
+
+### 段階1は「近似」にすぎない
+
+望月自身がこう述べている（IUT I, Introduction）:
+
+> "this decomposition into the 'additive' [F_l^±-] and 'multiplicative' [F_l^⊛-] symmetries of the ring F_l may be regarded as a sort of **rough, approximate approach** to the issue of 'disentangling' the multiplicative and additive structures"
+
+F_l 上の対称性の分離は「粗い近似」であり、本当の分離は段階2のΘ-リンクで実現される。
 
 ---
 
@@ -31,6 +88,7 @@ ABC予想は「a + b = c（足し算の世界）」と「rad(abc)（掛け算の
 得られる不等式が空虚（vacuous）になってしまった。
 
 → これが「環構造を壊す」という大胆なアプローチへの動機。
+→ ガウス極が消える仕組みの数値例は [numerical_example_view.md](./numerical_example_view.md) を参照。
 
 ---
 

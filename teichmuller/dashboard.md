@@ -58,6 +58,7 @@ teichmuller/
 | analogy_view | done | 「例えると？」日常の言葉での概念理解 |
 | history_view | done | 「どこから来た？」時系列と知的系譜 |
 | open_questions_view | done | 「何がわかっていない？」未解決問題の整理 |
+| numerical_example_view | done | 「数値で見せて！」p進数での分離操作を具体的な数字で |
 
 ### 未作成
 

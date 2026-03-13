@@ -49,12 +49,13 @@ views/
 │       └── 08_corollary_3_12.md  ← 争点の核心（学会が何を受容していないか）
 ├── analogy_view.md         ← 例えビュー（日常の言葉での理解補助）
 ├── history_view.md         ← 歴史ビュー（時系列と知的系譜）
-└── open_questions_view.md  ← 未解決問題ビュー（何がわかっていないか）
+├── open_questions_view.md  ← 未解決問題ビュー（何がわかっていないか）
+└── numerical_example_view.md ← 数値例ビュー（p進数で分離を数字で体感）
 ```
 
 ### 推奨ルート
 
-- **初めて**: summary_view → why_view → analogy_view
+- **初めて**: summary_view → why_view → numerical_example_view → analogy_view
 - **応用が知りたい**: applications_view → 01_abc_conjecture
 - **論争を理解したい**: rigorous/08_corollary_3_12 → 08_controversy
 - **厳密に読みたい**: rigorous/07_proof_skeleton → rigorous/01–06
