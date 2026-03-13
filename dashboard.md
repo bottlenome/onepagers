@@ -28,6 +28,7 @@ onepagers/
 | [虹色リバーシ](rainbow-reversi/index.html) | game | done | 虹色グラデーションの駒で最大4人対戦できるリバーシ |
 | [Loveless Chronicle](browser-rpg/index.html) | game | wip | 転職・スキル・自動戦闘が楽しめるRPGブラウザゲーム |
 | [櫻井政博のゲームデザイン方法論](sakurai-methodology/index.html) | doc | done | YouTube「桜井政博のゲーム作るには」全256話の設計原則まとめ |
+| [宇宙際タイヒミューラー理論](teichmuller/index.html) | doc | wip | 望月新一のIUT理論とABC予想を非数学者向けに解説 |
 
 ## 新規プロジェクト追加手順
 
