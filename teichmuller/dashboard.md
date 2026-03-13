@@ -65,6 +65,8 @@ teichmuller/
 | コンテンツ | 状態 | 説明 |
 |-----------|------|------|
 | index.html | todo | 解説ワンページャー（上記ノートをベースに構成予定）|
+| numerical_log_theta_lattice.md | todo | 数値例ビュー続編A: 対数テータ格子を数値で見る（log-リンク・対数殻・格子の2方向）|
+| numerical_final_inequality.md | todo | 数値例ビュー続編B: 不確定性の見積もりと最終不等式（3つの不確定性・マルチラジアル・ABC導出）|
 
 ## 原論文情報
 
