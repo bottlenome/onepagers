@@ -3,7 +3,8 @@
 ## この解説の目標
 
 数学科でない人が「IUT理論が何をやっているか」を構造的に理解できるようにする。
-数式の厳密な証明は追わず、**なぜこの理論が必要で、何を達成したか**に焦点を当てる。
+同じ理論を**複数のビュー（視点）**で多角的に照らすことで、
+「なぜ？」「何ができる？」「厳密にはどうなっている？」のすべてに答える。
 
 ---
 
@@ -13,13 +14,15 @@
 
 ---
 
-## 読み進める順番
+## コンテンツ構成
+
+### 縦読み: 論文に沿った解説 (notes/)
 
 ```
 00_overview.md          ← いまここ。全体の地図
 │
-├── 01_abc_conjecture.md      ← ABC予想とは何か（ゴールの理解）
-├── 02_prerequisites.md       ← 前提知識マップ（楕円曲線・p進数・ガロア群...）
+├── 01_abc_conjecture.md      ← ABC予想とは何か
+├── 02_prerequisites.md       ← 前提知識マップ（レベル別）
 ├── 03_classical_teichmuller.md ← 古典的タイヒミューラー理論とのアナロジー
 │
 ├── 04_hodge_theater.md       ← IUT I: ホッジシアターの構成
@@ -30,6 +33,32 @@
 ├── 08_controversy.md         ← 論争の経緯（Scholze-Stix、Joshi）
 └── 09_glossary.md            ← 用語集
 ```
+
+### 横読み: ビュー別の多角的理解 (notes/views/)
+
+同じ理論を異なる問いの切り口で照らすビュー群:
+
+```
+views/
+├── summary_view.md         ← 概要ビュー（30秒/3分/30分の3段階）
+├── applications_view.md    ← 何ができるかビュー（帰結と応用）
+├── why_view.md             ← なんで？ビュー（各段階の「なぜ」に答える）
+├── rigorous_view.md        ← 数学的厳密さビュー（索引→サブファイル群）
+│   └── rigorous/
+│       ├── 01–07           ← 定義・定理・証明の骨格
+│       └── 08_corollary_3_12.md  ← 争点の核心（学会が何を受容していないか）
+├── analogy_view.md         ← 例えビュー（日常の言葉での理解補助）
+├── history_view.md         ← 歴史ビュー（時系列と知的系譜）
+└── open_questions_view.md  ← 未解決問題ビュー（何がわかっていないか）
+```
+
+### 推奨ルート
+
+- **初めて**: summary_view → why_view → analogy_view
+- **応用が知りたい**: applications_view → 01_abc_conjecture
+- **論争を理解したい**: rigorous/08_corollary_3_12 → 08_controversy
+- **厳密に読みたい**: rigorous/07_proof_skeleton → rigorous/01–06
+- **歴史が知りたい**: history_view → 03_classical_teichmuller
 
 ---
 
