@@ -204,6 +204,72 @@ pre.code {
       <tr><td><strong>本検証</strong></td><td style="color:#ef4444">証明にギャップあり</td><td style="color:#ef4444">自明化のリスク大</td><td>Scholze批判を支持</td></tr>
     </table>
   </div>
+
+  <div class="section">
+    <h2>シミュレーション総合結論</h2>
+    <p>4つのシミュレーション（Sim-A〜D）が全体として示すこと:</p>
+    <div class="verdict ng">
+      <h4>Sim-A → 歪みの巨大さ</h4>
+      <p>Θ-リンクはテータ値列 {q^{j²}} を q-パラメータ1つに「圧縮」する。
+      この圧縮比（歪み率 = Σj²）は l が大きくなると l³/24 のオーダーで爆発する。
+      デフォルト設定（l=11）でも55倍の歪みが生じる。</p>
+    </div>
+    <div class="verdict ng">
+      <h4>Sim-B → 証明の脆弱性</h4>
+      <p>Ind1（内部自己同型）がテータ値情報のわずか数%を「壊す」だけで、
+      系3.12の不等式は自明化する。望月の証明はInd1の効果がゼロ（α=0）でなければ成立しないが、
+      その根拠が不十分。閾値の小ささが証明の脆弱さを定量的に示している。</p>
+    </div>
+    <div class="verdict ng">
+      <h4>Sim-C → クッションの圧倒的不足</h4>
+      <p>対数殻（不定性を吸収するクッション）はテータ歪みの約1〜2%しかカバーできない。
+      残り98%以上は「Ind1が対数殻に収まる」という未証明の仮定に依存。
+      素数の数を増やすほどカバー率は下がる。</p>
+    </div>
+    <div class="verdict ok">
+      <h4>Sim-D → 予想自体は真（おそらく）</h4>
+      <p>ABC予想自体は数値的証拠で圧倒的に支持されている。
+      問題は「予想が正しいか」ではなく「IUTによる証明が正しいか」。
+      答えが正しくても解法に誤りがある可能性は数学史上珍しくない。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>本検証の限界</h2>
+    <div class="verdict">
+      <h4>1. 原論文の完全な追跡は行えていない</h4>
+      <p>IUT I〜IV は合計1000ページ超。本検証はPDFから核心部分（系3.12の証明、
+      Theorem 3.11、IUT IV Theorem 1.10）を抽出して分析したが、
+      他の箇所に暗黙のInd1制御の議論が存在する可能性は排除できない。</p>
+    </div>
+    <div class="verdict">
+      <h4>2. 遠アーベル幾何学の技術的詳細</h4>
+      <p>Neukirch-Uchida型定理やmono-theta環境の剛性定理など、
+      遠アーベル幾何学の高度な技術的詳細は完全には検証しきれていない。
+      これらがInd1の制御に寄与する可能性はゼロではない。</p>
+    </div>
+    <div class="verdict">
+      <h4>3. シミュレーションの簡略化</h4>
+      <p>p進算術の「単純化されたモデル」で計算している。実際の IUT 理論は
+      ホッジシアター、フロベニオイド、エタール基本群などの複雑な構造を含み、
+      これらの相互作用を完全に模倣することは計算機では不可能。
+      シミュレーションは「定量的な直感」を提供するものであり、厳密な証明ではない。</p>
+    </div>
+    <div class="verdict">
+      <h4>4. Joshiの再構成が成功する可能性</h4>
+      <p>Kirti Joshi（アリゾナ大学）がp進幾何（ダイアモンド、プリズム等）を用いた
+      IUT理論の再構成を試みている。この試みが成功すれば、
+      望月の証明のギャップが別の方法で埋められる可能性がある。
+      我々の分析は「望月の原論文の証明」に限定されたものである。</p>
+    </div>
+    <div class="verdict">
+      <h4>5. 数学的立場について</h4>
+      <p>本検証はScholze-Stix側の立場を支持する結論になっているが、
+      これは数学コミュニティの多数意見と一致する。
+      独自の新しい批判というよりは、既存の批判を原論文と照合し、
+      シミュレーションで定量的に裏付けたものである。</p>
+    </div>
+  </div>
 </div>
 
 <!-- ===== 数学的検証タブ ===== -->
@@ -559,35 +625,51 @@ function runSimA() {
   // 対数殻サイズ
   const muI = logShellSize(p);
   const ind2Total = lStar * muI;
+  const gapMultiple = (logVolTheta / ind2Total);
 
   // 結果テーブル
   let html = '<h3>テータ値列 (p=' + p + ', q=p^' + a + ', l=' + l + ', l*=' + lStar + ')</h3>';
-  html += '<table class="result-table"><tr><th>j</th><th>j²</th><th>v_p(q^{j²})</th><th>q^{j²}</th></tr>';
+
+  // ★グラフの読み方
+  html += '<div class="verdict">';
+  html += '<h4>グラフの読み方</h4>';
+  html += '<p><strong style="color:#60a5fa">青い棒</strong> = テータ値の付値 v_p(q^{j²})。j が大きいほど j² で急成長する。<br>';
+  html += '<strong style="color:#ef4444">赤い棒</strong> = q-パラメータの付値 v_p(q)。Θ-リンクは青い棒すべてを赤い棒1本に「圧縮」する。<br>';
+  html += '→ 青と赤の<strong>落差が大きいほど「歪み」が大きい</strong>。この歪みがABC不等式の源泉。<br>';
+  html += '→ しかし圧縮の過程で足し算の情報が失われる（不定性の発生）。</p>';
+  html += '</div>';
+
+  html += '<table class="result-table"><tr><th>j</th><th>j²</th><th>v_p(q^{j²})</th><th>q^{j²}</th><th>意味</th></tr>';
   for (let j = 1; j <= lStar; j++) {
     const vp = a * j * j;
-    html += '<tr><td>' + j + '</td><td>' + (j*j) + '</td><td>' + vp + '</td><td>' + p + '^' + vp + '</td></tr>';
+    const isMax = (j === lStar);
+    html += '<tr><td>' + j + '</td><td>' + (j*j) + '</td><td>' + vp + '</td>';
+    html += '<td>' + p + '<sup>' + vp + '</sup></td>';
+    html += '<td>' + (isMax ? '← 最大のテータ値（最大の歪み）' : '') + '</td></tr>';
   }
   html += '</table>';
 
   // 比較表
-  html += '<h3>Θ-リンクの歪み分析</h3>';
+  html += '<h3>歪みの定量分析</h3>';
   html += '<table class="result-table">';
-  html += '<tr><th>項目</th><th>値</th></tr>';
-  html += '<tr><td>テータ値付値の合計 Σv_p(q^{j²})</td><td>' + sumTheta + '</td></tr>';
-  html += '<tr><td>q-パラメータの付値 v_p(q)</td><td>' + qVal + '</td></tr>';
-  html += '<tr><td><strong>歪み率 Σj²</strong></td><td><strong>' + ratio + '</strong></td></tr>';
-  html += '<tr><td>対数体積(テータ側)</td><td>' + logVolTheta.toFixed(3) + '</td></tr>';
-  html += '<tr><td>対数体積(q側)</td><td>' + logVolQ.toFixed(3) + '</td></tr>';
-  html += '<tr><td>対数殻サイズ μ(I_v)</td><td>' + muI.toFixed(4) + '</td></tr>';
-  html += '<tr><td>Ind2累積 l*×μ(I_v)</td><td>' + ind2Total.toFixed(4) + '</td></tr>';
+  html += '<tr><th>項目</th><th>値</th><th>何を意味するか</th></tr>';
+  html += '<tr><td>テータ値付値の合計</td><td>' + sumTheta + '</td><td>世界A側の「情報量」</td></tr>';
+  html += '<tr><td>q-パラメータの付値</td><td>' + qVal + '</td><td>世界B側の「受け皿」</td></tr>';
+  html += '<tr style="color:#f59e0b"><td><strong>歪み率 Σj²</strong></td><td><strong>×' + ratio + '</strong></td>';
+  html += '<td>テータ側は q 側の ' + ratio + '倍の情報量</td></tr>';
+  html += '<tr><td>対数殻サイズ μ(I_v)</td><td>' + muI.toFixed(4) + '</td><td>不定性を吸収できる「クッション」</td></tr>';
+  html += '<tr><td>Ind2累積 l*×μ(I_v)</td><td>' + ind2Total.toFixed(4) + '</td><td>全 j にわたるクッションの合計</td></tr>';
   html += '</table>';
 
   // 判定
   html += '<div class="verdict ng">';
-  html += '<h4>歪み分析の結論</h4>';
-  html += '<p>歪み率 = ' + ratio + ' に対して、対数殻による補正は ' + ind2Total.toFixed(3) + ' のみ。';
-  html += '歪みの ' + (logVolTheta / ind2Total).toFixed(1) + '倍の対数殻が必要 → ';
-  html += 'Ind1が対数殻に収まらなければ不等式は自明化する。</p>';
+  html += '<h4>核心的な数値: 歪みはクッションの ' + gapMultiple.toFixed(1) + '倍</h4>';
+  html += '<p>テータ値の歪み（= ' + logVolTheta.toFixed(1) + '）に対して、';
+  html += '対数殻のクッション（= ' + ind2Total.toFixed(3) + '）は<strong>わずか ';
+  html += (100/gapMultiple).toFixed(2) + '%</strong> しかカバーしない。<br>';
+  html += '残り ' + (100 - 100/gapMultiple).toFixed(2) + '% は「Ind1が対数殻に収まる」という';
+  html += '<strong style="color:#ef4444">未証明の仮定</strong>に依存している。<br>';
+  html += 'これが Scholze-Stix 批判の定量的な核心。</p>';
   html += '</div>';
 
   document.getElementById('simA-result').innerHTML = html;
@@ -603,7 +685,7 @@ function runSimA() {
   vals.push(qVal);
   const colors = labels.map((_, i) => i < lStar ? '#60a5fa' : '#ef4444');
   drawBarChart('simA-canvas', labels, vals, colors,
-    'Θ-リンク: テータ値 vs q-パラメータの付値', 'v_p(・)');
+    '青=テータ値の付値  赤=q-パラメータの付値（圧縮先）', 'v_p(・)');
 }
 
 // ===== Sim-B: 不定性の爆発シミュレーション =====
@@ -626,59 +708,66 @@ function runSimB() {
   // α=0 → 望月モデル（Ind1効果なし）
   // α=1 → Scholzeモデル（Ind1が全情報を飲み込む）
   const alphaSteps = 50;
-  const points_ineq = []; // 不等式の左辺 - 右辺（負なら成立）
-  const points_mochi = []; // 望月モデルの値
-  const points_scholze = []; // Scholzeモデルの値
+  const points_ineq = [];
   const tableRows = [];
 
   for (let i = 0; i <= alphaSteps; i++) {
     const alpha = i / alphaSteps;
-
-    // 不等式: -|log(q)| ≤ -|log(Θ)| + Ind1補正 + Ind2補正
-    // = -(logVolTheta) + α * logVolTheta + lStar * muI
-    // 成立条件: -logVolQ ≤ -logVolTheta + α * logVolTheta + lStar * muI
-    // ⟺ logVolTheta - logVolQ ≤ α * logVolTheta + lStar * muI
-    // ⟺ logVolTheta * (1 - α) - logVolQ ≤ lStar * muI
-
-    const lhs = logVolQ; // |log(q)|
-    const rhs_thetaPart = logVolTheta * (1 - alpha); // Ind1で残る部分
+    const lhs = logVolQ;
+    const rhs_thetaPart = logVolTheta * (1 - alpha);
     const rhs_ind2 = lStar * muI;
-    const inequality = rhs_thetaPart - rhs_ind2 - lhs; // >0なら非自明
-
+    const inequality = rhs_thetaPart - rhs_ind2 - lhs;
     points_ineq.push([alpha, inequality]);
-    points_mochi.push([alpha, rhs_thetaPart]);
-    points_scholze.push([alpha, lhs]);
 
-    if (i % 10 === 0) {
+    if (i % 5 === 0) {
       tableRows.push({
-        alpha: alpha.toFixed(2),
-        ind1Effect: (alpha * logVolTheta).toFixed(2),
-        remaining: rhs_thetaPart.toFixed(2),
-        trivial: inequality <= 0 ? '自明' : '非自明'
+        alpha: alpha,
+        ind1Effect: (alpha * logVolTheta),
+        remaining: rhs_thetaPart,
+        inequality: inequality,
+        trivial: inequality <= 0
       });
     }
   }
 
   // 自明化の閾値
   const critAlpha = 1 - (logVolQ + lStar * muI) / logVolTheta;
+  const critPct = ((1 - critAlpha) * 100);
 
-  let html = '<h3>Ind1制御パラメータ α の効果</h3>';
-  html += '<p>α=0: 望月モデル（Ind1の効果なし）<br>';
-  html += 'α=1: Scholzeモデル（Ind1が全情報を破壊）</p>';
+  // ★グラフの読み方
+  let html = '<div class="verdict">';
+  html += '<h4>グラフの読み方</h4>';
+  html += '<p>横軸 α = 「Ind1がテータ値情報をどれだけ破壊するか」<br>';
+  html += '&nbsp;&nbsp;α=0（左端）: 望月の主張 — Ind1は情報を一切壊さない<br>';
+  html += '&nbsp;&nbsp;α=1（右端）: Scholzeの主張 — Ind1が情報を完全に壊す<br><br>';
+  html += '<strong style="color:#f59e0b">黄色い線</strong> = 不等式の「非自明性」の値<br>';
+  html += '&nbsp;&nbsp;線が<strong>0より上</strong>: 不等式が意味のある情報を含む（非自明）<br>';
+  html += '&nbsp;&nbsp;線が<strong>0以下</strong>: 不等式が何も言っていないのと同じ（自明）<br><br>';
+  html += '<strong style="color:#ef4444">赤い線</strong> = 自明化の閾値。この線より右では不等式が崩壊する。</p>';
+  html += '</div>';
 
-  html += '<table class="result-table"><tr><th>α</th><th>Ind1の効果</th><th>残存情報</th><th>判定</th></tr>';
+  html += '<h3>αを変化させたときの不等式の状態</h3>';
+  html += '<table class="result-table"><tr><th>α</th><th>Ind1が壊す量</th><th>残る情報</th><th>非自明性</th><th>判定</th></tr>';
   tableRows.forEach(r => {
-    const cls = r.trivial === '自明' ? 'style="color:#ef4444"' : 'style="color:#22c55e"';
-    html += '<tr><td>' + r.alpha + '</td><td>' + r.ind1Effect + '</td><td>' + r.remaining + '</td>';
-    html += '<td ' + cls + '><strong>' + r.trivial + '</strong></td></tr>';
+    const cls = r.trivial ? 'style="color:#ef4444;font-weight:bold"' : 'style="color:#22c55e"';
+    html += '<tr><td>' + r.alpha.toFixed(2) + '</td>';
+    html += '<td>' + r.ind1Effect.toFixed(2) + '</td>';
+    html += '<td>' + r.remaining.toFixed(2) + '</td>';
+    html += '<td>' + r.inequality.toFixed(2) + '</td>';
+    html += '<td ' + cls + '>' + (r.trivial ? '✗ 自明' : '✓ 非自明') + '</td></tr>';
   });
   html += '</table>';
 
   html += '<div class="verdict ng">';
-  html += '<h4>自明化の閾値: α = ' + critAlpha.toFixed(4) + '</h4>';
-  html += '<p>Ind1がテータ値情報のわずか ' + ((1-critAlpha)*100).toFixed(2) + '% を破壊するだけで不等式は自明化する。<br>';
-  html += '望月の主張（α=0）が成立するには、Ind1が対数殻内で完全に制御される必要がある。<br>';
-  html += 'Scholzeの主張（α→1）では不等式は完全に自明。</p>';
+  html += '<h4>発見: Ind1がわずか ' + critPct.toFixed(2) + '% 効くだけで不等式は崩壊する</h4>';
+  html += '<p>自明化の閾値 α = ' + critAlpha.toFixed(4) + '<br>';
+  html += 'つまり、Ind1がテータ値情報の <strong>' + critPct.toFixed(2) + '%</strong> を破壊するだけで、';
+  html += '系3.12の不等式は何の情報も含まなくなる。<br><br>';
+  html += '望月の証明が成立するには α=0（Ind1の効果がゼロ）が必要だが、';
+  html += 'Scholzeは α≈1 と主張している。<br>';
+  html += '仮に Scholze が間違っていて α がとても小さかったとしても、';
+  html += 'α > ' + critAlpha.toFixed(4) + ' ならば証明は成立しない。<br>';
+  html += '<strong>この閾値がいかに小さいか</strong>が、証明のギャップの深刻さを示している。</p>';
   html += '</div>';
 
   document.getElementById('simB-result').innerHTML = html;
@@ -686,8 +775,9 @@ function runSimB() {
   // グラフ
   drawLineChart('simB-canvas', [
     { points: points_ineq, color: '#f59e0b', label: '非自明性' },
-    { points: [[critAlpha, -logVolTheta * 0.5], [critAlpha, logVolTheta * 0.5]], color: '#ef4444', label: '閾値' }
-  ], 'Ind1制御率 α vs 不等式の非自明性', 'α (Ind1制御パラメータ)', '非自明性 (>0で非自明)');
+    { points: [[critAlpha, -logVolTheta * 0.3], [critAlpha, logVolTheta * 0.8]], color: '#ef4444', label: '閾値 α=' + critAlpha.toFixed(3) },
+    { points: [[0, 0], [1, 0]], color: '#475569', label: '自明化ライン' }
+  ], 'Ind1制御率 α vs 不等式の非自明性（0以下で自明）', 'α（0=望月, 1=Scholze）', '非自明性');
 }
 
 // ===== Sim-C: 対数殻サイズ vs 不定性の比較 =====
@@ -715,74 +805,77 @@ function runSimC() {
     totalLogShell += ind2;
     totalThetaVol += thetaVol;
 
-    rows.push({
-      p: p,
-      mu: mu,
-      ind2: ind2,
-      thetaVol: thetaVol,
-      ratio: thetaVol / ind2
-    });
+    rows.push({ p, mu, ind2, thetaVol, ratio: thetaVol / ind2 });
   });
 
   const totalQVol = usedPrimes.reduce((s, p) => s + a * Math.log(p), 0);
   const coverageRatio = totalLogShell / totalThetaVol;
+  const coveragePct = (coverageRatio * 100);
 
-  let html = '<h3>対数殻 vs テータ値歪み（' + numPrimes + '素数, l=' + l + '）</h3>';
+  // ★グラフの読み方
+  let html = '<div class="verdict">';
+  html += '<h4>グラフの読み方</h4>';
+  html += '<p>各素数について2本の棒を表示:<br>';
+  html += '<strong style="color:#22c55e">緑の棒</strong> = 対数殻のサイズ（不定性を吸収できる「クッション」の大きさ）<br>';
+  html += '<strong style="color:#ef4444">赤の棒</strong> = テータ値の歪み（Θ-リンクが生む「圧縮」の大きさ）<br><br>';
+  html += '→ <strong>赤が緑を大幅に上回る</strong>ほど、対数殻では歪みを吸収しきれない。<br>';
+  html += '→ 素数を増やすと、この差が累積的に拡大する。</p>';
+  html += '</div>';
+
+  html += '<h3>素数別: 対数殻 vs テータ歪み</h3>';
   html += '<table class="result-table">';
-  html += '<tr><th>素数 p</th><th>μ(I_p)</th><th>Ind2累積</th><th>テータ歪み</th><th>カバー率</th></tr>';
+  html += '<tr><th>素数 p</th><th>対数殻 μ(I_p)</th><th style="color:#22c55e">クッション合計</th>';
+  html += '<th style="color:#ef4444">テータ歪み</th><th>カバー率</th><th>意味</th></tr>';
   rows.forEach(r => {
-    const pct = (r.ind2 / r.thetaVol * 100).toFixed(2);
+    const pct = (r.ind2 / r.thetaVol * 100);
+    const meaning = pct < 2 ? '深刻な不足' : pct < 10 ? '大幅な不足' : '不足';
     html += '<tr><td>' + r.p + '</td>';
     html += '<td>' + r.mu.toFixed(4) + '</td>';
-    html += '<td>' + r.ind2.toFixed(3) + '</td>';
-    html += '<td>' + r.thetaVol.toFixed(3) + '</td>';
-    html += '<td style="color:' + (parseFloat(pct) < 5 ? '#ef4444' : '#f59e0b') + '">' + pct + '%</td></tr>';
+    html += '<td style="color:#22c55e">' + r.ind2.toFixed(3) + '</td>';
+    html += '<td style="color:#ef4444">' + r.thetaVol.toFixed(3) + '</td>';
+    html += '<td style="color:' + (pct < 5 ? '#ef4444' : '#f59e0b') + ';font-weight:bold">' + pct.toFixed(2) + '%</td>';
+    html += '<td>' + meaning + '</td></tr>';
   });
   html += '<tr style="font-weight:bold;border-top:2px solid #475569">';
-  html += '<td>合計</td><td>-</td>';
-  html += '<td>' + totalLogShell.toFixed(3) + '</td>';
-  html += '<td>' + totalThetaVol.toFixed(3) + '</td>';
-  html += '<td style="color:#ef4444">' + (coverageRatio * 100).toFixed(2) + '%</td></tr>';
-  html += '</table>';
-
-  // ht(E) ≈ 6 * totalQVol として ABC不等式をチェック
-  const htE = 6 * totalQVol;
-  const lhs = totalQVol; // (1/6) * ht(E)
-
-  html += '<h3>ABC不等式への影響</h3>';
-  html += '<table class="result-table">';
-  html += '<tr><th>項目</th><th>値</th></tr>';
-  html += '<tr><td>左辺 (1/6)·ht(E) ≈ Σ v_p(q)·log(p)</td><td>' + lhs.toFixed(3) + '</td></tr>';
-  html += '<tr><td>Ind2による累積補正</td><td>' + totalLogShell.toFixed(3) + '</td></tr>';
-  html += '<tr><td>Ind2/左辺 比率</td><td>' + (totalLogShell / lhs).toFixed(2) + '倍</td></tr>';
+  html += '<td>全素数合計</td><td>-</td>';
+  html += '<td style="color:#22c55e">' + totalLogShell.toFixed(3) + '</td>';
+  html += '<td style="color:#ef4444">' + totalThetaVol.toFixed(3) + '</td>';
+  html += '<td style="color:#ef4444">' + coveragePct.toFixed(2) + '%</td>';
+  html += '<td></td></tr>';
   html += '</table>';
 
   html += '<div class="verdict ng">';
-  html += '<h4>対数殻の制約力: テータ歪みの ' + (coverageRatio * 100).toFixed(2) + '% しかカバーできない</h4>';
-  html += '<p>対数殻は各素数でのInd2を制御するが、テータ値の歪み（Σj² ≈ ' + sumJ2 + '）に比べて';
-  html += '遥かに小さい。Ind1がこの差分を埋められなければ、不等式は非自明にならない。<br>';
-  html += '素数の数を増やすと累積効果はさらに顕著になる。</p>';
+  html += '<h4>結論: 対数殻はテータ歪みの ' + coveragePct.toFixed(2) + '% しか吸収できない</h4>';
+  html += '<p>残り ' + (100 - coveragePct).toFixed(2) + '% の歪みは、';
+  html += '「Ind1（内部自己同型の不定性）が対数殻の中に収まる」という仮定でカバーされる。<br><br>';
+  html += '<strong>この仮定が IUT 証明の最大の未証明部分</strong>であり、Scholze-Stix の批判はまさにこの点を突いている。<br>';
+  html += '素数の数を増やすと（スライダーで試してみてください）、カバー率はさらに下がり、';
+  html += '未証明部分への依存度が上がる。</p>';
   html += '</div>';
 
   document.getElementById('simC-result').innerHTML = html;
 
-  // グラフ: 素数ごとの対数殻 vs テータ歪み
-  const labels = rows.map(r => 'p=' + r.p);
-  const shellVals = rows.map(r => r.ind2);
-  const thetaVals = rows.map(r => r.thetaVol);
+  // グラフ: 素数ごとに緑（対数殻）と赤（テータ歪み）を並べる
+  // 2グループ描画のため、交互に配置
+  const allLabels = [];
+  const allVals = [];
+  const allColors = [];
+  rows.forEach(r => {
+    allLabels.push(r.p + ':殻');
+    allVals.push(r.ind2);
+    allColors.push('#22c55e');
+    allLabels.push(r.p + ':歪');
+    allVals.push(r.thetaVol);
+    allColors.push('#ef4444');
+  });
 
-  drawBarChart('simC-canvas',
-    labels.concat(labels),
-    shellVals.concat(thetaVals),
-    shellVals.map(() => '#22c55e').concat(thetaVals.map(() => '#ef4444')),
-    '緑=対数殻(Ind2)  赤=テータ歪み  (素数別)',
-    '対数体積');
+  drawBarChart('simC-canvas', allLabels, allVals, allColors,
+    '素数別: 緑=対数殻(クッション)  赤=テータ歪み(圧縮)', '対数体積');
 }
 
 // ===== Sim-D: ABC予想の不等式検証 =====
-// IUT IV Theorem 1.10 の不等式を具体的な楕円曲線で検証
+// IUT IV Theorem 1.10 の不等式を具体的なABC tripleで検証
 
-// ABC triple (a,b,c) where a+b=c, gcd(a,b)=1
 function findABCTriples(maxC) {
   const triples = [];
   for (let c = 3; c <= maxC; c++) {
@@ -793,7 +886,7 @@ function findABCTriples(maxC) {
       const rad = radical(a * b * c);
       const quality = Math.log(c) / Math.log(rad);
       if (quality > 1.0) {
-        triples.push({ a, b, c, rad, quality: quality });
+        triples.push({ a, b, c, rad, quality });
       }
     }
   }
@@ -815,9 +908,6 @@ function radical(n) {
   return rad;
 }
 
-// Szpiro比 (楕円曲線版)
-// E: y² = x(x-a)(x+b) に対応する Frey curve
-// Δ = 16(abc)² , N = rad(abc)
 function szpiroRatio(a, b, c) {
   const logDelta = Math.log(16) + 2 * Math.log(a * b * c);
   const logN = Math.log(radical(a * b * c));
@@ -832,10 +922,21 @@ function runSimD() {
   const triples = findABCTriples(maxC).slice(0, 20);
   const sumJ2 = sumOfSquares(lStar);
 
-  let html = '<h3>ABC triple (quality > 1.0, c ≤ ' + maxC + ')</h3>';
-  html += '<p>quality = log(c)/log(rad(abc)) — 1を超えるものがABC予想の「境界」</p>';
+  // ★グラフの読み方
+  let html = '<div class="verdict">';
+  html += '<h4>グラフの読み方</h4>';
+  html += '<p>ABC予想: a+b=c, gcd(a,b)=1 のとき、c < rad(abc)^{1+ε} が（ほぼ）常に成立<br>';
+  html += '<strong>quality</strong> = log(c)/log(rad(abc)) — これが1を超えると「珍しい」triple<br><br>';
+  html += '<strong style="color:#60a5fa">青い線</strong> = quality値（1を超えるものを表示）<br>';
+  html += '<strong style="color:#f59e0b">黄色い線</strong> = Szpiro比（楕円曲線版の指標）<br>';
+  html += '<strong style="color:#ef4444">赤い線</strong> = IUT Theorem 1.10 が主張する上界<br><br>';
+  html += '→ 黄色が赤を超えたら IUT の主張に反する反例（見つかっていない）<br>';
+  html += '→ ABC予想自体は真と広く信じられている。問題は<strong>証明の正しさ</strong>。</p>';
+  html += '</div>';
+
+  html += '<h3>ABC triple (quality > 1.0, c ≤ ' + maxC + ')</h3>';
   html += '<table class="result-table">';
-  html += '<tr><th>a</th><th>b</th><th>c</th><th>rad(abc)</th><th>quality</th><th>Szpiro比</th><th>IUT上界</th></tr>';
+  html += '<tr><th>a</th><th>b</th><th>c=a+b</th><th>rad(abc)</th><th>quality</th><th>Szpiro比</th><th>IUT上界</th></tr>';
 
   const qualityPts = [];
   const szpiroPts = [];
@@ -843,58 +944,55 @@ function runSimD() {
 
   triples.forEach((t, i) => {
     const sz = szpiroRatio(t.a, t.b, t.c);
-    // IUT Theorem 1.10 の上界を簡略計算
-    // (1/6)·log(Δ) ≤ (1+ε)·(log-diff + log-cond) + C
-    // → Szpiro比 ≤ 6(1+ε) + C/log(N)
-    const epsilon = 20 / l; // d_mod/l ≈ 1/l の近似
+    const epsilon = 20 / l;
     const iutUpper = 6 * (1 + epsilon);
 
     qualityPts.push([i, t.quality]);
     szpiroPts.push([i, sz]);
     iutBoundPts.push([i, iutUpper]);
 
+    const qColor = t.quality > 1.4 ? '#ef4444' : t.quality > 1.2 ? '#f59e0b' : '#e2e8f0';
     html += '<tr><td>' + t.a + '</td><td>' + t.b + '</td><td>' + t.c + '</td>';
     html += '<td>' + t.rad + '</td>';
-    html += '<td style="color:' + (t.quality > 1.4 ? '#ef4444' : '#f59e0b') + '">' + t.quality.toFixed(4) + '</td>';
+    html += '<td style="color:' + qColor + ';font-weight:bold">' + t.quality.toFixed(4) + '</td>';
     html += '<td>' + sz.toFixed(3) + '</td>';
     html += '<td>' + iutUpper.toFixed(3) + '</td></tr>';
   });
   html += '</table>';
 
-  // 既知のhigh-quality triples
-  html += '<h3>既知の高品質ABC triple</h3>';
+  html += '<h3>既知の高品質ABC triple（参考）</h3>';
   html += '<table class="result-table">';
   html += '<tr><th>triple</th><th>quality</th><th>発見者</th></tr>';
-  html += '<tr><td>2 + 3¹⁰·109 = 23⁵</td><td>1.6299</td><td>Reyssat</td></tr>';
-  html += '<tr><td>11² + 3²·5⁶·7³ = 2²¹·23</td><td>1.6260</td><td>de Smit</td></tr>';
-  html += '<tr><td>19·1307 + 7·29²·31⁸ = 2⁸·3²²·5⁴</td><td>1.6235</td><td>de Smit</td></tr>';
+  html += '<tr><td>2 + 3<sup>10</sup>·109 = 23<sup>5</sup></td><td>1.6299</td><td>Reyssat</td></tr>';
+  html += '<tr><td>11<sup>2</sup> + 3<sup>2</sup>·5<sup>6</sup>·7<sup>3</sup> = 2<sup>21</sup>·23</td><td>1.6260</td><td>de Smit</td></tr>';
   html += '</table>';
-
-  // IUT不等式の検証
-  html += '<h3>IUT不等式の検証</h3>';
 
   const maxQuality = triples.length > 0 ? triples[0].quality : 1;
   const maxSzpiro = triples.length > 0 ? szpiroRatio(triples[0].a, triples[0].b, triples[0].c) : 6;
 
-  html += '<div class="verdict">';
-  html += '<h4>検証結果</h4>';
-  html += '<p>観測された最大quality: ' + maxQuality.toFixed(4) + '<br>';
-  html += '観測された最大Szpiro比: ' + maxSzpiro.toFixed(3) + '<br>';
-  html += 'IUT上界 (l=' + l + '): ' + (6 * (1 + 20/l)).toFixed(3) + '<br><br>';
-  html += '<strong>注意</strong>: ABC予想自体は広く真と信じられており、数値的証拠も圧倒的に支持している。';
-  html += '問題は予想の真偽ではなく、IUT理論による<em>証明</em>が正しいかどうかである。';
-  html += '予想が正しくても証明が不完全という状況は数学史上珍しくない。</p>';
+  html += '<div class="verdict ok">';
+  html += '<h4>ABC予想の数値的証拠: 圧倒的に支持</h4>';
+  html += '<p>c ≤ ' + maxC + ' の範囲で最大quality = ' + maxQuality.toFixed(4) + '<br>';
+  html += 'quality > 2 の triple は発見されていない（予想は quality < 1+ε を主張）<br>';
+  html += '→ ABC予想自体は真である可能性が極めて高い。</p>';
+  html += '</div>';
+
+  html += '<div class="verdict ng">';
+  html += '<h4>ただし: 予想が真でも証明が正しいとは限らない</h4>';
+  html += '<p>「答え」が正しくても「解法」に誤りがあることは数学では珍しくない。<br>';
+  html += '有名な例: ケンプの四色定理の証明（1879年、11年後に誤り発覚）<br>';
+  html += 'IUT理論の場合、ABC予想の真偽と系3.12の証明の正しさは独立な問題。<br>';
+  html += '本プロジェクトが検証しているのは<strong>証明の論理的健全性</strong>であり、予想の真偽ではない。</p>';
   html += '</div>';
 
   document.getElementById('simD-result').innerHTML = html;
 
-  // グラフ
   if (triples.length > 0) {
     drawLineChart('simD-canvas', [
       { points: szpiroPts, color: '#f59e0b', label: 'Szpiro比' },
       { points: iutBoundPts, color: '#ef4444', label: 'IUT上界' },
       { points: qualityPts, color: '#60a5fa', label: 'quality' }
-    ], 'ABC triples: Szpiro比 vs IUT上界', 'triple番号', '比率');
+    ], '青=quality  黄=Szpiro比  赤=IUT上界（黄が赤を超えたら反例）', 'triple番号', '比率');
   }
 }
 

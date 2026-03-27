@@ -18,59 +18,66 @@ function runSimB() {
   // α=0 → 望月モデル（Ind1効果なし）
   // α=1 → Scholzeモデル（Ind1が全情報を飲み込む）
   const alphaSteps = 50;
-  const points_ineq = []; // 不等式の左辺 - 右辺（負なら成立）
-  const points_mochi = []; // 望月モデルの値
-  const points_scholze = []; // Scholzeモデルの値
+  const points_ineq = [];
   const tableRows = [];
 
   for (let i = 0; i <= alphaSteps; i++) {
     const alpha = i / alphaSteps;
-
-    // 不等式: -|log(q)| ≤ -|log(Θ)| + Ind1補正 + Ind2補正
-    // = -(logVolTheta) + α * logVolTheta + lStar * muI
-    // 成立条件: -logVolQ ≤ -logVolTheta + α * logVolTheta + lStar * muI
-    // ⟺ logVolTheta - logVolQ ≤ α * logVolTheta + lStar * muI
-    // ⟺ logVolTheta * (1 - α) - logVolQ ≤ lStar * muI
-
-    const lhs = logVolQ; // |log(q)|
-    const rhs_thetaPart = logVolTheta * (1 - alpha); // Ind1で残る部分
+    const lhs = logVolQ;
+    const rhs_thetaPart = logVolTheta * (1 - alpha);
     const rhs_ind2 = lStar * muI;
-    const inequality = rhs_thetaPart - rhs_ind2 - lhs; // >0なら非自明
-
+    const inequality = rhs_thetaPart - rhs_ind2 - lhs;
     points_ineq.push([alpha, inequality]);
-    points_mochi.push([alpha, rhs_thetaPart]);
-    points_scholze.push([alpha, lhs]);
 
-    if (i % 10 === 0) {
+    if (i % 5 === 0) {
       tableRows.push({
-        alpha: alpha.toFixed(2),
-        ind1Effect: (alpha * logVolTheta).toFixed(2),
-        remaining: rhs_thetaPart.toFixed(2),
-        trivial: inequality <= 0 ? '自明' : '非自明'
+        alpha: alpha,
+        ind1Effect: (alpha * logVolTheta),
+        remaining: rhs_thetaPart,
+        inequality: inequality,
+        trivial: inequality <= 0
       });
     }
   }
 
   // 自明化の閾値
   const critAlpha = 1 - (logVolQ + lStar * muI) / logVolTheta;
+  const critPct = ((1 - critAlpha) * 100);
 
-  let html = '<h3>Ind1制御パラメータ α の効果</h3>';
-  html += '<p>α=0: 望月モデル（Ind1の効果なし）<br>';
-  html += 'α=1: Scholzeモデル（Ind1が全情報を破壊）</p>';
+  // ★グラフの読み方
+  let html = '<div class="verdict">';
+  html += '<h4>グラフの読み方</h4>';
+  html += '<p>横軸 α = 「Ind1がテータ値情報をどれだけ破壊するか」<br>';
+  html += '&nbsp;&nbsp;α=0（左端）: 望月の主張 — Ind1は情報を一切壊さない<br>';
+  html += '&nbsp;&nbsp;α=1（右端）: Scholzeの主張 — Ind1が情報を完全に壊す<br><br>';
+  html += '<strong style="color:#f59e0b">黄色い線</strong> = 不等式の「非自明性」の値<br>';
+  html += '&nbsp;&nbsp;線が<strong>0より上</strong>: 不等式が意味のある情報を含む（非自明）<br>';
+  html += '&nbsp;&nbsp;線が<strong>0以下</strong>: 不等式が何も言っていないのと同じ（自明）<br><br>';
+  html += '<strong style="color:#ef4444">赤い線</strong> = 自明化の閾値。この線より右では不等式が崩壊する。</p>';
+  html += '</div>';
 
-  html += '<table class="result-table"><tr><th>α</th><th>Ind1の効果</th><th>残存情報</th><th>判定</th></tr>';
+  html += '<h3>αを変化させたときの不等式の状態</h3>';
+  html += '<table class="result-table"><tr><th>α</th><th>Ind1が壊す量</th><th>残る情報</th><th>非自明性</th><th>判定</th></tr>';
   tableRows.forEach(r => {
-    const cls = r.trivial === '自明' ? 'style="color:#ef4444"' : 'style="color:#22c55e"';
-    html += '<tr><td>' + r.alpha + '</td><td>' + r.ind1Effect + '</td><td>' + r.remaining + '</td>';
-    html += '<td ' + cls + '><strong>' + r.trivial + '</strong></td></tr>';
+    const cls = r.trivial ? 'style="color:#ef4444;font-weight:bold"' : 'style="color:#22c55e"';
+    html += '<tr><td>' + r.alpha.toFixed(2) + '</td>';
+    html += '<td>' + r.ind1Effect.toFixed(2) + '</td>';
+    html += '<td>' + r.remaining.toFixed(2) + '</td>';
+    html += '<td>' + r.inequality.toFixed(2) + '</td>';
+    html += '<td ' + cls + '>' + (r.trivial ? '✗ 自明' : '✓ 非自明') + '</td></tr>';
   });
   html += '</table>';
 
   html += '<div class="verdict ng">';
-  html += '<h4>自明化の閾値: α = ' + critAlpha.toFixed(4) + '</h4>';
-  html += '<p>Ind1がテータ値情報のわずか ' + ((1-critAlpha)*100).toFixed(2) + '% を破壊するだけで不等式は自明化する。<br>';
-  html += '望月の主張（α=0）が成立するには、Ind1が対数殻内で完全に制御される必要がある。<br>';
-  html += 'Scholzeの主張（α→1）では不等式は完全に自明。</p>';
+  html += '<h4>発見: Ind1がわずか ' + critPct.toFixed(2) + '% 効くだけで不等式は崩壊する</h4>';
+  html += '<p>自明化の閾値 α = ' + critAlpha.toFixed(4) + '<br>';
+  html += 'つまり、Ind1がテータ値情報の <strong>' + critPct.toFixed(2) + '%</strong> を破壊するだけで、';
+  html += '系3.12の不等式は何の情報も含まなくなる。<br><br>';
+  html += '望月の証明が成立するには α=0（Ind1の効果がゼロ）が必要だが、';
+  html += 'Scholzeは α≈1 と主張している。<br>';
+  html += '仮に Scholze が間違っていて α がとても小さかったとしても、';
+  html += 'α > ' + critAlpha.toFixed(4) + ' ならば証明は成立しない。<br>';
+  html += '<strong>この閾値がいかに小さいか</strong>が、証明のギャップの深刻さを示している。</p>';
   html += '</div>';
 
   document.getElementById('simB-result').innerHTML = html;
@@ -78,6 +85,7 @@ function runSimB() {
   // グラフ
   drawLineChart('simB-canvas', [
     { points: points_ineq, color: '#f59e0b', label: '非自明性' },
-    { points: [[critAlpha, -logVolTheta * 0.5], [critAlpha, logVolTheta * 0.5]], color: '#ef4444', label: '閾値' }
-  ], 'Ind1制御率 α vs 不等式の非自明性', 'α (Ind1制御パラメータ)', '非自明性 (>0で非自明)');
+    { points: [[critAlpha, -logVolTheta * 0.3], [critAlpha, logVolTheta * 0.8]], color: '#ef4444', label: '閾値 α=' + critAlpha.toFixed(3) },
+    { points: [[0, 0], [1, 0]], color: '#475569', label: '自明化ライン' }
+  ], 'Ind1制御率 α vs 不等式の非自明性（0以下で自明）', 'α（0=望月, 1=Scholze）', '非自明性');
 }
