@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT理論の間違い検証</title>
+<style>
+/* __CSS__ */
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; OnePagers</a>
+
+<header>
+  <h1>宇宙際タイヒミューラー理論の間違い検証</h1>
+  <p class="subtitle">IUT III 系3.12の論理的ギャップを数学的証明とシミュレーションで検証</p>
+  <div class="tags">
+    <span class="tag">数学</span>
+    <span class="tag">ABC予想</span>
+    <span class="tag">Scholze-Stix批判</span>
+    <span class="tag">p進算術</span>
+    <span class="tag">シミュレーション</span>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="tab-overview" onclick="switchTab('tab-overview')">概要</button>
+  <button class="tab-btn" data-tab="tab-math" onclick="switchTab('tab-math')">数学的検証</button>
+  <button class="tab-btn" data-tab="tab-simA" onclick="switchTab('tab-simA')">Sim-A: Θ-リンク</button>
+  <button class="tab-btn" data-tab="tab-simB" onclick="switchTab('tab-simB')">Sim-B: 不定性</button>
+  <button class="tab-btn" data-tab="tab-simC" onclick="switchTab('tab-simC')">Sim-C: 対数殻</button>
+  <button class="tab-btn" data-tab="tab-simD" onclick="switchTab('tab-simD')">Sim-D: ABC検証</button>
+</nav>
+
+<div class="container">
+
+<!-- ===== 概要タブ ===== -->
+<div id="tab-overview" class="tab-content active">
+  <div class="section">
+    <h2>プロジェクトの目的</h2>
+    <p>望月新一のIUT（宇宙際タイヒミューラー）理論における系3.12（IUT III）の
+    証明に含まれる論理的ギャップを、以下の二系統で検証する:</p>
+    <ul>
+      <li><strong>系統1: 数学的手段</strong> — Scholze-Stix批判を再構成し、原論文との対照で問題箇所を特定</li>
+      <li><strong>系統2: シミュレーション</strong> — p進算術のモデルを計算機上に構築し、不定性の振る舞いを定量的に検証</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>発見された問題点（要約）</h2>
+    <div class="verdict ng">
+      <h4>問題1: Ind1不定性の制御が不十分</h4>
+      <p>対数殻は Ind2（O^×作用）を制御するが、Ind1（内部自己同型）の制御は別の議論が必要。
+      望月の証明では両者が混同されている。原論文 IUT III Remark 3.9.5(i) で
+      「容易に検証されるコンパクト性」として一言で片付けられている部分に、証明のギャップがある。</p>
+    </div>
+    <div class="verdict ng">
+      <h4>問題2: 循環論法の構造</h4>
+      <p>log-Kummer対応がInd1を「対数殻の範囲に制限する」という主張は、
+      Ind1が対数殻を「はみ出さない」ことを前提としている。
+      これは系3.12の結論を暗黙に仮定する循環論法の構造を持つ。</p>
+    </div>
+    <div class="verdict ng">
+      <h4>問題3: 非可換性の未解決</h4>
+      <p>対数テータ格子の横方向（Θ-リンク）と縦方向（log-リンク）の非可換性により、
+      一方で構成した対数殻のサイズが他方を跨いだ先で保存される保証がない。</p>
+    </div>
+    <div class="verdict">
+      <h4>望月の主張で正しい部分</h4>
+      <p>コピーの安易な同一視の禁止、マルチラジアリティの概念、Θ-リンクの論理AND構造、
+      対数殻によるInd2制御 — これらは数学的に正当である。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>三者の立場</h2>
+    <table class="result-table">
+      <tr><th></th><th>系3.12は正しいか</th><th>不等式は非自明か</th><th>核心的主張</th></tr>
+      <tr><td><strong>望月</strong></td><td>正しい</td><td>非自明</td><td>対数殻がInd1を制御</td></tr>
+      <tr><td><strong>Scholze</strong></td><td style="color:#ef4444">正しくない</td><td style="color:#ef4444">自明化する</td><td>Ind1の制御が不十分</td></tr>
+      <tr><td><strong>Joshi</strong></td><td style="color:#f59e0b">証明は不完全</td><td>別の方法なら可能</td><td>群論的手法の限界</td></tr>
+      <tr><td><strong>本検証</strong></td><td style="color:#ef4444">証明にギャップあり</td><td style="color:#ef4444">自明化のリスク大</td><td>Scholze批判を支持</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 数学的検証タブ ===== -->
+<div id="tab-math" class="tab-content">
+  <div class="section">
+    <h2>系3.12の主張（IUT III, p.174）</h2>
+    <pre class="code">前提: 初期テータデータ、LGP-ガウス型対数テータ格子
+定義:
+  −|log(Θ)| = Θ-パイロット対象の可能な像の和集合の
+               正則包のプロセッション正規化モノアナリティック対数体積
+  −|log(q)|  = q-パイロット対象の同様の対数体積
+
+主張:  −|log(Θ)| ∈ R  かつ  −|log(Θ)| ≥ −|log(q)|
+       (すなわち CΘ ≥ −1)</pre>
+  </div>
+
+  <div class="section">
+    <h2>証明のギャップ1: コンパクト性の仮定</h2>
+    <p>望月の証明 Step (xi) では、−|log(Θ)| が有限であることを以下のように正当化する:</p>
+    <pre class="code">IUT III, Corollary 3.12, Proof:
+"one concludes easily from the [easily verified]
+ compactness of the U_{j,v_Q}, together with the
+ definition of the log-volume, that the quantity
+ −|log(Θ)| is finite"</pre>
+    <p>しかし U_{j,v_Q} のコンパクト性は、Ind1の軌道が対数殻 I_v 内に留まることを前提としている。
+    この前提の証明は明示されていない。</p>
+    <div class="verdict ng">
+      <h4>ギャップの所在</h4>
+      <p>U_{j,v_Q} = Ind1とInd2を考慮したテータ値の可能な像の集合。
+      対数殻 I_v はコンパクトだが、Ind1（Inn(Π_X)の作用）が I_v 内に留まるかは別問題。
+      Ind2（O^×作用）による I_v の不変性はInd1の制御を意味しない。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>証明のギャップ2: 循環論法</h2>
+    <pre class="code">論理的依存関係:
+
+系3.12: −|log(Θ)| ∈ R（有限）
+  ← U_{j,v_Q} のコンパクト性
+    ← Ind1の軌道 ⊂ I_v
+      ← log-Kummer対応がInd1を制御  [Theorem 3.11(ii)]
+        ← 対数殻の O^×-不変性        [これは Ind2 の話]
+          ★ Ind1 → Ind2 の論理的接続が不在</pre>
+    <p>Ind1（群レベルの不定性）とInd2（環レベルの不定性）は異なるレベルの操作であり、
+    一方の制御が他方を含意するという証明は見当たらない。</p>
+  </div>
+
+  <div class="section">
+    <h2>証明のギャップ3: 非可換性</h2>
+    <pre class="code">対数テータ格子:
+
+       log ↑        log ↑
+  ... → n,m HT →Θ→ n,m+1 HT → ...
+       log ↑        log ↑
+
+横（Θ-リンク）と縦（log-リンク）は非可換:  log ∘ Θ ≠ Θ ∘ log
+
+望月: 非可換性が「力の源泉」
+Scholze: 非可換性が「不等式の意味喪失の原因」</pre>
+    <p>我々の分析: 非可換性により、log-リンクで構成した対数殻のサイズが
+    Θ-リンクを跨いだ先で保存される保証がない。これが対数殻の制約力の根本的限界。</p>
+  </div>
+
+  <div class="section">
+    <h2>望月の2024年反論への評価</h2>
+    <p>望月は2024年の論文 "Essential Logical Structure of IUT" で
+    批判者を「RCS（redundant copies school）」と呼び、コピーの同一視が理論を破壊すると主張した。</p>
+    <div class="verdict">
+      <h4>評価</h4>
+      <p><strong>正しい点</strong>: コピーを安易に同一視してはならない。Θ-リンクの「論理AND」構造は重要。<br>
+      <strong>問題点</strong>: Scholzeの批判の核心は「コピーの同一視」ではなく「不定性の大きさ」にある。
+      望月の反論は Scholze の批判の本質を正確に捉えていない。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Sim-A: Θ-リンク ===== -->
+<div id="tab-simA" class="tab-content">
+  <div class="section">
+    <h2>Sim-A: Θ-リンクの数値シミュレーション</h2>
+    <p>テータ値列 {q^{j²}} の生成とΘ-リンクによる歪みを数値で可視化する。
+    テート曲線 E ≅ Q_p^× / q^Z 上のテータ関数評価を再現。</p>
+    <div class="sim-controls">
+      <div><label>素数 p</label><input id="simA-p" type="number" value="5" min="2"></div>
+      <div><label>付値 a = v_p(q)</label><input id="simA-a" type="number" value="2" min="1"></div>
+      <div><label>素数 l</label><input id="simA-l" type="number" value="11" min="5" step="2"></div>
+      <button class="btn" onclick="runSimA()">実行</button>
+    </div>
+    <canvas id="simA-canvas"></canvas>
+    <div id="simA-result"></div>
+  </div>
+</div>
+
+<!-- ===== Sim-B: 不定性 ===== -->
+<div id="tab-simB" class="tab-content">
+  <div class="section">
+    <h2>Sim-B: 不定性の爆発シミュレーション</h2>
+    <p>Ind1の制御パラメータ α を0（望月モデル）から1（Scholzeモデル）まで変化させ、
+    不等式が自明化する閾値を特定する。</p>
+    <div class="sim-controls">
+      <div><label>素数 p</label><input id="simB-p" type="number" value="5" min="2"></div>
+      <div><label>付値 a</label><input id="simB-a" type="number" value="2" min="1"></div>
+      <div><label>素数 l</label><input id="simB-l" type="number" value="11" min="5" step="2"></div>
+      <button class="btn" onclick="runSimB()">実行</button>
+    </div>
+    <canvas id="simB-canvas"></canvas>
+    <div id="simB-result"></div>
+  </div>
+</div>
+
+<!-- ===== Sim-C: 対数殻 ===== -->
+<div id="tab-simC" class="tab-content">
+  <div class="section">
+    <h2>Sim-C: 対数殻サイズ vs 不定性</h2>
+    <p>複数素数にわたる対数殻の累積サイズと、テータ値歪みの累積を比較する。
+    対数殻がテータ歪みの何%をカバーできるかを定量化。</p>
+    <div class="sim-controls">
+      <div><label>素数の個数</label><input id="simC-primes" type="number" value="5" min="1" max="25"></div>
+      <div><label>素数 l</label><input id="simC-l" type="number" value="11" min="5" step="2"></div>
+      <div><label>付値 a</label><input id="simC-a" type="number" value="2" min="1"></div>
+      <button class="btn" onclick="runSimC()">実行</button>
+    </div>
+    <canvas id="simC-canvas"></canvas>
+    <div id="simC-result"></div>
+  </div>
+</div>
+
+<!-- ===== Sim-D: ABC検証 ===== -->
+<div id="tab-simD" class="tab-content">
+  <div class="section">
+    <h2>Sim-D: ABC予想の不等式検証</h2>
+    <p>ABC triple (a+b=c, gcd(a,b)=1) を探索し、IUT IV Theorem 1.10 の
+    不等式と比較する。予想自体の数値的証拠も示す。</p>
+    <div class="sim-controls">
+      <div><label>探索上限 c</label><input id="simD-maxC" type="number" value="1000" min="100" max="10000"></div>
+      <div><label>素数 l</label><input id="simD-l" type="number" value="11" min="5" step="2"></div>
+      <button class="btn" onclick="runSimD()">実行</button>
+    </div>
+    <canvas id="simD-canvas"></canvas>
+    <div id="simD-result"></div>
+  </div>
+</div>
+
+</div><!-- /.container -->
+
+<script>
+/* __JS_CONSTANTS__ */
+/* __JS_CANVAS__ */
+/* __JS_SIMA__ */
+/* __JS_SIMB__ */
+/* __JS_SIMC__ */
+/* __JS_SIMD__ */
+/* __JS_MAIN__ */
+</script>
+
+</body>
+</html>
