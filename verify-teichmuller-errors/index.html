@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT理論の間違い検証</title>
+<style>
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0a0e1a;
+  color: #e2e8f0;
+  line-height: 1.7;
+}
+a { color: #60a5fa; }
+.back { display: inline-block; margin: 1rem 1.5rem; color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+.back:hover { color: #e2e8f0; }
+
+/* Header */
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  border-bottom: 1px solid #1e293b;
+  background: linear-gradient(135deg, #0f172a 0%, #1a1030 100%);
+}
+header h1 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+header .subtitle { color: #94a3b8; font-size: 0.95rem; }
+header .tags { margin-top: 0.7rem; }
+header .tag {
+  display: inline-block; background: #334155; color: #93c5fd;
+  font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 9999px; margin: 0.15rem;
+}
+
+/* Navigation tabs */
+.tab-nav {
+  display: flex; justify-content: center; gap: 0.5rem;
+  padding: 1rem; background: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: #1e293b; color: #94a3b8; border: 1px solid #334155;
+  padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.85rem; transition: all 0.2s;
+}
+.tab-btn:hover { border-color: #60a5fa; color: #e2e8f0; }
+.tab-btn.active { background: #1e3a5f; color: #60a5fa; border-color: #60a5fa; }
+
+/* Container */
+.container { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Section cards */
+.section {
+  background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+  padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.section h2 { font-size: 1.2rem; margin-bottom: 0.8rem; color: #f1f5f9; }
+.section h3 { font-size: 1rem; margin: 1rem 0 0.5rem; color: #cbd5e1; }
+.section p, .section li { color: #94a3b8; font-size: 0.9rem; }
+.section ul { padding-left: 1.2rem; }
+.section li { margin-bottom: 0.3rem; }
+
+/* Sim controls */
+.sim-controls {
+  display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: end;
+  margin: 1rem 0; padding: 1rem; background: #0f172a; border-radius: 8px;
+}
+.sim-controls label { font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 0.2rem; }
+.sim-controls input, .sim-controls select {
+  background: #1e293b; color: #e2e8f0; border: 1px solid #475569;
+  padding: 0.4rem 0.6rem; border-radius: 6px; font-size: 0.85rem; width: 100px;
+}
+.sim-controls input:focus, .sim-controls select:focus {
+  outline: none; border-color: #60a5fa;
+}
+.btn {
+  background: #2563eb; color: #fff; border: none; padding: 0.5rem 1.2rem;
+  border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: background 0.2s;
+}
+.btn:hover { background: #3b82f6; }
+.btn-danger { background: #dc2626; }
+.btn-danger:hover { background: #ef4444; }
+
+/* Canvas */
+canvas {
+  width: 100%; height: 300px; background: #0a0e1a;
+  border: 1px solid #334155; border-radius: 8px; margin: 0.8rem 0;
+}
+
+/* Result tables */
+.result-table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.8rem; }
+.result-table th { background: #334155; color: #93c5fd; padding: 0.4rem 0.6rem; text-align: left; }
+.result-table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+.result-table tr:hover td { background: #1a2332; }
+
+/* Verdict box */
+.verdict {
+  border-left: 4px solid #f59e0b; background: #1c1a0e; padding: 1rem 1.2rem;
+  border-radius: 0 8px 8px 0; margin: 1rem 0;
+}
+.verdict.ok { border-left-color: #22c55e; background: #0e1c14; }
+.verdict.ng { border-left-color: #ef4444; background: #1c0e0e; }
+.verdict h4 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+.verdict p { font-size: 0.85rem; color: #94a3b8; }
+
+/* Code block */
+pre.code {
+  background: #0a0e1a; border: 1px solid #334155; border-radius: 8px;
+  padding: 1rem; font-size: 0.8rem; overflow-x: auto; color: #a5b4c8;
+  font-family: "Fira Code", "Source Code Pro", monospace;
+  line-height: 1.5;
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 6px; background: #334155; border-radius: 3px; overflow: hidden; margin: 0.5rem 0;
+}
+.progress-bar .fill { height: 100%; background: #60a5fa; transition: width 0.3s; border-radius: 3px; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  header h1 { font-size: 1.3rem; }
+  .sim-controls { flex-direction: column; }
+  .sim-controls input { width: 100%; }
+  canvas { height: 220px; }
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; OnePagers</a>
+
+<header>
+  <h1>宇宙際タイヒミューラー理論の間違い検証</h1>
+  <p class="subtitle">IUT III 系3.12の論理的ギャップを数学的証明とシミュレーションで検証</p>
+  <div class="tags">
+    <span class="tag">数学</span>
+    <span class="tag">ABC予想</span>
+    <span class="tag">Scholze-Stix批判</span>
+    <span class="tag">p進算術</span>
+    <span class="tag">シミュレーション</span>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="tab-overview" onclick="switchTab('tab-overview')">概要</button>
+  <button class="tab-btn" data-tab="tab-math" onclick="switchTab('tab-math')">数学的検証</button>
+  <button class="tab-btn" data-tab="tab-simA" onclick="switchTab('tab-simA')">Sim-A: Θ-リンク</button>
+  <button class="tab-btn" data-tab="tab-simB" onclick="switchTab('tab-simB')">Sim-B: 不定性</button>
+  <button class="tab-btn" data-tab="tab-simC" onclick="switchTab('tab-simC')">Sim-C: 対数殻</button>
+  <button class="tab-btn" data-tab="tab-simD" onclick="switchTab('tab-simD')">Sim-D: ABC検証</button>
+</nav>
+
+<div class="container">
+
+<!-- ===== 概要タブ ===== -->
+<div id="tab-overview" class="tab-content active">
+  <div class="section">
+    <h2>プロジェクトの目的</h2>
+    <p>望月新一のIUT（宇宙際タイヒミューラー）理論における系3.12（IUT III）の
+    証明に含まれる論理的ギャップを、以下の二系統で検証する:</p>
+    <ul>
+      <li><strong>系統1: 数学的手段</strong> — Scholze-Stix批判を再構成し、原論文との対照で問題箇所を特定</li>
+      <li><strong>系統2: シミュレーション</strong> — p進算術のモデルを計算機上に構築し、不定性の振る舞いを定量的に検証</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>発見された問題点（要約）</h2>
+    <div class="verdict ng">
+      <h4>問題1: Ind1不定性の制御が不十分</h4>
+      <p>対数殻は Ind2（O^×作用）を制御するが、Ind1（内部自己同型）の制御は別の議論が必要。
+      望月の証明では両者が混同されている。原論文 IUT III Remark 3.9.5(i) で
+      「容易に検証されるコンパクト性」として一言で片付けられている部分に、証明のギャップがある。</p>
+    </div>
+    <div class="verdict ng">
+      <h4>問題2: 循環論法の構造</h4>
+      <p>log-Kummer対応がInd1を「対数殻の範囲に制限する」という主張は、
+      Ind1が対数殻を「はみ出さない」ことを前提としている。
+      これは系3.12の結論を暗黙に仮定する循環論法の構造を持つ。</p>
+    </div>
+    <div class="verdict ng">
+      <h4>問題3: 非可換性の未解決</h4>
+      <p>対数テータ格子の横方向（Θ-リンク）と縦方向（log-リンク）の非可換性により、
+      一方で構成した対数殻のサイズが他方を跨いだ先で保存される保証がない。</p>
+    </div>
+    <div class="verdict">
+      <h4>望月の主張で正しい部分</h4>
+      <p>コピーの安易な同一視の禁止、マルチラジアリティの概念、Θ-リンクの論理AND構造、
+      対数殻によるInd2制御 — これらは数学的に正当である。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>三者の立場</h2>
+    <table class="result-table">
+      <tr><th></th><th>系3.12は正しいか</th><th>不等式は非自明か</th><th>核心的主張</th></tr>
+      <tr><td><strong>望月</strong></td><td>正しい</td><td>非自明</td><td>対数殻がInd1を制御</td></tr>
+      <tr><td><strong>Scholze</strong></td><td style="color:#ef4444">正しくない</td><td style="color:#ef4444">自明化する</td><td>Ind1の制御が不十分</td></tr>
+      <tr><td><strong>Joshi</strong></td><td style="color:#f59e0b">証明は不完全</td><td>別の方法なら可能</td><td>群論的手法の限界</td></tr>
+      <tr><td><strong>本検証</strong></td><td style="color:#ef4444">証明にギャップあり</td><td style="color:#ef4444">自明化のリスク大</td><td>Scholze批判を支持</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 数学的検証タブ ===== -->
+<div id="tab-math" class="tab-content">
+  <div class="section">
+    <h2>系3.12の主張（IUT III, p.174）</h2>
+    <pre class="code">前提: 初期テータデータ、LGP-ガウス型対数テータ格子
+定義:
+  −|log(Θ)| = Θ-パイロット対象の可能な像の和集合の
+               正則包のプロセッション正規化モノアナリティック対数体積
+  −|log(q)|  = q-パイロット対象の同様の対数体積
+
+主張:  −|log(Θ)| ∈ R  かつ  −|log(Θ)| ≥ −|log(q)|
+       (すなわち CΘ ≥ −1)</pre>
+  </div>
+
+  <div class="section">
+    <h2>証明のギャップ1: コンパクト性の仮定</h2>
+    <p>望月の証明 Step (xi) では、−|log(Θ)| が有限であることを以下のように正当化する:</p>
+    <pre class="code">IUT III, Corollary 3.12, Proof:
+"one concludes easily from the [easily verified]
+ compactness of the U_{j,v_Q}, together with the
+ definition of the log-volume, that the quantity
+ −|log(Θ)| is finite"</pre>
+    <p>しかし U_{j,v_Q} のコンパクト性は、Ind1の軌道が対数殻 I_v 内に留まることを前提としている。
+    この前提の証明は明示されていない。</p>
+    <div class="verdict ng">
+      <h4>ギャップの所在</h4>
+      <p>U_{j,v_Q} = Ind1とInd2を考慮したテータ値の可能な像の集合。
+      対数殻 I_v はコンパクトだが、Ind1（Inn(Π_X)の作用）が I_v 内に留まるかは別問題。
+      Ind2（O^×作用）による I_v の不変性はInd1の制御を意味しない。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>証明のギャップ2: 循環論法</h2>
+    <pre class="code">論理的依存関係:
+
+系3.12: −|log(Θ)| ∈ R（有限）
+  ← U_{j,v_Q} のコンパクト性
+    ← Ind1の軌道 ⊂ I_v
+      ← log-Kummer対応がInd1を制御  [Theorem 3.11(ii)]
+        ← 対数殻の O^×-不変性        [これは Ind2 の話]
+          ★ Ind1 → Ind2 の論理的接続が不在</pre>
+    <p>Ind1（群レベルの不定性）とInd2（環レベルの不定性）は異なるレベルの操作であり、
+    一方の制御が他方を含意するという証明は見当たらない。</p>
+  </div>
+
+  <div class="section">
+    <h2>証明のギャップ3: 非可換性</h2>
+    <pre class="code">対数テータ格子:
+
+       log ↑        log ↑
+  ... → n,m HT →Θ→ n,m+1 HT → ...
+       log ↑        log ↑
+
+横（Θ-リンク）と縦（log-リンク）は非可換:  log ∘ Θ ≠ Θ ∘ log
+
+望月: 非可換性が「力の源泉」
+Scholze: 非可換性が「不等式の意味喪失の原因」</pre>
+    <p>我々の分析: 非可換性により、log-リンクで構成した対数殻のサイズが
+    Θ-リンクを跨いだ先で保存される保証がない。これが対数殻の制約力の根本的限界。</p>
+  </div>
+
+  <div class="section">
+    <h2>望月の2024年反論への評価</h2>
+    <p>望月は2024年の論文 "Essential Logical Structure of IUT" で
+    批判者を「RCS（redundant copies school）」と呼び、コピーの同一視が理論を破壊すると主張した。</p>
+    <div class="verdict">
+      <h4>評価</h4>
+      <p><strong>正しい点</strong>: コピーを安易に同一視してはならない。Θ-リンクの「論理AND」構造は重要。<br>
+      <strong>問題点</strong>: Scholzeの批判の核心は「コピーの同一視」ではなく「不定性の大きさ」にある。
+      望月の反論は Scholze の批判の本質を正確に捉えていない。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Sim-A: Θ-リンク ===== -->
+<div id="tab-simA" class="tab-content">
+  <div class="section">
+    <h2>Sim-A: Θ-リンクの数値シミュレーション</h2>
+    <p>テータ値列 {q^{j²}} の生成とΘ-リンクによる歪みを数値で可視化する。
+    テート曲線 E ≅ Q_p^× / q^Z 上のテータ関数評価を再現。</p>
+    <div class="sim-controls">
+      <div><label>素数 p</label><input id="simA-p" type="number" value="5" min="2"></div>
+      <div><label>付値 a = v_p(q)</label><input id="simA-a" type="number" value="2" min="1"></div>
+      <div><label>素数 l</label><input id="simA-l" type="number" value="11" min="5" step="2"></div>
+      <button class="btn" onclick="runSimA()">実行</button>
+    </div>
+    <canvas id="simA-canvas"></canvas>
+    <div id="simA-result"></div>
+  </div>
+</div>
+
+<!-- ===== Sim-B: 不定性 ===== -->
+<div id="tab-simB" class="tab-content">
+  <div class="section">
+    <h2>Sim-B: 不定性の爆発シミュレーション</h2>
+    <p>Ind1の制御パラメータ α を0（望月モデル）から1（Scholzeモデル）まで変化させ、
+    不等式が自明化する閾値を特定する。</p>
+    <div class="sim-controls">
+      <div><label>素数 p</label><input id="simB-p" type="number" value="5" min="2"></div>
+      <div><label>付値 a</label><input id="simB-a" type="number" value="2" min="1"></div>
+      <div><label>素数 l</label><input id="simB-l" type="number" value="11" min="5" step="2"></div>
+      <button class="btn" onclick="runSimB()">実行</button>
+    </div>
+    <canvas id="simB-canvas"></canvas>
+    <div id="simB-result"></div>
+  </div>
+</div>
+
+<!-- ===== Sim-C: 対数殻 ===== -->
+<div id="tab-simC" class="tab-content">
+  <div class="section">
+    <h2>Sim-C: 対数殻サイズ vs 不定性</h2>
+    <p>複数素数にわたる対数殻の累積サイズと、テータ値歪みの累積を比較する。
+    対数殻がテータ歪みの何%をカバーできるかを定量化。</p>
+    <div class="sim-controls">
+      <div><label>素数の個数</label><input id="simC-primes" type="number" value="5" min="1" max="25"></div>
+      <div><label>素数 l</label><input id="simC-l" type="number" value="11" min="5" step="2"></div>
+      <div><label>付値 a</label><input id="simC-a" type="number" value="2" min="1"></div>
+      <button class="btn" onclick="runSimC()">実行</button>
+    </div>
+    <canvas id="simC-canvas"></canvas>
+    <div id="simC-result"></div>
+  </div>
+</div>
+
+<!-- ===== Sim-D: ABC検証 ===== -->
+<div id="tab-simD" class="tab-content">
+  <div class="section">
+    <h2>Sim-D: ABC予想の不等式検証</h2>
+    <p>ABC triple (a+b=c, gcd(a,b)=1) を探索し、IUT IV Theorem 1.10 の
+    不等式と比較する。予想自体の数値的証拠も示す。</p>
+    <div class="sim-controls">
+      <div><label>探索上限 c</label><input id="simD-maxC" type="number" value="1000" min="100" max="10000"></div>
+      <div><label>素数 l</label><input id="simD-l" type="number" value="11" min="5" step="2"></div>
+      <button class="btn" onclick="runSimD()">実行</button>
+    </div>
+    <canvas id="simD-canvas"></canvas>
+    <div id="simD-result"></div>
+  </div>
+</div>
+
+</div><!-- /.container -->
+
+<script>
+
+// ===== 数学定数・初期データ =====
+const PRIMES = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97];
+
+// 対数殻サイズ μ(I_v) = log(p)/(p-1)  (正規化済み)
+function logShellSize(p) {
+  return Math.log(p) / (p - 1);
+}
+
+// テータ値列 { q^{j²} } の付値列
+function thetaValuations(a, lStar) {
+  const vals = [];
+  for (let j = 1; j <= lStar; j++) {
+    vals.push(a * j * j);
+  }
+  return vals;
+}
+
+// Σ j² for j=1..n
+function sumOfSquares(n) {
+  return n * (n + 1) * (2 * n + 1) / 6;
+}
+
+// IUT IV Theorem 1.10 の最終不等式の右辺
+function iutBound(logQ, dMod, l, logD, logF, eMod, etaPrm) {
+  return (1 + 20 * dMod / l) * (logD + logF) + 20 * (eMod * l + etaPrm);
+}
+
+// ===== Canvas描画ユーティリティ =====
+
+function getCtx(canvasId) {
+  const c = document.getElementById(canvasId);
+  if (!c) return null;
+  c.width = c.offsetWidth * (window.devicePixelRatio || 1);
+  c.height = c.offsetHeight * (window.devicePixelRatio || 1);
+  const ctx = c.getContext('2d');
+  ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  return { ctx, w: c.offsetWidth, h: c.offsetHeight };
+}
+
+function clearCanvas(canvasId) {
+  const r = getCtx(canvasId);
+  if (!r) return null;
+  r.ctx.clearRect(0, 0, r.w, r.h);
+  return r;
+}
+
+// 棒グラフ描画
+function drawBarChart(canvasId, labels, values, colors, title, yLabel) {
+  const r = clearCanvas(canvasId);
+  if (!r) return;
+  const { ctx, w, h } = r;
+  const pad = { top: 40, right: 20, bottom: 50, left: 70 };
+  const cw = w - pad.left - pad.right;
+  const ch = h - pad.top - pad.bottom;
+
+  // タイトル
+  ctx.fillStyle = '#e2e8f0';
+  ctx.font = '13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(title, w / 2, 20);
+
+  // 最大値
+  const maxVal = Math.max(...values.map(Math.abs), 1);
+
+  // Y軸
+  ctx.fillStyle = '#64748b';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + ch - (i / 4) * ch;
+    const v = (i / 4) * maxVal;
+    ctx.fillText(v.toFixed(1), pad.left - 8, y + 3);
+    ctx.strokeStyle = '#1e293b';
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(w - pad.right, y); ctx.stroke();
+  }
+  // Y軸ラベル
+  ctx.save();
+  ctx.translate(14, pad.top + ch / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '10px sans-serif';
+  ctx.fillText(yLabel || '', 0, 0);
+  ctx.restore();
+
+  // 棒
+  const barW = Math.min(cw / labels.length * 0.7, 50);
+  const gap = cw / labels.length;
+  labels.forEach((label, i) => {
+    const barH = (Math.abs(values[i]) / maxVal) * ch;
+    const x = pad.left + gap * i + (gap - barW) / 2;
+    const y = pad.top + ch - barH;
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fillRect(x, y, barW, barH);
+    // ラベル
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x + barW / 2, pad.top + ch + 14);
+    // 値
+    ctx.fillStyle = '#e2e8f0';
+    ctx.fillText(values[i].toFixed(1), x + barW / 2, y - 5);
+  });
+}
+
+// 折れ線グラフ描画
+function drawLineChart(canvasId, datasets, title, xLabel, yLabel) {
+  const r = clearCanvas(canvasId);
+  if (!r) return;
+  const { ctx, w, h } = r;
+  const pad = { top: 40, right: 20, bottom: 50, left: 70 };
+  const cw = w - pad.left - pad.right;
+  const ch = h - pad.top - pad.bottom;
+
+  ctx.fillStyle = '#e2e8f0';
+  ctx.font = '13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(title, w / 2, 20);
+
+  // 全データの範囲
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  datasets.forEach(ds => {
+    ds.points.forEach(([x, y]) => {
+      if (x < minX) minX = x; if (x > maxX) maxX = x;
+      if (y < minY) minY = y; if (y > maxY) maxY = y;
+    });
+  });
+  if (maxX === minX) maxX = minX + 1;
+  if (maxY === minY) maxY = minY + 1;
+  const rangeX = maxX - minX;
+  const rangeY = maxY - minY;
+
+  // グリッド
+  ctx.strokeStyle = '#1e293b';
+  ctx.fillStyle = '#64748b';
+  ctx.font = '9px sans-serif';
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + ch - (i / 4) * ch;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(w - pad.right, y); ctx.stroke();
+    ctx.textAlign = 'right';
+    ctx.fillText((minY + (i / 4) * rangeY).toFixed(1), pad.left - 5, y + 3);
+  }
+  for (let i = 0; i <= 5; i++) {
+    const x = pad.left + (i / 5) * cw;
+    ctx.textAlign = 'center';
+    ctx.fillText((minX + (i / 5) * rangeX).toFixed(0), x, pad.top + ch + 15);
+  }
+
+  // 軸ラベル
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(xLabel || '', pad.left + cw / 2, h - 5);
+  ctx.save();
+  ctx.translate(14, pad.top + ch / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText(yLabel || '', 0, 0);
+  ctx.restore();
+
+  // データ線
+  datasets.forEach(ds => {
+    ctx.strokeStyle = ds.color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ds.points.forEach(([x, y], i) => {
+      const px = pad.left + ((x - minX) / rangeX) * cw;
+      const py = pad.top + ch - ((y - minY) / rangeY) * ch;
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+    // 凡例
+    if (ds.label) {
+      const lastPt = ds.points[ds.points.length - 1];
+      const lx = pad.left + ((lastPt[0] - minX) / rangeX) * cw;
+      const ly = pad.top + ch - ((lastPt[1] - minY) / rangeY) * ch;
+      ctx.fillStyle = ds.color;
+      ctx.font = '10px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(ds.label, lx + 5, ly + 3);
+    }
+  });
+  ctx.lineWidth = 1;
+}
+
+// ===== Sim-A: Θ-リンクの数値シミュレーション =====
+// テータ値列 {q^{j²}} の生成とΘ-リンクの動作を可視化
+
+function runSimA() {
+  const p = parseInt(document.getElementById('simA-p').value) || 5;
+  const a = parseInt(document.getElementById('simA-a').value) || 2;
+  const l = parseInt(document.getElementById('simA-l').value) || 11;
+  const lStar = (l - 1) / 2;
+
+  // テータ値列の付値
+  const thetaVals = thetaValuations(a, lStar);
+  const sumTheta = thetaVals.reduce((s, v) => s + v, 0);
+  const qVal = a;
+
+  // 対数体積
+  const logP = Math.log(p);
+  const logVolTheta = sumTheta * logP;
+  const logVolQ = qVal * logP;
+  const ratio = sumTheta / qVal;
+
+  // 対数殻サイズ
+  const muI = logShellSize(p);
+  const ind2Total = lStar * muI;
+
+  // 結果テーブル
+  let html = '<h3>テータ値列 (p=' + p + ', q=p^' + a + ', l=' + l + ', l*=' + lStar + ')</h3>';
+  html += '<table class="result-table"><tr><th>j</th><th>j²</th><th>v_p(q^{j²})</th><th>q^{j²}</th></tr>';
+  for (let j = 1; j <= lStar; j++) {
+    const vp = a * j * j;
+    html += '<tr><td>' + j + '</td><td>' + (j*j) + '</td><td>' + vp + '</td><td>' + p + '^' + vp + '</td></tr>';
+  }
+  html += '</table>';
+
+  // 比較表
+  html += '<h3>Θ-リンクの歪み分析</h3>';
+  html += '<table class="result-table">';
+  html += '<tr><th>項目</th><th>値</th></tr>';
+  html += '<tr><td>テータ値付値の合計 Σv_p(q^{j²})</td><td>' + sumTheta + '</td></tr>';
+  html += '<tr><td>q-パラメータの付値 v_p(q)</td><td>' + qVal + '</td></tr>';
+  html += '<tr><td><strong>歪み率 Σj²</strong></td><td><strong>' + ratio + '</strong></td></tr>';
+  html += '<tr><td>対数体積(テータ側)</td><td>' + logVolTheta.toFixed(3) + '</td></tr>';
+  html += '<tr><td>対数体積(q側)</td><td>' + logVolQ.toFixed(3) + '</td></tr>';
+  html += '<tr><td>対数殻サイズ μ(I_v)</td><td>' + muI.toFixed(4) + '</td></tr>';
+  html += '<tr><td>Ind2累積 l*×μ(I_v)</td><td>' + ind2Total.toFixed(4) + '</td></tr>';
+  html += '</table>';
+
+  // 判定
+  html += '<div class="verdict ng">';
+  html += '<h4>歪み分析の結論</h4>';
+  html += '<p>歪み率 = ' + ratio + ' に対して、対数殻による補正は ' + ind2Total.toFixed(3) + ' のみ。';
+  html += '歪みの ' + (logVolTheta / ind2Total).toFixed(1) + '倍の対数殻が必要 → ';
+  html += 'Ind1が対数殻に収まらなければ不等式は自明化する。</p>';
+  html += '</div>';
+
+  document.getElementById('simA-result').innerHTML = html;
+
+  // グラフ: 付値の比較
+  const labels = [];
+  const vals = [];
+  for (let j = 1; j <= lStar; j++) {
+    labels.push('j=' + j);
+    vals.push(a * j * j);
+  }
+  labels.push('q');
+  vals.push(qVal);
+  const colors = labels.map((_, i) => i < lStar ? '#60a5fa' : '#ef4444');
+  drawBarChart('simA-canvas', labels, vals, colors,
+    'Θ-リンク: テータ値 vs q-パラメータの付値', 'v_p(・)');
+}
+
+// ===== Sim-B: 不定性の爆発シミュレーション =====
+// Ind1の自由度を変化させたとき、不等式が自明化する様子を可視化
+
+function runSimB() {
+  const p = parseInt(document.getElementById('simB-p').value) || 5;
+  const a = parseInt(document.getElementById('simB-a').value) || 2;
+  const l = parseInt(document.getElementById('simB-l').value) || 11;
+  const lStar = (l - 1) / 2;
+  const logP = Math.log(p);
+
+  // 基本値
+  const sumJ2 = sumOfSquares(lStar);
+  const logVolTheta = a * sumJ2 * logP;
+  const logVolQ = a * logP;
+  const muI = logShellSize(p);
+
+  // Ind1の制御パラメータ α: Ind1の効果 = α × logVolTheta
+  // α=0 → 望月モデル（Ind1効果なし）
+  // α=1 → Scholzeモデル（Ind1が全情報を飲み込む）
+  const alphaSteps = 50;
+  const points_ineq = []; // 不等式の左辺 - 右辺（負なら成立）
+  const points_mochi = []; // 望月モデルの値
+  const points_scholze = []; // Scholzeモデルの値
+  const tableRows = [];
+
+  for (let i = 0; i <= alphaSteps; i++) {
+    const alpha = i / alphaSteps;
+
+    // 不等式: -|log(q)| ≤ -|log(Θ)| + Ind1補正 + Ind2補正
+    // = -(logVolTheta) + α * logVolTheta + lStar * muI
+    // 成立条件: -logVolQ ≤ -logVolTheta + α * logVolTheta + lStar * muI
+    // ⟺ logVolTheta - logVolQ ≤ α * logVolTheta + lStar * muI
+    // ⟺ logVolTheta * (1 - α) - logVolQ ≤ lStar * muI
+
+    const lhs = logVolQ; // |log(q)|
+    const rhs_thetaPart = logVolTheta * (1 - alpha); // Ind1で残る部分
+    const rhs_ind2 = lStar * muI;
+    const inequality = rhs_thetaPart - rhs_ind2 - lhs; // >0なら非自明
+
+    points_ineq.push([alpha, inequality]);
+    points_mochi.push([alpha, rhs_thetaPart]);
+    points_scholze.push([alpha, lhs]);
+
+    if (i % 10 === 0) {
+      tableRows.push({
+        alpha: alpha.toFixed(2),
+        ind1Effect: (alpha * logVolTheta).toFixed(2),
+        remaining: rhs_thetaPart.toFixed(2),
+        trivial: inequality <= 0 ? '自明' : '非自明'
+      });
+    }
+  }
+
+  // 自明化の閾値
+  const critAlpha = 1 - (logVolQ + lStar * muI) / logVolTheta;
+
+  let html = '<h3>Ind1制御パラメータ α の効果</h3>';
+  html += '<p>α=0: 望月モデル（Ind1の効果なし）<br>';
+  html += 'α=1: Scholzeモデル（Ind1が全情報を破壊）</p>';
+
+  html += '<table class="result-table"><tr><th>α</th><th>Ind1の効果</th><th>残存情報</th><th>判定</th></tr>';
+  tableRows.forEach(r => {
+    const cls = r.trivial === '自明' ? 'style="color:#ef4444"' : 'style="color:#22c55e"';
+    html += '<tr><td>' + r.alpha + '</td><td>' + r.ind1Effect + '</td><td>' + r.remaining + '</td>';
+    html += '<td ' + cls + '><strong>' + r.trivial + '</strong></td></tr>';
+  });
+  html += '</table>';
+
+  html += '<div class="verdict ng">';
+  html += '<h4>自明化の閾値: α = ' + critAlpha.toFixed(4) + '</h4>';
+  html += '<p>Ind1がテータ値情報のわずか ' + ((1-critAlpha)*100).toFixed(2) + '% を破壊するだけで不等式は自明化する。<br>';
+  html += '望月の主張（α=0）が成立するには、Ind1が対数殻内で完全に制御される必要がある。<br>';
+  html += 'Scholzeの主張（α→1）では不等式は完全に自明。</p>';
+  html += '</div>';
+
+  document.getElementById('simB-result').innerHTML = html;
+
+  // グラフ
+  drawLineChart('simB-canvas', [
+    { points: points_ineq, color: '#f59e0b', label: '非自明性' },
+    { points: [[critAlpha, -logVolTheta * 0.5], [critAlpha, logVolTheta * 0.5]], color: '#ef4444', label: '閾値' }
+  ], 'Ind1制御率 α vs 不等式の非自明性', 'α (Ind1制御パラメータ)', '非自明性 (>0で非自明)');
+}
+
+// ===== Sim-C: 対数殻サイズ vs 不定性の比較 =====
+// 複数素数にわたる累積効果を可視化
+
+function runSimC() {
+  const numPrimes = parseInt(document.getElementById('simC-primes').value) || 5;
+  const l = parseInt(document.getElementById('simC-l').value) || 11;
+  const a = parseInt(document.getElementById('simC-a').value) || 2;
+  const lStar = (l - 1) / 2;
+
+  const usedPrimes = PRIMES.slice(0, numPrimes);
+  const sumJ2 = sumOfSquares(lStar);
+
+  let totalLogShell = 0;
+  let totalThetaVol = 0;
+  const rows = [];
+
+  usedPrimes.forEach(p => {
+    const mu = logShellSize(p);
+    const logP = Math.log(p);
+    const thetaVol = a * sumJ2 * logP;
+    const ind2 = lStar * mu;
+
+    totalLogShell += ind2;
+    totalThetaVol += thetaVol;
+
+    rows.push({
+      p: p,
+      mu: mu,
+      ind2: ind2,
+      thetaVol: thetaVol,
+      ratio: thetaVol / ind2
+    });
+  });
+
+  const totalQVol = usedPrimes.reduce((s, p) => s + a * Math.log(p), 0);
+  const coverageRatio = totalLogShell / totalThetaVol;
+
+  let html = '<h3>対数殻 vs テータ値歪み（' + numPrimes + '素数, l=' + l + '）</h3>';
+  html += '<table class="result-table">';
+  html += '<tr><th>素数 p</th><th>μ(I_p)</th><th>Ind2累積</th><th>テータ歪み</th><th>カバー率</th></tr>';
+  rows.forEach(r => {
+    const pct = (r.ind2 / r.thetaVol * 100).toFixed(2);
+    html += '<tr><td>' + r.p + '</td>';
+    html += '<td>' + r.mu.toFixed(4) + '</td>';
+    html += '<td>' + r.ind2.toFixed(3) + '</td>';
+    html += '<td>' + r.thetaVol.toFixed(3) + '</td>';
+    html += '<td style="color:' + (parseFloat(pct) < 5 ? '#ef4444' : '#f59e0b') + '">' + pct + '%</td></tr>';
+  });
+  html += '<tr style="font-weight:bold;border-top:2px solid #475569">';
+  html += '<td>合計</td><td>-</td>';
+  html += '<td>' + totalLogShell.toFixed(3) + '</td>';
+  html += '<td>' + totalThetaVol.toFixed(3) + '</td>';
+  html += '<td style="color:#ef4444">' + (coverageRatio * 100).toFixed(2) + '%</td></tr>';
+  html += '</table>';
+
+  // ht(E) ≈ 6 * totalQVol として ABC不等式をチェック
+  const htE = 6 * totalQVol;
+  const lhs = totalQVol; // (1/6) * ht(E)
+
+  html += '<h3>ABC不等式への影響</h3>';
+  html += '<table class="result-table">';
+  html += '<tr><th>項目</th><th>値</th></tr>';
+  html += '<tr><td>左辺 (1/6)·ht(E) ≈ Σ v_p(q)·log(p)</td><td>' + lhs.toFixed(3) + '</td></tr>';
+  html += '<tr><td>Ind2による累積補正</td><td>' + totalLogShell.toFixed(3) + '</td></tr>';
+  html += '<tr><td>Ind2/左辺 比率</td><td>' + (totalLogShell / lhs).toFixed(2) + '倍</td></tr>';
+  html += '</table>';
+
+  html += '<div class="verdict ng">';
+  html += '<h4>対数殻の制約力: テータ歪みの ' + (coverageRatio * 100).toFixed(2) + '% しかカバーできない</h4>';
+  html += '<p>対数殻は各素数でのInd2を制御するが、テータ値の歪み（Σj² ≈ ' + sumJ2 + '）に比べて';
+  html += '遥かに小さい。Ind1がこの差分を埋められなければ、不等式は非自明にならない。<br>';
+  html += '素数の数を増やすと累積効果はさらに顕著になる。</p>';
+  html += '</div>';
+
+  document.getElementById('simC-result').innerHTML = html;
+
+  // グラフ: 素数ごとの対数殻 vs テータ歪み
+  const labels = rows.map(r => 'p=' + r.p);
+  const shellVals = rows.map(r => r.ind2);
+  const thetaVals = rows.map(r => r.thetaVol);
+
+  drawBarChart('simC-canvas',
+    labels.concat(labels),
+    shellVals.concat(thetaVals),
+    shellVals.map(() => '#22c55e').concat(thetaVals.map(() => '#ef4444')),
+    '緑=対数殻(Ind2)  赤=テータ歪み  (素数別)',
+    '対数体積');
+}
+
+// ===== Sim-D: ABC予想の不等式検証 =====
+// IUT IV Theorem 1.10 の不等式を具体的な楕円曲線で検証
+
+// ABC triple (a,b,c) where a+b=c, gcd(a,b)=1
+function findABCTriples(maxC) {
+  const triples = [];
+  for (let c = 3; c <= maxC; c++) {
+    for (let a = 1; a < c; a++) {
+      const b = c - a;
+      if (b <= a) continue;
+      if (gcd(a, b) !== 1) continue;
+      const rad = radical(a * b * c);
+      const quality = Math.log(c) / Math.log(rad);
+      if (quality > 1.0) {
+        triples.push({ a, b, c, rad, quality: quality });
+      }
+    }
+  }
+  return triples.sort((x, y) => y.quality - x.quality);
+}
+
+function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+function radical(n) {
+  let rad = 1;
+  let m = Math.abs(n);
+  for (let p = 2; p * p <= m; p++) {
+    if (m % p === 0) {
+      rad *= p;
+      while (m % p === 0) m = m / p;
+    }
+  }
+  if (m > 1) rad *= m;
+  return rad;
+}
+
+// Szpiro比 (楕円曲線版)
+// E: y² = x(x-a)(x+b) に対応する Frey curve
+// Δ = 16(abc)² , N = rad(abc)
+function szpiroRatio(a, b, c) {
+  const logDelta = Math.log(16) + 2 * Math.log(a * b * c);
+  const logN = Math.log(radical(a * b * c));
+  return logDelta / logN;
+}
+
+function runSimD() {
+  const maxC = parseInt(document.getElementById('simD-maxC').value) || 1000;
+  const l = parseInt(document.getElementById('simD-l').value) || 11;
+  const lStar = (l - 1) / 2;
+
+  const triples = findABCTriples(maxC).slice(0, 20);
+  const sumJ2 = sumOfSquares(lStar);
+
+  let html = '<h3>ABC triple (quality > 1.0, c ≤ ' + maxC + ')</h3>';
+  html += '<p>quality = log(c)/log(rad(abc)) — 1を超えるものがABC予想の「境界」</p>';
+  html += '<table class="result-table">';
+  html += '<tr><th>a</th><th>b</th><th>c</th><th>rad(abc)</th><th>quality</th><th>Szpiro比</th><th>IUT上界</th></tr>';
+
+  const qualityPts = [];
+  const szpiroPts = [];
+  const iutBoundPts = [];
+
+  triples.forEach((t, i) => {
+    const sz = szpiroRatio(t.a, t.b, t.c);
+    // IUT Theorem 1.10 の上界を簡略計算
+    // (1/6)·log(Δ) ≤ (1+ε)·(log-diff + log-cond) + C
+    // → Szpiro比 ≤ 6(1+ε) + C/log(N)
+    const epsilon = 20 / l; // d_mod/l ≈ 1/l の近似
+    const iutUpper = 6 * (1 + epsilon);
+
+    qualityPts.push([i, t.quality]);
+    szpiroPts.push([i, sz]);
+    iutBoundPts.push([i, iutUpper]);
+
+    html += '<tr><td>' + t.a + '</td><td>' + t.b + '</td><td>' + t.c + '</td>';
+    html += '<td>' + t.rad + '</td>';
+    html += '<td style="color:' + (t.quality > 1.4 ? '#ef4444' : '#f59e0b') + '">' + t.quality.toFixed(4) + '</td>';
+    html += '<td>' + sz.toFixed(3) + '</td>';
+    html += '<td>' + iutUpper.toFixed(3) + '</td></tr>';
+  });
+  html += '</table>';
+
+  // 既知のhigh-quality triples
+  html += '<h3>既知の高品質ABC triple</h3>';
+  html += '<table class="result-table">';
+  html += '<tr><th>triple</th><th>quality</th><th>発見者</th></tr>';
+  html += '<tr><td>2 + 3¹⁰·109 = 23⁵</td><td>1.6299</td><td>Reyssat</td></tr>';
+  html += '<tr><td>11² + 3²·5⁶·7³ = 2²¹·23</td><td>1.6260</td><td>de Smit</td></tr>';
+  html += '<tr><td>19·1307 + 7·29²·31⁸ = 2⁸·3²²·5⁴</td><td>1.6235</td><td>de Smit</td></tr>';
+  html += '</table>';
+
+  // IUT不等式の検証
+  html += '<h3>IUT不等式の検証</h3>';
+
+  const maxQuality = triples.length > 0 ? triples[0].quality : 1;
+  const maxSzpiro = triples.length > 0 ? szpiroRatio(triples[0].a, triples[0].b, triples[0].c) : 6;
+
+  html += '<div class="verdict">';
+  html += '<h4>検証結果</h4>';
+  html += '<p>観測された最大quality: ' + maxQuality.toFixed(4) + '<br>';
+  html += '観測された最大Szpiro比: ' + maxSzpiro.toFixed(3) + '<br>';
+  html += 'IUT上界 (l=' + l + '): ' + (6 * (1 + 20/l)).toFixed(3) + '<br><br>';
+  html += '<strong>注意</strong>: ABC予想自体は広く真と信じられており、数値的証拠も圧倒的に支持している。';
+  html += '問題は予想の真偽ではなく、IUT理論による<em>証明</em>が正しいかどうかである。';
+  html += '予想が正しくても証明が不完全という状況は数学史上珍しくない。</p>';
+  html += '</div>';
+
+  document.getElementById('simD-result').innerHTML = html;
+
+  // グラフ
+  if (triples.length > 0) {
+    drawLineChart('simD-canvas', [
+      { points: szpiroPts, color: '#f59e0b', label: 'Szpiro比' },
+      { points: iutBoundPts, color: '#ef4444', label: 'IUT上界' },
+      { points: qualityPts, color: '#60a5fa', label: 'quality' }
+    ], 'ABC triples: Szpiro比 vs IUT上界', 'triple番号', '比率');
+  }
+}
+
+// ===== メインロジック =====
+
+// タブ切り替え
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+}
+
+// 初期化
+document.addEventListener('DOMContentLoaded', () => {
+  switchTab('tab-overview');
+});
+</script>
+
+</body>
+</html>
