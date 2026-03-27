@@ -1,7 +1,6 @@
 // ===== Sim-D: ABC予想の不等式検証 =====
-// IUT IV Theorem 1.10 の不等式を具体的な楕円曲線で検証
+// IUT IV Theorem 1.10 の不等式を具体的なABC tripleで検証
 
-// ABC triple (a,b,c) where a+b=c, gcd(a,b)=1
 function findABCTriples(maxC) {
   const triples = [];
   for (let c = 3; c <= maxC; c++) {
@@ -12,7 +11,7 @@ function findABCTriples(maxC) {
       const rad = radical(a * b * c);
       const quality = Math.log(c) / Math.log(rad);
       if (quality > 1.0) {
-        triples.push({ a, b, c, rad, quality: quality });
+        triples.push({ a, b, c, rad, quality });
       }
     }
   }
@@ -34,9 +33,6 @@ function radical(n) {
   return rad;
 }
 
-// Szpiro比 (楕円曲線版)
-// E: y² = x(x-a)(x+b) に対応する Frey curve
-// Δ = 16(abc)² , N = rad(abc)
 function szpiroRatio(a, b, c) {
   const logDelta = Math.log(16) + 2 * Math.log(a * b * c);
   const logN = Math.log(radical(a * b * c));
@@ -51,10 +47,21 @@ function runSimD() {
   const triples = findABCTriples(maxC).slice(0, 20);
   const sumJ2 = sumOfSquares(lStar);
 
-  let html = '<h3>ABC triple (quality > 1.0, c ≤ ' + maxC + ')</h3>';
-  html += '<p>quality = log(c)/log(rad(abc)) — 1を超えるものがABC予想の「境界」</p>';
+  // ★グラフの読み方
+  let html = '<div class="verdict">';
+  html += '<h4>グラフの読み方</h4>';
+  html += '<p>ABC予想: a+b=c, gcd(a,b)=1 のとき、c < rad(abc)^{1+ε} が（ほぼ）常に成立<br>';
+  html += '<strong>quality</strong> = log(c)/log(rad(abc)) — これが1を超えると「珍しい」triple<br><br>';
+  html += '<strong style="color:#60a5fa">青い線</strong> = quality値（1を超えるものを表示）<br>';
+  html += '<strong style="color:#f59e0b">黄色い線</strong> = Szpiro比（楕円曲線版の指標）<br>';
+  html += '<strong style="color:#ef4444">赤い線</strong> = IUT Theorem 1.10 が主張する上界<br><br>';
+  html += '→ 黄色が赤を超えたら IUT の主張に反する反例（見つかっていない）<br>';
+  html += '→ ABC予想自体は真と広く信じられている。問題は<strong>証明の正しさ</strong>。</p>';
+  html += '</div>';
+
+  html += '<h3>ABC triple (quality > 1.0, c ≤ ' + maxC + ')</h3>';
   html += '<table class="result-table">';
-  html += '<tr><th>a</th><th>b</th><th>c</th><th>rad(abc)</th><th>quality</th><th>Szpiro比</th><th>IUT上界</th></tr>';
+  html += '<tr><th>a</th><th>b</th><th>c=a+b</th><th>rad(abc)</th><th>quality</th><th>Szpiro比</th><th>IUT上界</th></tr>';
 
   const qualityPts = [];
   const szpiroPts = [];
@@ -62,57 +69,54 @@ function runSimD() {
 
   triples.forEach((t, i) => {
     const sz = szpiroRatio(t.a, t.b, t.c);
-    // IUT Theorem 1.10 の上界を簡略計算
-    // (1/6)·log(Δ) ≤ (1+ε)·(log-diff + log-cond) + C
-    // → Szpiro比 ≤ 6(1+ε) + C/log(N)
-    const epsilon = 20 / l; // d_mod/l ≈ 1/l の近似
+    const epsilon = 20 / l;
     const iutUpper = 6 * (1 + epsilon);
 
     qualityPts.push([i, t.quality]);
     szpiroPts.push([i, sz]);
     iutBoundPts.push([i, iutUpper]);
 
+    const qColor = t.quality > 1.4 ? '#ef4444' : t.quality > 1.2 ? '#f59e0b' : '#e2e8f0';
     html += '<tr><td>' + t.a + '</td><td>' + t.b + '</td><td>' + t.c + '</td>';
     html += '<td>' + t.rad + '</td>';
-    html += '<td style="color:' + (t.quality > 1.4 ? '#ef4444' : '#f59e0b') + '">' + t.quality.toFixed(4) + '</td>';
+    html += '<td style="color:' + qColor + ';font-weight:bold">' + t.quality.toFixed(4) + '</td>';
     html += '<td>' + sz.toFixed(3) + '</td>';
     html += '<td>' + iutUpper.toFixed(3) + '</td></tr>';
   });
   html += '</table>';
 
-  // 既知のhigh-quality triples
-  html += '<h3>既知の高品質ABC triple</h3>';
+  html += '<h3>既知の高品質ABC triple（参考）</h3>';
   html += '<table class="result-table">';
   html += '<tr><th>triple</th><th>quality</th><th>発見者</th></tr>';
-  html += '<tr><td>2 + 3¹⁰·109 = 23⁵</td><td>1.6299</td><td>Reyssat</td></tr>';
-  html += '<tr><td>11² + 3²·5⁶·7³ = 2²¹·23</td><td>1.6260</td><td>de Smit</td></tr>';
-  html += '<tr><td>19·1307 + 7·29²·31⁸ = 2⁸·3²²·5⁴</td><td>1.6235</td><td>de Smit</td></tr>';
+  html += '<tr><td>2 + 3<sup>10</sup>·109 = 23<sup>5</sup></td><td>1.6299</td><td>Reyssat</td></tr>';
+  html += '<tr><td>11<sup>2</sup> + 3<sup>2</sup>·5<sup>6</sup>·7<sup>3</sup> = 2<sup>21</sup>·23</td><td>1.6260</td><td>de Smit</td></tr>';
   html += '</table>';
-
-  // IUT不等式の検証
-  html += '<h3>IUT不等式の検証</h3>';
 
   const maxQuality = triples.length > 0 ? triples[0].quality : 1;
   const maxSzpiro = triples.length > 0 ? szpiroRatio(triples[0].a, triples[0].b, triples[0].c) : 6;
 
-  html += '<div class="verdict">';
-  html += '<h4>検証結果</h4>';
-  html += '<p>観測された最大quality: ' + maxQuality.toFixed(4) + '<br>';
-  html += '観測された最大Szpiro比: ' + maxSzpiro.toFixed(3) + '<br>';
-  html += 'IUT上界 (l=' + l + '): ' + (6 * (1 + 20/l)).toFixed(3) + '<br><br>';
-  html += '<strong>注意</strong>: ABC予想自体は広く真と信じられており、数値的証拠も圧倒的に支持している。';
-  html += '問題は予想の真偽ではなく、IUT理論による<em>証明</em>が正しいかどうかである。';
-  html += '予想が正しくても証明が不完全という状況は数学史上珍しくない。</p>';
+  html += '<div class="verdict ok">';
+  html += '<h4>ABC予想の数値的証拠: 圧倒的に支持</h4>';
+  html += '<p>c ≤ ' + maxC + ' の範囲で最大quality = ' + maxQuality.toFixed(4) + '<br>';
+  html += 'quality > 2 の triple は発見されていない（予想は quality < 1+ε を主張）<br>';
+  html += '→ ABC予想自体は真である可能性が極めて高い。</p>';
+  html += '</div>';
+
+  html += '<div class="verdict ng">';
+  html += '<h4>ただし: 予想が真でも証明が正しいとは限らない</h4>';
+  html += '<p>「答え」が正しくても「解法」に誤りがあることは数学では珍しくない。<br>';
+  html += '有名な例: ケンプの四色定理の証明（1879年、11年後に誤り発覚）<br>';
+  html += 'IUT理論の場合、ABC予想の真偽と系3.12の証明の正しさは独立な問題。<br>';
+  html += '本プロジェクトが検証しているのは<strong>証明の論理的健全性</strong>であり、予想の真偽ではない。</p>';
   html += '</div>';
 
   document.getElementById('simD-result').innerHTML = html;
 
-  // グラフ
   if (triples.length > 0) {
     drawLineChart('simD-canvas', [
       { points: szpiroPts, color: '#f59e0b', label: 'Szpiro比' },
       { points: iutBoundPts, color: '#ef4444', label: 'IUT上界' },
       { points: qualityPts, color: '#60a5fa', label: 'quality' }
-    ], 'ABC triples: Szpiro比 vs IUT上界', 'triple番号', '比率');
+    ], '青=quality  黄=Szpiro比  赤=IUT上界（黄が赤を超えたら反例）', 'triple番号', '比率');
   }
 }
