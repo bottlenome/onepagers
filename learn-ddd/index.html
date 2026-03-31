@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDD実践入門 - OnePagers</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.8;
+    }
+
+    /* --- Header --- */
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border-bottom: 1px solid #334155;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .header a.back { color: #60a5fa; text-decoration: none; font-size: 0.9rem; }
+    .header a.back:hover { text-decoration: underline; }
+    .header h1 { font-size: 2rem; margin: 0.75rem 0 0.25rem; }
+    .header .subtitle { color: #94a3b8; font-size: 0.95rem; }
+
+    /* --- Nav --- */
+    .nav {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .nav a {
+      display: inline-block;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .nav a:hover, .nav a.active { background: #334155; color: #e2e8f0; }
+
+    /* --- Main --- */
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* --- Section --- */
+    .section {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .section h2 {
+      font-size: 1.3rem;
+      color: #93c5fd;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section h2 .tag {
+      background: #334155;
+      color: #facc15;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .section h3 {
+      font-size: 1rem;
+      color: #cbd5e1;
+      margin: 1.25rem 0 0.5rem;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 0.25rem;
+    }
+    .section p, .section li {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .section ul, .section ol { padding-left: 1.3rem; margin: 0.5rem 0; }
+    .section li { margin-bottom: 0.3rem; }
+
+    /* --- Highlight box --- */
+    .highlight {
+      background: #0f172a;
+      border-left: 3px solid #60a5fa;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.9rem;
+    }
+    .highlight strong { color: #93c5fd; }
+
+    .warn {
+      border-left-color: #f59e0b;
+    }
+    .warn strong { color: #fbbf24; }
+
+    /* --- Code block --- */
+    pre {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin: 0.75rem 0;
+      color: #e2e8f0;
+    }
+    code { font-family: "Fira Code", "SF Mono", Consolas, monospace; }
+    .kw { color: #c084fc; }
+    .ty { color: #67e8f9; }
+    .str { color: #86efac; }
+    .cm { color: #64748b; }
+    .fn { color: #fbbf24; }
+
+    /* --- Interactive: Ubiquitous Language --- */
+    .ul-exercise {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 600px) { .ul-exercise { grid-template-columns: 1fr; } }
+    .ul-col h4 {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+    }
+    .ul-term {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.85rem;
+    }
+    .ul-term:hover { border-color: #60a5fa; }
+    .ul-term.selected { border-color: #22c55e; background: #14532d22; }
+    .ul-term .bad { color: #f87171; text-decoration: line-through; margin-right: 0.5rem; }
+    .ul-term .good { color: #86efac; }
+    .ul-term .explain { display: none; color: #94a3b8; font-size: 0.8rem; margin-top: 0.3rem; }
+    .ul-term.selected .explain { display: block; }
+
+    /* --- DDD Map (概要図) --- */
+    .ddd-map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 600px) { .ddd-map { grid-template-columns: 1fr; } }
+    .map-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .map-card:hover { border-color: #60a5fa; transform: translateY(-2px); }
+    .map-card.strategic { border-left: 3px solid #a78bfa; }
+    .map-card.tactical { border-left: 3px solid #34d399; }
+    .map-card h4 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+    .map-card .map-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-bottom: 0.4rem;
+    }
+    .strategic .map-tag { background: #a78bfa33; color: #a78bfa; }
+    .tactical .map-tag { background: #34d39933; color: #34d399; }
+    .map-card p { font-size: 0.8rem; color: #94a3b8; }
+
+    /* --- Bounded Context boxes --- */
+    .ctx-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 700px) { .ctx-grid { grid-template-columns: 1fr; } }
+    .ctx-box {
+      background: #0f172a;
+      border: 2px solid #334155;
+      border-radius: 10px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ctx-box:hover { transform: translateY(-2px); }
+    .ctx-header { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .ctx-word { font-size: 1.1rem; font-weight: 700; color: #e2e8f0; }
+    .ctx-detail { display: none; margin-top: 0.75rem; border-top: 1px solid #334155; padding-top: 0.75rem; }
+    .ctx-detail p { font-size: 0.82rem; color: #94a3b8; margin-bottom: 0.5rem; }
+    .ctx-box.open .ctx-detail { display: block; }
+
+    /* --- Entity vs VO compare --- */
+    .ev-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 600px) { .ev-compare { grid-template-columns: 1fr; } }
+    .ev-card {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 1.25rem;
+      border: 1px solid #334155;
+    }
+    .ev-card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .entity-card { border-top: 3px solid #60a5fa; }
+    .entity-card h4 { color: #60a5fa; }
+    .vo-card { border-top: 3px solid #a78bfa; }
+    .vo-card h4 { color: #a78bfa; }
+    .ev-key {
+      background: #1e293b;
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      color: #94a3b8;
+    }
+    .ev-card ul { font-size: 0.85rem; margin-bottom: 0.75rem; }
+    .ev-example {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #334155;
+    }
+
+    /* --- Flowchart --- */
+    .flowchart {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .flow-step { margin: 0.5rem 0; }
+    .flow-q { font-size: 0.95rem; margin-bottom: 0.75rem; color: #e2e8f0; }
+    .flow-btns button {
+      background: #334155;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      padding: 0.4rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 0 0.3rem;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .flow-btns button:hover { background: #475569; }
+    .flow-a {
+      font-size: 0.95rem;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+    .entity-a { background: #60a5fa22; border: 1px solid #60a5fa55; color: #93c5fd; }
+    .vo-a { background: #a78bfa22; border: 1px solid #a78bfa55; color: #c4b5fd; }
+    .flow-reset {
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      padding: 0.3rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .flow-reset:hover { color: #e2e8f0; border-color: #60a5fa; }
+
+    /* --- Aggregate diagram --- */
+    .agg-diagram { margin: 1rem 0; }
+    .agg-root {
+      background: #0f172a;
+      border: 2px solid #60a5fa;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .agg-label {
+      font-size: 0.7rem;
+      color: #60a5fa;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .agg-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .agg-children { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .agg-child {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.6rem 0.8rem;
+      flex: 1;
+      min-width: 150px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .agg-child:hover { border-color: #60a5fa; }
+    .child-type { font-size: 0.65rem; color: #94a3b8; display: block; }
+    .child-name { font-size: 0.9rem; font-weight: 600; }
+    .entity-child { border-left: 3px solid #60a5fa; }
+    .entity-child .child-name { color: #93c5fd; }
+    .vo-child { border-left: 3px solid #a78bfa; }
+    .vo-child .child-name { color: #c4b5fd; }
+    .child-detail { display: none; font-size: 0.8rem; color: #94a3b8; margin-top: 0.4rem; }
+    .agg-child.open .child-detail { display: block; }
+
+    /* --- Event flow --- */
+    .event-flow { margin: 1rem 0; }
+    .event-trigger {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: block;
+      margin: 0 auto 1rem;
+    }
+    .event-trigger:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(37,99,235,0.4); }
+    .event-trigger:disabled { opacity: 0.5; cursor: default; transform: none; }
+    .event-timeline { position: relative; padding-left: 2rem; }
+    .event-item {
+      position: relative;
+      padding: 0.5rem 0 0.5rem 1rem;
+      opacity: 0.25;
+      transition: opacity 0.5s;
+    }
+    .event-item.visible { opacity: 1; }
+    .event-dot {
+      position: absolute;
+      left: -2rem;
+      top: 0.75rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #334155;
+      border: 2px solid #475569;
+      transition: all 0.3s;
+    }
+    .event-item.visible .event-dot { background: #22c55e; border-color: #4ade80; box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+    .event-name { font-size: 0.9rem; font-weight: 700; color: #86efac; }
+    .event-desc { font-size: 0.8rem; color: #94a3b8; }
+    .event-timeline::before {
+      content: '';
+      position: absolute;
+      left: -0.35rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #334155;
+    }
+
+    /* --- Layer diagram --- */
+    .layer-diagram { margin: 1rem 0; }
+    .layer {
+      border: 1px solid #334155;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .layer:hover { border-color: #60a5fa; }
+    .layer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .layer-arrow { font-size: 0.7rem; transition: transform 0.2s; color: #64748b; }
+    .layer.open .layer-arrow { transform: rotate(180deg); }
+    .layer-body {
+      display: none;
+      padding: 0 1rem 0.75rem;
+      font-size: 0.85rem;
+    }
+    .layer-body p { margin-bottom: 0.4rem; color: #94a3b8; }
+    .layer-body code { background: #0f172a; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; color: #86efac; }
+    .layer.open .layer-body { display: block; }
+    .layer-ui { background: #1e1b4b; }
+    .layer-ui .layer-name { color: #a5b4fc; }
+    .layer-app { background: #1e293b; }
+    .layer-app .layer-name { color: #93c5fd; }
+    .layer-domain { background: #14532d33; border-color: #22c55e55; }
+    .layer-domain .layer-name { color: #86efac; }
+    .layer-infra { background: #1c1917; }
+    .layer-infra .layer-name { color: #fdba74; }
+
+    /* --- Quiz --- */
+    .quiz-items { margin: 1rem 0; }
+    .quiz-item {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s;
+    }
+    .quiz-concept { font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .quiz-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .quiz-buttons button {
+      background: #334155;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quiz-buttons button:hover { background: #475569; }
+    .quiz-buttons button:disabled { cursor: default; opacity: 0.5; }
+    .quiz-buttons button.correct { background: #166534; border-color: #22c55e; color: #86efac; opacity: 1; }
+    .quiz-buttons button.wrong { background: #7f1d1d; border-color: #ef4444; color: #fca5a5; opacity: 1; }
+    .quiz-feedback {
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+      min-height: 1.2em;
+    }
+    .quiz-item.answered { border-color: #22c55e55; }
+    .quiz-item.wrong-answer { border-color: #ef444455; }
+    .quiz-score {
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      min-height: 1.5em;
+    }
+    .quiz-reset-btn {
+      display: block;
+      margin: 0 auto;
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid #475569;
+      padding: 0.4rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .quiz-reset-btn:hover { border-color: #60a5fa; color: #e2e8f0; }
+
+    /* --- Summary steps --- */
+    .summary-steps { margin: 1rem 0; }
+    .summary-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid #334155;
+    }
+    .summary-step:last-child { border-bottom: none; }
+    .step-num {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-body strong { color: #e2e8f0; font-size: 0.95rem; }
+    .step-body p { font-size: 0.85rem; color: #94a3b8; margin-top: 0.2rem; }
+
+    /* --- Footer --- */
+    .footer {
+      text-align: center;
+      color: #475569;
+      font-size: 0.75rem;
+      padding: 2rem 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <a class="back" href="../index.html">&larr; OnePagers に戻る</a>
+  <h1>DDD 実践入門</h1>
+  <p class="subtitle">ドメイン駆動設計の核心を、インタラクティブに学ぶ</p>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <a href="#overview">全体像</a>
+  <a href="#ubiquitous-language">ユビキタス言語</a>
+  <a href="#bounded-context">境界づけられたコンテキスト</a>
+  <a href="#entity-vo">エンティティ vs 値オブジェクト</a>
+  <a href="#aggregate">集約</a>
+  <a href="#domain-event">ドメインイベント</a>
+  <a href="#repository">リポジトリ</a>
+  <a href="#layered-arch">レイヤードアーキテクチャ</a>
+  <a href="#modeling-exercise">モデリング演習</a>
+</nav>
+
+<div class="container">
+
+  <!-- ===== Section 1: 全体像 ===== -->
+  <div class="section" id="overview">
+    <h2><span class="tag">INTRO</span> DDDの全体像</h2>
+    <p>ドメイン駆動設計（DDD）は、Eric Evans が2003年に提唱した<strong>「ソフトウェアの核心にある複雑さに立ち向かう」</strong>ための設計手法です。技術ではなく<strong>ビジネスドメインの理解</strong>を設計の中心に据えます。</p>
+
+    <div class="highlight">
+      <strong>DDDの根本思想:</strong> ソフトウェアの構造は、ビジネスドメインの構造を反映すべきである。コードはドメインエキスパートと開発者の共通言語で書かれるべきである。
+    </div>
+
+    <h3>戦略的設計 vs 戦術的設計</h3>
+    <p>DDDは大きく2つのレベルに分かれます。クリックして詳細を確認してください。</p>
+
+    <div class="ddd-map">
+      <div class="map-card strategic" onclick="this.classList.toggle('expanded')">
+        <span class="map-tag">戦略的設計</span>
+        <h4>ユビキタス言語</h4>
+        <p>チーム全員が使う共通のドメイン用語を定義し、コードにも反映する</p>
+      </div>
+      <div class="map-card strategic">
+        <span class="map-tag">戦略的設計</span>
+        <h4>境界づけられたコンテキスト</h4>
+        <p>モデルが有効な範囲を明確に区切り、コンテキスト間の関係を定義する</p>
+      </div>
+      <div class="map-card tactical">
+        <span class="map-tag">戦術的設計</span>
+        <h4>エンティティ / 値オブジェクト</h4>
+        <p>ドメインの概念をオブジェクトとしてモデリングする基本パターン</p>
+      </div>
+      <div class="map-card tactical">
+        <span class="map-tag">戦術的設計</span>
+        <h4>集約 / リポジトリ</h4>
+        <p>データの整合性境界と永続化の抽象化パターン</p>
+      </div>
+      <div class="map-card tactical">
+        <span class="map-tag">戦術的設計</span>
+        <h4>ドメインイベント</h4>
+        <p>ドメインで起きた出来事を表現し、コンテキスト間を疎結合に繋ぐ</p>
+      </div>
+      <div class="map-card tactical">
+        <span class="map-tag">戦術的設計</span>
+        <h4>ドメインサービス</h4>
+        <p>特定のエンティティに属さないドメインロジックを表現する</p>
+      </div>
+    </div>
+
+    <div class="highlight warn">
+      <strong>よくある誤解:</strong> DDDは「戦術的パターン（Entity, VO, Repository…）を使うこと」ではありません。本質は戦略的設計 — ドメインの深い理解とモデリングにあります。パターンは手段に過ぎません。
+    </div>
+  </div>
+
+  <!-- ===== Section 2: ユビキタス言語 ===== -->
+  <div class="section" id="ubiquitous-language">
+    <h2><span class="tag">戦略</span> ユビキタス言語</h2>
+    <p>ユビキタス言語（Ubiquitous Language）は DDDの最も重要な概念です。ドメインエキスパートと開発者が<strong>同じ言葉</strong>を使い、その言葉がそのまま<strong>コードのクラス名・メソッド名</strong>になります。</p>
+
+    <div class="highlight">
+      <strong>なぜ重要？</strong> 「仕様書」と「コード」で別の言葉を使うと、翻訳コストが発生し、誤解・バグの温床になる。言葉を統一すれば、会話がそのまま設計になる。
+    </div>
+
+    <h3>悪い例 → 良い例</h3>
+    <p>ECサイトのドメインで考えてみましょう。用語をクリックすると解説が表示されます。</p>
+
+    <div class="ul-exercise">
+      <div class="ul-col">
+        <h4>開発者用語（技術寄り）</h4>
+        <div class="ul-term" onclick="this.classList.toggle('selected')">
+          <span class="bad">user_data_record</span> → <span class="good">Customer（顧客）</span>
+          <div class="explain">「データレコード」は技術用語。ビジネスでは「顧客」と呼ぶ。クラス名も Customer に。</div>
+        </div>
+        <div class="ul-term" onclick="this.classList.toggle('selected')">
+          <span class="bad">item_list</span> → <span class="good">Cart（カート）</span>
+          <div class="explain">「アイテムリスト」はデータ構造の名前。「カートに入れる」がドメインの言葉。</div>
+        </div>
+        <div class="ul-term" onclick="this.classList.toggle('selected')">
+          <span class="bad">flag_is_done</span> → <span class="good">Order.fulfill()（注文を履行する）</span>
+          <div class="explain">フラグの ON/OFF ではなく「注文を履行する」というドメインの振る舞いとして表現する。</div>
+        </div>
+      </div>
+      <div class="ul-col">
+        <h4>ドメイン言語で書くコード</h4>
+<pre><code><span class="cm">// ❌ 技術用語ベース</span>
+<span class="kw">function</span> <span class="fn">updateStatus</span>(record, flag) {
+  record.status_flag = flag;
+}
+
+<span class="cm">// ✅ ユビキタス言語ベース</span>
+<span class="kw">class</span> <span class="ty">Order</span> {
+  <span class="fn">fulfill</span>() {
+    <span class="kw">if</span> (!<span class="kw">this</span>.canFulfill()) {
+      <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="str">"在庫不足で履行不可"</span>);
+    }
+    <span class="kw">this</span>.status = <span class="ty">OrderStatus</span>.Fulfilled;
+    <span class="kw">this</span>.fulfilledAt = <span class="kw">new</span> <span class="ty">Date</span>();
+  }
+}</code></pre>
+      </div>
+    </div>
+
+    <h3>実践のポイント</h3>
+    <ul>
+      <li><strong>用語集を作る</strong> — プロジェクト Wiki やコードの README に「この文脈での用語」を定義する</li>
+      <li><strong>コードレビューで言葉を確認</strong> — 変数名・メソッド名がドメイン用語と一致しているか？</li>
+      <li><strong>ドメインエキスパートとの会話をそのまま設計に</strong> — 「注文を<em>キャンセル</em>する」なら <code>order.cancel()</code></li>
+    </ul>
+  </div>
+
+  <!-- ===== Placeholder sections (will be added in next steps) ===== -->
+  <!-- ===== Section 3: 境界づけられたコンテキスト ===== -->
+  <div class="section" id="bounded-context">
+    <h2><span class="tag">戦略</span> 境界づけられたコンテキスト</h2>
+    <p>Bounded Context（境界づけられたコンテキスト）は、<strong>モデルが一貫した意味を持つ範囲</strong>を明確に区切るものです。同じ「商品」でも、販売・在庫・配送では意味が異なります。</p>
+
+    <div class="highlight">
+      <strong>核心:</strong> 1つの巨大なモデルを作るのではなく、文脈ごとにモデルを分ける。各コンテキスト内ではユビキタス言語が統一される。
+    </div>
+
+    <h3>同じ言葉、違う意味</h3>
+    <p>「商品（Product）」がコンテキストによってどう変わるか見てみましょう。ボックスをクリックして詳細を確認できます。</p>
+
+    <div class="ctx-grid" id="ctxGrid">
+      <div class="ctx-box" style="border-color: #a78bfa;" onclick="this.classList.toggle('open')">
+        <div class="ctx-header" style="color: #a78bfa;">販売コンテキスト</div>
+        <div class="ctx-word">Product</div>
+        <div class="ctx-detail">
+          <p>名前、価格、説明文、カテゴリ、レビュー評価</p>
+          <pre><code><span class="kw">class</span> <span class="ty">Product</span> {
+  name: <span class="ty">string</span>
+  price: <span class="ty">Money</span>
+  description: <span class="ty">string</span>
+  category: <span class="ty">Category</span>
+  <span class="fn">applyDiscount</span>(rate) { ... }
+}</code></pre>
+        </div>
+      </div>
+      <div class="ctx-box" style="border-color: #34d399;" onclick="this.classList.toggle('open')">
+        <div class="ctx-header" style="color: #34d399;">在庫コンテキスト</div>
+        <div class="ctx-word">Product</div>
+        <div class="ctx-detail">
+          <p>SKU、在庫数、倉庫位置、入出庫履歴</p>
+          <pre><code><span class="kw">class</span> <span class="ty">StockItem</span> {
+  sku: <span class="ty">SKU</span>
+  quantity: <span class="ty">number</span>
+  warehouse: <span class="ty">Location</span>
+  <span class="fn">reserve</span>(qty) { ... }
+  <span class="fn">restock</span>(qty) { ... }
+}</code></pre>
+        </div>
+      </div>
+      <div class="ctx-box" style="border-color: #fb923c;" onclick="this.classList.toggle('open')">
+        <div class="ctx-header" style="color: #fb923c;">配送コンテキスト</div>
+        <div class="ctx-word">Product</div>
+        <div class="ctx-detail">
+          <p>重量、サイズ、配送区分、取り扱い注意フラグ</p>
+          <pre><code><span class="kw">class</span> <span class="ty">Parcel</span> {
+  weight: <span class="ty">Weight</span>
+  dimensions: <span class="ty">Dimensions</span>
+  shippingClass: <span class="ty">ShippingClass</span>
+  <span class="fn">calculateShippingCost</span>() { ... }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <h3>コンテキストマップ</h3>
+    <p>コンテキスト間の関係を「コンテキストマップ」で表現します。代表的なパターン:</p>
+    <ul>
+      <li><strong>共有カーネル (Shared Kernel)</strong> — 2つのコンテキストがモデルの一部を共有。変更には両チームの合意が必要</li>
+      <li><strong>顧客/供給者 (Customer/Supplier)</strong> — 上流が下流のニーズに合わせてAPIを提供</li>
+      <li><strong>腐敗防止層 (Anti-Corruption Layer)</strong> — 外部の汚いモデルを自分のドメインモデルに変換するアダプター層</li>
+      <li><strong>公開ホストサービス (Open Host Service)</strong> — 公開APIを通じて複数の下流コンテキストにサービス提供</li>
+    </ul>
+
+    <div class="highlight warn">
+      <strong>実践のコツ:</strong> マイクロサービスに分割する前に、まずコンテキスト境界を見つけよう。境界を間違えたままサービス分割すると、分散モノリスという最悪の結果になる。
+    </div>
+  </div>
+
+  <!-- ===== Section 4: エンティティ vs 値オブジェクト ===== -->
+  <div class="section" id="entity-vo">
+    <h2><span class="tag">戦術</span> エンティティ vs 値オブジェクト</h2>
+    <p>ドメインの概念を「誰であるかが重要か（=エンティティ）」と「何であるかが重要か（=値オブジェクト）」に分類するのが、DDDの戦術的設計の出発点です。</p>
+
+    <div class="ev-compare">
+      <div class="ev-card entity-card">
+        <h4>エンティティ (Entity)</h4>
+        <div class="ev-key">同一性（Identity）で区別</div>
+        <ul>
+          <li>一意のIDを持つ</li>
+          <li>ライフサイクルがある（生成→変更→削除）</li>
+          <li>属性が変わっても「同じもの」</li>
+        </ul>
+        <pre><code><span class="kw">class</span> <span class="ty">Customer</span> {
+  <span class="kw">readonly</span> id: <span class="ty">CustomerId</span>  <span class="cm">// 同一性</span>
+  name: <span class="ty">string</span>              <span class="cm">// 変わりうる</span>
+  email: <span class="ty">Email</span>             <span class="cm">// 変わりうる</span>
+
+  <span class="fn">changeName</span>(newName) {
+    <span class="kw">this</span>.name = newName;    <span class="cm">// IDは変わらない</span>
+  }
+}
+<span class="cm">// 名前が変わっても同じ顧客</span></code></pre>
+        <div class="ev-example">
+          <strong>例:</strong> 顧客、注文、商品、ユーザーアカウント
+        </div>
+      </div>
+      <div class="ev-card vo-card">
+        <h4>値オブジェクト (Value Object)</h4>
+        <div class="ev-key">属性の組み合わせで区別</div>
+        <ul>
+          <li>IDを持たない</li>
+          <li><strong>不変（Immutable）</strong></li>
+          <li>属性が全て同じなら「同じもの」</li>
+        </ul>
+        <pre><code><span class="kw">class</span> <span class="ty">Money</span> {
+  <span class="kw">readonly</span> amount: <span class="ty">number</span>
+  <span class="kw">readonly</span> currency: <span class="ty">string</span>
+
+  <span class="fn">add</span>(other: <span class="ty">Money</span>): <span class="ty">Money</span> {
+    <span class="cm">// 新しいインスタンスを返す</span>
+    <span class="kw">return new</span> <span class="ty">Money</span>(
+      <span class="kw">this</span>.amount + other.amount,
+      <span class="kw">this</span>.currency
+    );
+  }
+}
+<span class="cm">// 100円 === 100円（中身で比較）</span></code></pre>
+        <div class="ev-example">
+          <strong>例:</strong> 金額、住所、メールアドレス、期間、色
+        </div>
+      </div>
+    </div>
+
+    <h3>判定フローチャート</h3>
+    <div class="flowchart" id="evFlowchart">
+      <div class="flow-step" id="flow-q1">
+        <div class="flow-q">そのドメイン概念には「一意のID」で追跡する必要がある？</div>
+        <div class="flow-btns">
+          <button onclick="showFlow('entity-result')">はい</button>
+          <button onclick="showFlow('flow-q2')">いいえ</button>
+        </div>
+      </div>
+      <div class="flow-step" id="flow-q2" style="display:none;">
+        <div class="flow-q">属性が全て同じなら「同じもの」と見なせる？</div>
+        <div class="flow-btns">
+          <button onclick="showFlow('vo-result')">はい</button>
+          <button onclick="showFlow('entity-result')">いいえ</button>
+        </div>
+      </div>
+      <div class="flow-step flow-result" id="entity-result" style="display:none;">
+        <div class="flow-a entity-a">→ <strong>エンティティ</strong>として設計しよう！ IDで識別し、ライフサイクルを管理する。</div>
+        <button class="flow-reset" onclick="resetFlow()">もう一度</button>
+      </div>
+      <div class="flow-step flow-result" id="vo-result" style="display:none;">
+        <div class="flow-a vo-a">→ <strong>値オブジェクト</strong>として設計しよう！ 不変にし、等価性は属性で判定する。</div>
+        <button class="flow-reset" onclick="resetFlow()">もう一度</button>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>設計のヒント:</strong> 迷ったら<strong>値オブジェクトを優先</strong>しよう。不変なオブジェクトはバグが少なく、テストしやすく、並行処理にも強い。エンティティは本当にIDが必要な場合だけ使う。
+    </div>
+  </div>
+
+  <!-- ===== Section 5: 集約 ===== -->
+  <div class="section" id="aggregate">
+    <h2><span class="tag">戦術</span> 集約（Aggregate）</h2>
+    <p>集約は<strong>データ変更の整合性境界</strong>です。関連するエンティティと値オブジェクトをまとめ、1つのルートエンティティ（集約ルート）を通じてのみアクセスを許可します。</p>
+
+    <div class="highlight">
+      <strong>集約ルール:</strong> 外部から集約内部のオブジェクトを直接操作してはいけない。必ず集約ルートのメソッドを通す。1トランザクション = 1集約の更新。
+    </div>
+
+    <h3>注文（Order）集約の例</h3>
+    <div class="agg-diagram">
+      <div class="agg-root">
+        <div class="agg-label">集約ルート</div>
+        <div class="agg-name">Order</div>
+        <div class="agg-children">
+          <div class="agg-child entity-child" onclick="this.classList.toggle('open')">
+            <span class="child-type">Entity</span>
+            <span class="child-name">OrderLine</span>
+            <div class="child-detail">注文明細。商品ID・数量・単価を持つ。Orderを通じてのみ追加・削除される。</div>
+          </div>
+          <div class="agg-child vo-child" onclick="this.classList.toggle('open')">
+            <span class="child-type">Value Object</span>
+            <span class="child-name">ShippingAddress</span>
+            <div class="child-detail">配送先住所。不変。変更時は新しい値オブジェクトで置き換え。</div>
+          </div>
+          <div class="agg-child vo-child" onclick="this.classList.toggle('open')">
+            <span class="child-type">Value Object</span>
+            <span class="child-name">Money (totalAmount)</span>
+            <div class="child-detail">合計金額。OrderLineから自動計算。直接設定は不可。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<pre><code><span class="kw">class</span> <span class="ty">Order</span> {                          <span class="cm">// 集約ルート</span>
+  <span class="kw">readonly</span> id: <span class="ty">OrderId</span>
+  lines: <span class="ty">OrderLine</span>[] = []               <span class="cm">// 内部エンティティ</span>
+  shippingAddress: <span class="ty">ShippingAddress</span>       <span class="cm">// 値オブジェクト</span>
+  status: <span class="ty">OrderStatus</span>
+
+  <span class="cm">// ✅ 集約ルートのメソッドを通じてのみ変更</span>
+  <span class="fn">addItem</span>(productId, quantity, unitPrice) {
+    <span class="kw">if</span> (<span class="kw">this</span>.status !== <span class="ty">OrderStatus</span>.Draft)
+      <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="str">"確定済み注文には追加不可"</span>);
+    <span class="kw">this</span>.lines.push(<span class="kw">new</span> <span class="ty">OrderLine</span>(productId, quantity, unitPrice));
+  }
+
+  <span class="kw">get</span> <span class="fn">totalAmount</span>(): <span class="ty">Money</span> {            <span class="cm">// 整合性を保証</span>
+    <span class="kw">return this</span>.lines.reduce(
+      (sum, line) => sum.add(line.subtotal), <span class="ty">Money</span>.zero(<span class="str">"JPY"</span>)
+    );
+  }
+
+  <span class="fn">confirm</span>() {
+    <span class="kw">if</span> (<span class="kw">this</span>.lines.length === <span class="ty">0</span>)
+      <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="str">"空の注文は確定不可"</span>);
+    <span class="kw">this</span>.status = <span class="ty">OrderStatus</span>.Confirmed;
+  }
+}
+
+<span class="cm">// ❌ NG: 外部から内部を直接操作</span>
+order.lines.push(newLine);           <span class="cm">// 整合性チェックをバイパス！</span>
+order.lines[0].quantity = 999;       <span class="cm">// 合計金額と不整合！</span>
+
+<span class="cm">// ✅ OK: 集約ルートを通す</span>
+order.addItem(productId, 2, price);  <span class="cm">// バリデーション済み</span></code></pre>
+
+    <h3>集約設計の原則</h3>
+    <ul>
+      <li><strong>小さく保つ</strong> — 集約が大きいとロック競合が増える。必要最小限のエンティティだけ含める</li>
+      <li><strong>IDで参照</strong> — 他の集約を直接保持せず、IDで参照する（Order は CustomerId を持つが Customer オブジェクトは持たない）</li>
+      <li><strong>結果整合性を受け入れる</strong> — 集約間の整合性はドメインイベントで非同期に保つ</li>
+    </ul>
+  </div>
+
+  <!-- ===== Section 6: ドメインイベント ===== -->
+  <div class="section" id="domain-event">
+    <h2><span class="tag">戦術</span> ドメインイベント</h2>
+    <p>ドメインイベントは<strong>「ドメインで起きた重要な出来事」</strong>を表現するオブジェクトです。過去形で命名し、不変です。集約間・コンテキスト間の連携を疎結合に実現します。</p>
+
+    <div class="highlight">
+      <strong>命名規則:</strong> 「〜された」という過去形で。OrderConfirmed, PaymentReceived, ItemShipped。動詞の命令形（ConfirmOrder）はコマンドであり、イベントではない。
+    </div>
+
+    <h3>イベントフロー体験</h3>
+    <p>「注文確定」ボタンを押して、ドメインイベントがどう連鎖するか見てみましょう。</p>
+
+    <div class="event-flow">
+      <button class="event-trigger" id="eventBtn" onclick="runEventFlow()">注文を確定する</button>
+      <div class="event-timeline" id="eventTimeline">
+        <div class="event-item" data-step="1">
+          <div class="event-dot"></div>
+          <div class="event-content">
+            <div class="event-name">OrderConfirmed</div>
+            <div class="event-desc">注文集約が確定状態に。イベントを発行。</div>
+          </div>
+        </div>
+        <div class="event-item" data-step="2">
+          <div class="event-dot"></div>
+          <div class="event-content">
+            <div class="event-name">→ PaymentRequested</div>
+            <div class="event-desc">決済コンテキストが受信。支払い処理を開始。</div>
+          </div>
+        </div>
+        <div class="event-item" data-step="3">
+          <div class="event-dot"></div>
+          <div class="event-content">
+            <div class="event-name">→ InventoryReserved</div>
+            <div class="event-desc">在庫コンテキストが受信。在庫を引き当て。</div>
+          </div>
+        </div>
+        <div class="event-item" data-step="4">
+          <div class="event-dot"></div>
+          <div class="event-content">
+            <div class="event-name">→ NotificationSent</div>
+            <div class="event-desc">通知コンテキストが受信。確認メールを送信。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<pre><code><span class="cm">// イベントの定義（不変）</span>
+<span class="kw">class</span> <span class="ty">OrderConfirmed</span> {
+  <span class="kw">readonly</span> orderId: <span class="ty">OrderId</span>
+  <span class="kw">readonly</span> totalAmount: <span class="ty">Money</span>
+  <span class="kw">readonly</span> occurredAt: <span class="ty">Date</span>
+}
+
+<span class="cm">// 集約内でイベントを発行</span>
+<span class="kw">class</span> <span class="ty">Order</span> {
+  <span class="fn">confirm</span>() {
+    <span class="kw">this</span>.status = <span class="ty">OrderStatus</span>.Confirmed;
+    <span class="kw">this</span>.addDomainEvent(<span class="kw">new</span> <span class="ty">OrderConfirmed</span>(
+      <span class="kw">this</span>.id, <span class="kw">this</span>.totalAmount, <span class="kw">new</span> <span class="ty">Date</span>()
+    ));
+  }
+}
+
+<span class="cm">// 別のコンテキストのハンドラーが反応</span>
+<span class="kw">class</span> <span class="ty">PaymentHandler</span> {
+  <span class="fn">handle</span>(event: <span class="ty">OrderConfirmed</span>) {
+    paymentService.requestPayment(event.orderId, event.totalAmount);
+  }
+}</code></pre>
+  </div>
+
+  <!-- ===== Section 7: リポジトリ ===== -->
+  <div class="section" id="repository">
+    <h2><span class="tag">戦術</span> リポジトリパターン</h2>
+    <p>リポジトリは<strong>集約の永続化を抽象化</strong>するパターンです。ドメイン層はデータベースの存在を知らず、「コレクション」のようなインターフェースを通じて集約を取得・保存します。</p>
+
+    <div class="highlight">
+      <strong>重要:</strong> リポジトリは<strong>集約ルートごとに1つ</strong>。OrderLineRepository は作らない — OrderRepository が Order 集約全体を丸ごと保存・復元する。
+    </div>
+
+<pre><code><span class="cm">// ドメイン層: インターフェース（抽象）を定義</span>
+<span class="kw">interface</span> <span class="ty">OrderRepository</span> {
+  <span class="fn">findById</span>(id: <span class="ty">OrderId</span>): <span class="ty">Order</span> | <span class="kw">null</span>
+  <span class="fn">save</span>(order: <span class="ty">Order</span>): <span class="kw">void</span>
+  <span class="fn">findByCustomer</span>(customerId: <span class="ty">CustomerId</span>): <span class="ty">Order</span>[]
+}
+
+<span class="cm">// インフラ層: 具体的な実装</span>
+<span class="kw">class</span> <span class="ty">PostgresOrderRepository</span> <span class="kw">implements</span> <span class="ty">OrderRepository</span> {
+  <span class="fn">findById</span>(id: <span class="ty">OrderId</span>): <span class="ty">Order</span> | <span class="kw">null</span> {
+    <span class="kw">const</span> row = <span class="kw">this</span>.db.query(
+      <span class="str">`SELECT * FROM orders WHERE id = $1`</span>, [id.value]
+    );
+    <span class="kw">return</span> row ? <span class="kw">this</span>.toOrder(row) : <span class="kw">null</span>;
+  }
+
+  <span class="fn">save</span>(order: <span class="ty">Order</span>): <span class="kw">void</span> {
+    <span class="kw">this</span>.db.transaction(() => {
+      <span class="kw">this</span>.upsertOrder(order);
+      <span class="kw">this</span>.upsertOrderLines(order.id, order.lines);
+    });
+  }
+}
+
+<span class="cm">// アプリケーション層での使用</span>
+<span class="kw">class</span> <span class="ty">ConfirmOrderUseCase</span> {
+  <span class="kw">constructor</span>(<span class="kw">private</span> orderRepo: <span class="ty">OrderRepository</span>) {}
+
+  <span class="fn">execute</span>(orderId: <span class="ty">string</span>) {
+    <span class="kw">const</span> order = <span class="kw">this</span>.orderRepo.findById(<span class="kw">new</span> <span class="ty">OrderId</span>(orderId));
+    <span class="kw">if</span> (!order) <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="str">"注文が見つかりません"</span>);
+    order.confirm();                    <span class="cm">// ドメインロジック</span>
+    <span class="kw">this</span>.orderRepo.save(order);         <span class="cm">// 永続化</span>
+  }
+}</code></pre>
+
+    <h3>リポジトリ vs DAO</h3>
+    <ul>
+      <li><strong>リポジトリ</strong>: 集約単位で操作。ドメインオブジェクトを返す。ドメイン層のインターフェース</li>
+      <li><strong>DAO</strong>: テーブル単位で操作。行データを返す。インフラ層の概念</li>
+    </ul>
+    <div class="highlight warn">
+      <strong>アンチパターン:</strong> リポジトリに <code>findByNameAndStatusAndDateRange(...)</code> のような複雑なクエリを増やし続けると、リポジトリが肥大化する。参照用途には CQRS（コマンドクエリ責務分離）の導入を検討しよう。
+    </div>
+  </div>
+
+  <!-- ===== Section 8: レイヤードアーキテクチャ ===== -->
+  <div class="section" id="layered-arch">
+    <h2><span class="tag">設計</span> レイヤードアーキテクチャ</h2>
+    <p>DDDでは依存関係の方向を制御するため、アプリケーションを層に分けます。<strong>ドメイン層が中心</strong>にあり、外側の層に依存しないのが鉄則です。</p>
+
+    <div class="layer-diagram">
+      <div class="layer layer-ui" onclick="this.classList.toggle('open')">
+        <div class="layer-header">
+          <span class="layer-name">プレゼンテーション層 (UI)</span>
+          <span class="layer-arrow">&#9660;</span>
+        </div>
+        <div class="layer-body">
+          <p>ユーザーからの入力を受け取り、結果を表示する。REST API コントローラー、画面、CLI など。</p>
+          <code>OrderController, OrderListView</code>
+        </div>
+      </div>
+      <div class="layer layer-app" onclick="this.classList.toggle('open')">
+        <div class="layer-header">
+          <span class="layer-name">アプリケーション層 (UseCase)</span>
+          <span class="layer-arrow">&#9660;</span>
+        </div>
+        <div class="layer-body">
+          <p>ユースケースを調整する薄い層。ドメインオブジェクトを取得し、ドメインのメソッドを呼び、保存する。<strong>ビジネスロジックは書かない</strong>。</p>
+          <code>ConfirmOrderUseCase, CreateOrderUseCase</code>
+        </div>
+      </div>
+      <div class="layer layer-domain" onclick="this.classList.toggle('open')">
+        <div class="layer-header">
+          <span class="layer-name">ドメイン層 (核心)</span>
+          <span class="layer-arrow">&#9660;</span>
+        </div>
+        <div class="layer-body">
+          <p>ビジネスルールの全て。エンティティ、値オブジェクト、集約、ドメインサービス、ドメインイベント、リポジトリの<strong>インターフェース</strong>がここに住む。</p>
+          <code>Order, Money, OrderRepository(interface), OrderConfirmed</code>
+        </div>
+      </div>
+      <div class="layer layer-infra" onclick="this.classList.toggle('open')">
+        <div class="layer-header">
+          <span class="layer-name">インフラ層 (実装詳細)</span>
+          <span class="layer-arrow">&#9660;</span>
+        </div>
+        <div class="layer-body">
+          <p>DB、メール、外部API、メッセージキューなどの技術的実装。ドメイン層のインターフェースを<strong>実装</strong>する。</p>
+          <code>PostgresOrderRepository, SmtpNotificationService</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>依存性逆転の原則 (DIP):</strong> ドメイン層がインターフェースを定義し、インフラ層がそれを実装する。これにより、ドメインロジックはDBやフレームワークに一切依存しない。テストも容易になる。
+    </div>
+
+<pre><code><span class="cm">// 依存の方向: UI → App → Domain ← Infra</span>
+<span class="cm">//                                ↑ 逆転!</span>
+
+<span class="cm">// Domain層 (インターフェースだけ定義)</span>
+<span class="kw">interface</span> <span class="ty">OrderRepository</span> { <span class="fn">save</span>(order): <span class="kw">void</span> }
+
+<span class="cm">// Infra層 (実装する)</span>
+<span class="kw">class</span> <span class="ty">PostgresOrderRepo</span> <span class="kw">implements</span> <span class="ty">OrderRepository</span> { ... }
+
+<span class="cm">// App層 (依存注入で繋ぐ)</span>
+<span class="kw">class</span> <span class="ty">ConfirmOrderUseCase</span> {
+  <span class="kw">constructor</span>(repo: <span class="ty">OrderRepository</span>) {}  <span class="cm">// 抽象に依存</span>
+}</code></pre>
+  </div>
+
+  <!-- ===== Section 9: モデリング演習 ===== -->
+  <div class="section" id="modeling-exercise">
+    <h2><span class="tag">演習</span> ドメインモデリング体験</h2>
+    <p>ECサイトの「注文」ドメインを題材に、ドメインモデルを組み立ててみましょう。概念カードを正しいカテゴリにドラッグ&ドロップ（またはクリック）で分類してください。</p>
+
+    <div class="exercise">
+      <h3>ドメイン概念を分類しよう</h3>
+      <p>各概念がエンティティ・値オブジェクト・ドメインイベントのどれかを選択してください。</p>
+
+      <div class="quiz-items" id="quizItems">
+        <div class="quiz-item" data-answer="entity">
+          <div class="quiz-concept">Customer（顧客）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="vo">
+          <div class="quiz-concept">Money（金額: 1000円）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="event">
+          <div class="quiz-concept">OrderShipped（注文が出荷された）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="entity">
+          <div class="quiz-concept">Order（注文）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="vo">
+          <div class="quiz-concept">Address（住所: 東京都渋谷区...）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="event">
+          <div class="quiz-concept">PaymentReceived（入金された）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="vo">
+          <div class="quiz-concept">EmailAddress（メールアドレス）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+        <div class="quiz-item" data-answer="entity">
+          <div class="quiz-concept">Product（商品）</div>
+          <div class="quiz-buttons">
+            <button onclick="checkAnswer(this, 'entity')">エンティティ</button>
+            <button onclick="checkAnswer(this, 'vo')">値オブジェクト</button>
+            <button onclick="checkAnswer(this, 'event')">イベント</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+      </div>
+
+      <div class="quiz-score" id="quizScore"></div>
+      <button class="quiz-reset-btn" onclick="resetQuiz()">リセット</button>
+    </div>
+
+    <h3>まとめ: DDDを始めるための3ステップ</h3>
+    <div class="summary-steps">
+      <div class="summary-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>ドメインエキスパートと話す</strong>
+          <p>技術の話はしない。ビジネスの言葉を集め、ユビキタス言語を作る。</p>
+        </div>
+      </div>
+      <div class="summary-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>境界を見つける</strong>
+          <p>同じ言葉が違う意味で使われる場所が、コンテキスト境界のヒント。</p>
+        </div>
+      </div>
+      <div class="summary-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>小さく始める</strong>
+          <p>最も複雑なサブドメイン1つにDDDを適用。全体に広げる前に効果を検証。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  DDD実践入門 — Eric Evans「Domain-Driven Design」(2003) / Vaughn Vernon「Implementing Domain-Driven Design」(2013) を基に構成
+</div>
+
+<!-- Quiz logic -->
+<script>
+const explanations = {
+  'Customer': { entity: 'IDで識別。名前が変わっても同じ顧客。', vo: '顧客はIDで追跡が必要。値オブジェクトではありません。', event: '顧客は「出来事」ではなく「もの」です。' },
+  'Money': { vo: '1000円 === 1000円。金額は属性で比較する不変オブジェクト。', entity: '「この1000円」と「あの1000円」を区別する必要はない。', event: '金額は「出来事」ではなく「性質」です。' },
+  'OrderShipped': { event: '過去形！「出荷された」という出来事を表現。', entity: '出荷イベントにIDで追跡するライフサイクルはない。', vo: '出荷は「出来事」であり「値」ではない。' },
+  'Order': { entity: '注文#001と#002は別物。IDで識別しライフサイクルを管理。', vo: '注文はIDで追跡し状態が変化する。値オブジェクトではない。', event: '注文は「もの」であり「出来事」ではない。' },
+  'Address': { vo: '同じ住所なら同じもの。不変で属性の組み合わせで比較。', entity: '「渋谷区1-1」にIDは不要。同じ住所 === 同じ値。', event: '住所は「出来事」ではなく「性質」です。' },
+  'PaymentReceived': { event: '過去形！「入金された」という出来事。後続処理のトリガー。', entity: '入金イベントは「もの」ではなく「出来事」。', vo: '入金イベントは「値」ではなく「出来事」。' },
+  'EmailAddress': { vo: '同じメアドなら同じもの。不変。バリデーションを内包。', entity: 'メールアドレスにIDは不要。内容が同じなら同一。', event: 'メールアドレスは「出来事」ではなく「性質」。' },
+  'Product': { entity: '商品A と商品B は別物。IDで識別し、価格や名前が変わる。', vo: '商品はIDで管理しライフサイクルがある。値オブジェクトではない。', event: '商品は「もの」であり「出来事」ではない。' }
+};
+
+let quizAnswered = 0;
+let quizCorrect = 0;
+
+function checkAnswer(btn, chosen) {
+  const item = btn.closest('.quiz-item');
+  if (item.classList.contains('answered') || item.classList.contains('wrong-answer')) return;
+
+  const answer = item.dataset.answer;
+  const concept = item.querySelector('.quiz-concept').textContent.split('（')[0].replace(/[（）]/g, '');
+  const feedback = item.querySelector('.quiz-feedback');
+  const buttons = item.querySelectorAll('.quiz-buttons button');
+
+  const key = Object.keys(explanations).find(k => concept.includes(k));
+  const exp = key ? explanations[key] : {};
+
+  if (chosen === answer) {
+    btn.classList.add('correct');
+    item.classList.add('answered');
+    feedback.style.color = '#86efac';
+    feedback.textContent = exp[chosen] || '正解！';
+    quizCorrect++;
+  } else {
+    btn.classList.add('wrong');
+    item.classList.add('wrong-answer');
+    feedback.style.color = '#fca5a5';
+    feedback.textContent = (exp[chosen] || '不正解...') + ' → 正解は' + (answer === 'entity' ? 'エンティティ' : answer === 'vo' ? '値オブジェクト' : 'イベント');
+    buttons.forEach(b => { if (b !== btn) b.disabled = true; });
+    // highlight correct
+    const labels = { entity: 'エンティティ', vo: '値オブジェクト', event: 'イベント' };
+    buttons.forEach(b => { if (b.textContent === labels[answer]) b.classList.add('correct'); });
+  }
+  buttons.forEach(b => b.disabled = true);
+  quizAnswered++;
+
+  if (quizAnswered === 8) {
+    const score = document.getElementById('quizScore');
+    const pct = Math.round(quizCorrect / 8 * 100);
+    score.innerHTML = quizCorrect === 8
+      ? '<span style="color:#86efac">全問正解！ DDDの基本概念をマスターしています。</span>'
+      : `<span style="color:#fbbf24">${quizCorrect}/8 正解 (${pct}%) — 間違えた問題の解説を読み返してみよう。</span>`;
+  }
+}
+
+function resetQuiz() {
+  quizAnswered = 0;
+  quizCorrect = 0;
+  document.getElementById('quizScore').innerHTML = '';
+  document.querySelectorAll('.quiz-item').forEach(item => {
+    item.classList.remove('answered', 'wrong-answer');
+    item.querySelector('.quiz-feedback').textContent = '';
+    item.querySelectorAll('button').forEach(b => {
+      b.disabled = false;
+      b.classList.remove('correct', 'wrong');
+    });
+  });
+}
+</script>
+
+<!-- Event flow animation -->
+<script>
+function runEventFlow() {
+  const btn = document.getElementById('eventBtn');
+  const items = document.querySelectorAll('#eventTimeline .event-item');
+  btn.disabled = true;
+  items.forEach(i => i.classList.remove('visible'));
+  let delay = 0;
+  items.forEach((item, idx) => {
+    delay += 600;
+    setTimeout(() => {
+      item.classList.add('visible');
+      if (idx === items.length - 1) {
+        setTimeout(() => { btn.disabled = false; }, 800);
+      }
+    }, delay);
+  });
+}
+</script>
+
+<!-- Flowchart logic -->
+<script>
+function showFlow(id) {
+  document.querySelectorAll('#evFlowchart .flow-step').forEach(s => s.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
+function resetFlow() {
+  document.querySelectorAll('#evFlowchart .flow-step').forEach(s => s.style.display = 'none');
+  document.getElementById('flow-q1').style.display = 'block';
+}
+</script>
+
+<!-- Nav highlight script -->
+<script>
+(function() {
+  const nav = document.getElementById('nav');
+  const links = nav.querySelectorAll('a');
+  const sections = [];
+  links.forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) sections.push({ el, a });
+  });
+
+  function updateNav() {
+    let current = sections[0];
+    const scrollY = window.scrollY + 120;
+    for (const s of sections) {
+      if (s.el.offsetTop <= scrollY) current = s;
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+})();
+</script>
+
+</body>
+</html>
