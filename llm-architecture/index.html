@@ -413,6 +413,96 @@
       color: #fde68a;
       margin-bottom: 1rem;
     }
+
+    /* ========= Component Section (Step 3) ========= */
+    .section-title {
+      font-size: 1.4rem;
+      margin: 3rem 0 1rem;
+      text-align: center;
+    }
+    .section-title small {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+      font-weight: normal;
+    }
+    .attn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .attn-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .attn-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+    }
+    .attn-card .tagline {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+    .attn-vis {
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .attn-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-bottom: 4px;
+    }
+    .attn-row:last-child { margin-bottom: 0; }
+    .row-label {
+      width: 14px;
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+    .head {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: hsl(calc(var(--c) * 45), 70%, 55%);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .head.dim { background: var(--bg-3); border-color: var(--border); }
+    .head.wide { width: auto; flex: 1; height: 14px; }
+    .head.latent {
+      background: linear-gradient(90deg, hsl(280, 70%, 55%), hsl(200, 70%, 55%));
+      flex: 1;
+      height: 14px;
+    }
+    .attn-formula {
+      background: var(--bg);
+      border-left: 3px solid var(--accent);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: #bfdbfe;
+      margin-bottom: 0.5rem;
+    }
+    .attn-models {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .attn-models strong { color: var(--text); }
+    .attn-pros {
+      font-size: 0.78rem;
+      line-height: 1.5;
+    }
+    .attn-pros span.pro { color: #6ee7b7; }
+    .attn-pros span.con { color: #fca5a5; }
   </style>
 </head>
 <body>
@@ -433,6 +523,12 @@
     </div>
 
     <div class="model-grid" id="modelGrid"></div>
+
+    <!-- ========= Component Section (Step 3) ========= -->
+    <h2 class="section-title">🧩 Attention 機構の比較
+      <small>モデルが推論時に最も計算・メモリを食う箇所。KVキャッシュ削減の工夫が鍵</small>
+    </h2>
+    <div class="attn-grid" id="attnGrid"></div>
 
     <div class="upcoming">
       <h3>🔍 次のステップで追加予定</h3>
@@ -795,6 +891,125 @@
       },
     };
 
+    // ========= Attention 比較データ (Step 3) =========
+    // n_q_heads = 8 で可視化。色の -c は group id (同じ色 = 同じ KV を共有)
+    // MHA: 全Q独立のKV (8 groups)
+    // GQA(group=4): 8Qが2グループに分かれる
+    // MQA: 全Qが1つのKVを共有
+    // MLA: 圧縮された潜在ベクトルから per-head にデコード
+    const ATTENTIONS = [
+      {
+        name: 'MHA (Multi-Head Attention)',
+        tagline: '2017 Attention Is All You Need の原型',
+        vis: {
+          q: [1,2,3,4,5,6,7,8],
+          k: [1,2,3,4,5,6,7,8],
+          v: [1,2,3,4,5,6,7,8],
+        },
+        formula: 'KV cache = 2 · L · n_heads · d_head · seq_len',
+        models: 'GPT-2/3, LLaMA 1, 初期のTransformer系',
+        pros: [
+          { type: 'pro', text: '各ヘッドが独立でパターン多様性◎' },
+          { type: 'con', text: 'KVキャッシュが最大。長文で破綻' },
+        ],
+      },
+      {
+        name: 'GQA (Grouped-Query Attention)',
+        tagline: '現代の事実上の標準。頭のグループごとにK/V共有',
+        vis: {
+          q: [1,1,1,1,2,2,2,2],
+          k: [1,1,1,1,2,2,2,2],
+          v: [1,1,1,1,2,2,2,2],
+          kCompact: [1,2],
+          vCompact: [1,2],
+        },
+        formula: 'KV cache = 2 · L · n_kv_heads · d_head · seq_len\n             n_kv_heads = n_heads / group_size',
+        models: 'Llama 2/3/4, Qwen2/3, Gemma, Mistral Large, Claude (推定)',
+        pros: [
+          { type: 'pro', text: 'MHAの品質をほぼ維持しつつKVを 1/group に縮小' },
+          { type: 'pro', text: '実装簡単・広く検証済み' },
+        ],
+      },
+      {
+        name: 'MQA (Multi-Query Attention)',
+        tagline: '極端に共有。全Qヘッドが単一K/Vを共有',
+        vis: {
+          q: [1,1,1,1,1,1,1,1],
+          kCompact: [1],
+          vCompact: [1],
+        },
+        formula: 'KV cache = 2 · L · 1 · d_head · seq_len',
+        models: 'PaLM, Falcon, StarCoder, Gemini 初期',
+        pros: [
+          { type: 'pro', text: 'KVが最小、推論最速' },
+          { type: 'con', text: '品質低下リスク → 現在はGQAに譲った形' },
+        ],
+      },
+      {
+        name: 'MLA (Multi-head Latent Attention)',
+        tagline: 'DeepSeek-V2/V3 の発明。低ランク圧縮で桁違いに小さいKV',
+        vis: {
+          q: [1,2,3,4,5,6,7,8],
+          latent: true,
+          kRope: true,
+        },
+        formula: 'KV cache ≈ (d_c + d_rope) · L · seq_len\n             d_c=512, d_rope=64 → MHA比 ~5-10%',
+        models: 'DeepSeek-V2, DeepSeek-V3, DeepSeek-R1',
+        pros: [
+          { type: 'pro', text: 'MHA並の品質でKV最小クラス' },
+          { type: 'pro', text: 'RoPEを decoupled path に分離して互換性確保' },
+          { type: 'con', text: '実装が複雑、推論カーネルの最適化要' },
+        ],
+      },
+    ];
+
+    function renderAttnRow(label, heads, { compact, latent, rope } = {}) {
+      if (latent) {
+        return `<div class="attn-row"><span class="row-label">c_KV</span><div class="head latent" title="圧縮済み潜在"></div></div>`;
+      }
+      if (rope) {
+        return `<div class="attn-row"><span class="row-label">rope</span><div class="head wide" style="background:hsl(40, 70%, 55%)" title="decoupled RoPE key"></div></div>`;
+      }
+      const cells = heads.map(c => {
+        if (c === 0) return `<div class="head dim"></div>`;
+        return `<div class="head" style="--c:${c}"></div>`;
+      }).join('');
+      // compact なら中央寄せ風に余白追加
+      const style = compact ? 'gap:3px;' : '';
+      return `<div class="attn-row" style="${style}"><span class="row-label">${label}</span>${cells}</div>`;
+    }
+
+    function renderAttnCard(a) {
+      const v = a.vis;
+      let rows = '';
+      rows += renderAttnRow('Q', v.q);
+      if (v.latent) {
+        rows += renderAttnRow('', [], { latent: true });
+        rows += renderAttnRow('', [], { rope: true });
+      } else {
+        const kHeads = v.kCompact || v.k;
+        const vHeads = v.vCompact || v.v;
+        rows += renderAttnRow('K', kHeads);
+        rows += renderAttnRow('V', vHeads);
+      }
+      const pros = a.pros.map(p =>
+        `<div><span class="${p.type}">${p.type === 'pro' ? '✓' : '✗'}</span> ${p.text}</div>`
+      ).join('');
+      return `
+        <div class="attn-card">
+          <h3>${a.name}</h3>
+          <div class="tagline">${a.tagline}</div>
+          <div class="attn-vis">${rows}</div>
+          <div class="attn-formula">${a.formula.replace(/\n/g, '<br>')}</div>
+          <div class="attn-models">採用: <strong>${a.models}</strong></div>
+          <div class="attn-pros">${pros}</div>
+        </div>
+      `;
+    }
+    function renderAttnGrid() {
+      document.getElementById('attnGrid').innerHTML = ATTENTIONS.map(renderAttnCard).join('');
+    }
+
     // ========= レンダリング =========
     const archBadgeClass = (m) => m.archClass || 'dense';
 
@@ -958,6 +1173,7 @@
 
     // 初期レンダリング
     renderCards('all');
+    renderAttnGrid();
   </script>
 </body>
 </html>
