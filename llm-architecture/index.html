@@ -1372,9 +1372,216 @@
       },
     ];
 
-    // ========= アーキテクチャ詳細データ (Step 2b) =========
+    // ========= アーキテクチャ詳細データ (Step 2b + Step 8) =========
     // 公開モデルのみ詳細を記載。非公開モデルは highlight のみで補足。
     const ARCH_DETAILS = {
+      'llama-4-maverick': {
+        specs: {
+          'Hidden size': '5120 (推定)',
+          'Layers': '48',
+          'Experts': '128 + 1 shared',
+          'Routing': 'top-1',
+          'Total params': '400B',
+          'Active params': '17B',
+          'Context': '1M (iRoPE)',
+          'Modality': 'text + image',
+        },
+        stack: [
+          { type: 'io',    label: 'Input: text + image tokens' },
+          { type: 'embed', label: 'Embedding (tied with MM-encoder output)' },
+          { type: 'stack', label: 'iRoPE Transformer × 48',
+            sub: '層を RoPE 層 / NoPE 層 に交互配置。MoE FFN (128 experts top-1 + shared)' },
+          { type: 'norm',  label: 'Final RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        innerBlock: {
+          title: '🔬 iRoPE + MoE Block 内部 (RoPE層と NoPE層が交互)',
+          steps: [
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'attn',  label: 'GQA + [RoPE or NoPE] \n・RoPE層: 通常のRoPE\n・NoPE層: 位置エンコ無し (無限外挿)' },
+            { type: 'resid', label: '+ Residual' },
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'moe',   label: 'MoE: 128 experts top-1 + shared expert\n各トークンは 1つの routed + 1つの shared を通る' },
+            { type: 'resid', label: '+ Residual' },
+          ]
+        },
+        highlights: [
+          '🎯 **iRoPE (interleaved RoPE)**: RoPE 層と NoPE 層を交互配置。NoPE 層が位置独立な情報統合を担い、理論上無限の外挿が可能',
+          '🎯 **top-1 + shared expert**: Mixtral の top-2 より簡素。shared expert が共通知識を一手に担う',
+          '🎯 **マルチモーダル native**: early fusion。画像トークンをテキストと同じスペースで処理',
+          '🎯 **1Mコンテキスト**: 256K の mid-training を経て 1M に拡張。Ring Attention でサーブ',
+        ],
+        refs: [
+          { label: 'Meta Llama 4 announcement', url: 'https://ai.meta.com/blog/llama-4-multimodal-intelligence/' },
+          { label: 'NoPE paper (Haviv+ 2022)', url: 'https://arxiv.org/abs/2203.16634' },
+        ],
+      },
+
+      'llama-4-scout': {
+        specs: {
+          'Hidden size': '5120 (推定)',
+          'Layers': '48',
+          'Experts': '16 + 1 shared',
+          'Routing': 'top-1',
+          'Total params': '109B',
+          'Active params': '17B',
+          'Context': '10M (!)',
+          'Serving': '単一 H100 80GB',
+        },
+        stack: [
+          { type: 'io',    label: 'Input: text + image tokens (up to 10M)' },
+          { type: 'embed', label: 'Embedding' },
+          { type: 'stack', label: 'iRoPE Transformer × 48',
+            sub: 'MoE (16 experts top-1 + shared)。NoPE層が超長文の主役' },
+          { type: 'norm',  label: 'Final RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+          { type: 'side',  label: 'Ring Attention (推論時): KVをリング状に分散' },
+        ],
+        innerBlock: {
+          title: '🔬 10Mコンテキストを支える仕掛け',
+          steps: [
+            { type: 'attn',  label: 'GQA + iRoPE\n・RoPE層が局所的な順序を学習\n・NoPE層が超長距離の統合を担う' },
+            { type: 'moe',   label: 'MoE 16 experts\n小規模なので単一GPUにも載る' },
+            { type: 'resid', label: '推論: Ring Attention で VRAM を溢れさせない' },
+          ]
+        },
+        highlights: [
+          '🎯 **10M コンテキスト**: 業界最長。書籍換算 約7500冊分を1回で処理可能',
+          '🎯 **エキスパート16個**: Maverick の 1/8 なのでメモリ効率が段違い',
+          '🎯 **段階的curriculum**: 4K → 256K → 10M の3段階で伸ばす',
+          '🎯 **Ring Attention**: 推論時KVを分散配置しメモリ制約を回避',
+        ],
+        refs: [
+          { label: 'Meta Llama 4 announcement', url: 'https://ai.meta.com/blog/llama-4-multimodal-intelligence/' },
+          { label: 'Ring Attention paper', url: 'https://arxiv.org/abs/2310.01889' },
+        ],
+      },
+
+      'qwen3': {
+        specs: {
+          'Hidden size': '4096',
+          'Layers': '94',
+          'Experts': '128 routed',
+          'Routing': 'top-8',
+          'Total params': '235B',
+          'Active params': '22B',
+          'Context': '128K → 1M (YaRN+DCA)',
+          'Mode': 'Thinking / Non-thinking',
+        },
+        stack: [
+          { type: 'io',    label: 'Input tokens (<|thinking|> タグで切替)' },
+          { type: 'embed', label: 'Token Embedding' },
+          { type: 'stack', label: 'Transformer × 94',
+            sub: 'GQA (8 KV heads) + RoPE + SwiGLU FFN or MoE (128 experts top-8)' },
+          { type: 'norm',  label: 'RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+          { type: 'side',  label: '推論時: YaRN (base scaling) + DCA (chunk分割)' },
+        ],
+        innerBlock: {
+          title: '🔬 Qwen3 MoE Block (thinking/non-thinking 両対応)',
+          steps: [
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'attn',  label: 'GQA (64 Q / 8 KV heads) + RoPE (base=10M, θ拡張)' },
+            { type: 'resid', label: '+ Residual' },
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'moe',   label: 'MoE: 128 experts top-8\n(小型版は dense SwiGLU)' },
+            { type: 'resid', label: '+ Residual' },
+          ]
+        },
+        highlights: [
+          '🎯 **dual-mode**: 同じモデルが thinking / non-thinking を切替。推論コスト制御',
+          '🎯 **YaRN + DCA**: 学習は128K。推論時に YaRN で base 拡張 + DCA で chunk 分割 = 1M',
+          '🎯 **多言語**: 119言語をカバー。非英語性能でトップクラス',
+          '🎯 **Dense + MoE 両系列**: 0.6B〜235B まで幅広いラインナップ',
+        ],
+        refs: [
+          { label: 'Qwen3 Technical Report', url: 'https://arxiv.org/abs/2505.09388' },
+          { label: 'YaRN paper', url: 'https://arxiv.org/abs/2309.00071' },
+        ],
+      },
+
+      'mixtral-8x22b': {
+        specs: {
+          'Hidden size': '6144',
+          'Layers': '56',
+          'Experts': '8',
+          'Routing': 'top-2',
+          'Total params': '141B',
+          'Active params': '39B',
+          'Context': '64K',
+          'Attention': 'GQA (8 KV) + SWA',
+        },
+        stack: [
+          { type: 'io',    label: 'Input tokens' },
+          { type: 'embed', label: 'Token Embedding' },
+          { type: 'stack', label: 'Transformer × 56',
+            sub: 'GQA + Sliding Window (W=4096) + MoE FFN (8 experts top-2)' },
+          { type: 'norm',  label: 'RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        innerBlock: {
+          title: '🔬 Mixtral MoE Block',
+          steps: [
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'attn',  label: 'GQA + Sliding Window Attention (W=4096)\n計算量を O(n·W) に線形化' },
+            { type: 'resid', label: '+ Residual' },
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'moe',   label: 'MoE: 8 experts top-2 + aux-loss\nシンプルで解析性が高い古典的 MoE' },
+            { type: 'resid', label: '+ Residual' },
+          ]
+        },
+        highlights: [
+          '🎯 **解析しやすい MoE**: 8エキスパートと小さめなので研究コミュニティで徹底解析',
+          '🎯 **Sliding Window Attention**: 局所 attention で長文に対応',
+          '🎯 **開放的ライセンス**: Apache 2.0。商用利用可能で広く採用',
+          '🎯 **top-2 aux-loss**: DeepSeek 登場前の MoE の教科書的実装',
+        ],
+        refs: [
+          { label: 'Mixtral 8x7B paper', url: 'https://arxiv.org/abs/2401.04088' },
+        ],
+      },
+
+      'gemma-3': {
+        specs: {
+          'Hidden size': '5376',
+          'Layers': '62',
+          'Attention': 'local:global = 5:1',
+          'Sliding window': '1024',
+          'Total params': '27B',
+          'Active params': '27B',
+          'Context': '128K',
+          'Modality': 'text + image (SigLIP)',
+        },
+        stack: [
+          { type: 'io',    label: 'Input: text + image patches (Pan & Scan)' },
+          { type: 'embed', label: 'SigLIP encoder (画像) + Embedding' },
+          { type: 'stack', label: 'Transformer × 62',
+            sub: 'Hybrid Attention: 5個の local SWA (W=1024) ごとに 1個の global' },
+          { type: 'norm',  label: 'RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        innerBlock: {
+          title: '🔬 Gemma 3 Hybrid Attention',
+          steps: [
+            { type: 'norm',  label: 'RMSNorm (QK-norm 併用)' },
+            { type: 'attn',  label: 'GQA + Hybrid window\n・Local層 (W=1024): 直近トークンのみ\n・Global層 (1/6比率): 全体参照' },
+            { type: 'resid', label: '+ Residual' },
+            { type: 'norm',  label: 'RMSNorm' },
+            { type: 'attn',  label: 'Dense FFN (SwiGLU)' },
+            { type: 'resid', label: '+ Residual' },
+          ]
+        },
+        highlights: [
+          '🎯 **local:global = 5:1**: ほとんどの層が O(n·W) で高速、たまに全体統合',
+          '🎯 **Pan & Scan**: 画像を動的にズーム/パンして高解像度対応',
+          '🎯 **SigLIP integration**: Google の強力な画像エンコーダを統合',
+          '🎯 **QK-norm**: Attention 内の Q/K に別途 RMSNorm 適用で学習安定化',
+        ],
+        refs: [
+          { label: 'Gemma 3 Technical Report', url: 'https://arxiv.org/abs/2503.19786' },
+        ],
+      },
+
       'deepseek-v3': {
         specs: {
           'Hidden size': '7168',
@@ -1421,6 +1628,136 @@
           { label: 'DeepSeek-V3 Technical Report', url: 'https://arxiv.org/abs/2412.19437' },
           { label: 'DeepSeekMoE paper', url: 'https://arxiv.org/abs/2401.06066' },
           { label: 'MLA: DeepSeek-V2', url: 'https://arxiv.org/abs/2405.04434' },
+        ],
+      },
+
+      'deepseek-r1': {
+        specs: {
+          'Base': 'DeepSeek-V3 (同構造)',
+          'Layers': '61 (Dense×3 + MoE×58)',
+          'Attention': 'MLA (128 heads)',
+          'Experts': '256 routed + 1 shared',
+          'Total params': '671B',
+          'Active params': '37B',
+          'Training': 'SFT + GRPO (RL)',
+          'Distilled': '7B〜70B版も公開',
+        },
+        stack: [
+          { type: 'io',    label: 'Input tokens (<think>...</think> CoT)' },
+          { type: 'embed', label: 'V3 と同じ Embedding' },
+          { type: 'stack', label: 'MLA + DeepSeekMoE × 61',
+            sub: '重みは V3 ベース → 推論タスクで GRPO により更新' },
+          { type: 'norm',  label: 'Final RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        innerBlock: {
+          title: '🔬 R1 独自の学習パイプライン',
+          steps: [
+            { type: 'attn',  label: '① V3 ベース (構造は完全同一)' },
+            { type: 'moe',   label: '② Cold-start SFT\n少量の高品質 CoT データで SFT' },
+            { type: 'resid', label: '③ Reasoning RL (GRPO)\n検証可能な報酬 (math/code) で純粋 RL' },
+            { type: 'moe',   label: '④ Rejection sampling + SFT\n生成したサンプルを品質フィルタ' },
+            { type: 'attn',  label: '⑤ All-scenario RL\n最終的な alignment' },
+          ]
+        },
+        highlights: [
+          '🎯 **R1-Zero**: SFT なしで V3 から <em>純粋 RL のみ</em>。推論途中で自発的に reflection が創発 (aha moment)',
+          '🎯 **GRPO**: value model 不要。グループ内相対報酬で PPO の半分のメモリ',
+          '🎯 **検証可能報酬 (RLVR)**: 数学の答え一致、コードのテスト成功を報酬に使用',
+          '🎯 **蒸留版公開**: Qwen/Llama ベースに R1 の出力を蒸留した 7B〜70B を MIT で公開',
+          '🎯 **衝撃的インパクト**: 2025年1月に公開され、業界の RL 方式を一変させた',
+        ],
+        refs: [
+          { label: 'DeepSeek-R1 paper', url: 'https://arxiv.org/abs/2501.12948' },
+          { label: 'GRPO (DeepSeekMath)', url: 'https://arxiv.org/abs/2402.03300' },
+        ],
+      },
+
+      'kimi-k2': {
+        specs: {
+          'Hidden size': '7168',
+          'Layers': '61',
+          'Attention': 'MLA (類似)',
+          'Experts': '384 routed + 1 shared',
+          'Routing': 'top-8',
+          'Total params': '1T',
+          'Active params': '32B',
+          'Optimizer': 'MuonClip',
+        },
+        stack: [
+          { type: 'io',    label: 'Input tokens' },
+          { type: 'embed', label: 'Token Embedding' },
+          { type: 'stack', label: 'MoE Transformer × 61',
+            sub: 'MLA-like attention + MoE (384 experts top-8 + shared)' },
+          { type: 'norm',  label: 'Final RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        highlights: [
+          '🎯 **1兆パラメータ級のオープン MoE**: active 32B なので実用的な推論コスト',
+          '🎯 **MuonClip optimizer**: Muon optimizer を大規模で安定化。Adam より収束が速い',
+          '🎯 **エージェント特化**: ツール使用・コード実行タスクに最適化',
+          '🎯 **384 エキスパート**: fine-grained の極限。DeepSeek-V3 (256) を超える',
+        ],
+        refs: [
+          { label: 'Kimi K2 report', url: 'https://github.com/MoonshotAI/Kimi-K2' },
+          { label: 'Muon optimizer', url: 'https://github.com/KellerJordan/Muon' },
+        ],
+      },
+
+      'glm-4-5': {
+        specs: {
+          'Hidden size': '5120',
+          'Layers': '64',
+          'Experts': '160 routed + 1 shared',
+          'Routing': 'top-8',
+          'Total params': '355B',
+          'Active params': '32B',
+          'Context': '128K',
+          'Mode': 'Thinking / Non-thinking',
+        },
+        stack: [
+          { type: 'io',    label: 'Input tokens' },
+          { type: 'embed', label: 'Token Embedding' },
+          { type: 'stack', label: 'MoE Transformer × 64',
+            sub: 'GQA + RoPE + MoE (160 experts top-8 + shared)' },
+          { type: 'norm',  label: 'RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        highlights: [
+          '🎯 **エージェント特化**: ブラウザ操作・ツール使用・多段ワークフローに最適化',
+          '🎯 **hybrid thinking**: Qwen3 同様の mode 切替',
+          '🎯 **fine-grained MoE**: 160エキスパート + shared で知識分離',
+        ],
+        refs: [
+          { label: 'GLM-4.5 report', url: 'https://arxiv.org/abs/2508.06471' },
+        ],
+      },
+
+      'mistral-large-2': {
+        specs: {
+          'Hidden size': '12288',
+          'Layers': '88',
+          'Attention': 'GQA (8 KV heads)',
+          'Total params': '123B',
+          'Active params': '123B (dense)',
+          'Context': '128K',
+          'Vocab': '32,000',
+        },
+        stack: [
+          { type: 'io',    label: 'Input tokens' },
+          { type: 'embed', label: 'Token Embedding' },
+          { type: 'stack', label: 'Dense Transformer × 88',
+            sub: 'GQA (96 Q / 8 KV) + RoPE + SwiGLU FFN (intermediate 28672)' },
+          { type: 'norm',  label: 'RMSNorm' },
+          { type: 'head',  label: 'LM Head' },
+        ],
+        highlights: [
+          '🎯 **高品質 Dense**: MoE が主流の中で Dense を貫く。推論パスが単純で最適化しやすい',
+          '🎯 **多言語 + コード特化**: 10以上の言語と80以上のプログラミング言語に強い',
+          '🎯 **128K コンテキスト**: YaRN ベースの拡張',
+        ],
+        refs: [
+          { label: 'Mistral Large 2 announcement', url: 'https://mistral.ai/news/mistral-large-2407/' },
         ],
       },
     };
