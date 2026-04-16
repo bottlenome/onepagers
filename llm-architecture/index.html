@@ -277,6 +277,142 @@
       color: var(--text-dim);
     }
     body.modal-open { overflow: hidden; }
+
+    /* ========= Architecture Diagram (Step 2c) ========= */
+    .arch-section { margin-top: 1.5rem; }
+    .arch-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.6rem;
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .spec-item {
+      background: var(--bg-3);
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+    }
+    .spec-label { color: var(--text-dim); font-size: 0.7rem; display: block; }
+    .spec-value { font-weight: 600; color: var(--text); }
+
+    .block-diagram {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: stretch;
+    }
+    .block {
+      position: relative;
+      padding: 0.65rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all 0.15s;
+    }
+    .block.io {
+      background: var(--bg-3);
+      color: var(--text-dim);
+      font-family: monospace;
+      font-size: 0.8rem;
+    }
+    .block.embed {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: var(--accent);
+      color: #bfdbfe;
+    }
+    .block.stack {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: #a855f7;
+      color: #ddd6fe;
+      font-weight: 600;
+      padding: 0.9rem;
+    }
+    .block.stack small {
+      display: block;
+      font-weight: normal;
+      color: #c4b5fd;
+      font-size: 0.72rem;
+      margin-top: 0.2rem;
+    }
+    .block.norm {
+      background: rgba(234, 179, 8, 0.12);
+      border-color: #eab308;
+      color: #fde68a;
+    }
+    .block.head {
+      background: rgba(16, 163, 127, 0.15);
+      border-color: var(--openai);
+      color: #6ee7b7;
+    }
+    .block.side {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: var(--china);
+      color: #fca5a5;
+      font-size: 0.78rem;
+    }
+    .block-arrow {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    /* Transformer block (inner) */
+    .inner-block {
+      margin-top: 0.75rem;
+      background: var(--bg);
+      border: 1px dashed #a855f7;
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+    .inner-block h4 {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      color: #c4b5fd;
+    }
+    .sub-block {
+      padding: 0.4rem 0.7rem;
+      border-radius: 5px;
+      font-size: 0.75rem;
+      text-align: center;
+      margin-bottom: 0.3rem;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+    .sub-block.attn { background: rgba(96, 165, 250, 0.15); border-color: var(--accent); color: #bfdbfe; }
+    .sub-block.moe  { background: rgba(239, 68, 68, 0.15); border-color: var(--china); color: #fca5a5; }
+    .sub-block.norm { background: rgba(234, 179, 8, 0.12); border-color: #eab308; color: #fde68a; }
+    .sub-block.resid { background: transparent; border-style: dashed; color: var(--text-dim); font-size: 0.7rem; }
+
+    .refs {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    .refs a { color: var(--accent); text-decoration: none; }
+    .refs a:hover { text-decoration: underline; }
+
+    .arch-note {
+      background: rgba(234, 179, 8, 0.08);
+      border-left: 3px solid #eab308;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: #fde68a;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -606,6 +742,59 @@
       },
     ];
 
+    // ========= アーキテクチャ詳細データ (Step 2b) =========
+    // 公開モデルのみ詳細を記載。非公開モデルは highlight のみで補足。
+    const ARCH_DETAILS = {
+      'deepseek-v3': {
+        specs: {
+          'Hidden size': '7168',
+          'Layers': '61 (Dense×3 + MoE×58)',
+          'Vocab': '129,280',
+          'Attention heads': '128',
+          'Head dim': '128',
+          'Total params': '671B',
+          'Active params': '37B',
+          'Training tokens': '14.8T',
+        },
+        // 全体ブロック図 (上から下へ)
+        stack: [
+          { type: 'io',    label: 'Input tokens' },
+          { type: 'embed', label: 'Token Embedding (vocab 129,280 × 7168)' },
+          { type: 'stack', label: 'Dense Transformer Block × 3',
+            sub: 'RMSNorm → MLA → Res → RMSNorm → FFN(SwiGLU, 18432) → Res' },
+          { type: 'stack', label: 'MoE Transformer Block × 58',
+            sub: 'RMSNorm → MLA → Res → RMSNorm → DeepSeekMoE → Res' },
+          { type: 'norm',  label: 'Final RMSNorm' },
+          { type: 'head',  label: 'LM Head (tied with embedding)' },
+          { type: 'side',  label: 'MTP Head × 1 (予測+1トークン先, 学習時のみ)' },
+        ],
+        // Transformer block 内部の詳細
+        innerBlock: {
+          title: '🔬 MoE Transformer Block 内部',
+          steps: [
+            { type: 'norm',  label: 'RMSNorm (Pre-norm)' },
+            { type: 'attn',  label: 'MLA — Multi-head Latent Attention\n(Q/KV 共有 low-rank 圧縮, KVキャッシュ70B→1.5B比で縮小)' },
+            { type: 'resid', label: '+ Residual' },
+            { type: 'norm',  label: 'RMSNorm (Pre-norm)' },
+            { type: 'moe',   label: 'DeepSeekMoE\n・256 routed experts (top-8) + 1 shared expert\n・expert hidden 2048\n・aux-loss-free load balancing (bias調整)' },
+            { type: 'resid', label: '+ Residual' },
+          ]
+        },
+        highlights: [
+          '🎯 **MLA** で KVキャッシュを従来MHAの約1/10に圧縮。推論時のメモリ負荷が激減。',
+          '🎯 **DeepSeekMoE**: fine-grained 専門家 (従来比4倍の細粒度) + shared expert で知識分離',
+          '🎯 **Aux-loss-free load balancing**: 補助ロスなしでバイアス項のみで負荷均衡 → 学習安定',
+          '🎯 **MTP (Multi-Token Prediction)**: 次1トークンだけでなく +1 先も予測する学習信号',
+          '🎯 **FP8 mixed precision**: H800 2048枚で 2.788M GPU時間と圧倒的な効率',
+        ],
+        refs: [
+          { label: 'DeepSeek-V3 Technical Report', url: 'https://arxiv.org/abs/2412.19437' },
+          { label: 'DeepSeekMoE paper', url: 'https://arxiv.org/abs/2401.06066' },
+          { label: 'MLA: DeepSeek-V2', url: 'https://arxiv.org/abs/2405.04434' },
+        ],
+      },
+    };
+
     // ========= レンダリング =========
     const archBadgeClass = (m) => m.archClass || 'dense';
 
@@ -665,13 +854,86 @@
     const modalTitle = document.getElementById('modalTitle');
     const modalSubtitle = document.getElementById('modalSubtitle');
 
+    function renderBlock(b) {
+      const sub = b.sub ? `<small>${b.sub}</small>` : '';
+      return `<div class="block ${b.type}">${b.label}${sub}</div>`;
+    }
+    function renderStack(stack) {
+      return stack.map((b, i) => {
+        const arrow = i < stack.length - 1 && b.type !== 'side' && stack[i+1].type !== 'side'
+          ? '<div class="block-arrow">↓</div>' : '';
+        return renderBlock(b) + arrow;
+      }).join('');
+    }
+    function renderInnerBlock(inner) {
+      if (!inner) return '';
+      const steps = inner.steps.map(s => {
+        const label = s.label.replace(/\n/g, '<br>');
+        return `<div class="sub-block ${s.type}">${label}</div>`;
+      }).join('');
+      return `
+        <div class="inner-block">
+          <h4>${inner.title}</h4>
+          ${steps}
+        </div>`;
+    }
+    function renderSpecs(specs) {
+      return Object.entries(specs).map(([k, v]) => `
+        <div class="spec-item">
+          <span class="spec-label">${k}</span>
+          <span class="spec-value">${v}</span>
+        </div>
+      `).join('');
+    }
+    function renderDetail(m, d) {
+      if (!d) {
+        return `
+          <div class="arch-note">
+            🔒 このモデルのアーキテクチャ詳細は公式には非公開です。
+            現在見える情報: ${m.archType}、コンテキスト ${m.context}。
+            今後のステップで推定情報を補足予定。
+          </div>
+          <p class="card-highlight">${m.highlight}</p>
+        `;
+      }
+      const note = m.disclosed ? '' : `
+        <div class="arch-note">🔒 推定情報を含みます。公式レポートで確認してください。</div>`;
+      const highlights = d.highlights
+        ? `<div class="arch-section">
+             <h3>✨ このモデルの特徴</h3>
+             <ul style="padding-left: 1.2rem; font-size: 0.85rem; line-height: 1.7;">
+               ${d.highlights.map(h => `<li>${h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</li>`).join('')}
+             </ul>
+           </div>`
+        : '';
+      const refs = d.refs
+        ? `<div class="refs">📚 参考: ${d.refs.map(r => `<a href="${r.url}" target="_blank" rel="noopener">${r.label}</a>`).join(' · ')}</div>`
+        : '';
+      return `
+        ${note}
+        <div class="arch-section">
+          <h3>📊 主要スペック</h3>
+          <div class="specs-grid">${renderSpecs(d.specs)}</div>
+        </div>
+        <div class="arch-section">
+          <h3>🏗️ 全体アーキテクチャ</h3>
+          <div class="block-diagram">${renderStack(d.stack)}</div>
+          ${renderInnerBlock(d.innerBlock)}
+        </div>
+        ${highlights}
+        ${refs}
+      `;
+    }
+
     function openModal(modelId) {
       const m = MODELS.find(x => x.id === modelId);
       if (!m) return;
       modalTitle.textContent = m.name;
       modalSubtitle.textContent = `${m.vendor} · ${m.archType} · Context ${m.context}`;
+      document.getElementById('modalBody').innerHTML = renderDetail(m, ARCH_DETAILS[modelId]);
       overlay.classList.add('open');
       document.body.classList.add('modal-open');
+      overlay.scrollTop = 0;
     }
     function closeModal() {
       overlay.classList.remove('open');
