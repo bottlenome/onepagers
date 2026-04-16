@@ -791,6 +791,123 @@
       font-size: 1.2rem;
     }
     @media (max-width: 600px) { .pipe-arrow { transform: rotate(90deg); } }
+
+    /* ========= Training Section (Step 6) ========= */
+    .train-pipeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.4rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 700px) { .train-pipeline { grid-template-columns: repeat(2, 1fr); } }
+    .train-stage {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 0.7rem;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+    .train-stage.s1 { border-top-color: #60a5fa; }
+    .train-stage.s2 { border-top-color: #a855f7; }
+    .train-stage.s3 { border-top-color: #f59e0b; }
+    .train-stage.s4 { border-top-color: #ef4444; }
+    .train-stage.s5 { border-top-color: #10b981; }
+    .train-stage strong { display: block; font-size: 0.88rem; margin-bottom: 0.3rem; }
+    .train-stage small { display: block; color: var(--text-dim); font-size: 0.7rem; line-height: 1.4; }
+
+    .align-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .align-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .align-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: var(--accent);
+    }
+    .align-card .year {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+    }
+    .align-flow {
+      background: var(--bg);
+      border-radius: 5px;
+      padding: 0.5rem;
+      font-family: monospace;
+      font-size: 0.72rem;
+      line-height: 1.6;
+      color: #bfdbfe;
+      margin-bottom: 0.5rem;
+    }
+    .align-card p { font-size: 0.8rem; line-height: 1.5; }
+    .align-card .usage {
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      padding: 0.3rem 0.5rem;
+      background: var(--bg-3);
+      border-radius: 4px;
+      color: #fde68a;
+    }
+
+    .model-train-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 1rem;
+    }
+    .model-train-table th, .model-train-table td {
+      padding: 0.6rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .model-train-table th {
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+    .model-train-table td .pill {
+      display: inline-block;
+      padding: 0.12rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin: 0.1rem 0.2rem 0.1rem 0;
+      background: var(--bg-3);
+      color: var(--text);
+    }
+    .pill.sft { background: rgba(96, 165, 250, 0.2); color: #bfdbfe; }
+    .pill.rlhf { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+    .pill.dpo { background: rgba(16, 163, 127, 0.2); color: #6ee7b7; }
+    .pill.grpo { background: rgba(168, 85, 247, 0.2); color: #c4b5fd; }
+    .pill.cai { background: rgba(212, 165, 116, 0.2); color: #fcd34d; }
+    .pill.rlvr { background: rgba(234, 179, 8, 0.2); color: #fde68a; }
+
+    .ttc-box {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-left: 3px solid #10b981;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .ttc-box h4 { font-size: 1rem; margin-bottom: 0.5rem; color: #6ee7b7; }
+    .ttc-box p { font-size: 0.85rem; line-height: 1.7; }
+    .ttc-box code {
+      background: var(--bg);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      font-size: 0.78rem;
+      color: #fde68a;
+    }
   </style>
 </head>
 <body>
@@ -909,6 +1026,43 @@
 
     <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">⑤ 各モデルの超長コンテキスト戦略 (分かっている範囲)</h3>
     <div class="ctx-archs" id="ctxModels"></div>
+
+    <!-- ========= Training Section (Step 6) ========= -->
+    <h2 class="section-title">🎓 学習パイプライン & アライメント手法
+      <small>Pre-training からユーザ向けアライメントまでの流れと、各手法の違い</small>
+    </h2>
+
+    <div class="train-pipeline">
+      <div class="train-stage s1"><strong>① Pre-train</strong><small>次トークン予測<br>数兆〜十数兆 tokens</small></div>
+      <div class="train-stage s2"><strong>② Mid-train</strong><small>長文脈・マルチモーダル<br>合成データ混合</small></div>
+      <div class="train-stage s3"><strong>③ SFT</strong><small>指示データで微調整<br>人手/合成 デモ</small></div>
+      <div class="train-stage s4"><strong>④ Alignment</strong><small>RLHF/DPO/GRPO/CAI<br>好み/報酬で強化</small></div>
+      <div class="train-stage s5"><strong>⑤ Test-time</strong><small>推論時CoT/探索<br>o3, DeepSeek-R1</small></div>
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">アライメント手法の比較</h3>
+    <div class="align-grid" id="alignGrid"></div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">各モデルの学習スタック</h3>
+    <div style="overflow-x: auto;">
+      <table class="model-train-table" id="modelTrainTable"></table>
+    </div>
+
+    <div class="ttc-box">
+      <h4>🧠 Test-time Compute Scaling (推論時計算)</h4>
+      <p>
+        2024-2026 の最大のパラダイム転換。<strong>モデルの重みを大きくせずとも、
+        推論時に長い思考を回すことで精度を上げる</strong>アプローチ。
+      </p>
+      <ul style="font-size: 0.82rem; line-height: 1.7; padding-left: 1.2rem; margin-top: 0.5rem;">
+        <li><code>o1 / o3</code> (OpenAI): 内部の CoT に RL を適用して思考軌跡を学習。ユーザには要約のみ表示</li>
+        <li><code>DeepSeek-R1</code>: 純粋RL (R1-Zero) で突然 "aha moment" 的に reflection が出現。完全公開</li>
+        <li><code>Claude extended thinking</code>: "thinking" モードで出力前に思考を展開。hybrid-reasoning</li>
+        <li><code>Gemini 2.5 Thinking</code>: thinking budget を動的制御 (0〜24576 tokens)</li>
+        <li><code>Best-of-N / Self-consistency</code>: 複数サンプルから選ぶシンプルな手法</li>
+        <li><code>PRM (Process Reward Model)</code>: 思考の各ステップに報酬。 OpenAI Let's Verify Step by Step</li>
+      </ul>
+    </div>
 
     <div class="upcoming">
       <h3>🔍 次のステップで追加予定</h3>
@@ -1691,6 +1845,131 @@
       `).join('');
     }
 
+    // ========= 学習手法 データ (Step 6) =========
+    const ALIGN_METHODS = [
+      {
+        name: 'RLHF (PPO)',
+        year: 'OpenAI 2022 (InstructGPT)',
+        flow: 'prompt → policy π\n       → reward model r\n       → PPO で π を更新',
+        desc: '人間の好みから報酬モデルを学習し、PPO で方針を強化。最も歴史があり、ChatGPT を誕生させた手法',
+        usage: '採用: GPT-4/4o (ベース), 初期 Claude, 初期 Llama',
+      },
+      {
+        name: 'DPO (Direct Preference Optimization)',
+        year: '2023 (Rafailov et al.)',
+        flow: 'chosen vs rejected\n  → 直接 log-ratio を最大化\n  (reward model 不要)',
+        desc: '報酬モデルを介さず好み対から直接ポリシーを更新。実装簡単で安定。しかし off-policy 故の限界',
+        usage: '採用: Llama 3/4, Zephyr, Tulu, 多数のオープンモデル',
+      },
+      {
+        name: 'KTO / ORPO',
+        year: '2024',
+        flow: 'KTO: prospect theory\nORPO: SFT + odds ratio\n  を同時最適化',
+        desc: 'KTO は好み対ではなく「良い/悪い」の単一ラベルで学習。ORPO は SFT と alignment を1段で',
+        usage: '採用: Tulu 2.5, Orca 系',
+      },
+      {
+        name: 'GRPO (Group Relative Policy)',
+        year: '2024 (DeepSeek-Math → R1)',
+        flow: '1つの質問に n 個サンプル\n  → グループ内の相対報酬\n  → 価値モデルなしで PPO',
+        desc: 'PPO から critic (value model) を排除しメモリ半減。報酬はグループ内の平均・標準偏差で正規化',
+        usage: '採用: DeepSeek-R1, Qwen3 思考モード, 多くの推論モデル',
+      },
+      {
+        name: 'Constitutional AI / RLAIF',
+        year: 'Anthropic 2022',
+        flow: 'AI が "原則" に従って\n  自己批判・修正サンプル生成\n  → そのラベルで DPO/RLHF',
+        desc: '人間ラベラーの代わりに AI が憲法 (principles) に基づいて好みラベルを生成。スケールしやすく有害性削減に強い',
+        usage: '採用: Claude 全世代, Llama 4 (RLAIF 併用)',
+      },
+      {
+        name: 'RLVR (Verifiable Rewards)',
+        year: '2024 (OpenAI o1, Tülu 3)',
+        flow: '検証可能タスク\n  (数学/コード/形式証明)\n  → 実行して正否で報酬',
+        desc: '人間の好みではなく実行結果・テスト結果を報酬信号にする。ノイズゼロの強い信号で推論能力が飛躍',
+        usage: '採用: o1/o3, DeepSeek-R1, Tulu 3, 数学特化モデル全般',
+      },
+    ];
+
+    const MODEL_TRAINING = [
+      {
+        model: 'Claude Opus/Sonnet 4.x',
+        stages: ['Pre-train', 'SFT', 'CAI (RL-CAI)', 'RLHF', 'Extended Thinking'],
+        pills: [['sft','SFT'],['cai','Constitutional AI'],['rlhf','RLHF'],['rlvr','RLVR (一部)']],
+        note: '憲法 (Constitutional AI) が中核。hybrid-reasoning で思考モード統合',
+      },
+      {
+        model: 'GPT-4o / GPT-5',
+        stages: ['Pre-train', 'SFT', 'RLHF (PPO)', 'RLVR', 'Deliberative Alignment'],
+        pills: [['sft','SFT'],['rlhf','RLHF/PPO'],['rlvr','RLVR']],
+        note: 'PPO ベースの RLHF を洗練。推論モデルは "熟慮的アライメント"',
+      },
+      {
+        model: 'o3 / o3-mini',
+        stages: ['GPT-4系base', 'CoT SFT', 'RLVR (大量)', 'PRM'],
+        pills: [['sft','CoT SFT'],['rlvr','RLVR 主軸'],['rlhf','PRM']],
+        note: '内部 CoT に RL で思考軌跡を学習。test-time compute が武器',
+      },
+      {
+        model: 'Gemini 2.5',
+        stages: ['Pre-train (multimodal)', 'SFT', 'RLHF', 'Thinking RL'],
+        pills: [['sft','SFT'],['rlhf','RLHF'],['rlvr','Thinking RL']],
+        note: 'マルチモーダル native。thinking budget で推論深さ制御',
+      },
+      {
+        model: 'DeepSeek-R1',
+        stages: ['DS-V3 base', 'Cold-start SFT', 'GRPO (推論RL)', 'rejection SFT', 'GRPO (alignment)'],
+        pills: [['sft','Cold SFT'],['grpo','GRPO'],['rlvr','Verifiable rewards']],
+        note: '2段階 GRPO。R1-Zero (純粋RL) で reflection が創発したのが衝撃',
+      },
+      {
+        model: 'Llama 4',
+        stages: ['Pre-train', 'Long-ctx mid-train', 'SFT', 'iterative DPO', 'RLAIF'],
+        pills: [['sft','SFT'],['dpo','iterative DPO'],['cai','RLAIF (一部)']],
+        note: 'DPO を反復。ラウンドごとに新しい好みデータ生成',
+      },
+      {
+        model: 'Qwen3',
+        stages: ['Pre-train', 'SFT', 'DPO / GRPO (mode別)', 'Thinking mode RL'],
+        pills: [['sft','SFT'],['dpo','DPO'],['grpo','GRPO']],
+        note: 'Thinking/Non-thinking 切替モデル。モードごとに別 RL',
+      },
+      {
+        model: 'Kimi K2',
+        stages: ['Pre-train (MuonClip)', 'SFT', 'Agentic RL'],
+        pills: [['sft','SFT'],['rlvr','Agentic RL']],
+        note: 'Muon optimizer を安定化した MuonClip で pretraining。ツール使用タスクで RL',
+      },
+    ];
+
+    function renderAlignGrid() {
+      document.getElementById('alignGrid').innerHTML = ALIGN_METHODS.map(a => `
+        <div class="align-card">
+          <h4>${a.name}</h4>
+          <div class="year">${a.year}</div>
+          <div class="align-flow">${a.flow.replace(/\n/g, '<br>')}</div>
+          <p>${a.desc}</p>
+          <div class="usage">${a.usage}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderModelTrainTable() {
+      const rows = MODEL_TRAINING.map(m => {
+        const pills = m.pills.map(([cls, label]) => `<span class="pill ${cls}">${label}</span>`).join('');
+        return `
+          <tr>
+            <td style="font-weight:600;">${m.model}</td>
+            <td>${pills}</td>
+            <td style="font-size:0.78rem;color:var(--text-dim);">${m.note}</td>
+          </tr>`;
+      }).join('');
+      document.getElementById('modelTrainTable').innerHTML = `
+        <thead><tr><th>Model</th><th>使用手法</th><th>特徴</th></tr></thead>
+        <tbody>${rows}</tbody>
+      `;
+    }
+
     // ========= レンダリング =========
     const archBadgeClass = (m) => m.archClass || 'dense';
 
@@ -1862,6 +2141,8 @@
     renderCtxArchs();
     renderPipeline();
     renderCtxModels();
+    renderAlignGrid();
+    renderModelTrainTable();
   </script>
 </body>
 </html>
