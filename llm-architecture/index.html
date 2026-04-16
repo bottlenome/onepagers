@@ -503,6 +503,127 @@
     }
     .attn-pros span.pro { color: #6ee7b7; }
     .attn-pros span.con { color: #fca5a5; }
+
+    /* ========= MoE Section (Step 4) ========= */
+    .moe-concept {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+    }
+    .moe-flow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 600px;
+      padding: 0.5rem 0;
+    }
+    .moe-stage {
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      padding: 0.6rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      border: 1px solid var(--border);
+    }
+    .moe-stage.token { background: var(--bg-3); color: var(--text-dim); }
+    .moe-stage.router {
+      background: rgba(234, 179, 8, 0.15);
+      border-color: #eab308;
+      color: #fde68a;
+      font-weight: 600;
+    }
+    .moe-experts {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1.5;
+      min-width: 140px;
+    }
+    .expert {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid #4c1d95;
+      color: #c4b5fd;
+      padding: 0.3rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      opacity: 0.35;
+      transition: all 0.3s;
+    }
+    .expert.active {
+      opacity: 1;
+      background: rgba(168, 85, 247, 0.35);
+      border-color: #a855f7;
+      color: white;
+      box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+    }
+    .expert.shared {
+      opacity: 1;
+      background: rgba(16, 163, 127, 0.25);
+      border-color: var(--openai);
+      color: #6ee7b7;
+    }
+    .moe-arrow {
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .moe-stage.sum {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: var(--accent);
+      color: #bfdbfe;
+    }
+
+    .moe-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+    .moe-table th, .moe-table td {
+      padding: 0.6rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .moe-table th {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .moe-table tr:hover td { background: var(--bg-2); }
+    .moe-table td.num { font-family: monospace; text-align: right; color: #bfdbfe; }
+    .moe-table .model-col { font-weight: 600; }
+    .moe-table .sparse {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      background: rgba(168, 85, 247, 0.2);
+      color: #c4b5fd;
+      margin-left: 0.3rem;
+    }
+    .moe-balance {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .moe-balance h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    .moe-balance ul {
+      padding-left: 1.2rem;
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+    .moe-wrap { overflow-x: auto; }
   </style>
 </head>
 <body>
@@ -529,6 +650,33 @@
       <small>モデルが推論時に最も計算・メモリを食う箇所。KVキャッシュ削減の工夫が鍵</small>
     </h2>
     <div class="attn-grid" id="attnGrid"></div>
+
+    <!-- ========= MoE Section (Step 4) ========= -->
+    <h2 class="section-title">🎛️ MoE (Mixture of Experts) の仕組み
+      <small>疎な活性化で総パラメータを爆増させつつ、推論コストは据え置きにする技術</small>
+    </h2>
+
+    <div class="moe-concept">
+      <div class="moe-flow" id="moeFlow"></div>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.75rem; text-align: center;">
+        各トークンが Router によって <strong style="color: #fde68a;">top-K 個の専門家</strong> だけに送られる。
+        MoE 層のパラメータは巨大でも実際に計算されるのは K 個分だけ。
+      </p>
+    </div>
+
+    <div class="moe-wrap">
+      <table class="moe-table" id="moeTable"></table>
+    </div>
+
+    <div class="moe-balance">
+      <h4>⚖️ 負荷均衡 (Load Balancing) の工夫</h4>
+      <ul>
+        <li><strong>Aux-loss (Switch/Mixtral)</strong>: 各エキスパートの使用率が均等になるよう補助損失を追加。シンプルだが主タスク損失と干渉する</li>
+        <li><strong>Router z-loss (GShard)</strong>: softmax入力のノルムを抑える数値安定化ロス</li>
+        <li><strong>Aux-loss-free (DeepSeek-V3)</strong>: 補助損失なしで、各エキスパートに<em>バイアス項</em>を付けて動的調整。使われすぎたら下げ、使われなければ上げる。主タスクを阻害せず最も高品質</li>
+        <li><strong>Expert Choice (Zoph+22)</strong>: 逆転の発想。各専門家が自分が処理するトークンを選ぶ。負荷は完全均一だが因果性に制約</li>
+      </ul>
+    </div>
 
     <div class="upcoming">
       <h3>🔍 次のステップで追加予定</h3>
@@ -1010,6 +1158,105 @@
       document.getElementById('attnGrid').innerHTML = ATTENTIONS.map(renderAttnCard).join('');
     }
 
+    // ========= MoE データ (Step 4) =========
+    const MOE_VARIANTS = [
+      {
+        model: 'Mixtral 8x22B',
+        total: '141B', active: '39B', ratio: 28,
+        experts: 8, topK: 2, shared: 0,
+        balance: 'Aux-loss',
+        note: 'シンプル、解析容易。少数の太いエキスパート',
+      },
+      {
+        model: 'Qwen3 235B-A22B',
+        total: '235B', active: '22B', ratio: 9.4,
+        experts: 128, topK: 8, shared: 0,
+        balance: 'Aux-loss',
+        note: 'Mixtral路線をスケール。細かめの専門家',
+      },
+      {
+        model: 'GLM-4.5',
+        total: '355B', active: '32B', ratio: 9.0,
+        experts: 160, topK: 8, shared: 1,
+        balance: 'Aux-loss',
+        note: 'shared expert 導入で知識分離',
+      },
+      {
+        model: 'Llama 4 Maverick',
+        total: '400B', active: '17B', ratio: 4.3,
+        experts: 128, topK: 1, shared: 1,
+        balance: 'Aux-loss',
+        note: 'top-1 + shared expert でルーティング簡素化',
+      },
+      {
+        model: 'Llama 4 Scout',
+        total: '109B', active: '17B', ratio: 15.6,
+        experts: 16, topK: 1, shared: 1,
+        balance: 'Aux-loss',
+        note: 'エッジ/単一GPU向けの小規模 MoE',
+      },
+      {
+        model: 'DeepSeek-V3 / R1',
+        total: '671B', active: '37B', ratio: 5.5,
+        experts: 256, topK: 8, shared: 1,
+        balance: 'Aux-loss-free',
+        note: 'Fine-grained (最小粒度) + バイアス自己調整。疎度が極端',
+      },
+      {
+        model: 'Kimi K2',
+        total: '1T', active: '32B', ratio: 3.2,
+        experts: 384, topK: 8, shared: 1,
+        balance: 'Aux-loss-free (類型)',
+        note: 'DeepSeekMoE 系を 1T パラメータにスケール',
+      },
+    ];
+
+    function renderMoEFlow() {
+      // Router → 8 experts (top-2 active) のサンプル
+      const experts = Array.from({length: 8}, (_, i) => {
+        const active = (i === 1 || i === 4); // top-2 の例
+        return `<div class="expert ${active ? 'active' : ''}">Expert ${i+1}${active ? ' ★' : ''}</div>`;
+      }).join('');
+      document.getElementById('moeFlow').innerHTML = `
+        <div class="moe-stage token">Token<br><small>hidden x</small></div>
+        <div class="moe-arrow">→</div>
+        <div class="moe-stage router">Router<br>(softmax)</div>
+        <div class="moe-arrow">→</div>
+        <div class="moe-experts">${experts}</div>
+        <div class="moe-arrow">→</div>
+        <div class="moe-stage sum">Weighted<br>Sum</div>
+      `;
+    }
+
+    function renderMoETable() {
+      const rows = MOE_VARIANTS.map(m => {
+        const sharedBadge = m.shared ? '<span class="sparse">+shared</span>' : '';
+        const auxBadge = m.balance.includes('free')
+          ? '<span class="sparse" style="background:rgba(16,163,127,0.2);color:#6ee7b7;">aux-free</span>' : '';
+        return `
+          <tr>
+            <td class="model-col">${m.model}${sharedBadge}${auxBadge}</td>
+            <td class="num">${m.total}</td>
+            <td class="num">${m.active}</td>
+            <td class="num">${m.ratio}%</td>
+            <td class="num">${m.experts}</td>
+            <td class="num">top-${m.topK}</td>
+            <td>${m.balance}</td>
+            <td style="font-size:0.75rem;color:var(--text-dim);">${m.note}</td>
+          </tr>`;
+      }).join('');
+      document.getElementById('moeTable').innerHTML = `
+        <thead>
+          <tr>
+            <th>Model</th><th style="text-align:right;">Total</th><th style="text-align:right;">Active</th>
+            <th style="text-align:right;">Active率</th><th style="text-align:right;">Experts</th>
+            <th style="text-align:right;">Routing</th><th>Load Balance</th><th>Note</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      `;
+    }
+
     // ========= レンダリング =========
     const archBadgeClass = (m) => m.archClass || 'dense';
 
@@ -1174,6 +1421,8 @@
     // 初期レンダリング
     renderCards('all');
     renderAttnGrid();
+    renderMoEFlow();
+    renderMoETable();
   </script>
 </body>
 </html>
