@@ -624,6 +624,173 @@
       line-height: 1.7;
     }
     .moe-wrap { overflow-x: auto; }
+
+    /* ========= Long Context Section (Step 5) ========= */
+    .ctx-intro {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+    .ctx-intro ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+    .ctx-intro code {
+      background: var(--bg);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      color: #bfdbfe;
+    }
+
+    .rope-vis {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .rope-vis { grid-template-columns: 1fr; } }
+    .rope-panel {
+      background: var(--bg-2);
+      border-radius: 6px;
+      padding: 0.75rem;
+    }
+    .rope-panel h4 {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    .rope-freq {
+      display: flex;
+      gap: 2px;
+      margin-top: 0.4rem;
+      align-items: flex-end;
+      height: 50px;
+    }
+    .rope-bar {
+      flex: 1;
+      background: linear-gradient(to top, var(--accent), #a855f7);
+      border-radius: 2px 2px 0 0;
+      min-height: 3px;
+    }
+    .rope-caption {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .ext-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 1rem;
+    }
+    .ext-table th, .ext-table td {
+      padding: 0.65rem 0.7rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+    .ext-table th {
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .ext-table .method { font-weight: 600; color: var(--accent); white-space: nowrap; }
+    .ext-table code {
+      background: var(--bg);
+      padding: 0.1rem 0.3rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      color: #fde68a;
+    }
+
+    .ctx-archs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .ctx-arch-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem;
+    }
+    .ctx-arch-card h4 {
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .ctx-arch-card p {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--text-dim);
+    }
+    .ctx-arch-card .used {
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: #bfdbfe;
+    }
+
+    /* Attention window viz */
+    .window-vis {
+      display: flex;
+      gap: 2px;
+      margin-top: 0.5rem;
+    }
+    .win-cell {
+      flex: 1;
+      height: 12px;
+      background: var(--bg-3);
+      border-radius: 2px;
+    }
+    .win-cell.active { background: var(--accent); }
+    .win-cell.global { background: #a855f7; }
+
+    .pipeline {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .pipeline h4 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .pipeline-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+    .pipe-step {
+      flex: 1;
+      min-width: 130px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 0.6rem;
+      font-size: 0.78rem;
+      position: relative;
+    }
+    .pipe-step strong { display: block; color: var(--accent); margin-bottom: 0.2rem; font-size: 0.82rem; }
+    .pipe-step small { color: var(--text-dim); font-size: 0.7rem; display: block; margin-top: 0.2rem; }
+    .pipe-arrow {
+      align-self: center;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+    }
+    @media (max-width: 600px) { .pipe-arrow { transform: rotate(90deg); } }
   </style>
 </head>
 <body>
@@ -677,6 +844,71 @@
         <li><strong>Expert Choice (Zoph+22)</strong>: 逆転の発想。各専門家が自分が処理するトークンを選ぶ。負荷は完全均一だが因果性に制約</li>
       </ul>
     </div>
+
+    <!-- ========= Long Context Section (Step 5) ========= -->
+    <h2 class="section-title">📏 1M / 10M 超長コンテキストの学習手法
+      <small>位置エンコーディング拡張と専用アーキテクチャの合わせ技で実現</small>
+    </h2>
+
+    <div class="ctx-intro">
+      <strong>💡 なぜ長コンテキストは難しい？</strong>
+      <ul>
+        <li><strong>計算量が O(n²)</strong>: シーケンス長が2倍になると Attention コストは4倍</li>
+        <li><strong>位置エンコーディングが外挿できない</strong>: 学習時の最大長を超えると位置情報が壊れる (RoPE は高周波成分が "aliasing")</li>
+        <li><strong>KVキャッシュ爆発</strong>: 1Mトークン × 層数 × ヘッド数で数百GB級</li>
+        <li><strong>データ不足</strong>: 1M級の高品質な連続文書は世界に存在しない → 合成/連結が必要</li>
+      </ul>
+      これらを <code>位置エンコ拡張 + 疎Attention + 長文継続学習</code> の三本柱で解決する。
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">① RoPE (Rotary Position Embedding) の基本</h3>
+    <div class="rope-vis">
+      <div class="rope-panel">
+        <h4>回転式位置符号</h4>
+        <p style="font-size: 0.82rem; line-height: 1.6;">
+          トークン位置 <code>m</code> で Q/K の各次元ペアを角度
+          <code>θ_i · m</code> だけ回転。<code>θ_i = base^(-2i/d)</code>。
+          <strong>相対位置が内積として自然に現れる</strong>のが美点。
+        </p>
+        <div class="rope-freq" id="ropeFreq"></div>
+        <div class="rope-caption">
+          <span>← 低dim (高頻度回転)</span>
+          <span>高dim (低頻度) →</span>
+        </div>
+      </div>
+      <div class="rope-panel">
+        <h4>なぜ外挿が効かない？</h4>
+        <p style="font-size: 0.82rem; line-height: 1.6;">
+          学習時の最大位置 <code>L_train</code> を超えると、高頻度次元の回転が
+          学習範囲外の角度組み合わせに入り、<strong>Q·K 内積の分布が激変</strong>。
+          Attention softmax が崩壊する。
+        </p>
+        <p style="font-size: 0.78rem; color: #fca5a5; margin-top: 0.5rem;">
+          ⚠️ LLaMA (2K) → ナイーブに 8K で推論すると性能大幅低下
+        </p>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">② RoPE 拡張手法の比較</h3>
+    <div style="overflow-x: auto;">
+      <table class="ext-table" id="extTable"></table>
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">③ アーキテクチャ側の工夫</h3>
+    <div class="ctx-archs" id="ctxArchs"></div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">④ 実際の学習パイプライン (Llama 4 Scout: 10M コンテキスト)</h3>
+    <div class="pipeline">
+      <h4>段階的に context を伸ばしていく "curriculum"</h4>
+      <div class="pipeline-steps" id="pipeline"></div>
+      <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 0.75rem;">
+        ※ Meta 公式発表ベース。数値は公表情報。各段階で <code>RoPE base</code> を大きくし、
+        学習データも長文サンプルの比率を上げていく。
+      </p>
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.5rem;">⑤ 各モデルの超長コンテキスト戦略 (分かっている範囲)</h3>
+    <div class="ctx-archs" id="ctxModels"></div>
 
     <div class="upcoming">
       <h3>🔍 次のステップで追加予定</h3>
@@ -1257,6 +1489,208 @@
       `;
     }
 
+    // ========= 長コンテキスト データ (Step 5) =========
+    const EXTENSION_METHODS = [
+      {
+        method: 'PI (Position Interpolation)',
+        year: '2023',
+        idea: '位置を L_new/L_orig 倍に圧縮して元の範囲に詰め込む',
+        formula: 'pos → pos · L_orig / L_new',
+        pros: '実装超簡単、fine-tuning 1000step程度で効く',
+        cons: '高周波情報が潰れて精度低下',
+        models: '初期LLaMA extended, Code LLaMA',
+      },
+      {
+        method: 'NTK-aware',
+        year: '2023',
+        idea: '位置ではなく RoPE base (θの基底) を拡大。NTK理論由来',
+        formula: 'base → base · α^(d/(d-2))',
+        pros: 'fine-tuning 不要で外挿できる (2倍程度なら)',
+        cons: '拡張率が大きいと高頻度側が狂う',
+        models: 'コミュニティ実装 (oobabooga等)',
+      },
+      {
+        method: 'YaRN (Yet another RoPE)',
+        year: '2023',
+        idea: 'NTK-by-parts (周波数帯で処理を分ける) + attention temperature 調整',
+        formula: '高頻度 → そのまま / 中頻度 → NTK / 低頻度 → PI',
+        pros: '品質低下が最小、拡張率4-16倍で実用的',
+        cons: 'ハイパラ多め',
+        models: 'Qwen2/3 (128K→1M), Yi, Mistral',
+      },
+      {
+        method: 'LongRoPE / LongRoPE2',
+        year: '2024-2025',
+        idea: '次元ごとに最適な RoPE スケールを進化的探索 (evolutionary search) で決定',
+        formula: '各dim独立のスケール係数',
+        pros: '128K→2M級の拡張でも品質維持',
+        cons: '探索コストが高い',
+        models: 'Phi-3-mini-128K, 研究実装',
+      },
+      {
+        method: 'DCA (Dual Chunk Attention)',
+        year: '2024',
+        idea: '推論時に長文を chunk に分割、chunk内/間で異なる位置処理',
+        formula: 'chunk内 → 元RoPE / chunk間 → 再エンコード',
+        pros: '学習不要、訓練長の8-16倍まで対応',
+        cons: '推論コードが複雑化',
+        models: 'Qwen3 (1M 推論時)',
+      },
+    ];
+
+    const CTX_ARCHS = [
+      {
+        name: 'iRoPE (Llama 4)',
+        desc: 'Transformer 層を交互に "RoPE 付き" と "NoPE (位置無し)" にする。RoPE層が相対位置を担い、NoPE層が情報を<em>位置非依存</em>に混ぜる',
+        used: '採用: Llama 4 Scout (10M), Maverick (1M)',
+        viz: 'interleaved',
+      },
+      {
+        name: 'NoPE (No Positional Encoding)',
+        desc: '位置エンコーディングを一切入れない。Causal attention だけで暗黙の位置情報が学習される (Haviv+ 2022)。理論上は無限に外挿可能',
+        used: '採用: Llama 4 の一部層、研究実装',
+      },
+      {
+        name: 'Sliding Window Attention',
+        desc: '各トークンは直近 W トークンだけに Attention。計算量 O(n·W) に線形化',
+        used: '採用: Mistral (W=4096), Gemma (W=4096), Mixtral',
+        viz: 'sliding',
+      },
+      {
+        name: 'Hybrid Global/Local',
+        desc: '多くの層は local (Sliding Window)、数層だけ global attention。局所・大域の両立',
+        used: '採用: Gemma 3 (global:local = 1:5)',
+        viz: 'hybrid',
+      },
+      {
+        name: 'Ring Attention',
+        desc: 'KV を複数デバイスで環状に分割し、リング通信しながら順に参照。単一GPUの VRAM を超える長さを扱える',
+        used: '採用: Llama 4 Scout の 10M サーブ, 研究実装',
+      },
+      {
+        name: 'Attention Sink',
+        desc: '先頭の数トークン ("sink") を常にKVキャッシュに保持。長期推論で softmax の分母を安定化 (Streaming LLM)',
+        used: '採用: Mistral Streaming, 多くのエージェント系',
+      },
+    ];
+
+    const LLAMA4_PIPELINE = [
+      { title: '① Pretrain 4K', body: '通常の base pretraining。22Tトークン(Scout)。ここでは短文主体。', arrow: true },
+      { title: '② Mid-train 256K', body: '長文書 (書籍、コードリポジトリ、法律文書) にサンプル重み付け。RoPE base を大幅増。', arrow: true },
+      { title: '③ Long PT 10M', body: '10Mトークンの合成シーケンスで継続学習。iRoPE の NoPE 層が勝負。', arrow: true },
+      { title: '④ SFT + RL', body: '指示追従・安全性を仕上げ。長文能力を壊さないようデータを混合。' },
+    ];
+
+    const CTX_MODELS = [
+      {
+        name: 'Claude Sonnet 4.6 (1M β)',
+        desc: '200K → 1M の拡張方法は非公開。Sliding Window + カスタム位置エンコの可能性。エージェント向けに "attention sink + summarization" の組み合わせとの推測も',
+        used: '🔒 詳細非公開',
+      },
+      {
+        name: 'Gemini 2.5 Pro (1M-2M)',
+        desc: 'Google 独自の "long-context-first" 設計。疎Attention + 訓練データに ultra-long を多量含めるとされる。Needle-in-haystack で2Mまで高精度',
+        used: '🔒 部分公開 (DeepMind ブログ)',
+      },
+      {
+        name: 'Qwen3 (128K → 1M)',
+        desc: '事前学習 128K → 推論時に <strong>YaRN + DCA</strong> で 1M まで拡張。ChatML template 側で chunk 境界を管理',
+        used: '📖 完全公開、実装公開',
+      },
+      {
+        name: 'Llama 4 Scout (10M)',
+        desc: 'iRoPE (interleaved RoPE + NoPE) + 段階的 curriculum。Ring Attention で単一 H100 ノードでもサーブ可能',
+        used: '📖 技術レポート公開',
+      },
+      {
+        name: 'DeepSeek-V3 (128K)',
+        desc: 'YaRN ベースの拡張。超長文ではなく "高品質な128K" 路線。MLA で KVキャッシュ負荷を抑えているのが大きい',
+        used: '📖 技術レポート公開',
+      },
+      {
+        name: 'GPT-5 / GPT-4o (400K/128K)',
+        desc: '手法は非公開。GPT-5 の 400K は中間的な長さで、全 attention + Flash Attention系の最適化と推測',
+        used: '🔒 詳細非公開',
+      },
+    ];
+
+    function renderRopeFreq() {
+      // d=64 の各ペアの θ_i を相対的に可視化 (bar の高さで角速度)
+      const d = 32; // 32 pairs
+      const bars = Array.from({length: d}, (_, i) => {
+        // θ_i = 10000^(-2i/d), log軸で可視化
+        const theta = Math.pow(10000, -2 * i / d);
+        const h = Math.max(3, theta * 100); // 視覚的にスケール
+        return `<div class="rope-bar" style="height:${h}%;" title="θ_${i} = ${theta.toExponential(2)}"></div>`;
+      }).join('');
+      document.getElementById('ropeFreq').innerHTML = bars;
+    }
+
+    function renderExtTable() {
+      const rows = EXTENSION_METHODS.map(e => `
+        <tr>
+          <td class="method">${e.method}<br><small style="color:var(--text-dim);font-weight:normal;">${e.year}</small></td>
+          <td>${e.idea}<br><code>${e.formula}</code></td>
+          <td style="color:#6ee7b7;">✓ ${e.pros}</td>
+          <td style="color:#fca5a5;">✗ ${e.cons}</td>
+          <td style="font-size:0.75rem;color:var(--text-dim);">${e.models}</td>
+        </tr>`).join('');
+      document.getElementById('extTable').innerHTML = `
+        <thead><tr><th>Method</th><th>アイデア / 式</th><th>長所</th><th>短所</th><th>採用</th></tr></thead>
+        <tbody>${rows}</tbody>
+      `;
+    }
+
+    function renderWindowViz(type) {
+      // 20 セルで簡易表現
+      if (type === 'interleaved') {
+        // 交互に global(RoPE) / local(NoPE)
+        return '<div class="window-vis">' + Array.from({length: 20}, (_, i) =>
+          `<div class="win-cell ${i % 2 === 0 ? 'global' : 'active'}" title="${i%2===0?'RoPE':'NoPE'}"></div>`
+        ).join('') + '</div>';
+      }
+      if (type === 'sliding') {
+        return '<div class="window-vis">' + Array.from({length: 20}, (_, i) =>
+          `<div class="win-cell ${i >= 12 ? 'active' : ''}"></div>`
+        ).join('') + '</div>';
+      }
+      if (type === 'hybrid') {
+        return '<div class="window-vis">' + Array.from({length: 20}, (_, i) =>
+          `<div class="win-cell ${i === 5 || i === 11 || i === 17 ? 'global' : 'active'}"></div>`
+        ).join('') + '</div>';
+      }
+      return '';
+    }
+
+    function renderCtxArchs() {
+      document.getElementById('ctxArchs').innerHTML = CTX_ARCHS.map(c => `
+        <div class="ctx-arch-card">
+          <h4>${c.name}</h4>
+          <p>${c.desc}</p>
+          ${c.viz ? renderWindowViz(c.viz) : ''}
+          <div class="used">${c.used}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderPipeline() {
+      const html = LLAMA4_PIPELINE.map((s, i) => {
+        const arrow = s.arrow ? '<div class="pipe-arrow">→</div>' : '';
+        return `<div class="pipe-step"><strong>${s.title}</strong><small>${s.body}</small></div>${arrow}`;
+      }).join('');
+      document.getElementById('pipeline').innerHTML = html;
+    }
+
+    function renderCtxModels() {
+      document.getElementById('ctxModels').innerHTML = CTX_MODELS.map(c => `
+        <div class="ctx-arch-card">
+          <h4>${c.name}</h4>
+          <p>${c.desc}</p>
+          <div class="used">${c.used}</div>
+        </div>
+      `).join('');
+    }
+
     // ========= レンダリング =========
     const archBadgeClass = (m) => m.archClass || 'dense';
 
@@ -1423,6 +1857,11 @@
     renderAttnGrid();
     renderMoEFlow();
     renderMoETable();
+    renderRopeFreq();
+    renderExtTable();
+    renderCtxArchs();
+    renderPipeline();
+    renderCtxModels();
   </script>
 </body>
 </html>
