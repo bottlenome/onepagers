@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLMアーキテクチャ比較 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0f172a;
+      --bg-2: #1e293b;
+      --bg-3: #334155;
+      --border: #334155;
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --accent: #60a5fa;
+      --anthropic: #d4a574;
+      --google: #4285f4;
+      --openai: #10a37f;
+      --china: #ef4444;
+      --open: #a855f7;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 2rem; }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #60a5fa, #a855f7, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle { color: var(--text-dim); font-size: 1rem; }
+    .nav-home {
+      display: inline-block;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .nav-home:hover { color: var(--accent); }
+
+    /* Filter tabs */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0 1.5rem;
+    }
+    .filter-btn {
+      background: var(--bg-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Model grid */
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .model-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .model-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .model-card[data-company="anthropic"] { border-left-color: var(--anthropic); }
+    .model-card[data-company="google"] { border-left-color: var(--google); }
+    .model-card[data-company="openai"] { border-left-color: var(--openai); }
+    .model-card[data-company="china"] { border-left-color: var(--china); }
+    .model-card[data-company="open"] { border-left-color: var(--open); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    .model-name { font-size: 1.15rem; font-weight: 600; }
+    .model-vendor {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+    .arch-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: var(--bg-3);
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .arch-badge.moe { background: rgba(168, 85, 247, 0.2); color: #c4b5fd; }
+    .arch-badge.dense { background: rgba(96, 165, 250, 0.2); color: #93c5fd; }
+    .arch-badge.hybrid { background: rgba(234, 179, 8, 0.2); color: #fde047; }
+
+    .card-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .meta-item {
+      background: var(--bg-3);
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+    }
+    .meta-label {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+    .meta-value { font-weight: 600; color: var(--text); }
+
+    .card-highlight {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .disclosed-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--bg-3);
+      color: var(--text-dim);
+    }
+    .disclosed-badge.open {
+      background: rgba(16, 163, 127, 0.2);
+      color: #6ee7b7;
+    }
+
+    .tags {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+    .tag {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--bg);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+    }
+
+    /* Upcoming sections placeholder */
+    .upcoming {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background: var(--bg-2);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    .upcoming h3 { color: var(--text); margin-bottom: 0.5rem; }
+    .upcoming ul {
+      display: inline-block;
+      text-align: left;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .upcoming li { margin: 0.25rem 0; }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="nav-home">← OnePagers</a>
+    <header>
+      <h1>LLMアーキテクチャ比較 2026</h1>
+      <p class="subtitle">主要大規模言語モデルの内部構造を視覚的に比較 (2026年4月時点)</p>
+    </header>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="anthropic">Anthropic</button>
+      <button class="filter-btn" data-filter="google">Google</button>
+      <button class="filter-btn" data-filter="openai">OpenAI</button>
+      <button class="filter-btn" data-filter="china">中国勢</button>
+      <button class="filter-btn" data-filter="open">オープンモデル</button>
+    </div>
+
+    <div class="model-grid" id="modelGrid"></div>
+
+    <div class="upcoming">
+      <h3>🔍 次のステップで追加予定</h3>
+      <ul>
+        <li>・ 各モデルのアーキテクチャブロック図 (クリックでズーム)</li>
+        <li>・ Attention / MoE / 位置エンコーディングの内部構造</li>
+        <li>・ 1Mコンテキストの学習手法 (RoPEスケーリング, YaRN, PI 等)</li>
+        <li>・ RLHF / DPO / GRPO などの学習手法比較</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p>データソース: 各社公式技術レポート / arXiv 論文 / モデルカード</p>
+      <p>非公開モデルは推定/公表情報のみ記載</p>
+    </footer>
+  </div>
+
+  <script>
+    // ========= モデルデータ =========
+    // disclosed: アーキテクチャ詳細が技術レポートで公開されているか
+    const MODELS = [
+      // ---- Anthropic ----
+      {
+        id: 'claude-opus-4-6',
+        name: 'Claude Opus 4.6',
+        vendor: 'Anthropic',
+        company: 'anthropic',
+        released: '2026-03',
+        archType: 'Dense Transformer (推定)',
+        archClass: 'dense',
+        params: { total: '非公開', active: '非公開' },
+        context: '200K',
+        highlight: 'Constitutional AI とハイブリッド推論モード。長文・コーディングで業界トップ級。',
+        tags: ['hybrid-reasoning', 'constitutional-ai', 'tool-use'],
+        disclosed: false,
+      },
+      {
+        id: 'claude-sonnet-4-6',
+        name: 'Claude Sonnet 4.6',
+        vendor: 'Anthropic',
+        company: 'anthropic',
+        released: '2026-03',
+        archType: 'Dense Transformer (推定)',
+        archClass: 'dense',
+        params: { total: '非公開', active: '非公開' },
+        context: '200K / 1M (拡張)',
+        highlight: '性能と速度のバランス。Claude Code の標準モデル。1Mコンテキストβ対応。',
+        tags: ['1M-context-beta', 'agent-optimized'],
+        disclosed: false,
+      },
+      {
+        id: 'claude-haiku-4-5',
+        name: 'Claude Haiku 4.5',
+        vendor: 'Anthropic',
+        company: 'anthropic',
+        released: '2025-10',
+        archType: 'Dense Transformer (推定)',
+        archClass: 'dense',
+        params: { total: '非公開', active: '非公開' },
+        context: '200K',
+        highlight: '高速・低コスト。モバイルエージェント向けに最適化。',
+        tags: ['fast', 'cost-efficient'],
+        disclosed: false,
+      },
+
+      // ---- Google ----
+      {
+        id: 'gemini-2-5-pro',
+        name: 'Gemini 2.5 Pro',
+        vendor: 'Google DeepMind',
+        company: 'google',
+        released: '2025-03',
+        archType: 'Sparse MoE',
+        archClass: 'moe',
+        params: { total: '非公開', active: '非公開' },
+        context: '1M → 2M',
+        highlight: 'Thinking model。ネイティブマルチモーダル。200万トークン級の超長文脈。',
+        tags: ['native-multimodal', '2M-context', 'thinking'],
+        disclosed: false,
+      },
+      {
+        id: 'gemini-2-5-flash',
+        name: 'Gemini 2.5 Flash',
+        vendor: 'Google DeepMind',
+        company: 'google',
+        released: '2025-04',
+        archType: 'Sparse MoE',
+        archClass: 'moe',
+        params: { total: '非公開', active: '非公開' },
+        context: '1M',
+        highlight: '高速・軽量MoE。Thinking budget を動的に制御可能。',
+        tags: ['1M-context', 'thinking-budget'],
+        disclosed: false,
+      },
+      {
+        id: 'gemma-3',
+        name: 'Gemma 3 (27B)',
+        vendor: 'Google',
+        company: 'open',
+        subCompany: 'google',
+        released: '2025-03',
+        archType: 'Dense Transformer',
+        archClass: 'dense',
+        params: { total: '27B', active: '27B' },
+        context: '128K',
+        highlight: 'Geminiベースのオープンモデル。Pan&Scan で画像処理。SigLIP統合。',
+        tags: ['open-weights', 'multimodal', 'sliding-window'],
+        disclosed: true,
+      },
+
+      // ---- OpenAI ----
+      {
+        id: 'gpt-5',
+        name: 'GPT-5',
+        vendor: 'OpenAI',
+        company: 'openai',
+        released: '2025-08',
+        archType: 'MoE (推定)',
+        archClass: 'moe',
+        params: { total: '非公開', active: '非公開' },
+        context: '400K',
+        highlight: '統合的 reasoning + 高速応答。router で推論深さを動的選択。',
+        tags: ['unified-reasoning', 'router'],
+        disclosed: false,
+      },
+      {
+        id: 'gpt-4o',
+        name: 'GPT-4o',
+        vendor: 'OpenAI',
+        company: 'openai',
+        released: '2024-05',
+        archType: 'MoE (推定)',
+        archClass: 'moe',
+        params: { total: '非公開', active: '非公開' },
+        context: '128K',
+        highlight: 'Omni model。音声・画像・テキストを同一トークナイザで統合。',
+        tags: ['omni-modal', 'realtime'],
+        disclosed: false,
+      },
+      {
+        id: 'o3',
+        name: 'o3 / o3-mini',
+        vendor: 'OpenAI',
+        company: 'openai',
+        released: '2025-01',
+        archType: 'Reasoning (test-time compute)',
+        archClass: 'hybrid',
+        params: { total: '非公開', active: '非公開' },
+        context: '200K',
+        highlight: 'Chain-of-thought を内部で長時間実行。RL で推論軌跡を学習。',
+        tags: ['test-time-compute', 'rl-reasoning'],
+        disclosed: false,
+      },
+
+      // ---- 中国勢 ----
+      {
+        id: 'deepseek-v3',
+        name: 'DeepSeek-V3',
+        vendor: 'DeepSeek',
+        company: 'china',
+        subCompany: 'open',
+        released: '2024-12',
+        archType: 'MoE + MLA',
+        archClass: 'moe',
+        params: { total: '671B', active: '37B' },
+        context: '128K',
+        highlight: 'Multi-head Latent Attention + DeepSeekMoE。FP8学習。aux-loss-free load balancing。',
+        tags: ['MLA', 'DeepSeekMoE', 'FP8', 'open-weights', 'MTP'],
+        disclosed: true,
+      },
+      {
+        id: 'deepseek-r1',
+        name: 'DeepSeek-R1',
+        vendor: 'DeepSeek',
+        company: 'china',
+        subCompany: 'open',
+        released: '2025-01',
+        archType: 'MoE + MLA (RL推論)',
+        archClass: 'moe',
+        params: { total: '671B', active: '37B' },
+        context: '128K',
+        highlight: 'V3ベースに純粋RL (GRPO) で推論能力を獲得。SFT なし R1-Zero も公開。',
+        tags: ['GRPO', 'pure-RL', 'reasoning', 'open-weights'],
+        disclosed: true,
+      },
+      {
+        id: 'qwen3',
+        name: 'Qwen3 (235B-A22B)',
+        vendor: 'Alibaba',
+        company: 'china',
+        subCompany: 'open',
+        released: '2025-04',
+        archType: 'MoE',
+        archClass: 'moe',
+        params: { total: '235B', active: '22B' },
+        context: '128K → 1M (YaRN)',
+        highlight: 'Dense / MoE 両系列。Thinking モード切替。1M拡張は YaRN + DCA。',
+        tags: ['dual-mode', 'YaRN', 'open-weights', '119-langs'],
+        disclosed: true,
+      },
+      {
+        id: 'kimi-k2',
+        name: 'Kimi K2',
+        vendor: 'Moonshot AI',
+        company: 'china',
+        subCompany: 'open',
+        released: '2025-07',
+        archType: 'MoE (MuonClip学習)',
+        archClass: 'moe',
+        params: { total: '1T', active: '32B' },
+        context: '128K',
+        highlight: '1Tパラメータ級オープンMoE。Muon optimizer を安定化した MuonClip で学習。',
+        tags: ['1T-params', 'MuonClip', 'agentic', 'open-weights'],
+        disclosed: true,
+      },
+      {
+        id: 'glm-4-5',
+        name: 'GLM-4.5',
+        vendor: 'Zhipu AI',
+        company: 'china',
+        subCompany: 'open',
+        released: '2025-07',
+        archType: 'MoE',
+        archClass: 'moe',
+        params: { total: '355B', active: '32B' },
+        context: '128K',
+        highlight: 'Agentic タスクに特化。Thinking / Non-thinking の統合モデル。',
+        tags: ['agentic', 'hybrid-thinking', 'open-weights'],
+        disclosed: true,
+      },
+
+      // ---- オープンモデル ----
+      {
+        id: 'llama-4-maverick',
+        name: 'Llama 4 Maverick',
+        vendor: 'Meta',
+        company: 'open',
+        released: '2025-04',
+        archType: 'MoE + iRoPE',
+        archClass: 'moe',
+        params: { total: '400B', active: '17B' },
+        context: '1M',
+        highlight: '128エキスパート。iRoPE (interleaved RoPE + NoPE層) で1Mコンテキスト。',
+        tags: ['iRoPE', 'NoPE', '1M-context', 'open-weights', 'multimodal'],
+        disclosed: true,
+      },
+      {
+        id: 'llama-4-scout',
+        name: 'Llama 4 Scout',
+        vendor: 'Meta',
+        company: 'open',
+        released: '2025-04',
+        archType: 'MoE + iRoPE',
+        archClass: 'moe',
+        params: { total: '109B', active: '17B' },
+        context: '10M',
+        highlight: '16エキスパート。10Mトークンの超長文脈を単一GPUでサーブ可能。',
+        tags: ['iRoPE', '10M-context', 'open-weights'],
+        disclosed: true,
+      },
+      {
+        id: 'mistral-large-2',
+        name: 'Mistral Large 2',
+        vendor: 'Mistral AI',
+        company: 'open',
+        released: '2024-07',
+        archType: 'Dense Transformer',
+        archClass: 'dense',
+        params: { total: '123B', active: '123B' },
+        context: '128K',
+        highlight: 'GQA + Sliding Window Attention。多言語・コード特化。',
+        tags: ['GQA', 'SWA', 'open-weights'],
+        disclosed: true,
+      },
+      {
+        id: 'mixtral-8x22b',
+        name: 'Mixtral 8x22B',
+        vendor: 'Mistral AI',
+        company: 'open',
+        released: '2024-04',
+        archType: 'Sparse MoE',
+        archClass: 'moe',
+        params: { total: '141B', active: '39B' },
+        context: '64K',
+        highlight: '8エキスパート top-2 ルーティング。シンプルで解析しやすい MoE。',
+        tags: ['top-2-routing', 'open-weights'],
+        disclosed: true,
+      },
+    ];
+
+    // ========= レンダリング =========
+    const archBadgeClass = (m) => m.archClass || 'dense';
+
+    function renderCards(filter = 'all') {
+      const grid = document.getElementById('modelGrid');
+      const filtered = MODELS.filter(m => {
+        if (filter === 'all') return true;
+        return m.company === filter || m.subCompany === filter;
+      });
+
+      grid.innerHTML = filtered.map(m => `
+        <div class="model-card" data-company="${m.company}" data-id="${m.id}">
+          <span class="disclosed-badge ${m.disclosed ? 'open' : ''}">
+            ${m.disclosed ? '📖 公開' : '🔒 非公開'}
+          </span>
+          <div class="card-header">
+            <div>
+              <div class="model-name">${m.name}</div>
+              <div class="model-vendor">${m.vendor} · ${m.released}</div>
+            </div>
+          </div>
+          <div>
+            <span class="arch-badge ${archBadgeClass(m)}">${m.archType}</span>
+          </div>
+          <div class="card-meta">
+            <div class="meta-item">
+              <span class="meta-label">Total params</span>
+              <span class="meta-value">${m.params.total}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Active params</span>
+              <span class="meta-value">${m.params.active}</span>
+            </div>
+            <div class="meta-item" style="grid-column: span 2;">
+              <span class="meta-label">Context</span>
+              <span class="meta-value">${m.context}</span>
+            </div>
+          </div>
+          <p class="card-highlight">${m.highlight}</p>
+          <div class="tags">
+            ${m.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ========= フィルター =========
+    document.getElementById('filters').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('filter-btn')) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      renderCards(e.target.dataset.filter);
+    });
+
+    // 初期レンダリング
+    renderCards('all');
+  </script>
+</body>
+</html>
