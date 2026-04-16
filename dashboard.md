@@ -31,6 +31,7 @@ onepagers/
 | [宇宙際タイヒミューラー理論](teichmuller/index.html) | doc | wip | 望月新一のIUT理論とABC予想を非数学者向けに解説 |
 | [IUT理論の間違い検証](verify-teichmuller-errors/index.html) | doc | wip | IUT III 系3.12の論理的ギャップを数学的証明とシミュレーションで検証 |
 | [DDD実践入門](learn-ddd/index.html) | doc | done | ドメイン駆動設計の核心をインタラクティブに学べる実践入門 |
+| [LLMアーキテクチャ比較 2026](llm-architecture/index.html) | doc | wip | 2026年4月時点の主要LLM 18モデルを視覚比較。Attention/MoE/1M長文脈/RLHFを図解 |
 
 ## 新規プロジェクト追加手順
 
