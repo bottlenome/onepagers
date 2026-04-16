@@ -208,6 +208,75 @@
       font-size: 0.8rem;
     }
     footer a { color: var(--accent); text-decoration: none; }
+
+    /* ========= Modal (Step 2a) ========= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 100;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 900px;
+      width: 100%;
+      margin: auto;
+      padding: 2rem;
+      position: relative;
+      animation: modalIn 0.2s ease-out;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--bg-3);
+      border: none;
+      color: var(--text);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: var(--accent); color: var(--bg); }
+    .modal-header {
+      margin-bottom: 1.5rem;
+      padding-right: 3rem;
+    }
+    .modal-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.25rem;
+    }
+    .modal-subtitle {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    .modal-placeholder {
+      background: var(--bg);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-dim);
+    }
+    body.modal-open { overflow: hidden; }
   </style>
 </head>
 <body>
@@ -243,6 +312,25 @@
       <p>データソース: 各社公式技術レポート / arXiv 論文 / モデルカード</p>
       <p>非公開モデルは推定/公表情報のみ記載</p>
     </footer>
+  </div>
+
+  <!-- ========= Modal (Step 2a) ========= -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="閉じる">✕</button>
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">—</div>
+        <div class="modal-subtitle" id="modalSubtitle">—</div>
+      </div>
+      <div id="modalBody">
+        <div class="modal-placeholder">
+          <p>🏗️ アーキテクチャ詳細は Step 2b/2c で追加予定</p>
+          <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+            ブロック図 / Attention 内部 / MoE ルーティングを順次実装します
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -570,6 +658,40 @@
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       e.target.classList.add('active');
       renderCards(e.target.dataset.filter);
+    });
+
+    // ========= モーダル (Step 2a) =========
+    const overlay = document.getElementById('modalOverlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubtitle = document.getElementById('modalSubtitle');
+
+    function openModal(modelId) {
+      const m = MODELS.find(x => x.id === modelId);
+      if (!m) return;
+      modalTitle.textContent = m.name;
+      modalSubtitle.textContent = `${m.vendor} · ${m.archType} · Context ${m.context}`;
+      overlay.classList.add('open');
+      document.body.classList.add('modal-open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.classList.remove('modal-open');
+    }
+
+    // カードクリックで開く
+    document.getElementById('modelGrid').addEventListener('click', (e) => {
+      const card = e.target.closest('.model-card');
+      if (card) openModal(card.dataset.id);
+    });
+    // ✕ ボタン
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    // 背景クリック
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+    // ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
     });
 
     // 初期レンダリング
