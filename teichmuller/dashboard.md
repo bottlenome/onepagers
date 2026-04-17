@@ -21,7 +21,9 @@ teichmuller/
         │   └── rigorous/ (8本)         #   定義・定理・証明・争点の詳細
         ├── analogy_view.md             # 例えビュー
         ├── history_view.md             # 歴史ビュー
-        └── open_questions_view.md      # 未解決問題ビュー
+        ├── open_questions_view.md      # 未解決問題ビュー
+        ├── numerical_log_theta_lattice.md  # 数値例続編A: 対数テータ格子
+        └── numerical_final_inequality.md   # 数値例続編B: 最終不等式
 ```
 
 ## コンテンツ一覧
@@ -59,14 +61,14 @@ teichmuller/
 | history_view | done | 「どこから来た？」時系列と知的系譜 |
 | open_questions_view | done | 「何がわかっていない？」未解決問題の整理 |
 | numerical_example_view | done | 「数値で見せて！」p進数での分離操作を具体的な数字で |
+| numerical_log_theta_lattice | done | 「対数テータ格子を数値で！」log-リンク・対数殻・格子の2方向 |
+| numerical_final_inequality | done | 「最終不等式を数値で！」3つの不確定性・マルチラジアル・ABC導出 |
 
 ### 未作成
 
 | コンテンツ | 状態 | 説明 |
 |-----------|------|------|
 | index.html | todo | 解説ワンページャー（上記ノートをベースに構成予定）|
-| numerical_log_theta_lattice.md | todo | 数値例ビュー続編A: 対数テータ格子を数値で見る（log-リンク・対数殻・格子の2方向）|
-| numerical_final_inequality.md | todo | 数値例ビュー続編B: 不確定性の見積もりと最終不等式（3つの不確定性・マルチラジアル・ABC導出）|
 
 ## 原論文情報
 
