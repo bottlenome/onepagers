@@ -28,7 +28,7 @@ onepagers/
 | [虹色リバーシ](rainbow-reversi/index.html) | game | done | 虹色グラデーションの駒で最大4人対戦できるリバーシ |
 | [Loveless Chronicle](browser-rpg/index.html) | game | wip | 転職・スキル・自動戦闘が楽しめるRPGブラウザゲーム |
 | [櫻井政博のゲームデザイン方法論](sakurai-methodology/index.html) | doc | done | YouTube「桜井政博のゲーム作るには」全256話の設計原則まとめ |
-| [宇宙際タイヒミューラー理論](teichmuller/index.html) | doc | wip | 望月新一のIUT理論とABC予想を非数学者向けに解説 |
+| [宇宙際タイヒミューラー理論](teichmuller/index.html) | doc | done | 望月新一のIUT理論とABC予想を非数学者向けに解説。10タブ構成（概要/なぜ/構造/例え/数値例/応用/歴史/論争/用語集/資料） |
 | [IUT理論の間違い検証](verify-teichmuller-errors/index.html) | doc | wip | IUT III 系3.12の論理的ギャップを数学的証明とシミュレーションで検証 |
 | [DDD実践入門](learn-ddd/index.html) | doc | done | ドメイン駆動設計の核心をインタラクティブに学べる実践入門 |
 | [LLMアーキテクチャ比較 2026](llm-architecture/index.html) | doc | wip | 2026年4月時点の主要LLM 18モデルを視覚比較。Attention/MoE/1M長文脈/RLHFを図解 |

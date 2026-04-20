@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇宙際タイヒミューラー理論 (IUT)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0a0e1a;
+  color: #e2e8f0;
+  line-height: 1.7;
+}
+a { color: #60a5fa; }
+a:hover { color: #93c5fd; }
+.back { display: inline-block; margin: 1rem 1.5rem; color: #94a3b8; text-decoration: none; font-size: 0.9rem; }
+.back:hover { color: #e2e8f0; }
+
+header {
+  text-align: center;
+  padding: 2rem 1rem 1.2rem;
+  border-bottom: 1px solid #1e293b;
+  background: linear-gradient(135deg, #0f172a 0%, #1a1030 100%);
+}
+header h1 { font-size: 1.7rem; margin-bottom: 0.4rem; }
+header .subtitle { color: #94a3b8; font-size: 0.95rem; max-width: 720px; margin: 0 auto; }
+header .tags { margin-top: 0.8rem; }
+header .tag {
+  display: inline-block; background: #334155; color: #93c5fd;
+  font-size: 0.7rem; padding: 0.15rem 0.55rem; border-radius: 9999px; margin: 0.15rem;
+}
+
+.tab-nav {
+  display: flex; justify-content: center; gap: 0.4rem;
+  padding: 0.9rem; background: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  flex-wrap: wrap;
+  position: sticky; top: 0; z-index: 10;
+}
+.tab-btn {
+  background: #1e293b; color: #94a3b8; border: 1px solid #334155;
+  padding: 0.45rem 1rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.82rem; transition: all 0.2s;
+  font-family: inherit;
+}
+.tab-btn:hover { border-color: #60a5fa; color: #e2e8f0; }
+.tab-btn.active { background: #1e3a5f; color: #60a5fa; border-color: #60a5fa; }
+
+.container { max-width: 920px; margin: 0 auto; padding: 1.5rem; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.section {
+  background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+  padding: 1.4rem 1.5rem; margin-bottom: 1.3rem;
+}
+.section h2 { font-size: 1.2rem; margin-bottom: 0.7rem; color: #f1f5f9; }
+.section h3 { font-size: 1rem; margin: 1rem 0 0.5rem; color: #cbd5e1; }
+.section h4 { font-size: 0.92rem; margin: 0.8rem 0 0.4rem; color: #93c5fd; }
+.section p, .section li { color: #cbd5e1; font-size: 0.9rem; }
+.section ul, .section ol { padding-left: 1.4rem; margin: 0.4rem 0 0.7rem; }
+.section li { margin-bottom: 0.3rem; }
+.section strong { color: #f1f5f9; }
+.section em { color: #fbbf24; font-style: normal; }
+
+.lead {
+  font-size: 1.02rem; line-height: 1.8; color: #e2e8f0;
+  border-left: 3px solid #60a5fa; padding: 0.4rem 1rem;
+  background: #0f172a; border-radius: 0 8px 8px 0; margin: 0.6rem 0 1rem;
+}
+
+.note-table { width: 100%; border-collapse: collapse; margin: 0.6rem 0; font-size: 0.85rem; }
+.note-table th { background: #334155; color: #93c5fd; padding: 0.45rem 0.7rem; text-align: left; font-weight: 600; }
+.note-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid #0f172a; color: #cbd5e1; vertical-align: top; }
+.note-table tr:hover td { background: #1a2332; }
+
+pre.code, pre.diagram {
+  background: #0a0e1a; border: 1px solid #334155; border-radius: 8px;
+  padding: 0.9rem 1rem; font-size: 0.78rem; overflow-x: auto; color: #a5b4c8;
+  font-family: "Fira Code", "Source Code Pro", ui-monospace, monospace;
+  line-height: 1.55; margin: 0.6rem 0;
+}
+pre.diagram { color: #cbd5e1; }
+code.inline {
+  background: #0a0e1a; border: 1px solid #334155; border-radius: 4px;
+  padding: 0.05rem 0.4rem; font-size: 0.85em; color: #fcd34d;
+  font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.callout {
+  border-left: 4px solid #f59e0b; background: #1c1a0e; padding: 0.9rem 1.1rem;
+  border-radius: 0 8px 8px 0; margin: 0.8rem 0;
+}
+.callout.info { border-left-color: #60a5fa; background: #0e1a2e; }
+.callout.warn { border-left-color: #ef4444; background: #1c0e0e; }
+.callout.ok   { border-left-color: #22c55e; background: #0e1c14; }
+.callout h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: #f1f5f9; }
+.callout p, .callout li { font-size: 0.87rem; color: #cbd5e1; }
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem; margin: 0.8rem 0;
+}
+.summary-card {
+  background: #0f172a; border: 1px solid #334155; border-radius: 10px;
+  padding: 1rem; transition: border-color 0.2s;
+}
+.summary-card:hover { border-color: #60a5fa; }
+.summary-card .num {
+  display: inline-block; background: #1e3a5f; color: #60a5fa;
+  font-size: 0.7rem; padding: 0.1rem 0.5rem; border-radius: 4px; margin-bottom: 0.4rem;
+}
+.summary-card h4 { color: #f1f5f9; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.summary-card p { color: #94a3b8; font-size: 0.83rem; line-height: 1.55; }
+
+.qna { margin: 0.8rem 0; }
+.qna details {
+  background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+  padding: 0.6rem 1rem; margin-bottom: 0.5rem;
+}
+.qna details[open] { border-color: #60a5fa; }
+.qna summary {
+  cursor: pointer; color: #f1f5f9; font-weight: 600; font-size: 0.92rem;
+  list-style: none; padding: 0.3rem 0;
+}
+.qna summary::-webkit-details-marker { display: none; }
+.qna summary::before {
+  content: "▶ "; color: #60a5fa; transition: transform 0.2s; display: inline-block;
+}
+.qna details[open] summary::before { content: "▼ "; }
+.qna details p, .qna details ul { margin-top: 0.5rem; font-size: 0.88rem; color: #cbd5e1; }
+
+.timeline {
+  position: relative; margin: 1rem 0; padding-left: 1.5rem;
+  border-left: 2px solid #334155;
+}
+.timeline-item { position: relative; margin-bottom: 1rem; padding-left: 0.8rem; }
+.timeline-item::before {
+  content: ""; position: absolute; left: -1.95rem; top: 0.3rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #60a5fa; border: 2px solid #0a0e1a;
+}
+.timeline-item.major::before { background: #f59e0b; width: 14px; height: 14px; left: -2.05rem; }
+.timeline-item .year { color: #fbbf24; font-weight: 600; font-size: 0.85rem; }
+.timeline-item .text { color: #cbd5e1; font-size: 0.88rem; margin-top: 0.1rem; }
+
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.6rem; margin: 0.6rem 0;
+}
+.gterm {
+  background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+}
+.gterm .term { color: #93c5fd; font-weight: 600; font-size: 0.92rem; }
+.gterm .reading { color: #94a3b8; font-size: 0.78rem; margin-left: 0.4rem; }
+.gterm .desc { color: #cbd5e1; font-size: 0.83rem; margin-top: 0.3rem; line-height: 1.55; }
+
+.resource-list { list-style: none; padding: 0; }
+.resource-list li {
+  background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+  padding: 0.6rem 0.9rem; margin-bottom: 0.4rem;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+}
+.resource-list .meta { color: #94a3b8; font-size: 0.78rem; }
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem; margin: 0.8rem 0;
+}
+.flow .step {
+  background: #0f172a; border: 1px solid #334155; border-radius: 8px;
+  padding: 0.7rem; text-align: center; position: relative;
+}
+.flow .step .n {
+  display: inline-block; width: 22px; height: 22px; line-height: 20px;
+  border-radius: 50%; background: #1e3a5f; color: #60a5fa;
+  font-size: 0.78rem; margin-bottom: 0.3rem; border: 1px solid #60a5fa;
+}
+.flow .step .label { color: #f1f5f9; font-size: 0.85rem; font-weight: 600; }
+.flow .step .desc { color: #94a3b8; font-size: 0.75rem; margin-top: 0.2rem; }
+
+footer {
+  text-align: center; padding: 2rem 1rem 1rem;
+  color: #64748b; font-size: 0.78rem;
+  border-top: 1px solid #1e293b; margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  header h1 { font-size: 1.3rem; }
+  .container { padding: 1rem; }
+  .section { padding: 1rem 1rem; }
+  pre.code, pre.diagram { font-size: 0.7rem; }
+  .tab-btn { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<a class="back" href="../index.html">&larr; OnePagers</a>
+
+<header>
+  <h1>宇宙際タイヒミューラー理論 (IUT)</h1>
+  <p class="subtitle">望月新一が約1000ページかけて構築した数学理論。整数論の超重要未解決問題「ABC予想」を、数の世界の足し算と掛け算を一度バラバラにして組み直すことで証明しようと試みる。</p>
+  <div class="tags">
+    <span class="tag">数論幾何</span>
+    <span class="tag">ABC予想</span>
+    <span class="tag">遠アーベル幾何</span>
+    <span class="tag">タイヒミューラー理論</span>
+    <span class="tag">非数学者向け解説</span>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')">概要</button>
+  <button class="tab-btn" data-tab="why" onclick="switchTab('why')">なぜ？</button>
+  <button class="tab-btn" data-tab="structure" onclick="switchTab('structure')">構造 (4巻)</button>
+  <button class="tab-btn" data-tab="analogy" onclick="switchTab('analogy')">例え</button>
+  <button class="tab-btn" data-tab="numerical" onclick="switchTab('numerical')">数値例</button>
+  <button class="tab-btn" data-tab="apps" onclick="switchTab('apps')">応用</button>
+  <button class="tab-btn" data-tab="history" onclick="switchTab('history')">歴史</button>
+  <button class="tab-btn" data-tab="controversy" onclick="switchTab('controversy')">論争</button>
+  <button class="tab-btn" data-tab="glossary" onclick="switchTab('glossary')">用語集</button>
+  <button class="tab-btn" data-tab="resources" onclick="switchTab('resources')">資料</button>
+</nav>
+
+<div class="container">
+
+<!-- ======================== 概要タブ ======================== -->
+<div id="overview" class="tab-content active">
+
+  <div class="section">
+    <h2>30秒で理解する</h2>
+    <p class="lead">
+      <strong>IUT理論</strong>は、整数論の超重要未解決問題「<strong>ABC予想</strong>」を証明するために、
+      数の世界の<em>足し算</em>と<em>掛け算</em>を一度バラバラに解体し、別々の"宇宙"に分けて、
+      繋ぎ直すことで不等式を導く理論。
+    </p>
+    <p>
+      著者は望月新一（京都大学RIMS）。論文4本＋概観2本で合計約1,000ページ超。
+      2012年に公開、2021年にPRIMSに掲載されたが、Fields賞受賞者Scholzeを含む数学コミュニティの
+      多数派は「<strong>ABC予想はまだ未解決</strong>」と見なしている（2025年時点）。
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>3分で理解する</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <span class="num">1. 問題</span>
+        <h4>ABC予想</h4>
+        <p>「a + b = c を満たす互いに素な整数について、c の大きさは素因数の積 rad(abc) でほぼ抑えられる」。足し算の結果が掛け算の構造で縛られるという驚くべき主張。</p>
+      </div>
+      <div class="summary-card">
+        <span class="num">2. 難しさ</span>
+        <h4>足し算と掛け算の不可分性</h4>
+        <p>普通の数学では足し算と掛け算は一つの「環」として一体化していて、片方だけを動かして不等式を出すことができない。スキーム論など既存の手法はすべてこの一体構造の上に立つ。</p>
+      </div>
+      <div class="summary-card">
+        <span class="num">3. 解決</span>
+        <h4>環構造の解体と再構成</h4>
+        <p>環構造をホッジシアターに解体 → 掛け算側だけシータリンクで変形 (q^j² ↔ q) → 遠アーベル幾何で復元 → 復元の歪みを定量化 → ABC予想の不等式。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>理論の全体像（一枚絵）</h2>
+<pre class="diagram">
+          足し算の世界              掛け算の世界
+         ┌──────────┐           ┌──────────┐
+    環   │  + の構造  │←─ 環構造 ─→│  × の構造  │
+  構造   │  (加法群)  │   (通常は │  (乗法群)  │
+  の中   │           │   不可分) │  値群     │
+         └──────────┘           └──────────┘
+              ↓ IUT理論: 一度分離する        ↓
+         ┌──────────┐           ┌──────────┐
+  ホッジ  │  F_l^±    │           │  F_l^⊛    │
+  シアター│  対称性    │           │  対称性    │
+         └──────────┘           └──────────┘
+              │                       │
+              │     ┌─────────┐       │
+              └────→│Θ-link   │←──────┘
+                    │q^{j²}↔q │
+                    └────┬────┘
+                         │
+                    ┌────┴────┐
+                    │対数テータ │  ← 理論の中心舞台
+                    │ 格子     │
+                    └────┬────┘
+                         │
+                    ┌────┴────┐
+                    │マルチラジ │  ← 「壁」を越える技術
+                    │アル算法   │
+                    └────┬────┘
+                         │
+                    ┌────┴────┐
+                    │対数体積  │  ← 歪みの定量化
+                    │の見積もり│
+                    └────┬────┘
+                         │
+                         ▼
+                   ABC予想の不等式
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>主要な構成物の早見表</h2>
+    <table class="note-table">
+      <thead>
+        <tr><th>概念</th><th>論文</th><th>役割</th><th>たとえ話</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>初期シータデータ</strong></td><td>I</td><td>出発点</td><td>地図を作る測量基準点</td></tr>
+        <tr><td><strong>ホッジシアター</strong></td><td>I</td><td>環構造のミニチュア</td><td>劇場のセット</td></tr>
+        <tr><td><strong>シータリンク (Θ-link)</strong></td><td>I, II</td><td>シアター間の橋渡し</td><td>劇場を繋ぐ通路</td></tr>
+        <tr><td><strong>テータ関数の評価</strong></td><td>II</td><td>l-等分点でのテータ値</td><td>通路を通る荷物</td></tr>
+        <tr><td><strong>対数テータ格子</strong></td><td>III</td><td>全体の二次元ダイアグラム</td><td>劇場が並んだ街</td></tr>
+        <tr><td><strong>マルチラジアル算法</strong></td><td>III</td><td>環構造をまたぐ算法</td><td>異なる街の地図翻訳</td></tr>
+        <tr><td><strong>対数体積の計算</strong></td><td>IV</td><td>最終的な数値見積もり</td><td>歪みの量を測る</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>推奨ルート</h2>
+    <ul>
+      <li><strong>初めて</strong>: <em>概要</em> → <em>なぜ？</em> → <em>数値例</em> → <em>例え</em></li>
+      <li><strong>応用が知りたい</strong>: <em>応用</em> → 関連ノート 01_abc_conjecture</li>
+      <li><strong>論争を理解したい</strong>: <em>論争</em> → <a href="../verify-teichmuller-errors/index.html">系3.12の独立検証</a></li>
+      <li><strong>厳密に読みたい</strong>: <a href="notes/views/rigorous_view.md">rigorous_view.md</a> → 原論文</li>
+      <li><strong>歴史が知りたい</strong>: <em>歴史</em> → 関連ノート 03_classical_teichmuller</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ======================== なぜ？タブ ======================== -->
+<div id="why" class="tab-content">
+
+  <div class="section">
+    <h2>「なぜ？」を10問で理解する</h2>
+    <p>各段階で「なぜそうするのか？」「なぜそれが必要なのか？」に答える。</p>
+  </div>
+
+  <div class="section">
+    <h2>核心の問い</h2>
+    <div class="qna">
+
+      <details open>
+        <summary>Q1: なぜABC予想は直接証明できないのか？</summary>
+        <p><strong>A:</strong> 足し算と掛け算が同じ環の中で不可分に結びついているから。</p>
+        <ul>
+          <li>既存の数学的枠組み（スキーム論、代数幾何）はすべて<strong>環構造</strong>を前提にしている</li>
+          <li>環の中では足し算と掛け算は分配法則で絡み合っている: a(b+c) = ab + ac</li>
+          <li>片方だけを「動かす」操作が、そもそも定義できない</li>
+        </ul>
+        <p><strong>具体例</strong>: 5進数の世界で 7 + 18 = 25 を考える。7 も 18 も「5とは無関係」（v₅=0, 単数）なのに、足すと 25=5² で「5が2つ出てくる」。足し算が掛け算の構造を変えてしまう。</p>
+      </details>
+
+      <details>
+        <summary>Q2: なぜ環構造を「壊す」のか？</summary>
+        <p><strong>A:</strong> 壊さないと足し算と掛け算を独立に扱えないから。</p>
+        <p>望月は2000年に<strong>ホッジ・アラケロフ理論</strong>を開発し、環構造を保ったまま不等式を導こうとした。しかし「ガウス極」という技術的障害により、得られる不等式が空虚 (vacuous) になった。これが「環構造を壊す」という大胆なアプローチへの動機となった。</p>
+      </details>
+
+      <details>
+        <summary>Q3: なぜホッジシアターという複雑な構造が必要なのか？</summary>
+        <p><strong>A:</strong> 環構造を壊すと通常の数学（スキーム論）が使えなくなるので、代替物が必要だから。</p>
+        <p>ホッジシアターは<strong>スキーム論のミニチュアモデル</strong>。環構造の代わりに、足し算的対称性 (F_l<sup>±</sup>) と掛け算的対称性 (F_l<sup>⊛</sup>) を分離して保持する。これにより、環を壊した後も「何が何に対応するか」を追跡できる。</p>
+      </details>
+
+      <details>
+        <summary>Q4: なぜ素数 l が必要なのか？</summary>
+        <p><strong>A:</strong> 有限体 F_l = Z/lZ が足し算と掛け算の両方の対称性を持つ最小の舞台だから。</p>
+        <ul>
+          <li>F_l は加法群と乗法群 F_l* の両方を持つ</li>
+          <li>l が素数であることで、これらの対称性が「きれいに」分離できる</li>
+          <li>l ≥ 5 は技術的な理由（l=2,3 では退化が起きる）</li>
+        </ul>
+        <p>最終的に l は楕円曲線の高さと同じオーダー（l ~ ht_E）に選ばれる。</p>
+      </details>
+
+      <details>
+        <summary>Q5: なぜシータ関数なのか？</summary>
+        <p><strong>A:</strong> テータ関数 θ(q) = Σ q<sup>n²</sup> が「ガウス分布の離散版」として、足し算と掛け算を橋渡しする唯一の自然な対象だから。</p>
+        <ul>
+          <li><strong>q^j² の形</strong>: 二次形式 (j²) がガウス分布 e<sup>−x²</sup> の離散版</li>
+          <li><strong>楕円曲線との関係</strong>: テータ関数は楕円曲線のモジュライ上で自然に定義される</li>
+          <li><strong>剛性</strong>: エタールテータ関数は離散剛性・定数倍剛性・単テータ環境剛性を持ち、マルチラジアルな文脈でも well-defined</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Q6: なぜ対数 (log-link) が必要なのか？</summary>
+        <p><strong>A:</strong> p進対数は「掛け算を足し算に変換する」唯一の自然な操作だから。</p>
+        <p>掛け算的な対象（局所単数 O_v<sup>×</sup>）を足し算的な対象（対数殻）に変換する。この変換により、シータリンク（横）と対数リンク（縦）が<strong>二次元の格子</strong>を形成し、足し算と掛け算を「別の方向」として扱うことが可能になる。</p>
+      </details>
+
+      <details>
+        <summary>Q7: なぜマルチラジアリティが必要なのか？</summary>
+        <p><strong>A:</strong> シータリンクは環構造を壊すので、「こちら側」の言葉が「あちら側」で意味をなさなくなるから。</p>
+        <ul>
+          <li><strong>ユニラジアル</strong>: 一つの環構造の中でだけ意味をなす議論（普通の数学はすべてこれ）</li>
+          <li><strong>マルチラジアル</strong>: 異なる環構造（「異質な算術的正則構造」）の視点からも意味をなす議論</li>
+        </ul>
+        <p>比喩: 異なる通貨圏の2つの国がある。ユニラジアル＝「円建て」でしか計算できない。マルチラジアル＝「為替レートが不確定でも成り立つ購買力平価のような指標」で計算する。</p>
+      </details>
+
+      <details>
+        <summary>Q8: なぜ3種類の不定性は許容されるのか？</summary>
+        <p><strong>A:</strong> 不定性は「歪み」として不等式に吸収されるが、(1+ε) の範囲に収まるから。</p>
+        <table class="note-table">
+          <tr><th>不定性</th><th>なぜ生じるか</th><th>許容される理由</th></tr>
+          <tr><td>Ind1: ガロア群の内部自己同型</td><td>遠アーベル復元は内部自己同型の不定性を込めてしか実行できない</td><td>ε に吸収</td></tr>
+          <tr><td>Ind2: O<sup>×</sup> の作用</td><td>対数殻上で単数群の自由度が残る</td><td>対数体積で制御</td></tr>
+          <tr><td>Ind3: 上限/下限の選択</td><td>対数殻の「大きさ」の評価に幅がある</td><td>明示的な定数で抑制</td></tr>
+        </table>
+        <p>これらは最終的な不等式を (1+ε) の形に「緩める」が、ABC予想が言っているのはまさに (1+ε) の形なので十分。</p>
+      </details>
+
+      <details>
+        <summary>Q9: なぜ「宇宙際 (inter-universal)」なのか？</summary>
+        <p><strong>A:</strong> 異なる「数学の宇宙」（集合論モデル）を跨ぐ操作を含むから。</p>
+        <ul>
+          <li>シータリンクで繋がれた2つのホッジシアターは、ある意味で「異なる宇宙」に属する</li>
+          <li>これらを関係づけるために、特定の集合論モデルに依存しない「<strong>種 (Species)</strong>」の概念が必要</li>
+          <li>「宇宙と宇宙の間」= Inter-universal</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Q10: なぜこの理論は理解されにくいのか？</summary>
+        <p><strong>A:</strong> 複数の理由が重なっている。</p>
+        <ul>
+          <li><strong>分量</strong>: 4本合計で約1000ページ。前提を含めると数千ページ</li>
+          <li><strong>独自用語</strong>: フロベニオイド、ホッジシアター、対数殻など、IUT以外で使われない概念が多い</li>
+          <li><strong>既存枠組みの外</strong>: スキーム論・圏論の標準的な道具立てでは記述できない操作</li>
+          <li><strong>前提知識の特殊性</strong>: 遠アーベル幾何学は世界でも少数の研究者しか扱えない</li>
+          <li><strong>検証の困難</strong>: 望月の先行研究全体の理解が必要</li>
+          <li><strong>コミュニケーションの断絶</strong>: 望月と批判者の間で「何が議論の核心か」について合意がない</li>
+        </ul>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>「2つの次元」の正体</h2>
+    <p>p進局所体 k の任意の元 x ≠ 0 は<strong>一意に</strong>分解できる:</p>
+<pre class="code">
+x = p^n × u     (n = v_p(x) ∈ Z,  u ∈ O_k^×)
+    ~~~~   ~~~
+    値群   単数群
+</pre>
+    <ul>
+      <li><strong>値群</strong> k<sup>×</sup>/O_k<sup>×</sup> ≅ Z : 「pを何回含むか」= <em>掛け算的な次元</em></li>
+      <li><strong>単数群</strong> O_k<sup>×</sup> : 「pを取り除いた残り」= <em>足し算的な次元</em></li>
+    </ul>
+    <p>IUT理論はこの2つの次元を「解きほぐし」、掛け算側だけをシータリンクで変形する。これは古典タイヒミューラー変形 z = x+iy → ζ = Kx+iy（x方向だけK倍、y方向は固定）の<strong>算術版</strong>。</p>
+  </div>
+
+</div>
+<!-- ======================== 構造（4巻）タブ ======================== -->
+<div id="structure" class="tab-content">
+
+  <div class="section">
+    <h2>論文4巻の役割</h2>
+    <table class="note-table">
+      <thead>
+        <tr><th>巻</th><th>タイトル</th><th>頁</th><th>一言</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>I</strong></td><td>Construction of Hodge Theaters</td><td>~259</td><td>舞台装置を組み立てる</td></tr>
+        <tr><td><strong>II</strong></td><td>Hodge-Arakelov-theoretic Evaluation</td><td>~231</td><td>シータ関数の値を正しく計算する</td></tr>
+        <tr><td><strong>III</strong></td><td>Canonical Splittings of the Log-theta-lattice</td><td>~284</td><td>理論の頂点。格子上のアルゴリズム</td></tr>
+        <tr><td><strong>IV</strong></td><td>Log-volume Computations and Set-theoretic Foundations</td><td>~164</td><td>具体的不等式の計算 + 基礎論</td></tr>
+        <tr><td>概観</td><td>Panoramic Overview of IUT</td><td>~46</td><td>全体の見取り図</td></tr>
+        <tr><td>論理</td><td>Essential Logical Structure of IUT</td><td>~88</td><td>論理的骨格を命題論理で説明</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>IUT I: ホッジシアターの構成</h2>
+    <p class="lead">IUT理論の<strong>舞台装置</strong>を組み立てる巻。後続の議論で使うすべての数学的オブジェクトをここで構成する。</p>
+
+    <h3>初期シータデータ (Initial Θ-data)</h3>
+    <p>IUT理論全体の出発点となるデータの組:</p>
+    <ol>
+      <li>楕円曲線 E_F: 数体 F 上の楕円曲線</li>
+      <li>素数 l ≥ 5: 理論のパラメータ</li>
+      <li>代数閉包 F̄ of F</li>
+      <li>付値の集合 V: 数体 K (= F(E[l])) の付値の部分集合</li>
+      <li>悪い還元の付値 V<sup>bad</sup>: E が乗法的悪い還元を持つ付値</li>
+    </ol>
+
+    <h3>二つの対称性</h3>
+    <p>F_l = Z/lZ 上の二つの対称性に分離:</p>
+    <table class="note-table">
+      <thead><tr><th>対称性</th><th>作用</th><th>記号</th></tr></thead>
+      <tbody>
+        <tr><td>加法的 (additive)</td><td>F_l の足し算（±符号付き）</td><td>F_l<sup>±</sup></td></tr>
+        <tr><td>乗法的 (multiplicative)</td><td>F_l* の掛け算</td><td>F_l<sup>⊛</sup></td></tr>
+      </tbody>
+    </table>
+    <p>この分離は「環構造を解体する第一歩」。望月自身が IUT I 序文で「<em>rough, approximate approach</em>」と呼ぶ近似的な分離で、本当の分離はΘ-リンクで実現される。</p>
+  </div>
+
+  <div class="section">
+    <h2>IUT II: シータリンクの精密化</h2>
+    <p class="lead">IUT I で構成したシータリンクを精密化し、テータ関数の値を正しく計算するための理論を構築する。</p>
+
+    <h3>テータ関数の評価</h3>
+    <p>楕円曲線の l-等分点 (l-torsion points) でテータ関数の値を計算する:</p>
+<pre class="code">Θ_v = (テータ関数の l乗根の逆数)</pre>
+    <p>このテータ値を、楕円曲線が悪い還元を持つ各付値 v ∈ V<sup>bad</sup> で計算する。</p>
+
+    <h3>Θ_gau<sup>×μ</sup> リンク</h3>
+    <ul>
+      <li><strong>Θ-link</strong> (IUT I): テータ関数そのものを使う</li>
+      <li><strong>Θ_gau<sup>×μ</sup>-link</strong> (IUT II): l-等分点でのテータ値を使う（より制御された変形）</li>
+    </ul>
+
+    <h3>マルチラジアリティの導入</h3>
+    <p>シータリンクは環構造を壊すので、左側のホッジシアターの環構造は右側から見ると「異質な (alien)」構造。これを跨いで意味をなす議論＝マルチラジアル (多放射的) なアルゴリズムを設計する必要がある。</p>
+  </div>
+
+  <div class="section">
+    <h2>IUT III: 対数テータ格子</h2>
+    <p class="lead">IUT シリーズの<strong>概念的頂点</strong>。理論の中心舞台「対数テータ格子」を構築し、マルチラジアルアルゴリズムによって最終的な見積もりの基礎を確立する。</p>
+
+    <h3>対数テータ格子（二次元の非可換ダイアグラム）</h3>
+<pre class="diagram">
+        ...                 ...                 ...
+         ↑ log               ↑ log               ↑ log
+  ... ← •_{n,m+1} ← Θ ← •_{n+1,m+1} ← Θ ← •_{n+2,m+1} ← ...
+         ↑ log               ↑ log               ↑ log
+  ... ← •_{n,m}   ← Θ ← •_{n+1,m}   ← Θ ← •_{n+2,m}   ← ...
+         ↑ log               ↑ log               ↑ log
+  ... ← •_{n,m-1} ← Θ ← •_{n+1,m-1} ← Θ ← •_{n+2,m-1} ← ...
+         ↑ log               ↑ log               ↑ log
+        ...                 ...                 ...
+</pre>
+    <ul>
+      <li>各 <strong>•</strong> はホッジシアター</li>
+      <li><strong>横矢印 (Θ)</strong>: シータリンク（掛け算的変形、環構造を壊す）</li>
+      <li><strong>縦矢印 (log)</strong>: 対数リンク（p進対数写像）</li>
+      <li><strong>非可換</strong>: 「右→上」と「上→右」で結果が異なる！</li>
+    </ul>
+
+    <h3>対数殻 (Log-shell)</h3>
+    <p>対数リンクの像を少し調整した集合。掛け算的構造（単数群 O_v<sup>×</sup>）を、対数を通じて足し算的構造に変換した「殻」（入れ物）。<strong>足し算と掛け算を橋渡しする入れ物</strong>として機能する。</p>
+
+    <h3>LGP-モノイドとマルチラジアルアルゴリズム</h3>
+    <p>Logarithmic Gaussian Procession Monoid (LGP-モノイド) を導入し、対数殻のテンソル積上で「テータ値の系列」を扱う。これにより、シータリンクを跨いで意味をなすマルチラジアル算法が完成する（IUT III の主定理）。</p>
+
+    <h3>3つの不定性 (Indeterminacy)</h3>
+    <table class="note-table">
+      <tr><th>名前</th><th>由来</th></tr>
+      <tr><td><strong>Ind1</strong></td><td>ガロア群の内部自己同型の不定性</td></tr>
+      <tr><td><strong>Ind2</strong></td><td>対数殻上の O<sup>×</sup> 作用の不定性</td></tr>
+      <tr><td><strong>Ind3</strong></td><td>対数殻の上限/下限の選択の不定性</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>IUT IV: 最終的な不等式の導出</h2>
+    <p class="lead">IUT III で得られた対数体積の見積もりを具体的に計算し、ディオファンタス幾何の定理（ABC予想を含む）を導く。</p>
+
+    <h3>主定理: ディオファンタス不等式（定理A）</h3>
+    <p>X を数体上の滑らかな射影曲線、D ⊆ X を被約因子、U_X = X \ D が双曲的曲線と仮定する。任意の正整数 d と ε > 0 に対して:</p>
+<pre class="code">
+ht_{ω_X(D)} ≤ (1 + ε) · (log-diff_X + log-cond_D)
+</pre>
+    <p>（「bounded discrepancy class」の意味で、U_X(Q̄)<sup>≤d</sup> 上の関数として成立）</p>
+
+    <h3>ABC予想への帰着</h3>
+    <p>楕円曲線 y² = x(x-a)(x-b) を適切に選ぶことで:</p>
+    <ul>
+      <li>標準高さ ↔ log(max(|a|,|b|,|c|))</li>
+      <li>対数的導手 ↔ log(rad(abc))</li>
+      <li>対数的判別式 ↔ 数体の判別式（有限個の例外で制御可能）</li>
+    </ul>
+    <p>これにより定理A から ABC予想 c < K(ε) · rad(abc)<sup>1+ε</sup> が導かれる。</p>
+  </div>
+
+  <div class="section">
+    <h2>処理の全体フロー</h2>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><div class="label">解体</div><div class="desc">IUT I: 環構造をホッジシアターに分解</div></div>
+      <div class="step"><div class="n">2</div><div class="label">変形</div><div class="desc">IUT II: Θ-link で q → q^j² 対応</div></div>
+      <div class="step"><div class="n">3</div><div class="label">統合</div><div class="desc">IUT III: 対数テータ格子＋マルチラジアル</div></div>
+      <div class="step"><div class="n">4</div><div class="label">計算</div><div class="desc">IUT IV: 対数体積→明示的不等式</div></div>
+    </div>
+  </div>
+
+</div>
+<!-- ======================== 例えタブ ======================== -->
+<div id="analogy" class="tab-content">
+
+  <div class="section">
+    <h2>IUT理論全体の例え</h2>
+
+    <h3>例え1: 翻訳不可能な2つの言語</h3>
+    <p>二つの国がある。A国は「足し算語」、B国は「掛け算語」を話す。普段は一つの国（環構造）で両方の言語が一体化していて翻訳不要。IUT理論は:</p>
+    <ol>
+      <li>この国を二つに分割する（ホッジシアター = 分割後の国）</li>
+      <li>二つの国の間にトンネルを掘る（シータリンク = トンネル）</li>
+      <li>ただしトンネルでは「掛け算語」しか通じない（環構造の非互換性）</li>
+      <li>特殊な通訳を雇う（マルチラジアルアルゴリズム = 言語に依存しない意思疎通）</li>
+      <li>通訳の「誤差範囲」から不等式を導く（三つの不定性 → ABC予想）</li>
+    </ol>
+
+    <h3>例え2: 二つの地図を重ねる</h3>
+    <p>同じ土地の<strong>等高線地図</strong>と<strong>地質図</strong>がある。等高線地図は高さ（足し算的構造）を、地質図は地層（掛け算的構造）を表す。普通は一枚にまとめられているが、IUT理論は二枚を別々に扱い、「微妙にずれた二枚の地図を重ねたときの歪み」から地形の制約条件（ABC予想の不等式）を導く。</p>
+  </div>
+
+  <div class="section">
+    <h2>個別概念の例え</h2>
+
+    <div class="qna">
+
+      <details open>
+        <summary>環構造（足し算 + 掛け算の一体化） — 色付きの積み木</summary>
+        <p>積み木には「形」（丸、四角、三角）と「色」（赤、青、緑）がある。普通の積み木は形と色が一体化していて分離できない。「赤い丸を青い丸にする」ことは、積み木を壊して作り直さないと不可能。</p>
+        <ul>
+          <li>環構造 = 形と色が不可分の積み木</li>
+          <li>IUT理論 = 積み木を壊して形と色を別管理にする</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>ホッジシアター — ジオラマ（ミニチュア模型）</summary>
+        <p>数学の世界全体（スキーム論）の精巧なジオラマ。実物（環構造）を直接いじるのは危険なので、ジオラマ上で実験する。ジオラマには「足し算の棟」と「掛け算の棟」が分かれて配置されている。</p>
+      </details>
+
+      <details>
+        <summary>シータリンク — ワームホール</summary>
+        <p>二つのジオラマ（ホッジシアター）を繋ぐワームホール。ただし、このワームホールは「掛け算的な荷物」しか運べない。具体的には: ワームホールは q<sup>j²</sup> を q に変換する。これは掛け算の世界では「冪乗を変える」だけだが、足し算の世界から見ると「数そのものが変わる」ことに相当する。</p>
+      </details>
+
+      <details>
+        <summary>マルチラジアリティ — GPS vs 方角指示</summary>
+        <ul>
+          <li><strong>ユニラジアル</strong> = 「この建物を左に曲がって3ブロック先」→ 出発地点に依存</li>
+          <li><strong>マルチラジアル</strong> = 「北緯35度、東経135度」→ どこから出発しても同じ場所を指す</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>対数テータ格子 — 碁盤の目の街</summary>
+        <p>東西（シータリンク）と南北（対数リンク）に無限に広がる街。各交差点にジオラマがある。重要: 「東に行ってから北に行く」のと「北に行ってから東に行く」では、たどり着く場所は同じだが<strong>見える景色が違う</strong>（非可換性）。</p>
+      </details>
+
+      <details>
+        <summary>対数殻 (Log-shell) — 通貨の購買力範囲</summary>
+        <p>各国の通貨は正確な為替レートが不明だが、「1000円で買えるもの」の範囲はだいたいわかる。対数殻 = 為替レートが不定でも使える「購買力の入れ物」。</p>
+      </details>
+
+      <details>
+        <summary>三つの不定性 — 測量の誤差</summary>
+        <table class="note-table">
+          <tr><th>不定性</th><th>例え</th></tr>
+          <tr><td>Ind1: 内部自己同型</td><td>地図の向きが少し回転しているかもしれない</td></tr>
+          <tr><td>Ind2: O<sup>×</sup> 作用</td><td>スケールの基準点が少しずれているかもしれない</td></tr>
+          <tr><td>Ind3: 上限/下限</td><td>測量器の精度に限界がある</td></tr>
+        </table>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>ガウス積分とのアナロジー（数学的だが直感的）</h2>
+    <h3>1次元では解けない問題を2次元で解く</h3>
+<pre class="code">
+目標: ∫_{-∞}^{∞} e^{-x²} dx = ?
+
+1次元のまま では e^{-x²} の原始関数が初等関数で表せない → 行き詰まる
+
+2次元に持ち上げる:
+   I² = (∫e^{-x²}dx)(∫e^{-y²}dy) = ∫∫e^{-(x²+y²)}dxdy
+   極座標 (r, θ) に変換 → I² = π → I = √π
+</pre>
+
+    <h3>IUT理論版</h3>
+    <p>「環構造のまま」でABC予想を証明しようとすると、足し算と掛け算が絡み合って行き詰まる（ガウス極）。「二次元に持ち上げる」= 対数テータ格子（横 = 掛け算的変形、縦 = 足し算的変換）。</p>
+    <table class="note-table">
+      <tr><th>古典 (ガウス積分)</th><th>IUT 理論</th></tr>
+      <tr><td>e<sup>-x²</sup></td><td>q<sup>j²</sup>（テータ値）</td></tr>
+      <tr><td>直交座標 → 極座標</td><td>環構造の解体と再構成</td></tr>
+      <tr><td>√π</td><td>ω_E（楕円曲線のコタンジェント束）</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>例えの限界</h2>
+    <div class="callout warn">
+      <h4>注意</h4>
+      <p>すべての例えには限界がある。例えは「最初のとっかかり」であり、厳密な理解には原論文に立ち返る必要がある。</p>
+    </div>
+    <table class="note-table">
+      <tr><th>例え</th><th>限界</th></tr>
+      <tr><td>翻訳の例え</td><td>実際は「2つの言語」ではなく無限個の局所体での同時操作</td></tr>
+      <tr><td>ジオラマの例え</td><td>ホッジシアターは単なる「縮小版」ではなく構造が異なる</td></tr>
+      <tr><td>ワームホールの例え</td><td>シータリンクは「移動」ではなく「同一視」</td></tr>
+      <tr><td>GPSの例え</td><td>マルチラジアリティは座標系の話ではなく圏論的な構造の問題</td></tr>
+    </table>
+  </div>
+
+</div>
+<!-- ======================== 数値例タブ ======================== -->
+<div id="numerical" class="tab-content">
+
+  <div class="section">
+    <h2>具体的な数値で「足し算と掛け算の分離」を体感する</h2>
+    <p class="lead">IUT理論の核心操作——「掛け算の次元だけを動かし、足し算の次元は固定する」——を、実際の数値で見せる。抽象的な定義ではなく、手で計算できるレベルに落とす。</p>
+  </div>
+
+  <div class="section">
+    <h2>5進数の世界 (p=5)</h2>
+    <p>5進整数とは 5 を「小さい数」と見なす世界:</p>
+<pre class="code">
+通常の感覚: 125 は「大きい」、1/5 は「小さい」
+5進の感覚: 125 = 5³ は「超小さい」、1/5 は「大きい」
+</pre>
+
+    <h3>5進付値 v₅(x) = 「x を何回 5 で割れるか」</h3>
+<pre class="code">
+v₅(1)   = 0    (5で割れない)
+v₅(5)   = 1    (1回割れる)
+v₅(25)  = 2    (2回割れる)
+v₅(125) = 3    (3回割れる)
+v₅(7)   = 0    (5で割れない)
+v₅(50)  = 2    (50 = 2 × 5²)
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>「2つの次元」の正体</h2>
+    <p>任意の 5 進数 x ≠ 0 は<strong>一意に</strong>分解できる:</p>
+<pre class="code">
+x = 5^n × u     (n = v₅(x), u は5進単数)
+    ~~~~   ~~~
+    値群   単数群
+    (掛け算の次元)  (足し算の次元)
+</pre>
+
+    <table class="note-table">
+      <thead><tr><th>数 x</th><th>値群の成分 5^n</th><th>単数群の成分 u</th><th>分解</th></tr></thead>
+      <tbody>
+        <tr><td>7</td><td>5⁰ = 1</td><td>7</td><td>7 = 1 × 7</td></tr>
+        <tr><td>25</td><td>5²</td><td>1</td><td>25 = 5² × 1</td></tr>
+        <tr><td>50</td><td>5²</td><td>2</td><td>50 = 5² × 2</td></tr>
+        <tr><td>35</td><td>5¹</td><td>7</td><td>35 = 5¹ × 7</td></tr>
+        <tr><td>375</td><td>5³</td><td>3</td><td>375 = 5³ × 3</td></tr>
+      </tbody>
+    </table>
+
+    <ul>
+      <li><strong>値群</strong> = 「5を何回含むか」= 掛け算的な情報</li>
+      <li><strong>単数群</strong> = 「5を全部取り除いた残り」= 足し算に関わる情報</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>なぜ「単数群 = 足し算的」なのか — 絡み合いの実例</h2>
+
+    <div class="callout">
+      <h4>例: 7 + 18 = 25</h4>
+<pre class="code">
+左辺: 7 = 5⁰ × 7,  18 = 5⁰ × 18    (どちらも値群=0、つまり単数)
+右辺: 25 = 5² × 1                     (値群=2、単数=1)
+</pre>
+      <p><strong>2つの単数（7と18）を足しただけなのに、値群が0から2に跳ね上がった！</strong></p>
+    </div>
+
+    <p>これが足し算と掛け算の「絡み合い」の最も単純な例:</p>
+    <ul>
+      <li>掛け算的には 7 も 18 も「5とは無関係」（値群=0）</li>
+      <li>でも足し算すると 7+18=25=5² で「5が2つ出てくる」</li>
+      <li><strong>足し算が掛け算の構造を変えてしまう</strong></li>
+    </ul>
+
+    <p>逆もある:</p>
+<pre class="code">
+3 + 122 = 125 = 5³    (単数同士の和が値群=3を生み出す)
+2 + 123 = 125 = 5³    (同上)
+4 + 121 = 125 = 5³    (同上)
+</pre>
+
+    <div class="callout warn">
+      <h4>結論</h4>
+      <p>環構造（足し算+掛け算が共存）がある限り、この絡み合いは避けられない。これがABC予想を直接証明できない根本的な理由。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>IUT理論の解決法（数値で）</h2>
+    <p>IUT理論はこの絡み合いを解消するため、<strong>値群側だけ</strong>を変形する:</p>
+<pre class="code">
+古典タイヒミューラー:    z = x + iy → ζ = K·x + iy  (x方向だけK倍)
+
+IUT (Θ-link):           q^j² ↔ q
+                         ~~~~     ~
+                         値群側を伸縮  単数群側は別世界に切離
+</pre>
+    <p>
+      望月の言葉で「値群（掛け算的次元）はテータ関数で q → q<sup>j²</sup> に伸縮され、
+      単数群（足し算的次元）は固定される（正確には別世界に属するので繋がない）」。
+      これが古典タイヒミューラー変形の<strong>算術版</strong>。
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>テート曲線: 楕円曲線の p進版（ドーナツ）</h2>
+    <p>乗法的悪い還元を持つ素数 p において、楕円曲線は p進的に<strong>テート曲線</strong>として記述できる:</p>
+<pre class="code">
+複素数版: E(C) ≅ C× / q^Z     (q = e^{2πiτ}, 掛け算群を q の冪で巻き取る)
+p進版:   E(Q_p) ≅ Q_p× / q^Z
+</pre>
+    <p><strong>具体例 (p=5, q=5²):</strong></p>
+<pre class="code">
+Q₅× / (5²)^Z = Q₅× / {... , 5⁻⁴, 5⁻², 1, 5², 5⁴, 5⁶, ...}
+
+Q₅× の元 x に対して、x と x·5² と x·5⁴ は「同じ点」
+</pre>
+    <p><strong>q-パラメータ</strong>は楕円曲線の「p進的な形」を決める数。<code class="inline">log|q|</code> が楕円曲線の「高さ」に直結し、ABC予想の左辺に対応する。</p>
+<pre class="code">
+ABC予想の不等式:  (1/6)·log|q| ≤ (1+ε)·(log-diff + log-cond)
+                   ~~~~~~~~~~
+                   ここが q-パラメータ
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>テータ関数の級数と j² の由来</h2>
+    <p>テート曲線上のテータ関数の明示的な級数表示 ([EtTh, Prop 1.4]):</p>
+<pre class="code">
+Θ(u) = Σ_{n∈Z} (-1)^n · q^{(n+1/2)²/2} · u^{n+1/2}
+</pre>
+    <p>l-等分点 u = q<sup>j/l</sup> で評価すると、主要項として:</p>
+<pre class="code">
+Θ(q^{j/l}) の主要項 ∼ q^{j²/2l} の定数倍
+  → 適切な冪をとるとテータ値 ∼ q^{j²}
+</pre>
+    <p><strong>j² が出てくるのは、級数の指数が二次形式 (n+1/2)² だから</strong>。ガウス分布 e<sup>−x²</sup> の離散版。</p>
+  </div>
+
+  <div class="section">
+    <h2>数値例: p=5, q=5², l=11, l*=5</h2>
+    <p>各 l-等分点 j = 1,...,5 でのテータ値（主要項）:</p>
+    <table class="note-table">
+      <thead><tr><th>j</th><th>j²</th><th>テータ値 ∼ q<sup>j²</sup> = 5<sup>2j²</sup></th><th>v₅(テータ値) = 2j²</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1</td><td>5² = 25</td><td>2</td></tr>
+        <tr><td>2</td><td>4</td><td>5⁸ = 390,625</td><td>8</td></tr>
+        <tr><td>3</td><td>9</td><td>5¹⁸ ≈ 3.8 × 10¹²</td><td>18</td></tr>
+        <tr><td>4</td><td>16</td><td>5³² ≈ 2.3 × 10²²</td><td>32</td></tr>
+        <tr><td>5</td><td>25</td><td>5⁵⁰ ≈ 8.9 × 10³⁴</td><td>50</td></tr>
+      </tbody>
+    </table>
+    <p>テータ値の付値の列: <strong>2, 8, 18, 32, 50</strong>。q-パラメータ自体の付値: <strong>2</strong>。</p>
+
+    <h3>一気通貫の流れ</h3>
+<pre class="code">
+楕円曲線 E/Q
+  ↓ 素数 p=5 で乗法的悪い還元
+テート曲線 E ≅ Q₅×/q^Z  (q=5²)
+  ↓ l=11 の l-等分点で
+テータ関数を評価
+  ↓ 主要項を取ると
+テータ値列 {q^{j²}} = {5², 5⁸, 5¹⁸, 5³², 5⁵⁰}
+  ↓ 付値を見ると
+{2, 8, 18, 32, 50}  ← これが Θ-リンクで「向こう側」に送られるデータ
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>Θ-リンク: 2つの世界を「値のみ貼り付け」で繋ぐ</h2>
+    <p>普通の数学では q-パラメータを直接いじって不等式を証明しようとするが、q-パラメータは環構造（足し算＋掛け算）に縛られて自由にいじれない。Excel でたとえると:</p>
+<pre class="diagram">
+┌─ シートA ──────────────┐     ┌─ シートB ──────────────┐
+│                        │     │                        │
+│  q_A = 25              │     │  q_B                   │
+│  テータ値: 25,390625,..│     │  テータ値: 独自に計算   │
+│  足し算: 数式で連動    │     │  足し算: 独自に連動    │
+│                        │     │                        │
+└──────────┬─────────────┘     └──────────┬─────────────┘
+           │                              ▲
+           │   「シートAのテータ値」を     │
+           │    コピーして                 │
+           └──「シートBの q_B」に ─────────┘
+               ペーストする
+               （「値のみ貼り付け」！
+                 数式は持ち込めない！）
+</pre>
+    <p>Θ-リンクの本質:</p>
+    <ul>
+      <li><strong>繋がるもの</strong>: 掛け算の情報（付値「5の何乗か」）だけはコピーできる</li>
+      <li><strong>切断されるもの</strong>: 足し算の情報（数式リンク）は持ち込めない</li>
+    </ul>
+    <p>数式リンクが切れるからこそ、2つのシートの間に「歪み」が生じる。<strong>掛け算だけ繋いで、足し算を切断する</strong>。</p>
+
+    <h3>一枚の表にまとめる（q=5², l*=5）</h3>
+<pre class="diagram">
+        ┃  値群 (掛け算の次元)     ┃  単数群 (足し算の次元)
+━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━
+世界A   ┃  v₅(q_A) = 2           ┃  世界Aの単数群 U_A
+        ┃  テータ値列の付値:       ┃   (U_A 内で足し算ができる)
+        ┃  2, 8, 18, 32, 50      ┃
+━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━
+Θ-リンク ┃  ← 値のみ貼り付け →     ┃  ← 数式リンク切断 →
+        ┃  {2,8,18,32,50} → 2    ┃  U_A と U_B は無関係
+        ┃  (5個 → 1個に圧縮)      ┃
+━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━
+世界B   ┃  v₅(q_B) = 2           ┃  世界Bの単数群 U_B
+        ┃  (受け取り側)            ┃   (U_B 内で独自の足し算)
+━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━
+
+       「繋がる」                  「切断される」
+    (値のみコピー)                 (数式は消える)
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>「歪み」が不等式を生むメカニズム</h2>
+    <h3>対数体積の比較（= 付値の合計）</h3>
+<pre class="code">
+世界A側（テータ値列）:
+Σ v₅(q^{j²}) = v₅(q) × Σ j²
+             = 2 × (1 + 4 + 9 + 16 + 25)
+             = 2 × 55
+             = 110
+
+世界B側（q-パラメータ）:
+v₅(q_B) = 2
+</pre>
+
+    <div class="callout warn">
+      <h4>Θ-リンクはこの2つを同一視する。しかし 110 ≠ 2</h4>
+      <p>5個の値の列を1個の値に圧縮しているのだから、体積が一致するわけがない。この比が<strong>歪み率</strong>:</p>
+<pre class="code">
+世界Aの対数体積 / 世界Bの対数体積 = 110 / 2 = 55 = Σ j²
+</pre>
+    </div>
+
+    <h3>ABC予想への繋がり（概算の流れ）</h3>
+    <p>q = 5², l = 11 (l* = 5) の場合の一連の計算:</p>
+<pre class="code">
+1. テータ値列: {5², 5⁸, 5¹⁸, 5³², 5⁵⁰}
+   付値列:    {2, 8, 18, 32, 50}
+
+2. 対数体積（合計）:          110
+3. q-パラメータの対数体積:    2
+4. 比率:                      110/2 = 55
+5. 1/l で正規化:              55/11 = 5 = l*
+6. 1/l* で平均:               55/5  = 11 = l
+
+7. この「l」が最終的に (1/6)·ht_E の左辺になる
+   （厳密にはもう少し複雑だが、最高次項として）
+</pre>
+
+    <p>一般の l では <code class="inline">Σ_{j=1}^{l*} j² ≈ l³/24</code>、1成分あたりの平均付値は <code class="inline">≈ l²/6</code>。l ~ ht_E と選ぶと:</p>
+<pre class="code">
+(1/6) × ht_E ≤ (1+ε) × (log-diff + log-cond) + 定数
+</pre>
+    <p>左辺は (1/6)·log(q) に、右辺は判別式と導手に対応する（ABC予想の形）。</p>
+  </div>
+
+  <div class="section">
+    <h2>なぜ「分離」が不等式を生むのか（核心の直感）</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <span class="num">分離しない場合</span>
+        <h4>ガウス極で vacuous になる</h4>
+        <p>足し算と掛け算が絡み合っているため、値群の変化 (q → q<sup>j²</sup>) を見積もろうとすると足し算由来の項（ガウス極）が爆発。「∞ ≤ 何か」になり何も言えない。</p>
+      </div>
+      <div class="summary-card">
+        <span class="num">IUT の分離</span>
+        <h4>対数殻で足し算を閉じ込める</h4>
+        <p>掛け算の次元だけを q → q<sup>j²</sup> で変形。足し算は「対数殻」の中に閉じ込められ、そのサイズは有限で明示的に計算可能。歪みの量 Σj²/q が有限に制御される。</p>
+      </div>
+    </div>
+    <div class="callout ok">
+      <h4>結論</h4>
+      <p><strong>分離しないと</strong>: ガウス極で「∞ ≤ 何か」→ 何も言えない。<br>
+      <strong>分離すると</strong>: ガウス極が消えて「有限の量 ≤ 何か」→ ABC予想の形になる。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>古典的タイヒミューラーとの数値的対応</h2>
+
+    <h3>古典: z → ζ = K·x + iy</h3>
+<pre class="code">
+リーマン面のタイヒミューラー変形:
+
+z = x + iy = (3, 4)    （2つの実次元）
+
+変形後: ζ = 2x + iy = (6, 4)     （K=2 で x方向だけ2倍）
+
+動いた: x成分  3 → 6 (×2)
+固定:   y成分  4 → 4 (そのまま)
+
+歪みの量 = K = 2（擬等角定数）
+</pre>
+
+    <h3>IUT: 値群を j² 倍に「伸縮」</h3>
+<pre class="code">
+数体のIUT変形:
+
+q = 5²   （v₅ = 2, 単数 = 1 の2つの次元）
+
+変形後 (j=3): q^{j²} = q^9 = 5¹⁸
+
+動いた: 値群  2 → 18 (×9)
+固定:   単数群は別世界に属するので比較不能（= 固定というより切断）
+
+歪みの量 = Σj² = 55（l*=5の場合）
+</pre>
+
+    <h3>対応表</h3>
+    <table class="note-table">
+      <thead><tr><th></th><th>古典</th><th>IUT</th></tr></thead>
+      <tbody>
+        <tr><td>対象</td><td>z = x + iy</td><td>q = p<sup>n</sup> × u</td></tr>
+        <tr><td>2つの次元</td><td>実部 x / 虚部 y</td><td>値群 n / 単数群 u</td></tr>
+        <tr><td>変形</td><td>x → Kx</td><td>n → j²n</td></tr>
+        <tr><td>固定</td><td>y → y</td><td>u → (別世界、繋がない)</td></tr>
+        <tr><td>歪みの量</td><td>K（擬等角定数）</td><td>Σj²（テータ値の合計）</td></tr>
+        <tr><td>結論</td><td>テータ距離の上界</td><td>ABC不等式</td></tr>
+      </tbody>
+    </table>
+
+    <p>詳細は <a href="notes/views/numerical_example_view.md">notes/views/numerical_example_view.md</a> を参照（全文598行）。</p>
+  </div>
+
+</div>
+<!-- ======================== 応用タブ ======================== -->
+<div id="apps" class="tab-content">
+
+  <div class="section">
+    <h2>IUT理論で何ができるのか</h2>
+    <div class="callout info">
+      <h4>注意</h4>
+      <p>IUT理論の第一義的な目標はABC予想の証明ではなく、「<strong>数体の算術的構造の変形理論</strong>」の構築である。ABC予想はその理論から導かれる最も顕著な帰結（応用）。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>理論そのものの成果（構成的成果）</h2>
+    <p>証明の正否に関わらず、新しい視点として提示されたもの:</p>
+    <table class="note-table">
+      <tr><th>成果</th><th>内容</th></tr>
+      <tr><td><strong>環構造の解体と再構成</strong></td><td>数体の足し算と掛け算を分離して扱う枠組みの提示</td></tr>
+      <tr><td><strong>対数テータ格子</strong></td><td>シータリンクとlog-リンクからなる二次元非可換ダイアグラム</td></tr>
+      <tr><td><strong>マルチラジアリティ</strong></td><td>異なる環構造をまたいで意味をなすアルゴリズムの概念</td></tr>
+      <tr><td><strong>Speciesの理論</strong></td><td>集合論モデルを跨ぐ数学的対象の型の形式化</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>ディオファンタス幾何への帰結（証明が正しいと仮定した場合）</h2>
+
+    <h3>1. Vojta予想（双曲曲線の場合） — IUT IV 定理Aの直接的な内容</h3>
+<pre class="code">ht_{ω_X(D)} ≤ (1 + ε)(log-diff_X + log-cond_D)</pre>
+    <p>双曲曲線上の有理点の「大きさ」は、定義体と悪い還元の情報で制約される。これが理論の最も一般的な帰結であり、以下の予想はすべてこの特殊ケース。</p>
+
+    <h3>2. ABC予想（Vojta予想の特殊ケース）</h3>
+    <p>互いに素な正整数 a + b = c に対し、任意の ε > 0 で:</p>
+<pre class="code">c < K(ε) · rad(abc)^{1+ε}</pre>
+    <p>足し算の結果は、関与する素因数の種類で本質的に制約される。Vojta予想で X = P¹, D = {0, 1, ∞} とした特殊ケース。</p>
+
+    <h3>3. Szpiro予想</h3>
+    <p>楕円曲線 E/Q の最小判別式 Δ と導手 N に対し:</p>
+<pre class="code">|Δ| ≤ C(ε) · N^{6+ε}</pre>
+    <p>楕円曲線の「複雑さ」（判別式）は、「どこで悪い還元を持つか」（導手）で制約される。</p>
+  </div>
+
+  <div class="section">
+    <h2>ABC予想から従う間接的な帰結</h2>
+    <table class="note-table">
+      <thead><tr><th>帰結</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><strong>フェルマーの最終定理（有効版）</strong></td><td>x<sup>n</sup>+y<sup>n</sup>=z<sup>n</sup> は n ≥ 4 で非自明解なし。具体的な上界が得られる</td></tr>
+        <tr><td><strong>Pillai予想の部分結果</strong></td><td>完全冪の差 |x<sup>a</sup>-y<sup>b</sup>| の下界</td></tr>
+        <tr><td><strong>Erdős–Woods予想の部分結果</strong></td><td>連続整数列の素因数による特徴づけ</td></tr>
+        <tr><td><strong>弱いHall予想</strong></td><td>x³ - y² ≠ 0 ならば |x³ - y²| > |x|<sup>1/2-ε</sup></td></tr>
+        <tr><td><strong>Lang予想の特殊ケース</strong></td><td>一般型多様体上の有理点の有限性の定量版</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>影響範囲の図</h2>
+<pre class="diagram">
+                    ┌─────────────────┐
+                    │  IUT理論 (定理A)  │
+                    └────────┬────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              ▼              ▼              ▼
+        ┌──────────┐  ┌──────────┐  ┌──────────┐
+        │ABC予想    │  │Szpiro予想│  │Vojta予想  │
+        │          │  │          │  │(双曲曲線) │
+        └────┬─────┘  └──────────┘  └────┬─────┘
+             │                            │
+    ┌────────┼────────┐              ┌────┴─────┐
+    ▼        ▼        ▼              ▼          ▼
+ ┌──────┐┌──────┐┌──────┐      ┌──────┐  ┌──────┐
+ │有効FLT││Hall  ││Pillai│      │Lang  │  │...   │
+ │      ││予想  ││予想  │      │予想  │  │      │
+ └──────┘└──────┘└──────┘      └──────┘  └──────┘
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>「できないこと」の明確化</h2>
+    <table class="note-table">
+      <tr><th>できないこと</th><th>理由</th></tr>
+      <tr><td>高次元アーベル多様体への一般化</td><td>IUT理論は楕円曲線（1次元）に本質的に依存</td></tr>
+      <tr><td>具体的な定数の計算</td><td>不等式は「bounded discrepancy class」の意味。定数は非構成的</td></tr>
+      <tr><td>ABC予想の最適な指数の決定</td><td>(1+ε) の形でのみ成立。ε=0 のケースは射程外</td></tr>
+      <tr><td>リーマン予想への応用</td><td>直接的な関連はない</td></tr>
+    </table>
+  </div>
+
+</div>
+<!-- ======================== 歴史タブ ======================== -->
+<div id="history" class="tab-content">
+
+  <div class="section">
+    <h2>前史: ABC予想の誕生まで</h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="year">1637</div><div class="text">フェルマーが「最終定理」を余白に記す</div></div>
+      <div class="timeline-item"><div class="year">1859</div><div class="text">リーマンがゼータ関数の論文を発表</div></div>
+      <div class="timeline-item"><div class="year">1882</div><div class="text">デデキント・ウェーバーが「数体と関数体のアナロジー」を確立</div></div>
+      <div class="timeline-item"><div class="year">1913</div><div class="text">ラマヌジャンがハーディに手紙を書く。テータ関数の深い性質</div></div>
+      <div class="timeline-item major"><div class="year">1939</div><div class="text">タイヒミューラーがリーマン面の変形理論を創始</div></div>
+      <div class="timeline-item major"><div class="year">1960年代</div><div class="text">グロタンディークがスキーム論を確立。現代代数幾何の基盤</div></div>
+      <div class="timeline-item"><div class="year">1970年代</div><div class="text">ファルティングスの先駆的研究。アラケロフ幾何の発展</div></div>
+      <div class="timeline-item"><div class="year">1983</div><div class="text">ファルティングスがモーデル予想を証明</div></div>
+      <div class="timeline-item major"><div class="year">1985</div><div class="text">Oesterlé と Masser が ABC予想 を独立に提唱</div></div>
+      <div class="timeline-item"><div class="year">1986</div><div class="text">Szpiro が楕円曲線版（Szpiro予想）を定式化</div></div>
+      <div class="timeline-item"><div class="year">1995</div><div class="text">ワイルズがフェルマーの最終定理を証明</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>望月新一の研究歴</h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="year">1969</div><div class="text">東京に生まれる</div></div>
+      <div class="timeline-item"><div class="year">1988</div><div class="text">プリンストン大学卒業（16歳で入学、19歳で卒業）</div></div>
+      <div class="timeline-item"><div class="year">1992</div><div class="text">プリンストン大学でPh.D.取得（23歳）。指導教員はファルティングス</div></div>
+      <div class="timeline-item"><div class="year">1992–</div><div class="text">京都大学数理解析研究所 (RIMS) に着任</div></div>
+      <div class="timeline-item"><div class="year">1996</div><div class="text">p進タイヒミューラー理論を確立</div></div>
+      <div class="timeline-item"><div class="year">1998–2000</div><div class="text">遠アーベル幾何学の基礎的結果を証明（グロタンディーク予想の解決を含む）</div></div>
+      <div class="timeline-item"><div class="year">1999–2002</div><div class="text">ホッジ・アラケロフ理論を開発 → ガウス極の壁</div></div>
+      <div class="timeline-item major"><div class="year">2000年夏</div><div class="text">IUT理論の着想。「環構造を壊す」アプローチへ</div></div>
+      <div class="timeline-item"><div class="year">2006</div><div class="text">エタールテータ関数の理論 [EtTh] を完成</div></div>
+      <div class="timeline-item"><div class="year">2008</div><div class="text">フロベニオイドの理論 [FrdI, FrdII]、絶対遠アーベル幾何III [AbsTopIII]</div></div>
+      <div class="timeline-item major"><div class="year">2012年8月</div><div class="text">IUT I–IV の4本のプレプリントを公開</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>IUT理論公開後</h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="year">2012年8月</div><div class="text">論文公開。世界の数学者に衝撃が走る</div></div>
+      <div class="timeline-item"><div class="year">2012–2014</div><div class="text">星裕一郎、山下剛らが理解の試みを開始</div></div>
+      <div class="timeline-item"><div class="year">2015</div><div class="text">Oxford で IUT 理論に関する国際ワークショップ</div></div>
+      <div class="timeline-item"><div class="year">2017</div><div class="text">Scholze がブログで系3.12への疑問を表明</div></div>
+      <div class="timeline-item major"><div class="year">2018年3月</div><div class="text">Scholze と Stix が京都を訪問。望月と1週間にわたり議論</div></div>
+      <div class="timeline-item"><div class="year">2018年5月</div><div class="text">Scholze-Stix が「系3.12に致命的な欠陥」と報告書を公開</div></div>
+      <div class="timeline-item"><div class="year">2018</div><div class="text">望月が反論文書を公開。対話は平行線に</div></div>
+      <div class="timeline-item"><div class="year">2019</div><div class="text">Fesenko らが IUT 理論の正当性を支持する文書を公表</div></div>
+      <div class="timeline-item"><div class="year">2020</div><div class="text">論文の改訂版が公開される</div></div>
+      <div class="timeline-item major"><div class="year">2021年3月</div><div class="text">PRIMS に4本の論文が掲載（特別号として出版）</div></div>
+      <div class="timeline-item"><div class="year">2021</div><div class="text">Scholze が再度、系3.12の議論が不正確であると主張</div></div>
+      <div class="timeline-item"><div class="year">2022年4月</div><div class="text">NHKスペシャル「数学者は宇宙をつなげるか？」放送</div></div>
+      <div class="timeline-item"><div class="year">2023</div><div class="text">RIMS で IUT Summit 開催</div></div>
+      <div class="timeline-item"><div class="year">2024</div><div class="text">Kirti Joshi が独自アプローチの論文を発表。Scholze との対話を経て新見解</div></div>
+      <div class="timeline-item"><div class="year">2024年3月</div><div class="text">望月が "Essential Logical Structure of IUT" を公開</div></div>
+      <div class="timeline-item"><div class="year">2025</div><div class="text">Joshi が "Final Report on the Mochizuki-Scholze-Stix Controversy" を公開。決着には至らず</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>知的系譜</h2>
+<pre class="diagram">
+グロタンディーク (1960s)
+  │ スキーム論・エタールコホモロジー
+  │
+  ├──→ ファルティングス (1983)
+  │       │ モーデル予想の証明、アラケロフ幾何
+  │       │
+  │       └──→ 望月新一 (Ph.D. 1992)
+  │               ├──→ p進タイヒミューラー理論 (1996)
+  │               ├──→ 遠アーベル幾何 (1998–2000)
+  │               ├──→ ホッジ・アラケロフ理論 (1999–2002) → ガウス極の壁
+  │               ├──→ エタールテータ関数 (2006)
+  │               ├──→ フロベニオイド (2008)
+  │               └──→ ★ IUT理論 (2012)
+  │
+  ├──→ 遠アーベル幾何の発展 (中村博昭、玉川安騎男ら)
+  │
+  └──→ タイヒミューラー理論の発展
+          古典 → p進版 → 宇宙際版
+
+Oesterlé & Masser (1985)  →  ABC予想  →  IUT理論による主張される証明
+</pre>
+  </div>
+
+  <div class="section">
+    <h2>望月の研究スタイルの特徴</h2>
+    <ul>
+      <li>プレプリントサーバー (arXiv) を使わず、自身のウェブサイトのみで公開</li>
+      <li>国際学会にほとんど出席しない</li>
+      <li>論文の解説のために他国を訪問しない</li>
+      <li>自身のウェブサイトで詳細な反論や解説を公開するスタイル</li>
+      <li>この孤立的なスタイルが理論の受容の遅さの一因とも指摘される</li>
+    </ul>
+  </div>
+
+</div>
+<!-- ======================== 論争タブ ======================== -->
+<div id="controversy" class="tab-content">
+
+  <div class="section">
+    <h2>論争の核心</h2>
+    <p class="lead">2018年、Fields賞受賞者 Peter Scholze と Jakob Stix が望月を訪問し、IUT III <strong>系3.12</strong>の証明に「致命的な欠陥」があると報告。以来、数学コミュニティの多数派は「ABC予想はまだ未解決」と見なしている。</p>
+  </div>
+
+  <div class="section">
+    <h2>三者の立場</h2>
+    <table class="note-table">
+      <thead>
+        <tr><th></th><th>系3.12は正しいか</th><th>不等式は非自明か</th><th>核心的主張</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>望月</strong></td>
+          <td>正しい</td>
+          <td>はい (ABC予想を含意)</td>
+          <td>マルチラジアリティと遠アーベル復元が要点。批判者は本質を理解していない</td>
+        </tr>
+        <tr>
+          <td><strong>Scholze-Stix</strong></td>
+          <td>誤り</td>
+          <td>いいえ (vacuous)</td>
+          <td>シータリンクを跨ぐ同一視が不当。簡略化すると新しい情報が出ない</td>
+        </tr>
+        <tr>
+          <td><strong>Joshi</strong></td>
+          <td>不完全</td>
+          <td>未決</td>
+          <td>Scholze の2021年批判は誤り、ただし望月の証明も不完全。幾何的対象を重視すべき</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Scholze-Stix の批判</h2>
+    <h3>何が問題とされたか</h3>
+    <ul>
+      <li><strong>IUT III 系3.12</strong> の証明において、ある同一視が不当であると指摘</li>
+      <li>具体的には: シータリンクを跨いで局所データを比較する際に、異なるホッジシアター間の「同一視」が正当化されていないと主張</li>
+    </ul>
+
+    <div class="callout warn">
+      <h4>Scholze の立場（要約）</h4>
+      <p>「系3.12の証明を追うと、本質的な部分で何も新しい情報が得られない。不等式の導出において、シータリンクの非可換性から生じる困難が実際には解決されていない。」</p>
+    </div>
+
+    <div class="callout">
+      <h4>望月の反論（要約）</h4>
+      <p>「Scholze-Stixの批判は、理論の本質的な構造（特にマルチラジアリティと遠アーベル幾何学的復元）を正しく理解していないことに起因する。彼らの『簡略化』は、理論の核心的な部分を取り除いてしまっている。」</p>
+    </div>
+
+    <h3>対話の断絶</h3>
+    <p>両者は互いの主張を「根本的な誤解」と見なし、合意に至らなかった。数学における前例のない事態 — 査読付き雑誌に掲載されたにも関わらず、フィールズ賞受賞者（Scholze）が証明の正当性を認めないという状況。</p>
+  </div>
+
+  <div class="section">
+    <h2>Kirti Joshi のアプローチ</h2>
+    <h3>第三の道</h3>
+    <p>Joshi（アリゾナ大学）は2024年以降、独自の視点からIUT理論を再構成しようとしている。</p>
+    <ol>
+      <li>Scholze の2021年の批判は<strong>数学的に誤り</strong>と主張</li>
+      <li>しかし<strong>望月の証明も不完全</strong>と認める</li>
+      <li>望月の「数体のタイヒミューラー理論が存在する」という直観は正しいが、その存在証明には望月の遠アーベル幾何学的手法だけでは不十分</li>
+      <li>幾何学的・算術的対象の「優位性」(primacy) を重視すべき</li>
+    </ol>
+    <p>2024年6月のScholzeとの対話では、「望月は純粋に群論的手法に頼りすぎており、幾何的・算術的対象自体を重視すべきだった」という点で合意した、と Joshi は報告。しかし、Joshi の新しい証明も Scholze を含む専門家を納得させるには至っていない。</p>
+  </div>
+
+  <div class="section">
+    <h2>現在の状況 (2025年時点)</h2>
+    <h3>数学コミュニティの多数意見</h3>
+    <ul>
+      <li><strong>ABC予想はまだ未解決問題</strong>と見なされている</li>
+      <li>望月の論文はPRIMSに掲載されたが、広いコミュニティの合意は得られていない</li>
+      <li>「査読プロセスの失敗」として問題視する声もある（望月が編集長）</li>
+    </ul>
+
+    <h3>日本国内での受容</h3>
+    <ul>
+      <li>一部の数学者（主に望月の共同研究者圏）は証明を受け入れている</li>
+      <li>メディアでは「天才数学者が難問を解決」という文脈で紹介されることが多い</li>
+      <li>論争の詳細が一般に伝わりにくい状況</li>
+    </ul>
+
+    <h3>数学的な教訓</h3>
+    <ul>
+      <li>1000ページ超の証明を検証する困難さ</li>
+      <li>新しい枠組み（既存理論の直接的な延長でない理論）の受容の難しさ</li>
+      <li>査読プロセスの利益相反の問題</li>
+      <li>数学的真理の社会的合意形成のメカニズム</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>関連プロジェクト</h2>
+    <p>系3.12 のギャップを<strong>数学的証明とシミュレーション</strong>で独立に検証するプロジェクトが姉妹プロジェクトとして存在:</p>
+    <ul class="resource-list">
+      <li>
+        <span><a href="../verify-teichmuller-errors/index.html">→ IUT理論の間違い検証 (verify-teichmuller-errors)</a></span>
+        <span class="meta">数学的証明 + p進シミュレーション</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<!-- ======================== 用語集タブ ======================== -->
+<div id="glossary" class="tab-content">
+
+  <div class="section">
+    <h2>基礎的な数学用語</h2>
+    <div class="glossary-grid">
+      <div class="gterm"><span class="term">素数</span><span class="reading">そすう</span><div class="desc">1とそれ自身でしか割り切れない2以上の整数。例: 2, 3, 5, 7, 11...</div></div>
+      <div class="gterm"><span class="term">素因数分解</span><span class="reading">そいんすうぶんかい</span><div class="desc">整数を素数の積として表すこと。例: 12 = 2² × 3</div></div>
+      <div class="gterm"><span class="term">体 (field)</span><span class="reading">たい</span><div class="desc">四則演算ができる数の集合。Q, R, C など</div></div>
+      <div class="gterm"><span class="term">環 (ring)</span><span class="reading">かん</span><div class="desc">足し算と掛け算ができる数の集合。整数 Z が典型例</div></div>
+      <div class="gterm"><span class="term">群 (group)</span><span class="reading">ぐん</span><div class="desc">一つの演算（と逆演算）ができる集合。対称性を記述</div></div>
+      <div class="gterm"><span class="term">圏 (category)</span><span class="reading">けん</span><div class="desc">対象（もの）と射（矢印）の集まり。数学的構造間の関係</div></div>
+      <div class="gterm"><span class="term">同型 (isomorphism)</span><span class="reading">どうけい</span><div class="desc">構造を完全に保つ対応。「同じもの」とみなせる</div></div>
+      <div class="gterm"><span class="term">関手 (functor)</span><span class="reading">かんしゅ</span><div class="desc">圏から圏への「構造を保つ対応」</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>数論・代数幾何の用語</h2>
+    <div class="glossary-grid">
+      <div class="gterm"><span class="term">数体 (number field)</span><div class="desc">有理数 Q に代数的な数を付け加えた体。例: Q(√2)</div></div>
+      <div class="gterm"><span class="term">楕円曲線</span><div class="desc">y² = x³ + ax + b の形の曲線。点同士の「足し算」が定義できる</div></div>
+      <div class="gterm"><span class="term">l-等分点 (l-torsion)</span><div class="desc">楕円曲線上で l 回足すと原点に戻る点</div></div>
+      <div class="gterm"><span class="term">ガロア群</span><div class="desc">体の拡大の対称性を記述する群</div></div>
+      <div class="gterm"><span class="term">基本群</span><div class="desc">空間のループ構造を記述する群。穴の数を代数的に捉える</div></div>
+      <div class="gterm"><span class="term">エタール基本群</span><div class="desc">基本群の代数幾何版。数論的情報を含む</div></div>
+      <div class="gterm"><span class="term">付値 (valuation)</span><div class="desc">数の「大きさ」を測る方法。素数 p ごとに一つ存在</div></div>
+      <div class="gterm"><span class="term">p進数</span><div class="desc">素数 p に基づく距離で完備化した数体系</div></div>
+      <div class="gterm"><span class="term">スキーム</span><div class="desc">代数幾何の基本対象。環から構成される幾何学的空間</div></div>
+      <div class="gterm"><span class="term">良い還元/悪い還元</span><div class="desc">楕円曲線を mod p で見たときの振る舞い</div></div>
+      <div class="gterm"><span class="term">q-パラメータ</span><div class="desc">テート曲線（p進的な楕円曲線）のパラメータ</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>IUT理論固有の用語</h2>
+    <div class="glossary-grid">
+      <div class="gterm"><span class="term">初期シータデータ</span><div class="desc">IUT理論の出発点（楕円曲線、素数 l、付値の集合など）</div></div>
+      <div class="gterm"><span class="term">ホッジシアター</span><div class="desc">スキーム論のミニチュアモデル。足し算と掛け算の対称性を分離して保持</div></div>
+      <div class="gterm"><span class="term">シータリンク (Θ-link)</span><div class="desc">二つのホッジシアターを繋ぐ操作。q^j² → q の対応。環構造を壊す</div></div>
+      <div class="gterm"><span class="term">対数リンク (log-link)</span><div class="desc">p進対数写像を通じてホッジシアターを縦に繋ぐ</div></div>
+      <div class="gterm"><span class="term">対数テータ格子</span><div class="desc">シータリンク（横）と対数リンク（縦）で繋いだ二次元格子</div></div>
+      <div class="gterm"><span class="term">対数殻 (log-shell)</span><div class="desc">p進対数の像を調整した集合。足し算と掛け算を橋渡し</div></div>
+      <div class="gterm"><span class="term">マルチラジアル</span><div class="desc">異なる環構造の視点からも意味をなすアルゴリズム</div></div>
+      <div class="gterm"><span class="term">ユニラジアル</span><div class="desc">一つの環構造の中でだけ意味をなすアルゴリズム</div></div>
+      <div class="gterm"><span class="term">算術的正則構造</span><div class="desc">環構造のこと。複素解析の正則構造の算術版</div></div>
+      <div class="gterm"><span class="term">フロベニオイド</span><div class="desc">数体の掛け算的部分を抽象化した圏論的構造</div></div>
+      <div class="gterm"><span class="term">共役同期</span><div class="desc">異なるl-等分点の局所ガロア群が整合的に同一視されること</div></div>
+      <div class="gterm"><span class="term">不定性 (indeterminacy)</span><div class="desc">マルチラジアル算法適用時に避けられない「ずれ」</div></div>
+      <div class="gterm"><span class="term">LGP-モノイド</span><div class="desc">Logarithmic Gaussian Procession Monoid。対数殻版のガウスモノイド</div></div>
+      <div class="gterm"><span class="term">種 (species)</span><div class="desc">「数学的対象の型」を集合論的公式で形式化したもの</div></div>
+      <div class="gterm"><span class="term">変異 (mutation)</span><div class="desc">種の間の対応。関手の集合論的類似物</div></div>
+      <div class="gterm"><span class="term">核 (core)</span><div class="desc">変異の図式から不変な部分を取り出す操作</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>古典との対応（アナロジー）</h2>
+    <table class="note-table">
+      <thead><tr><th>古典的概念</th><th>IUT での対応物</th><th>共通する本質</th></tr></thead>
+      <tbody>
+        <tr><td>リーマン面</td><td>数体＋楕円曲線</td><td>変形する対象</td></tr>
+        <tr><td>正則構造</td><td>環構造</td><td>保ちたい/変形する構造</td></tr>
+        <tr><td>擬等角変形</td><td>シータリンク</td><td>構造を歪める操作</td></tr>
+        <tr><td>タイヒミューラー空間</td><td>対数テータ格子</td><td>変形のパラメータ空間</td></tr>
+        <tr><td>ガウス分布 e<sup>-x²</sup></td><td>テータ値 q<sup>j²</sup></td><td>二次形式的な構造</td></tr>
+        <tr><td>√π</td><td>ω_E（コタンジェント束）</td><td>変形の「結果」の値</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<!-- ======================== 資料タブ ======================== -->
+<div id="resources" class="tab-content">
+
+  <div class="section">
+    <h2>原論文</h2>
+    <table class="note-table">
+      <thead><tr><th>論文</th><th>頁</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td>IUT I: Construction of Hodge Theaters</td><td>~259</td><td>舞台装置（ホッジシアター）の組み立て</td></tr>
+        <tr><td>IUT II: Hodge-Arakelov-theoretic Evaluation</td><td>~231</td><td>テータ関数の値を正しく計算</td></tr>
+        <tr><td>IUT III: Canonical Splittings of the Log-theta-lattice</td><td>~284</td><td>理論の頂点。格子上のアルゴリズム</td></tr>
+        <tr><td>IUT IV: Log-volume Computations and Set-theoretic Foundations</td><td>~164</td><td>具体的不等式の計算＋基礎論</td></tr>
+        <tr><td>A Panoramic Overview of IUT</td><td>~46</td><td>全体の見取り図</td></tr>
+        <tr><td>Essential Logical Structure of IUT</td><td>~88</td><td>命題論理による骨格</td></tr>
+      </tbody>
+    </table>
+    <p>著者: 望月新一（京都大学RIMS）・出典: <a href="https://www.kurims.kyoto-u.ac.jp/~motizuki/papers-english.html" target="_blank" rel="noopener">RIMS / 望月新一の論文ページ</a></p>
+  </div>
+
+  <div class="section">
+    <h2>解説ノート（縦読み: 論文に沿った解説）</h2>
+    <ul class="resource-list">
+      <li><span><a href="notes/00_overview.md">00_overview.md</a></span><span class="meta">全体概要・読み順</span></li>
+      <li><span><a href="notes/01_abc_conjecture.md">01_abc_conjecture.md</a></span><span class="meta">ABC予想とは（具体例付き）</span></li>
+      <li><span><a href="notes/02_prerequisites.md">02_prerequisites.md</a></span><span class="meta">前提知識マップ（レベル別）</span></li>
+      <li><span><a href="notes/03_classical_teichmuller.md">03_classical_teichmuller.md</a></span><span class="meta">古典的タイヒミューラー理論との対応</span></li>
+      <li><span><a href="notes/04_hodge_theater.md">04_hodge_theater.md</a></span><span class="meta">IUT I: ホッジシアター・二つの対称性</span></li>
+      <li><span><a href="notes/05_theta_link.md">05_theta_link.md</a></span><span class="meta">IUT II: シータリンク・マルチラジアリティ</span></li>
+      <li><span><a href="notes/06_log_theta_lattice.md">06_log_theta_lattice.md</a></span><span class="meta">IUT III: 対数テータ格子・LGPモノイド</span></li>
+      <li><span><a href="notes/07_diophantine_result.md">07_diophantine_result.md</a></span><span class="meta">IUT IV: ディオファンタス不等式・Species</span></li>
+      <li><span><a href="notes/08_controversy.md">08_controversy.md</a></span><span class="meta">論争の経緯（Scholze-Stix, Joshi）</span></li>
+      <li><span><a href="notes/09_glossary.md">09_glossary.md</a></span><span class="meta">用語集</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>解説ノート（横読み: ビュー別の多角的解説）</h2>
+    <ul class="resource-list">
+      <li><span><a href="notes/views/summary_view.md">summary_view.md</a></span><span class="meta">「で、結局何なの？」を30秒/3分/30分で</span></li>
+      <li><span><a href="notes/views/applications_view.md">applications_view.md</a></span><span class="meta">「何ができるの？」帰結と応用の一覧</span></li>
+      <li><span><a href="notes/views/why_view.md">why_view.md</a></span><span class="meta">「なんで？」各段階の動機を10問で</span></li>
+      <li><span><a href="notes/views/rigorous_view.md">rigorous_view.md</a></span><span class="meta">「厳密にはどう？」定義・定理・証明の骨格</span></li>
+      <li><span><a href="notes/views/analogy_view.md">analogy_view.md</a></span><span class="meta">「例えると？」日常の言葉での概念理解</span></li>
+      <li><span><a href="notes/views/history_view.md">history_view.md</a></span><span class="meta">「どこから来た？」時系列と知的系譜</span></li>
+      <li><span><a href="notes/views/open_questions_view.md">open_questions_view.md</a></span><span class="meta">「何がわかっていない？」未解決問題の整理</span></li>
+      <li><span><a href="notes/views/numerical_example_view.md">numerical_example_view.md</a></span><span class="meta">「数値で見せて！」p進数での分離操作</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>一般向け資料</h2>
+    <ul>
+      <li>加藤文元『宇宙と宇宙をつなぐ数学 IUT理論の衝撃』(2019, KADOKAWA)</li>
+      <li>NHKスペシャル「数学者は宇宙をつなげるか？」(2022)</li>
+      <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Inter-universal_Teichm%C3%BCller_theory" target="_blank" rel="noopener">Inter-universal Teichmüller theory</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>論争関連</h2>
+    <ul>
+      <li>Scholze-Stix の報告書: "Why abc is still a conjecture" (2018)</li>
+      <li>望月の反論文書: <a href="https://www.kurims.kyoto-u.ac.jp/~motizuki/" target="_blank" rel="noopener">RIMS ウェブサイト</a></li>
+      <li>Joshi の論文: arXiv 上で公開</li>
+      <li>姉妹プロジェクト: <a href="../verify-teichmuller-errors/index.html">IUT理論の間違い検証</a> — 系3.12 の数学的証明＋シミュレーション</li>
+    </ul>
+  </div>
+
+</div>
+
+</div>
+
+<footer>
+  <p>解説ノート: <a href="notes/00_overview.md">notes/</a> ・ 関連: <a href="../verify-teichmuller-errors/index.html">系3.12の独立検証</a></p>
+  <p style="margin-top: 0.5rem;">Inter-universal Teichmüller Theory by 望月新一 (RIMS, 2012-2024)</p>
+</footer>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('[data-tab="' + id + '"]').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
