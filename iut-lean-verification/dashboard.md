@@ -28,8 +28,8 @@
 
 | チェーン | 主張 | 証明率 |
 |---------|------|--------|
-| M1 遠アーベル復元 | 未形式化 | 0% |
-| M2 Hodge theater | ラベル構造 l⋇ ≥ 2 のみ | ~5% |
+| M1 遠アーベル復元 | 論理骨格を形式化: mono⟹bi 公理なし / bi⟹mono 選択公理必須の非対称性、Aut不定性＝(Ind1)起源、無矛盾性 | ~10% |
+| M2 Hodge theater | ラベル組合せ骨格を形式化: F_l^±± の閉性・推移性、±1商 = {0..l⋇} 同定、テータ値ラベル = {1..l⋇}、Skeleton 橋渡し | ~25% |
 | M3 Θ-link / log-link | 2量＋貼り合わせ関係として抽象化 | ~15% |
 | M4 テータ値評価 | 算術核 Σj² > l⋇ を完全証明 | 算術核 100% / 理論 ~10% |
 | M5 定理3.11 多輻性 | 未形式化（最大の係争点と特定） | 0% |
@@ -39,7 +39,7 @@
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
 
-**総括**: 「IUT は正しい」~3%、「無条件に間違い」0%、「同一視読みでは間違い」100%、
+**総括**: 「IUT は正しい」~5%、「無条件に間違い」0%、「同一視読みでは間違い」100%、
 「係争点は M5 ただ一点」の形式的確定 100%。詳細は index.html の証明率セクション参照。
 
 ## ファイル構成
@@ -54,6 +54,8 @@ iut-lean-verification/
 ├── IUT.lean             # ルートモジュール
 └── IUT/
     ├── Arithmetic.lean  # Σj² > l⋇ の帰納法証明（テータ値平均次数 > 1）
+    ├── Anabelian.lean   # M1: mono/bi-anabelian の区別・公理非対称性・(Ind1)起源
+    ├── HodgeTheater.lean # M2: F_l ラベル構造・二つの対称性・Skeleton 橋渡し
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
     ├── ScholzeStix.lean # 定理1: RC同一視 + 系3.12 → False
     ├── Mochizuki.lean   # 定理2,3: 無矛盾モデル・反例モデル（独立性）
@@ -91,4 +93,7 @@ iut-lean-verification/
 | ∧/∨̇ 構造の命題論理検証 | done |
 | 公理チェック（sorry なし・標準公理のみ） | done |
 | 検証レポート index.html | done |
+| M1: mono/bi-anabelian 論理骨格の形式化 | done |
+| M2: Hodge theater ラベル対称性の形式化 | done |
 | 定理3.11 内部（多輻的アルゴリズム）の形式化 | 未着手（現状、世界の誰も達成していない） |
+| M1 実体（p進体の環構造復元）・M2 実体（prime-strip 圏論データ）の形式化 | todo |

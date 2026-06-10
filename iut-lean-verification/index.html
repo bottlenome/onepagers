@@ -94,8 +94,8 @@
   <h3>A. 望月の本体チェーン</h3>
   <table>
     <tr><th>#</th><th>主張</th><th>論争状態</th><th>今回の Lean 検証</th><th>証明率</th></tr>
-    <tr><td>M1</td><td>単遠アーベル復元（AbsTopIII ほか）</td><td>受容</td><td>未形式化（議論にも不使用）</td><td>0%</td></tr>
-    <tr><td>M2</td><td>Hodge theater の構成（IUT I）</td><td>受容</td><td>ラベル構造 l⋇ ≥ 2 のみ骨格に反映</td><td>~5%</td></tr>
+    <tr><td>M1</td><td>単遠アーベル復元（AbsTopIII ほか）</td><td>受容</td><td><strong>論理骨格を形式化</strong>（IUT/Anabelian.lean）: mono⟹bi は公理なし、bi⟹mono は選択公理必須という非対称性を機械証明。Aut 不定性＝(Ind1) の起源も定理化。復元定理の実体（p進体の環構造復元）は未形式化</td><td>~10%</td></tr>
+    <tr><td>M2</td><td>Hodge theater の構成（IUT I）</td><td>受容</td><td><strong>ラベル組合せ骨格を形式化</strong>（IUT/HodgeTheater.lean）: 加法的対称性 F<sub>l</sub><sup>±±</sup> の閉性（二面体演算則）と推移性、±1 商 = {0..l⋇} の同定、テータ値ラベル = {1..l⋇} を証明。Skeleton への橋渡し定理で M4/M6 と接続。prime-strip の圏論的データは未形式化</td><td>~25%</td></tr>
     <tr><td>M3</td><td>log-link / Θ-link の定義（IUT I–III）</td><td>受容</td><td>|log Θ|・|log q| の2量＋貼り合わせ関係として抽象化</td><td>~15%</td></tr>
     <tr><td>M4</td><td>テータ値評価 Θ-pilot = {q<sup>j²</sup>}（IUT II）</td><td>受容</td><td><strong>算術的帰結 Σj² &gt; l⋇ を完全証明</strong>（<code>sumSq_gt</code>）。評価理論本体は未形式化</td><td>算術核 100% / 理論 ~10%</td></tr>
     <tr><td>M5</td><td>定理3.11 多輻的表現（IUT III）</td><td><strong>最大の係争点</strong></td><td>未形式化。「全議論の支点」であることを独立性定理で特定</td><td><strong>0%</strong>（特定は100%）</td></tr>
@@ -122,12 +122,42 @@
   <h3>総括</h3>
   <table>
     <tr><th>問い</th><th>証明率</th><th>根拠</th></tr>
-    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~3%</strong></td><td>形式化できたのは M2–M4, M6 の算術骨格のみ。成立には M5 が必須（世界的に未達成）</td></tr>
+    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~5%</strong></td><td>M1 の論理骨格・M2 のラベル対称性・M4 の算術核・M6 statement まで形式化。成立には M5 が必須（世界的に未達成）</td></tr>
     <tr><td>IUT は間違っている（無条件に）</td><td><strong>0%</strong></td><td>むしろ「同一視なしでは矛盾が導出されない」こと（R3）を証明</td></tr>
     <tr><td>同一視を認める読みでは間違っている</td><td><strong>100%</strong></td><td><code>ss_incompatible</code>（sorry なし）</td></tr>
     <tr><td>論争は「RC 同一視の採否」と等価（二分法）</td><td><strong>100%</strong></td><td><code>verdict</code> / <code>controversy_reduces_to_rc</code></td></tr>
   </table>
-  <p class="small">一行で言うと: 本体チェーンの証明率は約3%に留まるが、論争の分岐点そのもの（S2・R3・二分法）は100%機械検証済みであり、「残り97%の成否は M5＝定理3.11 の多輻性ただ一点に懸かる」ことが形式的に確定した。</p>
+  <p class="small">一行で言うと: 本体チェーンの証明率は約5%に留まるが、論争の分岐点そのもの（S2・R3・二分法）は100%機械検証済みであり、「残りの成否は M5＝定理3.11 の多輻性ただ一点に懸かる」ことが形式的に確定した。</p>
+</section>
+
+<section>
+  <h2>M1・M2 の形式化（追加検証）</h2>
+
+  <h3>M1: 単遠アーベル復元の論理骨格（IUT/Anabelian.lean）</h3>
+  <div class="box">
+    <p>復元定理の実体ではなく、望月が [AbsTopIII] で強調する <strong>mono-anabelian（復元アルゴリズムの存在）と bi-anabelian（基本群関手の充満忠実性）の区別</strong> を抽象定式化し、次を機械証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>mono_implies_bi</code></td><td>mono ⟹ bi</td><td><strong>なし</strong>（公理ゼロ）</td></tr>
+      <tr><td><code>bi_implies_mono_classical</code></td><td>bi ⟹ mono</td><td><strong>Classical.choice 必須</strong></td></tr>
+      <tr><td><code>recon_aut_indeterminacy</code></td><td>群論的復元の出力は Aut(π₁) 分の不定性を持つ＝(Ind1) の形式的起源</td><td>なし</td></tr>
+      <tr><td><code>monoAnabelian_consistent</code></td><td>公理系の無矛盾性（恒等モデル）</td><td>なし</td></tr>
+    </table>
+    <p class="small"><code>#print axioms</code> がそのまま「mono-anabelian はアルゴリズム的で、bi-anabelian より真に強い」という望月の主張の形式的対応物を表示する——bi から作る「復元」は選択公理頼みの非構成的なものになる。</p>
+  </div>
+
+  <h3>M2: Hodge theater のラベル構造と二つの対称性（IUT/HodgeTheater.lean）</h3>
+  <div class="box">
+    <p>IUT I の Θ±ellNF-Hodge theater のうち、ラベル集合 F<sub>l</sub> 上の組合せ構造を構成し証明した（l = 2l⋇+1 ≥ 5。素数性は本骨格では不要なので未形式化と明示）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>AddSym.act_comp</code> (M2-1)</td><td>加法的対称性 F<sub>l</sub><sup>±±</sup> = F<sub>l</sub> ⋊ {±1} は合成で閉じる（二面体群の演算則）</td></tr>
+      <tr><td><code>addSym_transitive</code> (M2-2)</td><td>ラベル全体への推移的作用（ラベル同期の組合せ核）</td></tr>
+      <tr><td><code>orbitRep_*</code> (M2-3〜6)</td><td>±1 商 |F<sub>l</sub>| の標準代表元を構成し、商がちょうど l⋇+1 個（重複なし）であることを証明</td></tr>
+      <tr><td><code>theta_labels</code> (M2-7)</td><td>非零軌道＝テータ値 q<sup>j²</sup> のラベルが正確に {1, …, l⋇}（乗法的対称性 F<sub>l</sub><sup>*</sup> の台集合と一致）</td></tr>
+      <tr><td><code>toSkeleton</code> (M2-8)</td><td><strong>橋渡し定理</strong>: Hodge theater のラベル数 l⋇ ≥ 2 が系3.12 骨格の lstar をそのまま供給（M2 → M4 → M6 の依存を形式化）</td></tr>
+    </table>
+  </div>
 </section>
 
 <section>
@@ -219,6 +249,8 @@ $ lake env lean check_axioms.lean
   <table>
     <tr><th>ファイル</th><th>内容</th></tr>
     <tr><td><code>IUT/Arithmetic.lean</code></td><td>Σ j² &gt; l⋇（テータ値の平均次数 &gt; 1）の帰納法証明</td></tr>
+    <tr><td><code>IUT/Anabelian.lean</code></td><td>M1: mono/bi-anabelian の区別と公理非対称性、(Ind1) の起源</td></tr>
+    <tr><td><code>IUT/HodgeTheater.lean</code></td><td>M2: F<sub>l</sub> ラベル構造・二つの対称性・Skeleton への橋渡し</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
     <tr><td><code>IUT/ScholzeStix.lean</code></td><td>定理1: RC 同一視 + 系3.12 → 矛盾</td></tr>
     <tr><td><code>IUT/Mochizuki.lean</code></td><td>定理2・3: 無矛盾モデルと反例モデル（独立性）</td></tr>

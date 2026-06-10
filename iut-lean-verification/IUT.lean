@@ -10,3 +10,5 @@ import IUT.ScholzeStix
 import IUT.Mochizuki
 import IUT.Boolean
 import IUT.Verdict
+import IUT.Anabelian
+import IUT.HodgeTheater

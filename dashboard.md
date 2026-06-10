@@ -30,7 +30,7 @@ onepagers/
 | [櫻井政博のゲームデザイン方法論](sakurai-methodology/index.html) | doc | done | YouTube「桜井政博のゲーム作るには」全256話の設計原則まとめ |
 | [宇宙際タイヒミューラー理論](teichmuller/index.html) | doc | done | 望月新一のIUT理論とABC予想を非数学者向けに解説。10タブ構成（概要/なぜ/構造/例え/数値例/応用/歴史/論争/用語集/資料） |
 | [IUT理論の間違い検証](verify-teichmuller-errors/index.html) | doc | wip | IUT III 系3.12の論理的ギャップを数学的証明とシミュレーションで検証 |
-| [IUT 系3.12 の Lean 形式検証](iut-lean-verification/index.html) | doc | done | 原論文PDFを一次資料に論争の形式骨格を Lean 4 で機械検証。Scholze-Stix読みでは矛盾を証明、望月読みでは系3.12が独立命題であることを証明（sorry なし・標準公理のみ） |
+| [IUT 系3.12 の Lean 形式検証](iut-lean-verification/index.html) | doc | done | 原論文PDFを一次資料に論争の形式骨格を Lean 4 で機械検証。Scholze-Stix読みでは矛盾を証明、望月読みでは系3.12が独立命題であることを証明。M1（mono/bi-anabelian の公理非対称性）・M2（Hodge theater ラベル対称性）も形式化済み（sorry なし） |
 | [DDD実践入門](learn-ddd/index.html) | doc | done | ドメイン駆動設計の核心をインタラクティブに学べる実践入門 |
 | [LLMアーキテクチャ比較 2026](llm-architecture/index.html) | doc | wip | 2026年4月時点の主要LLM 18モデルを視覚比較。Attention/MoE/1M長文脈/RLHFを図解 |
 
