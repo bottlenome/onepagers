@@ -14,3 +14,4 @@ import IUT.Anabelian
 import IUT.HodgeTheater
 import IUT.LogThetaLattice
 import IUT.AbcConsequences
+import IUT.Diophantine

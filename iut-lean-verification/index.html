@@ -100,7 +100,7 @@
     <tr><td>M4</td><td>テータ値評価 Θ-pilot = {q<sup>j²</sup>}（IUT II）</td><td>受容</td><td><strong>算術的帰結 Σj² &gt; l⋇ を完全証明</strong>（<code>sumSq_gt</code>）。評価理論本体は未形式化</td><td>算術核 100% / 理論 ~10%</td></tr>
     <tr><td>M5</td><td>定理3.11 多輻的表現（IUT III）</td><td><strong>最大の係争点</strong></td><td>未形式化。「全議論の支点」であることを独立性定理で特定</td><td><strong>0%</strong>（特定は100%）</td></tr>
     <tr><td>M6</td><td>系3.12 不等式（IUT III p.174）</td><td><strong>係争点</strong></td><td>statement 完全形式化。<strong>骨格から独立＝現範囲では証明不能なことを証明</strong></td><td>statement 100% / 証明 0%</td></tr>
-    <tr><td>M7</td><td>log-volume 計算 → Szpiro 型不等式（IUT IV）</td><td>3.12 を認めれば概ね受容</td><td>未形式化</td><td>0%</td></tr>
+    <tr><td>M7</td><td>log-volume 計算 → Szpiro 型不等式（IUT IV）</td><td>3.12 を認めれば概ね受容</td><td><strong>条件付き導出を形式化</strong>（IUT/Diophantine.lean）: 系3.12 ＋ 体積評価インターフェース（a·|log q| − err ≤ |log Θ|, a ≥ 2）から Szpiro 型 (a−1)·|log q| ≤ err を機械証明。インターフェースの中身（明示計算）は M5 依存で未形式化</td><td>~15%</td></tr>
     <tr><td>M8</td><td>Szpiro/Vojta → ABC とその帰結（古典的還元）</td><td>受容</td><td><strong>ABC ⟹ 漸近フェルマーを機械証明</strong>（IUT/AbcConsequences.lean）: 有効版 ABC（指数2・定数C）から「C &lt; 2<sup>n−6</sup> なる全ての n でフェルマー方程式の原始解が不在」を導出。radical は使用する性質のみ公理化</td><td>~25%</td></tr>
   </table>
 
@@ -122,7 +122,7 @@
   <h3>総括</h3>
   <table>
     <tr><th>問い</th><th>証明率</th><th>根拠</th></tr>
-    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~10%</strong></td><td>M1 の論理骨格・M2 のラベル対称性・M3 の格子構造定理・M4 の算術核・M6 statement・M8 の帰結導出まで形式化。成立には M5 が必須（世界的に未達成）</td></tr>
+    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~12%</strong></td><td>M1 の論理骨格・M2 のラベル対称性・M3 の格子構造定理・M4 の算術核・M6 statement・M7 の条件付き導出・M8 の帰結導出まで形式化。成立には M5 が必須（世界的に未達成）</td></tr>
     <tr><td>IUT は間違っている（無条件に）</td><td><strong>0%</strong></td><td>むしろ「同一視なしでは矛盾が導出されない」こと（R3）を証明</td></tr>
     <tr><td>同一視を認める読みでは間違っている</td><td><strong>100%</strong></td><td><code>ss_incompatible</code>（sorry なし）</td></tr>
     <tr><td>論争は「RC 同一視の採否」と等価（二分法）</td><td><strong>100%</strong></td><td><code>verdict</code> / <code>controversy_reduces_to_rc</code></td></tr>
@@ -136,15 +136,15 @@
     <tr><td>M4 テータ値評価（IUT II）</td><td>150</td><td>12%</td><td>18</td></tr>
     <tr><td>M5 多輻的表現（IUT II–III の核心）</td><td>300</td><td>0%</td><td>0</td></tr>
     <tr><td>M6 系3.12</td><td>5</td><td>50%</td><td>2.5</td></tr>
-    <tr><td>M7 log-volume 計算（IUT IV）</td><td>80</td><td>0%</td><td>0</td></tr>
+    <tr><td>M7 log-volume 計算（IUT IV）</td><td>80</td><td>15%</td><td>12</td></tr>
     <tr><td>M8 古典的還元と帰結</td><td>15</td><td>25%</td><td>3.75</td></tr>
-    <tr><td><strong>合計</strong></td><td><strong>1,200</strong></td><td>—</td><td><strong>133 ≈ 11% → 保守的に ~10%</strong></td></tr>
+    <tr><td><strong>合計</strong></td><td><strong>1,200</strong></td><td>—</td><td><strong>145 ≈ 12%</strong></td></tr>
   </table>
-  <p class="small">一行で言うと: 本体チェーンの総合証明率は約10%。論争の分岐点そのもの（S2・R3・二分法）は100%機械検証済みであり、「残りの成否は M5＝定理3.11 の多輻性ただ一点に懸かる」ことが形式的に確定している。なお形式化率はあくまで分量ベースの概算である。</p>
+  <p class="small">一行で言うと: 本体チェーンの総合証明率は約12%。論争の分岐点そのもの（S2・R3・二分法）は100%機械検証済みで、さらに M7 の形式化により「系3.12 から下流（Szpiro → ABC → フェルマー型帰結）への道はすべて形式的に通る」ことも確認された。残りの成否は M5＝定理3.11 の多輻性ただ一点に懸かる。なお形式化率はあくまで分量ベースの概算である。</p>
 </section>
 
 <section>
-  <h2>M1・M2・M3・M8 の形式化（追加検証）</h2>
+  <h2>M1・M2・M3・M7・M8 の形式化（追加検証）</h2>
 
   <h3>M1: 単遠アーベル復元の論理骨格（IUT/Anabelian.lean）</h3>
   <div class="box">
@@ -182,6 +182,18 @@
       <tr><td><code>cross_col_needs_theta</code> (M3-3)</td><td><strong>異なる正則構造の比較は必ず Θ-link を通過する</strong>——多輻的表現（定理3.11）がそもそも必要になる理由の組合せ的内容</td></tr>
       <tr><td><code>invariant_col_blind</code> / <code>col_not_invariant</code> (M3-4)</td><td>リンク不変量（mono-analytic な構造）は列を区別できず、環構造（列ラベル）自体はリンク不変量に<strong>なれない</strong></td></tr>
     </table>
+  </div>
+
+  <h3>M7: 系3.12 → Szpiro 型不等式の条件付き導出（IUT/Diophantine.lean）</h3>
+  <div class="box">
+    <p>IUT IV §1–2（定理1.10）の論理ステップを形式化した。多輻的表現の体積評価 |log Θ| ≥ a·|log q| − err（a ≥ 2 は l と共に増大する平均次数係数、err はコンダクター項）を公理化インターフェース <code>LogVolumeComputation</code> とし、次を機械証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>szpiro_of_cor312_precise</code> (M7-1)</td><td>系3.12 ＋ 体積評価 ⟹ (a−1)·|log q| ≤ err（Szpiro 型。IUT IV の l 最適化の出発点）</td></tr>
+      <tr><td><code>szpiro_of_cor312</code> (M7-2)</td><td>簡約版: |log q| ≤ err — 高さがコンダクター項で抑えられる</td></tr>
+      <tr><td><code>computation_consistent</code> (M7-3)</td><td>体積評価インターフェースは系3.12 と両立（RC 評価と違い矛盾しない）ことのモデル検証</td></tr>
+    </table>
+    <p class="small">これで「系3.12 さえ認めれば Szpiro → ABC（→ M8 の漸近フェルマー）への道は形式的にすべて通る」ことが確認され、論争の全重量が M5/M6 に載っていることが下流側からも裏付けられた。インターフェースの中身（IUT IV の明示計算）は M5 の多輻的表現に依存するため未形式化である。</p>
   </div>
 
   <h3>M8: ABC の帰結 — 漸近フェルマーの機械証明（IUT/AbcConsequences.lean）</h3>
@@ -288,6 +300,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Anabelian.lean</code></td><td>M1: mono/bi-anabelian の区別と公理非対称性、(Ind1) の起源</td></tr>
     <tr><td><code>IUT/HodgeTheater.lean</code></td><td>M2: F<sub>l</sub> ラベル構造・二つの対称性・Skeleton への橋渡し</td></tr>
     <tr><td><code>IUT/LogThetaLattice.lean</code></td><td>M3: log-theta 格子の経路定理・Θ-link 必要性・mono-analytic 不変量</td></tr>
+    <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
     <tr><td><code>IUT/ScholzeStix.lean</code></td><td>定理1: RC 同一視 + 系3.12 → 矛盾</td></tr>

@@ -20,6 +20,8 @@ import IUT
 #print axioms IUT.path_col
 #print axioms IUT.cross_col_needs_theta
 #print axioms IUT.abc_implies_asymptotic_fermat
+#print axioms IUT.szpiro_of_cor312
+#print axioms IUT.szpiro_of_cor312_precise
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
