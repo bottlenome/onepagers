@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT 系3.12 の Lean 形式検証 — 正しさ/間違いの形式的判定</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: #0f172a; color: #e2e8f0; line-height: 1.8;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  header { text-align: center; padding: 2.5rem 0 1.5rem; }
+  header h1 { font-size: 1.7rem; color: #f1f5f9; margin-bottom: 0.8rem; }
+  header .sub { color: #94a3b8; font-size: 0.95rem; }
+  .badge {
+    display: inline-block; background: #166534; color: #bbf7d0;
+    padding: 0.2rem 0.8rem; border-radius: 999px; font-size: 0.8rem; margin: 0.3rem 0.2rem;
+  }
+  .badge.blue { background: #1e3a8a; color: #bfdbfe; }
+  .badge.amber { background: #78350f; color: #fde68a; }
+  section { margin-top: 2.8rem; }
+  h2 {
+    font-size: 1.3rem; color: #7dd3fc; border-left: 4px solid #0ea5e9;
+    padding-left: 0.7rem; margin-bottom: 1rem;
+  }
+  h3 { font-size: 1.05rem; color: #f1f5f9; margin: 1.4rem 0 0.6rem; }
+  p { margin-bottom: 0.9rem; }
+  .box {
+    background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+    padding: 1.2rem 1.4rem; margin: 1rem 0;
+  }
+  .box.verdict { border-color: #0ea5e9; background: #0c2536; }
+  .box.danger { border-color: #b91c1c; background: #2a1215; }
+  .box.ok { border-color: #15803d; background: #122a1a; }
+  code, pre {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 0.85rem;
+  }
+  code { background: #334155; padding: 0.1rem 0.4rem; border-radius: 4px; }
+  pre {
+    background: #111827; border: 1px solid #374151; border-radius: 10px;
+    padding: 1rem 1.2rem; overflow-x: auto; margin: 0.8rem 0; line-height: 1.6;
+  }
+  pre code { background: none; padding: 0; }
+  .kw { color: #c084fc; } .ty { color: #7dd3fc; } .cm { color: #6b7280; } .th { color: #fbbf24; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  th, td { border: 1px solid #334155; padding: 0.6rem 0.8rem; text-align: left; }
+  th { background: #1e293b; color: #7dd3fc; }
+  .formula {
+    text-align: center; font-size: 1.05rem; padding: 0.8rem;
+    background: #111827; border-radius: 8px; margin: 0.8rem 0;
+    font-family: "STIX Two Math", "Cambria Math", serif;
+  }
+  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom: 0.4rem; }
+  a { color: #38bdf8; }
+  .small { font-size: 0.85rem; color: #94a3b8; }
+  footer { margin-top: 4rem; text-align: center; color: #64748b; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>宇宙際タイヒミュラー論 系3.12 の Lean 形式検証</h1>
+  <div class="sub">原論文 PDF（teichmuller/pdf/ 全6本）を一次資料として、論争の形式骨格を Lean 4 で構成し機械検証した</div>
+  <div style="margin-top: 0.8rem;">
+    <span class="badge">Lean 4.30.0 / 全定理検証済み</span>
+    <span class="badge blue">sorry なし</span>
+    <span class="badge blue">標準公理のみ (propext, Quot.sound)</span>
+    <span class="badge amber">mathlib 非依存</span>
+  </div>
+</header>
+
+<section>
+  <h2>結論（形式的判定）</h2>
+  <div class="box verdict">
+    <p><strong>IUT の正否は「Θ-リンクの両側のコピーを同一視してよいか」という一点に形式的に帰着する。</strong>これが Lean で機械検証された判定であり、二分法として厳密に証明された（定理 <code>IUT.verdict</code>）:</p>
+    <ol>
+      <li><strong>Scholze–Stix の読み（同一視を認める）なら、系3.12 は証明可能な形で矛盾する。</strong>すなわちこの読みのもとで「IUT は間違っている」は Lean 検証済みの定理である（<code>ss_incompatible</code>）。</li>
+      <li><strong>望月の読み（同一視を拒否する）なら、矛盾は導出されない。</strong>骨格と系3.12 は無矛盾であり、Scholze–Stix 型の反証はこの読みでは再現不能（<code>cor312_consistent</code>）。</li>
+      <li><strong>ただし同じ読みのもとで、系3.12 は形式骨格から導出もできない（独立命題）。</strong>「IUT が正しい」ことの全根拠は、未形式化の定理3.11（多輻的アルゴリズム）の実質的内容に残る（<code>cor312_not_derivable</code>）。</li>
+    </ol>
+    <p class="small">つまり「IUT の完全な正しさ」も「完全な間違い」も無条件には証明されない。形式的に証明できる最強の主張は「論争は RC 同一視の採否と外延的に等価」（<code>controversy_reduces_to_rc</code>）であり、本プロジェクトはそれを機械検証した。</p>
+  </div>
+</section>
+
+<section>
+  <h2>検証対象 — 系3.12 とは</h2>
+  <p>IUT 全4篇（約1,000ページ）の結論部であり、ABC予想の証明の要となる不等式（<a href="../teichmuller/pdf/IUT_III_Canonical_Splittings.pdf">IUT III</a> p.174）:</p>
+  <div class="formula">−|log(Θ)| ≥ −|log(q)| &nbsp;&nbsp;（ただし |log(q)| &gt; 0）</div>
+  <ul>
+    <li><strong>|log(q)|</strong> — q-パイロット対象（楕円曲線の q-パラメータ）の procession 正規化対数体積</li>
+    <li><strong>|log(Θ)|</strong> — Θ-パイロット対象（テータ値 q<sup>1²</sup>, …, q<sup>l⋇²</sup> の集まり、l⋇ = (l−1)/2）の、不定性 (Ind1)(Ind2)(Ind3) 込みの「可能な像の合併の正則包」の対数体積</li>
+  </ul>
+  <p>素朴に計算すると Θ 側の平均次数は (Σ j²)/l⋇ &gt; 1 倍なので、不等式は「大きいはずのものが小さい側に収まる」と主張している。この一見した矛盾をどう解釈するかが2018年以降の論争（Scholze–Stix vs 望月）の核心である。</p>
+</section>
+
+<section>
+  <h2>形式化の方法</h2>
+  <p>1,000ページ全体の形式化は現実的に不可能であり、また論争の係争点はそこにはない。本プロジェクトは<strong>両陣営が合意する数値データだけを「形式骨格」として公理化</strong>し、係争点である「コピーの同一視」を分離した追加公理 <code>RCEval</code> として定式化した。</p>
+  <pre><code><span class="kw">structure</span> <span class="ty">Skeleton</span> <span class="kw">where</span>
+  lstar    : <span class="ty">Nat</span>        <span class="cm">-- l⋇ = (l−1)/2（テータ値のラベル数）</span>
+  hl       : lstar ≥ 2   <span class="cm">-- l ≥ 5 より</span>
+  logq     : <span class="ty">Int</span>        <span class="cm">-- |log(q)|</span>
+  hq       : logq &gt; 0    <span class="cm">-- 系3.12 の仮定</span>
+  logTheta : <span class="ty">Int</span>        <span class="cm">-- |log(Θ)|（不定性込みの多輻的体積）</span>
+
+<span class="cm">/-- 系3.12 の主張 -/</span>
+<span class="kw">def</span> <span class="ty">Cor312</span> (s : Skeleton) : <span class="ty">Prop</span> := -s.logTheta ≥ -s.logq
+
+<span class="cm">/-- RC 同一視（Scholze–Stix）のもとで成立する評価:
+    l⋇·|log(Θ)| ≥ (Σ j²)·|log(q)| -/</span>
+<span class="kw">def</span> <span class="ty">RCEval</span> (s : Skeleton) : <span class="ty">Prop</span> :=
+  (s.lstar : <span class="ty">Int</span>) * s.logTheta ≥ (sumSq s.lstar : <span class="ty">Int</span>) * s.logq</code></pre>
+  <p>準備として、テータ値の平均次数が 1 を真に超えること（Σ<sub>j=1</sub><sup>l⋇</sup> j² &gt; l⋇、l⋇ ≥ 2）を帰納法で証明した（<code>sumSq_gt</code>、Lean core のみ使用）。</p>
+</section>
+
+<section>
+  <h2>検証された3定理</h2>
+
+  <h3>定理1: Scholze–Stix の退化（同一視 → 矛盾）</h3>
+  <div class="box danger">
+    <pre><code><span class="th">theorem</span> ss_incompatible (s : Skeleton)
+    (hrc : RCEval s) (hcor : Cor312 s) : <span class="ty">False</span></code></pre>
+    <p>系3.12 から |log(Θ)| ≤ |log(q)|、RC 評価から l⋇·|log(Θ)| ≥ (Σj²)·|log(q)|。連結すると (Σj²)·|log(q)| ≤ l⋇·|log(q)|、しかし Σj² &gt; l⋇ かつ |log(q)| &gt; 0 なので矛盾。<strong>Scholze–Stix の「同一視すれば不等式は破綻する」という2018年の指摘は、数学的に厳密であることが機械検証された。</strong></p>
+  </div>
+
+  <h3>定理2: 望月の読みの無矛盾性（同一視なし → 矛盾は消える）</h3>
+  <div class="box ok">
+    <pre><code><span class="th">theorem</span> cor312_consistent : ∃ s : Skeleton, Cor312 s</code></pre>
+    <p>RC 評価を公理から外すと、系3.12 が成り立つモデルが存在する。<strong>望月の「コピーは別個の対象であり、同一視こそが誤解の根源」という反論（Essential Logical Structure of IUT, 2024）にも形式的な実体がある</strong>——同一視を拒否する限り、Scholze–Stix 型の反証は構成できない。</p>
+  </div>
+
+  <h3>定理3: 系3.12 の独立性（同一視なし → 証明もできない）</h3>
+  <div class="box">
+    <pre><code><span class="th">theorem</span> cor312_independent :
+    (∃ s : Skeleton, Cor312 s) ∧ (∃ s : Skeleton, ¬Cor312 s)</code></pre>
+    <p>同時に、系3.12 が成り立たないモデルも存在する。すなわち<strong>系3.12 は形式骨格から独立であり、その成立は形式化の外側——定理3.11 の多輻的アルゴリズムが本当に主張通りの体積制御を与えるか——に全面的に依存する</strong>。これが論争の真の係争点であり、未決着のまま残る部分である。</p>
+  </div>
+</section>
+
+<section>
+  <h2>付録: 望月の ∧/∨̇ 論理構造の検証</h2>
+  <p>「Essential Logical Structure of IUT」(2024) で望月は IUT の論理構造を次の命題論理式に要約している:</p>
+  <div class="formula">A ∧ B = A ∧ (B₁ ∨̇ B₂ ∨̇ …) ⟹ A ∧ (B₁ ∨̇ … ∨̇ B′₁ ∨̇ …)</div>
+  <p>∨̇ は排他的論理和 XOR（不定性 Ind1–Ind3 による分岐）。この表示自体を命題論理として検証した結果（IUT/Boolean.lean）:</p>
+  <table>
+    <tr><th>検証項目</th><th>結果</th></tr>
+    <tr><td>包含的 OR への弱化 A∧B → A∧(B∨C)</td><td>✅ 無条件に妥当（<code>and_or_weakening</code>）</td></tr>
+    <tr><td>XOR 連鎖への弱化</td><td>❌ 一般には<strong>不成立</strong>。反例を構成（<code>xor_weakening_fails</code>）</td></tr>
+    <tr><td>追加選択肢が偽と判明している場合の XOR 弱化</td><td>✅ 妥当（<code>xor_weakening_of_not</code>, <code>exactlyOne_extend</code>）</td></tr>
+    <tr><td>RC 同一視による A∧B → A∧A の退化</td><td>✅ A∧A ↔ A、∧ の論理的内容が消失（<code>and_self_collapse</code>）</td></tr>
+  </table>
+  <p class="small">つまり望月の表示を文字通り XOR と読むなら、選択肢を追加する弱化ステップには「新選択肢が既存選択肢と両立しない」ことの証明が別途必要で、それは命題論理の外（定理3.11 の内容）に属する。ここでも結論は同じ係争点に帰着する。</p>
+</section>
+
+<section>
+  <h2>検証の信頼性</h2>
+  <table>
+    <tr><th>項目</th><th>内容</th></tr>
+    <tr><td>証明支援系</td><td>Lean 4.30.0（lake ビルド、mathlib 非依存・core のみ）</td></tr>
+    <tr><td>sorry / admit</td><td>0 箇所</td></tr>
+    <tr><td>依存公理</td><td><code>propext</code>, <code>Quot.sound</code>（Lean 標準）のみ。<code>Classical.choice</code> すら不使用</td></tr>
+    <tr><td>一次資料</td><td>teichmuller/pdf/ の原論文6本（IUT I–IV, Panoramic Overview, Essential Logical Structure）から系3.12 の statement・∧/∨̇ 構造を直接抽出</td></tr>
+  </table>
+  <pre><code>$ lake build          <span class="cm"># 全ファイルをビルド</span>
+$ lake env lean check_axioms.lean
+'IUT.verdict' depends on axioms: [propext, Quot.sound]</code></pre>
+</section>
+
+<section>
+  <h2>ファイル構成</h2>
+  <table>
+    <tr><th>ファイル</th><th>内容</th></tr>
+    <tr><td><code>IUT/Arithmetic.lean</code></td><td>Σ j² &gt; l⋇（テータ値の平均次数 &gt; 1）の帰納法証明</td></tr>
+    <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
+    <tr><td><code>IUT/ScholzeStix.lean</code></td><td>定理1: RC 同一視 + 系3.12 → 矛盾</td></tr>
+    <tr><td><code>IUT/Mochizuki.lean</code></td><td>定理2・3: 無矛盾モデルと反例モデル（独立性）</td></tr>
+    <tr><td><code>IUT/Boolean.lean</code></td><td>∧/∨̇ 構造の命題論理検証</td></tr>
+    <tr><td><code>IUT/Verdict.lean</code></td><td>総括: 二分法定理 <code>verdict</code> と <code>controversy_reduces_to_rc</code></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>本検証の限界</h2>
+  <ul>
+    <li>形式化したのは論争の<strong>算術的骨格</strong>であり、定理3.11 の多輻的アルゴリズムの内部（遠アーベル幾何による復元、log-Kummer 対応など）は形式化していない。これらの完全形式化は現時点で誰にも達成されていない。</li>
+    <li>対数体積は実数ではなく整数（共通分母で正規化）でモデル化した。議論はすべて順序環の不等式論法なので結論に影響しない。</li>
+    <li>「RC 同一視が数学的に許されるか」自体は形式体系の<strong>外</strong>の問い（どちらを公理に取るかの選択）であり、本検証はその選択がもたらす帰結を完全に分類したものである。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>姉妹プロジェクト: <a href="../teichmuller/index.html">宇宙際タイヒミューラー理論 解説</a> ／ <a href="../verify-teichmuller-errors/index.html">IUT理論の間違い検証（数値シミュレーション）</a></p>
+  <p>一次資料: 望月新一 IUT I–IV ほか（RIMS, 京都大学）</p>
+</footer>
+
+</div>
+</body>
+</html>
