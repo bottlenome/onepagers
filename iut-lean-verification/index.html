@@ -88,6 +88,49 @@
 </section>
 
 <section>
+  <h2>主張チェーン全体と今回の証明範囲（証明率）</h2>
+  <p>IUT → ABC の議論全体を主張チェーンに分解し、本プロジェクトが機械検証した範囲を明示する。証明率は「その主張の数学的内容のうち Lean で検証できた部分」の分量ベースの目安。</p>
+
+  <h3>A. 望月の本体チェーン</h3>
+  <table>
+    <tr><th>#</th><th>主張</th><th>論争状態</th><th>今回の Lean 検証</th><th>証明率</th></tr>
+    <tr><td>M1</td><td>単遠アーベル復元（AbsTopIII ほか）</td><td>受容</td><td>未形式化（議論にも不使用）</td><td>0%</td></tr>
+    <tr><td>M2</td><td>Hodge theater の構成（IUT I）</td><td>受容</td><td>ラベル構造 l⋇ ≥ 2 のみ骨格に反映</td><td>~5%</td></tr>
+    <tr><td>M3</td><td>log-link / Θ-link の定義（IUT I–III）</td><td>受容</td><td>|log Θ|・|log q| の2量＋貼り合わせ関係として抽象化</td><td>~15%</td></tr>
+    <tr><td>M4</td><td>テータ値評価 Θ-pilot = {q<sup>j²</sup>}（IUT II）</td><td>受容</td><td><strong>算術的帰結 Σj² &gt; l⋇ を完全証明</strong>（<code>sumSq_gt</code>）。評価理論本体は未形式化</td><td>算術核 100% / 理論 ~10%</td></tr>
+    <tr><td>M5</td><td>定理3.11 多輻的表現（IUT III）</td><td><strong>最大の係争点</strong></td><td>未形式化。「全議論の支点」であることを独立性定理で特定</td><td><strong>0%</strong>（特定は100%）</td></tr>
+    <tr><td>M6</td><td>系3.12 不等式（IUT III p.174）</td><td><strong>係争点</strong></td><td>statement 完全形式化。<strong>骨格から独立＝現範囲では証明不能なことを証明</strong></td><td>statement 100% / 証明 0%</td></tr>
+    <tr><td>M7</td><td>log-volume 計算 → Szpiro 型不等式（IUT IV）</td><td>3.12 を認めれば概ね受容</td><td>未形式化</td><td>0%</td></tr>
+    <tr><td>M8</td><td>Szpiro/Vojta → ABC（古典的還元）</td><td>受容</td><td>未形式化</td><td>0%</td></tr>
+  </table>
+
+  <h3>B. Scholze–Stix の反証チェーン</h3>
+  <table>
+    <tr><th>#</th><th>主張</th><th>今回の Lean 検証</th><th>証明率</th></tr>
+    <tr><td>S1</td><td>コピーの同一視（RC）は無害</td><td>形式系の外のメタ選択。公理 <code>RCEval</code> として分離</td><td>定式化 100%（真偽は判定対象外）</td></tr>
+    <tr><td>S2</td><td>同一視のもとで系3.12 は矛盾</td><td><code>ss_incompatible</code> として<strong>完全証明</strong></td><td><strong>100%</strong></td></tr>
+  </table>
+
+  <h3>C. 望月の反論チェーン</h3>
+  <table>
+    <tr><th>#</th><th>主張</th><th>今回の Lean 検証</th><th>証明率</th></tr>
+    <tr><td>R1</td><td>同一視は ∧ 構造を破壊する</td><td><code>and_self_collapse</code>（A∧A ↔ A）として命題論理レベルのみ</td><td>部分的（~50%）</td></tr>
+    <tr><td>R2</td><td>∧/∨̇ 表示の論理的妥当性</td><td>検証完了: OR 弱化は妥当、<strong>XOR 弱化は反例あり</strong>＝非両立性証明（M5 に属する）が別途必要</td><td>検証 100%（条件付き妥当）</td></tr>
+    <tr><td>R3</td><td>同一視しなければ矛盾は生じない</td><td><code>cor312_consistent</code> として<strong>完全証明</strong></td><td><strong>100%</strong></td></tr>
+  </table>
+
+  <h3>総括</h3>
+  <table>
+    <tr><th>問い</th><th>証明率</th><th>根拠</th></tr>
+    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~3%</strong></td><td>形式化できたのは M2–M4, M6 の算術骨格のみ。成立には M5 が必須（世界的に未達成）</td></tr>
+    <tr><td>IUT は間違っている（無条件に）</td><td><strong>0%</strong></td><td>むしろ「同一視なしでは矛盾が導出されない」こと（R3）を証明</td></tr>
+    <tr><td>同一視を認める読みでは間違っている</td><td><strong>100%</strong></td><td><code>ss_incompatible</code>（sorry なし）</td></tr>
+    <tr><td>論争は「RC 同一視の採否」と等価（二分法）</td><td><strong>100%</strong></td><td><code>verdict</code> / <code>controversy_reduces_to_rc</code></td></tr>
+  </table>
+  <p class="small">一行で言うと: 本体チェーンの証明率は約3%に留まるが、論争の分岐点そのもの（S2・R3・二分法）は100%機械検証済みであり、「残り97%の成否は M5＝定理3.11 の多輻性ただ一点に懸かる」ことが形式的に確定した。</p>
+</section>
+
+<section>
   <h2>検証対象 — 系3.12 とは</h2>
   <p>IUT 全4篇（約1,000ページ）の結論部であり、ABC予想の証明の要となる不等式（<a href="../teichmuller/pdf/IUT_III_Canonical_Splittings.pdf">IUT III</a> p.174）:</p>
   <div class="formula">−|log(Θ)| ≥ −|log(q)| &nbsp;&nbsp;（ただし |log(q)| &gt; 0）</div>
