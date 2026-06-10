@@ -12,3 +12,5 @@ import IUT.Boolean
 import IUT.Verdict
 import IUT.Anabelian
 import IUT.HodgeTheater
+import IUT.LogThetaLattice
+import IUT.AbcConsequences

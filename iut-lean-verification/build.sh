@@ -17,6 +17,9 @@ import IUT
 #print axioms IUT.bi_implies_mono_classical
 #print axioms IUT.AddSym.act_comp
 #print axioms IUT.theta_labels
+#print axioms IUT.path_col
+#print axioms IUT.cross_col_needs_theta
+#print axioms IUT.abc_implies_asymptotic_fermat
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
