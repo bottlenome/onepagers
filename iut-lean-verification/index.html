@@ -158,7 +158,22 @@
 </section>
 
 <section>
-  <h2>M1〜M20 の形式化（追加検証）</h2>
+  <h2>M1〜M21 の形式化（追加検証）</h2>
+
+  <h3>M21: 抽象 Galois 圏 — 公理系からの一般形（IUT/AbstractGalois.lean）</h3>
+  <div class="box">
+    <p>M20 で具体的モデル上に検証した公理系 G1–G6 を抽象データ構造 <code>GaloisCatData</code> として定式化し、<strong>公理だけから</strong>主定理の抽象的中核を導出した（SGA1 V.4 の一般論の前半）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>prodObj</code> / <code>eqObj</code> / <code>eq_mono</code> (M21-1〜2)</td><td><strong>積とイコライザのファイバー積からの導出</strong>（積 = 終対象上の PB、イコライザ = ⟨f,g⟩ と Δ の PB）とイコライザのモノ性</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>feq_surj</code> (M21-3)</td><td>F はイコライザを保つ（ファイバーの成分計算）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>fiber_faithful</code> (M21-4)</td><td><strong>ファイバー関手の忠実性</strong>——G1+G4+G6 のみからの導出。抽象主定理の第一の柱</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>evaluation_injective</code> (M21-6)</td><td><strong>連結対象からの射はファイバーの一点で決まる</strong>——被覆理論の核心補題の公理からの導出</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>galois_evaluation_bijective</code> (M21-7)</td><td><strong>ガロア対象の自己射群 ≅ ファイバー</strong>——「π₁ の有限レベル = ガロア対象の自己同型群」の抽象形（M14/M20 の Aut(F) ≅ G の公理版）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>gsetGaloisData</code> (M21-8)</td><td><strong>モデルの公理系充足</strong>: G-Set 圏＋忘却関手が全フィールドを満たす（M20 の検証の構造化＝無矛盾性証明）</td><td>標準＋choice（G6 由来）</td></tr>
+    </table>
+    <p class="small">抽象部の6定理が<strong>完全に公理ゼロ</strong>であることは、これらが公理系の純粋な論理的帰結である（モデルにも選択原理にも依存しない）ことの機械的確認である。未形式化: 一般論の後半——十分多くのガロア対象の存在（pro-表現対象）とそれによる抽象圏同値。</p>
+  </div>
 
   <h3>M17: 有限性の本格的定義（IUT/Finiteness.lean）</h3>
   <div class="box">
@@ -520,6 +535,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Compactness.lean</code></td><td>M18: 有限⟹コンパクト・連続像・二項チコノフ（選択公理なし）（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/CategoryTheory.lean</code></td><td>M19: 圏・関手・自然変換・圏同値・G-Set 圏・同値の輸送（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/GaloisAxioms.lean</code></td><td>M20: Galois 圏 G1–G6 全検証・Aut(F) の群化・SGA1 主定理の圏同値（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/AbstractGalois.lean</code></td><td>M21: 抽象 Galois 圏——公理系の構造化と公理のみからの主定理中核（忠実性・evaluation 単射・群復元、公理ゼロ）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

@@ -115,6 +115,14 @@ import IUT
 #print axioms IUT.gsets_G4_forgetful_preserves_pullback
 #print axioms IUT.gsets_G5_forgetful_preserves_sum
 #print axioms IUT.gsets_G6_reflects_iso
+#print axioms IUT.GaloisCatData.eq_mono
+#print axioms IUT.GaloisCatData.feq_surj
+#print axioms IUT.GaloisCatData.fiber_faithful
+#print axioms IUT.GaloisCatData.mono_of_fiber_injective
+#print axioms IUT.GaloisCatData.evaluation_injective
+#print axioms IUT.GaloisCatData.galois_evaluation_bijective
+#print axioms IUT.gsetGaloisData
+#print axioms IUT.galoisCatData_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

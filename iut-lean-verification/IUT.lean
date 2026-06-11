@@ -29,3 +29,4 @@ import IUT.Finiteness
 import IUT.Compactness
 import IUT.CategoryTheory
 import IUT.GaloisAxioms
+import IUT.AbstractGalois
