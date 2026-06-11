@@ -182,6 +182,14 @@ import IUT
 #print axioms IUT.principalUnits_comm
 #print axioms IUT.principal_unit_invertible
 #print axioms IUT.toZp_one_add_principal
+#print axioms IUT.unitFiltration
+#print axioms IUT.unitFiltration_full
+#print axioms IUT.unitFiltration_antitone
+#print axioms IUT.unitFiltration_separated
+#print axioms IUT.levelTheta
+#print axioms IUT.unitTheta_hom
+#print axioms IUT.unitTheta_kernel
+#print axioms IUT.unitTheta_surj
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
