@@ -76,6 +76,22 @@ import IUT
 #print axioms IUT.fiber_functor_recovers_group
 #print axioms IUT.level_transition_equivariant
 #print axioms IUT.galois_closure
+#print axioms IUT.genOpen_minimal
+#print axioms IUT.continuous_into_gen
+#print axioms IUT.limitProj_continuous
+#print axioms IUT.limit_mul_continuous
+#print axioms IUT.limit_inv_continuous
+#print axioms IUT.projKernel_isOpen
+#print axioms IUT.cylinder_nbhd_basis
+#print axioms IUT.projKernel_nbhd
+#print axioms IUT.zhat_proj_surjective
+#print axioms IUT.cosetAction
+#print axioms IUT.orbit_stabilizer
+#print axioms IUT.orbit_transitive
+#print axioms IUT.every_orbit_is_coset
+#print axioms IUT.coset_hom_iff
+#print axioms IUT.levelAction_smooth
+#print axioms IUT.levelAction_stabilizer_open
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

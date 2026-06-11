@@ -158,7 +158,35 @@
 </section>
 
 <section>
-  <h2>M1〜M14 の形式化（追加検証）</h2>
+  <h2>M1〜M16 の形式化（追加検証）</h2>
+
+  <h3>M15: 位相付き副有限群（IUT/Topology.lean）</h3>
+  <div class="box">
+    <p>「実体」建設フェーズの第3弾。位相空間論を自前で建設し（mathlib 非依存）、M13 の逆極限群に副有限位相を与えてその位相的中核を完全証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>continuous_into_gen</code> (M15-1)</td><td>生成位相への連続性は準開基で検査すれば十分（連続性検査の基本補題）。生成位相 <code>GenOpen</code> は帰納的定義、最小性 <code>genOpen_minimal</code> は<strong>公理ゼロ</strong></td><td>標準のみ</td></tr>
+      <tr><td><code>limit_mul_continuous</code> / <code>limit_inv_continuous</code> (M15-3〜4)</td><td><strong>逆極限群は位相群</strong>: 積（直積位相から）と逆元が連続——副有限群の定義の位相的半分が実構成の上で成立</td><td>標準のみ</td></tr>
+      <tr><td><code>projKernel_isOpen</code> ほか (M15-5)</td><td>射影核は<strong>開部分群</strong>（開・1 を含む・積/逆元で閉）</td><td>標準のみ</td></tr>
+      <tr><td><code>cylinder_nbhd_basis</code> / <code>projKernel_nbhd</code> (M15-6)</td><td><strong>近傍基定理</strong>: 開集合は各点で「レベル k での一致」柱状集合を含む（有向性で複数レベルを束ねる）。系: 射影核は単位元の開近傍基——「副有限位相は有限商で決まる」</td><td>標準のみ</td></tr>
+      <tr><td><code>zhat_proj_surjective</code> (M15-7)</td><td>ẑ → ℤ/n の全射性（通常はコンパクト性の帰結。ẑ では完備化写像経由で<strong>構成的に</strong>証明、選択公理不要）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: コンパクト性・Hausdorff 性の一般論（有限集合論のインフラを要する）。</p>
+  </div>
+
+  <h3>M16: SGA1 主定理の核心 — 被覆の分類定理（IUT/SGA1.lean）</h3>
+  <div class="box">
+    <p>「実体」建設フェーズの第4弾。SGA1 の主定理（Galois 圏 ≃ π₁ の連続有限作用の圏）の数学的内容の三本柱を完全証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>cosetAction</code> (M16-2)</td><td>剰余類作用 G/H の構成（剰余類同値が同値関係で左移動と両立することの完全証明）</td><td>標準のみ</td></tr>
+      <tr><td><code>orbit_stabilizer</code> (M16-4)</td><td><strong>軌道-安定化定理（主定理・対象側）</strong>: 推移的 G-集合は G/Stab(x₀) と同変全単射——「全ての連結被覆は G/H の形」</td><td>標準のみ</td></tr>
+      <tr><td><code>every_orbit_is_coset</code> (M16-5)</td><td>軌道分解（<code>orbit_transitive</code>、公理ゼロ）との合成: 任意の G-集合の任意の軌道は剰余類作用に同型——対象の分類が完結</td><td>標準のみ</td></tr>
+      <tr><td><code>coset_hom_iff</code> (M16-6)</td><td><strong>Galois 対応の実現（主定理・射側）</strong>: 基点付き同変写像 G/H → G/K の存在 ⟺ H ⊆ K。M14 の抽象 Galois 接続が実際の部分群で実現される</td><td>標準のみ</td></tr>
+      <tr><td><code>levelAction_smooth</code> / <code>levelAction_stabilizer_open</code> (M16-7〜8)</td><td>SGA1 の<strong>連続作用条件</strong>: 有限レベル作用の安定化群は開部分群（M15 の射影核）を含む（M15 + M16 接続）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: Galois 圏の公理系 G1–G6 と圏同値の関手的パッケージング。残る実質は「双曲的曲線の有限 étale 被覆の圏が Galois 圏をなす」という幾何的入力。M15/M16 とも Classical.choice 不使用。</p>
+  </div>
 
   <h3>M13: 副有限群 — 逆極限と ẑ の実構成（IUT/Profinite.lean）</h3>
   <div class="box">
@@ -445,6 +473,8 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Frobenioid.lean</code></td><td>M12: Frobenioid 次数層（Frobenius 非可逆性・Gaussian 束次数・次数＝log-volume ⟹ vol_q 供給）</td></tr>
     <tr><td><code>IUT/Profinite.lean</code></td><td>M13: 商群・逆極限の普遍性・ẑ = lim ℤ/n の実構成・残余有限性（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/GaloisCategory.lean</code></td><td>M14: ファイバー関手の復元機構 Aut(F) ≅ G・π₁^ét の自然作用・Galois 接続（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/Topology.lean</code></td><td>M15: 位相の自前建設・逆極限群は位相群・射影核 = 単位元の開近傍基（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/SGA1.lean</code></td><td>M16: 軌道-安定化定理（連結被覆 ≅ G/H）・Galois 対応の実現・SGA1 連続作用条件（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

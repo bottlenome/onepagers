@@ -23,3 +23,5 @@ import IUT.EtaleTheta
 import IUT.Frobenioid
 import IUT.Profinite
 import IUT.GaloisCategory
+import IUT.Topology
+import IUT.SGA1
