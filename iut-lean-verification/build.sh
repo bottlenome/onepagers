@@ -28,6 +28,13 @@ import IUT
 #print axioms IUT.multiradial_consistent
 #print axioms IUT.gaussian_obstruction
 #print axioms IUT.szpiro_of_multiradial
+#print axioms IUT.recon_log_compat
+#print axioms IUT.addSym_inverse
+#print axioms IUT.bicoric_constant
+#print axioms IUT.theta_value_pm_symmetry
+#print axioms IUT.two_mul_procTotal
+#print axioms IUT.height_bounded_of_uniform_szpiro
+#print axioms IUT.abc_bounds_catalan23
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

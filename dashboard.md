@@ -30,7 +30,7 @@ onepagers/
 | [櫻井政博のゲームデザイン方法論](sakurai-methodology/index.html) | doc | done | YouTube「桜井政博のゲーム作るには」全256話の設計原則まとめ |
 | [宇宙際タイヒミューラー理論](teichmuller/index.html) | doc | done | 望月新一のIUT理論とABC予想を非数学者向けに解説。10タブ構成（概要/なぜ/構造/例え/数値例/応用/歴史/論争/用語集/資料） |
 | [IUT理論の間違い検証](verify-teichmuller-errors/index.html) | doc | wip | IUT III 系3.12の論理的ギャップを数学的証明とシミュレーションで検証 |
-| [IUT 系3.12 の Lean 形式検証](iut-lean-verification/index.html) | doc | done | 原論文PDFを一次資料に論争の形式骨格を Lean 4 で機械検証（総合証明率 ~19%）。定理3.11 の出力仕様を原文から形式化し系3.12 の証明本体を公理ゼロで機械化。「仕様充足→系3.12→Szpiro→ABC型帰結」の全経路接続済み。残る未形式化は定理3.11 の構成ただ一点（sorry なし） |
+| [IUT 系3.12 の Lean 形式検証](iut-lean-verification/index.html) | doc | done | 原論文PDFを一次資料に論争の形式骨格を Lean 4 で機械検証（総合証明率: ページ重み ~26% / 主張平均 ~37%）。定理3.11 の出力仕様を原文から形式化し系3.12 の証明本体を公理ゼロで機械化。コア性・群構造・l-最適化含め「仕様充足→系3.12→Szpiro→ABC型帰結」の全経路接続済み。残る未形式化は定理3.11 の構成ただ一点（sorry なし） |
 | [DDD実践入門](learn-ddd/index.html) | doc | done | ドメイン駆動設計の核心をインタラクティブに学べる実践入門 |
 | [LLMアーキテクチャ比較 2026](llm-architecture/index.html) | doc | wip | 2026年4月時点の主要LLM 18モデルを視覚比較。Attention/MoE/1M長文脈/RLHFを図解 |
 

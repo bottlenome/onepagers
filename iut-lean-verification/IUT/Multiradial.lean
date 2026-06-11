@@ -196,6 +196,42 @@ theorem multiradial_consistent :
        vol_hull := rfl,
        vol_q := rfl }⟩⟩
 
+/-! ## Procession の正規化簿記（IUT III Prop 3.1–3.2, Remark 3.1.1）
+
+定理3.11 (i) の多輻的表現は prime-strip の **procession**
+{0} ↪ {0,1} ↪ … ↪ {0,…,l⋇} の上に構成され、log-volume は
+各段のテンソル因子数 j+1 で正規化される（procession-normalized）。
+その組合せ簿記を形式化する。 -/
+
+/-- procession の総段数重み: `procTotal L = Σ_{j=0}^{L} (j+1)`
+    （第 j 段は j+1 個の prime-strip からなる）。 -/
+def procTotal : Nat → Nat
+  | 0 => 1
+  | n + 1 => procTotal n + (n + 2)
+
+/-- **定理 (M5-6): procession 重みの閉形式** —
+    2·Σ_{j=0}^{L}(j+1) = (L+1)(L+2)。procession 正規化の分母
+    （Remark 3.1.1 の平均化）の正確な値。 -/
+theorem two_mul_procTotal (L : Nat) :
+    2 * procTotal L = (L + 1) * (L + 2) := by
+  induction L with
+  | zero => rfl
+  | succ n ih =>
+    have h1 : (n + 2) * (n + 3) = (n + 2) * (n + 2) + (n + 2) :=
+      Nat.mul_succ (n + 2) (n + 2)
+    have h2 : (n + 2) * (n + 2) = (n + 1) * (n + 2) + (n + 2) :=
+      Nat.succ_mul (n + 1) (n + 2)
+    show 2 * (procTotal n + (n + 2)) = (n + 2) * (n + 3)
+    rw [Nat.mul_add, ih, h1, h2, Nat.two_mul, ← Nat.add_assoc]
+
+/-- procession は空でない（正規化が well-defined）。 -/
+theorem procTotal_pos (L : Nat) : 0 < procTotal L := by
+  induction L with
+  | zero => exact Nat.one_pos
+  | succ n ih =>
+    show 0 < procTotal n + (n + 2)
+    omega
+
 /-- **定理 (M5-5): 完全パイプライン** — 定理3.11 インターフェース
     ＋ IUT IV の体積計算 ⟹ Szpiro 型不等式。
 

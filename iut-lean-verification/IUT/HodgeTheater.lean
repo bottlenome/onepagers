@@ -131,6 +131,39 @@ theorem addSym_transitive {l : Nat} (hl : 0 < l) {j k : Nat} (hj : j < l) (hk : 
   repeat' split
   all_goals omega
 
+/-- 恒等対称性。 -/
+def AddSym.one (l : Nat) (hl : 0 < l) : AddSym l := ⟨false, 0, hl⟩
+
+/-- **定理 (M2-9): 単位元** — 恒等対称性は何も動かさない。 -/
+theorem AddSym.one_act {l : Nat} (hl : 0 < l) {x : Nat} (hx : x < l) :
+    (AddSym.one l hl).act x = x := by
+  show addMod l 0 x = x
+  unfold addMod
+  split <;> omega
+
+/-- **定理 (M2-10): 逆元の存在** — 各対称性は可逆。M2-1（閉性）・
+    M2-9（単位元）と合わせて **F_l^±± が群をなす** ことの組合せ的
+    内容が完結する（平行移動の逆は逆向き平行移動、反転付き対称性は
+    自己逆＝二面体群の標準的構造）。 -/
+theorem addSym_inverse {l : Nat} (hl : 0 < l) (s : AddSym l) :
+    ∃ t : AddSym l, ∀ x, x < l → t.act (s.act x) = x := by
+  obtain ⟨sf, sa, hsa⟩ := s
+  cases sf
+  · -- 平行移動 x ↦ sa + x の逆は x ↦ (−sa) + x
+    refine ⟨⟨false, negMod l sa, negMod_lt hl hsa⟩, ?_⟩
+    intro x hx
+    show addMod l (negMod l sa) (addMod l sa x) = x
+    unfold addMod negMod
+    repeat' split
+    all_goals omega
+  · -- 反転付き x ↦ sa − x は自己逆
+    refine ⟨⟨true, sa, hsa⟩, ?_⟩
+    intro x hx
+    show addMod l sa (negMod l (addMod l sa (negMod l x))) = x
+    unfold addMod negMod
+    repeat' split
+    all_goals omega
+
 /-! ## ±1 商: |F_l| = {0, …, l⋇} とテータ値ラベル {1, …, l⋇} -/
 
 /-- {±1} 軌道の標準代表元: min(j, l−j) ∈ {0, …, l⋇}。 -/

@@ -109,4 +109,79 @@ theorem col_not_invariant : ¬LinkInvariant LatticeSite.col := by
 example : Path 1 ⟨0, 0⟩ (⟨1, 2⟩ : LatticeSite) :=
   Path.log 0 0 (Path.theta 0 1 (Path.log 1 1 (Path.nil _)))
 
+/-! ## コア性（coricity）: IUT III 定理1.5 の骨格
+
+「垂直コア性」= log-link で不変なデータは各列（一つの数論的
+正則構造）の内部で一定であり、その列の **コア** をなす。
+「双コア性」= log-link と Θ-link の両方で不変なデータ
+（mono-analytic core）は格子全体で一意である。 -/
+
+/-- log-link 不変量（垂直方向のみの不変性）。 -/
+def LogInvariant {α : Type} (f : LatticeSite → α) : Prop :=
+  ∀ n m : Int, f ⟨n, m⟩ = f ⟨n, m + 1⟩
+
+/-- **定理 (M3-5): 垂直コア性**（定理1.5 (i) の骨格）—
+    log-link 不変量は各列の内部で一定。すなわち一つの数論的
+    正則構造に属する Hodge theater たちは共通の「コア」を持つ。 -/
+theorem vertical_coricity {α : Type} {f : LatticeSite → α}
+    (h : LogInvariant f) : ∀ n m : Int, f ⟨n, m⟩ = f ⟨n, 0⟩ := by
+  have up : ∀ (n : Int) (k : Nat), f ⟨n, (k : Int)⟩ = f ⟨n, 0⟩ := by
+    intro n k
+    induction k with
+    | zero => rfl
+    | succ k ih =>
+      rw [show ((k + 1 : Nat) : Int) = (k : Int) + 1 by omega, ← h n (k : Int)]
+      exact ih
+  have down : ∀ (n : Int) (k : Nat), f ⟨n, -(k : Int)⟩ = f ⟨n, 0⟩ := by
+    intro n k
+    induction k with
+    | zero => simp
+    | succ k ih =>
+      rw [h n (-((k + 1 : Nat) : Int)),
+          show (-((k + 1 : Nat) : Int) + 1) = -(k : Int) by omega]
+      exact ih
+  intro n m
+  rcases Int.le_total 0 m with hm | hm
+  · rw [show m = ((m.toNat : Nat) : Int) by omega]
+    exact up n m.toNat
+  · rw [show m = -(((-m).toNat : Nat) : Int) by omega]
+    exact down n (-m).toNat
+
+/-- **定理 (M3-6): 双コア性**（定理1.5 (iii) の骨格）—
+    log-link と Θ-link の両方で不変なデータ（mono-analytic core、
+    例えば F⊢×μ-prime-strip の同型類）は格子全体で一意である。
+    Θ-link をまたいで「共有」できる構造の一意性の形式化。 -/
+theorem bicoric_constant {α : Type} {f : LatticeSite → α}
+    (h : LinkInvariant f) : ∀ s t : LatticeSite, f s = f t := by
+  have hlog : LogInvariant f := fun n m => h _ _ (Link.log n m)
+  have hcol : ∀ n : Int, f ⟨n, 0⟩ = f ⟨n + 1, 0⟩ :=
+    fun n => h _ _ (Link.theta n 0)
+  have hup : ∀ k : Nat, f ⟨(k : Int), 0⟩ = f ⟨0, 0⟩ := by
+    intro k
+    induction k with
+    | zero => rfl
+    | succ k ih =>
+      rw [show ((k + 1 : Nat) : Int) = (k : Int) + 1 by omega, ← hcol (k : Int)]
+      exact ih
+  have hdown : ∀ k : Nat, f ⟨-(k : Int), 0⟩ = f ⟨0, 0⟩ := by
+    intro k
+    induction k with
+    | zero => simp
+    | succ k ih =>
+      rw [hcol (-((k + 1 : Nat) : Int)),
+          show (-((k + 1 : Nat) : Int) + 1) = -(k : Int) by omega]
+      exact ih
+  have horiz : ∀ n : Int, f ⟨n, 0⟩ = f ⟨0, 0⟩ := by
+    intro n
+    rcases Int.le_total 0 n with hn | hn
+    · rw [show n = ((n.toNat : Nat) : Int) by omega]
+      exact hup n.toNat
+    · rw [show n = -(((-n).toNat : Nat) : Int) by omega]
+      exact hdown (-n).toNat
+  intro s t
+  obtain ⟨n, m⟩ := s
+  obtain ⟨n', m'⟩ := t
+  rw [vertical_coricity hlog n m, vertical_coricity hlog n' m',
+      horiz n, horiz n']
+
 end IUT

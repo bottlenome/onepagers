@@ -102,6 +102,32 @@ def mkComputation (s : Skeleton) (a err : Int)
     (hbound : s.logTheta ≥ a * s.logq - err) : LogVolumeComputation s :=
   { a := a, err := err, ha := ha, herr := herr, bound := hbound }
 
+/-- **定理 (M4-7): テータ値の ±対称性** — 代数恒等式
+    (l−j)² = j² + l·(l−2j)。したがって (l−j)² ≡ j² (mod l)、
+    すなわちテータ値 q^{(l−j)²} と q^{j²} は q^l の冪を除いて
+    一致する。テータ値が |F_l| = F_l/{±1} のラベル（M2 の
+    `orbitRep`）の上で well-defined であること——IUT II の
+    F_l^±±-対称性とガロア評価の整合性——の値論的内容。 -/
+theorem theta_value_pm_symmetry (l j : Int) :
+    (l - j) * (l - j) = j * j + l * (l - 2 * j) := by
+  have e1 : (l - j) * (l - j) = l * (l - j) - j * (l - j) := Int.sub_mul l j (l - j)
+  have e2 : l * (l - j) = l * l - l * j := Int.mul_sub l l j
+  have e3 : j * (l - j) = j * l - j * j := Int.mul_sub j l j
+  have e4 : l * (l - 2 * j) = l * l - l * (2 * j) := Int.mul_sub l l (2 * j)
+  have e5 : l * (2 * j) = 2 * (l * j) := by
+    rw [Int.mul_comm l (2 * j), Int.mul_assoc, Int.mul_comm j l]
+  have e6 : j * l = l * j := Int.mul_comm j l
+  rw [e1, e2, e3, e4, e5, e6]
+  generalize l * l = P
+  generalize l * j = Q
+  generalize j * j = S
+  omega
+
+/-- 系: テータ値のラベル well-defined 性の mod 表示。 -/
+theorem theta_value_mod (l j : Int) :
+    ∃ k : Int, (l - j) * (l - j) = j * j + l * k :=
+  ⟨l - 2 * j, theta_value_pm_symmetry l j⟩
+
 /-- **整合性 (M4-6)**: 膨張込み評価は充足可能（モデル検証）。
     `computation_consistent`（M7-3）と合わせて、評価理論の
     両側の読みのうち矛盾を生むのは素朴側のみであることを確認。 -/

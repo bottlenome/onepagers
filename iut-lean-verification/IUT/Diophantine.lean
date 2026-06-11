@@ -90,6 +90,48 @@ theorem szpiro_of_cor312 (s : Skeleton) (hcor : Cor312 s)
   rw [Int.one_mul] at h3
   exact Int.le_trans h3 hp
 
+/-- **定理 (M7-4): l-最適化**（IUT IV 定理1.10 の質的内容）。
+
+    IUT IV では Szpiro 型不等式 (l−1)·ht ≤ c·l + d が
+    **すべての（十分大きな）素数 l について** 成り立つことを使い、
+    l を高さに応じて最適に選ぶことで ε 付きの絶対的な高さ上界を
+    得る。その論理を形式化する: もし全ての l ≥ 2 について
+    (l−1)·ht ≤ c·l + d ならば ht ≤ c。
+
+    証明: ht ≥ c+1 と仮定すると (l−1)(ht−c) ≤ c+d が全ての l で
+    成り立つはずだが、l−1 = c+d+1 と取ると矛盾。すなわち
+    「l を動かせる」ことが高さの絶対上界に変換される——
+    これが IUT で l を走らせる理由の形式的内容である。 -/
+theorem height_bounded_of_uniform_szpiro (ht c d : Int)
+    (hc : c ≥ 0) (hd : d ≥ 0)
+    (h : ∀ l : Int, l ≥ 2 → (l - 1) * ht ≤ c * l + d) :
+    ht ≤ c := by
+  rcases Int.lt_or_le c ht with hlt | hle
+  · -- ht ≥ c+1 として l = c+d+2 で矛盾を導く
+    exfalso
+    have hL := h (c + d + 2) (by omega)
+    -- (c+d+1)·ht ≥ (c+d+1)·(c+1)
+    have hlow : (c + d + 1) * (c + 1) ≤ (c + d + 1) * ht :=
+      Int.mul_le_mul_of_nonneg_left (by omega) (by omega)
+    have hcomb : (c + d + 1) * (c + 1) ≤ c * (c + d + 2) + d := by
+      have e0 : (c + d + 2 - 1) = c + d + 1 := by omega
+      rw [e0] at hL
+      omega
+    -- 両辺を展開して矛盾（アトム c·c, d·c の線形算術）
+    have e1 : (c + d + 1) * (c + 1) = (c + d + 1) * c + (c + d + 1) := by
+      rw [Int.mul_add, Int.mul_one]
+    have e2 : (c + d + 1) * c = c * c + d * c + c := by
+      rw [Int.add_mul, Int.add_mul, Int.one_mul]
+    have e3 : c * (c + d + 2) = c * c + c * d + c * 2 := by
+      rw [Int.mul_add, Int.mul_add]
+    have e4 : c * d = d * c := Int.mul_comm c d
+    rw [e1, e2] at hcomb
+    rw [e3, e4] at hcomb
+    generalize c * c = P at hcomb
+    generalize d * c = Q at hcomb
+    omega
+  · exact hle
+
 /-- **整合性チェック (M7-3)**: 計算インターフェースは系3.12 と
     両立する（SS 読みの RCEval と違って矛盾を生まない）。
     モデル: logq = 1, logTheta = 1, a = 2, err = 1 で

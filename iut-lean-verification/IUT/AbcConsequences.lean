@@ -120,6 +120,39 @@ theorem abc_implies_asymptotic_fermat
   have hpow2 : 2 ^ (n - 6) ≤ z ^ (n - 6) := Nat.pow_le_pow_left hz (n - 6)
   omega
 
+/-- **定理 (M8-2): ABC ⟹ Catalan 型方程式の有界性**。
+    有効版 ABC のもとで、3^b + 1 = 2^a 型の冪の衝突
+    （Catalan/Pillai 型方程式）の解は 2^a ≤ 36·C に抑えられる
+    （radical(1 · 3^b · 2^a) ≤ 6 のため）。
+    ABC が「冪同士は滅多に隣り合えない」ことを一律に支配する
+    ことの最小の実例。 -/
+theorem abc_bounds_catalan23 (R : RadicalAxioms) (C : Nat) (habc : ABC R C)
+    {a b : Nat} (ha : 0 < a) (hb : 0 < b)
+    (heq : 3 ^ b + 1 = 2 ^ a) : 2 ^ a ≤ C * 36 := by
+  have h3 : (0 : Nat) < 3 ^ b := Nat.pow_pos (by omega)
+  have h2 : (0 : Nat) < 2 ^ a := Nat.pow_pos (by omega)
+  -- ABC を 1 + 3^b = 2^a に適用
+  have hbound : 2 ^ a ≤ C * R.rad (1 * 3 ^ b * 2 ^ a) ^ 2 :=
+    habc 1 (3 ^ b) (2 ^ a) (by omega) h3 (Nat.gcd_one_left _) (by omega)
+  -- radical の評価: rad(1·3^b·2^a) ≤ 1·3·2 = 6
+  have hr1 : R.rad 1 ≤ 1 := R.rad_le (by omega)
+  have hr3 : R.rad (3 ^ b) ≤ 3 :=
+    Nat.le_trans (R.rad_pow_le b (by omega)) (R.rad_le (by omega))
+  have hr2 : R.rad (2 ^ a) ≤ 2 :=
+    Nat.le_trans (R.rad_pow_le a (by omega)) (R.rad_le (by omega))
+  have hrad : R.rad (1 * 3 ^ b * 2 ^ a) ≤ 6 :=
+    Nat.le_trans (R.rad_mul_le _ _)
+      (Nat.le_trans
+        (Nat.mul_le_mul (Nat.le_trans (R.rad_mul_le _ _)
+          (Nat.mul_le_mul hr1 hr3)) hr2) (by omega))
+  -- rad² ≤ 36
+  have hsq : R.rad (1 * 3 ^ b * 2 ^ a) ^ 2 ≤ 36 := by
+    have h := Nat.pow_le_pow_left hrad 2
+    have h36 : (6 : Nat) ^ 2 = 36 := rfl
+    rw [h36] at h
+    exact h
+  exact Nat.le_trans hbound (Nat.mul_le_mul_left C hsq)
+
 /-- 公理系の無矛盾性: 定数関数 rad ≡ 1 は `RadicalAxioms` を満たす
     （このモデルでは ABC の **仮定** が満たせなくなるだけで、
     公理系そのものは無矛盾であることが分かる）。 -/

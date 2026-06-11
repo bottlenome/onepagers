@@ -157,4 +157,53 @@ def identityModel : ReconSetting where
 theorem monoAnabelian_consistent : MonoAnabelian identityModel :=
   ⟨id, fun _ => rfl, fun h => h⟩
 
+/-! ## log-Frobenius 両立性（[AbsTopIII] 定理3.11 の骨格）
+
+[AbsTopIII] の表題定理（mono-anabelian log-Frobenius compatibility）は
+「復元アルゴリズムは log-Frobenius 操作と両立する形で実行できる」
+と主張する。これが IUT の log-link（M3 の垂直射）に沿って復元を
+持ち運ぶことを正当化し、log-Kummer 対応（定理3.11 (ii)）の
+前提となる。その骨格を形式化する。 -/
+
+/-- log 操作付きの復元設定: 体側の log 操作 `logF`、群側の対応物
+    `logG`、および π との両立 `pi_log`。 -/
+structure LogReconSetting extends ReconSetting where
+  logF : F → F
+  logG : G → G
+  pi_log : ∀ X, isoG (pi (logF X)) (logG (pi X))
+  logG_congr : ∀ {g h}, isoG g h → isoG (logG g) (logG h)
+
+/-- 反復適用。 -/
+def iterate {α : Type} (f : α → α) : Nat → α → α
+  | 0, x => x
+  | k + 1, x => f (iterate f k x)
+
+/-- 補題: π は log の反復とも両立する。 -/
+theorem pi_log_iter (S : LogReconSetting) (X : S.F) :
+    ∀ k : Nat, S.isoG (S.pi (iterate S.logF k X)) (iterate S.logG k (S.pi X)) := by
+  intro k
+  induction k with
+  | zero => exact S.isoG_refl _
+  | succ k ih =>
+    exact S.isoG_trans (S.pi_log (iterate S.logF k X)) (S.logG_congr ih)
+
+/-- **定理 (M1-6): log-Frobenius 両立復元**（[AbsTopIII] 定理3.11 の
+    骨格）。mono-anabelian 復元は log の任意回の反復と両立する:
+
+        recon(logG^k(π X)) ≅ logF^k(X)
+
+    すなわち群側で log-鎖をいくら下っても、復元結果は体側の
+    log-鎖と同型を除いて一致する。これが log-Kummer 対応
+    （IUT III 定理3.11 (ii)）で復元を log-link の列に沿って
+    使うことの形式的正当化である。 -/
+theorem recon_log_compat (S : LogReconSetting)
+    (recon : S.G → S.F)
+    (hpi : ∀ X, S.isoF (recon (S.pi X)) X)
+    (hcongr : ∀ {g h}, S.isoG g h → S.isoF (recon g) (recon h)) :
+    ∀ (X : S.F) (k : Nat),
+      S.isoF (recon (iterate S.logG k (S.pi X))) (iterate S.logF k X) :=
+  fun X k =>
+    S.isoF_trans (hcongr (S.isoG_symm (pi_log_iter S X k)))
+      (hpi (iterate S.logF k X))
+
 end IUT
