@@ -30,3 +30,4 @@ import IUT.Compactness
 import IUT.CategoryTheory
 import IUT.GaloisAxioms
 import IUT.AbstractGalois
+import IUT.SGA1Completion

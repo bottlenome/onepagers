@@ -158,7 +158,24 @@
 </section>
 
 <section>
-  <h2>M1〜M21 の形式化（追加検証）</h2>
+  <h2>M1〜M22 の形式化（追加検証）</h2>
+
+  <h3>M22: SGA1 主定理の抽象完成 — 比較関手の充満忠実性（IUT/SGA1Completion.lean）</h3>
+  <div class="box">
+    <p>主定理の<strong>射レベルを完成</strong>: ガロア対象 A に対する比較関手 Hom(A,−) : C → Aut(A)-Set を抽象構成し、連結分裂対象の上で<strong>充満忠実</strong>であることを公理から証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>CatIso.ext</code> / <code>autGrp</code> (M22-1)</td><td>同型射の外延性（逆は順で決まる）と<strong>自己同型群の群化</strong>（逆をデータに持つ CatIso が台。選択公理なし）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>homFunctor</code> (M22-2)</td><td><strong>比較関手の抽象構成</strong> Hom(A,−) : C → Aut(A)-Set（前合成作用・後合成射・関手性）——SGA1 主定理の関手そのもの</td><td>標準のみ</td></tr>
+      <tr><td><code>homFunctor_faithful</code> (M22-3)</td><td>分裂対象上の<strong>忠実性</strong></td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>connected_hom_surjective</code> / <code>split_connected_transitive</code> (M22-4)</td><td>連結対象への射はファイバー全射（像分解＋連結性）⟹ <strong>Hom(A,X) は Aut(A) の単一軌道</strong></td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>DescentData</code> (M22-5)</td><td>G3 の「強さ」: <strong>像エピに沿った降下</strong>（核対を等化する射は像を経由）を公理データ化——SGA1 の strict epi の内容</td><td>—</td></tr>
+      <tr><td><code>homFunctor_full</code> (M22-6)</td><td><strong>充満性</strong>: 同変写像 φ : Hom(A,X) → Hom(A,Y) は必ず後合成 (−;f)。降下＋「核対の二点はデッキ変換で移り合い evaluation 単射性で σ∘u₀ = u₀」＋軌道推移性による古典的証明の完全機械化</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>sga1_fully_faithful</code> (M22-7)</td><td><strong>SGA1 主定理・射レベルの完成</strong>: 比較関手は連結分裂対象上で充満忠実</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>gsetDescentData</code> (M22-8)</td><td>モデルは降下公理も充足（降下射の構成に Classical.choice——G6 と並ぶ選択原理の所在）</td><td>choice</td></tr>
+    </table>
+    <p class="small">これで SGA1 主定理は「モデル（G-Set 圏）で圏同値まで完成（M20-9）＋抽象（公理系から）で射レベル完全・対象レベルは軌道分類（M16-5 適用）まで」の形で完成。残るは対象レベルの本質的全射性（商公理 G2 後半と pro-対象を要する）。</p>
+  </div>
 
   <h3>M21: 抽象 Galois 圏 — 公理系からの一般形（IUT/AbstractGalois.lean）</h3>
   <div class="box">
@@ -536,6 +553,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/CategoryTheory.lean</code></td><td>M19: 圏・関手・自然変換・圏同値・G-Set 圏・同値の輸送（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/GaloisAxioms.lean</code></td><td>M20: Galois 圏 G1–G6 全検証・Aut(F) の群化・SGA1 主定理の圏同値（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/AbstractGalois.lean</code></td><td>M21: 抽象 Galois 圏——公理系の構造化と公理のみからの主定理中核（忠実性・evaluation 単射・群復元、公理ゼロ）</td></tr>
+    <tr><td><code>IUT/SGA1Completion.lean</code></td><td>M22: SGA1 主定理の抽象完成——比較関手の充満忠実性（降下公理・軌道推移性、射レベル全定理が公理ゼロ）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

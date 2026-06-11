@@ -123,6 +123,16 @@ import IUT
 #print axioms IUT.GaloisCatData.galois_evaluation_bijective
 #print axioms IUT.gsetGaloisData
 #print axioms IUT.galoisCatData_consistent
+#print axioms IUT.CatIso.ext
+#print axioms IUT.GaloisCatData.autGrp
+#print axioms IUT.GaloisCatData.homFunctor
+#print axioms IUT.GaloisCatData.homFunctor_faithful
+#print axioms IUT.GaloisCatData.connected_hom_surjective
+#print axioms IUT.GaloisCatData.split_connected_transitive
+#print axioms IUT.DescentData.homFunctor_full
+#print axioms IUT.DescentData.sga1_fully_faithful
+#print axioms IUT.gsetDescentData
+#print axioms IUT.descentData_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
