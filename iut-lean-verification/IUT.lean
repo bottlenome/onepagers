@@ -31,3 +31,4 @@ import IUT.CategoryTheory
 import IUT.GaloisAxioms
 import IUT.AbstractGalois
 import IUT.SGA1Completion
+import IUT.SGA1Object

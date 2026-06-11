@@ -158,7 +158,20 @@
 </section>
 
 <section>
-  <h2>M1〜M22 の形式化（追加検証）</h2>
+  <h2>M1〜M23 の形式化（追加検証）</h2>
+
+  <h3>M23: SGA1 主定理・対象レベルの完成 — 本質的全射性（IUT/SGA1Object.lean）</h3>
+  <div class="box">
+    <p>残っていた<strong>対象レベル</strong>を完成: 商公理（G2 後半）を追加し、剰余類作用が比較関手の像として実現されることを公理から導出した。これで主定理の三点——<strong>忠実（M21/M22）・充満（M22）・本質的全射（M23）</strong>——が全て公理から完結:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>QuotientData</code> (M23-2)</td><td><strong>商公理</strong>: 自己同型族 P による商 Qt(A,P)・商射の P-不変性・降下（普遍性）・<strong>F の商完全性</strong>（ファイバー全射 + 一段の P-witness 抽出）</td><td>—</td></tr>
+      <tr><td><code>quotient_realizes_coset</code> (M23-3)</td><td><strong>本質的全射性（推移的の場合）</strong>: Aut(A)/H ≅ Hom(A, Qt(A,H))（同変全単射）。単射性 = 商完全性 + evaluation 単射性 + 群計算、全射性 = 商ファイバー全射 + ガロア推移性</td><td>標準のみ（choice なし）</td></tr>
+      <tr><td><code>sga1_essentially_surjective</code> (M23-4)</td><td>対象レベルの組み立て: 全ての剰余類作用（M16-5 より = 全ての推移的 Aut(A)-集合 = 連結被覆のファイバー）が比較関手の像</td><td>標準のみ</td></tr>
+      <tr><td><code>gsetQuotientData</code> (M23-5)</td><td>モデルは商公理を充足。<strong>商は Quot で構成的（choice 不要）</strong>——選択的な降下公理（M22-8）との形式的対比</td><td>標準＋choice（継承分のみ）</td></tr>
+    </table>
+    <p class="small">残余: 非連結（= 有限和）対象への拡張（F の和完全性 + 連結成分分解の簿記）と pro-対象（ガロア対象の十分性）。</p>
+  </div>
 
   <h3>M22: SGA1 主定理の抽象完成 — 比較関手の充満忠実性（IUT/SGA1Completion.lean）</h3>
   <div class="box">
@@ -554,6 +567,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/GaloisAxioms.lean</code></td><td>M20: Galois 圏 G1–G6 全検証・Aut(F) の群化・SGA1 主定理の圏同値（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/AbstractGalois.lean</code></td><td>M21: 抽象 Galois 圏——公理系の構造化と公理のみからの主定理中核（忠実性・evaluation 単射・群復元、公理ゼロ）</td></tr>
     <tr><td><code>IUT/SGA1Completion.lean</code></td><td>M22: SGA1 主定理の抽象完成——比較関手の充満忠実性（降下公理・軌道推移性、射レベル全定理が公理ゼロ）</td></tr>
+    <tr><td><code>IUT/SGA1Object.lean</code></td><td>M23: 商公理と本質的全射性——Aut(A)/H ≅ Hom(A, Qt(A,H))、主定理の三点（忠実・充満・本質的全射）が公理から完結</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

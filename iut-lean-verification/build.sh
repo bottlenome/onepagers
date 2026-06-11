@@ -133,6 +133,11 @@ import IUT
 #print axioms IUT.DescentData.sga1_fully_faithful
 #print axioms IUT.gsetDescentData
 #print axioms IUT.descentData_consistent
+#print axioms IUT.Grp.mul_inv_cancel_left
+#print axioms IUT.QuotientData.quotient_realizes_coset
+#print axioms IUT.QuotientData.sga1_essentially_surjective
+#print axioms IUT.gsetQuotientData
+#print axioms IUT.quotientData_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
