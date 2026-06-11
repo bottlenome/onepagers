@@ -22,6 +22,12 @@ import IUT
 #print axioms IUT.abc_implies_asymptotic_fermat
 #print axioms IUT.szpiro_of_cor312
 #print axioms IUT.szpiro_of_cor312_precise
+#print axioms IUT.cor312_of_multiradial
+#print axioms IUT.strict_evaluation_obstruction
+#print axioms IUT.padding_necessary
+#print axioms IUT.multiradial_consistent
+#print axioms IUT.gaussian_obstruction
+#print axioms IUT.szpiro_of_multiradial
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

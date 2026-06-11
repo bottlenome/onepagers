@@ -128,6 +128,16 @@ theorem recon_aut_indeterminacy (S : ReconSetting)
     S.isoF (recon σg) (recon g) :=
   hcongr hσ
 
+/-- **定理 (M1-5): 復元アルゴリズムの本質的一意性**。
+    二つの mono-anabelian 復元アルゴリズムは、π₁ の像の上で
+    同型を除いて一致する。「群論的アルゴリズム」という概念が
+    well-defined であることの形式的根拠。 -/
+theorem recon_unique (S : ReconSetting) (r₁ r₂ : S.G → S.F)
+    (h₁ : ∀ X, S.isoF (r₁ (S.pi X)) X)
+    (h₂ : ∀ X, S.isoF (r₂ (S.pi X)) X) :
+    ∀ X, S.isoF (r₁ (S.pi X)) (r₂ (S.pi X)) :=
+  fun X => S.isoF_trans (h₁ X) (S.isoF_symm (h₂ X))
+
 /-- **無矛盾性 (M1-4)**: 恒等モデル（F = G、π = id、同型 = 等値）が
     mono-anabelian の公理を満たす。よって公理系は無矛盾。 -/
 def identityModel : ReconSetting where
