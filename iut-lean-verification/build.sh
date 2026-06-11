@@ -37,6 +37,18 @@ import IUT
 #print axioms IUT.abc_bounds_catalan23
 #print axioms IUT.six_mul_sumSq
 #print axioms IUT.invariant_transport
+#print axioms IUT.geometric_normal
+#print axioms IUT.outer_conjugation_unique
+#print axioms IUT.outer_action_inner_on_kernel
+#print axioms IUT.slim_faithful
+#print axioms IUT.section_decomposition
+#print axioms IUT.theta_deck_not_finite
+#print axioms IUT.theta_exponent_unique
+#print axioms IUT.theta_exponent_not_periodic
+#print axioms IUT.finite_quotient_collapses_theta
+#print axioms IUT.arithmetic_quotient_collapses_theta
+#print axioms IUT.temperedArithmetic_consistent
+#print axioms IUT.tempered_invariant_transport
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

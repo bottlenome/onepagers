@@ -17,3 +17,4 @@ import IUT.AbcConsequences
 import IUT.Diophantine
 import IUT.Multiradial
 import IUT.Evaluation
+import IUT.FundamentalGroup
