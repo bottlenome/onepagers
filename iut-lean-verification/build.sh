@@ -199,6 +199,14 @@ import IUT
 #print axioms IUT.binomial
 #print axioms IUT.freshman
 #print axioms IUT.fermat_little
+#print axioms IUT.pow_sub_factor
+#print axioms IUT.pow_lift
+#print axioms IUT.teich_step
+#print axioms IUT.teich
+#print axioms IUT.teich_reduction
+#print axioms IUT.teich_mul
+#print axioms IUT.teich_one
+#print axioms IUT.teich_frobenius
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M32 の形式化（追加検証）</h2>
+  <h2>M1〜M33 の形式化（追加検証）</h2>
+
+  <h3>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（IUT/Teichmuller.lean）</h3>
+  <div class="box">
+    <p>O^× = μ × (1+m) 分解の μ 部。Teichmüller 持ち上げ ω : ℤ → ℤ_p を実構成:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>pow_sub_factor</code> / <code>pow_lift</code> (M33-2, 4)</td><td>因数分解 x^n − y^n = (x−y)Σx^k y^{n−1−k}（再帰形で添字操作を回避）と<strong>持ち上げ補題</strong> x ≡ y (mod p^n) ⟹ x^p ≡ y^p (mod p^{n+1})</td><td>標準のみ</td></tr>
+      <tr><td><code>teich_step</code> / <code>teich</code> (M33-5〜6)</td><td><strong>整合性</strong> p^{n+1} ∣ a^{p^{n+1}} − a^{p^n}（基底 = FLT、帰納段 = 持ち上げ補題）と <strong>ω(a) = lim a^{p^n} : ℤ_p の実構成</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>teich_reduction</code> / <code>teich_mul</code> / <code>teich_frobenius</code> (M33-7〜9)</td><td><strong>剰余の復元</strong> ω(a) ≡ a (mod p)・<strong>乗法性</strong> ω(ab) = ω(a)ω(b)・ω(1) = 1・<strong>Frobenius 不変性</strong> ω(a^p) = ω(a)——Teichmüller 代表系が乗法的切断であること</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: ω の像 = μ_{p−1}（1 の冪根群）の同定・O^× = μ × U^(1) の直積分解そのもの・Lubin–Tate。</p>
+  </div>
 
   <h3>M32: Fermat の小定理の自前証明（IUT/Fermat.lean）</h3>
   <div class="box">
@@ -642,6 +654,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/PrincipalUnitGroup.lean</code></td><td>M30: 主単数群 (1+pℤ_p, ×) : Grp——幾何級数逆元の整合束による逆極限構成（choice なし）</td></tr>
     <tr><td><code>IUT/UnitFiltration.lean</code></td><td>M31: 単数 filtration U^(d) と次数商 θ_d: U^(d)/U^(d+1) ≅ ℤ/p（準同型・核・全射、choice なし）</td></tr>
     <tr><td><code>IUT/Fermat.lean</code></td><td>M32: Fermat の小定理——Bézout・Euclid の補題・二項定理を core のみで自前証明（choice なし）</td></tr>
+    <tr><td><code>IUT/Teichmuller.lean</code></td><td>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}——乗法的切断・剰余復元・Frobenius 不変（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
