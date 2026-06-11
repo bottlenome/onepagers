@@ -56,6 +56,7 @@
 | M29 主単数（基盤インフラ） | LCFT 分岐側の第一歩: **ℤ/p^n と ℤ_p の乗法構造**（合同両立・遷移両立・可換性）、幾何級数恒等式 (1−t)Σt^k = 1−t^n、**主単数の可逆性**（a ≡ 1 (mod p) ⟹ ℤ/p^n で可逆、逆元 = 幾何級数）——「1+pℤ_p が乗法群をなす」の各有限レベル完全証明。選択公理不使用 | 実体構成 |
 | M30 主単数群（基盤インフラ） | **(1+pℤ_p, ×) を実際の `Grp` として構成**: 幾何級数逆元のレベル間整合性（p^i ∣ Σ_{k<j}t^k − Σ_{k<i}t^k）で逆元を逆極限に持ち上げ、主単数性の積閉性・逆元閉性を証明、群公理は成分ごとの Int 恒等式に還元。アーベル性・「主単数は ℤ_p の単元」・1+p·k 型の像の主単数性込み。O^× = μ × (1+m) の (1+m) 部の完成。選択公理不使用 | 実体構成 |
 | M31 単数 filtration（基盤インフラ） | **U^(d) = 1+p^dℤ_p の部分群族と次数商 U^(d)/U^(d+1) ≅ ℤ/p**: filtration の部分群性（メンバーシップ = レベル d への射影が 1）、U^(1) = 全体・単調減少・分離性（∩U^(d) = {1}）、次数商写像 θ_d: 1+p^d u ↦ u mod p を整数除算で構成し**準同型・核 = U^(d+1)・全射**の三点を完全証明（第一同型定理の内容）。分岐相互法則の「上付き番号付け」の土台。選択公理不使用 | 実体構成 |
+| M32 Fermat の小定理（基盤インフラ） | **FLT を core のみで完全証明**: 二項係数の自前定義と委員会恒等式 (n+1)C(n,k) = (k+1)C(n+1,k+1)（二重帰納）、**Bézout の補題**（Euclid 互除法の燃料付き帰納で構成的に）、**Euclid の補題** p ∣ ab ⟹ p∣a ∨ p∣b、p ∣ C(p,k)、**二項定理** (x+1)^n = ΣC(n,k)x^k、新入生の夢、**a^p ≡ a (mod p)**（全 a : ℤ）。Teichmüller 持ち上げ ω(a) = lim a^{p^n} の整合性の基底。素数 witness: 2, 3。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -112,6 +113,7 @@ iut-lean-verification/
     ├── PrincipalUnits.lean # M29: ℤ_p の乗法構造・幾何級数・主単数の可逆性（choice なし）
     ├── PrincipalUnitGroup.lean # M30: 主単数群 (1+pℤ_p,×) : Grp（幾何級数逆元の整合束、choice なし）
     ├── UnitFiltration.lean # M31: 単数 filtration U^(d)・次数商 θ_d: U^(d)/U^(d+1) ≅ ℤ/p（choice なし）
+    ├── Fermat.lean      # M32: Fermat の小定理（Bézout・Euclid・二項定理込み、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -181,6 +183,7 @@ iut-lean-verification/
 | M29: 主単数（ℤ_p 乗法構造・幾何級数可逆性、1+pℤ_p の群性の核心） — 第16弾 | done（choice なし） |
 | M30: 主単数群 (1+pℤ_p, ×) の Grp 構成（逆元の逆極限持ち上げ） — 第17弾 | done（choice なし） |
 | M31: 単数 filtration U^(d) と次数商 U^(d)/U^(d+1) ≅ ℤ/p — 第18弾 | done（choice なし） |
+| M32: Fermat の小定理（Bézout・Euclid の補題・二項定理を core のみで） — 第19弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

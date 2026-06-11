@@ -190,6 +190,15 @@ import IUT
 #print axioms IUT.unitTheta_hom
 #print axioms IUT.unitTheta_kernel
 #print axioms IUT.unitTheta_surj
+#print axioms IUT.succ_mul_chs
+#print axioms IUT.bezout
+#print axioms IUT.euclid
+#print axioms IUT.isPrime_two
+#print axioms IUT.isPrime_three
+#print axioms IUT.prime_dvd_chs
+#print axioms IUT.binomial
+#print axioms IUT.freshman
+#print axioms IUT.fermat_little
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
