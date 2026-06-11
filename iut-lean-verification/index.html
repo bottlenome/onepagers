@@ -102,6 +102,7 @@
     <tr><td>M6</td><td>系3.12 不等式（IUT III p.174）</td><td><strong>係争点</strong></td><td>statement 完全形式化＋骨格からの独立性を証明。さらに<strong>定理3.11 インターフェースからの証明本体（p.174–175 の包含・単調性論法）を機械化</strong>（<code>cor312_of_multiradial</code>、公理ゼロ）</td><td>statement 100% / 証明 ~90%（条件付き）</td></tr>
     <tr><td>M7</td><td>log-volume 計算 → Szpiro 型不等式（IUT IV）</td><td>3.12 を認めれば概ね受容</td><td><strong>条件付き導出を形式化</strong>（IUT/Diophantine.lean）: 系3.12 ＋ 体積評価インターフェース（a·|log q| − err ≤ |log Θ|, a ≥ 2）から Szpiro 型 (a−1)·|log q| ≤ err を機械証明。インターフェースの中身（明示計算）は M5 依存で未形式化</td><td>~15%</td></tr>
     <tr><td>M8</td><td>Szpiro/Vojta → ABC とその帰結（古典的還元）</td><td>受容</td><td><strong>ABC ⟹ 漸近フェルマーを機械証明</strong>（IUT/AbcConsequences.lean）: 有効版 ABC（指数2・定数C）から「C &lt; 2<sup>n−6</sup> なる全ての n でフェルマー方程式の原始解が不在」を導出。radical は使用する性質のみ公理化</td><td>~25%</td></tr>
+    <tr><td>M9</td><td>テンパード基本群・数論的基本群の理論（André / [SemiAnbd] / [IUTchI] §2。M1/M4/M5 の土台）</td><td>受容</td><td><strong>土台理論の骨格を形式化</strong>（IUT/FundamentalGroup.lean）: 完全列 1→Δ→Π→G→1 の正規性・外ガロア作用の well-defined 性・slim ⟹ 共役忠実・切断の一意分解（すべて公理ゼロ）。テータ被覆のデッキ群 ℤ の非有限性、自動形式性差分方程式 ⟹ 指数 j² の一意性、<strong>有限商はテータ簿記 q<sup>j²</sup> を必ず潰す＝π₁<sup>temp</sup> の必然性</strong>を完全証明。副有限位相・semi-graph の分解群は未形式化</td><td>~20%</td></tr>
   </table>
 
   <h3>B. Scholze–Stix の反証チェーン</h3>
@@ -122,7 +123,7 @@
   <h3>総括</h3>
   <table>
     <tr><th>問い</th><th>証明率</th><th>根拠</th></tr>
-    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~26%</strong>（ページ重み）<br>~37%（主張平均）</td><td>M5 の出力仕様と M6 の証明本体まで形式化が到達し、「定理3.11 の充足 → 系3.12 → Szpiro（l-最適化込み）→ ABC 型帰結」の全論理経路が Lean 内で接続された。残るのは M5 の<strong>構成</strong>（遠アーベル復元・テータ剛性・Frobenioid 論、数百頁分）であり、これが唯一かつ最大の未形式化部分</td></tr>
+    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~26%</strong>（ページ重み）<br>~35%（主張平均）</td><td>M5 の出力仕様と M6 の証明本体まで形式化が到達し、「定理3.11 の充足 → 系3.12 → Szpiro（l-最適化込み）→ ABC 型帰結」の全論理経路が Lean 内で接続された。残るのは M5 の<strong>構成</strong>（遠アーベル復元・テータ剛性・Frobenioid 論、数百頁分）であり、その土台の基本群理論は M9 で骨格形式化済み</td></tr>
     <tr><td>IUT は間違っている（無条件に）</td><td><strong>0%</strong></td><td>むしろ「同一視なしでは矛盾が導出されない」こと（R3）を証明</td></tr>
     <tr><td>同一視を認める読みでは間違っている</td><td><strong>100%</strong></td><td><code>ss_incompatible</code>（sorry なし）</td></tr>
     <tr><td>論争は「RC 同一視の採否」と等価（二分法）</td><td><strong>100%</strong></td><td><code>verdict</code> / <code>controversy_reduces_to_rc</code></td></tr>
@@ -138,8 +139,9 @@
     <tr><td>M6 系3.12</td><td>5</td><td>90%</td><td>4.5</td></tr>
     <tr><td>M7 log-volume 計算（IUT IV）</td><td>80</td><td>35%</td><td>28</td></tr>
     <tr><td>M8 古典的還元と帰結</td><td>15</td><td>35%</td><td>5.25</td></tr>
-    <tr><td><strong>合計（ページ重み付け）</strong></td><td><strong>1,200</strong></td><td>—</td><td><strong>313 ≈ 26%</strong></td></tr>
-    <tr><td><strong>参考: 主張単位の単純平均</strong></td><td>—</td><td><strong>(15+25+40+30+25+90+35+35)/8 ≈ 37%</strong></td><td>—</td></tr>
+    <tr><td>M9 テンパード・数論的基本群（土台）</td><td>100</td><td>20%</td><td>20</td></tr>
+    <tr><td><strong>合計（ページ重み付け）</strong></td><td><strong>1,300</strong></td><td>—</td><td><strong>333 ≈ 26%</strong></td></tr>
+    <tr><td><strong>参考: 主張単位の単純平均</strong></td><td>—</td><td><strong>(15+25+40+30+25+90+35+35+20)/9 ≈ 35%</strong></td><td>—</td></tr>
   </table>
   <h3>第3ラウンドの追加形式化（各チェーンの深化）</h3>
   <table>
@@ -152,11 +154,32 @@
     <tr><td>M7</td><td><code>height_bounded_of_uniform_szpiro</code></td><td><strong>l-最適化定理</strong>: 全 l ≥ 2 で (l−1)·ht ≤ c·l+d ならば ht ≤ c——「l を走らせて絶対上界を得る」IUT IV 定理1.10 の質的内容</td></tr>
     <tr><td>M8</td><td><code>abc_bounds_catalan23</code></td><td>ABC ⟹ Catalan 型方程式 3<sup>b</sup>+1 = 2<sup>a</sup> の解の有界性（2<sup>a</sup> ≤ 36C）</td></tr>
   </table>
-  <p class="small">一行で言うと: 本体チェーンの総合証明率は<strong>ページ重み付けで約26%、主張単位の単純平均で約37%</strong>（目標30%はページ重みでは未達、主張平均では達成）。「仕様の充足 → 系3.12（公理ゼロ）→ Szpiro（l-最適化込み）→ ABC 型帰結」の全経路が Lean 内で接続済み。残る未形式化は定理3.11 の<strong>構成</strong>（遠アーベル復元・エタールテータ剛性・Frobenioid 論、ページ重みの残り約74%の大半）であり、これは mathlib 規模の数論幾何ライブラリ建設を要する。形式化率は分量ベースの概算である。</p>
+  <p class="small">一行で言うと: 本体チェーンの総合証明率は<strong>ページ重み付けで約26%、主張単位の単純平均で約35%</strong>（M9 を分母に追加。目標30%はページ重みでは未達、主張平均では達成）。「仕様の充足 → 系3.12（公理ゼロ）→ Szpiro（l-最適化込み）→ ABC 型帰結」の全経路が Lean 内で接続済み。残る未形式化は定理3.11 の<strong>構成</strong>（遠アーベル復元・エタールテータ剛性・Frobenioid 論）であり、その土台である<strong>基本群理論の群論的骨格は M9（IUT/FundamentalGroup.lean）で形式化済み</strong>。残部は mathlib 規模の数論幾何ライブラリ建設を要する。形式化率は分量ベースの概算である。</p>
 </section>
 
 <section>
-  <h2>M1〜M5・M7・M8 の形式化（追加検証）</h2>
+  <h2>M1〜M5・M7〜M9 の形式化（追加検証）</h2>
+
+  <h3>M9: テンパード基本群・数論的基本群の理論 — 全構成の土台（IUT/FundamentalGroup.lean）</h3>
+  <div class="box">
+    <p>遠アーベル復元（M1）・テータ評価（M4）・多輻的表現（M5）すべての土台となる基本群理論の論理骨格を、最小群論（core Lean のみ、mathlib 非依存）から建設して形式化した。数論的基本群の完全列 1 → Δ → Π → G<sub>K</sub> → 1 の理論（公理ゼロ）と、テンパード理論の IUT 的核心（テータ被覆のデッキ群 ℤ）の完全証明からなる:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>geometric_normal</code> (M9-1)</td><td>幾何的基本群 ι(Δ) = ker(pr) は Π の正規部分群（完全性の帰結）</td><td><strong>なし（公理ゼロ）</strong></td></tr>
+      <tr><td><code>outer_conjugation_unique</code> (M9-2)</td><td>Π の共役は Δ に一意に持ち上がる（Π の Δ への作用の存在）</td><td>なし</td></tr>
+      <tr><td><code>outer_action_inner_on_kernel</code> (M9-3)</td><td>ker(pr) による共役は Δ の内部自己同型 ⟹ <strong>外ガロア作用 G → Out(Δ) が well-defined</strong>（遠アーベル幾何の入力）</td><td>なし</td></tr>
+      <tr><td><code>slim_faithful</code> (M9-4)</td><td>Δ が slim（中心自明）なら共役表現は忠実——復元理論で slim 性が常に仮定される形式的理由</td><td>なし</td></tr>
+      <tr><td><code>section_decomposition</code> (M9-5)</td><td>pr の切断 s があれば x = ι(d)·s(pr x) と一意分解（分裂・global multiplicative subspace の骨格）</td><td>なし</td></tr>
+      <tr><td><code>theta_deck_not_finite</code> (M9-6)</td><td><strong>テータ被覆 Y → X（デッキ群 ℤ、[EtTh] §1）は有限エタールで実現不能</strong>＝テンパード理論が真に必要</td><td>標準のみ</td></tr>
+      <tr><td><code>theta_exponent_unique</code> (M9-7)</td><td>自動形式性の差分方程式 F(j+1) = F(j) + 2j + 1, F(0) = 0 の解は F(j) = j² ただ一つ——テータ値の<strong>二次指数 q<sup>j²</sup> が強制される</strong>（M4 の値の起源）</td><td>標準のみ</td></tr>
+      <tr><td><code>theta_exponent_not_periodic</code> (M9-8)</td><td>その簿記は非周期的 ⟹ テータは有限部分被覆 ℤ/p に降下しない</td><td>標準のみ</td></tr>
+      <tr><td><code>finite_quotient_collapses_theta</code> (M9-9)</td><td><strong>デッキ群 ℤ から有界指数群へのどんな準同型もテータラベルを潰す</strong>（j ≠ k で像が衝突するのに j² ≠ k²）＝π₁<sup>ét</sup>（副有限）の有限レベルでは評価理論が機能しない</td><td>標準のみ</td></tr>
+      <tr><td><code>arithmetic_quotient_collapses_theta</code> (M9-10)</td><td>同じ崩壊が数論的テンパード基本群 Π のどんな有界指数商でも不可避</td><td>標準のみ</td></tr>
+      <tr><td><code>temperedArithmetic_consistent</code> (M9-11)</td><td>公理系の無矛盾性（Tate 曲線型モデル: Δ = ℤ, Π = ℤ², G = ℤ）</td><td>標準のみ</td></tr>
+      <tr><td><code>tempered_invariant_transport</code> (M9-12)</td><td>テンパード遠アーベル定理（André・Mochizuki）を M1 の ReconSetting で読むと M1-7 転送原理が適用可能（M9 → M1 接続）</td><td>なし</td></tr>
+    </table>
+    <p class="small">「IUT はなぜ π₁<sup>ét</sup> でなく π₁<sup>temp</sup> を必要とするのか」——テータ関数の住む被覆のデッキ群が ℤ（無限）であり、その二次指数簿記 j ↦ j² はいかなる有限商でも潰れる——という理由そのものが機械検証された。未形式化: 副有限・テンパード位相、semi-graph of anabelioids の頂点・辺の分解群、実際の双曲的曲線の slim 性（幾何的入力として公理化）。</p>
+  </div>
 
   <h3>M5: 定理3.11（多輻的表現）の出力仕様と系3.12 の証明本体（IUT/Multiradial.lean）</h3>
   <div class="box verdict">
@@ -342,6 +365,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/LogThetaLattice.lean</code></td><td>M3: log-theta 格子の経路定理・Θ-link 必要性・mono-analytic 不変量</td></tr>
     <tr><td><code>IUT/Multiradial.lean</code></td><td>M5: 定理3.11 の出力仕様・系3.12 の証明本体・厳密評価の障害と膨張の必然性</td></tr>
     <tr><td><code>IUT/Evaluation.lean</code></td><td>M4: Gaussian monoid の次数簿記と S2/M5/M7 への接続定理</td></tr>
+    <tr><td><code>IUT/FundamentalGroup.lean</code></td><td>M9: テンパード基本群・数論的基本群の骨格（完全列・外ガロア作用・テータ被覆 ℤ・有限商の崩壊定理）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
