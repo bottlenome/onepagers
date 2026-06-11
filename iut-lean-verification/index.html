@@ -158,7 +158,20 @@
 </section>
 
 <section>
-  <h2>M1〜M26 の形式化（追加検証）</h2>
+  <h2>M1〜M27 の形式化（追加検証）</h2>
+
+  <h3>M27: 局所類体論の形式化 — ℤ_p と不分岐相互法則（IUT/LocalCFT.lean）</h3>
+  <div class="box">
+    <p>局所類体論の第一段。ℤ_p を実構成し、不分岐局所相互法則を完全証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>Zp</code> / <code>Zp_compact</code> / <code>Zp_mul_continuous</code> (M27-1〜2)</td><td><strong>ℤ_p = lim ℤ/p^n の実構成</strong>——M13 逆極限・M15 位相群・M25 コンパクト性が自動適用</td><td>標準（コンパクトのみ choice）</td></tr>
+      <tr><td><code>toZp_injective</code> (M27-3)</td><td>ℤ ↪ ℤ_p（p 進分離性: p^n の非有界性 m &lt; p^m から）</td><td>標準のみ</td></tr>
+      <tr><td><code>unramifiedRec</code> / <code>unramifiedRec_kernel</code> / <code>unramifiedRec_level_surj</code> (M27-4〜6)</td><td><strong>不分岐局所相互法則の完全証明</strong>: rec = 完備化∘付値 : K^× → ẑ = Gal(K^ur/K)、<strong>核 = 単数群 O^×</strong>、<strong>各有限レベルへ全射</strong>（Frobenius の稠密性）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>LocalCFTData</code> / <code>unramifiedLocalCFT</code> (M27-7〜8)</td><td>LCFT の statement の構造化（相互写像・単射性・稠密像）と<strong>不分岐モデルによる充足</strong>（公理化なしの witness）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: 分岐部分（O^× の構造論・Lubin–Tate 形式群）と rec の実際の Galois 群への同型性。本モジュールは M10 の <code>AbData</code>（G^ab が読めること）の不分岐方向の実証明にあたる。</p>
+  </div>
 
   <h3>M24〜M26: pro-対象・逆極限コンパクト性・有限和分解（IUT/ProObject.lean, LimitCompact.lean, SumDecomposition.lean）</h3>
   <div class="box">
@@ -586,6 +599,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/ProObject.lean</code></td><td>M24: ガロア塔・遷移準同型（∃!・全射、公理ゼロ）・π₁ = limitGrp(塔)（pro-対象）</td></tr>
     <tr><td><code>IUT/LimitCompact.lean</code></td><td>M25: 逆極限コンパクト性（König 木論法）——π₁ はコンパクト副有限群・ℤ/n! 鎖コンパクト</td></tr>
     <tr><td><code>IUT/SumDecomposition.lean</code></td><td>M26: 和完全性・連結射の和因子分解・剰余類作用の有限リスト実現（対象レベル有限和込み完全）</td></tr>
+    <tr><td><code>IUT/LocalCFT.lean</code></td><td>M27: ℤ_p の実構成（コンパクト位相群）・不分岐局所相互法則（核 = 単数群・Frobenius 稠密性、choice なし）・LCFT インターフェース</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

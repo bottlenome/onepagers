@@ -156,6 +156,15 @@ import IUT
 #print axioms IUT.SumData.sum_decomposition
 #print axioms IUT.gsetSumData
 #print axioms IUT.sumData_consistent
+#print axioms IUT.Zp
+#print axioms IUT.Zp_compact
+#print axioms IUT.Zp_mul_continuous
+#print axioms IUT.toZp_injective
+#print axioms IUT.unramifiedRec
+#print axioms IUT.unramifiedRec_kernel
+#print axioms IUT.unramifiedRec_level_surj
+#print axioms IUT.unramifiedLocalCFT
+#print axioms IUT.localCFT_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

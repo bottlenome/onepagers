@@ -35,3 +35,4 @@ import IUT.SGA1Object
 import IUT.ProObject
 import IUT.LimitCompact
 import IUT.SumDecomposition
+import IUT.LocalCFT
