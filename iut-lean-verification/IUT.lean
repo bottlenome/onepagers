@@ -32,3 +32,6 @@ import IUT.GaloisAxioms
 import IUT.AbstractGalois
 import IUT.SGA1Completion
 import IUT.SGA1Object
+import IUT.ProObject
+import IUT.LimitCompact
+import IUT.SumDecomposition

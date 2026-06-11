@@ -158,7 +158,22 @@
 </section>
 
 <section>
-  <h2>M1〜M23 の形式化（追加検証）</h2>
+  <h2>M1〜M26 の形式化（追加検証）</h2>
+
+  <h3>M24〜M26: pro-対象・逆極限コンパクト性・有限和分解（IUT/ProObject.lean, LimitCompact.lean, SumDecomposition.lean）</h3>
+  <div class="box">
+    <p>「副有限群・Galois 圏・étale π₁・SGA1」ブロックの残り三項目を完成:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>aut_transition_exists_unique</code> / <code>aut_transition_surjective</code> (M24-1〜2)</td><td>支配射に沿う Aut の遷移の存在・一意性・<strong>全射性</strong>（π₁ ↠ 有限ガロア群）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>towerSystem</code> / <code>pi1Tower</code> (M24-4)</td><td><strong>ガロア塔の逆系と π₁ = limitGrp(塔)</strong>——遷移準同型は一意性から群準同型・整合的。M13/M15 の普遍性・位相群性・開近傍基が自動適用</td><td>choice（∃! の関数化）</td></tr>
+      <tr><td><code>natSystem_compact</code> (M25-3)</td><td><strong>逆極限コンパクト性</strong>（König 型木論法: 未被覆点の無限枝 + 近傍基定理 M15-6 で矛盾）。choice = 枝の構成＝選択原理の所在の特定</td><td>標準＋choice</td></tr>
+      <tr><td><code>pi1Tower_compact</code> / <code>factChain_compact</code> (M25-4〜5)</td><td><strong>π₁ はコンパクト副有限群</strong>・階乗鎖 ℤ/n!（ẑ の鎖型表示）はコンパクト</td><td>標準＋choice</td></tr>
+      <tr><td><code>connected_factors</code> / <code>hom_sum_realizes</code> (M26-2〜3)</td><td>連結対象の射は和因子経由（<strong>公理ゼロ</strong>）・Hom(A,X⊕Y) ≅ Hom(A,X)⊔Hom(A,Y)（<strong>公理ゼロ</strong>）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>sum_decomposition</code> (M26-4)</td><td><strong>有限和分解の簿記の完成</strong>: 剰余類作用の任意有限リスト ⊔ Aut(A)/H ≅ Hom(A, ⊕ Qt(A,H))——対象レベルが有限和込みで完全</td><td>Quot.sound のみ</td></tr>
+    </table>
+    <p class="small">これで「副有限群（位相・有限性・コンパクト性）・Galois 圏（G1–G6 抽象＋モデル）・étale π₁（pro-構成・コンパクト）・SGA1 主定理（忠実・充満・本質的全射・有限和）」のブロックが完了。残る未形式化はガロア閉包（塔の存在・十分性 = 構造体データとして公理化）のみ。</p>
+  </div>
 
   <h3>M23: SGA1 主定理・対象レベルの完成 — 本質的全射性（IUT/SGA1Object.lean）</h3>
   <div class="box">
@@ -568,6 +583,9 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/AbstractGalois.lean</code></td><td>M21: 抽象 Galois 圏——公理系の構造化と公理のみからの主定理中核（忠実性・evaluation 単射・群復元、公理ゼロ）</td></tr>
     <tr><td><code>IUT/SGA1Completion.lean</code></td><td>M22: SGA1 主定理の抽象完成——比較関手の充満忠実性（降下公理・軌道推移性、射レベル全定理が公理ゼロ）</td></tr>
     <tr><td><code>IUT/SGA1Object.lean</code></td><td>M23: 商公理と本質的全射性——Aut(A)/H ≅ Hom(A, Qt(A,H))、主定理の三点（忠実・充満・本質的全射）が公理から完結</td></tr>
+    <tr><td><code>IUT/ProObject.lean</code></td><td>M24: ガロア塔・遷移準同型（∃!・全射、公理ゼロ）・π₁ = limitGrp(塔)（pro-対象）</td></tr>
+    <tr><td><code>IUT/LimitCompact.lean</code></td><td>M25: 逆極限コンパクト性（König 木論法）——π₁ はコンパクト副有限群・ℤ/n! 鎖コンパクト</td></tr>
+    <tr><td><code>IUT/SumDecomposition.lean</code></td><td>M26: 和完全性・連結射の和因子分解・剰余類作用の有限リスト実現（対象レベル有限和込み完全）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

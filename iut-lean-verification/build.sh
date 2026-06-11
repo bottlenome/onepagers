@@ -138,6 +138,24 @@ import IUT
 #print axioms IUT.QuotientData.sga1_essentially_surjective
 #print axioms IUT.gsetQuotientData
 #print axioms IUT.quotientData_consistent
+#print axioms IUT.GaloisCatData.aut_transition_exists_unique
+#print axioms IUT.GaloisCatData.aut_transition_surjective
+#print axioms IUT.GaloisTower.transAut_mul
+#print axioms IUT.GaloisTower.towerSystem
+#print axioms IUT.GaloisTower.pi1Tower
+#print axioms IUT.GaloisTower.pi1Tower_mul_continuous
+#print axioms IUT.unitAction_galois
+#print axioms IUT.galoisTower_consistent
+#print axioms IUT.assemble_level
+#print axioms IUT.refine_step
+#print axioms IUT.natSystem_compact
+#print axioms IUT.pi1Tower_compact
+#print axioms IUT.factChain_compact
+#print axioms IUT.SumData.connected_factors
+#print axioms IUT.SumData.hom_sum_realizes
+#print axioms IUT.SumData.sum_decomposition
+#print axioms IUT.gsetSumData
+#print axioms IUT.sumData_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
