@@ -158,7 +158,48 @@
 </section>
 
 <section>
-  <h2>M1〜M16 の形式化（追加検証）</h2>
+  <h2>M1〜M20 の形式化（追加検証）</h2>
+
+  <h3>M17: 有限性の本格的定義（IUT/Finiteness.lean）</h3>
+  <div class="box">
+    <p>有限性を定義しその理論の核心を完全証明（全て Classical.choice 不使用）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>pigeonhole</code> (M17-1)</td><td><strong>鳩の巣原理</strong>。有界存在の決定手続きを自前実装して選択公理を回避（omega が ∃ 仮定付き文脈で choice を引き込む現象を再度検出し排除）</td></tr>
+      <tr><td><code>card_unique</code> (M17-2)</td><td><strong>基数の一意性</strong>: α ≅ [0,m) ≅ [0,n) なら m = n</td></tr>
+      <tr><td><code>finite_bounded_exponent</code> (M17-4)</td><td><strong>有限群は有界指数を持つ</strong>（指数 n!）——M9 以来の有限性代理 <code>BoundedExponent</code> が本格的有限性の帰結であることの機械検証</td></tr>
+      <tr><td><code>zmod_finite</code> / <code>zmod_listable</code> (M17-5)</td><td><strong>ℤ/n の有限性・枚挙の実構成</strong>（非負剰余コード）⟹ ẑ は正真正銘「有限群の逆極限」</td></tr>
+    </table>
+  </div>
+
+  <h3>M18: コンパクト性の一般論（IUT/Compactness.lean）</h3>
+  <div class="box">
+    <p>開被覆の有限部分被覆（List で表現）によるコンパクト性とその一般定理（全て Classical.choice 不使用）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>listable_discrete_compact</code> / <code>zmod_compact</code> (M18-1)</td><td>有限（枚挙可能）離散空間はコンパクト ⟹ ℤ/n はコンパクト（zmodSystem は「コンパクト群の逆系」）</td></tr>
+      <tr><td><code>compact_image</code> (M18-2)</td><td><strong>コンパクト空間の連続像はコンパクト</strong></td></tr>
+      <tr><td><code>compact_prod</code> (M18-4)</td><td><strong>二項チコノフの定理</strong>: コンパクト×コンパクトはコンパクト。チューブ補題の機械化——集合族を述語として非可述的に定義することで選択公理を完全回避</td></tr>
+    </table>
+    <p class="small">未形式化: 逆極限のコンパクト性（一般チコノフ/König を要し本質的に選択原理が入る）。ẑ では有限レベル全射（M15-7、構成的）が使用面を供給済み。</p>
+  </div>
+
+  <h3>M19+M20: Galois 圏の公理系 G1–G6 と SGA1 主定理のパッケージング（IUT/CategoryTheory.lean, IUT/GaloisAxioms.lean）</h3>
+  <div class="box">
+    <p>圏論（圏・関手・自然変換・圏同値、宇宙多相）を自前建設し、SGA1 の公理系の全検証と主定理の関手的パッケージングを完成:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>gsets_G1_final</code> / <code>gsets_G1_pullback</code> (M20-1)</td><td>G1: 終対象・ファイバー積（普遍性込み）</td><td>なし〜標準</td></tr>
+      <tr><td><code>gsets_G2_initial</code> / <code>gsets_G2_sum</code> (M20-2)</td><td>G2: 始対象・有限和（余積の普遍性）</td><td>標準のみ</td></tr>
+      <tr><td><code>gsets_G3_factorization</code> (M20-3)</td><td>G3: エピ・モノ分解（像を経由）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>gsets_G4/G5...</code> (M20-4)</td><td>G4/G5: ファイバー関手はファイバー積・有限和を保つ（完全性）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>gsets_G6_reflects_iso</code> (M20-5)</td><td>G6: ファイバー関手は同型を反映する。<strong>逆写像の構成に Classical.choice が必要</strong>——選択原理の所在が公理系のどこにあるかの形式的特定</td><td>Classical.choice</td></tr>
+      <tr><td><code>skel_classification</code> (M20-6)</td><td><strong>分類定理</strong>: ファイバー関手の自然自己変換は一点 c = η([1]) の作用で尽きる（Yoneda 型論法、M14-1 の圏論的完成形）</td><td>標準のみ</td></tr>
+      <tr><td><code>fiberAut</code> / <code>from_to</code> / <code>to_from</code> (M20-7〜8)</td><td><strong>Aut(F) の群化と π₁ = Aut(F)</strong>: 自然自己変換全体が群をなし、G ⇄ Aut(F) が互いに逆な群準同型（基本群の復元の完成）</td><td>標準のみ</td></tr>
+      <tr><td><code>sga1Equivalence</code> (M20-9)</td><td><strong>SGA1 主定理（モデル版）の関手的パッケージング</strong>: 圏同値 G-Set ≃ Aut(F)-Set——被覆の圏はファイバー関手の自己同型群の作用圏と圏同値</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: 公理 G1–G6 を満たす抽象 Galois 圏から出発する一般形（pro-表現対象の構成を要する）。主定理の数学的内容（対象分類 M16・射分類 M16・Aut(F) の構造 M20・圏同値 M20-9）は全て完全証明。</p>
+  </div>
 
   <h3>M15: 位相付き副有限群（IUT/Topology.lean）</h3>
   <div class="box">
@@ -475,6 +516,10 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/GaloisCategory.lean</code></td><td>M14: ファイバー関手の復元機構 Aut(F) ≅ G・π₁^ét の自然作用・Galois 接続（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/Topology.lean</code></td><td>M15: 位相の自前建設・逆極限群は位相群・射影核 = 単位元の開近傍基（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/SGA1.lean</code></td><td>M16: 軌道-安定化定理（連結被覆 ≅ G/H）・Galois 対応の実現・SGA1 連続作用条件（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/Finiteness.lean</code></td><td>M17: 鳩の巣原理・基数一意性・有限群⟹有界指数・ℤ/n の有限性（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/Compactness.lean</code></td><td>M18: 有限⟹コンパクト・連続像・二項チコノフ（選択公理なし）（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/CategoryTheory.lean</code></td><td>M19: 圏・関手・自然変換・圏同値・G-Set 圏・同値の輸送（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/GaloisAxioms.lean</code></td><td>M20: Galois 圏 G1–G6 全検証・Aut(F) の群化・SGA1 主定理の圏同値（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

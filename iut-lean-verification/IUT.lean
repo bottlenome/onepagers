@@ -25,3 +25,7 @@ import IUT.Profinite
 import IUT.GaloisCategory
 import IUT.Topology
 import IUT.SGA1
+import IUT.Finiteness
+import IUT.Compactness
+import IUT.CategoryTheory
+import IUT.GaloisAxioms

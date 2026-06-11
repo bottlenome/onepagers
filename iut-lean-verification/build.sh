@@ -92,6 +92,29 @@ import IUT
 #print axioms IUT.coset_hom_iff
 #print axioms IUT.levelAction_smooth
 #print axioms IUT.levelAction_stabilizer_open
+#print axioms IUT.pigeonhole
+#print axioms IUT.card_unique
+#print axioms IUT.finite_bounded_exponent
+#print axioms IUT.zmod_finite
+#print axioms IUT.zmod_listable
+#print axioms IUT.listable_discrete_compact
+#print axioms IUT.zmod_compact
+#print axioms IUT.compact_image
+#print axioms IUT.compact_prod
+#print axioms IUT.restrictEquiv
+#print axioms IUT.skel_classification
+#print axioms IUT.fiberAut
+#print axioms IUT.from_to
+#print axioms IUT.to_from
+#print axioms IUT.sga1Equivalence
+#print axioms IUT.gsets_G1_final
+#print axioms IUT.gsets_G1_pullback
+#print axioms IUT.gsets_G2_initial
+#print axioms IUT.gsets_G2_sum
+#print axioms IUT.gsets_G3_factorization
+#print axioms IUT.gsets_G4_forgetful_preserves_pullback
+#print axioms IUT.gsets_G5_forgetful_preserves_sum
+#print axioms IUT.gsets_G6_reflects_iso
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
