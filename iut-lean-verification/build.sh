@@ -169,6 +169,11 @@ import IUT
 #print axioms IUT.comap_map_of_injective
 #print axioms IUT.norm_correspondence
 #print axioms IUT.unramified_norm_correspondence
+#print axioms IUT.dvd_sub_mul
+#print axioms IUT.zpMul
+#print axioms IUT.zpMul_comm
+#print axioms IUT.geom_identity
+#print axioms IUT.zmod_principal_unit_invertible
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
