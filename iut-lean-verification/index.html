@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M27 の形式化（追加検証）</h2>
+  <h2>M1〜M30 の形式化（追加検証）</h2>
+
+  <h3>M28〜M30: ノルム対応・主単数・主単数群（IUT/NormCorrespondence.lean, PrincipalUnits.lean, PrincipalUnitGroup.lean）</h3>
+  <div class="box">
+    <p>局所類体論の第二の柱（ノルム部分群対応）と分岐側の構造論（主単数群）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>map_le_iff_le_comap</code> / <code>comap_map_of_injective</code> / <code>norm_correspondence</code> (M28)</td><td><strong>ノルム部分群対応</strong>: 部分群の引き戻し・押し出しの随伴性（ガロア接続）と、rec 単射 ⟹ comap∘map = id（「ノルム部分群から拡大が一意」の群論的内容）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>zmodMul</code> / <code>zpMul</code> / <code>zmod_principal_unit_invertible</code> (M29)</td><td><strong>ℤ/p^n・ℤ_p の乗法構造</strong>（合同・遷移両立）と<strong>主単数の可逆性</strong>: a ≡ 1 (mod p) ⟹ ℤ/p^n で可逆（逆元 = 幾何級数 Σ(1−a)^k）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>geomSum_levels</code> / <code>zpGeomInv</code> / <code>principalUnits</code> (M30)</td><td><strong>主単数群 (1+pℤ_p, ×) : Grp の実構成</strong>——幾何級数逆元のレベル間整合性で逆元を逆極限に持ち上げ。アーベル群・「主単数は ℤ_p の単元」込み。O^× = μ × (1+m) の (1+m) 部完成</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: Teichmüller 代表系 μ_{p−1}（O^× = μ × (1+m) の μ 部）・単数 filtration U^(n) の次数商・Lubin–Tate 形式群。</p>
+  </div>
 
   <h3>M27: 局所類体論の形式化 — ℤ_p と不分岐相互法則（IUT/LocalCFT.lean）</h3>
   <div class="box">
@@ -600,6 +612,9 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/LimitCompact.lean</code></td><td>M25: 逆極限コンパクト性（König 木論法）——π₁ はコンパクト副有限群・ℤ/n! 鎖コンパクト</td></tr>
     <tr><td><code>IUT/SumDecomposition.lean</code></td><td>M26: 和完全性・連結射の和因子分解・剰余類作用の有限リスト実現（対象レベル有限和込み完全）</td></tr>
     <tr><td><code>IUT/LocalCFT.lean</code></td><td>M27: ℤ_p の実構成（コンパクト位相群）・不分岐局所相互法則（核 = 単数群・Frobenius 稠密性、choice なし）・LCFT インターフェース</td></tr>
+    <tr><td><code>IUT/NormCorrespondence.lean</code></td><td>M28: ノルム部分群対応——随伴性（ガロア接続）・対応の忠実性（核心3定理は公理ゼロ）</td></tr>
+    <tr><td><code>IUT/PrincipalUnits.lean</code></td><td>M29: ℤ/p^n・ℤ_p の乗法構造・幾何級数恒等式・主単数の可逆性（choice なし）</td></tr>
+    <tr><td><code>IUT/PrincipalUnitGroup.lean</code></td><td>M30: 主単数群 (1+pℤ_p, ×) : Grp——幾何級数逆元の整合束による逆極限構成（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

@@ -174,6 +174,14 @@ import IUT
 #print axioms IUT.zpMul_comm
 #print axioms IUT.geom_identity
 #print axioms IUT.zmod_principal_unit_invertible
+#print axioms IUT.dvd_sub_geomSum
+#print axioms IUT.geomSum_levels
+#print axioms IUT.isPrincipalUnit_mul
+#print axioms IUT.zpGeomInv
+#print axioms IUT.principalUnits
+#print axioms IUT.principalUnits_comm
+#print axioms IUT.principal_unit_invertible
+#print axioms IUT.toZp_one_add_principal
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
