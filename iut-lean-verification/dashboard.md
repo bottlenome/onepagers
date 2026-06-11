@@ -37,6 +37,8 @@
 | M7 IUT IV log-volume 計算 | 条件付き導出 ＋ **l-最適化定理**（全 l で Szpiro 型 ⟹ ht ≤ c、定理1.10 の質的内容） | ~35% |
 | M8 古典的還元と帰結 | ABC ⟹ 漸近フェルマー ＋ Catalan 型 3^b+1=2^a の有界性を完全証明 | ~35% |
 | M9 テンパード・数論的基本群（土台） | **基本群理論の骨格を形式化**: 完全列 1→Δ→Π→G→1 の正規性・**外ガロア作用の well-defined 性**・slim ⟹ 共役忠実・切断の一意分解（公理ゼロ）、**テータ被覆のデッキ群 ℤ の非有限性**、差分方程式 ⟹ 指数 j² の一意性、**有限商はテータ簿記 q^{j²} を必ず潰す ⟹ π₁^temp の必然性**（M1/M4/M5 の土台） | ~20% |
+| M13 副有限群（基盤インフラ） | **逆極限理論の実構成**: 商群（Quot 構成・分離性・普遍性）、逆系と逆極限群・**逆極限の普遍性**、**ẑ = lim ℤ/n の実構成**、完備化 ℤ→ẑ の単射性（残余有限性）、各有限レベルがテータ簿記を潰すことの実例化（M9 接続）。全構成・公理化なし | 実体構成 |
+| M14 Galois 圏・étale π₁（基盤インフラ） | **ファイバー関手の復元機構の完全証明**: 正則作用の同変自己写像 = 右移動のみ（Aut(F) ≅ G、公理ゼロ）、π₁^ét の有限レベルへの作用が**自然変換**であること（M13 接続）、反変 Galois 接続の単位・余単位・閉包冪等性。SGA1 主定理（圏同値）は未形式化 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -74,6 +76,8 @@ iut-lean-verification/
     ├── Reconstruction.lean # M10: 局所体 (p,d) 復元アルゴリズム実装・MonoAnabelian 充足（選択公理不使用）
     ├── EtaleTheta.lean  # M11: cyclotomic rigidity（テータ群交換子⟹シクロトーム剛性、公理化ゼロ）
     ├── Frobenioid.lean  # M12: Frobenioid 次数層（Frobenius 非可逆性・次数＝log-volume・vol_q 供給）
+    ├── Profinite.lean   # M13: 商群・逆極限・ẑ = lim ℤ/n の実構成（普遍性・残余有限性）
+    ├── GaloisCategory.lean # M14: ファイバー関手復元機構・π₁^ét の自然作用・Galois 接続
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -125,4 +129,8 @@ iut-lean-verification/
 | M11: エタールテータの cyclotomic rigidity の機構（issue #29 項目2の骨格） | done（公理化ゼロの完全証明） |
 | M12: Frobenioid 次数層と vol_q 供給（issue #29 項目3の骨格） | done |
 | M5: 定理3.11 の**構成**の完全形式化 | 4基盤の骨格（M9–M12）は done。残り（環構造復元の本体・p進テータ関数の関数等式・Frobenioid の圏論的実体・実際の数体での充足）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
+| M13: 副有限群（商群・逆極限・ẑ の実構成）— 実体建設フェーズ第1弾 | done（公理化なしの実構成） |
+| M14: Galois 圏・étale π₁ のファイバー関手機構 — 実体建設フェーズ第2弾 | done（Aut(F) ≅ G は公理ゼロ） |
+| 実体建設の続き: 位相付き副有限群（開部分群）・有限性の本格的定義・SGA1 主定理 | todo |
+| 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

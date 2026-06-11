@@ -65,6 +65,17 @@ import IUT
 #print axioms IUT.gaussianDiv_deg
 #print axioms IUT.frobenioid_realizes_qpilot
 #print axioms IUT.degree_volume_consistent
+#print axioms IUT.GrpCong.inv_compat
+#print axioms IUT.quot_exact
+#print axioms IUT.quot_universal
+#print axioms IUT.limit_universal
+#print axioms IUT.toZhat_injective
+#print axioms IUT.zmod_bounded_exponent
+#print axioms IUT.zmod_collapses_theta
+#print axioms IUT.equivariant_is_right_mul
+#print axioms IUT.fiber_functor_recovers_group
+#print axioms IUT.level_transition_equivariant
+#print axioms IUT.galois_closure
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

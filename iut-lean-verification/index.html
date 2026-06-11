@@ -158,7 +158,35 @@
 </section>
 
 <section>
-  <h2>M1〜M12 の形式化（追加検証）</h2>
+  <h2>M1〜M14 の形式化（追加検証）</h2>
+
+  <h3>M13: 副有限群 — 逆極限と ẑ の実構成（IUT/Profinite.lean）</h3>
+  <div class="box">
+    <p>「実体」建設フェーズの第1弾。π₁<sup>ét</sup> の住処である副有限群の理論の中核を、公理化なしの実構成として建設した（mathlib 非依存・core Lean のみ）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>GrpCong.inv_compat</code> (M13-1)</td><td>群の合同は積との両立だけから逆元との両立が従う（公理系の最小性）</td><td><strong>なし（公理ゼロ）</strong></td></tr>
+      <tr><td><code>quotGrp</code> / <code>quot_exact</code> / <code>quot_universal</code> (M13-2〜4)</td><td>商群の構成（Quot）・分離性 mk a = mk b → a ~ b・普遍性（一意分解）</td><td>標準のみ</td></tr>
+      <tr><td><code>limitGrp</code> / <code>limit_universal</code> (M13-5〜6)</td><td>逆系の極限群の構成と<strong>逆極限の普遍性</strong>（副有限群の圏論的特徴付けの核）</td><td>標準のみ</td></tr>
+      <tr><td><code>zhat</code> (M13-7)</td><td><strong>ẑ = lim ℤ/n の実構成</strong>: ℤ/n を商群として構成し、割り切り順序の逆系の極限として組み立てる</td><td>—</td></tr>
+      <tr><td><code>toZhat_injective</code> (M13-8)</td><td>完備化 ℤ → ẑ は単射（ℤ の<strong>残余有限性</strong>）: テンパード側の情報は完備化で消えない</td><td>標準のみ</td></tr>
+      <tr><td><code>zmod_collapses_theta</code> (M13-9)</td><td>一方、<strong>各有限レベル ℤ/n は必ずテータ簿記を潰す</strong>（M9-9 の実例化）——「ẑ は塔全体では ℤ を覚えているのに、どの有限段でもテータが見えない」がこの実構成上で再現される</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">位相（コンパクト性・開部分群）は未導入。逆極限を代数的に構成し、本計画で使う「有限レベルへの射影・整合性・普遍性」を完全証明した。</p>
+  </div>
+
+  <h3>M14: Galois 圏・ファイバー関手・étale π₁（IUT/GaloisCategory.lean）</h3>
+  <div class="box">
+    <p>「実体」建設フェーズの第2弾。Galois 圏の理論（SGA1）で π₁<sup>ét</sup> := Aut(ファイバー関手) と定義できる理由の中核機構を完全証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>equivariant_is_right_mul</code> (M14-1)</td><td><strong>ファイバー関手の復元機構</strong>: 正則作用（普遍被覆のファイバー）の同変自己写像は右移動 x ↦ x·c のみ ⟹ Aut(ファイバー) ≅ G</td><td><strong>なし（公理ゼロ）</strong></td></tr>
+      <tr><td><code>fiber_functor_recovers_group</code> (M14-3)</td><td>同変自己写像 ↔ G の元の一対一対応（存在と一意性）</td><td><strong>なし（公理ゼロ）</strong></td></tr>
+      <tr><td><code>levelAction</code> / <code>level_transition_equivariant</code> (M14-5〜6)</td><td>π₁<sup>ét</sup>（= M13 の逆極限）は各有限レベルに作用し、その作用は推移射と両立する＝<strong>ファイバー関手の自然変換</strong>（M14 → M13 接続）</td><td>標準のみ</td></tr>
+      <tr><td><code>galois_unit</code> 〜 <code>galois_closure</code> (M14-7〜10)</td><td>反変 Galois 接続（部分群 ↔ 被覆）の単位・余単位・反単調性・閉包冪等性——対応定理の束論的シャドウ</td><td>なし</td></tr>
+    </table>
+    <p class="small">SGA1 の Galois 圏の公理系と主定理（圏同値）そのものは未形式化。証明したのは主定理の二つの核心機構（Aut(F) = 群、自然性）であり、双曲的曲線の被覆圏が Galois 圏をなすこと（幾何的入力）が残る実質である。</p>
+  </div>
 
   <h3>M10: 遠アーベル復元アルゴリズムの実装 — MonoAnabelian の充足（IUT/Reconstruction.lean）</h3>
   <div class="box">
@@ -415,6 +443,8 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Reconstruction.lean</code></td><td>M10: 局所体 (p, d) の復元アルゴリズム実装と MonoAnabelian 充足（選択公理不使用）</td></tr>
     <tr><td><code>IUT/EtaleTheta.lean</code></td><td>M11: cyclotomic rigidity（テータ群の交換子 ⟹ シクロトーム剛性、公理化ゼロ）</td></tr>
     <tr><td><code>IUT/Frobenioid.lean</code></td><td>M12: Frobenioid 次数層（Frobenius 非可逆性・Gaussian 束次数・次数＝log-volume ⟹ vol_q 供給）</td></tr>
+    <tr><td><code>IUT/Profinite.lean</code></td><td>M13: 商群・逆極限の普遍性・ẑ = lim ℤ/n の実構成・残余有限性（実体建設フェーズ）</td></tr>
+    <tr><td><code>IUT/GaloisCategory.lean</code></td><td>M14: ファイバー関手の復元機構 Aut(F) ≅ G・π₁^ét の自然作用・Galois 接続（実体建設フェーズ）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
