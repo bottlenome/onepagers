@@ -76,4 +76,33 @@ theorem sumSq_gt_int (L : Nat) (hL : L ≥ 2) : (sumSq L : Int) > (L : Int) := b
   have := sumSq_gt L hL
   omega
 
+/-- **閉形式**: `6 · Σ_{j=1}^{L} j² = L(L+1)(2L+1)`。
+    IUT IV §1 の log-volume 計算でテータ値の平均次数
+    (Σj²)/l⋇ = (l⋇+1)(2l⋇+1)/6 を評価する際の基礎式。 -/
+theorem six_mul_sumSq (L : Nat) :
+    6 * sumSq L = L * (L + 1) * (2 * L + 1) := by
+  induction L with
+  | zero => rfl
+  | succ n ih =>
+    rw [show n + 1 + 1 = n + 2 by omega, show 2 * (n + 1) + 1 = 2 * n + 3 by omega]
+    -- 右辺の展開: (n+1)(n+2)(2n+3) = (n+1)·[n(2n+1) + (6n+6)]
+    have e1 : (n + 1) * (n + 2) * (2 * n + 3)
+        = (n + 1) * ((n + 2) * (2 * n + 3)) := Nat.mul_assoc _ _ _
+    have e2 : (n + 2) * (2 * n + 3) = n * (2 * n + 1) + (6 * n + 6) := by
+      have a1 : (n + 2) * (2 * n + 3) = n * (2 * n + 3) + 2 * (2 * n + 3) :=
+        Nat.add_mul n 2 (2 * n + 3)
+      have a2 : n * (2 * n + 3) = n * (2 * n + 1) + n * 2 := by
+        rw [show 2 * n + 3 = 2 * n + 1 + 2 by omega, Nat.mul_add]
+      rw [a1, a2]
+      generalize n * (2 * n + 1) = A
+      omega
+    have e3 : (n + 1) * (n * (2 * n + 1) + (6 * n + 6))
+        = (n + 1) * (n * (2 * n + 1)) + (n + 1) * (6 * n + 6) := Nat.mul_add _ _ _
+    have e4 : (n + 1) * (n * (2 * n + 1)) = n * (n + 1) * (2 * n + 1) := by
+      rw [← Nat.mul_assoc, Nat.mul_comm (n + 1) n]
+    have e5 : (n + 1) * (6 * n + 6) = 6 * ((n + 1) * (n + 1)) := by
+      rw [show 6 * n + 6 = 6 * (n + 1) by omega, Nat.mul_left_comm]
+    show 6 * (sumSq n + (n + 1) * (n + 1)) = (n + 1) * (n + 2) * (2 * n + 3)
+    rw [Nat.mul_add, ih, e1, e2, e3, e4, e5]
+
 end IUT

@@ -157,6 +157,21 @@ def identityModel : ReconSetting where
 theorem monoAnabelian_consistent : MonoAnabelian identityModel :=
   ⟨id, fun _ => rfl, fun h => h⟩
 
+/-- **定理 (M1-7): 同型不変量の群論的転送** — mono-anabelian 性の
+    中心的帰結。体側の **任意の** 同型不変量 φ（同型な対象に同じ値を
+    取る関数）は、群側の関数 ψ = φ ∘ recon として実現でき、
+    ψ(π₁(X)) = φ(X) が成り立つ。
+
+    すなわち「環構造・体積・次数など、同型で保たれるあらゆる量は
+    エタール基本群だけから計算できる」——遠アーベル幾何が IUT に
+    提供する転送原理そのものの形式化である。 -/
+theorem invariant_transport (S : ReconSetting) (h : MonoAnabelian S)
+    {α : Type} (φ : S.F → α)
+    (hφ : ∀ {X Y : S.F}, S.isoF X Y → φ X = φ Y) :
+    ∃ ψ : S.G → α, ∀ X, ψ (S.pi X) = φ X := by
+  obtain ⟨recon, hpi, _⟩ := h
+  exact ⟨fun g => φ (recon g), fun X => hφ (hpi X)⟩
+
 /-! ## log-Frobenius 両立性（[AbsTopIII] 定理3.11 の骨格）
 
 [AbsTopIII] の表題定理（mono-anabelian log-Frobenius compatibility）は

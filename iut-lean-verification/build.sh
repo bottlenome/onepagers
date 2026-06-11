@@ -35,6 +35,8 @@ import IUT
 #print axioms IUT.two_mul_procTotal
 #print axioms IUT.height_bounded_of_uniform_szpiro
 #print axioms IUT.abc_bounds_catalan23
+#print axioms IUT.six_mul_sumSq
+#print axioms IUT.invariant_transport
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
