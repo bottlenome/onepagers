@@ -49,6 +49,22 @@ import IUT
 #print axioms IUT.arithmetic_quotient_collapses_theta
 #print axioms IUT.temperedArithmetic_consistent
 #print axioms IUT.tempered_invariant_transport
+#print axioms IUT.findWitness_spec
+#print axioms IUT.abelianization_determines
+#print axioms IUT.reconCore_correct
+#print axioms IUT.padic_recon_monoanabelian
+#print axioms IUT.padic_recon_bianabelian
+#print axioms IUT.padic_invariant_transport
+#print axioms IUT.cyclotome_indeterminacy
+#print axioms IUT.marked_cyclotome_rigid
+#print axioms IUT.theta_comm
+#print axioms IUT.mono_theta_cyclotomic_rigidity
+#print axioms IUT.rigid_theta_values
+#print axioms IUT.Frobenioid.deg_zero
+#print axioms IUT.frob_not_invertible
+#print axioms IUT.gaussianDiv_deg
+#print axioms IUT.frobenioid_realizes_qpilot
+#print axioms IUT.degree_volume_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -18,3 +18,6 @@ import IUT.Diophantine
 import IUT.Multiradial
 import IUT.Evaluation
 import IUT.FundamentalGroup
+import IUT.Reconstruction
+import IUT.EtaleTheta
+import IUT.Frobenioid

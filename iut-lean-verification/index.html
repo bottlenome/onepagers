@@ -94,11 +94,11 @@
   <h3>A. 望月の本体チェーン</h3>
   <table>
     <tr><th>#</th><th>主張</th><th>論争状態</th><th>今回の Lean 検証</th><th>証明率</th></tr>
-    <tr><td>M1</td><td>単遠アーベル復元（AbsTopIII ほか）</td><td>受容</td><td><strong>論理骨格を形式化</strong>（IUT/Anabelian.lean）: mono⟹bi は公理なし、bi⟹mono は選択公理必須という非対称性を機械証明。Aut 不定性＝(Ind1) の起源も定理化。復元定理の実体（p進体の環構造復元）は未形式化</td><td>~10%</td></tr>
+    <tr><td>M1</td><td>単遠アーベル復元（AbsTopIII ほか）</td><td>受容</td><td><strong>論理骨格を形式化</strong>（IUT/Anabelian.lean）: mono⟹bi は公理なし、bi⟹mono は選択公理必須という非対称性を機械証明。Aut 不定性＝(Ind1) の起源も定理化。<strong>＋ M10 復元アルゴリズムの実装</strong>（IUT/Reconstruction.lean）: 局所体の (p, d) を G<sup>ab</sup> の rank profile から復元する手続きを整礎再帰で実装・正当性証明し、<code>MonoAnabelian</code> を<strong>選択公理不使用で充足</strong>。環構造復元の本体は未形式化</td><td>~20%</td></tr>
     <tr><td>M2</td><td>Hodge theater の構成（IUT I）</td><td>受容</td><td><strong>ラベル組合せ骨格を形式化</strong>（IUT/HodgeTheater.lean）: 加法的対称性 F<sub>l</sub><sup>±±</sup> の閉性（二面体演算則）と推移性、±1 商 = {0..l⋇} の同定、テータ値ラベル = {1..l⋇} を証明。Skeleton への橋渡し定理で M4/M6 と接続。prime-strip の圏論的データは未形式化</td><td>~25%</td></tr>
     <tr><td>M3</td><td>log-link / Θ-link と log-theta 格子（IUT I–III）</td><td>受容</td><td><strong>格子の構造定理を形式化</strong>（IUT/LogThetaLattice.lean）: 列の変化 = Θ-link 通過本数（経路定理）、「異なる正則構造の比較は必ず Θ-link を通る」「環構造はリンク不変量になれない」を機械証明。頂点上の実データ（prime-strip）は未形式化</td><td>~30%</td></tr>
-    <tr><td>M4</td><td>テータ値評価 Θ-pilot = {q<sup>j²</sup>}（IUT II）</td><td>受容</td><td><strong>値と次数の簿記層を形式化</strong>（IUT/Evaluation.lean）: Gaussian 分布の総次数 Σj²·d の閉形式、素朴評価 ⟹ RC評価（S2 接続）、素朴評価 ⟹ 多輻的表現と非両立（M5 接続）、膨張込み評価 ⟹ M7 計算（M7 接続）。エタールテータ関数の剛性は未形式化</td><td>算術核 100% / 理論 ~25%</td></tr>
-    <tr><td>M5</td><td>定理3.11 多輻的表現（IUT III pp.153–157）</td><td><strong>最大の係争点</strong></td><td><strong>statement を原文から読み取り出力仕様（インターフェース）を形式化</strong>（IUT/Multiradial.lean）: (i) 対数殻入れ物・可能な像・(Ind1)(Ind2)、(ii) log-Kummer・体積両立・(Ind3)、(iii) Θ-link 両立＝q-パイロット実現。<strong>系3.12 の証明本体を機械化</strong>（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性を証明。アルゴリズムの構成（遠アーベル復元・テータ剛性）は未形式化</td><td><strong>~20%</strong>（構成 0%）</td></tr>
+    <tr><td>M4</td><td>テータ値評価 Θ-pilot = {q<sup>j²</sup>}（IUT II）</td><td>受容</td><td><strong>値と次数の簿記層を形式化</strong>（IUT/Evaluation.lean）: Gaussian 分布の総次数 Σj²·d の閉形式、素朴評価 ⟹ RC評価（S2 接続）、素朴評価 ⟹ 多輻的表現と非両立（M5 接続）、膨張込み評価 ⟹ M7 計算（M7 接続）。<strong>＋ M11 cyclotomic rigidity の機構</strong>（IUT/EtaleTheta.lean、[EtTh] Cor 2.19 の離散骨格）: テータ群の交換子がシクロトームを剛性化し<strong>テータ切断の不定性が完全相殺</strong>されることを公理化ゼロで完全証明。p進テータ関数の関数等式は未形式化</td><td>算術核 100% / 理論 ~35%</td></tr>
+    <tr><td>M5</td><td>定理3.11 多輻的表現（IUT III pp.153–157）</td><td><strong>最大の係争点</strong></td><td><strong>statement を原文から読み取り出力仕様（インターフェース）を形式化</strong>（IUT/Multiradial.lean）: (i) 対数殻入れ物・可能な像・(Ind1)(Ind2)、(ii) log-Kummer・体積両立・(Ind3)、(iii) Θ-link 両立＝q-パイロット実現。<strong>系3.12 の証明本体を機械化</strong>（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性を証明。<strong>＋ M12 Frobenioid 次数層</strong>（IUT/Frobenioid.lean、[FrdI/II]）: Frobenius-like 非可逆性・Gaussian 束の次数公式・<strong>次数＝log-volume 両立 ⟹ vol_q 供給</strong>（定理3.11 (i)(c) の骨格）。構成の実体（実際の数体での充足）は未形式化</td><td><strong>~28%</strong>（構成は土台のみ）</td></tr>
     <tr><td>M6</td><td>系3.12 不等式（IUT III p.174）</td><td><strong>係争点</strong></td><td>statement 完全形式化＋骨格からの独立性を証明。さらに<strong>定理3.11 インターフェースからの証明本体（p.174–175 の包含・単調性論法）を機械化</strong>（<code>cor312_of_multiradial</code>、公理ゼロ）</td><td>statement 100% / 証明 ~90%（条件付き）</td></tr>
     <tr><td>M7</td><td>log-volume 計算 → Szpiro 型不等式（IUT IV）</td><td>3.12 を認めれば概ね受容</td><td><strong>条件付き導出を形式化</strong>（IUT/Diophantine.lean）: 系3.12 ＋ 体積評価インターフェース（a·|log q| − err ≤ |log Θ|, a ≥ 2）から Szpiro 型 (a−1)·|log q| ≤ err を機械証明。インターフェースの中身（明示計算）は M5 依存で未形式化</td><td>~15%</td></tr>
     <tr><td>M8</td><td>Szpiro/Vojta → ABC とその帰結（古典的還元）</td><td>受容</td><td><strong>ABC ⟹ 漸近フェルマーを機械証明</strong>（IUT/AbcConsequences.lean）: 有効版 ABC（指数2・定数C）から「C &lt; 2<sup>n−6</sup> なる全ての n でフェルマー方程式の原始解が不在」を導出。radical は使用する性質のみ公理化</td><td>~25%</td></tr>
@@ -123,7 +123,7 @@
   <h3>総括</h3>
   <table>
     <tr><th>問い</th><th>証明率</th><th>根拠</th></tr>
-    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~26%</strong>（ページ重み）<br>~35%（主張平均）</td><td>M5 の出力仕様と M6 の証明本体まで形式化が到達し、「定理3.11 の充足 → 系3.12 → Szpiro（l-最適化込み）→ ABC 型帰結」の全論理経路が Lean 内で接続された。残るのは M5 の<strong>構成</strong>（遠アーベル復元・テータ剛性・Frobenioid 論、数百頁分）であり、その土台の基本群理論は M9 で骨格形式化済み</td></tr>
+    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~28%</strong>（ページ重み）<br>~36%（主張平均）</td><td>M5 の出力仕様と M6 の証明本体まで形式化が到達し、「定理3.11 の充足 → 系3.12 → Szpiro（l-最適化込み）→ ABC 型帰結」の全論理経路が Lean 内で接続された。構成の4基盤（基本群 M9・復元アルゴリズム M10・cyclotomic rigidity M11・Frobenioid 次数層 M12）も骨格形式化済み。残るのは M5 の<strong>構成の実体</strong>（環構造復元・p進テータ関数・実際の数体での充足、数百頁分）</td></tr>
     <tr><td>IUT は間違っている（無条件に）</td><td><strong>0%</strong></td><td>むしろ「同一視なしでは矛盾が導出されない」こと（R3）を証明</td></tr>
     <tr><td>同一視を認める読みでは間違っている</td><td><strong>100%</strong></td><td><code>ss_incompatible</code>（sorry なし）</td></tr>
     <tr><td>論争は「RC 同一視の採否」と等価（二分法）</td><td><strong>100%</strong></td><td><code>verdict</code> / <code>controversy_reduces_to_rc</code></td></tr>
@@ -131,17 +131,17 @@
   <h3>総合証明率 ~10% の算出根拠（ページ規模による重み付け）</h3>
   <table>
     <tr><th>チェーン</th><th>対象ページ規模（概算）</th><th>形式化率</th><th>寄与（頁換算）</th></tr>
-    <tr><td>M1 遠アーベル復元（AbsTopIII ほか）</td><td>300</td><td>15%</td><td>45</td></tr>
+    <tr><td>M1 遠アーベル復元（AbsTopIII ほか）</td><td>300</td><td>20%</td><td>60</td></tr>
     <tr><td>M2 Hodge theater（IUT I）</td><td>200</td><td>25%</td><td>50</td></tr>
     <tr><td>M3 リンクと格子（IUT I–III）</td><td>150</td><td>40%</td><td>60</td></tr>
-    <tr><td>M4 テータ値評価（IUT II）</td><td>150</td><td>30%</td><td>45</td></tr>
-    <tr><td>M5 多輻的表現（IUT II–III の核心）</td><td>300</td><td>25%</td><td>75</td></tr>
+    <tr><td>M4 テータ値評価（IUT II）</td><td>150</td><td>35%</td><td>52.5</td></tr>
+    <tr><td>M5 多輻的表現（IUT II–III の核心）</td><td>300</td><td>28%</td><td>84</td></tr>
     <tr><td>M6 系3.12</td><td>5</td><td>90%</td><td>4.5</td></tr>
     <tr><td>M7 log-volume 計算（IUT IV）</td><td>80</td><td>35%</td><td>28</td></tr>
     <tr><td>M8 古典的還元と帰結</td><td>15</td><td>35%</td><td>5.25</td></tr>
     <tr><td>M9 テンパード・数論的基本群（土台）</td><td>100</td><td>20%</td><td>20</td></tr>
-    <tr><td><strong>合計（ページ重み付け）</strong></td><td><strong>1,300</strong></td><td>—</td><td><strong>333 ≈ 26%</strong></td></tr>
-    <tr><td><strong>参考: 主張単位の単純平均</strong></td><td>—</td><td><strong>(15+25+40+30+25+90+35+35+20)/9 ≈ 35%</strong></td><td>—</td></tr>
+    <tr><td><strong>合計（ページ重み付け）</strong></td><td><strong>1,300</strong></td><td>—</td><td><strong>364 ≈ 28%</strong></td></tr>
+    <tr><td><strong>参考: 主張単位の単純平均</strong></td><td>—</td><td><strong>(20+25+40+35+28+90+35+35+20)/9 ≈ 36%</strong></td><td>—</td></tr>
   </table>
   <h3>第3ラウンドの追加形式化（各チェーンの深化）</h3>
   <table>
@@ -154,11 +154,57 @@
     <tr><td>M7</td><td><code>height_bounded_of_uniform_szpiro</code></td><td><strong>l-最適化定理</strong>: 全 l ≥ 2 で (l−1)·ht ≤ c·l+d ならば ht ≤ c——「l を走らせて絶対上界を得る」IUT IV 定理1.10 の質的内容</td></tr>
     <tr><td>M8</td><td><code>abc_bounds_catalan23</code></td><td>ABC ⟹ Catalan 型方程式 3<sup>b</sup>+1 = 2<sup>a</sup> の解の有界性（2<sup>a</sup> ≤ 36C）</td></tr>
   </table>
-  <p class="small">一行で言うと: 本体チェーンの総合証明率は<strong>ページ重み付けで約26%、主張単位の単純平均で約35%</strong>（M9 を分母に追加。目標30%はページ重みでは未達、主張平均では達成）。「仕様の充足 → 系3.12（公理ゼロ）→ Szpiro（l-最適化込み）→ ABC 型帰結」の全経路が Lean 内で接続済み。残る未形式化は定理3.11 の<strong>構成</strong>（遠アーベル復元・エタールテータ剛性・Frobenioid 論）であり、その土台である<strong>基本群理論の群論的骨格は M9（IUT/FundamentalGroup.lean）で形式化済み</strong>。残部は mathlib 規模の数論幾何ライブラリ建設を要する。形式化率は分量ベースの概算である。</p>
+  <p class="small">一行で言うと: 本体チェーンの総合証明率は<strong>ページ重み付けで約28%、主張単位の単純平均で約36%</strong>。「仕様の充足 → 系3.12（公理ゼロ）→ Szpiro（l-最適化込み）→ ABC 型帰結」の全経路が Lean 内で接続済み。定理3.11 の構成の<strong>4基盤理論はすべて骨格を形式化済み</strong>: 基本群（M9）・遠アーベル復元アルゴリズム（M10、選択公理不使用）・cyclotomic rigidity（M11、公理化ゼロ）・Frobenioid 次数層（M12）。残る未形式化は構成の<strong>実体</strong>（環構造復元の本体・p進テータ関数の関数等式・実際の数体での充足）であり、mathlib 規模の数論幾何ライブラリ建設を要する。形式化率は分量ベースの概算である。</p>
 </section>
 
 <section>
-  <h2>M1〜M5・M7〜M9 の形式化（追加検証）</h2>
+  <h2>M1〜M12 の形式化（追加検証）</h2>
+
+  <h3>M10: 遠アーベル復元アルゴリズムの実装 — MonoAnabelian の充足（IUT/Reconstruction.lean）</h3>
+  <div class="box">
+    <p>M1 で述語として公理化されていた <code>MonoAnabelian</code>（復元アルゴリズムの存在）を、p 進局所体の基本不変量 (p, d) = (剰余標数, 次数) について<strong>実際のアルゴリズムの構成によって証明</strong>した。局所類体論 G<sub>k</sub><sup>ab</sup> ≅ (k<sup>×</sup>)<sup>∧</sup> による rank profile（rank<sub>l</sub> = 1 + ε<sub>l</sub>（l ≠ p）、1 + d + ε<sub>p</sub>（l = p））を入力として:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>p_characterized</code> (M10-1)</td><td>p は「rank ≥ 3 となる唯一の素数」——復元レシピの根拠</td><td>標準のみ</td></tr>
+      <tr><td><code>findWitness_spec</code> (M10-2)</td><td><strong>witness 探索の自前実装</strong>: Nat.find が core に無いため整礎再帰（Acc 再帰）で探索関数を実装し正当性を証明（選択公理不使用）</td><td>標準のみ</td></tr>
+      <tr><td><code>reconCore_correct</code> (M10-3)</td><td>復元アルゴリズムが G<sup>ab</sup> データから (p, d, m) を正しく再構成する</td><td>標準のみ</td></tr>
+      <tr><td><code>abelianization_determines</code> (M10-4)</td><td><strong>復元の一意性</strong>: (rank profile, 捩れ位数) は (p, d) を一意に決める</td><td>標準のみ</td></tr>
+      <tr><td><code>padic_recon_monoanabelian</code> (M10-5)</td><td><strong>MonoAnabelian の充足</strong>——M1 の仕様が実アルゴリズムで初めて実体化（M10 → M1 接続）。<strong>Classical.choice 不使用</strong>＝「mono-anabelian = アルゴリズム」の実例の機械検証</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>padic_recon_bianabelian</code> (M10-6) / <code>padic_invariant_transport</code> (M10-7)</td><td>系: bi-anabelian と不変量転送が M1-1/M1-7 の適用で従う</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: 局所類体論そのもの（rank が G<sub>k</sub> から読めること）は入力データ型のフィールドとして公理化。[AbsTopIII] 本体の環構造復元は未達であり、それがこのモジュールの残る実質である。</p>
+  </div>
+
+  <h3>M11: エタールテータの cyclotomic rigidity — [EtTh] Cor 2.19 の骨格（IUT/EtaleTheta.lean）</h3>
+  <div class="box">
+    <p>テータ値 q<sup>j²</sup>（M4）の well-defined 性を支える mono-theta 環境の cyclotomic rigidity を、離散テータ群（Heisenberg 群 ℤ³）の上で<strong>公理化ゼロの完全証明</strong>として形式化した。「裸のシクロトームは ±1 の不定性を持つ / テータ構造があれば剛性」という [EtTh] の核心の二段構えがそのまま機械検証される:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>theta_comm</code> (M11-1)</td><td>テータ群の交換子公式 [(a,b,c),(a',b',c')] = (0,0,ab'−a'b)——非可換性のすべてが中心シクロトーム1次元に圧縮され、シンプレクティック形式になる</td></tr>
+      <tr><td><code>comm_xy</code> (M11-2)</td><td>標準生成元の交換子 = 中心の生成元——交換子ペアリングがシクロトームの<strong>標準生成元を指定</strong>する（first Chern class の離散版）</td></tr>
+      <tr><td><code>cyclotome_indeterminacy</code> (M11-3)</td><td><strong>剛性なしの場合</strong>: 裸のシクロトーム ℤ の可逆自己準同型は ±1 のみ（ẑ<sup>×</sup>-不定性の離散版）</td></tr>
+      <tr><td><code>marked_cyclotome_rigid</code> (M11-4)</td><td>生成元を指定されたシクロトームの自己同型は恒等のみ・同型は一意</td></tr>
+      <tr><td><code>mono_theta_cyclotomic_rigidity</code> (M11-5)</td><td><strong>[EtTh] Cor 2.19 の離散骨格</strong>: テータ群の自己準同型が標準生成元を中心ズレ（テータ切断の取り替え）を除いて保つなら、シクロトームの生成元を厳密に固定する——<strong>切断の不定性は交換子で完全相殺</strong>される</td></tr>
+      <tr><td><code>rigid_theta_values</code> (M11-6)</td><td>剛性のもとでテータ指数簿記 j ↦ j²（M9-7 で一意性証明済み）は単数倍の不定性なしに転送される（M11 → M9/M4 接続）</td></tr>
+    </table>
+    <p class="small">未形式化: p 進体上の実際の mono-theta 環境（μ<sub>l</sub> 係数・ガロア作用付き）と、エタールテータ関数の関数等式がこの交換子構造を実現すること。</p>
+  </div>
+
+  <h3>M12: Frobenioid の次数層 — 定理3.11 (i)(c) の骨格（IUT/Frobenioid.lean）</h3>
+  <div class="box">
+    <p>[FrdI]/[FrdII] の Frobenioid 論のうち IUT III 定理3.11 (i)(c)「大域 realified Frobenioid の次数が log-volume で計算される」が実際に消費する構造層（因子モノイド＋次数準同型＋Frobenius 射）を形式化した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>Frobenioid.deg_zero</code> (M12-1)</td><td>deg(0) = 0 は公理から導出される（公理系の最小性）</td></tr>
+      <tr><td><code>frob_frob_deg</code> (M12-2)</td><td>Frobenius の合成則 deg(φ<sub>n</sub>φ<sub>m</sub>x) = nm·deg x</td></tr>
+      <tr><td><code>frob_not_invertible</code> (M12-3)</td><td><strong>Frobenius-like 性</strong>: 次数 ≠ 0 の上で φ<sub>n</sub> (n ≥ 2) は不動点なし——Frobenius-like / étale-like 二分法（Θ-link の一方向性）の形式的根拠</td></tr>
+      <tr><td><code>units_etale_like</code> (M12-4)</td><td>次数 0（étale-like 部分）は全 Frobenius で安定</td></tr>
+      <tr><td><code>gaussianDiv_deg</code> (M12-5)</td><td><strong>Gaussian 束の次数公式</strong> deg(⊕φ<sub>j²</sub>x) = (Σj²)·deg x——M4 の次数簿記が Frobenioid の公理から従う（M12 → M4 接続）</td></tr>
+      <tr><td><code>frobenioid_realizes_qpilot</code> (M12-6)</td><td><strong>定理3.11 (i)(c) の骨格</strong>: 次数＝log-volume 両立データのもとで q-パイロット因子は体積 −|log q| の領域として実現——<code>MultiradialRep</code> の <code>vol_q</code> フィールドの供給源（M12 → M5 接続）</td></tr>
+      <tr><td><code>frobenioid_consistent</code> / <code>degree_volume_consistent</code> (M12-7)</td><td>公理系の無矛盾性（Div = ℤ・deg = id・φ<sub>n</sub> = n倍モデル）</td></tr>
+    </table>
+    <p class="small">未形式化: Frobenioid の圏論的実体（基底圏上のファイバー構造・分裂・realification の構成）と、実際の数体の Frobenioid で deg = log-volume を証明すること（<code>DegreeVolumeCompat</code> の充足）。</p>
+  </div>
 
   <h3>M9: テンパード基本群・数論的基本群の理論 — 全構成の土台（IUT/FundamentalGroup.lean）</h3>
   <div class="box">
@@ -366,6 +412,9 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Multiradial.lean</code></td><td>M5: 定理3.11 の出力仕様・系3.12 の証明本体・厳密評価の障害と膨張の必然性</td></tr>
     <tr><td><code>IUT/Evaluation.lean</code></td><td>M4: Gaussian monoid の次数簿記と S2/M5/M7 への接続定理</td></tr>
     <tr><td><code>IUT/FundamentalGroup.lean</code></td><td>M9: テンパード基本群・数論的基本群の骨格（完全列・外ガロア作用・テータ被覆 ℤ・有限商の崩壊定理）</td></tr>
+    <tr><td><code>IUT/Reconstruction.lean</code></td><td>M10: 局所体 (p, d) の復元アルゴリズム実装と MonoAnabelian 充足（選択公理不使用）</td></tr>
+    <tr><td><code>IUT/EtaleTheta.lean</code></td><td>M11: cyclotomic rigidity（テータ群の交換子 ⟹ シクロトーム剛性、公理化ゼロ）</td></tr>
+    <tr><td><code>IUT/Frobenioid.lean</code></td><td>M12: Frobenioid 次数層（Frobenius 非可逆性・Gaussian 束次数・次数＝log-volume ⟹ vol_q 供給）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
