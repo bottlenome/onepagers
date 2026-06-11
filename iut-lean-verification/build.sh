@@ -165,6 +165,10 @@ import IUT
 #print axioms IUT.unramifiedRec_level_surj
 #print axioms IUT.unramifiedLocalCFT
 #print axioms IUT.localCFT_consistent
+#print axioms IUT.map_le_iff_le_comap
+#print axioms IUT.comap_map_of_injective
+#print axioms IUT.norm_correspondence
+#print axioms IUT.unramified_norm_correspondence
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
