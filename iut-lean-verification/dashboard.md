@@ -28,11 +28,11 @@
 
 | チェーン | 主張 | 証明率 |
 |---------|------|--------|
-| M1 遠アーベル復元 | 論理骨格: mono⟹bi 公理なし / bi⟹mono 選択公理必須、Aut不定性＝(Ind1)起源、復元一意性、**log-Frobenius 両立復元（[AbsTopIII] 表題定理の骨格、公理ゼロ）** | ~15% |
+| M1 遠アーベル復元 | 論理骨格: mono⟹bi 公理なし / bi⟹mono 選択公理必須、Aut不定性＝(Ind1)起源、復元一意性、**log-Frobenius 両立復元（[AbsTopIII] 表題定理の骨格、公理ゼロ）**。＋ **M10 復元アルゴリズムの実装**（IUT/Reconstruction.lean）: 局所体の (p,d) を G^ab の rank profile から復元する手続きを整礎再帰で実装し正当性を証明、`MonoAnabelian` を**選択公理不使用で充足**（M1 の述語の初の実体化） | ~20% |
 | M2 Hodge theater | ラベル組合せ骨格＋ **F_l^±± の群公理完結**（閉性・単位元・逆元）、±1商 = {0..l⋇} 同定、テータ値ラベル = {1..l⋇}、Skeleton 橋渡し | ~25% |
 | M3 Θ-link / log-link | 格子の構造定理＋ **垂直コア性・双コア性（定理1.5 の骨格）**: log-不変量は列ごとに一定、リンク不変量は格子全体で一意 | ~40% |
-| M4 テータ値評価 | 値・次数簿記層: Gaussian 総次数の閉形式、素朴評価⟹RC評価/多輻的表現と非両立、膨張込み評価⟹M7計算、**テータ値の±ラベル well-defined 性** (l−j)² ≡ j² (mod l) | 算術核 100% / 理論 ~30% |
-| M5 定理3.11 多輻性 | **statement を原文から読み取り出力仕様を形式化**: (i)(Ind1)(Ind2)・(ii)(Ind3)・(iii) をインターフェース化、系3.12 の証明本体を機械化（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性、**procession 正規化の閉形式（公理ゼロ）**。**構成**（遠アーベル復元等）は未形式化 | ~25%（構成 0%） |
+| M4 テータ値評価 | 値・次数簿記層: Gaussian 総次数の閉形式、素朴評価⟹RC評価/多輻的表現と非両立、膨張込み評価⟹M7計算、**テータ値の±ラベル well-defined 性** (l−j)² ≡ j² (mod l)。＋ **M11 cyclotomic rigidity の骨格**（IUT/EtaleTheta.lean、[EtTh] Cor 2.19）: テータ群（Heisenberg 群）の交換子＝シンプレクティック形式がシクロトームの標準生成元を指定し、**テータ切断の不定性が交換子で完全相殺**されることを公理化ゼロの完全証明で機械検証（裸のシクロトームの ±1 不定性との対比込み） | 算術核 100% / 理論 ~35% |
+| M5 定理3.11 多輻性 | **statement を原文から読み取り出力仕様を形式化**: (i)(Ind1)(Ind2)・(ii)(Ind3)・(iii) をインターフェース化、系3.12 の証明本体を機械化（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性、**procession 正規化の閉形式（公理ゼロ）**。＋ **M12 Frobenioid 次数層**（IUT/Frobenioid.lean、[FrdI/II]）: deg(0)=0 の導出・Frobenius 合成則・**Frobenius-like 非可逆性**・Gaussian 束の次数公式（M4 接続）・**次数＝log-volume 両立 ⟹ `vol_q` の供給**（定理3.11 (i)(c) の骨格、M5 接続）。構成の実体は未形式化 | ~28%（構成は土台のみ） |
 | M6 系3.12 | statement 100% 形式化、骨格からの独立性＋**定理3.11 からの証明本体（p.174–175 の包含論法）を機械化** | statement 100% / 証明 ~90%（条件付き） |
 | M7 IUT IV log-volume 計算 | 条件付き導出 ＋ **l-最適化定理**（全 l で Szpiro 型 ⟹ ht ≤ c、定理1.10 の質的内容） | ~35% |
 | M8 古典的還元と帰結 | ABC ⟹ 漸近フェルマー ＋ Catalan 型 3^b+1=2^a の有界性を完全証明 | ~35% |
@@ -41,16 +41,17 @@
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
 
-**総括**: 「IUT は正しい」**~26%**（ページ規模重み付け: 333/1300 ≈ 26%。主張単位の単純平均では ~35%）、
+**総括**: 「IUT は正しい」**~28%**（ページ規模重み付け: 364/1300 ≈ 28%。主張単位の単純平均では ~36%）、
 「無条件に間違い」0%、「同一視読みでは間違い」100%、
 「係争点は M5 ただ一点」の形式的確定 100%。
 定理3.11 の statement の形式化により「仕様の充足 → 系3.12（証明は公理ゼロで機械化済み）
 → Szpiro → ABC 型帰結」の全経路が Lean 内で接続され、未決着の数学的実質は
 `MultiradialRep` の充足問題ただ一つに圧縮された。
-目標 30% への残りは定理3.11 の**構成**（遠アーベル復元・テータ剛性・Frobenioid 論）
-の形式化であり、その土台の**テンパード基本群・数論的基本群の理論は M9
-（IUT/FundamentalGroup.lean）で骨格を形式化済み**。残部は mathlib 規模の
-数論幾何ライブラリを要する。詳細は index.html の証明率セクション参照。
+issue #29 の4基盤理論はすべて骨格を形式化済み: **基本群（M9）・遠アーベル復元
+アルゴリズム（M10、選択公理不使用）・cyclotomic rigidity（M11、公理化ゼロ）・
+Frobenioid 次数層（M12）**。残部（環構造復元の本体・p進テータ関数の関数等式・
+Frobenioid の圏論的実体）は mathlib 規模の数論幾何ライブラリを要する。
+詳細は index.html の証明率セクション参照。
 
 ## ファイル構成
 
@@ -70,6 +71,9 @@ iut-lean-verification/
     ├── Multiradial.lean # M5: 定理3.11 の出力仕様・系3.12 証明本体・障害と膨張の必然性
     ├── Evaluation.lean  # M4: Gaussian monoid の次数簿記と S2/M5/M7 接続
     ├── FundamentalGroup.lean # M9: テンパード・数論的基本群の骨格（完全列・外作用・テータ被覆 ℤ・有限商崩壊）
+    ├── Reconstruction.lean # M10: 局所体 (p,d) 復元アルゴリズム実装・MonoAnabelian 充足（選択公理不使用）
+    ├── EtaleTheta.lean  # M11: cyclotomic rigidity（テータ群交換子⟹シクロトーム剛性、公理化ゼロ）
+    ├── Frobenioid.lean  # M12: Frobenioid 次数層（Frobenius 非可逆性・次数＝log-volume・vol_q 供給）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -117,5 +121,8 @@ iut-lean-verification/
 | M5: 定理3.11 の statement 読解と出力仕様の形式化・系3.12 証明本体の機械化 | done |
 | M4: Gaussian monoid 次数簿記と接続定理 | done |
 | M9: テンパード基本群・数論的基本群の理論の骨格形式化（issue #29 の土台項目） | done |
-| M5: 定理3.11 の**構成**（遠アーベル復元・テータ剛性・Frobenioid）の形式化 | 土台（M9 基本群骨格）は done。残り（復元実体・テータ剛性・Frobenioid）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
-| M1 実体（p進体の環構造復元）・M2 実体（prime-strip 圏論データ）の形式化 | todo |
+| M10: 遠アーベル復元アルゴリズムの実装と MonoAnabelian 充足（issue #29 項目1の骨格） | done（選択公理不使用） |
+| M11: エタールテータの cyclotomic rigidity の機構（issue #29 項目2の骨格） | done（公理化ゼロの完全証明） |
+| M12: Frobenioid 次数層と vol_q 供給（issue #29 項目3の骨格） | done |
+| M5: 定理3.11 の**構成**の完全形式化 | 4基盤の骨格（M9–M12）は done。残り（環構造復元の本体・p進テータ関数の関数等式・Frobenioid の圏論的実体・実際の数体での充足）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
+| M2 実体（prime-strip 圏論データ）の形式化 | todo |
