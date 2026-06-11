@@ -1,0 +1,6 @@
+name = "iut-lean-verification"
+version = "0.1.0"
+defaultTargets = ["IUT"]
+
+[[lean_lib]]
+name = "IUT"

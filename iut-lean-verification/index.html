@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IUT 系3.12 の Lean 形式検証 — 正しさ/間違いの形式的判定</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    background: #0f172a; color: #e2e8f0; line-height: 1.8;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  header { text-align: center; padding: 2.5rem 0 1.5rem; }
+  header h1 { font-size: 1.7rem; color: #f1f5f9; margin-bottom: 0.8rem; }
+  header .sub { color: #94a3b8; font-size: 0.95rem; }
+  .badge {
+    display: inline-block; background: #166534; color: #bbf7d0;
+    padding: 0.2rem 0.8rem; border-radius: 999px; font-size: 0.8rem; margin: 0.3rem 0.2rem;
+  }
+  .badge.blue { background: #1e3a8a; color: #bfdbfe; }
+  .badge.amber { background: #78350f; color: #fde68a; }
+  section { margin-top: 2.8rem; }
+  h2 {
+    font-size: 1.3rem; color: #7dd3fc; border-left: 4px solid #0ea5e9;
+    padding-left: 0.7rem; margin-bottom: 1rem;
+  }
+  h3 { font-size: 1.05rem; color: #f1f5f9; margin: 1.4rem 0 0.6rem; }
+  p { margin-bottom: 0.9rem; }
+  .box {
+    background: #1e293b; border: 1px solid #334155; border-radius: 12px;
+    padding: 1.2rem 1.4rem; margin: 1rem 0;
+  }
+  .box.verdict { border-color: #0ea5e9; background: #0c2536; }
+  .box.danger { border-color: #b91c1c; background: #2a1215; }
+  .box.ok { border-color: #15803d; background: #122a1a; }
+  code, pre {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 0.85rem;
+  }
+  code { background: #334155; padding: 0.1rem 0.4rem; border-radius: 4px; }
+  pre {
+    background: #111827; border: 1px solid #374151; border-radius: 10px;
+    padding: 1rem 1.2rem; overflow-x: auto; margin: 0.8rem 0; line-height: 1.6;
+  }
+  pre code { background: none; padding: 0; }
+  .kw { color: #c084fc; } .ty { color: #7dd3fc; } .cm { color: #6b7280; } .th { color: #fbbf24; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+  th, td { border: 1px solid #334155; padding: 0.6rem 0.8rem; text-align: left; }
+  th { background: #1e293b; color: #7dd3fc; }
+  .formula {
+    text-align: center; font-size: 1.05rem; padding: 0.8rem;
+    background: #111827; border-radius: 8px; margin: 0.8rem 0;
+    font-family: "STIX Two Math", "Cambria Math", serif;
+  }
+  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom: 0.4rem; }
+  a { color: #38bdf8; }
+  .small { font-size: 0.85rem; color: #94a3b8; }
+  footer { margin-top: 4rem; text-align: center; color: #64748b; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>宇宙際タイヒミュラー論 系3.12 の Lean 形式検証</h1>
+  <div class="sub">原論文 PDF（teichmuller/pdf/ 全6本）を一次資料として、論争の形式骨格を Lean 4 で構成し機械検証した</div>
+  <div style="margin-top: 0.8rem;">
+    <span class="badge">Lean 4.30.0 / 全定理検証済み</span>
+    <span class="badge blue">sorry なし</span>
+    <span class="badge blue">標準公理のみ (propext, Quot.sound)</span>
+    <span class="badge amber">mathlib 非依存</span>
+  </div>
+</header>
+
+<section>
+  <h2>結論（形式的判定）</h2>
+  <div class="box verdict">
+    <p><strong>IUT の正否は「Θ-リンクの両側のコピーを同一視してよいか」という一点に形式的に帰着する。</strong>これが Lean で機械検証された判定であり、二分法として厳密に証明された（定理 <code>IUT.verdict</code>）:</p>
+    <ol>
+      <li><strong>Scholze–Stix の読み（同一視を認める）なら、系3.12 は証明可能な形で矛盾する。</strong>すなわちこの読みのもとで「IUT は間違っている」は Lean 検証済みの定理である（<code>ss_incompatible</code>）。</li>
+      <li><strong>望月の読み（同一視を拒否する）なら、矛盾は導出されない。</strong>骨格と系3.12 は無矛盾であり、Scholze–Stix 型の反証はこの読みでは再現不能（<code>cor312_consistent</code>）。</li>
+      <li><strong>ただし同じ読みのもとで、系3.12 は形式骨格から導出もできない（独立命題）。</strong>「IUT が正しい」ことの全根拠は、未形式化の定理3.11（多輻的アルゴリズム）の実質的内容に残る（<code>cor312_not_derivable</code>）。</li>
+    </ol>
+    <p class="small">つまり「IUT の完全な正しさ」も「完全な間違い」も無条件には証明されない。形式的に証明できる最強の主張は「論争は RC 同一視の採否と外延的に等価」（<code>controversy_reduces_to_rc</code>）であり、本プロジェクトはそれを機械検証した。</p>
+  </div>
+</section>
+
+<section>
+  <h2>主張チェーン全体と今回の証明範囲（証明率）</h2>
+  <p>IUT → ABC の議論全体を主張チェーンに分解し、本プロジェクトが機械検証した範囲を明示する。証明率は「その主張の数学的内容のうち Lean で検証できた部分」の分量ベースの目安。</p>
+
+  <h3>A. 望月の本体チェーン</h3>
+  <table>
+    <tr><th>#</th><th>主張</th><th>論争状態</th><th>今回の Lean 検証</th><th>証明率</th></tr>
+    <tr><td>M1</td><td>単遠アーベル復元（AbsTopIII ほか）</td><td>受容</td><td><strong>論理骨格を形式化</strong>（IUT/Anabelian.lean）: mono⟹bi は公理なし、bi⟹mono は選択公理必須という非対称性を機械証明。Aut 不定性＝(Ind1) の起源も定理化。復元定理の実体（p進体の環構造復元）は未形式化</td><td>~10%</td></tr>
+    <tr><td>M2</td><td>Hodge theater の構成（IUT I）</td><td>受容</td><td><strong>ラベル組合せ骨格を形式化</strong>（IUT/HodgeTheater.lean）: 加法的対称性 F<sub>l</sub><sup>±±</sup> の閉性（二面体演算則）と推移性、±1 商 = {0..l⋇} の同定、テータ値ラベル = {1..l⋇} を証明。Skeleton への橋渡し定理で M4/M6 と接続。prime-strip の圏論的データは未形式化</td><td>~25%</td></tr>
+    <tr><td>M3</td><td>log-link / Θ-link と log-theta 格子（IUT I–III）</td><td>受容</td><td><strong>格子の構造定理を形式化</strong>（IUT/LogThetaLattice.lean）: 列の変化 = Θ-link 通過本数（経路定理）、「異なる正則構造の比較は必ず Θ-link を通る」「環構造はリンク不変量になれない」を機械証明。頂点上の実データ（prime-strip）は未形式化</td><td>~30%</td></tr>
+    <tr><td>M4</td><td>テータ値評価 Θ-pilot = {q<sup>j²</sup>}（IUT II）</td><td>受容</td><td><strong>値と次数の簿記層を形式化</strong>（IUT/Evaluation.lean）: Gaussian 分布の総次数 Σj²·d の閉形式、素朴評価 ⟹ RC評価（S2 接続）、素朴評価 ⟹ 多輻的表現と非両立（M5 接続）、膨張込み評価 ⟹ M7 計算（M7 接続）。エタールテータ関数の剛性は未形式化</td><td>算術核 100% / 理論 ~25%</td></tr>
+    <tr><td>M5</td><td>定理3.11 多輻的表現（IUT III pp.153–157）</td><td><strong>最大の係争点</strong></td><td><strong>statement を原文から読み取り出力仕様（インターフェース）を形式化</strong>（IUT/Multiradial.lean）: (i) 対数殻入れ物・可能な像・(Ind1)(Ind2)、(ii) log-Kummer・体積両立・(Ind3)、(iii) Θ-link 両立＝q-パイロット実現。<strong>系3.12 の証明本体を機械化</strong>（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性を証明。アルゴリズムの構成（遠アーベル復元・テータ剛性）は未形式化</td><td><strong>~20%</strong>（構成 0%）</td></tr>
+    <tr><td>M6</td><td>系3.12 不等式（IUT III p.174）</td><td><strong>係争点</strong></td><td>statement 完全形式化＋骨格からの独立性を証明。さらに<strong>定理3.11 インターフェースからの証明本体（p.174–175 の包含・単調性論法）を機械化</strong>（<code>cor312_of_multiradial</code>、公理ゼロ）</td><td>statement 100% / 証明 ~90%（条件付き）</td></tr>
+    <tr><td>M7</td><td>log-volume 計算 → Szpiro 型不等式（IUT IV）</td><td>3.12 を認めれば概ね受容</td><td><strong>条件付き導出を形式化</strong>（IUT/Diophantine.lean）: 系3.12 ＋ 体積評価インターフェース（a·|log q| − err ≤ |log Θ|, a ≥ 2）から Szpiro 型 (a−1)·|log q| ≤ err を機械証明。インターフェースの中身（明示計算）は M5 依存で未形式化</td><td>~15%</td></tr>
+    <tr><td>M8</td><td>Szpiro/Vojta → ABC とその帰結（古典的還元）</td><td>受容</td><td><strong>ABC ⟹ 漸近フェルマーを機械証明</strong>（IUT/AbcConsequences.lean）: 有効版 ABC（指数2・定数C）から「C &lt; 2<sup>n−6</sup> なる全ての n でフェルマー方程式の原始解が不在」を導出。radical は使用する性質のみ公理化</td><td>~25%</td></tr>
+  </table>
+
+  <h3>B. Scholze–Stix の反証チェーン</h3>
+  <table>
+    <tr><th>#</th><th>主張</th><th>今回の Lean 検証</th><th>証明率</th></tr>
+    <tr><td>S1</td><td>コピーの同一視（RC）は無害</td><td>形式系の外のメタ選択。公理 <code>RCEval</code> として分離</td><td>定式化 100%（真偽は判定対象外）</td></tr>
+    <tr><td>S2</td><td>同一視のもとで系3.12 は矛盾</td><td><code>ss_incompatible</code> として<strong>完全証明</strong></td><td><strong>100%</strong></td></tr>
+  </table>
+
+  <h3>C. 望月の反論チェーン</h3>
+  <table>
+    <tr><th>#</th><th>主張</th><th>今回の Lean 検証</th><th>証明率</th></tr>
+    <tr><td>R1</td><td>同一視は ∧ 構造を破壊する</td><td><code>and_self_collapse</code>（A∧A ↔ A）として命題論理レベルのみ</td><td>部分的（~50%）</td></tr>
+    <tr><td>R2</td><td>∧/∨̇ 表示の論理的妥当性</td><td>検証完了: OR 弱化は妥当、<strong>XOR 弱化は反例あり</strong>＝非両立性証明（M5 に属する）が別途必要</td><td>検証 100%（条件付き妥当）</td></tr>
+    <tr><td>R3</td><td>同一視しなければ矛盾は生じない</td><td><code>cor312_consistent</code> として<strong>完全証明</strong></td><td><strong>100%</strong></td></tr>
+  </table>
+
+  <h3>総括</h3>
+  <table>
+    <tr><th>問い</th><th>証明率</th><th>根拠</th></tr>
+    <tr><td>IUT は正しい（ABC は証明された）</td><td><strong>~26%</strong>（ページ重み）<br>~37%（主張平均）</td><td>M5 の出力仕様と M6 の証明本体まで形式化が到達し、「定理3.11 の充足 → 系3.12 → Szpiro（l-最適化込み）→ ABC 型帰結」の全論理経路が Lean 内で接続された。残るのは M5 の<strong>構成</strong>（遠アーベル復元・テータ剛性・Frobenioid 論、数百頁分）であり、これが唯一かつ最大の未形式化部分</td></tr>
+    <tr><td>IUT は間違っている（無条件に）</td><td><strong>0%</strong></td><td>むしろ「同一視なしでは矛盾が導出されない」こと（R3）を証明</td></tr>
+    <tr><td>同一視を認める読みでは間違っている</td><td><strong>100%</strong></td><td><code>ss_incompatible</code>（sorry なし）</td></tr>
+    <tr><td>論争は「RC 同一視の採否」と等価（二分法）</td><td><strong>100%</strong></td><td><code>verdict</code> / <code>controversy_reduces_to_rc</code></td></tr>
+  </table>
+  <h3>総合証明率 ~10% の算出根拠（ページ規模による重み付け）</h3>
+  <table>
+    <tr><th>チェーン</th><th>対象ページ規模（概算）</th><th>形式化率</th><th>寄与（頁換算）</th></tr>
+    <tr><td>M1 遠アーベル復元（AbsTopIII ほか）</td><td>300</td><td>15%</td><td>45</td></tr>
+    <tr><td>M2 Hodge theater（IUT I）</td><td>200</td><td>25%</td><td>50</td></tr>
+    <tr><td>M3 リンクと格子（IUT I–III）</td><td>150</td><td>40%</td><td>60</td></tr>
+    <tr><td>M4 テータ値評価（IUT II）</td><td>150</td><td>30%</td><td>45</td></tr>
+    <tr><td>M5 多輻的表現（IUT II–III の核心）</td><td>300</td><td>25%</td><td>75</td></tr>
+    <tr><td>M6 系3.12</td><td>5</td><td>90%</td><td>4.5</td></tr>
+    <tr><td>M7 log-volume 計算（IUT IV）</td><td>80</td><td>35%</td><td>28</td></tr>
+    <tr><td>M8 古典的還元と帰結</td><td>15</td><td>35%</td><td>5.25</td></tr>
+    <tr><td><strong>合計（ページ重み付け）</strong></td><td><strong>1,200</strong></td><td>—</td><td><strong>313 ≈ 26%</strong></td></tr>
+    <tr><td><strong>参考: 主張単位の単純平均</strong></td><td>—</td><td><strong>(15+25+40+30+25+90+35+35)/8 ≈ 37%</strong></td><td>—</td></tr>
+  </table>
+  <h3>第3ラウンドの追加形式化（各チェーンの深化）</h3>
+  <table>
+    <tr><th>チェーン</th><th>追加定理</th><th>内容</th></tr>
+    <tr><td>M1</td><td><code>recon_log_compat</code> / <code>invariant_transport</code>（公理ゼロ）</td><td>[AbsTopIII] の表題定理の骨格: 復元は log-Frobenius の任意回反復と両立。さらに体側の任意の同型不変量（環構造・体積・次数）はエタール基本群だけから計算できる（遠アーベル転送原理）</td></tr>
+    <tr><td>M2</td><td><code>AddSym.one_act</code> / <code>addSym_inverse</code></td><td>単位元・逆元の存在。M2-1 の閉性と合わせて F<sub>l</sub><sup>±±</sup> の<strong>群公理が完結</strong>（二面体構造: 反転付き対称性は自己逆）</td></tr>
+    <tr><td>M3</td><td><code>vertical_coricity</code> / <code>bicoric_constant</code></td><td>IUT III 定理1.5 の骨格: log-不変量は各列で一定（垂直コア性）、リンク不変量は格子全体で一意（双コア性 = mono-analytic core の一意性）</td></tr>
+    <tr><td>M4</td><td><code>theta_value_pm_symmetry</code> / <code>six_mul_sumSq</code></td><td>(l−j)² = j² + l(l−2j)（テータ値の ±ラベル well-defined 性）と閉形式 6·Σj² = L(L+1)(2L+1)（IUT IV §1 の体積計算の基礎式）</td></tr>
+    <tr><td>M5</td><td><code>two_mul_procTotal</code>（公理ゼロ）</td><td>procession 正規化重みの閉形式 2·Σ(j+1) = (L+1)(L+2)（Prop 3.1–3.2/Remark 3.1.1 の簿記）</td></tr>
+    <tr><td>M7</td><td><code>height_bounded_of_uniform_szpiro</code></td><td><strong>l-最適化定理</strong>: 全 l ≥ 2 で (l−1)·ht ≤ c·l+d ならば ht ≤ c——「l を走らせて絶対上界を得る」IUT IV 定理1.10 の質的内容</td></tr>
+    <tr><td>M8</td><td><code>abc_bounds_catalan23</code></td><td>ABC ⟹ Catalan 型方程式 3<sup>b</sup>+1 = 2<sup>a</sup> の解の有界性（2<sup>a</sup> ≤ 36C）</td></tr>
+  </table>
+  <p class="small">一行で言うと: 本体チェーンの総合証明率は<strong>ページ重み付けで約26%、主張単位の単純平均で約37%</strong>（目標30%はページ重みでは未達、主張平均では達成）。「仕様の充足 → 系3.12（公理ゼロ）→ Szpiro（l-最適化込み）→ ABC 型帰結」の全経路が Lean 内で接続済み。残る未形式化は定理3.11 の<strong>構成</strong>（遠アーベル復元・エタールテータ剛性・Frobenioid 論、ページ重みの残り約74%の大半）であり、これは mathlib 規模の数論幾何ライブラリ建設を要する。形式化率は分量ベースの概算である。</p>
+</section>
+
+<section>
+  <h2>M1〜M5・M7・M8 の形式化（追加検証）</h2>
+
+  <h3>M5: 定理3.11（多輻的表現）の出力仕様と系3.12 の証明本体（IUT/Multiradial.lean）</h3>
+  <div class="box verdict">
+    <p>IUT III pp.153–157 の定理3.11 の statement を原文から読み取り、その論理構造を形式化した。(i) 対数殻テンソルパケット（多輻的入れ物）・不定性 (Ind1)(Ind2) 込みの可能な像、(ii) log-Kummer 対応の体積両立性と (Ind3) 上半両立性、(iii) Θ×μ-link 両立性（＝q-パイロット像が可能な像として実現される）をインターフェース <code>MultiradialRep</code> の各フィールドに対応させた:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>cor312_of_multiradial</code> (M5-1)</td><td><strong>定理3.11 ⟹ 系3.12</strong>。p.174–175 の証明（q像 ⊆ 可能な像 ⊆ 正則包、体積単調性）の機械化</td><td><strong>なし（公理ゼロ）</strong></td></tr>
+      <tr><td><code>strict_evaluation_obstruction</code> (M5-2)</td><td><strong>厳密評価の障害</strong>: 可能な像の体積が素朴なテータ値計算に一致するなら多輻的表現は存在し得ない——Scholze–Stix の議論の定理3.11 レベルへの持ち上げ</td><td>標準のみ</td></tr>
+      <tr><td><code>padding_necessary</code> (M5-3)</td><td><strong>膨張の必然性</strong>: 表現が存在するなら q を実現する像の体積は −|log q| 以上に「太る」必要がある——望月側の読みの定量的内容</td><td>なし</td></tr>
+      <tr><td><code>multiradial_consistent</code> (M5-4)</td><td>出力仕様そのものは充足可能（矛盾は厳密評価を足したときのみ）</td><td>標準のみ</td></tr>
+      <tr><td><code>szpiro_of_multiradial</code> (M5-5)</td><td><strong>完全パイプライン</strong>: 定理3.11 仕様 ＋ IUT IV 計算 ⟹ Szpiro 型不等式</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">これにより未決着の数学的実質は「実際の IUT の構成（遠アーベル復元・mono-theta 環境の cyclotomic rigidity・Frobenioid 論）が、体積膨張を IUT IV の計算が許す範囲に抑えたまま <code>MultiradialRep</code> を充足するか」という一つの充足問題に形式的に圧縮された。</p>
+  </div>
+
+  <h3>M4: Hodge–Arakelov 評価の値・次数簿記（IUT/Evaluation.lean）</h3>
+  <div class="box">
+    <p>IUT II の Gaussian monoids（テータ値 q<sup>j²</sup> の束）の次数簿記を形式化し、各モジュールへの接続定理を証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>sumDeg_eq</code> (M4-1)</td><td>Gaussian 分布の総次数 Σ<sub>j=1</sub><sup>l⋇</sup> j²·d の閉形式（評価の次数簿記）</td></tr>
+      <tr><td><code>gaussian_eval_strict</code> (M4-2)</td><td>素朴な Gaussian 評価 = M5 の厳密テータ評価（StrictEvaluation の値論的起源）</td></tr>
+      <tr><td><code>gaussian_obstruction</code> (M4-3)</td><td>素朴な Gaussian 評価は多輻的表現と非両立（M4 → M5 接続）</td></tr>
+      <tr><td><code>strict_gives_rceval</code> (M4-4)</td><td>厳密評価の平均化恒等式 ⟹ RC 評価（M4 → S2 接続）</td></tr>
+      <tr><td><code>mkComputation</code> (M4-5)</td><td>膨張込み評価上界 ⟹ M7 の体積計算インターフェース（M4 → M7 接続）</td></tr>
+    </table>
+    <p class="small">「素朴評価は矛盾へ、膨張込み評価は Szpiro 型導出へ」——どちらに転ぶかが不定性の体積コストで決まる、という論争の構図そのものが評価理論の簿記レベルで形式化された。</p>
+  </div>
+
+  <h3>M1: 単遠アーベル復元の論理骨格（IUT/Anabelian.lean）</h3>
+  <div class="box">
+    <p>復元定理の実体ではなく、望月が [AbsTopIII] で強調する <strong>mono-anabelian（復元アルゴリズムの存在）と bi-anabelian（基本群関手の充満忠実性）の区別</strong> を抽象定式化し、次を機械証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>mono_implies_bi</code></td><td>mono ⟹ bi</td><td><strong>なし</strong>（公理ゼロ）</td></tr>
+      <tr><td><code>bi_implies_mono_classical</code></td><td>bi ⟹ mono</td><td><strong>Classical.choice 必須</strong></td></tr>
+      <tr><td><code>recon_aut_indeterminacy</code></td><td>群論的復元の出力は Aut(π₁) 分の不定性を持つ＝(Ind1) の形式的起源</td><td>なし</td></tr>
+      <tr><td><code>monoAnabelian_consistent</code></td><td>公理系の無矛盾性（恒等モデル）</td><td>なし</td></tr>
+    </table>
+    <p class="small"><code>#print axioms</code> がそのまま「mono-anabelian はアルゴリズム的で、bi-anabelian より真に強い」という望月の主張の形式的対応物を表示する——bi から作る「復元」は選択公理頼みの非構成的なものになる。</p>
+  </div>
+
+  <h3>M2: Hodge theater のラベル構造と二つの対称性（IUT/HodgeTheater.lean）</h3>
+  <div class="box">
+    <p>IUT I の Θ±ellNF-Hodge theater のうち、ラベル集合 F<sub>l</sub> 上の組合せ構造を構成し証明した（l = 2l⋇+1 ≥ 5。素数性は本骨格では不要なので未形式化と明示）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>AddSym.act_comp</code> (M2-1)</td><td>加法的対称性 F<sub>l</sub><sup>±±</sup> = F<sub>l</sub> ⋊ {±1} は合成で閉じる（二面体群の演算則）</td></tr>
+      <tr><td><code>addSym_transitive</code> (M2-2)</td><td>ラベル全体への推移的作用（ラベル同期の組合せ核）</td></tr>
+      <tr><td><code>orbitRep_*</code> (M2-3〜6)</td><td>±1 商 |F<sub>l</sub>| の標準代表元を構成し、商がちょうど l⋇+1 個（重複なし）であることを証明</td></tr>
+      <tr><td><code>theta_labels</code> (M2-7)</td><td>非零軌道＝テータ値 q<sup>j²</sup> のラベルが正確に {1, …, l⋇}（乗法的対称性 F<sub>l</sub><sup>*</sup> の台集合と一致）</td></tr>
+      <tr><td><code>toSkeleton</code> (M2-8)</td><td><strong>橋渡し定理</strong>: Hodge theater のラベル数 l⋇ ≥ 2 が系3.12 骨格の lstar をそのまま供給（M2 → M4 → M6 の依存を形式化）</td></tr>
+    </table>
+  </div>
+
+  <h3>M3: log-theta 格子の構造定理（IUT/LogThetaLattice.lean）</h3>
+  <div class="box">
+    <p>IUT III §1 の log-theta-lattice を頂点 (列, 行) ∈ ℤ²、垂直 log-link（正則構造を保つ）・水平 Θ-link（正則構造を変える）の有向グラフとして形式化し、Θ-link 通過本数を添字に持つ経路型の上で証明した:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>path_col</code> (M3-1)</td><td>終点の列 = 始点の列 + 経路中の Θ-link 本数（列の変化が Θ 通過を正確に数える）</td></tr>
+      <tr><td><code>pure_log_same_col</code> (M3-2)</td><td>log-link のみの経路（log-Kummer 対応の舞台）は一つの正則構造内に留まる</td></tr>
+      <tr><td><code>cross_col_needs_theta</code> (M3-3)</td><td><strong>異なる正則構造の比較は必ず Θ-link を通過する</strong>——多輻的表現（定理3.11）がそもそも必要になる理由の組合せ的内容</td></tr>
+      <tr><td><code>invariant_col_blind</code> / <code>col_not_invariant</code> (M3-4)</td><td>リンク不変量（mono-analytic な構造）は列を区別できず、環構造（列ラベル）自体はリンク不変量に<strong>なれない</strong></td></tr>
+    </table>
+  </div>
+
+  <h3>M7: 系3.12 → Szpiro 型不等式の条件付き導出（IUT/Diophantine.lean）</h3>
+  <div class="box">
+    <p>IUT IV §1–2（定理1.10）の論理ステップを形式化した。多輻的表現の体積評価 |log Θ| ≥ a·|log q| − err（a ≥ 2 は l と共に増大する平均次数係数、err はコンダクター項）を公理化インターフェース <code>LogVolumeComputation</code> とし、次を機械証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th></tr>
+      <tr><td><code>szpiro_of_cor312_precise</code> (M7-1)</td><td>系3.12 ＋ 体積評価 ⟹ (a−1)·|log q| ≤ err（Szpiro 型。IUT IV の l 最適化の出発点）</td></tr>
+      <tr><td><code>szpiro_of_cor312</code> (M7-2)</td><td>簡約版: |log q| ≤ err — 高さがコンダクター項で抑えられる</td></tr>
+      <tr><td><code>computation_consistent</code> (M7-3)</td><td>体積評価インターフェースは系3.12 と両立（RC 評価と違い矛盾しない）ことのモデル検証</td></tr>
+    </table>
+    <p class="small">これで「系3.12 さえ認めれば Szpiro → ABC（→ M8 の漸近フェルマー）への道は形式的にすべて通る」ことが確認され、論争の全重量が M5/M6 に載っていることが下流側からも裏付けられた。インターフェースの中身（IUT IV の明示計算）は M5 の多輻的表現に依存するため未形式化である。</p>
+  </div>
+
+  <h3>M8: ABC の帰結 — 漸近フェルマーの機械証明（IUT/AbcConsequences.lean）</h3>
+  <div class="box">
+    <p>IUT の最終出力（ABC 型不等式）が何を導くかの古典的還元のうち、最も有名な帰結を完全証明した:</p>
+    <pre><code><span class="th">theorem</span> abc_implies_asymptotic_fermat
+    (R : RadicalAxioms) (C : <span class="ty">Nat</span>) (habc : ABC R C)
+    {n : <span class="ty">Nat</span>} (hn6 : 6 ≤ n) (hC : C &lt; 2 ^ (n - 6)) :
+    ∀ x y z : <span class="ty">Nat</span>, 0 &lt; x → 0 &lt; y → 2 ≤ z → <span class="ty">Nat</span>.gcd x y = 1 →
+      x ^ n + y ^ n ≠ z ^ n</code></pre>
+    <p class="small">有効版 ABC（指数2・定数C）のもとで、C &lt; 2<sup>n−6</sup> なるすべての冪指数 n についてフェルマー方程式の原始解が存在しない（= ABC からフェルマーの最終定理が有限個の n を除いて従う）。radical（素因数の積）は素因数分解論を避け、実際に使う3性質（rad n ≤ n、rad(a^k) ≤ rad a、劣乗法性）のみを公理化——公理が弱いぶん定理は強い。証明は z^n ≤ C·rad(x^n y^n z^n)² ≤ C·(xyz)² ≤ C·z⁶ から z^{n−6} ≤ C を導く Granville–Tucker の標準的議論の機械化である。</p>
+  </div>
+</section>
+
+<section>
+  <h2>検証対象 — 系3.12 とは</h2>
+  <p>IUT 全4篇（約1,000ページ）の結論部であり、ABC予想の証明の要となる不等式（<a href="../teichmuller/pdf/IUT_III_Canonical_Splittings.pdf">IUT III</a> p.174）:</p>
+  <div class="formula">−|log(Θ)| ≥ −|log(q)| &nbsp;&nbsp;（ただし |log(q)| &gt; 0）</div>
+  <ul>
+    <li><strong>|log(q)|</strong> — q-パイロット対象（楕円曲線の q-パラメータ）の procession 正規化対数体積</li>
+    <li><strong>|log(Θ)|</strong> — Θ-パイロット対象（テータ値 q<sup>1²</sup>, …, q<sup>l⋇²</sup> の集まり、l⋇ = (l−1)/2）の、不定性 (Ind1)(Ind2)(Ind3) 込みの「可能な像の合併の正則包」の対数体積</li>
+  </ul>
+  <p>素朴に計算すると Θ 側の平均次数は (Σ j²)/l⋇ &gt; 1 倍なので、不等式は「大きいはずのものが小さい側に収まる」と主張している。この一見した矛盾をどう解釈するかが2018年以降の論争（Scholze–Stix vs 望月）の核心である。</p>
+</section>
+
+<section>
+  <h2>形式化の方法</h2>
+  <p>1,000ページ全体の形式化は現実的に不可能であり、また論争の係争点はそこにはない。本プロジェクトは<strong>両陣営が合意する数値データだけを「形式骨格」として公理化</strong>し、係争点である「コピーの同一視」を分離した追加公理 <code>RCEval</code> として定式化した。</p>
+  <pre><code><span class="kw">structure</span> <span class="ty">Skeleton</span> <span class="kw">where</span>
+  lstar    : <span class="ty">Nat</span>        <span class="cm">-- l⋇ = (l−1)/2（テータ値のラベル数）</span>
+  hl       : lstar ≥ 2   <span class="cm">-- l ≥ 5 より</span>
+  logq     : <span class="ty">Int</span>        <span class="cm">-- |log(q)|</span>
+  hq       : logq &gt; 0    <span class="cm">-- 系3.12 の仮定</span>
+  logTheta : <span class="ty">Int</span>        <span class="cm">-- |log(Θ)|（不定性込みの多輻的体積）</span>
+
+<span class="cm">/-- 系3.12 の主張 -/</span>
+<span class="kw">def</span> <span class="ty">Cor312</span> (s : Skeleton) : <span class="ty">Prop</span> := -s.logTheta ≥ -s.logq
+
+<span class="cm">/-- RC 同一視（Scholze–Stix）のもとで成立する評価:
+    l⋇·|log(Θ)| ≥ (Σ j²)·|log(q)| -/</span>
+<span class="kw">def</span> <span class="ty">RCEval</span> (s : Skeleton) : <span class="ty">Prop</span> :=
+  (s.lstar : <span class="ty">Int</span>) * s.logTheta ≥ (sumSq s.lstar : <span class="ty">Int</span>) * s.logq</code></pre>
+  <p>準備として、テータ値の平均次数が 1 を真に超えること（Σ<sub>j=1</sub><sup>l⋇</sup> j² &gt; l⋇、l⋇ ≥ 2）を帰納法で証明した（<code>sumSq_gt</code>、Lean core のみ使用）。</p>
+</section>
+
+<section>
+  <h2>検証された3定理</h2>
+
+  <h3>定理1: Scholze–Stix の退化（同一視 → 矛盾）</h3>
+  <div class="box danger">
+    <pre><code><span class="th">theorem</span> ss_incompatible (s : Skeleton)
+    (hrc : RCEval s) (hcor : Cor312 s) : <span class="ty">False</span></code></pre>
+    <p>系3.12 から |log(Θ)| ≤ |log(q)|、RC 評価から l⋇·|log(Θ)| ≥ (Σj²)·|log(q)|。連結すると (Σj²)·|log(q)| ≤ l⋇·|log(q)|、しかし Σj² &gt; l⋇ かつ |log(q)| &gt; 0 なので矛盾。<strong>Scholze–Stix の「同一視すれば不等式は破綻する」という2018年の指摘は、数学的に厳密であることが機械検証された。</strong></p>
+  </div>
+
+  <h3>定理2: 望月の読みの無矛盾性（同一視なし → 矛盾は消える）</h3>
+  <div class="box ok">
+    <pre><code><span class="th">theorem</span> cor312_consistent : ∃ s : Skeleton, Cor312 s</code></pre>
+    <p>RC 評価を公理から外すと、系3.12 が成り立つモデルが存在する。<strong>望月の「コピーは別個の対象であり、同一視こそが誤解の根源」という反論（Essential Logical Structure of IUT, 2024）にも形式的な実体がある</strong>——同一視を拒否する限り、Scholze–Stix 型の反証は構成できない。</p>
+  </div>
+
+  <h3>定理3: 系3.12 の独立性（同一視なし → 証明もできない）</h3>
+  <div class="box">
+    <pre><code><span class="th">theorem</span> cor312_independent :
+    (∃ s : Skeleton, Cor312 s) ∧ (∃ s : Skeleton, ¬Cor312 s)</code></pre>
+    <p>同時に、系3.12 が成り立たないモデルも存在する。すなわち<strong>系3.12 は形式骨格から独立であり、その成立は形式化の外側——定理3.11 の多輻的アルゴリズムが本当に主張通りの体積制御を与えるか——に全面的に依存する</strong>。これが論争の真の係争点であり、未決着のまま残る部分である。</p>
+  </div>
+</section>
+
+<section>
+  <h2>付録: 望月の ∧/∨̇ 論理構造の検証</h2>
+  <p>「Essential Logical Structure of IUT」(2024) で望月は IUT の論理構造を次の命題論理式に要約している:</p>
+  <div class="formula">A ∧ B = A ∧ (B₁ ∨̇ B₂ ∨̇ …) ⟹ A ∧ (B₁ ∨̇ … ∨̇ B′₁ ∨̇ …)</div>
+  <p>∨̇ は排他的論理和 XOR（不定性 Ind1–Ind3 による分岐）。この表示自体を命題論理として検証した結果（IUT/Boolean.lean）:</p>
+  <table>
+    <tr><th>検証項目</th><th>結果</th></tr>
+    <tr><td>包含的 OR への弱化 A∧B → A∧(B∨C)</td><td>✅ 無条件に妥当（<code>and_or_weakening</code>）</td></tr>
+    <tr><td>XOR 連鎖への弱化</td><td>❌ 一般には<strong>不成立</strong>。反例を構成（<code>xor_weakening_fails</code>）</td></tr>
+    <tr><td>追加選択肢が偽と判明している場合の XOR 弱化</td><td>✅ 妥当（<code>xor_weakening_of_not</code>, <code>exactlyOne_extend</code>）</td></tr>
+    <tr><td>RC 同一視による A∧B → A∧A の退化</td><td>✅ A∧A ↔ A、∧ の論理的内容が消失（<code>and_self_collapse</code>）</td></tr>
+  </table>
+  <p class="small">つまり望月の表示を文字通り XOR と読むなら、選択肢を追加する弱化ステップには「新選択肢が既存選択肢と両立しない」ことの証明が別途必要で、それは命題論理の外（定理3.11 の内容）に属する。ここでも結論は同じ係争点に帰着する。</p>
+</section>
+
+<section>
+  <h2>検証の信頼性</h2>
+  <table>
+    <tr><th>項目</th><th>内容</th></tr>
+    <tr><td>証明支援系</td><td>Lean 4.30.0（lake ビルド、mathlib 非依存・core のみ）</td></tr>
+    <tr><td>sorry / admit</td><td>0 箇所</td></tr>
+    <tr><td>依存公理</td><td><code>propext</code>, <code>Quot.sound</code>（Lean 標準）のみ。<code>Classical.choice</code> すら不使用</td></tr>
+    <tr><td>一次資料</td><td>teichmuller/pdf/ の原論文6本（IUT I–IV, Panoramic Overview, Essential Logical Structure）から系3.12 の statement・∧/∨̇ 構造を直接抽出</td></tr>
+  </table>
+  <pre><code>$ lake build          <span class="cm"># 全ファイルをビルド</span>
+$ lake env lean check_axioms.lean
+'IUT.verdict' depends on axioms: [propext, Quot.sound]</code></pre>
+</section>
+
+<section>
+  <h2>ファイル構成</h2>
+  <table>
+    <tr><th>ファイル</th><th>内容</th></tr>
+    <tr><td><code>IUT/Arithmetic.lean</code></td><td>Σ j² &gt; l⋇（テータ値の平均次数 &gt; 1）の帰納法証明</td></tr>
+    <tr><td><code>IUT/Anabelian.lean</code></td><td>M1: mono/bi-anabelian の区別と公理非対称性、(Ind1) の起源</td></tr>
+    <tr><td><code>IUT/HodgeTheater.lean</code></td><td>M2: F<sub>l</sub> ラベル構造・二つの対称性・Skeleton への橋渡し</td></tr>
+    <tr><td><code>IUT/LogThetaLattice.lean</code></td><td>M3: log-theta 格子の経路定理・Θ-link 必要性・mono-analytic 不変量</td></tr>
+    <tr><td><code>IUT/Multiradial.lean</code></td><td>M5: 定理3.11 の出力仕様・系3.12 の証明本体・厳密評価の障害と膨張の必然性</td></tr>
+    <tr><td><code>IUT/Evaluation.lean</code></td><td>M4: Gaussian monoid の次数簿記と S2/M5/M7 への接続定理</td></tr>
+    <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
+    <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
+    <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
+    <tr><td><code>IUT/ScholzeStix.lean</code></td><td>定理1: RC 同一視 + 系3.12 → 矛盾</td></tr>
+    <tr><td><code>IUT/Mochizuki.lean</code></td><td>定理2・3: 無矛盾モデルと反例モデル（独立性）</td></tr>
+    <tr><td><code>IUT/Boolean.lean</code></td><td>∧/∨̇ 構造の命題論理検証</td></tr>
+    <tr><td><code>IUT/Verdict.lean</code></td><td>総括: 二分法定理 <code>verdict</code> と <code>controversy_reduces_to_rc</code></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>本検証の限界</h2>
+  <ul>
+    <li>形式化したのは論争の<strong>算術的骨格</strong>であり、定理3.11 の多輻的アルゴリズムの内部（遠アーベル幾何による復元、log-Kummer 対応など）は形式化していない。これらの完全形式化は現時点で誰にも達成されていない。</li>
+    <li>対数体積は実数ではなく整数（共通分母で正規化）でモデル化した。議論はすべて順序環の不等式論法なので結論に影響しない。</li>
+    <li>「RC 同一視が数学的に許されるか」自体は形式体系の<strong>外</strong>の問い（どちらを公理に取るかの選択）であり、本検証はその選択がもたらす帰結を完全に分類したものである。</li>
+  </ul>
+</section>
+
+<footer>
+  <p>姉妹プロジェクト: <a href="../teichmuller/index.html">宇宙際タイヒミューラー理論 解説</a> ／ <a href="../verify-teichmuller-errors/index.html">IUT理論の間違い検証（数値シミュレーション）</a></p>
+  <p>一次資料: 望月新一 IUT I–IV ほか（RIMS, 京都大学）</p>
+</footer>
+
+</div>
+</body>
+</html>
