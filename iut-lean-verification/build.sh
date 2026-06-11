@@ -65,6 +65,12 @@ import IUT
 #print axioms IUT.gaussianDiv_deg
 #print axioms IUT.frobenioid_realizes_qpilot
 #print axioms IUT.degree_volume_consistent
+#print axioms IUT.kummer_faithful
+#print axioms IUT.kummer_orbit_faithful
+#print axioms IUT.indeterminacy_localization
+#print axioms IUT.padding_from_hull
+#print axioms IUT.path_forward_step
+#print axioms IUT.quotient_rep_bij
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

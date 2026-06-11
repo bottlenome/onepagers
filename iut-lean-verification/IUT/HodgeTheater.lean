@@ -213,6 +213,15 @@ theorem theta_labels {l L : Nat} (hodd : l = 2 * L + 1) :
   · intro k hk1 hkL
     exact ⟨k, by omega, by omega, orbitRep_fixes hodd hkL⟩
 
+/-- **定理 (M2-11): 商 |F_l| の完全な代表系** — l = 2l⋇+1 のとき、
+    {0, …, l⋇} の各 k はそれ自身が軌道代表元（orbitRep l k = k）で
+    あり、逆に任意のラベル j < l の代表元は {0, …, l⋇} に収まる。
+    M2-6（軌道の分離）と合わせて、商 |F_l| = F_l/{±1} が
+    ちょうど {0, …, l⋇}（l⋇+1 個）と全単射的に同定される。 -/
+theorem quotient_rep_bij {l L : Nat} (hodd : l = 2 * L + 1) :
+    (∀ k, k ≤ L → orbitRep l k = k) ∧ (∀ j, j < l → orbitRep l j ≤ L) :=
+  ⟨fun k hk => orbitRep_fixes hodd hk, fun j hj => orbitRep_le hodd hj⟩
+
 /-! ## Hodge theater 骨格と Skeleton への橋渡し -/
 
 /-- **Hodge theater の組合せ骨格**: IUT の走行仮定

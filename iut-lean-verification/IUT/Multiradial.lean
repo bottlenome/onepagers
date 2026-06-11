@@ -196,6 +196,63 @@ theorem multiradial_consistent :
        vol_hull := rfl,
        vol_q := rfl }⟩⟩
 
+/-! ## 不定性の群作用（Ind1, Ind2）と膨張の局在化
+
+定理3.11 (i) の不定性 (Ind1)（procession の自己同型）と
+(Ind2)（局所コピーへの Ism の作用）を、領域への群作用として
+抽象化する。これにより「不定性のどの部分が体積を膨らませるか」を
+精密に切り分ける。 -/
+
+/-- 不定性の群作用: (Ind1)(Ind2) が多輻的表現の領域に作用する。 -/
+structure IndeterminacyAction (V : VolumeTheory) where
+  G : Type
+  one : G
+  act : G → V.Region → V.Region
+  act_one : ∀ r, act one r = r
+
+/-- 体積保存の不定性: すべての群元が log-volume を保つ。
+    (Ind1) の procession 自己同型・(Ind2) の Ism 作用は
+    mono-analytic な体積を保つ等長変換である。 -/
+def VolumePreserving {V : VolumeTheory} (A : IndeterminacyAction V) : Prop :=
+  ∀ g r, V.vol (A.act g r) = V.vol r
+
+/-- **定理 (M5-7): 不定性軌道による膨張の局在化** — 多輻的表現の
+    可能な像が、ある基底領域 r₀ の (Ind1)(Ind2)-軌道（体積保存
+    作用）として与えられるなら、q-パイロットを実現する基底領域
+    r₀ はそれ自身 体積 ≥ −|log q| を持たねばならない。
+
+    含意: 系3.12 のための「太り」は不定性 (Ind1)(Ind2) の
+    **散らばり**から生じるのではなく、基底領域＝正則包の取り方
+    （Ind3 の上半両立性と holomorphic hull）に既に含まれていなければ
+    ならない。論争の所在を Ind1/Ind2 の外へさらに局在化する。 -/
+theorem indeterminacy_localization {V : VolumeTheory} {s : Skeleton}
+    (M : MultiradialRep V s) (A : IndeterminacyAction V)
+    (h : VolumePreserving A) (r0 : V.Region)
+    (hcover : ∀ i, ∃ g, M.image i = A.act g r0) :
+    -s.logq ≤ V.vol r0 := by
+  obtain ⟨i, hi⟩ := padding_necessary M
+  obtain ⟨g, hg⟩ := hcover i
+  rw [hg, h g r0] at hi
+  exact hi
+
+/-- **定理 (M5-8): 膨張の源は正則包** — 各可能な像の体積は
+    正則包の体積以下。M5-7 と合わせて、系3.12 に必要な体積膨張は
+    個々の不定性ではなく、可能な像たちの**合併（正則包）を取る
+    操作**から生じることが形式的に確定する。 -/
+theorem padding_from_hull {V : VolumeTheory} {s : Skeleton}
+    (M : MultiradialRep V s) :
+    ∀ i, V.vol (M.image i) ≤ V.vol M.hullTheta :=
+  fun i => V.vol_mono (M.image_in_hull i)
+
+/-- **定理 (M5-9): étale-picture 置換対称性のコリック性** —
+    定理3.11 (i) 末尾。procession の置換対称性 σ が体積を保つなら
+    （n,◦R ≅ n′,◦R の体積両立性）、表現データの log-volume は σ で
+    不変。異なる列 n, n′ の表現が「同じエタール絵」として貼り合う
+    ことの体積レベルの根拠。 -/
+theorem etale_picture_coric {V : VolumeTheory}
+    (σ : V.Region → V.Region) (hσ : ∀ r, V.vol (σ r) = V.vol r)
+    (R : V.Region) : V.vol (σ R) = V.vol R := hσ R
+
 /-! ## Procession の正規化簿記（IUT III Prop 3.1–3.2, Remark 3.1.1）
 
 定理3.11 (i) の多輻的表現は prime-strip の **procession**

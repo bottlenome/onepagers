@@ -109,6 +109,40 @@ theorem col_not_invariant : ¬LinkInvariant LatticeSite.col := by
 example : Path 1 ⟨0, 0⟩ (⟨1, 2⟩ : LatticeSite) :=
   Path.log 0 0 (Path.theta 0 1 (Path.log 1 1 (Path.nil _)))
 
+/-! ## 経路の構成と格子の連結性（生成性） -/
+
+/-- **定理 (M3-7): 同一列内の log 経路** — log-link だけで
+    (n,a) から (n,a+k) へ到達できる（Θ-link 0 本）。 -/
+theorem path_log_up (n : Int) :
+    ∀ (k : Nat) (a : Int), Path 0 (⟨n, a⟩ : LatticeSite) ⟨n, a + (k : Int)⟩ := by
+  intro k
+  induction k with
+  | zero =>
+    intro a
+    simpa using Path.nil (⟨n, a⟩ : LatticeSite)
+  | succ k ih =>
+    intro a
+    have base : Path 0 (⟨n, a⟩ : LatticeSite) ⟨n, (a + 1) + (k : Int)⟩ :=
+      Path.log n a (ih (a + 1))
+    rwa [show (a + 1) + (k : Int) = a + ((k + 1 : Nat) : Int) by omega] at base
+
+/-- **定理 (M3-8): Θ-link 1 本で隣の列へ**。 -/
+theorem path_theta_step (n m : Int) :
+    Path 1 (⟨n, m⟩ : LatticeSite) ⟨n + 1, m⟩ :=
+  Path.theta n m (Path.nil _)
+
+/-- **定理 (M3-9): 前方単位到達** — (n,m) から次の列の任意の行
+    (n+1, m′) へ Θ-link ちょうど 1 本で到達できる（m ≤ m′）。
+    まず Θ-link で列を渡り、次の列の内部を log-link で上る。
+    格子が Θ・log の合成で前方連結であることの単位ステップ。 -/
+theorem path_forward_step (n m m' : Int) (h : m ≤ m') :
+    Path 1 (⟨n, m⟩ : LatticeSite) ⟨n + 1, m'⟩ := by
+  -- (n,m) →θ→ (n+1,m) →log→ (n+1,m′)
+  have inner : Path 0 (⟨n + 1, m⟩ : LatticeSite) ⟨n + 1, m'⟩ := by
+    have := path_log_up (n + 1) (m' - m).toNat m
+    rwa [show m + ((m' - m).toNat : Int) = m' by omega] at this
+  exact Path.theta n m inner
+
 /-! ## コア性（coricity）: IUT III 定理1.5 の骨格
 
 「垂直コア性」= log-link で不変なデータは各列（一つの数論的

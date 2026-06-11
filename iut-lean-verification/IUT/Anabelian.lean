@@ -202,6 +202,59 @@ theorem pi_log_iter (S : LogReconSetting) (X : S.F) :
   | succ k ih =>
     exact S.isoG_trans (S.pi_log (iterate S.logF k X)) (S.logG_congr ih)
 
+/-! ## Kummer 理論と円分剛性（[EtTh]/[AbsTopIII] の骨格）
+
+定理3.11 (ii) の log-Kummer 対応の核心は、Frobenius 的なテータ値
+データとエタール的なコア・データを結ぶ Kummer 写像が、円分剛性
+(cyclotomic rigidity) のもとで忠実 (injective) になることである。
+これにより「値の同一視」が正当化され、不定性が制御される。 -/
+
+/-- Kummer 設定: Frobenius 的モノイド `MF` からエタール的 `ME` への
+    Kummer 写像 `kum`。`frob`/`frobE` は log-link に対応する
+    Frobenius 操作で、Kummer 写像はこれと両立する。 -/
+structure KummerSetting where
+  MF : Type
+  ME : Type
+  kum : MF → ME
+  frob : MF → MF
+  frobE : ME → ME
+  kum_frob : ∀ x, kum (frob x) = frobE (kum x)
+
+/-- 円分剛性: Kummer 写像が単射（[EtTh] の cyclotomic rigidity の
+    抽象化）。 -/
+def CyclotomicRigidity (K : KummerSetting) : Prop := Function.Injective K.kum
+
+/-- **定理 (M1-8): Kummer 忠実性** — 円分剛性のもとでは、異なる
+    Frobenius 的テータ値は異なるエタール的像を持つ（値が潰れない）。
+    定理3.11 (ii) の Kummer 同型による同一視を正当化する根拠。 -/
+theorem kummer_faithful (K : KummerSetting) (h : CyclotomicRigidity K)
+    {x y : K.MF} (hxy : K.kum x = K.kum y) : x = y := h hxy
+
+/-- **定理 (M1-9): Kummer–Frobenius 両立の反復** — Kummer 写像は
+    Frobenius の任意回反復と両立する（log-link 列に沿った両立）。 -/
+theorem kum_frob_iter (K : KummerSetting) (x : K.MF) :
+    ∀ k : Nat, K.kum (iterate K.frob k x) = iterate K.frobE k (K.kum x) := by
+  intro k
+  induction k with
+  | zero => rfl
+  | succ k ih =>
+    show K.kum (K.frob (iterate K.frob k x))
+       = K.frobE (iterate K.frobE k (K.kum x))
+    rw [K.kum_frob, ih]
+
+/-- **定理 (M1-10): log-Kummer 軌道の忠実性** — 円分剛性のもとでは、
+    Frobenius 軌道 {frob^k x} のエタール像が一致するのは元の軌道が
+    一致するときに限る。すなわち log-link を何回反復しても値が
+    崩れない（定理3.11 (ii) の「1の冪根 = addition by zero = no
+    indeterminacy」の骨格）。 -/
+theorem kummer_orbit_faithful (K : KummerSetting) (h : CyclotomicRigidity K)
+    (x : K.MF) {j k : Nat}
+    (heq : iterate K.frobE j (K.kum x) = iterate K.frobE k (K.kum x)) :
+    iterate K.frob j x = iterate K.frob k x := by
+  apply h
+  rw [kum_frob_iter, kum_frob_iter]
+  exact heq
+
 /-- **定理 (M1-6): log-Frobenius 両立復元**（[AbsTopIII] 定理3.11 の
     骨格）。mono-anabelian 復元は log の任意回の反復と両立する:
 
