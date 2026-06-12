@@ -328,6 +328,12 @@ import IUT
 #print axioms IUT.ps2Y_pow
 #print axioms IUT.ps2MonoXY
 #print axioms IUT.ps2Comp2_coords
+#print axioms IUT.ps2Comp1_coordX
+#print axioms IUT.ps2Comp1_coordY
+#print axioms IUT.psMap_constHom_psX
+#print axioms IUT.fgl_equation_identity
+#print axioms IUT.inX_ltPoly_00
+#print axioms IUT.inY_ltPoly_00
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
