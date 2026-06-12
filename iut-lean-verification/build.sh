@@ -640,6 +640,16 @@ import IUT
 #print axioms IUT.ps21Comp_comp2
 #print axioms IUT.ps21Comp_inX
 #print axioms IUT.ps21Comp_inY
+#print axioms IUT.psComp_mul
+#print axioms IUT.psComp_pow
+#print axioms IUT.psComp_assoc
+#print axioms IUT.ltIter_coeff_zero
+#print axioms IUT.ltIter_coeff_one
+#print axioms IUT.ltIter_comm
+#print axioms IUT.psComp_single_one
+#print axioms IUT.psComp_mono
+#print axioms IUT.psComp_ltPoly_left
+#print axioms IUT.ltIter_eq_ltSol
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
