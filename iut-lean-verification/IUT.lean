@@ -60,3 +60,4 @@ import IUT.LTErrorDivisible
 import IUT.LubinTateExists
 import IUT.FrobenioidCat
 import IUT.PowerSeries2
+import IUT.FormalGroupSub
