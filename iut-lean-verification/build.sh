@@ -411,6 +411,11 @@ import IUT
 #print axioms IUT.split_forget_mapIso_eq
 #print axioms IUT.split_dichotomy_refined
 #print axioms IUT.splitInd_nontrivial
+#print axioms IUT.ps2Mul_coeff
+#print axioms IUT.ps2Pow_one
+#print axioms IUT.ps2Mul_coeff_congr
+#print axioms IUT.ps2Pow_coeff_congr
+#print axioms IUT.ps2Pow_coeff_congr'
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

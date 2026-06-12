@@ -69,3 +69,4 @@ import IUT.FormalGroupMap
 import IUT.FrobeniusGen
 import IUT.Frobenius2
 import IUT.FormalGroupErr
+import IUT.FormalGroupCongr
