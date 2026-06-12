@@ -371,6 +371,25 @@ import IUT
 #print axioms IUT.gaunt_dichotomy
 #print axioms IUT.deloop_intGrp_not_iso_unique
 #print axioms IUT.deloopInd_nontrivial
+#print axioms IUT.freshman_exact_ring
+#print axioms IUT.frobHom
+#print axioms IUT.freshman_exact_gen
+#print axioms IUT.psMap_trunc
+#print axioms IUT.frobenius_trunc_gen
+#print axioms IUT.frobenius_charp_gen
+#print axioms IUT.frobenius_gen_recovers
+#print axioms IUT.psRing_char
+#print axioms IUT.ps2Comp1_mono
+#print axioms IUT.ps2_powXY
+#print axioms IUT.ps2Comp2_powXY_hit
+#print axioms IUT.ps2Comp2_powXY_missY
+#print axioms IUT.ps2Comp2_powXY_missX
+#print axioms IUT.ps2Pow_frob_hit
+#print axioms IUT.ps2Pow_frob_missY
+#print axioms IUT.ps2Pow_frob_missX
+#print axioms IUT.frobenius2_charp
+#print axioms IUT.lt_error_vanishes_modp
+#print axioms IUT.lt_error_vanishes_modp'
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -65,3 +65,5 @@ import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq
 import IUT.FormalGroupMap
+import IUT.FrobeniusGen
+import IUT.Frobenius2
