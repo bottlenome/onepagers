@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M33 の形式化（追加検証）</h2>
+  <h2>M1〜M34 の形式化（追加検証）</h2>
+
+  <h3>M34: ω の 1 の冪根性と可逆性（IUT/RootsOfUnity.lean）</h3>
+  <div class="box">
+    <p>Teichmüller 代表が 1 の (p−1) 乗根である（値域 = μ_{p−1}）ことの完全証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>zpPow</code> / <code>euclid_int</code> (M34-1〜2)</td><td>ℤ_p の冪演算（well-defined・遷移両立）と <strong>Euclid の補題の Int 版</strong>（natAbs 還元で M32 の Nat 版から）</td><td>標準のみ</td></tr>
+      <tr><td><code>flt_unit</code> / <code>euler_pow</code> (M34-3〜4)</td><td><strong>古典形 Fermat</strong> a^{p−1} ≡ 1 (mod p) と <strong>Euler の定理の p 冪版</strong> p^{n+1} ∣ a^{p^n(p−1)} − 1（持ち上げ補題で反復昇格）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>teich_root_of_unity</code> / <code>teich_invertible</code> (M34-5〜6)</td><td><strong>ω(a)^{p−1} = 1</strong>（p ∤ a）と <strong>ω(a) は ℤ_p の単元</strong>（逆元 = ω(a)^{p−2} の明示構成）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: μ_{p−1} ≅ (ℤ/p)^× の同定（巡回性）・O^× = μ × U^(1) の直積分解・Lubin–Tate。</p>
+  </div>
 
   <h3>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（IUT/Teichmuller.lean）</h3>
   <div class="box">
@@ -655,6 +667,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/UnitFiltration.lean</code></td><td>M31: 単数 filtration U^(d) と次数商 θ_d: U^(d)/U^(d+1) ≅ ℤ/p（準同型・核・全射、choice なし）</td></tr>
     <tr><td><code>IUT/Fermat.lean</code></td><td>M32: Fermat の小定理——Bézout・Euclid の補題・二項定理を core のみで自前証明（choice なし）</td></tr>
     <tr><td><code>IUT/Teichmuller.lean</code></td><td>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}——乗法的切断・剰余復元・Frobenius 不変（choice なし）</td></tr>
+    <tr><td><code>IUT/RootsOfUnity.lean</code></td><td>M34: ω(a)^{p−1} = 1——Euler の定理 p 冪版・Int 版 Euclid・ω の可逆性（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

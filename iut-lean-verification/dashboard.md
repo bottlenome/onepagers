@@ -58,6 +58,7 @@
 | M31 単数 filtration（基盤インフラ） | **U^(d) = 1+p^dℤ_p の部分群族と次数商 U^(d)/U^(d+1) ≅ ℤ/p**: filtration の部分群性（メンバーシップ = レベル d への射影が 1）、U^(1) = 全体・単調減少・分離性（∩U^(d) = {1}）、次数商写像 θ_d: 1+p^d u ↦ u mod p を整数除算で構成し**準同型・核 = U^(d+1)・全射**の三点を完全証明（第一同型定理の内容）。分岐相互法則の「上付き番号付け」の土台。選択公理不使用 | 実体構成 |
 | M32 Fermat の小定理（基盤インフラ） | **FLT を core のみで完全証明**: 二項係数の自前定義と委員会恒等式 (n+1)C(n,k) = (k+1)C(n+1,k+1)（二重帰納）、**Bézout の補題**（Euclid 互除法の燃料付き帰納で構成的に）、**Euclid の補題** p ∣ ab ⟹ p∣a ∨ p∣b、p ∣ C(p,k)、**二項定理** (x+1)^n = ΣC(n,k)x^k、新入生の夢、**a^p ≡ a (mod p)**（全 a : ℤ）。Teichmüller 持ち上げ ω(a) = lim a^{p^n} の整合性の基底。素数 witness: 2, 3。選択公理不使用 | 実体構成 |
 | M33 Teichmüller 持ち上げ（基盤インフラ） | **ω(a) = lim a^{p^n} : ℤ_p の実構成**（O^× = μ × (1+m) の μ 部）: 指数法則、因数分解 x^n−y^n = (x−y)Σx^k y^{n−1−k}（再帰形で添字回避）、**持ち上げ補題** x ≡ y (mod p^n) ⟹ x^p ≡ y^p (mod p^{n+1})、整合性（基底 = FLT）とその望遠鏡和。**剰余の復元** ω(a) ≡ a (mod p)・**乗法性** ω(ab) = ω(a)ω(b)・ω(1) = 1・**Frobenius 不変性** ω(a^p) = ω(a)。選択公理不使用 | 実体構成 |
+| M34 1 の冪根性（基盤インフラ） | **ω(a)^{p−1} = 1 の完全証明**: ℤ_p の冪演算 zpPow、**Euclid の補題の Int 版**（natAbs 還元）、**古典形 Fermat** a^{p−1} ≡ 1 (mod p)（p ∤ a）、**Euler の定理の p 冪版** p^{n+1} ∣ a^{p^n(p−1)} − 1（基底 = 古典形 Fermat、帰納段 = 持ち上げ補題）。帰結: **ω(a) は 1 の (p−1) 乗根**（値域 = μ_{p−1}）かつ **ℤ_p の単元**（逆元 = ω(a)^{p−2} の明示構成）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -116,6 +117,7 @@ iut-lean-verification/
     ├── UnitFiltration.lean # M31: 単数 filtration U^(d)・次数商 θ_d: U^(d)/U^(d+1) ≅ ℤ/p（choice なし）
     ├── Fermat.lean      # M32: Fermat の小定理（Bézout・Euclid・二項定理込み、choice なし）
     ├── Teichmuller.lean # M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（乗法的・Frobenius 不変、choice なし）
+    ├── RootsOfUnity.lean # M34: ω(a)^{p−1} = 1（Euler の定理 p 冪版・ω の可逆性、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -187,6 +189,7 @@ iut-lean-verification/
 | M31: 単数 filtration U^(d) と次数商 U^(d)/U^(d+1) ≅ ℤ/p — 第18弾 | done（choice なし） |
 | M32: Fermat の小定理（Bézout・Euclid の補題・二項定理を core のみで） — 第19弾 | done（choice なし） |
 | M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（乗法的切断・Frobenius 不変） — 第20弾 | done（choice なし） |
+| M34: ω の 1 の冪根性・可逆性（Euler の定理 p 冪版・Int 版 Euclid） — 第21弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

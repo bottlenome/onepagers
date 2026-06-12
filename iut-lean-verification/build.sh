@@ -207,6 +207,13 @@ import IUT
 #print axioms IUT.teich_mul
 #print axioms IUT.teich_one
 #print axioms IUT.teich_frobenius
+#print axioms IUT.zpPow
+#print axioms IUT.zpPow_succ
+#print axioms IUT.euclid_int
+#print axioms IUT.flt_unit
+#print axioms IUT.euler_pow
+#print axioms IUT.teich_root_of_unity
+#print axioms IUT.teich_invertible
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
