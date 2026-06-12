@@ -315,6 +315,14 @@ import IUT
 #print axioms IUT.degMor
 #print axioms IUT.frobFunctor_matches_frob
 #print axioms IUT.deg_frobFunctor
+#print axioms IUT.rsum_psRing_coeff
+#print axioms IUT.ps2Pow_tcoeff_zero
+#print axioms IUT.ps2Comp1_add
+#print axioms IUT.ps2Comp1_one
+#print axioms IUT.ps2Comp1_X
+#print axioms IUT.ps2Lin_00
+#print axioms IUT.ps2Lin_10
+#print axioms IUT.ps2Lin_01
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

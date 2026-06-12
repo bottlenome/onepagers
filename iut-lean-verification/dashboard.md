@@ -74,6 +74,7 @@
 | M47 標数 p の Frobenius 定理（第十層） | **F^p = F∘X^p in PS(ℤ/p) の完全証明**（LT 誤差項整除性の核心）: ℤ/p の標数 p（rofNat p = 0）と係数 FLT c^p = c、**char p では新入生の夢が正確な等式** (A+B)^p = A^p + B^p、打ち切り trunc F (N+1) = trunc F N + F_N·X^N と単項式の冪 (c·X^m)^k = c^k·X^{mk}・合成 (c·X^N)∘X^m = c·X^{mN} で **truncation 帰納**、係数 n の一般化は psPow_congr（M41）。選択公理不使用 | 実体構成 |
 | M48 LT 誤差項の p-整除性（第十一層） | **任意の F で (p·F + F^p) − F∘f の全係数が p で割れる**（f = pX + X^p）: psMap の neg・単項式・スカラー倍保存、**LT 多項式の定義と mod-p 還元 f̄ = X^p**、誤差項の mod-p 消滅 Φ(E) = 0 — Φ(pF) = 0（標数）・Φ(F^p) = Φ(F)^p・Φ(F∘f) = Φ(F)∘X^p に **M47 の Frobenius 定理**を適用して一撃。各係数の整除性 witness は構成的（M43 zpDivP）。選択公理不使用 | 実体構成 |
 | M49 Lubin–Tate 補題（最終層・**LT キャンペーン完成**） | **存在 + 一意性の完全証明**: 係数の再帰構成 ltSeg/ltSol（F₀ = 0・F₁ = a・F_{m+2} = u^{-1}·(E(部分解)/p)、choice-free）、切片の整合性（stable・eq_sol・high）、**除算恒等式** π·(u·F_n) = E_n（M36 単元逆元 + M43 zpDivP + M48 整除性の合流）、**方程式 F∘f = p·F + F^p の全係数検証**（n ≥ 2 は一意性と同じ分解 L + F_n·p^n = p·F_n + T を移項簿記で逆向きに）。**lubin_tate: 任意の a : ℤ_p に対し F(0)=0・F(1)=a の解が存在し一意**（M42 と結合）。選択公理不使用 | 実体構成 |
+| M50 二変数冪級数の基盤（形式群第一層） | **PS2 R := PS(psRing R)（反復構成 R[[X]][[Y]]）で環構造を M39 から無償取得**。新規は総次数のみ: 座標 X = psC(psX)・Y = psX(psRing R)、有限和の係数交換、**総次数 truncation**（F₀₀ = 0 ⟹ i+j < k で (F^k)_{i,j} = 0、二重和の各項消滅）、**1変数→2変数代入** (f∘F)_{i,j} = Σ_{k≤i+j} f_k(F^k)_{i,j} とその基本性質（加法性・1∘F = 1・X∘F = F）、線形部 X+Y の係数（形式群の一次条件）。選択公理不使用 | 実体構成 |
 | M48F Frobenioid の圏論化（並行ブランチ） | **M12 の Frobenioid 次数データを M19 の `Cat` 上の実際の圏として実装**: elementary Frobenioid（対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0) with 線形条件 m = d·n + c、合成 = 捻れ半直積型 (d₁d₂, d₂c₁+c₂)）の圏公理完全証明、**次数関手** F_Φ → (ℕ≥1, ×) と **Frobenius 自己関手** Φ_e の関手性、**非可逆性定理群**（次数 ≥ 2 の射は右逆なし・同型の次数は必ず 1・**同型は対象を動かせない** n ≅ m ⟹ n = m・1 → 2 に射はあるが同型はない = M12-3 の圏論版を仮定なしの強い形で。Galois 圏の G6「同型の反映」（M20-5）との二分法の機械検証）、M12 接続（degMor の実現・frob_deg の関手化・Φ_e は次数関手上で恒等）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
@@ -150,6 +151,7 @@ iut-lean-verification/
     ├── LTErrorDivisible.lean # M48: LT 誤差項の p-整除性（mod-p 還元 + Frobenius 定理、choice なし）
     ├── LubinTateExists.lean # M49: Lubin–Tate 補題完成（係数の再帰構成 + 存在 + 一意性、choice なし）
     ├── FrobenioidCat.lean # M48F: Frobenioid の圏論化（elementary Frobenioid・次数関手・同型 = 恒等のみ、choice なし）
+    ├── PowerSeries2.lean # M50: 二変数冪級数の基盤（総次数 truncation・1→2変数代入、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -238,6 +240,7 @@ iut-lean-verification/
 | M48: LT 誤差項の p-整除性（mod-p 還元で Frobenius 定理に帰着） — 第35弾 | done（choice なし） |
 | M49: Lubin–Tate 補題（存在 + 一意性、**LT キャンペーン完成**） — 第36弾 | done（choice なし） |
 | M48F: Frobenioid の圏論化（サブエージェント並行開発・統合） — 第36弾 | done（choice なし） |
+| M50: 二変数冪級数の基盤（総次数 truncation・代入、形式群第一層） — 第37弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |
