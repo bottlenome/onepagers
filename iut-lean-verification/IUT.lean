@@ -61,6 +61,7 @@ import IUT.LubinTateExists
 import IUT.FrobenioidCat
 import IUT.FrobenioidModel
 import IUT.PolyIsomorphism
+import IUT.SplitFrobenioid
 import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq

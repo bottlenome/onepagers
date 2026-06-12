@@ -84,6 +84,7 @@
 | M48F Frobenioid の圏論化（並行ブランチ） | **M12 の Frobenioid 次数データを M19 の `Cat` 上の実際の圏として実装**: elementary Frobenioid（対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0) with 線形条件 m = d·n + c、合成 = 捻れ半直積型 (d₁d₂, d₂c₁+c₂)）の圏公理完全証明、**次数関手** F_Φ → (ℕ≥1, ×) と **Frobenius 自己関手** Φ_e の関手性、**非可逆性定理群**（次数 ≥ 2 の射は右逆なし・同型の次数は必ず 1・**同型は対象を動かせない** n ≅ m ⟹ n = m・1 → 2 に射はあるが同型はない = M12-3 の圏論版を仮定なしの強い形で。Galois 圏の G6「同型の反映」（M20-5）との二分法の機械検証）、M12 接続（degMor の実現・frob_deg の関手化・Φ_e は次数関手上で恒等）。選択公理不使用 | 実体構成 |
 | M51F Frobenioid の圏論的実体と数体での充足（並行ブランチ） | **M12 の `Frobenioid` 構造を ℚ 型の実データで充足**: 有効因子 = 素点での重複度の有限サポート関数（QDiv、サポート上界をデータとして持ち choice 回避）、可換モノイド法則・**重み付き次数の加法性 deg(x+y) = deg x + deg y・Frobenius 斉次性 deg(φ_e x) = e·deg x** を完全証明して `rationalFrobenioid` を Nonempty でなく def として構成。`DegreeVolumeCompat` の実構成により **M12-6（vol_q 供給）が実データで発動**（`rational_qpilot_volume`: 任意の骨格 s で単一素点因子の実現体積 = −\|log q\|）、局所付値（M27）との整合。＋**因子レベルの圏** divisorFrobenioid（対象 = 有効因子、射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明、**次数関手** → elementaryFrobenioid（M48F）の関手性、**因子レベルの非可逆性**（同型は因子を動かせない x ≅ y ⟹ x = y、＋次数関手で M48F に帰着する独立経路）。選択公理不使用 | 実体構成 |
 | M53F poly-isomorphism と剛性（並行ブランチ） | **[FrdI] の Frobenius-like/étale-like 二分法と (Ind1) 不定性の在処を圏論的核で機械検証**: 剛性述語 `IsGaunt`（同型 ⟹ 対象の等号）・`IsoUnique`（同型の hom 成分は一意 = poly-isomorphism が単集合に潰れる、CatIso 全体の等号は M22-1a の逆一意性で従う）を定義し、**Frobenioid 側は剛的** — divisorFrobenioid（M51F）・elementaryFrobenioid（M48F）の任意の同型は成分 (d,c) = (1,0)（恒等射と同成分）で gaunt かつ IsoUnique 成立。**étale 側は非剛的** — 群 G の一点圏 BG（`deloopCat`、圏公理は群公理から完全証明・右単位/右逆は左公理系からの導出定理）では全ての射が同型で、**poly-isomorphism は G.carrier と明示的全単射（G-トーソル）**＝(Ind1) 型不定性の在処。総括 `gaunt_dichotomy`: 非自明群 G で「divisorFrobenioid は IsoUnique ∧ BG は ¬IsoUnique」（注意: BG は一点なので gaunt は自明成立 — 剛性を測るのは IsoUnique）。デッキ群 ℤ（M9 intGrp）での具体的発動＋ M5 `MultiradialRep.Ind`/`ind0` への型レベル接続（`deloopInd`、G 非自明なら基点以外の選択肢が実在）。選択公理不使用 | 実体構成 |
+| M55F split Frobenioid（並行ブランチ） | **[FrdI] の split 構造（射 = Frobenius 次数・効果的因子・単数の三つ組）と (Ind2) 型不定性の在処を機械検証**: 可換単数群 U をパラメータに、射 (d ≥ 1, c : QDiv, u : U) with y = φ_d(x) + c（u は線形条件に関与しない = 因子簿記と単数の分裂）の圏 `splitFrobenioid` を建設。恒等 (1,0,1)・合成 (d₁d₂, φ_{d₂}(c₁)+c₂, u₁^{d₂}·u₂)——単数は第二射の Frobenius 次数で d 乗されて運ばれる。単数結合則は (ab)^n = aⁿbⁿ（`gpow_mul_dist`）を要し非可換群では偽のため U の可換性を仮定（O^× は可換なので正当）。**因子部分は剛的**——同型は (d,c) = (1,0) を強制し対象を動かせない（gaunt、M51F-10 の踏襲）が**単数部分は U-トーソル**——任意の u で (1,0,u) が同型（逆 (1,0,u⁻¹)）になり自己同型全体は U.carrier と明示的全単射（`split_polyiso_torsor`、往復恒等の両向き証明）。二分法の精密化 `split_dichotomy_refined`: 忘却関手 `splitForget`（u を捨てる）の像では任意の二同型が一致（IsoUnique 回復）∧ U 非自明なら hom の異なる同型対が実在 = **一つの圏の中で不定性は単数成分にのみ宿る**（M53F は剛的圏と非剛的圏が別々だった）。M5 `MultiradialRep.Ind`/`ind0` への型レベル接続（`splitInd`、M53F-9 deloopInd の (Ind2) 版）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -161,6 +162,7 @@ iut-lean-verification/
     ├── FrobenioidCat.lean # M48F: Frobenioid の圏論化（elementary Frobenioid・次数関手・同型 = 恒等のみ、choice なし）
     ├── FrobenioidModel.lean # M51F: Frobenioid の圏論的実体と数体での充足（QDiv・rationalFrobenioid・divisorFrobenioid・次数関手、choice なし）
     ├── PolyIsomorphism.lean # M53F: poly-isomorphism と剛性（IsGaunt/IsoUnique・deloopCat・G-トーソル定理、choice なし）
+    ├── SplitFrobenioid.lean # M55F: split Frobenioid — 単数成分と (Ind2) の在処（gpow・SplitHom・U-トーソル・二分法精密化、choice なし）
     ├── PowerSeries2.lean # M50: 二変数冪級数の基盤（総次数 truncation・1→2変数代入、choice なし）
     ├── FormalGroupSub.lean # M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）
     ├── FormalGroupEq.lean # M52: 形式群方程式の定式化・恒等での成立（choice なし）
@@ -265,6 +267,7 @@ iut-lean-verification/
 | M54: 一般化 Frobenius 定理 F^p = (Frob F)∘X^p（標数 p の任意の環、形式群第五層前半） — 第41弾 | done（choice なし） |
 | M55: 二変数 Frobenius G^p = G(X^p,Y^p) と LT 誤差の mod-p 消滅（形式群第五層後半） — 第41弾 | done（choice なし） |
 | M56: 二変数 LT 誤差の係数 p-整除性と誤差/p の実構成（形式群第六層） — 第42弾 | done（choice なし） |
+| M55F: split Frobenioid — 射の単数成分と (Ind2) の在処（因子は剛的・単数が U-トーソル、M53F 二分法の精密化） — サブエージェント並行開発・第42弾統合 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

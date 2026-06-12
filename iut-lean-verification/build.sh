@@ -396,6 +396,21 @@ import IUT
 #print axioms IUT.lt2Err_divisible
 #print axioms IUT.lt2Div
 #print axioms IUT.lt2Div_cancel
+#print axioms IUT.gpow_add
+#print axioms IUT.gpow_mul
+#print axioms IUT.gpow_mul_dist
+#print axioms IUT.splitFrobenioid
+#print axioms IUT.splitForget
+#print axioms IUT.unit_endo_comp
+#print axioms IUT.splitForget_unit
+#print axioms IUT.split_iso_objects_eq
+#print axioms IUT.splitFrobenioid_gaunt
+#print axioms IUT.split_iso_unit_arbitrary
+#print axioms IUT.split_polyiso_torsor
+#print axioms IUT.split_not_iso_unique
+#print axioms IUT.split_forget_mapIso_eq
+#print axioms IUT.split_dichotomy_refined
+#print axioms IUT.splitInd_nontrivial
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -290,6 +290,22 @@
     <p class="small">正直な申告: BG は Galois 圏そのものではなく「一つのガロア対象の自己同型の巣」の一点 base 骨格（位相・副有限性は不見）。poly-isomorphism の集合演算（合成・関手性）は未形式化で、検証したのは基数の二分法（単集合 vs G-トーソル）。(Ind1) 接続は型レベル（Ind が procession 自己同型群から来る解析的内容は M5 のインターフェース宣言に留まる）。</p>
   </div>
 
+  <h3>M55F: split Frobenioid — 並行ブランチ（IUT/SplitFrobenioid.lean）</h3>
+  <div class="box">
+    <p>[FrdI] の split 構造（射 = Frobenius 次数・効果的因子・単数の三つ組）の実装と、(Ind2) 型不定性が単数成分にのみ宿ることの機械検証（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>gpow</code> / <code>gpow_add</code> / <code>gpow_mul</code> / <code>gpow_mul_dist</code> (M55F-1)</td><td><strong>群の自然数冪と指数法則</strong>——g^{m+n} = g^m·g^n と g^{mn} = (g^m)^n は可換性なしで成立、(ab)^n = a^n·b^n（<code>gpow_mul_dist</code>）だけが可換性を要する。単数合成則の結合性が U の可換性を強制する紙上検証の機械化</td><td>なし</td></tr>
+      <tr><td><code>SplitHom</code> / <code>splitFrobenioid</code> (M55F-2〜3)</td><td><strong>単数つき射の圏</strong>——射 (d ≥ 1, c, u) with y = φ_d(x) + c（u は線形条件に関与しない = 分裂）、恒等 (1,0,1)、合成 (d₁d₂, φ_{d₂}(c₁)+c₂, u₁^{d₂}·u₂)——単数は第二射の Frobenius 次数で d 乗されて運ばれる [FrdI] の簿記。圏公理完全証明</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>splitForget</code> / <code>unit_endo_comp</code> (M55F-4)</td><td><strong>忘却関手</strong> splitFrobenioid → divisorFrobenioid（u を捨てる）の関手性＋各対象の単数自己射 (1,0,u) の合成が U の積に一致（単数群のコピーの注入）、忘却関手は単数自己射を恒等に潰す</td><td>標準のみ</td></tr>
+      <tr><td><code>split_iso_objects_eq</code> / <code>split_iso_unit_arbitrary</code> (M55F-5)</td><td><strong>因子部分は剛的・単数部分は自由</strong>——同型は d = 1・c = 0 を強制し対象を動かせない（M51F-10 の踏襲）が、任意の u で (1,0,u) が同型（逆 = (1,0,u⁻¹)）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>split_polyiso_torsor</code> (M55F-6)</td><td><strong>poly-isomorphism は U-トーソル</strong>——自己同型全体と U.carrier の明示的全単射（往復恒等を両向き証明）＝(Ind2) 型不定性（単数のコピーの作用）の在処の機械検証。M53F-7 と違い剛的な因子簿記と同居する一つの圏の中でトーソル化</td><td>標準のみ</td></tr>
+      <tr><td><code>split_not_iso_unique</code> / <code>split_dichotomy_refined</code> (M55F-7)</td><td><strong>二分法の精密化</strong>——U 非自明なら splitFrobenioid は ¬IsoUnique だが、忘却像（因子簿記）では任意の二同型が一致（IsoUnique 回復）。「不定性は単数成分にのみ宿る」を一つの定理に</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>splitInd</code> / <code>splitInd_nontrivial</code> (M55F-8)</td><td><strong>M5 (Ind2) への接続</strong>——splitFrobenioid の自己同型型は <code>MultiradialRep</code> の <code>Ind</code>/<code>ind0</code> が要求する形の点付き型を供給し、U 非自明なら基点以外の選択肢が実在（M53F-9 deloopInd の (Ind2) 版）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">正直な申告: U は抽象可換群であり O^×（M28–M30 の filtration・ℤ_p 加群構造を持つ位相群）の実体ではない——単数の「簿記としての運ばれ方」（Frobenius で d 乗）だけのモデル化。theta 単数・単数積分（log-shell 上の Ism 作用）の解析的内容は未形式化（M5 のインターフェース宣言に留まる）。base 圏一点（M51F と同じ）。単数結合則 (ab)^n = a^n b^n は非可換で偽のため可換性の仮定は数学的に必須。</p>
+  </div>
+
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
   <div class="box">
     <p>任意の F で (p·F + F^p) − F∘f（f = pX + X^p）の全係数が p で割れることを完全証明:</p>
@@ -991,6 +1007,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FrobeniusGen.lean</code></td><td>M54: 一般化 Frobenius 定理——F^p = (Frob F)∘X^p、標数 p の任意の環（choice なし）</td></tr>
     <tr><td><code>IUT/Frobenius2.lean</code></td><td>M55: 二変数 Frobenius——G^p = G(X^p,Y^p)・LT 誤差の mod-p 消滅（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupErr.lean</code></td><td>M56: 二変数 LT 誤差——係数 p-整除性・誤差/p の実構成・E = 0 ⟺ 方程式（choice なし）</td></tr>
+    <tr><td><code>IUT/SplitFrobenioid.lean</code></td><td>M55F: split Frobenioid——単数成分と (Ind2) の在処・U-トーソル・二分法精密化（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
