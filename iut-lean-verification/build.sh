@@ -536,6 +536,8 @@ import IUT
 #print axioms IUT.in3X_mul_in3Y
 #print axioms IUT.ps3_constV_mul_inZ
 #print axioms IUT.lt3_rhs_coeff
+#print axioms IUT.lt3_rhs_split
+#print axioms IUT.lt3_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
