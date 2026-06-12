@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M35 の形式化（追加検証）</h2>
+  <h2>M1〜M36 の形式化（追加検証）</h2>
+
+  <h3>M36: 単数群 ℤ_p^× の Grp 構成（IUT/ZpUnits.lean）</h3>
+  <div class="box">
+    <p>ℚ_p の単数群 O^× = ℤ_p^× を実際の Grp として構成。ℚ_p^× = p^ℤ × ℤ_p^× と分岐相互法則の土台:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>IsZpUnit</code> / <code>isZpUnit_mul</code> / <code>isZpUnit_teich</code> (M36-1〜2)</td><td>単数性（レベル 1 剰余が p と素）・積閉性（Euclid の補題）・Teichmüller 代表と主単数は単数</td><td>標準のみ</td></tr>
+      <tr><td><code>unit_pow_principal</code> / <code>zpUnitInv_mul</code> (M36-3〜4)</td><td><strong>逆元の明示構成</strong> x^{−1} = x^{p−2}·(x^{p−1})^{−1}——x^{p−1} は古典形 Fermat で主単数となり幾何級数逆元（M30）が適用可能。<strong>代表元抽出（選択公理）を完全回避</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>zpUnits</code> / <code>zpUnits_decomposition</code> (M36-5〜6)</td><td><strong>ℤ_p^× : Grp</strong>（アーベル群、群法則は全て既証明に帰着）と単数群の元の <strong>μ × U^(1) 分解</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: ℚ_p^× = p^ℤ × ℤ_p^× の明示同型・Lubin–Tate・分岐相互法則の Galois 側同定。</p>
+  </div>
 
   <h3>M35: 単数分解 O^× = μ_{p−1} × U^(1)（IUT/UnitDecomposition.lean）</h3>
   <div class="box">
@@ -681,6 +693,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Teichmuller.lean</code></td><td>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}——乗法的切断・剰余復元・Frobenius 不変（choice なし）</td></tr>
     <tr><td><code>IUT/RootsOfUnity.lean</code></td><td>M34: ω(a)^{p−1} = 1——Euler の定理 p 冪版・Int 版 Euclid・ω の可逆性（choice なし）</td></tr>
     <tr><td><code>IUT/UnitDecomposition.lean</code></td><td>M35: 単数分解 O^× = μ_{p−1} × U^(1)——存在（明示構成）+ 一意性（choice なし）</td></tr>
+    <tr><td><code>IUT/ZpUnits.lean</code></td><td>M36: 単数群 ℤ_p^× : Grp——逆元 x^{p−2}·(x^{p−1})^{−1} の明示構成で choice 回避</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

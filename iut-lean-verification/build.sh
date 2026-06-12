@@ -220,6 +220,15 @@ import IUT
 #print axioms IUT.teich_congr
 #print axioms IUT.unit_decomposition
 #print axioms IUT.decomposition_unique
+#print axioms IUT.not_dvd_ipow
+#print axioms IUT.isZpUnit_mul
+#print axioms IUT.isZpUnit_teich
+#print axioms IUT.isZpUnit_of_principal
+#print axioms IUT.unit_pow_principal
+#print axioms IUT.zpUnitInv_mul
+#print axioms IUT.zpUnits
+#print axioms IUT.zpUnits_comm
+#print axioms IUT.zpUnits_decomposition
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

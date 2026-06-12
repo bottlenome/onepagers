@@ -60,6 +60,7 @@
 | M33 Teichmüller 持ち上げ（基盤インフラ） | **ω(a) = lim a^{p^n} : ℤ_p の実構成**（O^× = μ × (1+m) の μ 部）: 指数法則、因数分解 x^n−y^n = (x−y)Σx^k y^{n−1−k}（再帰形で添字回避）、**持ち上げ補題** x ≡ y (mod p^n) ⟹ x^p ≡ y^p (mod p^{n+1})、整合性（基底 = FLT）とその望遠鏡和。**剰余の復元** ω(a) ≡ a (mod p)・**乗法性** ω(ab) = ω(a)ω(b)・ω(1) = 1・**Frobenius 不変性** ω(a^p) = ω(a)。選択公理不使用 | 実体構成 |
 | M34 1 の冪根性（基盤インフラ） | **ω(a)^{p−1} = 1 の完全証明**: ℤ_p の冪演算 zpPow、**Euclid の補題の Int 版**（natAbs 還元）、**古典形 Fermat** a^{p−1} ≡ 1 (mod p)（p ∤ a）、**Euler の定理の p 冪版** p^{n+1} ∣ a^{p^n(p−1)} − 1（基底 = 古典形 Fermat、帰納段 = 持ち上げ補題）。帰結: **ω(a) は 1 の (p−1) 乗根**（値域 = μ_{p−1}）かつ **ℤ_p の単元**（逆元 = ω(a)^{p−2} の明示構成）。選択公理不使用 | 実体構成 |
 | M35 単数分解（基盤インフラ） | **O^× = μ_{p−1} × U^(1) の直積分解**: ℤ_p 乗法の結合則・単位元、**主単数性のレベル 1 判定**（x ≡ 1 mod p で十分）、**ω の剰余依存性** a ≡ b (mod p) ⟹ ω(a) = ω(b)（持ち上げ補題の反復）、**分解の存在** x = ω(a)·u（u = ω(a)^{p−2}·x、主単数性は p(p−2)+1 = (p−1)² と古典形 Fermat）、**一意性**（レベル 1 合同の望遠鏡和 + ω^{p−2} 消去）。μ 部（M33–34）と U^(1) 部（M30–31）がここで結合。選択公理不使用 | 実体構成 |
+| M36 単数群 ℤ_p^×（基盤インフラ） | **ℤ_p^× を実際の `Grp` として構成**: 単数性 = レベル 1 剰余が p と素、積閉性（Euclid）、Teichmüller 代表・主単数は単数。核心は**逆元の明示構成 x^{−1} = x^{p−2}·(x^{p−1})^{−1}** — x^{p−1} は古典形 Fermat で主単数になり M30 の幾何級数逆元が適用可能（代表元抽出 = 選択公理を完全回避）。アーベル性・**μ × U^(1) 分解のパッケージング**込み。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -120,6 +121,7 @@ iut-lean-verification/
     ├── Teichmuller.lean # M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（乗法的・Frobenius 不変、choice なし）
     ├── RootsOfUnity.lean # M34: ω(a)^{p−1} = 1（Euler の定理 p 冪版・ω の可逆性、choice なし）
     ├── UnitDecomposition.lean # M35: 単数分解 O^× = μ × U^(1)（存在 + 一意性、choice なし）
+    ├── ZpUnits.lean     # M36: 単数群 ℤ_p^× : Grp（逆元 = x^{p−2}(x^{p−1})^{−1}、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -193,6 +195,7 @@ iut-lean-verification/
 | M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（乗法的切断・Frobenius 不変） — 第20弾 | done（choice なし） |
 | M34: ω の 1 の冪根性・可逆性（Euler の定理 p 冪版・Int 版 Euclid） — 第21弾 | done（choice なし） |
 | M35: 単数分解 O^× = μ_{p−1} × U^(1)（存在 + 一意性） — 第22弾 | done（choice なし） |
+| M36: 単数群 ℤ_p^× の Grp 構成（逆元の明示構成、choice 回避） — 第23弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

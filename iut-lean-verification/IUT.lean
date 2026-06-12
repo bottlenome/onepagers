@@ -44,3 +44,4 @@ import IUT.Fermat
 import IUT.Teichmuller
 import IUT.RootsOfUnity
 import IUT.UnitDecomposition
+import IUT.ZpUnits
