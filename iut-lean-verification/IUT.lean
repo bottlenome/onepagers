@@ -114,6 +114,7 @@ import IUT.EisensteinTorsion
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
+import IUT.FormalGroupPointsMul3
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace

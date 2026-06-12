@@ -743,6 +743,11 @@ import IUT
 #print axioms IUT.eis_lambda_ne_zero
 #print axioms IUT.eisOf_compat_f
 #print axioms IUT.eisIter_compat
+#print axioms IUT.zpEval2Seg_rsum
+#print axioms IUT.nilpotent_cauchy_mul
+#print axioms IUT.zpEval3_mul
+#print axioms IUT.zpEval3_one
+#print axioms IUT.zpEval3_pow
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
