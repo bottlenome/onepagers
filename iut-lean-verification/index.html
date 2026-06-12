@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M37 の形式化（追加検証）</h2>
+  <h2>M1〜M38 の形式化（追加検証）</h2>
+
+  <h3>M38: 可換環の基盤 — Lubin–Tate 第一層（IUT/Ring.lean）</h3>
+  <div class="box">
+    <p>Lubin–Tate 形式群キャンペーンの開始。LT 級数の係数環 ℤ_p の環構造を整備:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>CRing</code> / <code>CRing.toGrp</code> (M38-1〜2)</td><td>可換環の公理系（加法群 + 可換モノイド + 左分配、右分配・mul_zero は導出）と加法群への忘却（既存 Grp 理論と接続）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>intRing</code> / <code>zmodRing</code> / <code>zpRing</code> (M38-3〜5)</td><td><strong>ℤ・ℤ/n・ℤ_p は可換環</strong>——M13/M27 の加法群と M29/M35 の乗法構造を環として束ねる（分配は成分計算）</td><td>標準のみ（choice なし）</td></tr>
+      <tr><td><code>RingHom</code> / <code>toZpRing</code> / <code>projRing</code> (M38-6)</td><td>環準同型と <strong>ℤ → ℤ_p・ℤ_p → ℤ/p^n の環準同型性</strong></td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">ロードマップ: M38 環構造 → M39 形式冪級数環 R[[X]] → M40 合成と Lubin–Tate 補題 → M41 形式群法則 F_f。</p>
+  </div>
 
   <h3>M37: 完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×（IUT/FullReciprocity.lean）</h3>
   <div class="box">
@@ -707,6 +719,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/UnitDecomposition.lean</code></td><td>M35: 単数分解 O^× = μ_{p−1} × U^(1)——存在（明示構成）+ 一意性（choice なし）</td></tr>
     <tr><td><code>IUT/ZpUnits.lean</code></td><td>M36: 単数群 ℤ_p^× : Grp——逆元 x^{p−2}·(x^{p−1})^{−1} の明示構成で choice 回避</td></tr>
     <tr><td><code>IUT/FullReciprocity.lean</code></td><td>M37: 完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×——単射・単数 → 慣性・LCFT 完全模型（choice なし）</td></tr>
+    <tr><td><code>IUT/Ring.lean</code></td><td>M38: 可換環 CRing——ℤ・ℤ/n・ℤ_p の環化と環準同型（Lubin–Tate 第一層、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

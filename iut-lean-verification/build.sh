@@ -235,6 +235,14 @@ import IUT
 #print axioms IUT.recQp_units_to_inertia
 #print axioms IUT.fullLocalCFT
 #print axioms IUT.fullLocalCFT_consistent
+#print axioms IUT.CRing.right_distrib
+#print axioms IUT.CRing.mul_zero
+#print axioms IUT.CRing.toGrp
+#print axioms IUT.intRing
+#print axioms IUT.zmodRing
+#print axioms IUT.zpRing
+#print axioms IUT.toZpRing
+#print axioms IUT.projRing
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
