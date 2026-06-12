@@ -104,6 +104,7 @@ import IUT.FormalGroupInvLeft
 import IUT.FormalGroupEnd
 import IUT.FormalGroupPoints
 import IUT.FormalGroupPointsMul
+import IUT.FormalGroupPointsComp
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
