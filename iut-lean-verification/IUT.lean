@@ -109,6 +109,7 @@ import IUT.FormalGroupPointsComp
 import IUT.FormalGroupPoints2
 import IUT.TorsionPoints
 import IUT.TorsionTrivial
+import IUT.EisensteinRing
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.DecompositionInertia

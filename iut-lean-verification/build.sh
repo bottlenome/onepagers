@@ -726,6 +726,12 @@ import IUT
 #print axioms IUT.zpEval2Seg_one
 #print axioms IUT.zpEval3_liftXY
 #print axioms IUT.zpEval3_ps3Z
+#print axioms IUT.eisRing
+#print axioms IUT.eisOf
+#print axioms IUT.eis_rpow_mk
+#print axioms IUT.eis_lambda_pow
+#print axioms IUT.eis_one_ne_zero
+#print axioms IUT.eisOf_lambda_torsion_shape
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
