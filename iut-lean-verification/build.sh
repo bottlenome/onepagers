@@ -748,6 +748,16 @@ import IUT
 #print axioms IUT.zpEval3_mul
 #print axioms IUT.zpEval3_one
 #print axioms IUT.zpEval3_pow
+#print axioms IUT.zpPow_eq_rpow
+#print axioms IUT.eisF_semilinear
+#print axioms IUT.conj_is_torsion
+#print axioms IUT.conj_ne_zero
+#print axioms IUT.conj_distinct
+#print axioms IUT.teich_conj_torsion
+#print axioms IUT.teich_conj_ne_zero
+#print axioms IUT.teich_conj_distinct
+#print axioms IUT.lambda_one_torsion_family
+#print axioms IUT.lambda_one_family_distinct
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

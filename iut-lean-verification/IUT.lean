@@ -111,6 +111,7 @@ import IUT.TorsionPoints
 import IUT.TorsionTrivial
 import IUT.EisensteinRing
 import IUT.EisensteinTorsion
+import IUT.EisensteinConjugates
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
