@@ -256,6 +256,11 @@ import IUT
 #print axioms IUT.psComp_X
 #print axioms IUT.psComp_coeff_zero
 #print axioms IUT.psComp_coeff_one
+#print axioms IUT.CRing.add_quad_swap
+#print axioms IUT.psPow_congr
+#print axioms IUT.psPow_coeff_diag
+#print axioms IUT.psPow_coeff_congr
+#print axioms IUT.lubin_tate_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

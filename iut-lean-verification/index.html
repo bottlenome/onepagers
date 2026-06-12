@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M40 の形式化（追加検証）</h2>
+  <h2>M1〜M41 の形式化（追加検証）</h2>
+
+  <h3>M41: Lubin–Tate 一意性 — 第四層（IUT/LubinTateUnique.lean）</h3>
+  <div class="box">
+    <p>Lubin–Tate 型方程式 F∘g = c·F + F^q の解の一意性を抽象可換環上のスキーマとして完全証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>psPow_coeff_diag</code> (M41-4)</td><td><strong>対角係数</strong> (g^k)_k = (g_1)^k——合成の leading term の同定（g(0) = 0 で下三角 + 対角のみ生存）</td><td>標準のみ</td></tr>
+      <tr><td><code>psPow_coeff_congr</code> (M41-5)</td><td><strong>F_n 非依存性</strong>: (F^{k+2})_n は F_{&lt;n} のみで決まる（境界項は truncation と F(0) = 0 で消滅）</td><td>標準のみ</td></tr>
+      <tr><td><code>lubin_tate_unique</code> (M41-6)</td><td><strong>一意性定理</strong>: 定数項 0・一次係数一致・双方が方程式を満たす ⟹ F = F'（係数の強帰納法。正則性は減算なしの消去仮説 a·G + c·b = b·G + c·a ⟹ a = b で定式化）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">次段 M42: ℤ_p での消去仮説の充足（p^n − p の正則性 = 捻れなし性 × 主単数の可逆性）と存在側（係数の再帰構成）。</p>
+  </div>
 
   <h3>M40: 級数の合成 P∘Q — Lubin–Tate 第三層（IUT/Composition.lean）</h3>
   <div class="box">
@@ -746,6 +758,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Ring.lean</code></td><td>M38: 可換環 CRing——ℤ・ℤ/n・ℤ_p の環化と環準同型（Lubin–Tate 第一層、choice なし）</td></tr>
     <tr><td><code>IUT/PowerSeries.lean</code></td><td>M39: 形式冪級数環 R[[X]]——三角和交換による Cauchy 積の結合則（choice なし）</td></tr>
     <tr><td><code>IUT/Composition.lean</code></td><td>M40: 級数の合成 P∘Q——truncation・X∘Q = Q・低次係数公式（choice なし）</td></tr>
+    <tr><td><code>IUT/LubinTateUnique.lean</code></td><td>M41: Lubin–Tate 一意性——係数の強帰納による解の一意性スキーマ（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
