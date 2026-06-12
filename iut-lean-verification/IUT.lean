@@ -47,3 +47,4 @@ import IUT.UnitDecomposition
 import IUT.ZpUnits
 import IUT.FullReciprocity
 import IUT.Ring
+import IUT.PowerSeries

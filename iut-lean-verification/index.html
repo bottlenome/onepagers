@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M38 の形式化（追加検証）</h2>
+  <h2>M1〜M39 の形式化（追加検証）</h2>
+
+  <h3>M39: 形式冪級数環 R[[X]] — Lubin–Tate 第二層（IUT/PowerSeries.lean）</h3>
+  <div class="box">
+    <p>Lubin–Tate 形式群法則が住む冪級数環。Cauchy 積の環法則を完全証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>rsum</code> 補題群 / <code>rsum_reflect</code> (M39-1)</td><td>一般可換環上の有限和（congr・加法・head 分解・スカラー倍・<strong>反転</strong> Σf(k) = Σf(m−k)）</td><td>標準のみ</td></tr>
+      <tr><td><code>rsum_triangle</code> (M39-2)</td><td><strong>三角和の交換</strong> Σ_{j≤n}Σ_{k≤j} g(k,j−k) = Σ_{k≤n}Σ_{l≤n−k} g(k,l)——畳み込み結合則の核（矩形化・指示関数なしの直接帰納）</td><td>標準のみ</td></tr>
+      <tr><td><code>psRing</code> / <code>psConstHom</code> (M39-4〜5)</td><td><strong>R[[X]] は可換環</strong>——可換性 = 反転・結合則 = 三角交換・分配 = 項ごと分配。定数項埋め込みの環準同型性と変数 X</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">次層: M40 級数の合成と Lubin–Tate 補題（係数帰納による一意存在）→ M41 形式群法則 F_f。</p>
+  </div>
 
   <h3>M38: 可換環の基盤 — Lubin–Tate 第一層（IUT/Ring.lean）</h3>
   <div class="box">
@@ -720,6 +732,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/ZpUnits.lean</code></td><td>M36: 単数群 ℤ_p^× : Grp——逆元 x^{p−2}·(x^{p−1})^{−1} の明示構成で choice 回避</td></tr>
     <tr><td><code>IUT/FullReciprocity.lean</code></td><td>M37: 完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×——単射・単数 → 慣性・LCFT 完全模型（choice なし）</td></tr>
     <tr><td><code>IUT/Ring.lean</code></td><td>M38: 可換環 CRing——ℤ・ℤ/n・ℤ_p の環化と環準同型（Lubin–Tate 第一層、choice なし）</td></tr>
+    <tr><td><code>IUT/PowerSeries.lean</code></td><td>M39: 形式冪級数環 R[[X]]——三角和交換による Cauchy 積の結合則（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

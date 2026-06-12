@@ -63,6 +63,7 @@
 | M36 単数群 ℤ_p^×（基盤インフラ） | **ℤ_p^× を実際の `Grp` として構成**: 単数性 = レベル 1 剰余が p と素、積閉性（Euclid）、Teichmüller 代表・主単数は単数。核心は**逆元の明示構成 x^{−1} = x^{p−2}·(x^{p−1})^{−1}** — x^{p−1} は古典形 Fermat で主単数になり M30 の幾何級数逆元が適用可能（代表元抽出 = 選択公理を完全回避）。アーベル性・**μ × U^(1) 分解のパッケージング**込み。選択公理不使用 | 実体構成 |
 | M37 完全な相互写像（基盤インフラ） | **rec : ℚ_p^× → ẑ × ℤ_p^× の完成**: ℚ_p^× = p^ℤ × ℤ_p^× と Gal(ℚ_p^ab/ℚ_p) = ẑ × ℤ_p^× の表示（両因子とも実構成）、rec(p^k·u) = (Frob^k, u)、**単射性**（p 進分離性 × 恒等）、**単数は慣性群へ**（M27-5 の核特徴付けの精密化）、**LCFT インターフェースの完全模型**（M27 の不分岐 witness を本物の単数群で置き換え）。右辺と実際の Galois 群の同型（局所 Kronecker–Weber）は対象外と正直に申告。選択公理不使用 | 実体構成 |
 | M38 可換環の基盤（Lubin–Tate 第一層） | **CRing 公理系の自前定義と ℤ・ℤ/n・ℤ_p の可換環化**: 右分配・mul_zero 等の導出、加法群への忘却（Grp 理論と接続）、ℤ/n 環（加法 = M13 商群 + 乗法 = M29 zmodMul）、**ℤ_p 環**（M27 逆極限群 + M29/M35 乗法構造を束ねる、分配は成分計算）、環準同型 RingHom と **ℤ → ℤ_p・ℤ_p → ℤ/p^n が環準同型**。LT 級数の係数環の整備。選択公理不使用 | 実体構成 |
+| M39 形式冪級数環（Lubin–Tate 第二層） | **R[[X]] は可換環**: 一般有限和 rsum（congr・加法・head・スカラー倍・**反転**）、**三角和の交換** Σ_{j≤n}Σ_{k≤j} g(k,j−k) = Σ_{k≤n}Σ_{l≤n−k} g(k,l)（直接帰納）、Cauchy 積の**可換性 = 反転・結合則 = 三角交換・分配 = 項ごと分配**で完全証明。定数項埋め込み R → R[[X]] の環準同型性・変数 X。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -126,6 +127,7 @@ iut-lean-verification/
     ├── ZpUnits.lean     # M36: 単数群 ℤ_p^× : Grp（逆元 = x^{p−2}(x^{p−1})^{−1}、choice なし）
     ├── FullReciprocity.lean # M37: 完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×（choice なし）
     ├── Ring.lean        # M38: 可換環 CRing・ℤ と ℤ/n と ℤ_p の環化・環準同型（LT 第一層、choice なし）
+    ├── PowerSeries.lean # M39: 形式冪級数環 R[[X]]（三角和交換による結合則、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -202,6 +204,7 @@ iut-lean-verification/
 | M36: 単数群 ℤ_p^× の Grp 構成（逆元の明示構成、choice 回避） — 第23弾 | done（choice なし） |
 | M37: 完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×（LCFT 完全模型） — 第24弾 | done（choice なし） |
 | M38: 可換環の基盤（ℤ・ℤ/n・ℤ_p の環化、Lubin–Tate 第一層） — 第25弾 | done（choice なし） |
+| M39: 形式冪級数環 R[[X]]（Cauchy 積の環法則、Lubin–Tate 第二層） — 第26弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

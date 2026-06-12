@@ -243,6 +243,11 @@ import IUT
 #print axioms IUT.zpRing
 #print axioms IUT.toZpRing
 #print axioms IUT.projRing
+#print axioms IUT.rsum_add
+#print axioms IUT.rsum_reflect
+#print axioms IUT.rsum_triangle
+#print axioms IUT.psRing
+#print axioms IUT.psConstHom
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
