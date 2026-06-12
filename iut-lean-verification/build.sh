@@ -390,6 +390,12 @@ import IUT
 #print axioms IUT.frobenius2_charp
 #print axioms IUT.lt_error_vanishes_modp
 #print axioms IUT.lt_error_vanishes_modp'
+#print axioms IUT.lt2Err_zero_iff_equation
+#print axioms IUT.ps2Map_zero_cond
+#print axioms IUT.lt2Err_reduction
+#print axioms IUT.lt2Err_divisible
+#print axioms IUT.lt2Div
+#print axioms IUT.lt2Div_cancel
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
