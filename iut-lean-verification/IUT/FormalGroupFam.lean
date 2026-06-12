@@ -291,6 +291,40 @@ theorem ps3PowPow_mul (R : CRing) (P Q : PS3 R) (a₁ b₁ a₂ b₂ : Nat) :
     (psPow (psRing (psRing R)) P a₁) (psPow (psRing (psRing R)) Q b₁)
     (psPow (psRing (psRing R)) P a₂) (psPow (psRing (psRing R)) Q b₂)
 
+/-- 三重定数は乗法的（psC = psConstHom の map の三段重ね）。 -/
+theorem ps3Const_mul (R : CRing) (c d : R.carrier) :
+    psMul (psRing (psRing R)) (ps3Const R c) (ps3Const R d)
+      = ps3Const R (R.mul c d) := by
+  show psMul (psRing (psRing R))
+      (psC (psRing (psRing R)) (psC (psRing R) (psC R c)))
+      (psC (psRing (psRing R)) (psC (psRing R) (psC R d)))
+    = psC (psRing (psRing R)) (psC (psRing R) (psC R (R.mul c d)))
+  rw [show psC R (R.mul c d)
+      = psMul R (psC R c) (psC R d) from (psConstHom R).map_mul c d,
+    show psC (psRing R) (psMul R (psC R c) (psC R d))
+      = psMul (psRing R) (psC (psRing R) (psC R c))
+          (psC (psRing R) (psC R d)) from
+      (psConstHom (psRing R)).map_mul (psC R c) (psC R d),
+    show psC (psRing (psRing R))
+        (psMul (psRing R) (psC (psRing R) (psC R c))
+          (psC (psRing R) (psC R d)))
+      = psMul (psRing (psRing R))
+          (psC (psRing (psRing R)) (psC (psRing R) (psC R c)))
+          (psC (psRing (psRing R)) (psC (psRing R) (psC R d))) from
+      (psConstHom (psRing (psRing R))).map_mul
+        (psC (psRing R) (psC R c)) (psC (psRing R) (psC R d))]
+
+/-- **スカラー積の合成則** — (c•A)·(d•B) = (c·d)•(A·B)
+    （定数積表示 + interchange）。 -/
+theorem ps3Smul_mul_smul (R : CRing) (c d : R.carrier) (A B : PS3 R) :
+    psMul (psRing (psRing R)) (ps3Smul R c A) (ps3Smul R d B)
+      = ps3Smul R (R.mul c d) (psMul (psRing (psRing R)) A B) := by
+  rw [ps3Smul_eq R c A, ps3Smul_eq R d B,
+    ps3Smul_eq R (R.mul c d) (psMul (psRing (psRing R)) A B),
+    ← ps3Const_mul R c d]
+  exact CRing.mul_mul_comm (psRing (psRing (psRing R)))
+    (ps3Const R c) A (ps3Const R d) B
+
 /-! ## 打ち切り安定性 -/
 
 /-- **定理 (M69a-6): ps23Comp の族和表示（打ち切り安定性）** —
