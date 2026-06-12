@@ -583,6 +583,8 @@ import IUT
 #print axioms IUT.ps2PowPow_low
 #print axioms IUT.ps23Comp_pow
 #print axioms IUT.ps23Comp_comp1
+#print axioms IUT.ps2Comp2_pad
+#print axioms IUT.ps23Comp_comp2
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

@@ -88,6 +88,7 @@ import IUT.FormalGroupChain
 import IUT.FormalGroupFam
 import IUT.FormalGroupMult
 import IUT.FormalGroupComp1
+import IUT.FormalGroupComp2
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
