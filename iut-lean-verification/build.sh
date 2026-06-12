@@ -769,6 +769,12 @@ import IUT
 #print axioms IUT.zpEval3Seg_ps23Comp
 #print axioms IUT.zpEval3_ps23Comp
 #print axioms IUT.lt_point_assoc
+#print axioms IUT.wsum_supported
+#print axioms IUT.lMul_coeff_window
+#print axioms IUT.lAdd_coeff_assoc
+#print axioms IUT.lAdd_coeff_neg
+#print axioms IUT.lMul_coeff_distrib
+#print axioms IUT.lMul_coeff_comm
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
