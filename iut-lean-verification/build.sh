@@ -448,6 +448,19 @@ import IUT
 #print axioms IUT.lt2Sol_equation
 #print axioms IUT.lt2Sol_is_formal_group
 #print axioms IUT.lt_formal_group_exists
+#print axioms IUT.splitFiberedFrobenioid
+#print axioms IUT.sfForgetUnit
+#print axioms IUT.sfProj
+#print axioms IUT.sfProj_onHom_factor
+#print axioms IUT.localSplitFrobenioid
+#print axioms IUT.sfFiberIncl
+#print axioms IUT.sf_fiber_local_iso
+#print axioms IUT.sf_iso_objects_eq
+#print axioms IUT.splitFiberedFrobenioid_gaunt
+#print axioms IUT.sf_polyiso_torsor
+#print axioms IUT.sf_forget_mapIso_eq
+#print axioms IUT.sf_not_iso_unique
+#print axioms IUT.sf_dichotomy
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
