@@ -726,6 +726,11 @@ import IUT
 #print axioms IUT.zpEval2Seg_one
 #print axioms IUT.zpEval3_liftXY
 #print axioms IUT.zpEval3_ps3Z
+#print axioms IUT.proj_rpow_point_low
+#print axioms IUT.rpow_pair_mul
+#print axioms IUT.zpEval2_mul
+#print axioms IUT.zpEval2_one
+#print axioms IUT.zpEval2_pow
 #print axioms IUT.eisRing
 #print axioms IUT.eisOf
 #print axioms IUT.eis_rpow_mk

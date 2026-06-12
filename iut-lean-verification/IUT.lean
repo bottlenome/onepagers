@@ -112,6 +112,7 @@ import IUT.TorsionTrivial
 import IUT.EisensteinRing
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
+import IUT.FormalGroupPointsMul2
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
