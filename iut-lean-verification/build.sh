@@ -801,6 +801,11 @@ import IUT
 #print axioms IUT.tri_bound
 #print axioms IUT.theta
 #print axioms IUT.theta_zero_coeff
+#print axioms IUT.uMon_mul_coeff
+#print axioms IUT.uMon_mul_uMon
+#print axioms IUT.laurent_uMon_mul
+#print axioms IUT.uShift_add
+#print axioms IUT.laurent_uMon_unit
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
