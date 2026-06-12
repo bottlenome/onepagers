@@ -248,6 +248,14 @@ import IUT
 #print axioms IUT.rsum_triangle
 #print axioms IUT.psRing
 #print axioms IUT.psConstHom
+#print axioms IUT.rsum_single
+#print axioms IUT.psPow_add
+#print axioms IUT.psPow_coeff_zero
+#print axioms IUT.psComp_add
+#print axioms IUT.psComp_one
+#print axioms IUT.psComp_X
+#print axioms IUT.psComp_coeff_zero
+#print axioms IUT.psComp_coeff_one
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

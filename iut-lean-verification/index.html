@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M39 の形式化（追加検証）</h2>
+  <h2>M1〜M40 の形式化（追加検証）</h2>
+
+  <h3>M40: 級数の合成 P∘Q — Lubin–Tate 第三層（IUT/Composition.lean）</h3>
+  <div class="box">
+    <p>LT 補題の方程式 f∘F = F∘f を書くための言語。合成を有限和で構成:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>rsum_single</code> / <code>psPow_add</code> (M40-1〜2)</td><td>一点集中和（範囲内一点以外 0 なら和はその点）と冪 Q^k の指数法則</td><td>標準のみ</td></tr>
+      <tr><td><code>psPow_coeff_zero</code> (M40-3)</td><td><strong>truncation</strong>: Q(0) = 0 ⟹ n &lt; k で (Q^k)_n = 0——合成の有限和定義 (P∘Q)_n = Σ_{k≤n} P_k(Q^k)_n の正当化</td><td>標準のみ</td></tr>
+      <tr><td><code>psComp_add</code> / <code>psComp_X</code> / <code>psComp_coeff_one</code> (M40-4〜6)</td><td>合成の加法性・1∘Q = 1・<strong>X∘Q = Q</strong>・低次係数公式 (P∘Q)_0 = P_0、(P∘Q)_1 = P_1·Q_1（M41 の係数帰納の出発点）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">次層: M41 Lubin–Tate 補題——f = pX + X^p に対する係数帰納の一意存在（f∘F = p·F + F^p と環演算で直接展開し、合成の乗法性を回避する設計）。</p>
+  </div>
 
   <h3>M39: 形式冪級数環 R[[X]] — Lubin–Tate 第二層（IUT/PowerSeries.lean）</h3>
   <div class="box">
@@ -733,6 +745,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FullReciprocity.lean</code></td><td>M37: 完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×——単射・単数 → 慣性・LCFT 完全模型（choice なし）</td></tr>
     <tr><td><code>IUT/Ring.lean</code></td><td>M38: 可換環 CRing——ℤ・ℤ/n・ℤ_p の環化と環準同型（Lubin–Tate 第一層、choice なし）</td></tr>
     <tr><td><code>IUT/PowerSeries.lean</code></td><td>M39: 形式冪級数環 R[[X]]——三角和交換による Cauchy 積の結合則（choice なし）</td></tr>
+    <tr><td><code>IUT/Composition.lean</code></td><td>M40: 級数の合成 P∘Q——truncation・X∘Q = Q・低次係数公式（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
