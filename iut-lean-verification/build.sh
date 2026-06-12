@@ -229,6 +229,12 @@ import IUT
 #print axioms IUT.zpUnits
 #print axioms IUT.zpUnits_comm
 #print axioms IUT.zpUnits_decomposition
+#print axioms IUT.prodHom_injective
+#print axioms IUT.recQp
+#print axioms IUT.recQp_injective
+#print axioms IUT.recQp_units_to_inertia
+#print axioms IUT.fullLocalCFT
+#print axioms IUT.fullLocalCFT_consistent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
