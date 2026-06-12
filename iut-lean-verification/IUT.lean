@@ -99,6 +99,7 @@ import IUT.FormalGroupEvalMult
 import IUT.FormalGroupEvalComp
 import IUT.LTIterate
 import IUT.FormalGroupInverse
+import IUT.FormalGroupOModule
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
