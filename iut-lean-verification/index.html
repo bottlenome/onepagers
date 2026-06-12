@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M70e の形式化（追加検証）</h2>
+  <h2>M1〜M71 の形式化（追加検証）</h2>
+
+  <h3>M71: Lubin–Tate 形式群法則の結合則 — 結合則キャンペーン最終層・完結（IUT/FormalGroupAssoc.lean）</h3>
+  <div class="box">
+    <p><strong>F(F(X,Y), Z) = F(X, F(Y,Z))</strong> — M63–M70e の全装置（三変数の congruence/分解/一意性・両辺の構成と一次条件・連鎖律 CR1/CR2/CR3・橋渡し・lift 互換・ps3Comp3 乗法性）の合流点:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>assocL_equation</code> / <code>assocR_equation</code> (M71-1, 2)</td><td><strong>両候補の LT 方程式 f∘₃A = A(f(X), f(Y), f(Z))</strong>——左辺は CR1 → <strong>F 自身の方程式（M62）</strong> → CR2 → 注入の橋渡し + lift の comp1/comp2 交換、右辺は CR3 → lift の崩落 + 座標の代入で、共通形 F(F(f(X),f(Y)), f(Z)) / F(f(X), F(f(Y),f(Z))) に合流。<strong>F の方程式を外側と内側に二回適用</strong>するのが鍵</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>assocL_is_lt3</code> / <code>assocR_is_lt3</code> (M71-3)</td><td>一次条件 8 本（M67）+ 方程式成分で <strong>assocL も assocR も IsLTFormalGroup3 を充足</strong></td><td>標準のみ</td></tr>
+      <tr><td><code>lt_formal_group_assoc</code> / <code>lt2Sol_assoc</code> (M71-4)</td><td><strong>結合則 assocL = assocR</strong>（三変数一意性 M66 で両候補が強制的に一致）——lt2Sol は定数項 0・一次係数 1・f との交換・可換性（M62）・<strong>結合性</strong>を備えた真の 1 次元可換形式群法則</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">結合則キャンペーン（M63〜M71、全 14 層 + サブエージェント並行部品 M70F）完結。Lubin–Tate 形式群の群法則公理（単位・可換・結合）が全て from-scratch・選択公理不使用で機械検証された。</p>
+  </div>
 
   <h3>M70e: 連鎖律 CR3 — 結合則キャンペーン第十三層（IUT/FormalGroupComp3.lean）</h3>
   <div class="box">
@@ -1378,6 +1390,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupMult3.lean</code></td><td>M70F: ps3Comp3 の乗法性パッケージ——三重冪積・六重和の再添字化・乗法性・1/冪の代入（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupLift.lean</code></td><td>M70d: lift の代入互換——lift の ps3Comp3 崩落・lift と ps2Comp2 の交換・座標の代入（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupComp3.lean</code></td><td>M70e: 連鎖律 CR3——(F(P,Q))∘(W₁,W₂,W₃) = F(P∘W⃗, Q∘W⃗)・五重和正規化（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupAssoc.lean</code></td><td>M71: Lubin–Tate 形式群法則の結合則 F(F(X,Y),Z) = F(X,F(Y,Z))——結合則キャンペーン完結（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

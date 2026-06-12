@@ -615,6 +615,12 @@ import IUT
 #print axioms IUT.ps23Comp_pad3
 #print axioms IUT.quint_reorder
 #print axioms IUT.ps3Comp3_comp23
+#print axioms IUT.assocL_equation
+#print axioms IUT.assocR_equation
+#print axioms IUT.assocL_is_lt3
+#print axioms IUT.assocR_is_lt3
+#print axioms IUT.lt_formal_group_assoc
+#print axioms IUT.lt2Sol_assoc
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
