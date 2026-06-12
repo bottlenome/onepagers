@@ -57,3 +57,5 @@ import IUT.Freshman
 import IUT.PSFunctor
 import IUT.FrobeniusCharP
 import IUT.LTErrorDivisible
+import IUT.LubinTateExists
+import IUT.FrobenioidCat

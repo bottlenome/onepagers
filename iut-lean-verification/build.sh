@@ -299,6 +299,22 @@ import IUT
 #print axioms IUT.ltPoly_reduction
 #print axioms IUT.ltError_reduction
 #print axioms IUT.ltError_divisible
+#print axioms IUT.ltSol
+#print axioms IUT.ltSeg_eq_sol
+#print axioms IUT.ltSol_div
+#print axioms IUT.ltSol_equation
+#print axioms IUT.lubin_tate_exists
+#print axioms IUT.lubin_tate
+#print axioms IUT.elementaryFrobenioid
+#print axioms IUT.degFunctor
+#print axioms IUT.frobFunctor
+#print axioms IUT.frob_no_right_inverse
+#print axioms IUT.iso_deg_one
+#print axioms IUT.iso_objects_eq
+#print axioms IUT.hom_exists_but_no_iso
+#print axioms IUT.degMor
+#print axioms IUT.frobFunctor_matches_frob
+#print axioms IUT.deg_frobFunctor
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

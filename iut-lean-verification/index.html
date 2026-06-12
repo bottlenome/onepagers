@@ -158,7 +158,31 @@
 </section>
 
 <section>
-  <h2>M1〜M48 の形式化（追加検証）</h2>
+  <h2>M1〜M49 の形式化（追加検証）</h2>
+
+  <h3>M49: Lubin–Tate 補題の完成 — 最終層（IUT/LubinTateExists.lean）</h3>
+  <div class="box">
+    <p><strong>Lubin–Tate キャンペーン(M38〜M49)の完成</strong>: 任意の a : ℤ_p に対し F(0) = 0・F(1) = a・F∘f = p·F + F^p の解の存在と一意性:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ltSeg</code> / <code>ltSol</code> (M49-2〜3)</td><td><strong>係数の再帰構成</strong>: F₀ = 0・F₁ = a・F_{m+2} = u^{-1}·(E(部分解)/p)（初期切片を一段ずつ拡張、choice-free）と切片の整合性</td><td>標準のみ</td></tr>
+      <tr><td><code>ltSol_div</code> / <code>ltSol_equation</code> (M49-4〜5)</td><td><strong>除算恒等式</strong> π·(u·F_n) = E_n（M36 単元逆元 + M43 zpDivP + M48 整除性の合流）と<strong>方程式の全係数検証</strong>（n ≥ 2 は一意性と同じ分解を移項簿記で逆向きに）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>lubin_tate</code> (M49-6)</td><td><strong>Lubin–Tate 補題</strong>——存在（構成的）+ 一意性（M42）のパッケージ。[a]_f 系列の理論の核</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: 2 変数形式群法則 F_f(X,Y)（同じ係数帰納スキーマの 2 変数版）・捻れ点と Galois 作用。</p>
+  </div>
+
+  <h3>M48F: Frobenioid の圏論化 — 並行ブランチ（IUT/FrobenioidCat.lean）</h3>
+  <div class="box">
+    <p>M12 の Frobenioid 次数データを M19 の Cat 上の実際の圏として実装（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>elementaryFrobenioid</code> / <code>degFunctor</code> / <code>frobFunctor</code> (M48F-1〜3)</td><td>対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0)、合成 = 捻れ半直積型の圏公理完全証明。<strong>次数関手</strong> F_Φ → (ℕ≥1, ×) と <strong>Frobenius 自己関手</strong> Φ_e</td><td>標準のみ</td></tr>
+      <tr><td><code>iso_objects_eq</code> / <code>hom_exists_but_no_iso</code> (M48F-4)</td><td><strong>非可逆性</strong>: 同型の次数は 1・因子は 0・<strong>同型は対象を動かせない</strong>（n ≅ m ⟹ n = m）——「Frobenioid は Galois 圏でない」（G6 との二分法）の機械検証</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>degMor</code> / <code>frobFunctor_matches_frob</code> (M48F-5)</td><td>M12 接続: φ_e の射実現・frob_deg の関手化・Φ_e は次数関手上で恒等</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">正直な申告: 基底圏一点・因子モノイド ℕ の elementary な場合（次数簿記が見る範囲）。poly-isomorphism・分裂・realification は未形式化。</p>
+  </div>
 
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
   <div class="box">
@@ -850,6 +874,8 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/PSFunctor.lean</code></td><td>M46: 冪級数の関手性 psMap（加法・乗法・冪・合成の保存）・モノミアル代数・伸長公式（choice なし）</td></tr>
     <tr><td><code>IUT/FrobeniusCharP.lean</code></td><td>M47: 標数 p の Frobenius 定理 F^p = F∘X^p——truncation 帰納（choice なし）</td></tr>
     <tr><td><code>IUT/LTErrorDivisible.lean</code></td><td>M48: LT 誤差項の p-整除性——mod-p 還元 + Frobenius 定理（choice なし）</td></tr>
+    <tr><td><code>IUT/LubinTateExists.lean</code></td><td>M49: Lubin–Tate 補題完成——係数の再帰構成による存在 + 一意性（choice なし）</td></tr>
+    <tr><td><code>IUT/FrobenioidCat.lean</code></td><td>M48F: Frobenioid の圏論化——elementary Frobenioid・次数関手・同型 = 恒等のみ（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
