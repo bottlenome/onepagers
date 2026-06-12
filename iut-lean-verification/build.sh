@@ -663,6 +663,8 @@ import IUT
 #print axioms IUT.lt_module_mul
 #print axioms IUT.lt_module_add_neg
 #print axioms IUT.ltInv_eq_ltSol_neg_one
+#print axioms IUT.lt_formal_group_inverse_left
+#print axioms IUT.lt_formal_group_inverse_both
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

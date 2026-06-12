@@ -24,8 +24,8 @@
 
   これで lt2Sol は単位・可換・結合（M62/M71）に加え**逆元**を備えた
   完全な 1 次元形式群（群法則の全公理）であることが機械検証された。
-  左逆元 F(ι(X), X) = 0 は可換性から従う（明示の機械検証は未形式化、
-  正直申告）。全て選択公理不使用。
+  左逆元 F(ι(X), X) = 0 は M75F（FormalGroupInvLeft）が明示に
+  機械検証済み。全て選択公理不使用。
 -/
 import IUT.FormalGroupEvalComp
 import IUT.LTIterate
