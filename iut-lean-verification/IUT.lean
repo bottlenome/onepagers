@@ -101,6 +101,8 @@ import IUT.LTIterate
 import IUT.FormalGroupInverse
 import IUT.FormalGroupOModule
 import IUT.FormalGroupInvLeft
+import IUT.FormalGroupEnd
+import IUT.FormalGroupPoints
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
