@@ -65,6 +65,7 @@ import IUT.SplitFrobenioid
 import IUT.FiberedFrobenioid
 import IUT.SplitFibered
 import IUT.RamifiedBase
+import IUT.RamifiedSplit
 import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq

@@ -447,7 +447,21 @@
       <tr><td><code>ram_iso_objects_eq</code> / <code>ramifiedFrobenioid_gaunt</code> / <code>ram_iso_unique</code> (M61F-6)</td><td><strong>剛性</strong>——同型は e = 1・d = 1・c = 0 を強制し段も重複度も動かせない（gaunt + IsoUnique）。<strong>base の非自明射を足しても Frobenius-like 剛性は保たれ、新規に「同型は塔を昇れない」が出る</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>ram_no_descent</code> / <code>pullback_not_invertible</code> (M61F-7)</td><td><strong>非可逆性の新形</strong>——n &lt; n' なら降下射は存在しない（塔は昇るだけで降りられない）。分岐 e ≥ 2 の純引き戻し射を hom とする同型は存在しない（具体的証人つき）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">正直な申告: base は単一素点の塔（全順序圏）のみ——複数素点への分解（分解数 g）・惰性（剰余次数 f）は未形式化。分岐指数 e は抽象パラメータで実際の体拡大から計算されない。単数なし——M59F の split 構造との合成は未形式化。M57F の離散 base との直積（素点ごとに塔が立つ base）も未形式化。</p>
+    <p class="small">正直な申告: base は単一素点の塔（全順序圏）のみ——複数素点への分解（分解数 g）・惰性（剰余次数 f）は未形式化。分岐指数 e は抽象パラメータで実際の体拡大から計算されない。単数との合成は M63F（IUT/RamifiedSplit.lean）で形式化済み。M57F の離散 base との直積（素点ごとに塔が立つ base）は未形式化。</p>
+  </div>
+
+  <h3>M63F: 分岐塔 base 上の単数つき全空間圏 — 並行ブランチ（IUT/RamifiedSplit.lean）</h3>
+  <div class="box">
+    <p>M61F「単数なし」と M59F「base は離散圏」の正直申告を同時解消——[FrdI] の射データ四つ組（base の射 = 分岐指数 e, deg_Fr = d, Div = c, 単数 u）の塔 base 完全版。単数は第二射の合成倍率 e₂d₂ で捻る u(f·g) = u(f)<sup>e₂d₂</sup>·u(g)（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>RamSplitHom</code> / <code>ramSplitFrobenioid</code> (M63F-1〜2)</td><td><strong>分岐塔 base 上の単数つき全空間圏</strong>——対象 = (塔の段, 重複度)、射 = (le, e ≥ 1, d ≥ 1, c, u) with m' = e·d·m + c。圏公理完全証明（単数結合則は gpow_mul_dist + gpow_mul + 指数の並べ替え ram_mul_swap、U 可換を仮定——M55F/M59F と同じ数学的必然）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rsForgetUnit</code> / <code>rsProj</code> (M63F-3)</td><td><strong>忘却関手の三角形</strong>——単数を捨てて ramifiedFrobenioid へ、base 成分で towerCat へ、＋ rsProj = ramProj ∘ rsForgetUnit（定義的 rfl）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rsPullbackMor</code> / <code>rs_hom_factor</code> (M63F-4)</td><td><strong>分解定理の単数つき版</strong>——任意の射 = 純引き戻し射 (le, e, 1, 0, 1) ∘ 垂直単数つき射 (le_refl, 1, d, c, u)。<strong>単数は垂直成分にのみ宿る</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rs_iso_objects_eq</code> / <code>rs_polyiso_torsor</code> (M63F-5)</td><td><strong>剛性と単数トーソルの両立</strong>——同型は (e, d, c) = (1, 1, 0) を強制し段も重複度も動かせない（gaunt）が、自己同型全体は U.carrier と明示的全単射（U-トーソル）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rs_dichotomy</code> / <code>rs_pullback_not_invertible</code> (M63F-6〜7)</td><td><strong>二分法の最終形</strong>——忘却像では任意の二同型が一致 ∧ U 非自明なら異なる自己同型対が実在。<strong>塔 base・分岐・ファイバー・単数を全部入れても「(Ind2) 型不定性は単数成分にのみ宿る」</strong>（M53F→M55F→M57F→M59F→M61F の系譜の完結）。単数を足しても分岐 e ≥ 2 は戻せない</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">正直な申告: base は単一素点の塔のみ（複数素点への分解 g・惰性 f、離散 base との直積は未形式化）。U は抽象可換群——「単数の引き戻しはノルム・指数写像で変換される」局所体論の実体はなく、捻り指数 e·d は因子簿記の合成倍率を流用した簿記レベルのモデル選択。e は抽象パラメータ。</p>
   </div>
 
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
@@ -1163,6 +1177,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/RamifiedBase.lean</code></td><td>M61F: base 圏の非自明射——分岐指数つき塔 base・引き戻し関手・分解定理・「同型は塔を昇れない」（choice なし）</td></tr>
     <tr><td><code>IUT/PowerSeries3.lean</code></td><td>M63: 三変数冪級数の基盤——三重 Cauchy・総次数 truncation・代入・IsLTFormalGroup3（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroup3Congr.lean</code></td><td>M64: 三変数冪の係数合同——三分処理・m 帰納（choice なし）</td></tr>
+    <tr><td><code>IUT/RamifiedSplit.lean</code></td><td>M63F: 分岐塔 base 上の単数つき全空間圏——M59F × M61F の合成・U-トーソル・二分法の最終形（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
