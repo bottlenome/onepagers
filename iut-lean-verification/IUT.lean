@@ -83,3 +83,4 @@ import IUT.PowerSeries3
 import IUT.FormalGroup3Congr
 import IUT.FormalGroup3Decomp
 import IUT.FormalGroup3Unique
+import IUT.FormalGroupAssocDef

@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M66 の形式化（追加検証）</h2>
+  <h2>M1〜M67 の形式化（追加検証）</h2>
+
+  <h3>M67: 結合則の両辺の構成と一次条件 — 結合則キャンペーン第五層（IUT/FormalGroupAssocDef.lean）</h3>
+  <div class="box">
+    <p>両辺 F(F(X,Y),Z)・F(X,F(Y,Z)) を三変数級数として実構成し、IsLTFormalGroup3 の一次成分をクリア:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ps23Comp</code> / <code>liftXY</code>/<code>liftYZ</code> (M67-1〜2)</td><td><strong>2→3 変数代入</strong>と 2 変数級数の三変数化（Z 定数方向の psC・X 定数方向の psMap、M53 の psRingHom 再利用）</td><td>標準のみ</td></tr>
+      <tr><td><code>ps23Comp_lin</code> (M67-4)</td><td><strong>代入の線形部 master 補題</strong>——F₀₀ = P₀₀₀ = Q₀₀₀ = 0 ⟹ 総次数 1 の係数 = F₀₁·P + F₁₀·Q（4 項展開・(1,1) 項は積の総次数 1 消滅 ps3Mul_deg1_zero）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>assocL</code>/<code>assocR</code> / <code>assocL_linear</code>/<code>assocR_linear</code> (M67-5)</td><td><strong>両辺の構成と一次条件 8 本</strong>——A₀₀₀ = B₀₀₀ = 0・三方向一次係数 = 1（F の一次条件と座標・lift の係数から機械的に）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: 方程式成分——合成の連鎖律 f∘(F∘(P,Q)) = (f∘F)∘(P,Q) 等（次層・最後の山場）→ 結合則。</p>
+  </div>
 
   <h3>M66: 三変数の対角分離と一意性 — 結合則キャンペーン第四層（IUT/FormalGroup3Unique.lean）</h3>
   <div class="box">
@@ -1203,6 +1215,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/RamifiedSplit.lean</code></td><td>M63F: 分岐塔 base 上の単数つき全空間圏——M59F × M61F の合成・U-トーソル・二分法の最終形（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroup3Decomp.lean</code></td><td>M65: 三変数方程式の分解——左辺 π·G + G^p・注入積の構造・右辺の一変数化（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroup3Unique.lean</code></td><td>M66: 三変数の対角分離と一意性——三重一点差分・zp_lt_cancel（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupAssocDef.lean</code></td><td>M67: 結合則の両辺の構成と一次条件——ps23Comp・lift・線形部 master 補題（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

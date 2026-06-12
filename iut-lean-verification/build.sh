@@ -538,6 +538,16 @@ import IUT
 #print axioms IUT.lt3_rhs_coeff
 #print axioms IUT.lt3_rhs_split
 #print axioms IUT.lt3_unique
+#print axioms IUT.ps23Comp
+#print axioms IUT.ps3Mul_deg1_zero
+#print axioms IUT.ps23Comp_000
+#print axioms IUT.ps23Comp_lin
+#print axioms IUT.assocL
+#print axioms IUT.assocR
+#print axioms IUT.assocL_000
+#print axioms IUT.assocR_000
+#print axioms IUT.assocL_linear
+#print axioms IUT.assocR_linear
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
