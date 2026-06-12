@@ -62,6 +62,7 @@ import IUT.FrobenioidCat
 import IUT.FrobenioidModel
 import IUT.PolyIsomorphism
 import IUT.SplitFrobenioid
+import IUT.FiberedFrobenioid
 import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq

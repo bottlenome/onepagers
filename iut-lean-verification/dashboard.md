@@ -32,7 +32,7 @@
 | M2 Hodge theater | ラベル組合せ骨格＋ **F_l^±± の群公理完結**（閉性・単位元・逆元）、±1商 = {0..l⋇} 同定、テータ値ラベル = {1..l⋇}、Skeleton 橋渡し | ~25% |
 | M3 Θ-link / log-link | 格子の構造定理＋ **垂直コア性・双コア性（定理1.5 の骨格）**: log-不変量は列ごとに一定、リンク不変量は格子全体で一意 | ~40% |
 | M4 テータ値評価 | 値・次数簿記層: Gaussian 総次数の閉形式、素朴評価⟹RC評価/多輻的表現と非両立、膨張込み評価⟹M7計算、**テータ値の±ラベル well-defined 性** (l−j)² ≡ j² (mod l)。＋ **M11 cyclotomic rigidity の骨格**（IUT/EtaleTheta.lean、[EtTh] Cor 2.19）: テータ群（Heisenberg 群）の交換子＝シンプレクティック形式がシクロトームの標準生成元を指定し、**テータ切断の不定性が交換子で完全相殺**されることを公理化ゼロの完全証明で機械検証（裸のシクロトームの ±1 不定性との対比込み） | 算術核 100% / 理論 ~35% |
-| M5 定理3.11 多輻性 | **statement を原文から読み取り出力仕様を形式化**: (i)(Ind1)(Ind2)・(ii)(Ind3)・(iii) をインターフェース化、系3.12 の証明本体を機械化（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性、**procession 正規化の閉形式（公理ゼロ）**。＋ **M12 Frobenioid 次数層**（IUT/Frobenioid.lean、[FrdI/II]）: deg(0)=0 の導出・Frobenius 合成則・**Frobenius-like 非可逆性**・Gaussian 束の次数公式（M4 接続）・**次数＝log-volume 両立 ⟹ `vol_q` の供給**（定理3.11 (i)(c) の骨格、M5 接続）。圏論的実体と数体型データでの充足は M48F（次数圏）+ M51F（因子圏・rationalFrobenioid）で base 圏一点の範囲を形式化済み | ~28%（構成は土台のみ） |
+| M5 定理3.11 多輻性 | **statement を原文から読み取り出力仕様を形式化**: (i)(Ind1)(Ind2)・(ii)(Ind3)・(iii) をインターフェース化、系3.12 の証明本体を機械化（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性、**procession 正規化の閉形式（公理ゼロ）**。＋ **M12 Frobenioid 次数層**（IUT/Frobenioid.lean、[FrdI/II]）: deg(0)=0 の導出・Frobenius 合成則・**Frobenius-like 非可逆性**・Gaussian 束の次数公式（M4 接続）・**次数＝log-volume 両立 ⟹ `vol_q` の供給**（定理3.11 (i)(c) の骨格、M5 接続）。圏論的実体と数体型データでの充足は M48F（次数圏）+ M51F（因子圏・rationalFrobenioid）で base 圏一点、M57F（離散 base 上の全空間圏・射影関手・局所制限）で base 離散の範囲を形式化済み | ~28%（構成は土台のみ） |
 | M6 系3.12 | statement 100% 形式化、骨格からの独立性＋**定理3.11 からの証明本体（p.174–175 の包含論法）を機械化** | statement 100% / 証明 ~90%（条件付き） |
 | M7 IUT IV log-volume 計算 | 条件付き導出 ＋ **l-最適化定理**（全 l で Szpiro 型 ⟹ ht ≤ c、定理1.10 の質的内容） | ~35% |
 | M8 古典的還元と帰結 | ABC ⟹ 漸近フェルマー ＋ Catalan 型 3^b+1=2^a の有界性を完全証明 | ~35% |
@@ -87,6 +87,7 @@
 | M51F Frobenioid の圏論的実体と数体での充足（並行ブランチ） | **M12 の `Frobenioid` 構造を ℚ 型の実データで充足**: 有効因子 = 素点での重複度の有限サポート関数（QDiv、サポート上界をデータとして持ち choice 回避）、可換モノイド法則・**重み付き次数の加法性 deg(x+y) = deg x + deg y・Frobenius 斉次性 deg(φ_e x) = e·deg x** を完全証明して `rationalFrobenioid` を Nonempty でなく def として構成。`DegreeVolumeCompat` の実構成により **M12-6（vol_q 供給）が実データで発動**（`rational_qpilot_volume`: 任意の骨格 s で単一素点因子の実現体積 = −\|log q\|）、局所付値（M27）との整合。＋**因子レベルの圏** divisorFrobenioid（対象 = 有効因子、射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明、**次数関手** → elementaryFrobenioid（M48F）の関手性、**因子レベルの非可逆性**（同型は因子を動かせない x ≅ y ⟹ x = y、＋次数関手で M48F に帰着する独立経路）。選択公理不使用 | 実体構成 |
 | M53F poly-isomorphism と剛性（並行ブランチ） | **[FrdI] の Frobenius-like/étale-like 二分法と (Ind1) 不定性の在処を圏論的核で機械検証**: 剛性述語 `IsGaunt`（同型 ⟹ 対象の等号）・`IsoUnique`（同型の hom 成分は一意 = poly-isomorphism が単集合に潰れる、CatIso 全体の等号は M22-1a の逆一意性で従う）を定義し、**Frobenioid 側は剛的** — divisorFrobenioid（M51F）・elementaryFrobenioid（M48F）の任意の同型は成分 (d,c) = (1,0)（恒等射と同成分）で gaunt かつ IsoUnique 成立。**étale 側は非剛的** — 群 G の一点圏 BG（`deloopCat`、圏公理は群公理から完全証明・右単位/右逆は左公理系からの導出定理）では全ての射が同型で、**poly-isomorphism は G.carrier と明示的全単射（G-トーソル）**＝(Ind1) 型不定性の在処。総括 `gaunt_dichotomy`: 非自明群 G で「divisorFrobenioid は IsoUnique ∧ BG は ¬IsoUnique」（注意: BG は一点なので gaunt は自明成立 — 剛性を測るのは IsoUnique）。デッキ群 ℤ（M9 intGrp）での具体的発動＋ M5 `MultiradialRep.Ind`/`ind0` への型レベル接続（`deloopInd`、G 非自明なら基点以外の選択肢が実在）。選択公理不使用 | 実体構成 |
 | M55F split Frobenioid（並行ブランチ） | **[FrdI] の split 構造（射 = Frobenius 次数・効果的因子・単数の三つ組）と (Ind2) 型不定性の在処を機械検証**: 可換単数群 U をパラメータに、射 (d ≥ 1, c : QDiv, u : U) with y = φ_d(x) + c（u は線形条件に関与しない = 因子簿記と単数の分裂）の圏 `splitFrobenioid` を建設。恒等 (1,0,1)・合成 (d₁d₂, φ_{d₂}(c₁)+c₂, u₁^{d₂}·u₂)——単数は第二射の Frobenius 次数で d 乗されて運ばれる。単数結合則は (ab)^n = aⁿbⁿ（`gpow_mul_dist`）を要し非可換群では偽のため U の可換性を仮定（O^× は可換なので正当）。**因子部分は剛的**——同型は (d,c) = (1,0) を強制し対象を動かせない（gaunt、M51F-10 の踏襲）が**単数部分は U-トーソル**——任意の u で (1,0,u) が同型（逆 (1,0,u⁻¹)）になり自己同型全体は U.carrier と明示的全単射（`split_polyiso_torsor`、往復恒等の両向き証明）。二分法の精密化 `split_dichotomy_refined`: 忘却関手 `splitForget`（u を捨てる）の像では任意の二同型が一致（IsoUnique 回復）∧ U 非自明なら hom の異なる同型対が実在 = **一つの圏の中で不定性は単数成分にのみ宿る**（M53F は剛的圏と非剛的圏が別々だった）。M5 `MultiradialRep.Ind`/`ind0` への型レベル接続（`splitInd`、M53F-9 deloopInd の (Ind2) 版）。選択公理不使用 | 実体構成 |
+| M57F base 圏上のファイバー構造（並行ブランチ） | **[FrdI] の Frobenioid のファイバー圏構造を素点の離散 base 圏の範囲で機械検証**——M48F/M51F/M55F が「base 圏一点」と申告してきた未達部分を base 離散で埋める: 素点の base 圏 = 離散圏 `discCat Nat`（射 = 等号の証明、圏公理は proof irrelevance + 構造 eta で rfl）、一素点上の**局所 Frobenioid** `localFrobenioid`（対象 = 重複度 ℕ、射 = (d ≥ 1, c) with m' = d·m + c、c ≥ 0 が型に内蔵された elementaryFrobenioid の ℕ 版 + ℤ への埋め込み関手 `localToElementary`）、**全空間圏** `fiberedFrobenioid`（対象 = (素点 k, 重複度 m)、射 = (base_eq, d, c)）の圏公理完全証明。**射影関手** `fibProj` と垂直性（射があれば素点一致・素点が違えば射は空 `no_cross_prime_hom`）、**ファイバー = 局所圏の忠実充満同定** `fiber_local_iso`（往復写像の両向き恒等）、**大域→局所の制限関手** `divRestrictFunctor`（divisorFrobenioid → localFrobenioid、x ↦ x.mult k、線形条件の保存は点ごとの定義から congrArg 一発）と**局所決定性（束着定理）** `restrict_determines`（大域射は全素点での制限 + bound 表示で決まる。bound 仮定は QDiv が choice 回避のため上界をデータで持つ表示の自由度ゆえ——正直申告）。**剛性の遺伝**: 全空間圏の同型は (d,c) = (1,0) を強制し素点も重複度も動かせない（gaunt + IsoUnique）= Frobenius-like 剛性はファイバー構造に遺伝。base の非自明射（分解・惰性）・アルキメデス素点・realification は未形式化。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -165,6 +166,7 @@ iut-lean-verification/
     ├── FrobenioidModel.lean # M51F: Frobenioid の圏論的実体と数体での充足（QDiv・rationalFrobenioid・divisorFrobenioid・次数関手、choice なし）
     ├── PolyIsomorphism.lean # M53F: poly-isomorphism と剛性（IsGaunt/IsoUnique・deloopCat・G-トーソル定理、choice なし）
     ├── SplitFrobenioid.lean # M55F: split Frobenioid — 単数成分と (Ind2) の在処（gpow・SplitHom・U-トーソル・二分法精密化、choice なし）
+    ├── FiberedFrobenioid.lean # M57F: base 圏上のファイバー構造 — 離散 base・局所/全空間圏・射影/包含/制限関手・局所決定性・剛性の遺伝（choice なし）
     ├── PowerSeries2.lean # M50: 二変数冪級数の基盤（総次数 truncation・1→2変数代入、choice なし）
     ├── FormalGroupSub.lean # M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）
     ├── FormalGroupEq.lean # M52: 形式群方程式の定式化・恒等での成立（choice なし）
@@ -224,7 +226,7 @@ iut-lean-verification/
 | M10: 遠アーベル復元アルゴリズムの実装と MonoAnabelian 充足（issue #29 項目1の骨格） | done（選択公理不使用） |
 | M11: エタールテータの cyclotomic rigidity の機構（issue #29 項目2の骨格） | done（公理化ゼロの完全証明） |
 | M12: Frobenioid 次数層と vol_q 供給（issue #29 項目3の骨格） | done |
-| M5: 定理3.11 の**構成**の完全形式化 | 4基盤の骨格（M9–M12）は done。**Frobenioid の圏論的実体と数体型データでの充足は M51F で base 圏一点の範囲を形式化済み**（因子圏・次数関手・実データによる M12 充足。poly-isomorphism・realification・base 圏上のファイバー構造は未達）。残り（環構造復元の本体・p進テータ関数の関数等式）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
+| M5: 定理3.11 の**構成**の完全形式化 | 4基盤の骨格（M9–M12）は done。**Frobenioid の圏論的実体と数体型データでの充足は M51F で base 圏一点の範囲を形式化済み**（因子圏・次数関手・実データによる M12 充足。poly-isomorphism は M53F、分裂（単数）は M55F、base 圏上のファイバー構造は M57F が離散 base の範囲で形式化済み。base の非自明射（分解・惰性）・realification は未達）。残り（環構造復元の本体・p進テータ関数の関数等式）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
 | M13: 副有限群（商群・逆極限・ẑ の実構成）— 実体建設フェーズ第1弾 | done（公理化なしの実構成） |
 | M14: Galois 圏・étale π₁ のファイバー関手機構 — 実体建設フェーズ第2弾 | done（Aut(F) ≅ G は公理ゼロ） |
 | M15: 位相付き副有限群（位相群性・開部分群・近傍基定理） — 実体建設フェーズ第3弾 | done（Classical.choice ゼロ） |
@@ -274,6 +276,7 @@ iut-lean-verification/
 | M55F: split Frobenioid — 射の単数成分と (Ind2) の在処（因子は剛的・単数が U-トーソル、M53F 二分法の精密化） — サブエージェント並行開発・第42弾統合 | done（choice なし） |
 | M57: 二変数冪の係数合同補題（存在再帰の礎石、形式群第七層） — 第43弾 | done（choice なし） |
 | M58: 形式群方程式の総次数分解（左辺 π·F + F^p・右辺の一変数化、形式群第八層） — 第43弾 | done（choice なし） |
+| M57F: base 圏上のファイバー構造 — 素点の離散 base 圏上の全空間圏（射影・ファイバー同定・大域因子の局所制限と束着、「base 一点」申告の解消・離散の範囲） — サブエージェント並行開発・第44弾統合 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

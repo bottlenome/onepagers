@@ -420,6 +420,21 @@ import IUT
 #print axioms IUT.lt2_lhs_decomp
 #print axioms IUT.inX_mul_inY
 #print axioms IUT.lt2_rhs_coeff
+#print axioms IUT.discCat
+#print axioms IUT.localFrobenioid
+#print axioms IUT.localToElementary
+#print axioms IUT.fiberedFrobenioid
+#print axioms IUT.fibProj
+#print axioms IUT.fibProj_endo_id
+#print axioms IUT.no_cross_prime_hom
+#print axioms IUT.fiberIncl
+#print axioms IUT.fiber_local_iso
+#print axioms IUT.divRestrictFunctor
+#print axioms IUT.restrict_determines
+#print axioms IUT.fibered_iso_objects_eq
+#print axioms IUT.fiberedFrobenioid_gaunt
+#print axioms IUT.fibered_iso_unique
+#print axioms IUT.fibered_rigid
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -295,7 +295,7 @@
       <tr><td><code>divisorFrobenioid</code> / <code>divDegFunctor</code> (M51F-8〜9)</td><td><strong>因子そのものを対象とする圏</strong>（射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明と<strong>次数関手</strong> → elementaryFrobenioid（M48F）の関手性——M48F の次数圏が本圏の「次数の影」であることの機械検証</td><td>標準のみ</td></tr>
       <tr><td><code>divisor_iso_objects_eq</code> / <code>divisor_hom_exists_but_no_iso</code> (M51F-10〜11)</td><td><strong>因子レベルの非可逆性</strong>——同型は因子を動かせない（x ≅ y ⟹ x = y、次数に落とさない強い形）＋具体的証人＋次数関手で M48F に帰着する独立経路（関手の同型保存 <code>Functor.mapIso</code>）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">正直な申告: 素点は添字 k で番号付け・重み w(k) は ⌊log p_k⌋ 相当の抽象パラメータ（素数の枚挙・対数の解析は未形式化）。有効因子のみ（主因子・積公式なし）。base 圏一点の Frobenioid（base 圏上のファイバー構造・poly-isomorphism・realification は未形式化）。</p>
+    <p class="small">正直な申告: 素点は添字 k で番号付け・重み w(k) は ⌊log p_k⌋ 相当の抽象パラメータ（素数の枚挙・対数の解析は未形式化）。有効因子のみ（主因子・積公式なし）。base 圏一点の Frobenioid（base 圏上のファイバー構造は M57F が離散 base の範囲で形式化。poly-isomorphism は M53F。realification は未形式化）。</p>
   </div>
 
   <h3>M53F: poly-isomorphism と剛性 — 並行ブランチ（IUT/PolyIsomorphism.lean）</h3>
@@ -327,7 +327,23 @@
       <tr><td><code>split_not_iso_unique</code> / <code>split_dichotomy_refined</code> (M55F-7)</td><td><strong>二分法の精密化</strong>——U 非自明なら splitFrobenioid は ¬IsoUnique だが、忘却像（因子簿記）では任意の二同型が一致（IsoUnique 回復）。「不定性は単数成分にのみ宿る」を一つの定理に</td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>splitInd</code> / <code>splitInd_nontrivial</code> (M55F-8)</td><td><strong>M5 (Ind2) への接続</strong>——splitFrobenioid の自己同型型は <code>MultiradialRep</code> の <code>Ind</code>/<code>ind0</code> が要求する形の点付き型を供給し、U 非自明なら基点以外の選択肢が実在（M53F-9 deloopInd の (Ind2) 版）</td><td>標準のみ</td></tr>
     </table>
-    <p class="small">正直な申告: U は抽象可換群であり O^×（M28–M30 の filtration・ℤ_p 加群構造を持つ位相群）の実体ではない——単数の「簿記としての運ばれ方」（Frobenius で d 乗）だけのモデル化。theta 単数・単数積分（log-shell 上の Ism 作用）の解析的内容は未形式化（M5 のインターフェース宣言に留まる）。base 圏一点（M51F と同じ）。単数結合則 (ab)^n = a^n b^n は非可換で偽のため可換性の仮定は数学的に必須。</p>
+    <p class="small">正直な申告: U は抽象可換群であり O^×（M28–M30 の filtration・ℤ_p 加群構造を持つ位相群）の実体ではない——単数の「簿記としての運ばれ方」（Frobenius で d 乗）だけのモデル化。theta 単数・単数積分（log-shell 上の Ism 作用）の解析的内容は未形式化（M5 のインターフェース宣言に留まる）。base 圏一点（離散 base 上のファイバー構造は M57F が単数なしで形式化。split 構造との合成は未形式化）。単数結合則 (ab)^n = a^n b^n は非可換で偽のため可換性の仮定は数学的に必須。</p>
+  </div>
+
+  <h3>M57F: base 圏上のファイバー構造 — 並行ブランチ（IUT/FiberedFrobenioid.lean）</h3>
+  <div class="box">
+    <p>[FrdI] の Frobenioid が本来持つ base 圏（素点の圏）上のファイバー構造——M48F/M51F/M55F が「base 一点」と申告してきた未達部分——を素点の離散 base 圏の範囲で形式化（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>discCat</code> (M57F-1)</td><td><strong>素点の離散 base 圏</strong>——対象 = 素点の添字 ℕ、射 = 等号の証明（PLift、合成 = Eq.trans）。圏公理は proof irrelevance + 構造 eta で rfl</td><td>なし</td></tr>
+      <tr><td><code>LocalHom</code> / <code>localFrobenioid</code> / <code>localToElementary</code> (M57F-2)</td><td><strong>一素点上の局所 Frobenioid</strong>——対象 = その素点での重複度 ℕ、射 = (d ≥ 1, c) with m' = d·m + c（c ≥ 0 が型に内蔵）、捻れ半直積合成の圏公理完全証明。ℤ への埋め込み関手で M48F の elementaryFrobenioid に接続</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>FibHom</code> / <code>fiberedFrobenioid</code> (M57F-3)</td><td><strong>全空間圏</strong>——対象 = (素点 k, 重複度 m)、射 = (base_eq : k = l, d, c)。base 成分の合成 = Eq.trans、簿記成分 = 捻れ半直積型。圏公理完全証明（射の等号は (d, c) だけで決まる——base_eq は proof irrelevance が吸収）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>fibProj</code> / <code>fib_hom_vertical</code> / <code>no_cross_prime_hom</code> (M57F-4)</td><td><strong>射影関手と垂直性</strong>——全空間 → base の関手性、任意の射は素点を保ち（垂直）、素点が異なれば射は存在しない（離散 base の分離性）</td><td>標準のみ</td></tr>
+      <tr><td><code>fiberIncl</code> / <code>fiber_local_iso</code> (M57F-5)</td><td><strong>ファイバー = 局所 Frobenioid（忠実充満）</strong>——素点 k のファイバーへの包含関手の onHom が全単射（往復写像 <code>fiberRestrictHom</code> との両向き恒等を明示検証）。「各 base 対象上に因子モノイドの圏が乗る」[FrdI] 構造の離散版</td><td>標準のみ</td></tr>
+      <tr><td><code>divRestrictFunctor</code> / <code>restrict_determines</code> (M57F-6〜7)</td><td><strong>大域→局所の制限関手と局所決定性（束着定理）</strong>——M51F の divisorFrobenioid から各素点の局所圏へ x ↦ x.mult k（線形条件の保存は点ごとの定義から congrArg 一発）。大域射は全素点での制限の一致 + 因子部分の bound 表示の一致で決まる（大域簿記 = 局所簿記の束）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>fibered_iso_objects_eq</code> / <code>fibered_iso_unique</code> / <code>fibered_rigid</code> (M57F-8)</td><td><strong>剛性の遺伝</strong>——全空間圏の同型は (d, c) = (1, 0) を強制し対象（素点・重複度とも）を動かせない（gaunt）、同型は一意（IsoUnique）。Frobenius-like 剛性（poly-isomorphism = 単集合、M53F）はファイバー構造に遺伝する</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">正直な申告: base は離散圏——本物の素点の圏が持つ素点間の射（素イデアルの分解・惰性・分岐、体拡大に沿った押し出し）は未形式化で、全空間の射は垂直成分のみ。アルキメデス素点・realification・単数成分（M55F の split 構造）との合成は範囲外。局所決定性の bound 仮定は QDiv がサポート上界を choice 回避のためデータとして持つ表示の自由度ゆえ（真の因子の同一性には商型が必要）。</p>
   </div>
 
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
@@ -1034,6 +1050,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/SplitFrobenioid.lean</code></td><td>M55F: split Frobenioid——単数成分と (Ind2) の在処・U-トーソル・二分法精密化（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupCongr.lean</code></td><td>M57: 二変数冪の係数合同——積の二重 Cauchy 公式・三分処理（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupDecomp.lean</code></td><td>M58: 方程式の総次数分解——左辺 π·F + F^p・注入積公式・右辺の一変数化（choice なし）</td></tr>
+    <tr><td><code>IUT/FiberedFrobenioid.lean</code></td><td>M57F: base 圏上のファイバー構造——離散 base・局所/全空間圏・射影/制限関手・束着・剛性の遺伝（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
