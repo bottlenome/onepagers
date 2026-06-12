@@ -598,6 +598,24 @@ import IUT
 #print axioms IUT.semiLocalFrobenioid_gaunt
 #print axioms IUT.semiLocal_iso_unique
 #print axioms IUT.semiLocal_rigid
+#print axioms IUT.nnqAdd_assoc
+#print axioms IUT.nnqAdd_comm
+#print axioms IUT.nnqOfNat_add
+#print axioms IUT.nnq_div_cancel
+#print axioms IUT.radd_assoc
+#print axioms IUT.realify_add
+#print axioms IUT.realify_frob
+#print axioms IUT.degR_add
+#print axioms IUT.degR_frob
+#print axioms IUT.degR_realify
+#print axioms IUT.rdiv_divisible
+#print axioms IUT.qdiv_not_divisible
+#print axioms IUT.realification_gains_divisibility
+#print axioms IUT.realFrobenioid
+#print axioms IUT.real_pilot_division
+#print axioms IUT.realifyFunctor
+#print axioms IUT.real_iso_objects_eq
+#print axioms IUT.real_gaunt_isoUnique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
