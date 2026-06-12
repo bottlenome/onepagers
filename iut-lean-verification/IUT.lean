@@ -75,3 +75,4 @@ import IUT.FormalGroupCongr
 import IUT.FormalGroupDecomp
 import IUT.FormalGroupDiag
 import IUT.FormalGroupExists
+import IUT.FormalGroupUnique

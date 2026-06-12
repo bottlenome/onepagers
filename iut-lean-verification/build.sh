@@ -461,6 +461,8 @@ import IUT
 #print axioms IUT.sf_forget_mapIso_eq
 #print axioms IUT.sf_not_iso_unique
 #print axioms IUT.sf_dichotomy
+#print axioms IUT.lt_formal_group_unique
+#print axioms IUT.lt_formal_group_exists_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
