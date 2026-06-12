@@ -685,6 +685,16 @@ import IUT
 #print axioms IUT.zpEval_pow
 #print axioms IUT.zpEvalSeg_comp
 #print axioms IUT.zpEval_comp
+#print axioms IUT.zpEval_witness_irrel
+#print axioms IUT.ps_eq_X_mul_shift
+#print axioms IUT.zpEval_smul
+#print axioms IUT.zpEval_neg
+#print axioms IUT.proj_rpow_x_low
+#print axioms IUT.zpEval_mono
+#print axioms IUT.zpEval_single_one
+#print axioms IUT.zpEval_ltPoly
+#print axioms IUT.zpEval_closed
+#print axioms IUT.zpEval_comp_closed
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

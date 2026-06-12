@@ -23,6 +23,7 @@
   全て選択公理不使用。
 -/
 import IUT.FormalGroupPointsMul
+import IUT.PointValues
 
 namespace IUT
 
@@ -123,5 +124,40 @@ theorem zpEval_comp (p : Nat) (F G : PS (zpRing p))
         (zpEval p (psPow (zpRing p) G j) x e hx))
   rw [(projRing p n).map_mul, (projRing p n).map_mul]
   rfl
+
+/-! ## 閉性と完結形（M78F との合流） -/
+
+/-- **M79-3: 閉性 G(x) ∈ pℤ_p** — G(0) = 0 なら G(x) = p·(e·(shift G)(x))
+    （witness の明示構成: psShift 因数分解（M78F）× 乗法性（M78）×
+    X(x) = x（M77））。 -/
+theorem zpEval_closed (p : Nat) (hp : 2 ≤ p) (G : PS (zpRing p))
+    (hG : G 0 = (zpRing p).zero) (x e : (Zp p).carrier)
+    (hx : x = (zpRing p).mul ((toZp p).map ((p : Nat) : Int)) e) :
+    zpEval p G x e hx
+      = (zpRing p).mul ((toZp p).map ((p : Nat) : Int))
+          ((zpRing p).mul e
+            (zpEval p (psShift (zpRing p) G) x e hx)) := by
+  have h1 : zpEval p G x e hx
+      = zpEval p (psMul (zpRing p) (psX (zpRing p))
+          (psShift (zpRing p) G)) x e hx :=
+    congrArg (fun H => zpEval p H x e hx)
+      (ps_eq_X_mul_shift (zpRing p) G hG)
+  rw [h1, zpEval_mul p (psX (zpRing p)) (psShift (zpRing p) G) x e hx,
+    zpEval_X p hp x e hx]
+  exact (congrArg (fun z => (zpRing p).mul z
+      (zpEval p (psShift (zpRing p) G) x e hx)) hx).trans
+    ((zpRing p).mul_assoc ((toZp p).map ((p : Nat) : Int)) e
+      (zpEval p (psShift (zpRing p) G) x e hx))
+
+/-- **M79-4: 合成両立の完結形** — witness 込みのパッケージ
+    (F∘G)(x) = F(G(x))（G(0) = 0 だけで適用可能）。 -/
+theorem zpEval_comp_closed (p : Nat) (hp : 2 ≤ p) (F G : PS (zpRing p))
+    (hG : G 0 = (zpRing p).zero) (x e : (Zp p).carrier)
+    (hx : x = (zpRing p).mul ((toZp p).map ((p : Nat) : Int)) e) :
+    zpEval p (psComp (zpRing p) F G) x e hx
+      = zpEval p F (zpEval p G x e hx)
+          ((zpRing p).mul e (zpEval p (psShift (zpRing p) G) x e hx))
+          (zpEval_closed p hp G hG x e hx) :=
+  zpEval_comp p F G hG x e hx _ (zpEval_closed p hp G hG x e hx)
 
 end IUT

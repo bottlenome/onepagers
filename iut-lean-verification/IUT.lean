@@ -103,6 +103,7 @@ import IUT.FormalGroupOModule
 import IUT.FormalGroupInvLeft
 import IUT.FormalGroupEnd
 import IUT.FormalGroupPoints
+import IUT.PointValues
 import IUT.FormalGroupPointsMul
 import IUT.FormalGroupPointsComp
 import IUT.DecompositionInertia
