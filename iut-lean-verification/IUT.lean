@@ -115,6 +115,7 @@ import IUT.EisensteinConjugates
 import IUT.RamifiedEntrance
 import IUT.EisensteinGalois
 import IUT.LaurentCoeff
+import IUT.LaurentRing
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2

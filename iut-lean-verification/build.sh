@@ -785,6 +785,11 @@ import IUT
 #print axioms IUT.lAdd_coeff_neg
 #print axioms IUT.lMul_coeff_distrib
 #print axioms IUT.lMul_coeff_comm
+#print axioms IUT.wsum_shift
+#print axioms IUT.lMul_coeff_assoc
+#print axioms IUT.lMul_coeff_one
+#print axioms IUT.laurentRing
+#print axioms IUT.laurentOf
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
