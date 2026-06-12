@@ -158,7 +158,18 @@
 </section>
 
 <section>
-  <h2>M1〜M69a の形式化（追加検証）</h2>
+  <h2>M1〜M69b の形式化（追加検証）</h2>
+
+  <h3>M69b: ps23Comp の乗法性 — 結合則キャンペーン第八層・最難所（IUT/FormalGroupMult.lean）</h3>
+  <div class="box">
+    <p><strong>(F·G)∘(P,Q) = (F∘(P,Q))·(G∘(P,Q))</strong>（P₀₀₀ = Q₀₀₀ = 0）の完全証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>quad_sum_reindex</code> (M69b-1)</td><td><strong>抽象四重和の再添字化</strong>——(b₁,a₁,b₂,a₂) ⇄ (b,a,b₁≤b,a₁≤a)（添字交換 rsum_exchange + 高位 padding rsum_pad + <strong>三角和交換 rsum_triangle（M39 が 13 キャンペーンぶりに再登板）</strong>×2、対角外消滅つき）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps23Comp_mul</code> (M69b-2)</td><td><strong>乗法性（本丸）</strong>——右辺は因子を族和表示に置換し族和の分配・スカラー積合成則・冪積結合で四重族和に展開（全て環レベル）、左辺は安定性 + Cauchy 係数 + rsum_mul_right で四重和に展開、quad_sum_reindex で接合</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: 連鎖律 3 本（乗法性の帰納適用）→ 結合則（次層・最終盤）。</p>
+  </div>
 
   <h3>M69a: 乗法性のための代数基盤 — 結合則キャンペーン第七層（IUT/FormalGroupFam.lean）</h3>
   <div class="box">
@@ -1271,6 +1282,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/DecompositionInertia.lean</code></td><td>M65F: 複数素点への分解・惰性の efg 簿記——半局所圏・引き戻し/ノルム関手・efg 恒等式（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupFam.lean</code></td><td>M69a: 乗法性のための代数基盤——族和の分配・冪積の結合・打ち切り安定性（choice なし）</td></tr>
     <tr><td><code>IUT/Realification.lean</code></td><td>M67F: realification 実化と可除性——ℚ≥0 の Quot 構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupMult.lean</code></td><td>M69b: ps23Comp の乗法性——四重和の再添字化・三角和交換の再登板（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

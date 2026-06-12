@@ -575,6 +575,8 @@ import IUT
 #print axioms IUT.ps3Const_mul
 #print axioms IUT.ps3Smul_mul_smul
 #print axioms IUT.ps23Comp_eq_fam
+#print axioms IUT.quad_sum_reindex
+#print axioms IUT.ps23Comp_mul
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

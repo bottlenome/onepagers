@@ -86,5 +86,6 @@ import IUT.FormalGroup3Unique
 import IUT.FormalGroupAssocDef
 import IUT.FormalGroupChain
 import IUT.FormalGroupFam
+import IUT.FormalGroupMult
 import IUT.DecompositionInertia
 import IUT.Realification
