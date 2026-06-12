@@ -758,6 +758,17 @@ import IUT
 #print axioms IUT.teich_conj_distinct
 #print axioms IUT.lambda_one_torsion_family
 #print axioms IUT.lambda_one_family_distinct
+#print axioms IUT.ramifiedEntrance
+#print axioms IUT.ramified_entrance_exists
+#print axioms IUT.zpEval3_liftYZ
+#print axioms IUT.zpEval2_ps2X
+#print axioms IUT.zpEval3_ps3X
+#print axioms IUT.zpEval2_closed'
+#print axioms IUT.proj_xyz_pow_low
+#print axioms IUT.proj_Seg3_powpow_high
+#print axioms IUT.zpEval3Seg_ps23Comp
+#print axioms IUT.zpEval3_ps23Comp
+#print axioms IUT.lt_point_assoc
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
