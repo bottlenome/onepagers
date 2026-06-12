@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M43 の形式化（追加検証）</h2>
+  <h2>M1〜M44 の形式化（追加検証）</h2>
+
+  <h3>M44: 可換環上の二変数二項定理 — 第七層（IUT/Binomial2.lean）</h3>
+  <div class="box">
+    <p>級数版「新入生の夢」(A+B)^p ≡ A^p + B^p (mod p) の代数的核心:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>rofNat_add</code> / <code>rofNat_mul</code> (M44-2)</td><td>自然数の環像 n ↦ 1 + ⋯ + 1 の<strong>半環準同型性</strong>（加法・乗法保存）</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>binomial2</code> (M44-3)</td><td><strong>二変数二項定理</strong> (x+y)^n = Σ_{k≤n} C(n,k)·x^k·y^{n−k}（任意の可換環、Pascal 帰納。M32 の ℤ・一変数版の一般化）</td><td>標準のみ（choice なし）</td></tr>
+      <tr><td><code>rofNat_chs_factor</code> (M44-4)</td><td><strong>中間項の p-因子</strong>: 0 &lt; k &lt; p で rofNat C(p,k) = rofNat p · c——M32 の p ∣ C(p,k) の環像翻訳。「中間項は p で消える」の内容</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">残り: mod-p 還元 PS(ℤ_p) → PS(ℤ/p) と級数の新入生の夢 → 誤差項整除性 → 係数の再帰構成（存在定理）。</p>
+  </div>
 
   <h3>M43: p-進除算と Frobenius 合同 — 第六層（IUT/PadicDivision.lean）</h3>
   <div class="box">
@@ -785,6 +797,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/LubinTateUnique.lean</code></td><td>M41: Lubin–Tate 一意性——係数の強帰納による解の一意性スキーマ（choice なし）</td></tr>
     <tr><td><code>IUT/LubinTateZp.lean</code></td><td>M42: ℤ_p の消去仮説充足——p-捻れなし × 単数正則、LT 一意性の具体化（choice なし）</td></tr>
     <tr><td><code>IUT/PadicDivision.lean</code></td><td>M43: p-進除算 zpDivP——ediv による全域構成・Frobenius 合同（choice なし）</td></tr>
+    <tr><td><code>IUT/Binomial2.lean</code></td><td>M44: 可換環上の二変数二項定理——rofNat の半環準同型性・中間項の p-因子（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

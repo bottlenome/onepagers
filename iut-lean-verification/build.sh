@@ -272,6 +272,10 @@ import IUT
 #print axioms IUT.zp_dvd_p_iff
 #print axioms IUT.zp_flt
 #print axioms IUT.zp_frobenius_divisible
+#print axioms IUT.rofNat_add
+#print axioms IUT.rofNat_mul
+#print axioms IUT.binomial2
+#print axioms IUT.rofNat_chs_factor
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

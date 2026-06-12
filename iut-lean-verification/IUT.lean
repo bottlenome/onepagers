@@ -52,3 +52,4 @@ import IUT.Composition
 import IUT.LubinTateUnique
 import IUT.LubinTateZp
 import IUT.PadicDivision
+import IUT.Binomial2
