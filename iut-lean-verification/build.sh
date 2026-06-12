@@ -720,6 +720,12 @@ import IUT
 #print axioms IUT.one_add_p_mul_regular
 #print axioms IUT.torsion_one_trivial
 #print axioms IUT.torsion_trivial
+#print axioms IUT.zpEval3Seg_stable
+#print axioms IUT.zpEval3
+#print axioms IUT.zpEval3_witness_irrel
+#print axioms IUT.zpEval2Seg_one
+#print axioms IUT.zpEval3_liftXY
+#print axioms IUT.zpEval3_ps3Z
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
