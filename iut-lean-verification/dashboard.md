@@ -71,6 +71,7 @@
 | M44 二変数二項定理（第七層） | **任意の可換環上で (x+y)^n = Σ C(n,k)x^k y^{n−k}**: 自然数の環像 rofNat とその**半環準同型性**（加法・乗法保存、公理ゼロ）、Pascal 帰納による二項定理（和の操作は全て M39 の rsum 補題、添字簿記は omega）、**中間項の p-因子** rofNat C(p,k) = rofNat p · c（M32 の p ∣ C(p,k) の環像翻訳）。級数版「新入生の夢」の代数的核心。選択公理不使用 | 実体構成 |
 | M45 新入生の夢（第八層） | **(x+y)^p = x^p + y^p + p·c の三段構成**: 環レベル（境界項 C = 1・中間項の p-因子を Nat 除算で正準化して括り出し = 選択公理回避）→ **級数レベル** PS(R)（psPow = rpow(psRing) の同定で即時転送）→ **ℤ_p 係数レベル**（rofNat(PS) = 定数級数・定数級数の積 = 係数ごとスカラー倍・rofNat(ℤ_p) = toZp 像で、各係数の p-整除性 witness 付きに翻訳）。LT 誤差項整除性の供給源。選択公理不使用 | 実体構成 |
 | M46 冪級数の関手性（第九層） | **環準同型 φ : R → S の冪級数環への持ち上げ psMap が加法・乗法・冪・合成を全て保存**（誤差項を mod p で PS(ℤ/p) に落とす輸送装置）。環準同型の 0・有限和・冪の保存、(ab)^k = a^k b^k、**モノミアル代数** X^a·X^b = X^{a+b}・(X^m)^k = X^{mk}、**伸長公式** (F∘X^m)_{mk} = F_k・m ∤ n で 0（mod p で f ≡ X^p となるため F̄∘X^p の係数読みに使用）。選択公理不使用 | 実体構成 |
+| M47 標数 p の Frobenius 定理（第十層） | **F^p = F∘X^p in PS(ℤ/p) の完全証明**（LT 誤差項整除性の核心）: ℤ/p の標数 p（rofNat p = 0）と係数 FLT c^p = c、**char p では新入生の夢が正確な等式** (A+B)^p = A^p + B^p、打ち切り trunc F (N+1) = trunc F N + F_N·X^N と単項式の冪 (c·X^m)^k = c^k·X^{mk}・合成 (c·X^N)∘X^m = c·X^{mN} で **truncation 帰納**、係数 n の一般化は psPow_congr（M41）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -142,6 +143,7 @@ iut-lean-verification/
     ├── Binomial2.lean   # M44: 可換環上の二変数二項定理・rofNat（choice なし）
     ├── Freshman.lean    # M45: 新入生の夢（環 → 級数 → ℤ_p 係数、choice なし）
     ├── PSFunctor.lean   # M46: 冪級数の関手性 psMap・モノミアル代数・伸長公式（choice なし）
+    ├── FrobeniusCharP.lean # M47: 標数 p の Frobenius 定理 F^p = F∘X^p（choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -226,6 +228,7 @@ iut-lean-verification/
 | M44: 可換環上の二変数二項定理（rofNat・中間項の p-因子） — 第31弾 | done（choice なし） |
 | M45: 新入生の夢 (x+y)^p = x^p + y^p + p·c（環 → 級数 → ℤ_p 係数） — 第32弾 | done（choice なし） |
 | M46: 冪級数の関手性 psMap（加法・乗法・冪・合成の保存）と伸長公式 — 第33弾 | done（choice なし） |
+| M47: 標数 p の Frobenius 定理 F^p = F∘X^p（truncation 帰納） — 第34弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

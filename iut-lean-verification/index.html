@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M46 の形式化（追加検証）</h2>
+  <h2>M1〜M47 の形式化（追加検証）</h2>
+
+  <h3>M47: 標数 p の Frobenius 定理 — 第十層（IUT/FrobeniusCharP.lean）</h3>
+  <div class="box">
+    <p>LT 誤差項 p-整除性の核心: <strong>F^p = F∘X^p in PS(ℤ/p)</strong> を完全証明:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>zmod_char</code> / <code>zmod_flt</code> (M47-1)</td><td>ℤ/p の標数 p（rofNat p = 0）と<strong>係数 FLT</strong> c^p = c（M32 の Fermat の成分適用）</td><td>標準のみ</td></tr>
+      <tr><td><code>freshman_exact</code> / <code>psSingle_pow</code> / <code>psComp_single</code> (M47-2〜4)</td><td><strong>char p の正確な新入生の夢</strong> (A+B)^p = A^p + B^p（p·C 項が標数で消滅）、単項式の冪 (c·X^m)^k = c^k·X^{mk} と合成 (c·X^N)∘X^m = c·X^{mN}</td><td>標準のみ</td></tr>
+      <tr><td><code>frobenius_charp</code> (M47-5)</td><td><strong>Frobenius 定理</strong> F^p = F∘X^p——truncation 帰納（一段分解 trunc (N+1) = trunc N + F_N·X^N）で打ち切り版を示し、係数 n の一般化は psPow_congr</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">残り: mod-p 還元（M46 psMap）で LT 誤差項の p-整除性 → 係数の再帰構成（存在定理）。</p>
+  </div>
 
   <h3>M46: 冪級数の関手性とモノミアル代数 — 第九層（IUT/PSFunctor.lean）</h3>
   <div class="box">
@@ -824,6 +836,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Binomial2.lean</code></td><td>M44: 可換環上の二変数二項定理——rofNat の半環準同型性・中間項の p-因子（choice なし）</td></tr>
     <tr><td><code>IUT/Freshman.lean</code></td><td>M45: 新入生の夢 (x+y)^p = x^p + y^p + p·c——環 → 級数 → ℤ_p 係数の三段（choice なし）</td></tr>
     <tr><td><code>IUT/PSFunctor.lean</code></td><td>M46: 冪級数の関手性 psMap（加法・乗法・冪・合成の保存）・モノミアル代数・伸長公式（choice なし）</td></tr>
+    <tr><td><code>IUT/FrobeniusCharP.lean</code></td><td>M47: 標数 p の Frobenius 定理 F^p = F∘X^p——truncation 帰納（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

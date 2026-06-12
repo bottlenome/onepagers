@@ -288,6 +288,12 @@ import IUT
 #print axioms IUT.psMono_pow
 #print axioms IUT.psComp_mono_coeff
 #print axioms IUT.psComp_mono_coeff_zero
+#print axioms IUT.zmod_flt
+#print axioms IUT.freshman_exact
+#print axioms IUT.psSingle_pow
+#print axioms IUT.psComp_single
+#print axioms IUT.frobenius_trunc
+#print axioms IUT.frobenius_charp
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

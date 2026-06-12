@@ -55,3 +55,4 @@ import IUT.PadicDivision
 import IUT.Binomial2
 import IUT.Freshman
 import IUT.PSFunctor
+import IUT.FrobeniusCharP
