@@ -357,6 +357,20 @@ import IUT
 #print axioms IUT.ps2Map_equation
 #print axioms IUT.ltFormalGroup_reduction
 #print axioms IUT.ltFormalGroup_reduction_linear
+#print axioms IUT.isoUnique_subsingleton
+#print axioms IUT.divisorFrobenioid_gaunt
+#print axioms IUT.divisor_iso_is_id
+#print axioms IUT.divisorFrobenioid_iso_unique
+#print axioms IUT.divisorFrobenioid_rigid
+#print axioms IUT.elementaryFrobenioid_gaunt
+#print axioms IUT.elementary_iso_unique
+#print axioms IUT.deloop_every_hom_iso
+#print axioms IUT.deloop_aut_torsor
+#print axioms IUT.deloop_gaunt
+#print axioms IUT.deloop_not_iso_unique
+#print axioms IUT.gaunt_dichotomy
+#print axioms IUT.deloop_intGrp_not_iso_unique
+#print axioms IUT.deloopInd_nontrivial
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

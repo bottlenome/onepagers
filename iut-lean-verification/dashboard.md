@@ -80,6 +80,7 @@
 | M53 二変数係数持ち上げと mod-p 還元（形式群第四層） | **ps2Map = psMap の反復適用**（psRingHom: psMap の環準同型化 R[[X]] → S[[X]] で二変数持ち上げを一変数理論から無償取得、係数ごとには φ(F_{j,i})）: 座標保存 X ↦ X・Y ↦ Y、**代入との交換** φ(f∘F) = φf∘φF・φ(F(P,Q)) = (φF)(φP, φQ)（ringHom_rsum + psMap_pow を psRing レベルで再利用）、二方向注入との交換、**方程式の移送**（F が f の形式群方程式を満たすなら φF は φf の方程式を満たす）、**LT 形式群の mod-p 還元**: IsLTFormalGroup p F ⟹ F̄ は X^p∘F̄ = F̄(X^p, Y^p) を満たす（M48 の f̄ = X^p と結合）＋一次条件の還元。選択公理不使用 | 実体構成 |
 | M48F Frobenioid の圏論化（並行ブランチ） | **M12 の Frobenioid 次数データを M19 の `Cat` 上の実際の圏として実装**: elementary Frobenioid（対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0) with 線形条件 m = d·n + c、合成 = 捻れ半直積型 (d₁d₂, d₂c₁+c₂)）の圏公理完全証明、**次数関手** F_Φ → (ℕ≥1, ×) と **Frobenius 自己関手** Φ_e の関手性、**非可逆性定理群**（次数 ≥ 2 の射は右逆なし・同型の次数は必ず 1・**同型は対象を動かせない** n ≅ m ⟹ n = m・1 → 2 に射はあるが同型はない = M12-3 の圏論版を仮定なしの強い形で。Galois 圏の G6「同型の反映」（M20-5）との二分法の機械検証）、M12 接続（degMor の実現・frob_deg の関手化・Φ_e は次数関手上で恒等）。選択公理不使用 | 実体構成 |
 | M51F Frobenioid の圏論的実体と数体での充足（並行ブランチ） | **M12 の `Frobenioid` 構造を ℚ 型の実データで充足**: 有効因子 = 素点での重複度の有限サポート関数（QDiv、サポート上界をデータとして持ち choice 回避）、可換モノイド法則・**重み付き次数の加法性 deg(x+y) = deg x + deg y・Frobenius 斉次性 deg(φ_e x) = e·deg x** を完全証明して `rationalFrobenioid` を Nonempty でなく def として構成。`DegreeVolumeCompat` の実構成により **M12-6（vol_q 供給）が実データで発動**（`rational_qpilot_volume`: 任意の骨格 s で単一素点因子の実現体積 = −\|log q\|）、局所付値（M27）との整合。＋**因子レベルの圏** divisorFrobenioid（対象 = 有効因子、射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明、**次数関手** → elementaryFrobenioid（M48F）の関手性、**因子レベルの非可逆性**（同型は因子を動かせない x ≅ y ⟹ x = y、＋次数関手で M48F に帰着する独立経路）。選択公理不使用 | 実体構成 |
+| M53F poly-isomorphism と剛性（並行ブランチ） | **[FrdI] の Frobenius-like/étale-like 二分法と (Ind1) 不定性の在処を圏論的核で機械検証**: 剛性述語 `IsGaunt`（同型 ⟹ 対象の等号）・`IsoUnique`（同型の hom 成分は一意 = poly-isomorphism が単集合に潰れる、CatIso 全体の等号は M22-1a の逆一意性で従う）を定義し、**Frobenioid 側は剛的** — divisorFrobenioid（M51F）・elementaryFrobenioid（M48F）の任意の同型は成分 (d,c) = (1,0)（恒等射と同成分）で gaunt かつ IsoUnique 成立。**étale 側は非剛的** — 群 G の一点圏 BG（`deloopCat`、圏公理は群公理から完全証明・右単位/右逆は左公理系からの導出定理）では全ての射が同型で、**poly-isomorphism は G.carrier と明示的全単射（G-トーソル）**＝(Ind1) 型不定性の在処。総括 `gaunt_dichotomy`: 非自明群 G で「divisorFrobenioid は IsoUnique ∧ BG は ¬IsoUnique」（注意: BG は一点なので gaunt は自明成立 — 剛性を測るのは IsoUnique）。デッキ群 ℤ（M9 intGrp）での具体的発動＋ M5 `MultiradialRep.Ind`/`ind0` への型レベル接続（`deloopInd`、G 非自明なら基点以外の選択肢が実在）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -156,6 +157,7 @@ iut-lean-verification/
     ├── LubinTateExists.lean # M49: Lubin–Tate 補題完成（係数の再帰構成 + 存在 + 一意性、choice なし）
     ├── FrobenioidCat.lean # M48F: Frobenioid の圏論化（elementary Frobenioid・次数関手・同型 = 恒等のみ、choice なし）
     ├── FrobenioidModel.lean # M51F: Frobenioid の圏論的実体と数体での充足（QDiv・rationalFrobenioid・divisorFrobenioid・次数関手、choice なし）
+    ├── PolyIsomorphism.lean # M53F: poly-isomorphism と剛性（IsGaunt/IsoUnique・deloopCat・G-トーソル定理、choice なし）
     ├── PowerSeries2.lean # M50: 二変数冪級数の基盤（総次数 truncation・1→2変数代入、choice なし）
     ├── FormalGroupSub.lean # M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）
     ├── FormalGroupEq.lean # M52: 形式群方程式の定式化・恒等での成立（choice なし）
@@ -253,6 +255,7 @@ iut-lean-verification/
 | M52: 形式群方程式の定式化と恒等での成立（形式群第三層） — 第39弾 | done（choice なし） |
 | M51F: Frobenioid の圏論的実体と数体での充足（M12/M5 の「未達」部分、因子圏・次数関手・実データ充足） — サブエージェント並行開発・第39弾統合 | done（choice なし） |
 | M53: 二変数係数持ち上げ ps2Map と LT 形式群の mod-p 還元（形式群第四層） — 第40弾 | done（choice なし） |
+| M53F: poly-isomorphism と剛性（Frobenioid = gaunt/IsoUnique vs BG = G-トーソル、(Ind1) の在処の二分法） — サブエージェント並行開発・第40弾統合 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

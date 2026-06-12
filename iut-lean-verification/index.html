@@ -248,6 +248,22 @@
     <p class="small">正直な申告: 素点は添字 k で番号付け・重み w(k) は ⌊log p_k⌋ 相当の抽象パラメータ（素数の枚挙・対数の解析は未形式化）。有効因子のみ（主因子・積公式なし）。base 圏一点の Frobenioid（base 圏上のファイバー構造・poly-isomorphism・realification は未形式化）。</p>
   </div>
 
+  <h3>M53F: poly-isomorphism と剛性 — 並行ブランチ（IUT/PolyIsomorphism.lean）</h3>
+  <div class="box">
+    <p>[FrdI] の Frobenius-like/étale-like 二分法——(Ind1)(Ind2) 不定性が étale-like 部分にのみ宿ること——の圏論的核を機械検証（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>IsGaunt</code> / <code>IsoUnique</code> / <code>isoUnique_subsingleton</code> (M53F-1)</td><td><strong>剛性述語</strong>——gaunt（同型 ⟹ 対象の等号）と同型の一意性（hom 成分の一意性。逆成分は M22-1a <code>CatIso.ext</code> で決まるので CatIso 全体の等号が従う = poly-isomorphism は単集合）</td><td>なし</td></tr>
+      <tr><td><code>divisor_iso_is_id</code> / <code>divisorFrobenioid_iso_unique</code> / <code>divisorFrobenioid_rigid</code> (M53F-2〜3)</td><td><strong>Frobenioid 側の剛性</strong>——divisorFrobenioid（M51F）の任意の同型は成分 (d, c) = (1, 0)（恒等射と同成分）、gaunt かつ同型は一意。<strong>poly-isomorphism は常に単集合</strong>＝因子簿記に「貼り方の選択肢」はない</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>elementaryFrobenioid_gaunt</code> / <code>elementary_iso_unique</code> (M53F-4)</td><td>次数レベル（M48F）でも同様の剛性（<code>iso_deg_one</code>・<code>iso_c_zero</code> の再利用）</td><td>標準のみ</td></tr>
+      <tr><td><code>deloopCat</code> / <code>deloop_every_hom_iso</code> (M53F-5〜6)</td><td><strong>群 G の一点圏 BG</strong>（étale 側の骨格モデル）の圏公理完全証明（右単位・右逆は左公理系 M9 からの導出定理）と<strong>全ての射が同型</strong>であること——次数 ≥ 2 の射が決して可逆にならない Frobenioid 側（M48F-4）との対比</td><td>なし</td></tr>
+      <tr><td><code>deloop_aut_torsor</code> (M53F-7)</td><td><strong>BG の poly-isomorphism は G-トーソル</strong>——同型全体と G.carrier の明示的全単射（往復恒等を両向き証明）＝(Ind1) 型不定性の在処の機械検証</td><td>なし</td></tr>
+      <tr><td><code>gaunt_dichotomy</code> / <code>deloop_intGrp_not_iso_unique</code> (M53F-8)</td><td><strong>二分法の総括</strong>——非自明群 G で「divisorFrobenioid は IsoUnique ∧ BG は ¬IsoUnique」（BG は一点なので gaunt は自明成立 — 剛性を測るのは IsoUnique）。デッキ群 ℤ（M9）での具体的発動</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>deloopInd</code> / <code>deloopInd_nontrivial</code> (M53F-9)</td><td><strong>M5 (Ind1) への接続</strong>——BG の poly-isomorphism は <code>MultiradialRep</code> の <code>Ind</code>/<code>ind0</code>（不定性の選択肢の型と基点）が要求する形のデータを供給し、G 非自明なら基点以外の選択肢が実在</td><td>なし</td></tr>
+    </table>
+    <p class="small">正直な申告: BG は Galois 圏そのものではなく「一つのガロア対象の自己同型の巣」の一点 base 骨格（位相・副有限性は不見）。poly-isomorphism の集合演算（合成・関手性）は未形式化で、検証したのは基数の二分法（単集合 vs G-トーソル）。(Ind1) 接続は型レベル（Ind が procession 自己同型群から来る解析的内容は M5 のインターフェース宣言に留まる）。</p>
+  </div>
+
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
   <div class="box">
     <p>任意の F で (p·F + F^p) − F∘f（f = pX + X^p）の全係数が p で割れることを完全証明:</p>
@@ -945,6 +961,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupSub.lean</code></td><td>M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupEq.lean</code></td><td>M52: 形式群方程式の定式化——座標代入 = 注入・恒等での成立（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupMap.lean</code></td><td>M53: 二変数係数持ち上げ ps2Map——方程式の移送・LT 形式群の mod-p 還元（choice なし）</td></tr>
+    <tr><td><code>IUT/PolyIsomorphism.lean</code></td><td>M53F: poly-isomorphism と剛性——IsGaunt/IsoUnique・Frobenioid 剛性・BG の G-トーソル・(Ind1) の在処（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
