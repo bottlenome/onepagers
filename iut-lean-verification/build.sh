@@ -713,6 +713,13 @@ import IUT
 #print axioms IUT.lt_point_comm
 #print axioms IUT.lt_point_inverse
 #print axioms IUT.lt_point_module_add
+#print axioms IUT.ltIter_one
+#print axioms IUT.lt_point_factor
+#print axioms IUT.cofactor_decomp
+#print axioms IUT.one_add_p_mul_unit
+#print axioms IUT.one_add_p_mul_regular
+#print axioms IUT.torsion_one_trivial
+#print axioms IUT.torsion_trivial
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
