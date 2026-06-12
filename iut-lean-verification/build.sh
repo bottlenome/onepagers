@@ -347,6 +347,16 @@ import IUT
 #print axioms IUT.divisor_iso_objects_eq
 #print axioms IUT.divisor_iso_deg_eq
 #print axioms IUT.divisor_hom_exists_but_no_iso
+#print axioms IUT.psRingHom
+#print axioms IUT.ps2Map_X
+#print axioms IUT.ps2Map_Y
+#print axioms IUT.ps2Map_comp1
+#print axioms IUT.ps2Map_comp2
+#print axioms IUT.ps2Map_psC
+#print axioms IUT.ps2Map_inY
+#print axioms IUT.ps2Map_equation
+#print axioms IUT.ltFormalGroup_reduction
+#print axioms IUT.ltFormalGroup_reduction_linear
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

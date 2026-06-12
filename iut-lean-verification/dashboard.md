@@ -77,6 +77,7 @@
 | M50 二変数冪級数の基盤（形式群第一層） | **PS2 R := PS(psRing R)（反復構成 R[[X]][[Y]]）で環構造を M39 から無償取得**。新規は総次数のみ: 座標 X = psC(psX)・Y = psX(psRing R)、有限和の係数交換、**総次数 truncation**（F₀₀ = 0 ⟹ i+j < k で (F^k)_{i,j} = 0、二重和の各項消滅）、**1変数→2変数代入** (f∘F)_{i,j} = Σ_{k≤i+j} f_k(F^k)_{i,j} とその基本性質（加法性・1∘F = 1・X∘F = F）、線形部 X+Y の係数（形式群の一次条件）。選択公理不使用 | 実体構成 |
 | M51 二変数→二変数代入（形式群第二層） | **代入 F(P,Q)_{i,j} = Σ_{a,b≤i+j} F_{a,b}(P^a Q^b)_{i,j} の構成**: (psC z)^k = psC(z^k)、座標の冪 X^a = psC(X^a)・Y^b = Y-mono^b、**二変数単項式の積公式** X^a·Y^b = δ_{(a,b)}、**恒等代入 F(X,Y) = F**（二重一点集中和 — 代入の座標規約のサニティアンカー）。選択公理不使用 | 実体構成 |
 | M52 形式群方程式の定式化（形式群第三層） | **f∘F = F(f(X), f(Y)) の機械可読化**: 座標代入と注入の整合 **f∘X-座標 = inX f・f∘Y-座標 = inY f**（一点集中和）、inY X = Y、**恒等 f = X で方程式が任意の F（F₀₀ = 0）で成立**（左辺 = F は M50・右辺 = F(X,Y) = F は M51 — 全機構のフルループ機械検証）、LT 形式群法則の述語 IsLTFormalGroup（一次条件 + 方程式）と注入の定数項消滅（truncation 妥当性）。選択公理不使用 | 実体構成 |
+| M53 二変数係数持ち上げと mod-p 還元（形式群第四層） | **ps2Map = psMap の反復適用**（psRingHom: psMap の環準同型化 R[[X]] → S[[X]] で二変数持ち上げを一変数理論から無償取得、係数ごとには φ(F_{j,i})）: 座標保存 X ↦ X・Y ↦ Y、**代入との交換** φ(f∘F) = φf∘φF・φ(F(P,Q)) = (φF)(φP, φQ)（ringHom_rsum + psMap_pow を psRing レベルで再利用）、二方向注入との交換、**方程式の移送**（F が f の形式群方程式を満たすなら φF は φf の方程式を満たす）、**LT 形式群の mod-p 還元**: IsLTFormalGroup p F ⟹ F̄ は X^p∘F̄ = F̄(X^p, Y^p) を満たす（M48 の f̄ = X^p と結合）＋一次条件の還元。選択公理不使用 | 実体構成 |
 | M48F Frobenioid の圏論化（並行ブランチ） | **M12 の Frobenioid 次数データを M19 の `Cat` 上の実際の圏として実装**: elementary Frobenioid（対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0) with 線形条件 m = d·n + c、合成 = 捻れ半直積型 (d₁d₂, d₂c₁+c₂)）の圏公理完全証明、**次数関手** F_Φ → (ℕ≥1, ×) と **Frobenius 自己関手** Φ_e の関手性、**非可逆性定理群**（次数 ≥ 2 の射は右逆なし・同型の次数は必ず 1・**同型は対象を動かせない** n ≅ m ⟹ n = m・1 → 2 に射はあるが同型はない = M12-3 の圏論版を仮定なしの強い形で。Galois 圏の G6「同型の反映」（M20-5）との二分法の機械検証）、M12 接続（degMor の実現・frob_deg の関手化・Φ_e は次数関手上で恒等）。選択公理不使用 | 実体構成 |
 | M51F Frobenioid の圏論的実体と数体での充足（並行ブランチ） | **M12 の `Frobenioid` 構造を ℚ 型の実データで充足**: 有効因子 = 素点での重複度の有限サポート関数（QDiv、サポート上界をデータとして持ち choice 回避）、可換モノイド法則・**重み付き次数の加法性 deg(x+y) = deg x + deg y・Frobenius 斉次性 deg(φ_e x) = e·deg x** を完全証明して `rationalFrobenioid` を Nonempty でなく def として構成。`DegreeVolumeCompat` の実構成により **M12-6（vol_q 供給）が実データで発動**（`rational_qpilot_volume`: 任意の骨格 s で単一素点因子の実現体積 = −\|log q\|）、局所付値（M27）との整合。＋**因子レベルの圏** divisorFrobenioid（対象 = 有効因子、射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明、**次数関手** → elementaryFrobenioid（M48F）の関手性、**因子レベルの非可逆性**（同型は因子を動かせない x ≅ y ⟹ x = y、＋次数関手で M48F に帰着する独立経路）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
@@ -158,6 +159,7 @@ iut-lean-verification/
     ├── PowerSeries2.lean # M50: 二変数冪級数の基盤（総次数 truncation・1→2変数代入、choice なし）
     ├── FormalGroupSub.lean # M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）
     ├── FormalGroupEq.lean # M52: 形式群方程式の定式化・恒等での成立（choice なし）
+    ├── FormalGroupMap.lean # M53: 二変数係数持ち上げ ps2Map・方程式の移送・LT 形式群の mod-p 還元（choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -250,6 +252,7 @@ iut-lean-verification/
 | M51: 二変数→二変数代入と恒等代入 F(X,Y) = F（形式群第二層） — 第38弾 | done（choice なし） |
 | M52: 形式群方程式の定式化と恒等での成立（形式群第三層） — 第39弾 | done（choice なし） |
 | M51F: Frobenioid の圏論的実体と数体での充足（M12/M5 の「未達」部分、因子圏・次数関手・実データ充足） — サブエージェント並行開発・第39弾統合 | done（choice なし） |
+| M53: 二変数係数持ち上げ ps2Map と LT 形式群の mod-p 還元（形式群第四層） — 第40弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

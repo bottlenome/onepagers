@@ -63,3 +63,4 @@ import IUT.FrobenioidModel
 import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq
+import IUT.FormalGroupMap
