@@ -72,3 +72,4 @@ import IUT.Frobenius2
 import IUT.FormalGroupErr
 import IUT.FormalGroupCongr
 import IUT.FormalGroupDecomp
+import IUT.FormalGroupDiag

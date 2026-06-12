@@ -83,6 +83,7 @@
 | M56 LT 誤差の係数 p-整除性と誤差/p（形式群第六層） | **二変数 LT 誤差 E(F) := f∘F − F(f(X), f(Y)) の実構成**（PS2 の環構造の加法・反元）、**誤差消滅 ⟺ 方程式成立**（E = 0 ⟺ IsLTFormalGroup の方程式 — 再帰構成の終着点）、誤差の mod-p 消滅（級数形 Φ(E) = 0、M55-7 を x − x = 0 に変換）、**全係数の p-整除性** ∃e, E_{j,i} = p·e（M43 zp_dvd_p_iff）、**誤差/p の実構成 lt2Div**（M43 zpDivP による choice-free 一斉除算）と除算恒等式 p·(E/p)_{j,i} = E_{j,i}。M48 → M49 パイプラインの二変数版前半が完成。選択公理不使用 | 実体構成 |
 | M57 二変数冪の係数合同補題（形式群第七層） | **存在再帰の礎石: k ≥ 2 のとき (F^k)_{j,i} は F の総次数 ≤ i+j−1 の係数のみで決まる**（M41 の一変数 psPow_coeff_congr の二変数版）。積の二重 Cauchy 係数公式 (A·B)_{j,i} = Σ_{k≤j}Σ_{l≤i} A_{k,l}·B_{j−k,i−l}（M50 rsum_psRing_coeff で級数和を係数化）、**積の係数合同**（三分処理: 因子1 = (0,0) → 0・因子2 = (0,0) → 0・双方総次数 ≥ 1 → 双方 ≤ n−1 で合同仮定）、**冪の係数合同**（k 帰納、因子の定数項消滅は M50 総次数 truncation）＋ q ≥ 2 の使い勝手版。これで方程式の総次数 n 部分 F_{j,i}·(pⁿ − p) = (既決定データ) の右辺が低次係数のみに依存することが保証され再帰が回る。選択公理不使用 | 実体構成 |
 | M58 形式群方程式の総次数分解（形式群第八層） | **両辺の係数分解が完成**: 線形項の代入 (c·X)∘F = c·F（k = 1 一点集中）、**左辺の分解 (f∘F)_{j,i} = π·F_{j,i} + (F^p)_{j,i}**（f = pX + X^p の係数が k ∈ {1, p} に集中、第二項は M57 で低次依存）、**注入積の係数公式 (inX g · inY h)_{j,i} = g_i·h_j**（二重 Cauchy 和が (0, i) に一点集中 — X 注入は第 0 行・Y 注入は第 0 列のみ非零）、**右辺の一変数化 F(f(X), f(Y))_{j,i} = Σ_{b,a} F_{b,a}·(f^a)_i·(f^b)_j**（(fX)^a = inX(f^a)・(fY)^b = inY(f^b)）— 係数因子が一変数 ltPoly の冪になり M49 の一変数機構（対角 π^a・下方消滅）が直接適用可能に。選択公理不使用 | 実体構成 |
+| M59 右辺の対角分離（形式群第九層） | **存在再帰の最後の構造補題**: 一点差分抽出 `rsum_single_diff`（f と g が k₀ 以外で一致 ⟹ Σf = Σg + (f(k₀) − g(k₀))、新しい和の道具）、f = pX + X^p の冪の係数（対角下 (f^a)_i = 0・対角 (f^a)_a = π^a — M40/M41 の instantiation）、**対角分離 lt2_rhs_split**: F と G が総次数 < i+j で一致するとき RHS(F)_{j,i} = RHS(G)_{j,i} + (F_{j,i} − G_{j,i})·(f^i)_i·(f^j)_j（外側 b = j・内側 a = i の二重一点差分、残余項は「< n は合同・≥ n は対角下消滅」の三分）。M57・M58 と合わせ方程式の総次数 n 部分が π·(π^{n−1} − 1)·F_{j,i} = E(G)_{j,i} に落ちる。選択公理不使用 | 実体構成 |
 | M48F Frobenioid の圏論化（並行ブランチ） | **M12 の Frobenioid 次数データを M19 の `Cat` 上の実際の圏として実装**: elementary Frobenioid（対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0) with 線形条件 m = d·n + c、合成 = 捻れ半直積型 (d₁d₂, d₂c₁+c₂)）の圏公理完全証明、**次数関手** F_Φ → (ℕ≥1, ×) と **Frobenius 自己関手** Φ_e の関手性、**非可逆性定理群**（次数 ≥ 2 の射は右逆なし・同型の次数は必ず 1・**同型は対象を動かせない** n ≅ m ⟹ n = m・1 → 2 に射はあるが同型はない = M12-3 の圏論版を仮定なしの強い形で。Galois 圏の G6「同型の反映」（M20-5）との二分法の機械検証）、M12 接続（degMor の実現・frob_deg の関手化・Φ_e は次数関手上で恒等）。選択公理不使用 | 実体構成 |
 | M51F Frobenioid の圏論的実体と数体での充足（並行ブランチ） | **M12 の `Frobenioid` 構造を ℚ 型の実データで充足**: 有効因子 = 素点での重複度の有限サポート関数（QDiv、サポート上界をデータとして持ち choice 回避）、可換モノイド法則・**重み付き次数の加法性 deg(x+y) = deg x + deg y・Frobenius 斉次性 deg(φ_e x) = e·deg x** を完全証明して `rationalFrobenioid` を Nonempty でなく def として構成。`DegreeVolumeCompat` の実構成により **M12-6（vol_q 供給）が実データで発動**（`rational_qpilot_volume`: 任意の骨格 s で単一素点因子の実現体積 = −\|log q\|）、局所付値（M27）との整合。＋**因子レベルの圏** divisorFrobenioid（対象 = 有効因子、射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明、**次数関手** → elementaryFrobenioid（M48F）の関手性、**因子レベルの非可逆性**（同型は因子を動かせない x ≅ y ⟹ x = y、＋次数関手で M48F に帰着する独立経路）。選択公理不使用 | 実体構成 |
 | M53F poly-isomorphism と剛性（並行ブランチ） | **[FrdI] の Frobenius-like/étale-like 二分法と (Ind1) 不定性の在処を圏論的核で機械検証**: 剛性述語 `IsGaunt`（同型 ⟹ 対象の等号）・`IsoUnique`（同型の hom 成分は一意 = poly-isomorphism が単集合に潰れる、CatIso 全体の等号は M22-1a の逆一意性で従う）を定義し、**Frobenioid 側は剛的** — divisorFrobenioid（M51F）・elementaryFrobenioid（M48F）の任意の同型は成分 (d,c) = (1,0)（恒等射と同成分）で gaunt かつ IsoUnique 成立。**étale 側は非剛的** — 群 G の一点圏 BG（`deloopCat`、圏公理は群公理から完全証明・右単位/右逆は左公理系からの導出定理）では全ての射が同型で、**poly-isomorphism は G.carrier と明示的全単射（G-トーソル）**＝(Ind1) 型不定性の在処。総括 `gaunt_dichotomy`: 非自明群 G で「divisorFrobenioid は IsoUnique ∧ BG は ¬IsoUnique」（注意: BG は一点なので gaunt は自明成立 — 剛性を測るのは IsoUnique）。デッキ群 ℤ（M9 intGrp）での具体的発動＋ M5 `MultiradialRep.Ind`/`ind0` への型レベル接続（`deloopInd`、G 非自明なら基点以外の選択肢が実在）。選択公理不使用 | 実体構成 |
@@ -176,6 +177,7 @@ iut-lean-verification/
     ├── FormalGroupErr.lean # M56: 二変数 LT 誤差の係数 p-整除性・誤差/p の実構成（choice なし）
     ├── FormalGroupCongr.lean # M57: 二変数冪の係数合同（積の二重 Cauchy 公式・三分処理、choice なし）
     ├── FormalGroupDecomp.lean # M58: 方程式の総次数分解（左辺 π·F + F^p・右辺の一変数化、choice なし）
+    ├── FormalGroupDiag.lean # M59: 右辺の対角分離（一点差分抽出・ltPoly 冪の対角、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -277,6 +279,7 @@ iut-lean-verification/
 | M57: 二変数冪の係数合同補題（存在再帰の礎石、形式群第七層） — 第43弾 | done（choice なし） |
 | M58: 形式群方程式の総次数分解（左辺 π·F + F^p・右辺の一変数化、形式群第八層） — 第43弾 | done（choice なし） |
 | M57F: base 圏上のファイバー構造 — 素点の離散 base 圏上の全空間圏（射影・ファイバー同定・大域因子の局所制限と束着、「base 一点」申告の解消・離散の範囲） — サブエージェント並行開発・第44弾統合 | done（choice なし） |
+| M59: 右辺の対角分離（一点差分抽出・lt2_rhs_split、形式群第九層） — 第44弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

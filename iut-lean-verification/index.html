@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M58 の形式化（追加検証）</h2>
+  <h2>M1〜M59 の形式化（追加検証）</h2>
+
+  <h3>M59: 右辺の対角分離 — 形式群第九層（IUT/FormalGroupDiag.lean）</h3>
+  <div class="box">
+    <p>存在再帰の最後の構造補題——方程式右辺から対角項（係数 π<sup>i+j</sup>）を分離:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>rsum_single_diff</code> (M59-1)</td><td><strong>一点差分抽出</strong>——f と g が k₀ 以外で一致するなら Σf = Σg + (f(k₀) − g(k₀))（新しい和の道具）</td><td>標準のみ</td></tr>
+      <tr><td><code>ltPow_low</code> / <code>ltPow_diag</code> (M59-2)</td><td><strong>f = pX + X<sup>p</sup> の冪の係数</strong>——対角下 (f<sup>a</sup>)<sub>i</sub> = 0 (i &lt; a)・対角 (f<sup>a</sup>)<sub>a</sub> = π<sup>a</sup>（M40/M41 の一変数機構の instantiation）</td><td>標準のみ</td></tr>
+      <tr><td><code>lt2_rhs_split</code> (M59-3)</td><td><strong>対角分離</strong>——F と G が総次数 &lt; i+j で一致するとき RHS(F)<sub>j,i</sub> = RHS(G)<sub>j,i</sub> + (F<sub>j,i</sub> − G<sub>j,i</sub>)·(f<sup>i</sup>)<sub>i</sub>·(f<sup>j</sup>)<sub>j</sub>（二重一点差分、残余項は「&lt; n は合同・≥ n は対角下消滅」の三分）。M57・M58 と合わせ方程式が π·(π<sup>n−1</sup> − 1)·F<sub>j,i</sub> = E(G)<sub>j,i</sub> に落ちる</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: 係数の再帰構成 lt2Seg/lt2Sol と存在定理（次層・最終層）。</p>
+  </div>
 
   <h3>M58: 形式群方程式の総次数分解 — 形式群第八層（IUT/FormalGroupDecomp.lean）</h3>
   <div class="box">
@@ -1051,6 +1063,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupCongr.lean</code></td><td>M57: 二変数冪の係数合同——積の二重 Cauchy 公式・三分処理（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupDecomp.lean</code></td><td>M58: 方程式の総次数分解——左辺 π·F + F^p・注入積公式・右辺の一変数化（choice なし）</td></tr>
     <tr><td><code>IUT/FiberedFrobenioid.lean</code></td><td>M57F: base 圏上のファイバー構造——離散 base・局所/全空間圏・射影/制限関手・束着・剛性の遺伝（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupDiag.lean</code></td><td>M59: 右辺の対角分離——一点差分抽出・ltPoly 冪の対角・lt2_rhs_split（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

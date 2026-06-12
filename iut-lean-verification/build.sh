@@ -435,6 +435,10 @@ import IUT
 #print axioms IUT.fiberedFrobenioid_gaunt
 #print axioms IUT.fibered_iso_unique
 #print axioms IUT.fibered_rigid
+#print axioms IUT.rsum_single_diff
+#print axioms IUT.ltPow_low
+#print axioms IUT.ltPow_diag
+#print axioms IUT.lt2_rhs_split
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
