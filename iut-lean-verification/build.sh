@@ -276,6 +276,11 @@ import IUT
 #print axioms IUT.rofNat_mul
 #print axioms IUT.binomial2
 #print axioms IUT.rofNat_chs_factor
+#print axioms IUT.freshman_ring
+#print axioms IUT.freshman_ps
+#print axioms IUT.psC_mul_coeff
+#print axioms IUT.rofNat_zp
+#print axioms IUT.freshman_zp
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

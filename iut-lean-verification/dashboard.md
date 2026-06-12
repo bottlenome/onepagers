@@ -69,6 +69,7 @@
 | M42 ℤ_p の LT 消去仮説（第五層） | **ℤ_p 上の Lubin–Tate 一意性の具体化**: CRing 負元ツールキット（mul_neg・neg_neg 等、公理ゼロ）、**消去式 ⟹ (G−c)(a−b) = 0** の一般変形、**ℤ_p の p-捻れなし性**（p·d = 0 ⟹ d = 0、成分計算）、**単数の正則性**（M36 の明示逆元で消去）、分解 p^n − p = p·(p^{n−1}−1)（p^{n−1}−1 は単数）で消去仮説を充足。帰結: **g(0)=0・g(1)=p・F∘g = p·F + F^q の解は一次係数で一意**。選択公理不使用 | 実体構成 |
 | M43 p-進除算（第六層） | **除算 zpDivP : ℤ_p → ℤ_p の全域・choice-free 構成**（レベル m+1 の代表の ediv でレベル m へ。well-defined 性と遷移整合性は ediv の加法公式から無条件）、**p·(x/p) = x**（x ≡ 0 mod p）・**(p·e)/p = e**（無条件）、**可除性の level-1 判定** ∃e, x = p·e ⟺ x の mod p 射影 = 0、**ℤ_p の Frobenius 合同** x^p ≡ x (mod p) と **x^p − x の p-整除性**（LT 誤差項整除性の原型）。選択公理不使用 | 実体構成 |
 | M44 二変数二項定理（第七層） | **任意の可換環上で (x+y)^n = Σ C(n,k)x^k y^{n−k}**: 自然数の環像 rofNat とその**半環準同型性**（加法・乗法保存、公理ゼロ）、Pascal 帰納による二項定理（和の操作は全て M39 の rsum 補題、添字簿記は omega）、**中間項の p-因子** rofNat C(p,k) = rofNat p · c（M32 の p ∣ C(p,k) の環像翻訳）。級数版「新入生の夢」の代数的核心。選択公理不使用 | 実体構成 |
+| M45 新入生の夢（第八層） | **(x+y)^p = x^p + y^p + p·c の三段構成**: 環レベル（境界項 C = 1・中間項の p-因子を Nat 除算で正準化して括り出し = 選択公理回避）→ **級数レベル** PS(R)（psPow = rpow(psRing) の同定で即時転送）→ **ℤ_p 係数レベル**（rofNat(PS) = 定数級数・定数級数の積 = 係数ごとスカラー倍・rofNat(ℤ_p) = toZp 像で、各係数の p-整除性 witness 付きに翻訳）。LT 誤差項整除性の供給源。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -138,6 +139,7 @@ iut-lean-verification/
     ├── LubinTateZp.lean # M42: ℤ_p の消去仮説充足・LT 一意性の具体化（choice なし）
     ├── PadicDivision.lean # M43: p-進除算 zpDivP・Frobenius 合同（choice なし）
     ├── Binomial2.lean   # M44: 可換環上の二変数二項定理・rofNat（choice なし）
+    ├── Freshman.lean    # M45: 新入生の夢（環 → 級数 → ℤ_p 係数、choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -220,6 +222,7 @@ iut-lean-verification/
 | M42: ℤ_p の LT 消去仮説充足（p-捻れなし × 単数正則、一意性の具体化） — 第29弾 | done（choice なし） |
 | M43: p-進除算 zpDivP と Frobenius 合同（存在側の除算インフラ） — 第30弾 | done（choice なし） |
 | M44: 可換環上の二変数二項定理（rofNat・中間項の p-因子） — 第31弾 | done（choice なし） |
+| M45: 新入生の夢 (x+y)^p = x^p + y^p + p·c（環 → 級数 → ℤ_p 係数） — 第32弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |
