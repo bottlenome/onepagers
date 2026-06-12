@@ -67,6 +67,7 @@
 | M40 級数の合成（Lubin–Tate 第三層） | **合成 (P∘Q)_n = Σ_{k≤n} P_k(Q^k)_n の有限和構成**: 一点集中和、冪 Q^k と指数法則、**truncation**（Q(0) = 0 ⟹ n < k で (Q^k)_n = 0、有限和定義の正当化）、合成の加法性・1∘Q = 1・**X∘Q = Q**、低次係数公式 (P∘Q)_0 = P_0・(P∘Q)_1 = P_1·Q_1（LT 補題の係数帰納の出発点）。選択公理不使用 | 実体構成 |
 | M41 Lubin–Tate 一意性（第四層） | **方程式 F∘g = c·F + F^q の解の一意性**（スキーマ、抽象可換環上）: **対角係数** (g^k)_k = (g_1)^k（leading term の同定）、**F_n 非依存性**（(F^{k+2})_n は F_{<n} のみ — 境界項は truncation と F(0) = 0 で消滅）、係数の強帰納法で「定数項 0・一次係数一致 ⟹ F = F'」。正則性は減算なしの消去仮説 a·G + c·b = b·G + c·a ⟹ a = b で定式化。選択公理不使用 | 実体構成 |
 | M42 ℤ_p の LT 消去仮説（第五層） | **ℤ_p 上の Lubin–Tate 一意性の具体化**: CRing 負元ツールキット（mul_neg・neg_neg 等、公理ゼロ）、**消去式 ⟹ (G−c)(a−b) = 0** の一般変形、**ℤ_p の p-捻れなし性**（p·d = 0 ⟹ d = 0、成分計算）、**単数の正則性**（M36 の明示逆元で消去）、分解 p^n − p = p·(p^{n−1}−1)（p^{n−1}−1 は単数）で消去仮説を充足。帰結: **g(0)=0・g(1)=p・F∘g = p·F + F^q の解は一次係数で一意**。選択公理不使用 | 実体構成 |
+| M43 p-進除算（第六層） | **除算 zpDivP : ℤ_p → ℤ_p の全域・choice-free 構成**（レベル m+1 の代表の ediv でレベル m へ。well-defined 性と遷移整合性は ediv の加法公式から無条件）、**p·(x/p) = x**（x ≡ 0 mod p）・**(p·e)/p = e**（無条件）、**可除性の level-1 判定** ∃e, x = p·e ⟺ x の mod p 射影 = 0、**ℤ_p の Frobenius 合同** x^p ≡ x (mod p) と **x^p − x の p-整除性**（LT 誤差項整除性の原型）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -134,6 +135,7 @@ iut-lean-verification/
     ├── Composition.lean # M40: 級数の合成 P∘Q・truncation・低次係数公式（choice なし）
     ├── LubinTateUnique.lean # M41: Lubin–Tate 一意性（係数の強帰納、choice なし）
     ├── LubinTateZp.lean # M42: ℤ_p の消去仮説充足・LT 一意性の具体化（choice なし）
+    ├── PadicDivision.lean # M43: p-進除算 zpDivP・Frobenius 合同（choice なし）
     ├── Diophantine.lean # M7: 系3.12 + 体積評価 ⟹ Szpiro 型不等式（条件付き）
     ├── AbcConsequences.lean # M8: ABC ⟹ 漸近フェルマー（radical 公理上）
     ├── Skeleton.lean    # 形式骨格 Skeleton / Cor312 / RCEval の定義
@@ -214,6 +216,7 @@ iut-lean-verification/
 | M40: 級数の合成 P∘Q（truncation・係数公式、Lubin–Tate 第三層） — 第27弾 | done（choice なし） |
 | M41: Lubin–Tate 一意性（F∘g = c·F + F^q の解の一意性スキーマ） — 第28弾 | done（choice なし） |
 | M42: ℤ_p の LT 消去仮説充足（p-捻れなし × 単数正則、一意性の具体化） — 第29弾 | done（choice なし） |
+| M43: p-進除算 zpDivP と Frobenius 合同（存在側の除算インフラ） — 第30弾 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

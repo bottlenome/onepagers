@@ -266,6 +266,12 @@ import IUT
 #print axioms IUT.zp_unit_regular
 #print axioms IUT.zp_lt_cancel
 #print axioms IUT.lubin_tate_unique_zp
+#print axioms IUT.zpDivP
+#print axioms IUT.zpDivP_mul_cancel
+#print axioms IUT.zpDivP_cancel
+#print axioms IUT.zp_dvd_p_iff
+#print axioms IUT.zp_flt
+#print axioms IUT.zp_frobenius_divisible
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
