@@ -165,9 +165,9 @@
     <p><strong>形式群の逆元 [-1] 級数キャンペーンの基盤</strong> — 2 変数級数 F(X,Y) に 1 変数級数 P(T)・Q(T) を代入した F(P(T), Q(T)) を構成し、打ち切り不変性と定数項・一次係数を検証:</p>
     <table>
       <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
-      <tr><td><code>psPow_low</code> / <code>psPowPow_low</code> (M72-1, 2)</td><td><strong>1 変数冪の対角下消滅</strong> (Q^k)_n = 0（n &lt; k、Q(0) = 0）と冪積の低次消滅 (P^a·Q^b)_n = 0（n &lt; a + b）——M59 の f 特化版の一般化</td><td><strong>標準のみ（choice なし）</strong></td></tr>
-      <tr><td><code>ps21Comp</code> / <code>ps21Comp_pad</code> (M72-3, 4)</td><td><strong>2 変数 → 1 変数代入</strong> F(P,Q)_n = Σ_{b,a≤n} F_{b,a}·(P^a Q^b)_n と打ち切り境界の付け替え（n + 1 → N、M70e の pad3 の 1 変数ミラー）</td><td>標準のみ</td></tr>
-      <tr><td><code>ps21Comp_zero_coeff</code> / <code>ps21Comp_lin</code> (M72-5)</td><td>定数項 = F₀₀（無条件）と<strong>一次係数 master 補題</strong> F(P,Q)₁ = F₀₁·P₁ + F₁₀·Q₁（4 項展開、(0,0)・(1,1) 項は消滅）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>psPowPow_low</code> (M72-1)</td><td>冪積の低次消滅 (P^a·Q^b)_n = 0（n &lt; a + b、P(0) = Q(0) = 0。各冪は既存 M40-3 の対角下消滅）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps21Comp</code> / <code>ps21Comp_pad</code> (M72-2, 3)</td><td><strong>2 変数 → 1 変数代入</strong> F(P,Q)_n = Σ_{b,a≤n} F_{b,a}·(P^a Q^b)_n と打ち切り境界の付け替え（n + 1 → N、M70e の pad3 の 1 変数ミラー）</td><td>標準のみ</td></tr>
+      <tr><td><code>ps21Comp_zero_coeff</code> / <code>ps21Comp_lin</code> (M72-4)</td><td>定数項 = F₀₀（無条件）と<strong>一次係数 master 補題</strong> F(P,Q)₁ = F₀₁·P₁ + F₁₀·Q₁（4 項展開、(0,0)・(1,1) 項は消滅）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
     <p class="small">逆元の本体（ι = ltSol(−1) と F(X, ι(X)) = 0 の検証）は次層以降。乗法性パッケージ・連鎖律・1 変数 LT 一意性（M49）との結合で完成する。</p>
   </div>

@@ -621,7 +621,6 @@ import IUT
 #print axioms IUT.assocR_is_lt3
 #print axioms IUT.lt_formal_group_assoc
 #print axioms IUT.lt2Sol_assoc
-#print axioms IUT.psPow_low
 #print axioms IUT.psPowPow_low
 #print axioms IUT.ps21Comp_pad
 #print axioms IUT.ps21Comp_zero_coeff

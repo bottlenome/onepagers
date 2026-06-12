@@ -6,14 +6,13 @@
   1 変数級数 P(T)・Q(T) を代入した 1 変数級数 F(P(T), Q(T)) を構成し、
   打ち切り不変性（pad）と定数項・一次係数を検証する。
 
-  * M72-1 `psPow_low` — **1 変数冪の対角下消滅**: Q(0) = 0 なら
-    (Q^k)_n = 0（n < k）。M59 の f 特化版の一般化
-  * M72-2 `psPowPow_low` — 積 (P^a·Q^b)_n = 0（n < a + b）
-  * M72-3 `ps21Comp` — **2 変数 → 1 変数代入** F(P,Q)_n
+  * M72-1 `psPowPow_low` — 冪積の低次消滅 (P^a·Q^b)_n = 0
+    （n < a + b。冪の対角下消滅は既存の M40-3 psPow_coeff_zero）
+  * M72-2 `ps21Comp` — **2 変数 → 1 変数代入** F(P,Q)_n
     = Σ_{b,a ≤ n} F_{b,a}·(P^a Q^b)_n（P(0) = Q(0) = 0 のとき
     truncation により真の代入と一致）
-  * M72-4 `ps21Comp_pad` — 打ち切り境界の付け替え（n + 1 → N）
-  * M72-5 `ps21Comp_zero_coeff` / `ps21Comp_lin` — 定数項 = F₀₀
+  * M72-3 `ps21Comp_pad` — 打ち切り境界の付け替え（n + 1 → N）
+  * M72-4 `ps21Comp_zero_coeff` / `ps21Comp_lin` — 定数項 = F₀₀
     （無条件）と一次係数 = F₀₁·P₁ + F₁₀·Q₁（master 補題、
     M67 の ps23Comp_lin の 1 変数版）
 
@@ -24,33 +23,10 @@ import IUT.FormalGroupAssoc
 
 namespace IUT
 
-/-! ## 冪の対角下消滅 -/
+/-! ## 冪積の低次消滅 -/
 
-/-- **M72-1: 1 変数冪の対角下消滅** — Q(0) = 0 なら (Q^k)_n = 0
-    （n < k）。 -/
-theorem psPow_low (R : CRing) (Q : PS R) (hQ : Q 0 = R.zero) :
-    ∀ k n, n < k → psPow R Q k n = R.zero := by
-  intro k
-  induction k with
-  | zero => intro n hn; exact absurd hn (Nat.not_lt_zero n)
-  | succ k ih =>
-    intro n hn
-    show rsum R (fun m => R.mul (psPow R Q k m) (Q (n - m))) (n + 1) = R.zero
-    have hz : rsum R (fun m => R.mul (psPow R Q k m) (Q (n - m))) (n + 1)
-        = rsum R (fun _ => R.zero) (n + 1) :=
-      rsum_congr R (n + 1) (fun m hm => by
-        cases Nat.lt_or_ge m k with
-        | inl hmk =>
-          rw [ih m hmk]
-          exact R.zero_mul _
-        | inr hmk =>
-          rw [show n - m = 0 by omega, hQ]
-          exact R.mul_zero _)
-    rw [hz]
-    exact rsum_const_zero R (n + 1)
-
-/-- **M72-2: 冪の積の低次消滅** — P(0) = Q(0) = 0 なら
-    (P^a·Q^b)_n = 0（n < a + b）。 -/
+/-- **M72-1: 冪の積の低次消滅** — P(0) = Q(0) = 0 なら
+    (P^a·Q^b)_n = 0（n < a + b。各冪は M40-3 の対角下消滅）。 -/
 theorem psPowPow_low (R : CRing) (P Q : PS R)
     (hP : P 0 = R.zero) (hQ : Q 0 = R.zero)
     (a b n : Nat) (h : n < a + b) :
@@ -63,17 +39,17 @@ theorem psPowPow_low (R : CRing) (P Q : PS R)
     rsum_congr R (n + 1) (fun m hm => by
       cases Nat.lt_or_ge m a with
       | inl hma =>
-        rw [psPow_low R P hP a m hma]
+        rw [psPow_coeff_zero R P hP a m hma]
         exact R.zero_mul _
       | inr hma =>
-        rw [psPow_low R Q hQ b (n - m) (by omega)]
+        rw [psPow_coeff_zero R Q hQ b (n - m) (by omega)]
         exact R.mul_zero _)
   rw [hz]
   exact rsum_const_zero R (n + 1)
 
 /-! ## 2 変数 → 1 変数代入 -/
 
-/-- **M72-3: 2 変数 → 1 変数代入** F(P, Q)_n
+/-- **M72-2: 2 変数 → 1 変数代入** F(P, Q)_n
     = Σ_{b,a ≤ n} F_{b,a}·(P^a Q^b)_n（P が X・Q が Y に入る。
     P(0) = Q(0) = 0 のとき truncation により真の代入と一致）。 -/
 def ps21Comp (R : CRing) (F : PS2 R) (P Q : PS R) : PS R :=
@@ -81,7 +57,7 @@ def ps21Comp (R : CRing) (F : PS2 R) (P Q : PS R) : PS R :=
     rsum R (fun b => rsum R (fun a =>
       R.mul (F b a) (psMul R (psPow R P a) (psPow R Q b) n)) (n + 1)) (n + 1)
 
-/-- **M72-4: 打ち切り境界の付け替え** — n < N なら境界 n + 1 を N に
+/-- **M72-3: 打ち切り境界の付け替え** — n < N なら境界 n + 1 を N に
     広げてよい（はみ出た項は psPowPow_low で消える）。 -/
 theorem ps21Comp_pad (R : CRing) (F : PS2 R) (P Q : PS R)
     (hP : P 0 = R.zero) (hQ : Q 0 = R.zero)
@@ -119,14 +95,14 @@ theorem ps21Comp_pad (R : CRing) (F : PS2 R) (P Q : PS R)
 
 /-! ## 定数項と一次係数 -/
 
-/-- **M72-5a: 代入の定数項** F(P,Q)_0 = F₀₀（無条件）。 -/
+/-- **M72-4a: 代入の定数項** F(P,Q)_0 = F₀₀（無条件）。 -/
 theorem ps21Comp_zero_coeff (R : CRing) (F : PS2 R) (P Q : PS R) :
     ps21Comp R F P Q 0 = F 0 0 := by
   show R.add R.zero (R.add R.zero
       (R.mul (F 0 0) (R.add R.zero (R.mul R.one R.one)))) = F 0 0
   rw [R.zero_add, R.zero_add, R.zero_add, R.one_mul, R.mul_comm, R.one_mul]
 
-/-- **M72-5b: 代入の一次係数**（master 補題）— P(0) = Q(0) = 0 なら
+/-- **M72-4b: 代入の一次係数**（master 補題）— P(0) = Q(0) = 0 なら
     F(P,Q)_1 = F₀₁·P₁ + F₁₀·Q₁（4 項展開、(0,0) 項と (1,1) 項は消滅）。 -/
 theorem ps21Comp_lin (R : CRing) (F : PS2 R) (P Q : PS R)
     (hP : P 0 = R.zero) (hQ : Q 0 = R.zero) :
