@@ -463,6 +463,36 @@ import IUT
 #print axioms IUT.sf_dichotomy
 #print axioms IUT.lt_formal_group_unique
 #print axioms IUT.lt_formal_group_exists_unique
+#print axioms IUT.rsum_exchange
+#print axioms IUT.swap_mul
+#print axioms IUT.swap_pow
+#print axioms IUT.swap_comp1
+#print axioms IUT.swap_rhs
+#print axioms IUT.swap_is_formal_group
+#print axioms IUT.lt_formal_group_comm
+#print axioms IUT.lt2Sol_comm
+#print axioms IUT.towerCat
+#print axioms IUT.tower_nontrivial
+#print axioms IUT.tower_no_descent
+#print axioms IUT.ramifiedFrobenioid
+#print axioms IUT.ramProj
+#print axioms IUT.ramProj_vertical_id
+#print axioms IUT.ramVerticalIncl
+#print axioms IUT.ramVerticalIncl_faithful
+#print axioms IUT.ramVerticalIncl_full
+#print axioms IUT.pullbackFunctor
+#print axioms IUT.pullback_deg
+#print axioms IUT.ramPullbackMor
+#print axioms IUT.ramProj_pullbackMor
+#print axioms IUT.ram_hom_factor
+#print axioms IUT.pullback_incl_compat
+#print axioms IUT.ram_iso_e_one
+#print axioms IUT.ram_iso_objects_eq
+#print axioms IUT.ramifiedFrobenioid_gaunt
+#print axioms IUT.ram_iso_unique
+#print axioms IUT.ram_rigid
+#print axioms IUT.ram_no_descent
+#print axioms IUT.pullback_not_invertible
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

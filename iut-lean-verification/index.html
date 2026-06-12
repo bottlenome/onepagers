@@ -158,7 +158,20 @@
 </section>
 
 <section>
-  <h2>M1〜M61 の形式化（追加検証）</h2>
+  <h2>M1〜M62 の形式化（追加検証）</h2>
+
+  <h3>M62: LT 形式群法則の可換性 F(X,Y) = F(Y,X)（IUT/FormalGroupComm.lean）</h3>
+  <div class="box">
+    <p><strong>可換性定理</strong>: LT 形式群法則 F は全係数で F<sub>i,j</sub> = F<sub>j,i</sub>。一意性のエレガントな応用:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>rsum_exchange</code> (M62-1)</td><td><strong>矩形 Fubini</strong>（新規・二重帰納）——Σ<sub>k&lt;A</sub>Σ<sub>l&lt;B</sub> g(k,l) = Σ<sub>l&lt;B</sub>Σ<sub>k&lt;A</sub> g(k,l)</td><td>なし</td></tr>
+      <tr><td><code>swap_mul</code> / <code>swap_pow</code> (M62-2)</td><td><strong>swap は環自己同型</strong>——変数交換 (j,i) ↦ (i,j) が Cauchy 積を保つ（二重 Cauchy 係数公式 M57 + 矩形 Fubini）。冪も保つ</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>swap_comp1</code> / <code>swap_rhs</code> (M62-3〜4)</td><td><strong>swap は代入と交換</strong>——swap(f∘F) = f∘(swap F)、swap(F(fX, fY)) = (swap F)(fX, fY)（f が両変数に対称なのが効く）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>swap_is_formal_group</code> / <code>lt_formal_group_comm</code> (M62-5〜6)</td><td><strong>swap F も LT 形式群法則 ⟹ M61 の一意性で swap F = F</strong>、すなわち F<sub>i,j</sub> = F<sub>j,i</sub>。lt2Sol の可換性も系として</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: 結合則 F(F(X,Y),Z) = F(X,F(Y,Z))・[a]_f 準同型系列（次層候補）。</p>
+  </div>
 
   <h3>M61: LT 形式群法則の一意性 — 存在と一意性の完結（IUT/FormalGroupUnique.lean）</h3>
   <div class="box">
@@ -380,7 +393,7 @@
       <tr><td><code>divRestrictFunctor</code> / <code>restrict_determines</code> (M57F-6〜7)</td><td><strong>大域→局所の制限関手と局所決定性（束着定理）</strong>——M51F の divisorFrobenioid から各素点の局所圏へ x ↦ x.mult k（線形条件の保存は点ごとの定義から congrArg 一発）。大域射は全素点での制限の一致 + 因子部分の bound 表示の一致で決まる（大域簿記 = 局所簿記の束）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>fibered_iso_objects_eq</code> / <code>fibered_iso_unique</code> / <code>fibered_rigid</code> (M57F-8)</td><td><strong>剛性の遺伝</strong>——全空間圏の同型は (d, c) = (1, 0) を強制し対象（素点・重複度とも）を動かせない（gaunt）、同型は一意（IsoUnique）。Frobenius-like 剛性（poly-isomorphism = 単集合、M53F）はファイバー構造に遺伝する</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">正直な申告: base は離散圏——本物の素点の圏が持つ素点間の射（素イデアルの分解・惰性・分岐、体拡大に沿った押し出し）は未形式化で、全空間の射は垂直成分のみ。アルキメデス素点・realification は範囲外（単数成分との合成は M59F で形式化済み）。局所決定性の bound 仮定は QDiv がサポート上界を choice 回避のためデータとして持つ表示の自由度ゆえ（真の因子の同一性には商型が必要）。</p>
+    <p class="small">正直な申告: base は離散圏——本物の素点の圏が持つ素点間の射のうち分岐（体拡大に沿った引き戻し）は M61F が単一素点の塔の範囲で形式化済み、複数素点への分解・惰性は未形式化で、本モジュールの全空間の射は垂直成分のみ。アルキメデス素点・realification は範囲外（単数成分との合成は M59F で形式化済み）。局所決定性の bound 仮定は QDiv がサポート上界を choice 回避のためデータとして持つ表示の自由度ゆえ（真の因子の同一性には商型が必要）。</p>
   </div>
 
   <h3>M59F: split × fibered の合成 — 並行ブランチ（IUT/SplitFibered.lean）</h3>
@@ -395,6 +408,22 @@
       <tr><td><code>sf_forget_iso_unique</code> / <code>sf_not_iso_unique</code> / <code>sf_dichotomy</code> (M59F-6)</td><td><strong>二分法の総括</strong>——忘却関手の像では任意の二同型が一致（base + 因子簿記は剛的 = 不定性ゼロ）∧ U 非自明なら hom の異なる自己同型対が実在。離散 base・ファイバー構造・単数を全部入れても「(Ind2) 型不定性は単数成分にのみ宿る」が保たれる（M53F→M55F→M57F の系譜の最終形）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
     <p class="small">正直な申告: base は離散圏のまま（素点間の射＝分解・惰性・分岐や base の射に沿った因子・単数の輸送は未形式化）。U は抽象可換群であり O^× の実体ではない（全素点で同一の U を使う簡約も含む——素点ごとの単数群の族は未形式化）。アルキメデス素点・realification は範囲外。大域 split 圏（M55F、対象 = QDiv）からの制限関手は単数の局所化のモデル選択が必要なため未形式化。</p>
+  </div>
+
+  <h3>M61F: base 圏の非自明射 — 並行ブランチ（IUT/RamifiedBase.lean）</h3>
+  <div class="box">
+    <p>M57F/M59F が「base の非自明射（分解・惰性・分岐）・base の射に沿った因子の輸送は未形式化」と申告してきた未達部分を、局所体の塔をモデルに単一素点の範囲で解消——[FrdI] §1 の「体拡大 L/K（分岐指数 e）に沿った因子の引き戻しで重複度が e 倍（π_K = π_L<sup>e</sup>·単数）」の機械検証（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>TowerHom</code> / <code>towerCat</code> / <code>tower_no_descent</code> (M61F-1)</td><td><strong>塔の base 圏</strong>——対象 = 局所体の塔 K₀ ⊆ K₁ ⊆ … の段数 ℕ、射 = (le : n ≤ n', 分岐指数 e ≥ 1)、合成 = (le_trans, e₁e₂)（分岐指数の乗法性）。離散圏と違い n &lt; n' の非自明射を持つが、塔は降りられない</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>RamHom</code> / <code>ramifiedFrobenioid</code> (M61F-2)</td><td><strong>分岐つき全空間圏</strong>——対象 = (段 n, 重複度 m)、射 = (le, e ≥ 1, d ≥ 1, c) with m' = e·d·m + c（base 輸送で e 倍・Frobenius で d 倍・効果的因子 c を加算）。圏公理完全証明</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ramProj</code> / <code>ramVerticalIncl_full</code> (M61F-3)</td><td><strong>射影関手と垂直部分</strong>——全空間 → 塔 base の関手性（射影先の射が分岐指数という実データを運ぶ）。e = 1 の段固定射が localFrobenioid の忠実なコピー（忠実充満）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>pullbackFunctor</code> / <code>pullback_deg</code> (M61F-4)</td><td><strong>base の射に沿った因子の引き戻し関手</strong>——分岐指数 e を固定し m ↦ e·m、(d, c) ↦ (d, e·c)。<strong>引き戻しで次数が分岐指数倍になる</strong> [FrdI] の簿記が定理に</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ramPullbackMor</code> / <code>ram_hom_factor</code> / <code>pullback_incl_compat</code> (M61F-5)</td><td><strong>純引き戻し射と分解定理</strong>——全空間の任意の射 = 純引き戻し射 ∘ 垂直射（[FrdI] の「射 = base 輸送と Frobenius-like 部分の合成」）＋引き戻し square の可換性（輸送の自然性）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ram_iso_objects_eq</code> / <code>ramifiedFrobenioid_gaunt</code> / <code>ram_iso_unique</code> (M61F-6)</td><td><strong>剛性</strong>——同型は e = 1・d = 1・c = 0 を強制し段も重複度も動かせない（gaunt + IsoUnique）。<strong>base の非自明射を足しても Frobenius-like 剛性は保たれ、新規に「同型は塔を昇れない」が出る</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ram_no_descent</code> / <code>pullback_not_invertible</code> (M61F-7)</td><td><strong>非可逆性の新形</strong>——n &lt; n' なら降下射は存在しない（塔は昇るだけで降りられない）。分岐 e ≥ 2 の純引き戻し射を hom とする同型は存在しない（具体的証人つき）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">正直な申告: base は単一素点の塔（全順序圏）のみ——複数素点への分解（分解数 g）・惰性（剰余次数 f）は未形式化。分岐指数 e は抽象パラメータで実際の体拡大から計算されない。単数なし——M59F の split 構造との合成は未形式化。M57F の離散 base との直積（素点ごとに塔が立つ base）も未形式化。</p>
   </div>
 
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
@@ -1106,6 +1135,8 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupExists.lean</code></td><td>M60: LT 形式群法則の存在定理——lt2Seg/lt2Sol・除算恒等式・全係数検証（choice なし）</td></tr>
     <tr><td><code>IUT/SplitFibered.lean</code></td><td>M59F: split × fibered の合成——単数つきファイバー Frobenioid・忘却三角形・U-トーソル（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupUnique.lean</code></td><td>M61: LT 形式群法則の一意性——総次数強帰納法・zp_lt_cancel・存在と一意性のパッケージ（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupComm.lean</code></td><td>M62: LT 形式群法則の可換性——矩形 Fubini・swap 環自己同型・一意性で F(X,Y)=F(Y,X)（choice なし）</td></tr>
+    <tr><td><code>IUT/RamifiedBase.lean</code></td><td>M61F: base 圏の非自明射——分岐指数つき塔 base・引き戻し関手・分解定理・「同型は塔を昇れない」（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

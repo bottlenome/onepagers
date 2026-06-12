@@ -64,6 +64,7 @@ import IUT.PolyIsomorphism
 import IUT.SplitFrobenioid
 import IUT.FiberedFrobenioid
 import IUT.SplitFibered
+import IUT.RamifiedBase
 import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq
@@ -76,3 +77,4 @@ import IUT.FormalGroupDecomp
 import IUT.FormalGroupDiag
 import IUT.FormalGroupExists
 import IUT.FormalGroupUnique
+import IUT.FormalGroupComm
