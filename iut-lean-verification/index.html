@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M34 の形式化（追加検証）</h2>
+  <h2>M1〜M35 の形式化（追加検証）</h2>
+
+  <h3>M35: 単数分解 O^× = μ_{p−1} × U^(1)（IUT/UnitDecomposition.lean）</h3>
+  <div class="box">
+    <p>ℚ_p の単数群の標準分解。μ 部（M33–34）と U^(1) 部（M30–31）がここで結合:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>isPrincipalUnit_of_level_one</code> / <code>teich_congr</code> (M35-2〜3)</td><td><strong>主単数性のレベル 1 判定</strong>（x ≡ 1 mod p で十分）と <strong>ω の剰余依存性</strong> a ≡ b (mod p) ⟹ ω(a) = ω(b)（持ち上げ補題の反復で p^n ∣ a^{p^n} − b^{p^n}）</td><td>標準のみ</td></tr>
+      <tr><td><code>unit_decomposition</code> (M35-4)</td><td><strong>分解の存在</strong>: x ≡ a (mod p)、p ∤ a なら x = ω(a)·u（u 主単数、u = ω(a)^{p−2}·x の明示構成。鍵は恒等式 p(p−2)+1 = (p−1)² と古典形 Fermat）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>decomposition_unique</code> (M35-5)</td><td><strong>一意性</strong>: ω(a)·u = ω(b)·u' なら ω(a) = ω(b) かつ u = u'（レベル 1 合同の望遠鏡和 + ω^{p−2} による消去）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: Lubin–Tate 形式群・分岐相互法則の Galois 側との同定。</p>
+  </div>
 
   <h3>M34: ω の 1 の冪根性と可逆性（IUT/RootsOfUnity.lean）</h3>
   <div class="box">
@@ -668,6 +680,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/Fermat.lean</code></td><td>M32: Fermat の小定理——Bézout・Euclid の補題・二項定理を core のみで自前証明（choice なし）</td></tr>
     <tr><td><code>IUT/Teichmuller.lean</code></td><td>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}——乗法的切断・剰余復元・Frobenius 不変（choice なし）</td></tr>
     <tr><td><code>IUT/RootsOfUnity.lean</code></td><td>M34: ω(a)^{p−1} = 1——Euler の定理 p 冪版・Int 版 Euclid・ω の可逆性（choice なし）</td></tr>
+    <tr><td><code>IUT/UnitDecomposition.lean</code></td><td>M35: 単数分解 O^× = μ_{p−1} × U^(1)——存在（明示構成）+ 一意性（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

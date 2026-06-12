@@ -214,6 +214,12 @@ import IUT
 #print axioms IUT.euler_pow
 #print axioms IUT.teich_root_of_unity
 #print axioms IUT.teich_invertible
+#print axioms IUT.zpMul_assoc
+#print axioms IUT.zpOne_mul
+#print axioms IUT.isPrincipalUnit_of_level_one
+#print axioms IUT.teich_congr
+#print axioms IUT.unit_decomposition
+#print axioms IUT.decomposition_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
