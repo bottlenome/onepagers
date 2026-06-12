@@ -56,3 +56,4 @@ import IUT.Binomial2
 import IUT.Freshman
 import IUT.PSFunctor
 import IUT.FrobeniusCharP
+import IUT.LTErrorDivisible

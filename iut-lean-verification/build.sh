@@ -294,6 +294,11 @@ import IUT
 #print axioms IUT.psComp_single
 #print axioms IUT.frobenius_trunc
 #print axioms IUT.frobenius_charp
+#print axioms IUT.ltPoly_coeff_zero
+#print axioms IUT.ltPoly_coeff_one
+#print axioms IUT.ltPoly_reduction
+#print axioms IUT.ltError_reduction
+#print axioms IUT.ltError_divisible
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
