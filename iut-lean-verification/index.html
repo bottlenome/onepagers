@@ -158,7 +158,20 @@
 </section>
 
 <section>
-  <h2>M1〜M62 の形式化（追加検証）</h2>
+  <h2>M1〜M63 の形式化（追加検証）</h2>
+
+  <h3>M63: 三変数冪級数の基盤 — 結合則キャンペーン第一層（IUT/PowerSeries3.lean）</h3>
+  <div class="box">
+    <p>結合則 F(F(X,Y),Z) = F(X,F(Y,Z)) に向けた三変数の土台——PS3 R := PS(psRing(psRing R)) の反復構成で環構造は無償:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>RingHom.comp</code> / 座標・線形部 (M63-1〜2)</td><td>環準同型の合成、座標 X・Y・Z（係数 G<sub>j,k,i</sub> = X<sup>i</sup>Y<sup>k</sup>Z<sup>j</sup>）と線形部 X+Y+Z の係数</td><td>なし〜標準のみ</td></tr>
+      <tr><td><code>ps3Mul_coeff</code> (M63-3)</td><td><strong>三重 Cauchy 係数公式</strong>——rsum_psRing_coeff 二段 + M57 の二変数公式</td><td>標準のみ</td></tr>
+      <tr><td><code>ps3Pow_tcoeff_zero</code> (M63-4)</td><td><strong>総次数 truncation（三変数）</strong>——G₀₀₀ = 0 ⟹ i+k+j &lt; n で (G<sup>n</sup>)<sub>j,k,i</sub> = 0（四重和の各項を帰納 + 境界で消す M50 の三変数版）。三変数代入の有限性の根拠</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps3Comp1</code> / <code>in3X</code>/<code>in3Y</code>/<code>in3Z</code> / <code>ps3Comp3</code> / <code>IsLTFormalGroup3</code> (M63-5〜8)</td><td>1→3 変数代入・三方向注入（psC/psMap/RingHom.comp の積み上げ）・3→3 変数代入（三重矩形打ち切り）・<strong>三変数 LT 方程式の述語</strong>（一次条件 4 本 + f∘G = G(fX, fY, fZ)）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: 三変数の係数合同（M57 版）・分解（M58/M59 版）・一意性（M61 版）・合成の連鎖律 → 結合則（次層以降）。</p>
+  </div>
 
   <h3>M62: LT 形式群法則の可換性 F(X,Y) = F(Y,X)（IUT/FormalGroupComm.lean）</h3>
   <div class="box">
@@ -1137,6 +1150,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupUnique.lean</code></td><td>M61: LT 形式群法則の一意性——総次数強帰納法・zp_lt_cancel・存在と一意性のパッケージ（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupComm.lean</code></td><td>M62: LT 形式群法則の可換性——矩形 Fubini・swap 環自己同型・一意性で F(X,Y)=F(Y,X)（choice なし）</td></tr>
     <tr><td><code>IUT/RamifiedBase.lean</code></td><td>M61F: base 圏の非自明射——分岐指数つき塔 base・引き戻し関手・分解定理・「同型は塔を昇れない」（choice なし）</td></tr>
+    <tr><td><code>IUT/PowerSeries3.lean</code></td><td>M63: 三変数冪級数の基盤——三重 Cauchy・総次数 truncation・代入・IsLTFormalGroup3（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

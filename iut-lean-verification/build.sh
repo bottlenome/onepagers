@@ -493,6 +493,19 @@ import IUT
 #print axioms IUT.ram_rigid
 #print axioms IUT.ram_no_descent
 #print axioms IUT.pullback_not_invertible
+#print axioms IUT.RingHom.comp
+#print axioms IUT.ps3Lin_000
+#print axioms IUT.ps3Lin_001
+#print axioms IUT.ps3Lin_010
+#print axioms IUT.ps3Lin_100
+#print axioms IUT.ps3Mul_coeff
+#print axioms IUT.ps3Pow_tcoeff_zero
+#print axioms IUT.ps3Comp1
+#print axioms IUT.in3X_000
+#print axioms IUT.in3Y_000
+#print axioms IUT.in3Z_000
+#print axioms IUT.ps3Comp3
+#print axioms IUT.ps3Lin_linear_conditions
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

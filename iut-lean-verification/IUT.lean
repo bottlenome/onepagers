@@ -78,3 +78,4 @@ import IUT.FormalGroupDiag
 import IUT.FormalGroupExists
 import IUT.FormalGroupUnique
 import IUT.FormalGroupComm
+import IUT.PowerSeries3
