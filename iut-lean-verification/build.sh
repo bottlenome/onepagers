@@ -636,6 +636,10 @@ import IUT
 #print axioms IUT.ps21Comp_mul
 #print axioms IUT.ps21Comp_one
 #print axioms IUT.ps21Comp_pow
+#print axioms IUT.ps21Comp_comp1
+#print axioms IUT.ps21Comp_comp2
+#print axioms IUT.ps21Comp_inX
+#print axioms IUT.ps21Comp_inY
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
