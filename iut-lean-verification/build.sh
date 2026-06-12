@@ -769,6 +769,16 @@ import IUT
 #print axioms IUT.zpEval3Seg_ps23Comp
 #print axioms IUT.zpEval3_ps23Comp
 #print axioms IUT.lt_point_assoc
+#print axioms IUT.psScale_mul
+#print axioms IUT.psScale_eisPoly
+#print axioms IUT.eisAut
+#print axioms IUT.eisAut_const
+#print axioms IUT.eisAut_lambda
+#print axioms IUT.eisAut_comp
+#print axioms IUT.eisAut_one
+#print axioms IUT.eisGal_mul
+#print axioms IUT.eisGal_distinct
+#print axioms IUT.eisAut_eisF
 #print axioms IUT.wsum_supported
 #print axioms IUT.lMul_coeff_window
 #print axioms IUT.lAdd_coeff_assoc

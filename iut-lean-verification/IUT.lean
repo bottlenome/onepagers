@@ -113,6 +113,7 @@ import IUT.EisensteinRing
 import IUT.EisensteinTorsion
 import IUT.EisensteinConjugates
 import IUT.RamifiedEntrance
+import IUT.EisensteinGalois
 import IUT.LaurentCoeff
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
