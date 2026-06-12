@@ -158,7 +158,18 @@
 </section>
 
 <section>
-  <h2>M1〜M63 の形式化（追加検証）</h2>
+  <h2>M1〜M64 の形式化（追加検証）</h2>
+
+  <h3>M64: 三変数冪の係数合同 — 結合則キャンペーン第二層（IUT/FormalGroup3Congr.lean）</h3>
+  <div class="box">
+    <p>q ≥ 2 のとき (G<sup>q</sup>)<sub>j,k,i</sub> は G の総次数 ≤ i+k+j−1 の係数のみで決まる（M57 の三変数版・三変数一意性の礎石）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ps3Mul_coeff_congr</code> (M64-2)</td><td><strong>積の係数合同</strong>——三重 Cauchy 公式上の三分処理（因子1 = (0,0,0) → 0・因子2 = (0,0,0) → 0・双方総次数 ≥ 1 → 双方 ≤ n−1 で合同仮定）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps3Pow_coeff_congr</code> / <code>ps3Pow_coeff_congr'</code> (M64-3)</td><td><strong>冪の係数合同</strong>——m 帰納、帰納因子の定数項消滅は M63 の総次数 truncation。q ≥ 2 の使い勝手版込み</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: 三変数の左辺分解・対角分離・一意性 → 合成の連鎖律 → 結合則（次層以降）。</p>
+  </div>
 
   <h3>M63: 三変数冪級数の基盤 — 結合則キャンペーン第一層（IUT/PowerSeries3.lean）</h3>
   <div class="box">
@@ -1151,6 +1162,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupComm.lean</code></td><td>M62: LT 形式群法則の可換性——矩形 Fubini・swap 環自己同型・一意性で F(X,Y)=F(Y,X)（choice なし）</td></tr>
     <tr><td><code>IUT/RamifiedBase.lean</code></td><td>M61F: base 圏の非自明射——分岐指数つき塔 base・引き戻し関手・分解定理・「同型は塔を昇れない」（choice なし）</td></tr>
     <tr><td><code>IUT/PowerSeries3.lean</code></td><td>M63: 三変数冪級数の基盤——三重 Cauchy・総次数 truncation・代入・IsLTFormalGroup3（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroup3Congr.lean</code></td><td>M64: 三変数冪の係数合同——三分処理・m 帰納（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

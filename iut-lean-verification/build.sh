@@ -506,6 +506,10 @@ import IUT
 #print axioms IUT.in3Z_000
 #print axioms IUT.ps3Comp3
 #print axioms IUT.ps3Lin_linear_conditions
+#print axioms IUT.ps3Pow_one
+#print axioms IUT.ps3Mul_coeff_congr
+#print axioms IUT.ps3Pow_coeff_congr
+#print axioms IUT.ps3Pow_coeff_congr'
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
