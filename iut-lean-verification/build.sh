@@ -790,6 +790,13 @@ import IUT
 #print axioms IUT.lMul_coeff_one
 #print axioms IUT.laurentRing
 #print axioms IUT.laurentOf
+#print axioms IUT.eisGal_residue
+#print axioms IUT.recRam_mul
+#print axioms IUT.eisGal_principal_trivial
+#print axioms IUT.eisGal_faithful
+#print axioms IUT.recRamLevelOne
+#print axioms IUT.recRam_exists
+#print axioms IUT.recRam_fixes_base
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
