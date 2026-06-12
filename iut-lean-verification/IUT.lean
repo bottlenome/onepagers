@@ -106,6 +106,7 @@ import IUT.FormalGroupPoints
 import IUT.PointValues
 import IUT.FormalGroupPointsMul
 import IUT.FormalGroupPointsComp
+import IUT.FormalGroupPoints2
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
