@@ -95,6 +95,7 @@ import IUT.FormalGroupLift
 import IUT.FormalGroupComp3
 import IUT.FormalGroupAssoc
 import IUT.FormalGroupEval
+import IUT.FormalGroupEvalMult
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace

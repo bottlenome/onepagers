@@ -625,6 +625,17 @@ import IUT
 #print axioms IUT.ps21Comp_pad
 #print axioms IUT.ps21Comp_zero_coeff
 #print axioms IUT.ps21Comp_lin
+#print axioms IUT.psFam_congr
+#print axioms IUT.psFam_mul_right
+#print axioms IUT.psFam_mul_left
+#print axioms IUT.psSmul_rsum
+#print axioms IUT.psMul_congr_le
+#print axioms IUT.psPowPow_mul
+#print axioms IUT.psSmul_mul_smul
+#print axioms IUT.ps21Comp_eq_fam
+#print axioms IUT.ps21Comp_mul
+#print axioms IUT.ps21Comp_one
+#print axioms IUT.ps21Comp_pow
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
