@@ -708,6 +708,11 @@ import IUT
 #print axioms IUT.torsion_zero_iff
 #print axioms IUT.torsion_mono
 #print axioms IUT.torsion_le
+#print axioms IUT.lt2Sol_comp_X_zero
+#print axioms IUT.lt_point_unit
+#print axioms IUT.lt_point_comm
+#print axioms IUT.lt_point_inverse
+#print axioms IUT.lt_point_module_add
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

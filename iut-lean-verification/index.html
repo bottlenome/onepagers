@@ -158,7 +158,20 @@
 </section>
 
 <section>
-  <h2>M1〜M80 の形式化（追加検証）</h2>
+  <h2>M1〜M81 の形式化（追加検証）</h2>
+
+  <h3>M81: 群法則の点への輸送 — 点の群キャンペーン第五層（IUT/FormalGroupPointsLaw.lean）</h3>
+  <div class="box">
+    <p><strong>M80 の輸送連鎖律を実行し、級数レベルの群法則恒等式を点の等式に</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>lt2Sol_comp_X_zero</code> / <code>lt_point_unit</code> (M81-1, 2)</td><td>級数準備 F(X, 0) = X（M76 の [1]⊕[0] = [1] の正規化）と<strong>単位法則 F(x, 0) = x</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>lt_point_comm</code> (M81-3)</td><td><strong>可換性 F(x, y) = F(y, x)</strong>（独立な 2 点——係数対称性 M62 の二重和転写）</td><td>標準のみ</td></tr>
+      <tr><td><code>lt_point_inverse</code> (M81-4)</td><td><strong>逆元 F(x, ι(x)) = 0</strong>（M75 の級数恒等式の輸送）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>lt_point_module_add</code> (M81-5)</td><td><strong>[a]-加群則 F([a](x), [b](x)) = [a+b](x)</strong>（M76 の輸送——点の集合への ℤ_p-作用の加法性）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">F(pℤ_p) は単位・可換・逆元・ℤ_p-作用を備えた点の集合に。結合則の点輸送は 3 変数評価が必要（未形式化、正直申告）。</p>
+  </div>
 
   <h3>M80: 2 変数評価と輸送連鎖律 — 点の群キャンペーン第四層（IUT/FormalGroupPoints2.lean）</h3>
   <div class="box">
@@ -1573,6 +1586,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/PointValues.lean</code></td><td>M78F: 点での具体値——psShift 因数分解・smul/neg/単項式・f(x) = πx + x^p（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupPoints2.lean</code></td><td>M80: 2 変数評価 zpEval2 と輸送連鎖律 (F(P,Q))(t) = F(P(t),Q(t))（点の群キャンペーン第四層、choice なし）</td></tr>
     <tr><td><code>IUT/TorsionPoints.lean</code></td><td>M79F: [πⁿ] の点作用と捻れ述語 IsTorsionPoint——点レベル再帰・単調性（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupPointsLaw.lean</code></td><td>M81: 群法則の点への輸送——F(x,0) = x・F(x,y) = F(y,x)・F(x,ι(x)) = 0・F([a]x,[b]x) = [a+b]x（点の群キャンペーン第五層、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
