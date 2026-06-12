@@ -650,6 +650,12 @@ import IUT
 #print axioms IUT.psComp_mono
 #print axioms IUT.psComp_ltPoly_left
 #print axioms IUT.ltIter_eq_ltSol
+#print axioms IUT.psComp_ps21Comp
+#print axioms IUT.zero_lt_equation
+#print axioms IUT.ltInv_zero
+#print axioms IUT.ltInv_one
+#print axioms IUT.lt_formal_group_inverse
+#print axioms IUT.lt_formal_group_has_inverse
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
