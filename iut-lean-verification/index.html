@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M87 の形式化（追加検証）</h2>
+  <h2>M1〜M88 の形式化（追加検証）</h2>
+
+  <h3>M88: q-級数環とテータ級数 — 柱E・E2+E3（IUT/ThetaSeries.lean）</h3>
+  <div class="box">
+    <p><strong>Θ(q, u) = Σ_{n∈ℤ} (−1)ⁿ q^{n(n+1)/2} uⁿ が形式体系内のデータに</strong>——[EtTh] のテータ関数の実体化第一歩:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>qLaurent</code> (M88-1)</td><td><strong>q-級数環 R[u^{±1}][[q]] = psRing (laurentRing R)</strong>——PS 理論（M39〜）を無償取得（E2 完了）</td><td>標準のみ</td></tr>
+      <tr><td><code>isgn</code> / <code>isgn_succ</code> / <code>tri_bound</code> (M88-2, 3)</td><td>符号 (−1)ⁿ（natAbs 偶奇）と反転則・<strong>三角数の台</strong> 2m = n(n+1) ⟹ |n| ≤ 2m+1</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>thetaRep</code> / <code>theta</code> / <code>theta_zero_coeff</code> (M88-4, 5)</td><td><strong>テータ級数の実構成</strong>（q^m 係数 = Σ_{2m=n(n+1)} (−1)ⁿuⁿ、分母を払った条件・有界台 Laurent）と<strong>検算: q⁰ 係数 = 1 − u^{−1}</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">関数等式 q·u·Θ(q,qu) = −Θ(q,u)（E4）・捻れ値の q^{j²} 簿記（E5）は次層。</p>
+  </div>
 
   <h3>M87: Laurent 環の完成 laurentRing R : CRing — 柱E・E1 完成（IUT/LaurentRing.lean）</h3>
   <div class="box">
@@ -1752,6 +1764,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/EisensteinGalois.lean</code></td><td>M86F: Eisenstein 環の Galois 作用——psScale・eisAut/eisGal・合成則・相異性・[π]-作用との可換（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/LaurentRing.lean</code></td><td>M87: Laurent 環の完成——結合則・Quot 環化 laurentRing : CRing・構造射（柱E E1 完成、choice なし）</td></tr>
     <tr><td><code>IUT/RecRamified.lean</code></td><td>M87F: 分岐相互写像のレベル 1 骨格——剰余依存性・主単数核・RecRamifiedLevelOneData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaSeries.lean</code></td><td>M88: q-級数環とテータ級数 Θ の実構成——三角数の台・符号・先頭係数の検算（柱E E2+E3、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

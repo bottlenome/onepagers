@@ -797,6 +797,10 @@ import IUT
 #print axioms IUT.recRamLevelOne
 #print axioms IUT.recRam_exists
 #print axioms IUT.recRam_fixes_base
+#print axioms IUT.isgn_succ
+#print axioms IUT.tri_bound
+#print axioms IUT.theta
+#print axioms IUT.theta_zero_coeff
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

@@ -117,6 +117,7 @@ import IUT.EisensteinGalois
 import IUT.RecRamified
 import IUT.LaurentCoeff
 import IUT.LaurentRing
+import IUT.ThetaSeries
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
