@@ -59,6 +59,7 @@ import IUT.FrobeniusCharP
 import IUT.LTErrorDivisible
 import IUT.LubinTateExists
 import IUT.FrobenioidCat
+import IUT.FrobenioidModel
 import IUT.PowerSeries2
 import IUT.FormalGroupSub
 import IUT.FormalGroupEq

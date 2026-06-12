@@ -32,7 +32,7 @@
 | M2 Hodge theater | ラベル組合せ骨格＋ **F_l^±± の群公理完結**（閉性・単位元・逆元）、±1商 = {0..l⋇} 同定、テータ値ラベル = {1..l⋇}、Skeleton 橋渡し | ~25% |
 | M3 Θ-link / log-link | 格子の構造定理＋ **垂直コア性・双コア性（定理1.5 の骨格）**: log-不変量は列ごとに一定、リンク不変量は格子全体で一意 | ~40% |
 | M4 テータ値評価 | 値・次数簿記層: Gaussian 総次数の閉形式、素朴評価⟹RC評価/多輻的表現と非両立、膨張込み評価⟹M7計算、**テータ値の±ラベル well-defined 性** (l−j)² ≡ j² (mod l)。＋ **M11 cyclotomic rigidity の骨格**（IUT/EtaleTheta.lean、[EtTh] Cor 2.19）: テータ群（Heisenberg 群）の交換子＝シンプレクティック形式がシクロトームの標準生成元を指定し、**テータ切断の不定性が交換子で完全相殺**されることを公理化ゼロの完全証明で機械検証（裸のシクロトームの ±1 不定性との対比込み） | 算術核 100% / 理論 ~35% |
-| M5 定理3.11 多輻性 | **statement を原文から読み取り出力仕様を形式化**: (i)(Ind1)(Ind2)・(ii)(Ind3)・(iii) をインターフェース化、系3.12 の証明本体を機械化（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性、**procession 正規化の閉形式（公理ゼロ）**。＋ **M12 Frobenioid 次数層**（IUT/Frobenioid.lean、[FrdI/II]）: deg(0)=0 の導出・Frobenius 合成則・**Frobenius-like 非可逆性**・Gaussian 束の次数公式（M4 接続）・**次数＝log-volume 両立 ⟹ `vol_q` の供給**（定理3.11 (i)(c) の骨格、M5 接続）。構成の実体は未形式化 | ~28%（構成は土台のみ） |
+| M5 定理3.11 多輻性 | **statement を原文から読み取り出力仕様を形式化**: (i)(Ind1)(Ind2)・(ii)(Ind3)・(iii) をインターフェース化、系3.12 の証明本体を機械化（公理ゼロ）、厳密評価の障害・膨張の必然性・仕様の充足可能性、**procession 正規化の閉形式（公理ゼロ）**。＋ **M12 Frobenioid 次数層**（IUT/Frobenioid.lean、[FrdI/II]）: deg(0)=0 の導出・Frobenius 合成則・**Frobenius-like 非可逆性**・Gaussian 束の次数公式（M4 接続）・**次数＝log-volume 両立 ⟹ `vol_q` の供給**（定理3.11 (i)(c) の骨格、M5 接続）。圏論的実体と数体型データでの充足は M48F（次数圏）+ M51F（因子圏・rationalFrobenioid）で base 圏一点の範囲を形式化済み | ~28%（構成は土台のみ） |
 | M6 系3.12 | statement 100% 形式化、骨格からの独立性＋**定理3.11 からの証明本体（p.174–175 の包含論法）を機械化** | statement 100% / 証明 ~90%（条件付き） |
 | M7 IUT IV log-volume 計算 | 条件付き導出 ＋ **l-最適化定理**（全 l で Szpiro 型 ⟹ ht ≤ c、定理1.10 の質的内容） | ~35% |
 | M8 古典的還元と帰結 | ABC ⟹ 漸近フェルマー ＋ Catalan 型 3^b+1=2^a の有界性を完全証明 | ~35% |
@@ -78,6 +78,7 @@
 | M51 二変数→二変数代入（形式群第二層） | **代入 F(P,Q)_{i,j} = Σ_{a,b≤i+j} F_{a,b}(P^a Q^b)_{i,j} の構成**: (psC z)^k = psC(z^k)、座標の冪 X^a = psC(X^a)・Y^b = Y-mono^b、**二変数単項式の積公式** X^a·Y^b = δ_{(a,b)}、**恒等代入 F(X,Y) = F**（二重一点集中和 — 代入の座標規約のサニティアンカー）。選択公理不使用 | 実体構成 |
 | M52 形式群方程式の定式化（形式群第三層） | **f∘F = F(f(X), f(Y)) の機械可読化**: 座標代入と注入の整合 **f∘X-座標 = inX f・f∘Y-座標 = inY f**（一点集中和）、inY X = Y、**恒等 f = X で方程式が任意の F（F₀₀ = 0）で成立**（左辺 = F は M50・右辺 = F(X,Y) = F は M51 — 全機構のフルループ機械検証）、LT 形式群法則の述語 IsLTFormalGroup（一次条件 + 方程式）と注入の定数項消滅（truncation 妥当性）。選択公理不使用 | 実体構成 |
 | M48F Frobenioid の圏論化（並行ブランチ） | **M12 の Frobenioid 次数データを M19 の `Cat` 上の実際の圏として実装**: elementary Frobenioid（対象 = 次数 ℤ、射 = (Frobenius 次数 d ≥ 1, 効果的因子 c ≥ 0) with 線形条件 m = d·n + c、合成 = 捻れ半直積型 (d₁d₂, d₂c₁+c₂)）の圏公理完全証明、**次数関手** F_Φ → (ℕ≥1, ×) と **Frobenius 自己関手** Φ_e の関手性、**非可逆性定理群**（次数 ≥ 2 の射は右逆なし・同型の次数は必ず 1・**同型は対象を動かせない** n ≅ m ⟹ n = m・1 → 2 に射はあるが同型はない = M12-3 の圏論版を仮定なしの強い形で。Galois 圏の G6「同型の反映」（M20-5）との二分法の機械検証）、M12 接続（degMor の実現・frob_deg の関手化・Φ_e は次数関手上で恒等）。選択公理不使用 | 実体構成 |
+| M51F Frobenioid の圏論的実体と数体での充足（並行ブランチ） | **M12 の `Frobenioid` 構造を ℚ 型の実データで充足**: 有効因子 = 素点での重複度の有限サポート関数（QDiv、サポート上界をデータとして持ち choice 回避）、可換モノイド法則・**重み付き次数の加法性 deg(x+y) = deg x + deg y・Frobenius 斉次性 deg(φ_e x) = e·deg x** を完全証明して `rationalFrobenioid` を Nonempty でなく def として構成。`DegreeVolumeCompat` の実構成により **M12-6（vol_q 供給）が実データで発動**（`rational_qpilot_volume`: 任意の骨格 s で単一素点因子の実現体積 = −\|log q\|）、局所付値（M27）との整合。＋**因子レベルの圏** divisorFrobenioid（対象 = 有効因子、射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明、**次数関手** → elementaryFrobenioid（M48F）の関手性、**因子レベルの非可逆性**（同型は因子を動かせない x ≅ y ⟹ x = y、＋次数関手で M48F に帰着する独立経路）。選択公理不使用 | 実体構成 |
 | S2 SS: 同一視→矛盾 | `ss_incompatible` 完全証明 | **100%** |
 | R3 望月: 同一視なし→無矛盾 | `cor312_consistent` 完全証明 | **100%** |
 | 二分法（論争 ≡ RC採否） | `verdict` 完全証明 | **100%** |
@@ -153,6 +154,7 @@ iut-lean-verification/
     ├── LTErrorDivisible.lean # M48: LT 誤差項の p-整除性（mod-p 還元 + Frobenius 定理、choice なし）
     ├── LubinTateExists.lean # M49: Lubin–Tate 補題完成（係数の再帰構成 + 存在 + 一意性、choice なし）
     ├── FrobenioidCat.lean # M48F: Frobenioid の圏論化（elementary Frobenioid・次数関手・同型 = 恒等のみ、choice なし）
+    ├── FrobenioidModel.lean # M51F: Frobenioid の圏論的実体と数体での充足（QDiv・rationalFrobenioid・divisorFrobenioid・次数関手、choice なし）
     ├── PowerSeries2.lean # M50: 二変数冪級数の基盤（総次数 truncation・1→2変数代入、choice なし）
     ├── FormalGroupSub.lean # M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）
     ├── FormalGroupEq.lean # M52: 形式群方程式の定式化・恒等での成立（choice なし）
@@ -206,7 +208,7 @@ iut-lean-verification/
 | M10: 遠アーベル復元アルゴリズムの実装と MonoAnabelian 充足（issue #29 項目1の骨格） | done（選択公理不使用） |
 | M11: エタールテータの cyclotomic rigidity の機構（issue #29 項目2の骨格） | done（公理化ゼロの完全証明） |
 | M12: Frobenioid 次数層と vol_q 供給（issue #29 項目3の骨格） | done |
-| M5: 定理3.11 の**構成**の完全形式化 | 4基盤の骨格（M9–M12）は done。残り（環構造復元の本体・p進テータ関数の関数等式・Frobenioid の圏論的実体・実際の数体での充足）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
+| M5: 定理3.11 の**構成**の完全形式化 | 4基盤の骨格（M9–M12）は done。**Frobenioid の圏論的実体と数体型データでの充足は M51F で base 圏一点の範囲を形式化済み**（因子圏・次数関手・実データによる M12 充足。poly-isomorphism・realification・base 圏上のファイバー構造は未達）。残り（環構造復元の本体・p進テータ関数の関数等式）は mathlib 規模の数論幾何ライブラリが必要。世界の誰も達成していない |
 | M13: 副有限群（商群・逆極限・ẑ の実構成）— 実体建設フェーズ第1弾 | done（公理化なしの実構成） |
 | M14: Galois 圏・étale π₁ のファイバー関手機構 — 実体建設フェーズ第2弾 | done（Aut(F) ≅ G は公理ゼロ） |
 | M15: 位相付き副有限群（位相群性・開部分群・近傍基定理） — 実体建設フェーズ第3弾 | done（Classical.choice ゼロ） |
@@ -247,6 +249,7 @@ iut-lean-verification/
 | M50: 二変数冪級数の基盤（総次数 truncation・代入、形式群第一層） — 第37弾 | done（choice なし） |
 | M51: 二変数→二変数代入と恒等代入 F(X,Y) = F（形式群第二層） — 第38弾 | done（choice なし） |
 | M52: 形式群方程式の定式化と恒等での成立（形式群第三層） — 第39弾 | done（choice なし） |
+| M51F: Frobenioid の圏論的実体と数体での充足（M12/M5 の「未達」部分、因子圏・次数関手・実データ充足） — サブエージェント並行開発・第39弾統合 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

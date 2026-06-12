@@ -334,6 +334,19 @@ import IUT
 #print axioms IUT.fgl_equation_identity
 #print axioms IUT.inX_ltPoly_00
 #print axioms IUT.inY_ltPoly_00
+#print axioms IUT.degZ_add
+#print axioms IUT.degZ_frob
+#print axioms IUT.rationalFrobenioid
+#print axioms IUT.rational_frob_not_invertible
+#print axioms IUT.rational_gaussian_deg
+#print axioms IUT.rationalDegVol
+#print axioms IUT.rational_qpilot_volume
+#print axioms IUT.degZ_single_valuation
+#print axioms IUT.divisorFrobenioid
+#print axioms IUT.divDegFunctor
+#print axioms IUT.divisor_iso_objects_eq
+#print axioms IUT.divisor_iso_deg_eq
+#print axioms IUT.divisor_hom_exists_but_no_iso
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

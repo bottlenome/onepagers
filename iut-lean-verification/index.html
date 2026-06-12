@@ -220,6 +220,21 @@
     <p class="small">正直な申告: 基底圏一点・因子モノイド ℕ の elementary な場合（次数簿記が見る範囲）。poly-isomorphism・分裂・realification は未形式化。</p>
   </div>
 
+  <h3>M51F: Frobenioid の圏論的実体と数体での充足 — 並行ブランチ（IUT/FrobenioidModel.lean）</h3>
+  <div class="box">
+    <p>M12/M5 行で「未達」だった「圏論的実体と実際の数体での充足」を base 圏一点の範囲で形式化（サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>QDiv</code> / <code>qadd</code> / <code>qfrob</code> (M51F-1)</td><td><strong>ℚ の有効因子</strong>——素点での重複度の有限サポート関数（サポート上界をデータとして持ち choice 回避）と和・Frobenius。可換モノイド法則完全証明</td><td>標準のみ</td></tr>
+      <tr><td><code>degZ_add</code> / <code>degZ_frob</code> (M51F-2〜3)</td><td><strong>重み付き次数</strong>（log-volume の整数化）の<strong>加法性</strong> deg(x+y) = deg x + deg y と <strong>Frobenius 斉次性</strong> deg(φ_e x) = e·deg x</td><td>標準のみ</td></tr>
+      <tr><td><code>rationalFrobenioid</code> (M51F-4)</td><td><strong>M12 の Frobenioid 公理群を実データで充足</strong>——Nonempty witness でなく def（全フィールドが上の定理で埋まる）。M12-3 非可逆性・M12-5 Gaussian 次数公式が実データ上で発動</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rationalDegVol</code> / <code>rational_qpilot_volume</code> (M51F-6)</td><td><strong>次数＝log-volume 両立データの実構成</strong>と q-パイロット体積実現——任意の骨格 s で単一素点因子の実現体積 = −|log q|（<code>vol_q</code> 供給経路の完全実体化）。＋局所付値（M27）との整合</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>divisorFrobenioid</code> / <code>divDegFunctor</code> (M51F-8〜9)</td><td><strong>因子そのものを対象とする圏</strong>（射 = (d≥1, c) with y = φ_d(x)+c、捻れ半直積合成）の圏公理完全証明と<strong>次数関手</strong> → elementaryFrobenioid（M48F）の関手性——M48F の次数圏が本圏の「次数の影」であることの機械検証</td><td>標準のみ</td></tr>
+      <tr><td><code>divisor_iso_objects_eq</code> / <code>divisor_hom_exists_but_no_iso</code> (M51F-10〜11)</td><td><strong>因子レベルの非可逆性</strong>——同型は因子を動かせない（x ≅ y ⟹ x = y、次数に落とさない強い形）＋具体的証人＋次数関手で M48F に帰着する独立経路（関手の同型保存 <code>Functor.mapIso</code>）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">正直な申告: 素点は添字 k で番号付け・重み w(k) は ⌊log p_k⌋ 相当の抽象パラメータ（素数の枚挙・対数の解析は未形式化）。有効因子のみ（主因子・積公式なし）。base 圏一点の Frobenioid（base 圏上のファイバー構造・poly-isomorphism・realification は未形式化）。</p>
+  </div>
+
   <h3>M48: LT 誤差項の p-整除性 — 第十一層（IUT/LTErrorDivisible.lean）</h3>
   <div class="box">
     <p>任意の F で (p·F + F^p) − F∘f（f = pX + X^p）の全係数が p で割れることを完全証明:</p>
@@ -912,6 +927,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/LTErrorDivisible.lean</code></td><td>M48: LT 誤差項の p-整除性——mod-p 還元 + Frobenius 定理（choice なし）</td></tr>
     <tr><td><code>IUT/LubinTateExists.lean</code></td><td>M49: Lubin–Tate 補題完成——係数の再帰構成による存在 + 一意性（choice なし）</td></tr>
     <tr><td><code>IUT/FrobenioidCat.lean</code></td><td>M48F: Frobenioid の圏論化——elementary Frobenioid・次数関手・同型 = 恒等のみ（choice なし）</td></tr>
+    <tr><td><code>IUT/FrobenioidModel.lean</code></td><td>M51F: Frobenioid の圏論的実体と数体での充足——QDiv・rationalFrobenioid・divisorFrobenioid・次数関手（choice なし）</td></tr>
     <tr><td><code>IUT/PowerSeries2.lean</code></td><td>M50: 二変数冪級数の基盤——総次数 truncation・1→2変数代入（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupSub.lean</code></td><td>M51: 二変数→二変数代入・恒等代入 F(X,Y) = F（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupEq.lean</code></td><td>M52: 形式群方程式の定式化——座標代入 = 注入・恒等での成立（choice なし）</td></tr>
