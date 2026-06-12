@@ -585,6 +585,13 @@ import IUT
 #print axioms IUT.ps23Comp_comp1
 #print axioms IUT.ps2Comp2_pad
 #print axioms IUT.ps23Comp_comp2
+#print axioms IUT.psX_pow_coeff
+#print axioms IUT.psComp_X_right
+#print axioms IUT.ps23Comp_inX
+#print axioms IUT.ps23Comp_inY
+#print axioms IUT.ps3Comp1_ps3X
+#print axioms IUT.ps3Comp1_ps3Y
+#print axioms IUT.ps3Comp1_ps3Z
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

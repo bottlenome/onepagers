@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M70b の形式化（追加検証）</h2>
+  <h2>M1〜M70c の形式化（追加検証）</h2>
+
+  <h3>M70c: 注入の橋渡し補題 — 結合則キャンペーン第十一層（IUT/FormalGroupBridge.lean）</h3>
+  <div class="box">
+    <p>結合則の方程式検証の接合部を担う橋渡し（全て仮定なし）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>psX_pow_coeff</code> / <code>psComp_X_right</code> (M70c-1)</td><td>X^k の係数公式（一点集中 δ_{n,k}）と<strong>恒等代入 f∘X = f</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps23Comp_inX</code> / <code>ps23Comp_inY</code> (M70c-2)</td><td><strong>注入の代入: (psC f)∘(P,Q) = f∘₃P・(psMap psConstHom f)∘(P,Q) = f∘₃Q</strong>——F が片方の変数を含まないので和が一点に集中し他方の因子が消える</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps3Comp1_ps3X/Y/Z</code> (M70c-3)</td><td>座標への 1→3 代入 f∘₃X = in3X f / f∘₃Y = in3Y f / f∘₃Z = in3Z f（M68 の注入代入 + 恒等代入）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">未形式化: CR3（ps3Comp3 の乗法性パッケージが必要）→ 結合則の最終組み立て。</p>
+  </div>
 
   <h3>M70b: 第二連鎖律 CR2 — 結合則キャンペーン第十層（IUT/FormalGroupComp2.lean）</h3>
   <div class="box">
@@ -1322,6 +1334,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/ArchimedeanPlace.lean</code></td><td>M69F: アルキメデス素点——アルキメデス局所圏・可除性の構造的二分法・局所実化関手・混合因子圏と総括二分法（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupComp1.lean</code></td><td>M70a: 合成の代数と連鎖律 CR1——1/加法/冪の代入・f∘₃(F∘(P,Q)) = (f∘₂F)∘(P,Q)（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupComp2.lean</code></td><td>M70b: 第二連鎖律 CR2——(F∘₂(U,V))∘(P,Q) = F∘(U∘(P,Q), V∘(P,Q))・四重和正規化（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupBridge.lean</code></td><td>M70c: 注入の橋渡し補題——f∘X = f・注入の ps23Comp 代入 = ps3Comp1・座標への 1→3 代入（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
