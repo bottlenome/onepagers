@@ -548,6 +548,45 @@ import IUT
 #print axioms IUT.assocR_000
 #print axioms IUT.assocL_linear
 #print axioms IUT.assocR_linear
+#print axioms IUT.ps3Mul_low_zero
+#print axioms IUT.ps3PowPow_low
+#print axioms IUT.liftXY_mul
+#print axioms IUT.liftXY_pow
+#print axioms IUT.liftXY_comp1
+#print axioms IUT.liftYZ_mul
+#print axioms IUT.liftYZ_pow
+#print axioms IUT.liftYZ_comp1
+#print axioms IUT.ps3X_eq_in3X
+#print axioms IUT.ps3Y_eq_in3Y
+#print axioms IUT.ps3Z_eq_in3Z
+#print axioms IUT.ps3Comp1_in3X
+#print axioms IUT.ps3Comp1_in3Y
+#print axioms IUT.ps3Comp1_in3Z
+#print axioms IUT.nsum_congr
+#print axioms IUT.nsum_mul_right
+#print axioms IUT.efSum
+#print axioms IUT.inertExt_sum
+#print axioms IUT.splitExt_sum
+#print axioms IUT.ramifiedExt_sum
+#print axioms IUT.semiLocalFrobenioid
+#print axioms IUT.decompPullback
+#print axioms IUT.normDeg_add
+#print axioms IUT.normDeg_frob
+#print axioms IUT.normDeg_linear
+#print axioms IUT.efg_identity
+#print axioms IUT.efg_deg
+#print axioms IUT.efg_pullback
+#print axioms IUT.inert_efg
+#print axioms IUT.split_efg
+#print axioms IUT.ramified_efg
+#print axioms IUT.normFunctor
+#print axioms IUT.norm_pullback_obj
+#print axioms IUT.norm_pullback_hom_d
+#print axioms IUT.norm_pullback_hom_c
+#print axioms IUT.semiLocal_iso_objects_eq
+#print axioms IUT.semiLocalFrobenioid_gaunt
+#print axioms IUT.semiLocal_iso_unique
+#print axioms IUT.semiLocal_rigid
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
