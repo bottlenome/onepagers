@@ -526,6 +526,16 @@ import IUT
 #print axioms IUT.ps3Mul_coeff_congr
 #print axioms IUT.ps3Pow_coeff_congr
 #print axioms IUT.ps3Pow_coeff_congr'
+#print axioms IUT.ps3Comp1_add
+#print axioms IUT.ps3Comp1_single_one
+#print axioms IUT.ps3Comp1_mono
+#print axioms IUT.lt3_lhs_decomp
+#print axioms IUT.in3X_pow
+#print axioms IUT.in3Y_pow
+#print axioms IUT.in3Z_pow
+#print axioms IUT.in3X_mul_in3Y
+#print axioms IUT.ps3_constV_mul_inZ
+#print axioms IUT.lt3_rhs_coeff
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
