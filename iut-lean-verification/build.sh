@@ -737,6 +737,12 @@ import IUT
 #print axioms IUT.eis_lambda_pow
 #print axioms IUT.eis_one_ne_zero
 #print axioms IUT.eisOf_lambda_torsion_shape
+#print axioms IUT.eisF_zero
+#print axioms IUT.eisF_lambda
+#print axioms IUT.lambda_all_torsion
+#print axioms IUT.eis_lambda_ne_zero
+#print axioms IUT.eisOf_compat_f
+#print axioms IUT.eisIter_compat
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
