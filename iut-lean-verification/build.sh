@@ -592,6 +592,13 @@ import IUT
 #print axioms IUT.ps3Comp1_ps3X
 #print axioms IUT.ps3Comp1_ps3Y
 #print axioms IUT.ps3Comp1_ps3Z
+#print axioms IUT.ps3TriplePow_low
+#print axioms IUT.ps3TriplePow_mul
+#print axioms IUT.ps3Comp3_eq_fam
+#print axioms IUT.hex_sum_reindex
+#print axioms IUT.ps3Comp3_mul
+#print axioms IUT.ps3Comp3_one
+#print axioms IUT.ps3Comp3_pow
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

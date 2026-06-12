@@ -160,6 +160,20 @@
 <section>
   <h2>M1〜M70c の形式化（追加検証）</h2>
 
+  <h3>M70F: ps3Comp3 の乗法性パッケージ — 結合則キャンペーン並行部品（IUT/FormalGroupMult3.lean）</h3>
+  <div class="box">
+    <p>三変数 → 三変数代入 ps3Comp3 の truncated ring hom 性（二変数版 M69a/M69b/M70a の精密な三変数ミラー、サブエージェント並行開発）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ps3TriplePow_low</code> / <code>ps3TriplePow_mul</code> (M70F-1, 2)</td><td>三重冪積 (W₁^a·W₂^b)·W₃^c の<strong>下方消滅</strong>（総次数 a+b+c 未満で 0、M68 の二段適用）と<strong>結合</strong> T₃(a₁,b₁,c₁)·T₃(a₂,b₂,c₂) = T₃(a₁+a₂,b₁+b₂,c₁+c₂)（rpow_add + interchange）</td><td>標準のみ</td></tr>
+      <tr><td><code>ps3Comp3_eq_fam</code> (M70F-3)</td><td><strong>打ち切り安定性</strong>: 総次数 i+k+j &lt; N の係数で ps3Comp3 = 境界 N の三重族和（rsum_pad ×3 + 下方消滅）</td><td>標準のみ</td></tr>
+      <tr><td><code>hex_sum_reindex</code> (M70F-4)</td><td><strong>六重和の再添字化</strong>: 対角外消滅つき Σ⁶φ = Σ_c Σ_b Σ_a Σ_{c₁≤c} Σ_{b₁≤b} Σ_{a₁≤a} φ(c₁,b₁,a₁,c−c₁,b−b₁,a−a₁)——添字交換 ×2 + padding + 三角和交換で c 対を処理し、内側の四重和は <strong>M69b の quad_sum_reindex がそのまま再登板</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps3Comp3_mul</code>（本丸） (M70F-5)</td><td><strong>乗法性 (G·H)∘(W₁,W₂,W₃) = (G∘(W₁,W₂,W₃))·(H∘(W₁,W₂,W₃))</strong>——右辺は族和分配 ×6 + スカラー積の合成 + 三重冪積の結合で六重族和、左辺は三重 Cauchy + rsum_mul_right ×3、接合は hex_sum_reindex + 添字簡約</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps3Comp3_one</code> / <code>ps3Comp3_pow</code> (M70F-6)</td><td><strong>1 の代入 = 1</strong>（三重一点集中和）と<strong>冪の代入</strong> (G∘W⃗)^m = (G^m)∘W⃗（乗法性の帰納適用）——ps3Comp3(−,W₁,W₂,W₃) は truncated ring hom</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">未形式化: 連鎖律 CR3（本パッケージの帰結・次層）→ 結合則の最終組み立て。</p>
+  </div>
+
   <h3>M70c: 注入の橋渡し補題 — 結合則キャンペーン第十一層（IUT/FormalGroupBridge.lean）</h3>
   <div class="box">
     <p>結合則の方程式検証の接合部を担う橋渡し（全て仮定なし）:</p>
@@ -1335,6 +1349,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupComp1.lean</code></td><td>M70a: 合成の代数と連鎖律 CR1——1/加法/冪の代入・f∘₃(F∘(P,Q)) = (f∘₂F)∘(P,Q)（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupComp2.lean</code></td><td>M70b: 第二連鎖律 CR2——(F∘₂(U,V))∘(P,Q) = F∘(U∘(P,Q), V∘(P,Q))・四重和正規化（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupBridge.lean</code></td><td>M70c: 注入の橋渡し補題——f∘X = f・注入の ps23Comp 代入 = ps3Comp1・座標への 1→3 代入（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupMult3.lean</code></td><td>M70F: ps3Comp3 の乗法性パッケージ——三重冪積・六重和の再添字化・乗法性・1/冪の代入（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
