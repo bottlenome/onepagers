@@ -620,6 +620,25 @@ import IUT
 #print axioms IUT.realifyFunctor
 #print axioms IUT.real_iso_objects_eq
 #print axioms IUT.real_gaunt_isoUnique
+#print axioms IUT.archFrobenioid
+#print axioms IUT.arch_divisible
+#print axioms IUT.arch_pilot_division
+#print axioms IUT.nonarch_pilot_obstruction
+#print axioms IUT.arch_vs_nonarch
+#print axioms IUT.localArchFunctor
+#print axioms IUT.local_realification_gains_divisibility
+#print axioms IUT.mixedAdd_assoc
+#print axioms IUT.mixedFrob_add
+#print axioms IUT.mixedFrob_frob
+#print axioms IUT.degMixed_add
+#print axioms IUT.degMixed_frob
+#print axioms IUT.mixedFrobenioid
+#print axioms IUT.mixed_iso_objects_eq
+#print axioms IUT.mixed_gaunt_isoUnique
+#print axioms IUT.mixed_divisibility_dichotomy
+#print axioms IUT.mixed_pilot_division
+#print axioms IUT.mixed_fin_zero_divisible
+#print axioms IUT.mixed_single_not_divisible
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
