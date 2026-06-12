@@ -261,6 +261,11 @@ import IUT
 #print axioms IUT.psPow_coeff_diag
 #print axioms IUT.psPow_coeff_congr
 #print axioms IUT.lubin_tate_unique
+#print axioms IUT.CRing.cancel_to_annihilate
+#print axioms IUT.zp_p_regular
+#print axioms IUT.zp_unit_regular
+#print axioms IUT.zp_lt_cancel
+#print axioms IUT.lubin_tate_unique_zp
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

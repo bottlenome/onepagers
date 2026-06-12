@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M41 の形式化（追加検証）</h2>
+  <h2>M1〜M42 の形式化（追加検証）</h2>
+
+  <h3>M42: ℤ_p は Lubin–Tate 消去仮説を満たす — 第五層（IUT/LubinTateZp.lean）</h3>
+  <div class="box">
+    <p>M41 のスキーマを係数環 ℤ_p・c = g_1 = p で具体化。鍵は p^n − p = p·(p^{n−1} − 1) と p^{n−1} − 1 が単数であること:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>CRing.cancel_to_annihilate</code> (M42-2)</td><td>負元ツールキット（mul_neg・neg_neg・neg_add_dist 等）と消去式 a·G + c·b = b·G + c·a から <strong>(G − c)·(a − b) = 0</strong> への一般変形</td><td><strong>公理ゼロ</strong></td></tr>
+      <tr><td><code>zp_p_regular</code> / <code>zp_unit_regular</code> (M42-4〜5)</td><td><strong>ℤ_p の p-捻れなし性</strong>（p·c ≡ 0 mod p^{m+1} ⟹ c ≡ 0 mod p^m の成分計算）と<strong>単数の正則性</strong>（M36 の明示逆元で消去）</td><td>標準のみ（choice なし）</td></tr>
+      <tr><td><code>zp_lt_cancel</code> / <code>lubin_tate_unique_zp</code> (M42-6〜7)</td><td><strong>ℤ_p は消去仮説を満たす</strong>（n ≥ 2 で p^n − p は正則）⟹ <strong>ℤ_p 上の LT 方程式 F∘g = p·F + F^q の解は一次係数で一意</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">残り: 存在側（係数の再帰構成・誤差項の p-整除性）と 2 変数形式群法則 F_f(X,Y)。</p>
+  </div>
 
   <h3>M41: Lubin–Tate 一意性 — 第四層（IUT/LubinTateUnique.lean）</h3>
   <div class="box">
@@ -759,6 +771,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/PowerSeries.lean</code></td><td>M39: 形式冪級数環 R[[X]]——三角和交換による Cauchy 積の結合則（choice なし）</td></tr>
     <tr><td><code>IUT/Composition.lean</code></td><td>M40: 級数の合成 P∘Q——truncation・X∘Q = Q・低次係数公式（choice なし）</td></tr>
     <tr><td><code>IUT/LubinTateUnique.lean</code></td><td>M41: Lubin–Tate 一意性——係数の強帰納による解の一意性スキーマ（choice なし）</td></tr>
+    <tr><td><code>IUT/LubinTateZp.lean</code></td><td>M42: ℤ_p の消去仮説充足——p-捻れなし × 単数正則、LT 一意性の具体化（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

@@ -50,3 +50,4 @@ import IUT.Ring
 import IUT.PowerSeries
 import IUT.Composition
 import IUT.LubinTateUnique
+import IUT.LubinTateZp
