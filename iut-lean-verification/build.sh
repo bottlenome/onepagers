@@ -281,6 +281,13 @@ import IUT
 #print axioms IUT.psC_mul_coeff
 #print axioms IUT.rofNat_zp
 #print axioms IUT.freshman_zp
+#print axioms IUT.ringHom_rsum
+#print axioms IUT.psMap_mul
+#print axioms IUT.psMap_comp
+#print axioms IUT.psMono_mul
+#print axioms IUT.psMono_pow
+#print axioms IUT.psComp_mono_coeff
+#print axioms IUT.psComp_mono_coeff_zero
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

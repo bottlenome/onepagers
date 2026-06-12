@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M45 の形式化（追加検証）</h2>
+  <h2>M1〜M46 の形式化（追加検証）</h2>
+
+  <h3>M46: 冪級数の関手性とモノミアル代数 — 第九層（IUT/PSFunctor.lean）</h3>
+  <div class="box">
+    <p>誤差項を mod p で PS(ℤ/p) に落とす輸送装置と、X^p 合成の係数読み:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ringHom_rsum</code> / <code>ringHom_rpow</code> (M46-1)</td><td>環準同型は 0・有限和・冪を保つ（rsum 保存は<strong>公理ゼロ</strong>）</td><td>公理ゼロ〜標準</td></tr>
+      <tr><td><code>psMap_mul</code> / <code>psMap_comp</code> (M46-3)</td><td><strong>係数ごとの持ち上げ psMap φ : PS R → PS S が加法・乗法・冪・合成を全て保存</strong>——mod-p 還元で F∘g ↦ F̄∘ḡ となることの一般形</td><td>標準のみ（choice なし）</td></tr>
+      <tr><td><code>psMono_mul</code> / <code>psMono_pow</code> / <code>psComp_mono_coeff</code> (M46-4〜5)</td><td>モノミアル代数 X^a·X^b = X^{a+b}・(X^m)^k = X^{mk} と<strong>伸長公式</strong> (F∘X^m)_{mk} = F_k（m ∤ n では 0）</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">残り: char p の Frobenius 定理 F^p = F∘X^p → 誤差項整除性 → 係数の再帰構成（存在定理）。</p>
+  </div>
 
   <h3>M45: 新入生の夢 — 第八層（IUT/Freshman.lean）</h3>
   <div class="box">
@@ -811,6 +823,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/PadicDivision.lean</code></td><td>M43: p-進除算 zpDivP——ediv による全域構成・Frobenius 合同（choice なし）</td></tr>
     <tr><td><code>IUT/Binomial2.lean</code></td><td>M44: 可換環上の二変数二項定理——rofNat の半環準同型性・中間項の p-因子（choice なし）</td></tr>
     <tr><td><code>IUT/Freshman.lean</code></td><td>M45: 新入生の夢 (x+y)^p = x^p + y^p + p·c——環 → 級数 → ℤ_p 係数の三段（choice なし）</td></tr>
+    <tr><td><code>IUT/PSFunctor.lean</code></td><td>M46: 冪級数の関手性 psMap（加法・乗法・冪・合成の保存）・モノミアル代数・伸長公式（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
