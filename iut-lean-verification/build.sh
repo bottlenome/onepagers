@@ -439,6 +439,15 @@ import IUT
 #print axioms IUT.ltPow_low
 #print axioms IUT.ltPow_diag
 #print axioms IUT.lt2_rhs_split
+#print axioms IUT.rpow_add
+#print axioms IUT.lt2Sol
+#print axioms IUT.lt2Seg_stable
+#print axioms IUT.lt2Seg_eq_sol
+#print axioms IUT.lt2Seg_high
+#print axioms IUT.lt2Sol_div
+#print axioms IUT.lt2Sol_equation
+#print axioms IUT.lt2Sol_is_formal_group
+#print axioms IUT.lt_formal_group_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

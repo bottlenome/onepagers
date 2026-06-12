@@ -73,3 +73,4 @@ import IUT.FormalGroupErr
 import IUT.FormalGroupCongr
 import IUT.FormalGroupDecomp
 import IUT.FormalGroupDiag
+import IUT.FormalGroupExists
