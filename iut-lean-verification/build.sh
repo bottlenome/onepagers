@@ -701,6 +701,13 @@ import IUT
 #print axioms IUT.zpEval2_congr_points
 #print axioms IUT.zpEvalSeg_ps21Comp
 #print axioms IUT.zpEval_ps21Comp
+#print axioms IUT.zpEval_at_zero
+#print axioms IUT.zpEval_eq_at_zero
+#print axioms IUT.zpEval_ltIter_succ
+#print axioms IUT.zero_is_torsion
+#print axioms IUT.torsion_zero_iff
+#print axioms IUT.torsion_mono
+#print axioms IUT.torsion_le
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
