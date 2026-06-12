@@ -158,7 +158,19 @@
 </section>
 
 <section>
-  <h2>M1〜M71 の形式化（追加検証）</h2>
+  <h2>M1〜M72 の形式化（追加検証）</h2>
+
+  <h3>M72: 2 変数法則への 1 変数代入 — 逆元 [-1] 級数キャンペーン第一層（IUT/FormalGroupEval.lean）</h3>
+  <div class="box">
+    <p><strong>形式群の逆元 [-1] 級数キャンペーンの基盤</strong> — 2 変数級数 F(X,Y) に 1 変数級数 P(T)・Q(T) を代入した F(P(T), Q(T)) を構成し、打ち切り不変性と定数項・一次係数を検証:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>psPow_low</code> / <code>psPowPow_low</code> (M72-1, 2)</td><td><strong>1 変数冪の対角下消滅</strong> (Q^k)_n = 0（n &lt; k、Q(0) = 0）と冪積の低次消滅 (P^a·Q^b)_n = 0（n &lt; a + b）——M59 の f 特化版の一般化</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ps21Comp</code> / <code>ps21Comp_pad</code> (M72-3, 4)</td><td><strong>2 変数 → 1 変数代入</strong> F(P,Q)_n = Σ_{b,a≤n} F_{b,a}·(P^a Q^b)_n と打ち切り境界の付け替え（n + 1 → N、M70e の pad3 の 1 変数ミラー）</td><td>標準のみ</td></tr>
+      <tr><td><code>ps21Comp_zero_coeff</code> / <code>ps21Comp_lin</code> (M72-5)</td><td>定数項 = F₀₀（無条件）と<strong>一次係数 master 補題</strong> F(P,Q)₁ = F₀₁·P₁ + F₁₀·Q₁（4 項展開、(0,0)・(1,1) 項は消滅）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">逆元の本体（ι = ltSol(−1) と F(X, ι(X)) = 0 の検証）は次層以降。乗法性パッケージ・連鎖律・1 変数 LT 一意性（M49）との結合で完成する。</p>
+  </div>
 
   <h3>M71: Lubin–Tate 形式群法則の結合則 — 結合則キャンペーン最終層・完結（IUT/FormalGroupAssoc.lean）</h3>
   <div class="box">
@@ -1391,6 +1403,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FormalGroupLift.lean</code></td><td>M70d: lift の代入互換——lift の ps3Comp3 崩落・lift と ps2Comp2 の交換・座標の代入（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupComp3.lean</code></td><td>M70e: 連鎖律 CR3——(F(P,Q))∘(W₁,W₂,W₃) = F(P∘W⃗, Q∘W⃗)・五重和正規化（choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupAssoc.lean</code></td><td>M71: Lubin–Tate 形式群法則の結合則 F(F(X,Y),Z) = F(X,F(Y,Z))——結合則キャンペーン完結（choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupEval.lean</code></td><td>M72: 2 変数法則への 1 変数代入 ps21Comp——対角下消滅・pad・定数項/一次係数 master 補題（逆元キャンペーン第一層、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
