@@ -119,6 +119,7 @@ import IUT.RecRamified
 import IUT.EisensteinTower
 import IUT.EisensteinUpper
 import IUT.EisDomain
+import IUT.EisDomain2
 import IUT.EisEndoRigidity
 import IUT.FactorTheorem
 import IUT.LaurentCoeff

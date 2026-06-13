@@ -913,6 +913,17 @@ import IUT
 #print axioms IUT.pEval_bin
 #print axioms IUT.bin_roots_bound
 #print axioms IUT.eis_roots_bound
+#print axioms IUT.eisNeZeroAt_lambda_wrap_rev
+#print axioms IUT.eisDivLambda_spec
+#print axioms IUT.eisValDecompose
+#print axioms IUT.eis_valuation_exists
+#print axioms IUT.eis_lambda_pow_mul_witness
+#print axioms IUT.eis_lambda_pow_mul_ne_zero
+#print axioms IUT.eis_mul_neZeroAt_exists
+#print axioms IUT.eis_mul_ne_zero
+#print axioms IUT.eis_ne_zero_mul
+#print axioms IUT.eisDomain2Data
+#print axioms IUT.eisDomain2_nonempty
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
