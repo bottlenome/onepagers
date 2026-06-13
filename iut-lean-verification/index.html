@@ -828,7 +828,7 @@
 
   <h3>M67F: realification 実化と可除性 — 並行ブランチ（IUT/Realification.lean）</h3>
   <div class="box">
-    <p>Frobenioid 系譜の残り未達項目「realification」を ℚ≥0 係数・base 圏一点の範囲で解消——[FrdI] の F<sup>rlf</sup> の本質 = 可除性（パイロット対象の 1/2ℓ 等分型操作の土台）の機械検証（サブエージェント並行開発）:</p>
+    <p>Frobenioid 系譜の残り未達項目「realification」を ℚ≥0 係数・base 圏一点の範囲で解消（<strong>実数値 log-volume 理論＝順序完備性・連続性は現存</strong>）——[FrdI] の F<sup>rlf</sup> の本質 = 可除性（パイロット対象の 1/2ℓ 等分型操作の土台）の機械検証（サブエージェント並行開発）:</p>
     <table>
       <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
       <tr><td><code>NNQ</code> / <code>nnqAdd</code> / <code>nnqOfNat</code> (M67F-1)</td><td><strong>非負有理数 ℚ≥0 の Quot 自前構成</strong>——(a, b) = a/(b+1)（分母 b+1 で正値を型に内蔵）・交差積関係。加法の well-definedness は交差積恒等式一本（自由変数補題 nnq_cross）。可換モノイド法則と ι : ℕ → ℚ≥0 の加法性</td><td><strong>標準のみ（choice なし）</strong></td></tr>
@@ -1356,7 +1356,7 @@
       <tr><td><code>flt_unit</code> / <code>euler_pow</code> (M34-3〜4)</td><td><strong>古典形 Fermat</strong> a^{p−1} ≡ 1 (mod p) と <strong>Euler の定理の p 冪版</strong> p^{n+1} ∣ a^{p^n(p−1)} − 1（持ち上げ補題で反復昇格）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>teich_root_of_unity</code> / <code>teich_invertible</code> (M34-5〜6)</td><td><strong>ω(a)^{p−1} = 1</strong>（p ∤ a）と <strong>ω(a) は ℤ_p の単元</strong>（逆元 = ω(a)^{p−2} の明示構成）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">未形式化: μ_{p−1} ≅ (ℤ/p)^× の同定（巡回性）・O^× = μ × U^(1) の直積分解・Lubin–Tate。</p>
+    <p class="small">未形式化: μ_{p−1} ≅ (ℤ/p)^× の同定（巡回性）・Lubin–Tate。（O^× = μ × U^(1) の直積分解は M35 で解消済。）</p>
   </div>
 
   <h3>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（IUT/Teichmuller.lean）</h3>
@@ -1368,7 +1368,7 @@
       <tr><td><code>teich_step</code> / <code>teich</code> (M33-5〜6)</td><td><strong>整合性</strong> p^{n+1} ∣ a^{p^{n+1}} − a^{p^n}（基底 = FLT、帰納段 = 持ち上げ補題）と <strong>ω(a) = lim a^{p^n} : ℤ_p の実構成</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>teich_reduction</code> / <code>teich_mul</code> / <code>teich_frobenius</code> (M33-7〜9)</td><td><strong>剰余の復元</strong> ω(a) ≡ a (mod p)・<strong>乗法性</strong> ω(ab) = ω(a)ω(b)・ω(1) = 1・<strong>Frobenius 不変性</strong> ω(a^p) = ω(a)——Teichmüller 代表系が乗法的切断であること</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">未形式化: ω の像 = μ_{p−1}（1 の冪根群）の同定・O^× = μ × U^(1) の直積分解そのもの・Lubin–Tate。</p>
+    <p class="small">未形式化: ω の像 = μ_{p−1}（1 の冪根群）の巡回性同定・Lubin–Tate。（O^× = μ × U^(1) の直積分解そのものは M35 で解消済。）</p>
   </div>
 
   <h3>M32: Fermat の小定理の自前証明（IUT/Fermat.lean）</h3>
@@ -1418,7 +1418,7 @@
       <tr><td><code>unramifiedRec</code> / <code>unramifiedRec_kernel</code> / <code>unramifiedRec_level_surj</code> (M27-4〜6)</td><td><strong>不分岐局所相互法則の完全証明</strong>: rec = 完備化∘付値 : K^× → ẑ = Gal(K^ur/K)、<strong>核 = 単数群 O^×</strong>、<strong>各有限レベルへ全射</strong>（Frobenius の稠密性）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>LocalCFTData</code> / <code>unramifiedLocalCFT</code> (M27-7〜8)</td><td>LCFT の statement の構造化（相互写像・単射性・稠密像）と<strong>不分岐モデルによる充足</strong>（公理化なしの witness）</td><td>標準のみ</td></tr>
     </table>
-    <p class="small">未形式化: 分岐部分（O^× の構造論・Lubin–Tate 形式群）と rec の実際の Galois 群への同型性。本モジュールは M10 の <code>AbData</code>（G^ab が読めること）の不分岐方向の実証明にあたる。</p>
+    <p class="small">分岐部分は M87F（<code>RecRamified.lean</code>）でレベル1 witness（剰余依存性・乗法性・主単数核 U<sup>(1)</sup> ⊆ ker・忠実性）まで構成済み。未形式化として残るのは K<sup>×</sup> 全体からの貼り合わせ・全射性（Gal の分類）・Λₙ(n≥2) への作用と rec が実際の Galois 群へ同型を誘導する実証明。本モジュールは M10 の <code>AbData</code>（G^ab が読めること）の不分岐方向の実証明にあたる。</p>
   </div>
 
   <h3>M24〜M26: pro-対象・逆極限コンパクト性・有限和分解（IUT/ProObject.lean, LimitCompact.lean, SumDecomposition.lean）</h3>
