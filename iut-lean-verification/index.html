@@ -178,6 +178,11 @@
     <p><strong>柱B 剛性プログラムの全部品の組み立てによる分類の完成</strong>（hD : NoZeroDiv を法として、サブエージェント並行開発・統合）: choice なし添字関数 rootSeq（i < p−1 は共役 ω(i+1)λ・それ以外は t）・<strong>本丸1 <code>eis_root_meets_family</code>: Eisenstein 根は共役族と必ず交わる</strong>（回避すると p 個の相異なる根 → M96 eis_roots_bound に矛盾）・<strong>本丸2 <code>eis_torsion_classify_full</code>: t ∈ Λ₁ → t = 0 ∨ 共役族と交わる</strong>（排中律不使用）・<strong>本丸3 <code>endo_lambda_meets_family</code>: σ(λ) = ω(a)λ の構成的 ¬∀≠ 形</strong>・総括 <code>LambdaClassifyData</code>。正の ∃ 形は逆極限 O の等値判定が choice なしで不可能なため正直に対象外。<strong>柱B 剛性プログラム（M84F 下界 → M95 拘束 → M96 上界 → 本層組み立て）完結。</strong>全て標準公理のみ。</p>
   </div>
 
+  <h3>M99F: 具体的 VolumeTheory モデル — 柱D: インターフェースの非空性実証（IUT/VolumeModel.lean）</h3>
+  <div class="box">
+    <p><strong>VolumeTheory インターフェースが非空であることの完全検証</strong>（サブエージェント並行開発・統合）: <code>intVolumeTheory</code>（Region := Int, le := ≤, hull := max, vol := id）で 9 フィールド全証明 → VolumeTheory は inhabited。M97 の sumSq 閉形式/下界の Int 持ち上げ・具体 Skeleton で Cor312 充足可能性の sanity・総括 <code>VolumeModelData</code>（<code>no_multiradial_rep : True</code> の正直マーカー付き）。<strong>正直申告: MultiradialRep は構成していない = 定理3.11 は証明していない。</strong>本層はインターフェースの非空性・整合性の実証のみで、柱D 本丸は未形式化。全て標準公理のみ。</p>
+  </div>
+
   <h3>M97: 定理3.11 の前提インターフェース — 柱D 入口（IUT/Premises311.lean）</h3>
   <div class="box">
     <p><strong>柱B + 柱E の総括 witness を束ね、定理3.11 → 系3.12 → Szpiro の既存パイプラインに接続</strong>:</p>
@@ -1943,6 +1948,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/FactorTheorem.lean</code></td><td>M96: 因数定理——除算恒等式・根の個数 ≤ 次数・x^n = a の解 ≤ n・Eisenstein 根 ≤ p−1（柱B、choice なし）</td></tr>
     <tr><td><code>IUT/EisDomain2.lean</code></td><td>M96F: O の witness 付き整域性・第二段——λ 進付値分解・eis_mul_ne_zero・EisDomain2Data（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/Premises311.lean</code></td><td>M97: 定理3.11 の前提インターフェース——ssq = sumSq の輪・Theorem311Premises・パイプライン接続（柱D 入口、choice なし）</td></tr>
+    <tr><td><code>IUT/VolumeModel.lean</code></td><td>M99F: 具体的 VolumeTheory モデル——Int 模型で 9 公理充足・非空性実証（MultiradialRep は未構成と明記）（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/LambdaClassify.lean</code></td><td>M97F: Λ₁ と自己準同型の完全分類——根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/ThetaReflection.lean</code></td><td>M98: テータの反転対称性——J(Θ) = −Θ・J² = id・J = T on Θ（M89 合流）（柱E、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>

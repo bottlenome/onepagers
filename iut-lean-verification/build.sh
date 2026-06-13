@@ -931,6 +931,13 @@ import IUT
 #print axioms IUT.theorem311Premises
 #print axioms IUT.premises_exist
 #print axioms IUT.premises_then_szpiro
+#print axioms IUT.intVolumeTheory
+#print axioms IUT.intVolumeTheory_consistent
+#print axioms IUT.theta_volume_cube_bound
+#print axioms IUT.sumSq_closed_int
+#print axioms IUT.demoSkeleton_cor312
+#print axioms IUT.volumeModelData
+#print axioms IUT.volumeModelData_exists
 #print axioms IUT.eis_root_meets_family
 #print axioms IUT.eis_torsion_classify_full
 #print axioms IUT.endo_lambda_meets_family

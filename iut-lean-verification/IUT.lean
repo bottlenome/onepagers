@@ -140,6 +140,7 @@ import IUT.FormalGroupPointsMul2
 import IUT.FormalGroupPointsMul3
 import IUT.FormalGroupPointsAssoc
 import IUT.Premises311
+import IUT.VolumeModel
 import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
