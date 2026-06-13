@@ -52,6 +52,7 @@ import IUT.Composition
 import IUT.LubinTateUnique
 import IUT.LubinTateZp
 import IUT.PadicDivision
+import IUT.ZpDomain
 import IUT.Binomial2
 import IUT.Freshman
 import IUT.PSFunctor
@@ -124,6 +125,7 @@ import IUT.ThetaSeries
 import IUT.ThetaFunctional
 import IUT.ThetaGauss
 import IUT.TateQuotient
+import IUT.MonoThetaWitness
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
