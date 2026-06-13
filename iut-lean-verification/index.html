@@ -158,7 +158,25 @@
 </section>
 
 <section>
-  <h2>M1〜M89 の形式化（追加検証）</h2>
+  <h2>M1〜M90 の形式化（追加検証）</h2>
+
+  <h3>M90: 反復関数等式とガウス簿記 — 柱E・E5（IUT/ThetaGauss.lean）</h3>
+  <div class="box">
+    <p><strong>T^j = q^{j(j+1)/2}·u^j·(u ↦ q^j u) のガウス指数簿記</strong>——IUT の捻れ値 q^{j²/2l} 系簿記の形式版:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>tCoeff</code> / <code>tCoeff_one</code> (M90-2)</td><td>T の j 回反復の係数列（構造的再帰）——j = 1 で M89 の tThetaRep と一致（rfl 一発の検算）</td><td>標準のみ</td></tr>
+      <tr><td><code>tCoeff_eq</code> (M90-3)</td><td><strong>反復関数等式（本丸1）</strong> T^j(Θ) = (−1)^j Θ——M89 の theta_funeq_coeff を j 重否定 negPow ごしに帰納で持ち上げ</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tCoeff_shift</code> / <code>gauss_bridge</code> (M90-4)</td><td><strong>ガウス簿記（本丸2）</strong>——2m = 2i + 2jn − j(j−1) なら T^j(Θ)_m の uⁿ 係数 = Θ_i の u^{n−j} 係数。<strong>u^j 対角で降下量 = ガウス指数 j(j+1)/2</strong>。非線形の橋は gauss_bridge 一本に隔離</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>thetaIter_even</code> / <code>thetaIter_odd</code> / <code>theta_gauss</code> (M90-5, 6)</td><td>級数（Quot）レベルの閉形式 T^{2k}Θ = Θ・T^{2k+1}Θ = −Θ と<strong>対角ガウス値 = 1</strong>（2m = j(j+1) のとき u^j 係数 = (−1)^j·(−1)^j）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">Tate 点群 ℚ_p^×/q^ℤ（E6）・mono-theta witness（E7）は次層。</p>
+  </div>
+
+  <h3>M90F: Λ₁ の上界・第一段 — 柱B: Eisenstein 方程式への還元（IUT/EisensteinUpper.lean）</h3>
+  <div class="box">
+    <p><strong>「Λ₁ の非零元は全て t^{p−1} = −π の根」の条件付き完全証明</strong>（サブエージェント並行開発・統合）: <code>eisF_factor</code>（f(t) = t·(π + t^{p−1})）・<code>NoZeroDiv</code>（公理依存ゼロの述語）・<strong><code>eisTorsion_one_classify</code>: NoZeroDiv の下で t ∈ Λ₁ ⟹ t = 0 ∨ t^{p−1} = −π</strong>・λ と共役 ω(a)λ の根性（共役は無条件）・総括 <code>EisUpperData</code>。正直申告: O の整域性（hD）と根の個数 ≤ p−1（因数定理）は未形式化。全て標準公理のみ（choice なし）。</p>
+  </div>
 
   <h3>M89: テータの関数等式 — 柱E・E4（IUT/ThetaFunctional.lean）</h3>
   <div class="box">
@@ -1790,6 +1808,8 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/LaurentMonomial.lean</code></td><td>M88F: Laurent 単項式計算——u^c 倍 = シフト・u^a·u^b = u^{a+b}・u^c は単元（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/ThetaFunctional.lean</code></td><td>M89: テータの関数等式 q·u·Θ(q,qu) = −Θ(q,u)——作用素 T の係数公式・三角数の橋・再添字化（柱E E4、choice なし）</td></tr>
     <tr><td><code>IUT/EisensteinTower.lean</code></td><td>M89F: O の捻れ塔 Λₙ と Galois 加群構造——合成則・単調性・σ_ζ 保存・EisTorsionTowerData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaGauss.lean</code></td><td>M90: 反復関数等式とガウス簿記——T^j(Θ) = (−1)^jΘ・q-次数降下 j(j+1)/2・対角ガウス値 = 1（柱E E5、choice なし）</td></tr>
+    <tr><td><code>IUT/EisensteinUpper.lean</code></td><td>M90F: Λ₁ 上界・第一段——Eisenstein 方程式への還元・NoZeroDiv 条件付き分類・EisUpperData（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>

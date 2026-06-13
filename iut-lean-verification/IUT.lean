@@ -116,11 +116,13 @@ import IUT.RamifiedEntrance
 import IUT.EisensteinGalois
 import IUT.RecRamified
 import IUT.EisensteinTower
+import IUT.EisensteinUpper
 import IUT.LaurentCoeff
 import IUT.LaurentRing
 import IUT.LaurentMonomial
 import IUT.ThetaSeries
 import IUT.ThetaFunctional
+import IUT.ThetaGauss
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
