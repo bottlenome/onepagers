@@ -199,7 +199,7 @@
       <h3>グラフ（地図）の読み方</h3>
       <p><span class="k">●</span> 丸＝Lean モジュール &nbsp; <span class="k">→</span> 矢印＝「これが無いと成り立たない」依存 &nbsp;
       <span class="k">色</span>＝同じ柱のまとまり（クラスタ）。</p>
-      <p class="hint">柱の大きな丸を<b>タップで展開</b>／もう一度タップで折りたたみ。モジュールを<b>タップで詳細</b>。</p>
+      <p class="hint">柱の大きな丸を<b>タップで「柱の説明＋展開」</b>／もう一度タップで折りたたみ。モジュールを<b>タップで詳細</b>。</p>
     </div></div>
 
     <div class="gstep"><span class="gn">6</span><div class="gc">
@@ -434,11 +434,31 @@
     showNode(id);
   }
 
-  // single tap: expand a collapsed pillar, collapse an expanded one, or show module detail
+  // pillar (cluster) detail popup — what the cluster is + its member modules
+  function showPillar(code) {
+    const p = pillars[code]; if (!p) return;
+    const mods = graph.nodes.filter(n => n.pillar === code).sort((a, b) => b.decl_count - a.decl_count);
+    body.innerHTML =
+      `<h3>${p.label}</h3>` +
+      `<div class="ms">柱（クラスタ）· モジュール ${mods.length}</div>` +
+      `<span class="chip" style="background:${p.color}22;color:${p.color};border:1px solid ${p.color}66">柱</span>` +
+      (p.plain || p.blurb ? `<div class="summary">${p.plain || p.blurb}</div>` : '') +
+      `<div style="height:6px;border-radius:3px;background:#334155;overflow:hidden;margin:0.7rem 0 0.35rem">` +
+        `<i style="display:block;height:100%;width:${p.progress_pct||0}%;background:${p.color};border-radius:3px"></i></div>` +
+      `<div style="color:#94a3b8;font-size:0.82rem">形式化 ${p.progress_pct||0}%${p.status ? ' · ' + p.status : ''}</div>` +
+      (mods.length ? `<div class="sec">この柱のモジュール ${mods.length}（タップで詳細）</div>` +
+        `<div class="dep">${mods.map(m => `<code data-id="${m.id}">${m.label}</code>`).join(' ')}</div>` : '');
+    body.querySelectorAll('code[data-id]').forEach(c => c.onclick = () => focusNode(c.dataset.id));
+    panel.classList.add('open'); backdrop.classList.add('open');
+    panel.scrollTop = 0;
+  }
+
+  // single tap: expand a collapsed pillar (and show its detail), collapse an expanded one, or show module detail
   cy.on('tap', 'node', evt => {
     const n = evt.target;
     if (api && n.hasClass('cy-expand-collapse-collapsed-node')) {
       try { api.expand(n); } catch (e) {}              // expand only the tapped pillar
+      showPillar(n.id().replace(/^P_/, ''));            // …and explain what the cluster is
       return;
     }
     if (n.isParent()) {
