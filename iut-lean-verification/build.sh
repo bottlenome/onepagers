@@ -1020,6 +1020,17 @@ import IUT
 #print axioms IUT.mixed_pilot_division
 #print axioms IUT.mixed_fin_zero_divisible
 #print axioms IUT.mixed_single_not_divisible
+#print axioms IUT.ltEnd_gAdd_comm
+#print axioms IUT.ltEnd_gAdd_assoc
+#print axioms IUT.ltEnd_gMul_comm
+#print axioms IUT.ltEnd_gMul_assoc
+#print axioms IUT.ltEnd_left_distrib
+#print axioms IUT.ltEnd_right_distrib
+#print axioms IUT.ltEnd_gAdd_zero
+#print axioms IUT.ltEnd_gAdd_neg
+#print axioms IUT.ltEnd_gMul_one
+#print axioms IUT.ltEndRingData
+#print axioms IUT.ltEndRing_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

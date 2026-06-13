@@ -158,7 +158,21 @@
 </section>
 
 <section>
-  <h2>M1〜M98 の形式化（追加検証）</h2>
+  <h2>M1〜M100 の形式化（追加検証）</h2>
+
+  <h3>M100: End(F) を環として閉じる — 柱B B-4（issue #36）（IUT/FormalGroupEndRing.lean）</h3>
+  <div class="box">
+    <p><strong>M76/M76F が「End(F) を環として閉じる一般論は未形式化」と正直申告していた穴の解消</strong>（issue #36 / 柱B B-4）: 自己準同型環 End(F) の二つの自然な演算——形式群加法 g ⊕ h := F(g(X), h(X)) = <code>ps21Comp F g h</code> と合成 g ⊙ h := g∘h = <code>psComp g h</code>——が、Lubin–Tate 像 {[a] : a ∈ ℤ_p}（= End(F)、Lubin–Tate 主定理）の上で<strong>可換環の全公理を満たす</strong>ことを、M76 の閉性（[a]⊕[b]=[a+b]・[a]⊙[b]=[ab]）と ℤ_p 環公理から機械検証:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ltEnd_gAdd_comm</code> / <code>ltEnd_gAdd_assoc</code> (M100-1)</td><td>⊕（形式群加法）の<strong>可換性・結合性</strong>（像の上。F の可換・結合を経由せず M76 + ℤ_p 加法公理で直接）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ltEnd_gMul_comm</code> / <code>ltEnd_gMul_assoc</code> (M100-2)</td><td>⊙（合成）の<strong>可換性・結合性</strong>（合成は一般に非可換だが LT 像では ab = ba で可換）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ltEnd_left_distrib</code> / <code>ltEnd_right_distrib</code> (M100-3)</td><td><strong>分配律</strong> [a]∘([b]⊕[c]) = ([a]∘[b])⊕([a]∘[c])——合成と形式群加法を繋ぐ環の本質的公理（M76 加法・乗法の合流: [a(b+c)] = [ab+ac]）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>ltEnd_gAdd_zero</code> / <code>ltEnd_gAdd_neg</code> / <code>ltEnd_gMul_one</code> (M100-4)</td><td>加法単位（0 級数）・逆元（[−a]）・乗法単位（X）の環公理</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>LTEndRingData</code> / <code>ltEndRing_exists</code> (M100-5)</td><td><strong>総括 witness</strong>——End(F) 像が ⊕/⊙ で可換環をなし、ι : ℤ_p → End(F)、a ↦ [a] が +/×/0/1 を ⊕/⊙/0級数/X として実現する<strong>単射準同型</strong>（ℤ_p ≅ End(F) 像の環同型）であることを束ねた純レコード</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">正直な申告: 像 {[a]} が End(F) の<strong>全体</strong>を尽くすこと（ℤ_p → End(F) の全射性）と、[a] の F-準同型性 [a](F(X,Y)) = F([a]X, [a]Y) は本モジュールの対象外（M76F の申告と同じく別項目）。本モジュールが閉じるのは像の上での環構造である。全て選択公理不使用。</p>
+  </div>
 
   <h3>M98F: テータ群 mod l — 柱E: mono-theta 環境の l-捻れ骨格（IUT/ThetaGroupMod.lean）</h3>
   <div class="box">
@@ -1957,6 +1971,7 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/LambdaClassify.lean</code></td><td>M97F: Λ₁ と自己準同型の完全分類——根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/ThetaReflection.lean</code></td><td>M98: テータの反転対称性——J(Θ) = −Θ・J² = id・J = T on Θ（M89 合流）（柱E、choice なし）</td></tr>
     <tr><td><code>IUT/ThetaGroupMod.lean</code></td><td>M98F: テータ群 mod l——Heisenberg 商群・mod-l cyclotomic rigidity・切断の 2l 周期性（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/FormalGroupEndRing.lean</code></td><td>M100: End(F) を環として閉じる（柱B B-4）——形式群加法 ⊕・合成 ⊙ が LT 像上で可換環公理を充足・ι:ℤ_p≅End(F) 像の単射準同型・LTEndRingData（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
