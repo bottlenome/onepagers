@@ -875,6 +875,17 @@ import IUT
 #print axioms IUT.cube_le_ssq
 #print axioms IUT.gaussianVolume
 #print axioms IUT.gaussian_volume_exists
+#print axioms IUT.zres
+#print axioms IUT.res1_unit_not_dvd
+#print axioms IUT.res1_mul_congr
+#print axioms IUT.recInertia_mul
+#print axioms IUT.recInertia_principal
+#print axioms IUT.recInertia_lambda
+#print axioms IUT.recLevelOne_mul_unram
+#print axioms IUT.recLevelOne_mul_ram
+#print axioms IUT.recLevelOne_ker
+#print axioms IUT.recGluing
+#print axioms IUT.recGluing_exists
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

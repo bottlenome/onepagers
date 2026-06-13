@@ -127,6 +127,7 @@ import IUT.ThetaGauss
 import IUT.TateQuotient
 import IUT.MonoThetaWitness
 import IUT.GaussianVolume
+import IUT.RecGluing
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
