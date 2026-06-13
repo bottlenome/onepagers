@@ -924,6 +924,13 @@ import IUT
 #print axioms IUT.eis_ne_zero_mul
 #print axioms IUT.eisDomain2Data
 #print axioms IUT.eisDomain2_nonempty
+#print axioms IUT.ssq_eq_sumSq
+#print axioms IUT.sumSq_closed
+#print axioms IUT.cube_le_sumSq
+#print axioms IUT.sumSq_tri_stri
+#print axioms IUT.theorem311Premises
+#print axioms IUT.premises_exist
+#print axioms IUT.premises_then_szpiro
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
