@@ -1031,6 +1031,14 @@ import IUT
 #print axioms IUT.ltEnd_gMul_one
 #print axioms IUT.ltEndRingData
 #print axioms IUT.ltEndRing_exists
+#print axioms IUT.ltAct_zero
+#print axioms IUT.ltAct_one
+#print axioms IUT.ltSol_comm_iter
+#print axioms IUT.ltAct_preserves_torsion
+#print axioms IUT.ltAct_mul
+#print axioms IUT.ltAct_add
+#print axioms IUT.ltTorsionModule
+#print axioms IUT.ltTorsionModule_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -146,3 +146,4 @@ import IUT.DecompositionInertia
 import IUT.Realification
 import IUT.ArchimedeanPlace
 import IUT.FormalGroupEndRing
+import IUT.TorsionModule

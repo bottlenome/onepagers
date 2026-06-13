@@ -55,6 +55,7 @@ PILLAR = {
     "EisensteinTower": "B", "EisensteinUpper": "B", "EisDomain": "B",
     "EisDomain2": "B", "EisEndoRigidity": "B", "FactorTheorem": "B",
     "LambdaClassify": "B", "RecGluing": "B", "FormalGroupEndRing": "B",
+    "TorsionModule": "B",
     # 柱C（Lubin–Tate・形式群・Frobenioid）
     "Ring": "C", "PowerSeries": "C", "Composition": "C", "LubinTateUnique": "C",
     "LubinTateZp": "C", "PadicDivision": "C", "Binomial2": "C", "Freshman": "C",
@@ -158,6 +159,7 @@ def parse_module(name):
         title = title or ftitle
     if title is None:
         title = name
+    title = " ".join(title.split())  # 改行・連続空白を 1 個に正規化
     # flags
     choice_free = ("選択公理不使用" in text) or ("choice なし" in text)
     honest = any(k in header for k in ("正直", "未形式化", "対象外"))
