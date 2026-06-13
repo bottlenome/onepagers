@@ -6,7 +6,7 @@
 |------|------|
 | 種別 | doc / formal-verification |
 | 状態 | done（骨格の形式検証完了） |
-| メインファイル | index.html（検証レポート）+ IUT/*.lean（Lean ソース） |
+| メインファイル | index.html（証明依存グラフ＝入口）+ report.html（詳細レポート）+ IUT/*.lean（Lean ソース） |
 | 関連 | teichmuller/（解説）、verify-teichmuller-errors/（数値検証） |
 
 `teichmuller/pdf/` の原論文6本を一次資料として、宇宙際タイヒミュラー論（IUT）の
@@ -182,7 +182,8 @@ Frobenioid の圏論的実体）は mathlib 規模の数論幾何ライブラリ
 
 ```
 iut-lean-verification/
-├── index.html           # 検証レポート（ワンページャー）
+├── index.html           # 入口：Cytoscape 証明依存グラフ（スマホ対応・タップで柱を展開／モジュール詳細はポップアップ／詳細レポートも同一ページ内ポップアップ表示）
+├── report.html          # 詳細レポート（ワンページャー本文）
 ├── dashboard.md         # このファイル
 ├── build.sh             # ビルド+公理チェック
 ├── lakefile.toml        # Lean パッケージ定義（mathlib 非依存）

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IUT Lean 形式検証 — 証明依存グラフ</title>
+<title>IUT 系3.12 Lean 形式検証 — 証明依存グラフ</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -11,46 +11,73 @@
     background: #0f172a; color: #e2e8f0; overflow: hidden;
   }
   #top {
-    position: fixed; top: 0; left: 0; right: 0; height: 58px; z-index: 20;
-    display: flex; align-items: center; gap: 1rem; padding: 0 1.1rem;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem;
     background: rgba(15,23,42,0.92); border-bottom: 1px solid #1e293b;
     backdrop-filter: blur(6px);
   }
-  #top h1 { font-size: 1.05rem; color: #f1f5f9; white-space: nowrap; }
-  #top .sub { color: #94a3b8; font-size: 0.78rem; }
-  #stats { margin-left: auto; font-size: 0.78rem; color: #7dd3fc; white-space: nowrap; }
+  #top h1 { font-size: 1rem; color: #f1f5f9; white-space: nowrap; }
+  #top .sub { color: #94a3b8; font-size: 0.76rem; white-space: nowrap; }
+  #stats { margin-left: auto; font-size: 0.74rem; color: #7dd3fc; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; }
   #stats b { color: #bbf7d0; }
   .btn {
     background: #1e293b; border: 1px solid #334155; color: #cbd5e1;
-    padding: 0.32rem 0.7rem; border-radius: 8px; font-size: 0.78rem; cursor: pointer;
+    padding: 0.34rem 0.7rem; border-radius: 8px; font-size: 0.76rem; cursor: pointer;
+    white-space: nowrap; flex: none; text-decoration: none; display: inline-block;
   }
   .btn:hover { border-color: #60a5fa; color: #fff; }
   .btn.accent { background: #0c2536; border-color: #0ea5e9; color: #7dd3fc; font-weight: 600; }
-  #cy { position: fixed; top: 58px; left: 0; right: 0; bottom: 0; }
-  /* legend */
-  #legend {
-    position: fixed; top: 70px; left: 12px; z-index: 15; width: 232px;
-    background: rgba(30,41,59,0.93); border: 1px solid #334155; border-radius: 12px;
-    padding: 0.8rem 0.9rem; font-size: 0.76rem; backdrop-filter: blur(6px);
+  #cy { position: fixed; top: 50px; left: 0; right: 0; bottom: 0; }
+
+  /* overview + legend (collapsible, works on mobile) */
+  #info {
+    position: fixed; top: 60px; left: 10px; z-index: 15; width: 250px;
+    max-width: calc(100% - 20px);
+    background: rgba(30,41,59,0.95); border: 1px solid #334155; border-radius: 12px;
+    font-size: 0.76rem; backdrop-filter: blur(6px); overflow: hidden;
   }
-  #legend h2 { font-size: 0.82rem; color: #7dd3fc; margin-bottom: 0.55rem; }
-  .lg { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.55rem; cursor: pointer; }
-  .lg .sw { width: 13px; height: 13px; border-radius: 3px; flex: none; }
+  #infoHead {
+    display: flex; align-items: center; gap: 0.4rem; cursor: pointer;
+    padding: 0.6rem 0.8rem; font-weight: 600; color: #7dd3fc; user-select: none;
+  }
+  #infoHead .chev { margin-left: auto; transition: transform 0.2s; color: #94a3b8; }
+  #info.collapsed #infoHead .chev { transform: rotate(-90deg); }
+  #infoBody { padding: 0 0.8rem 0.8rem; max-height: 65vh; overflow-y: auto; }
+  #info.collapsed #infoBody { display: none; }
+  #infoBody .lead { color: #cbd5e1; line-height: 1.6; margin-bottom: 0.7rem; }
+  #infoBody .lead b { color: #f1f5f9; }
+  #infoBody .how { color: #94a3b8; line-height: 1.6; margin-bottom: 0.8rem; font-size: 0.72rem; }
+  #infoBody .how .k { color: #7dd3fc; }
+  #infoBody h2 { font-size: 0.74rem; color: #7dd3fc; margin: 0.2rem 0 0.5rem; }
+  .lg { display: flex; align-items: flex-start; gap: 0.45rem; margin-bottom: 0.55rem; cursor: pointer; }
+  .lg .sw { width: 13px; height: 13px; border-radius: 3px; flex: none; margin-top: 2px; }
   .lg .nm { flex: 1; color: #e2e8f0; }
-  .lg .bar { height: 5px; border-radius: 3px; background: #334155; margin-top: 2px; overflow: hidden; }
+  .lg .bar { height: 5px; border-radius: 3px; background: #334155; margin-top: 3px; overflow: hidden; }
   .lg .bar i { display: block; height: 100%; border-radius: 3px; }
   .lg .pc { color: #94a3b8; font-size: 0.68rem; }
   .lg.dim { opacity: 0.35; }
-  #hint { margin-top: 0.4rem; color: #64748b; font-size: 0.68rem; line-height: 1.4; }
-  /* side panel */
+
+  /* detail popup (modal, not a page transition) */
+  #backdrop {
+    position: fixed; inset: 0; z-index: 30; background: rgba(2,6,23,0.66);
+    display: none; backdrop-filter: blur(2px);
+  }
+  #backdrop.open { display: block; }
   #panel {
-    position: fixed; top: 58px; right: 0; bottom: 0; width: 360px; z-index: 18;
-    background: #0c1626; border-left: 1px solid #1e293b; padding: 1.1rem 1.2rem;
-    overflow-y: auto; transform: translateX(100%); transition: transform 0.25s; }
-  #panel.open { transform: translateX(0); }
-  #panel .close { float: right; cursor: pointer; color: #64748b; font-size: 1.1rem; }
+    position: fixed; z-index: 31; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.96);
+    width: min(440px, calc(100% - 24px)); max-height: 86vh; overflow-y: auto;
+    background: #0c1626; border: 1px solid #1e293b; border-radius: 16px;
+    padding: 1.2rem 1.3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    opacity: 0; pointer-events: none; transition: opacity 0.18s, transform 0.18s;
+  }
+  #panel.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+  #panel .close {
+    position: absolute; top: 0.7rem; right: 0.9rem; cursor: pointer;
+    color: #64748b; font-size: 1.3rem; line-height: 1; z-index: 2;
+  }
   #panel .close:hover { color: #fff; }
-  #panel h3 { font-size: 1.15rem; color: #f1f5f9; margin-bottom: 0.2rem; word-break: break-word; }
+  #panel h3 { font-size: 1.15rem; color: #f1f5f9; margin-bottom: 0.2rem; padding-right: 1.6rem; word-break: break-word; }
   #panel .ms { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.8rem; }
   .chip { display: inline-block; font-size: 0.72rem; padding: 0.15rem 0.6rem; border-radius: 999px; margin: 0.15rem 0.2rem 0.15rem 0; }
   .badge { display: inline-block; font-size: 0.72rem; padding: 0.18rem 0.6rem; border-radius: 999px; margin: 0.2rem 0.25rem 0.2rem 0; }
@@ -63,10 +90,41 @@
   #panel a:hover { text-decoration: underline; }
   #panel .dep { color: #94a3b8; font-size: 0.8rem; line-height: 1.7; }
   #panel .dep code { background: #1e293b; padding: 0.05rem 0.35rem; border-radius: 4px; color: #cbd5e1; cursor: pointer; }
+
+  /* full report popup (iframe, stays in page) */
+  #reportModal {
+    position: fixed; inset: 0; z-index: 40; display: none;
+    background: rgba(2,6,23,0.72); backdrop-filter: blur(2px);
+  }
+  #reportModal.open { display: block; }
+  #reportBox {
+    position: absolute; inset: 3vh 2vw; background: #0f172a;
+    border: 1px solid #1e293b; border-radius: 14px; overflow: hidden;
+    display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+  }
+  #reportBar {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.9rem;
+    background: #0c1626; border-bottom: 1px solid #1e293b; flex: none;
+  }
+  #reportBar .t { font-size: 0.86rem; color: #f1f5f9; font-weight: 600; }
+  #reportBar .close { margin-left: auto; cursor: pointer; color: #94a3b8; font-size: 1.3rem; line-height: 1; }
+  #reportBar .close:hover { color: #fff; }
+  #reportFrame { flex: 1; width: 100%; border: 0; background: #0f172a; }
+
+  /* floating reset (re-fit + collapse) */
+  #reset {
+    position: fixed; right: 14px; bottom: 16px; z-index: 16;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(30,41,59,0.95); border: 1px solid #334155; color: #cbd5e1;
+    font-size: 1.1rem; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  }
+  #reset:hover { border-color: #60a5fa; color: #fff; }
+
   #err { position: fixed; inset: 0; display: none; place-items: center; text-align: center; padding: 2rem; }
   #err a { color: #38bdf8; }
   @media (max-width: 720px) {
-    #legend { display: none; } #panel { width: 100%; } #top .sub { display: none; }
+    #top h1 { font-size: 0.92rem; } #top .sub { display: none; }
+    #stats { font-size: 0.66rem; max-width: 40vw; }
   }
 </style>
 </head>
@@ -74,24 +132,50 @@
 <div id="top">
   <h1>IUT 系3.12 Lean 形式検証</h1>
   <span class="sub">証明依存グラフ</span>
-  <button class="btn" id="expandAll">全展開</button>
-  <button class="btn" id="collapseAll">柱に折りたたむ</button>
-  <button class="btn" id="fit">全体表示</button>
   <span id="stats"></span>
-  <a class="btn accent" href="report.html">詳細レポート →</a>
+  <button class="btn accent" id="openReport">📄 詳細</button>
 </div>
 
-<div id="legend">
-  <h2>柱（クリックで絞り込み）</h2>
-  <div id="legendItems"></div>
-  <div id="hint">ノード = Lean モジュール / 矢印 = import 依存。<br>柱をダブルクリックで展開・折りたたみ。ノードクリックで詳細。</div>
+<div id="info">
+  <div id="infoHead">📖 このグラフについて <span class="chev">▾</span></div>
+  <div id="infoBody">
+    <div class="lead">
+      Mochizuki <b>IUT 系3.12</b> の証明を <b>Lean4</b> で形式検証した
+      「<b>依存グラフ</b>」です。どのモジュールが何に依存し、証明がどこまで
+      機械チェック済みかが一目で分かります。
+    </div>
+    <div class="how">
+      <span class="k">●</span> Lean モジュール &nbsp; <span class="k">→</span> import 依存 &nbsp;
+      <span class="k">色</span> 証明の柱<br>
+      丸（柱）を<b>タップで展開</b>、もう一度タップで折りたたみ。
+      モジュールを<b>タップで詳細</b>。
+    </div>
+    <h2>柱（タップで絞り込み）</h2>
+    <div id="legendItems"></div>
+  </div>
 </div>
 
 <div id="cy"></div>
 
-<div id="panel">
+<button id="reset" title="全体表示にもどす">⤢</button>
+
+<!-- node detail popup -->
+<div id="backdrop"></div>
+<div id="panel" role="dialog" aria-modal="true">
   <span class="close" id="panelClose">✕</span>
   <div id="panelBody"></div>
+</div>
+
+<!-- full report popup -->
+<div id="reportModal">
+  <div id="reportBox">
+    <div id="reportBar">
+      <span class="t">📄 詳細レポート</span>
+      <a class="btn" id="reportNewTab" href="report.html" target="_blank" rel="noopener">新しいタブで開く ↗</a>
+      <span class="close" id="reportClose">✕</span>
+    </div>
+    <iframe id="reportFrame" title="詳細レポート" loading="lazy"></iframe>
+  </div>
 </div>
 
 <div id="err">
@@ -126,8 +210,7 @@
 
   // headline stats
   document.getElementById('stats').innerHTML =
-    `<b>${graph.module_count}</b> モジュール · 検証済み定理 <b>${graph.verified_theorem_total}</b> · ` +
-    `choice-free <b>${graph.choice_free_count}</b> · sorry なし`;
+    `<b>${graph.module_count}</b> モジュール · 定理 <b>${graph.verified_theorem_total}</b> · sorry なし`;
 
   // ---- build cytoscape elements (compound: pillar parents + module children) ----
   const usedPillars = [...new Set(graph.nodes.map(n => n.pillar))];
@@ -194,7 +277,12 @@
   if (api) { setTimeout(() => { try { api.collapseAll(); cy.fit(null, 40); } catch (e) {} }, 120); }
   else { cy.fit(null, 40); }
 
-  // ---- legend ----
+  // ---- overview / legend ----
+  const info = document.getElementById('info');
+  document.getElementById('infoHead').onclick = () => info.classList.toggle('collapsed');
+  // start collapsed on small screens so it doesn't cover the graph
+  if (window.matchMedia('(max-width: 720px)').matches) info.classList.add('collapsed');
+
   const legendItems = document.getElementById('legendItems');
   let activePillar = null;
   usedPillars.sort((a, b) => (a === 'core' ? -1 : b === 'core' ? 1 : a.localeCompare(b)));
@@ -227,10 +315,13 @@
     legendItems.appendChild(row);
   });
 
-  // ---- side panel ----
+  // ---- node detail popup (modal) ----
   const panel = document.getElementById('panel');
+  const backdrop = document.getElementById('backdrop');
   const body = document.getElementById('panelBody');
-  document.getElementById('panelClose').onclick = () => panel.classList.remove('open');
+  function closePanel() { panel.classList.remove('open'); backdrop.classList.remove('open'); cy.elements().removeClass('hl'); }
+  document.getElementById('panelClose').onclick = closePanel;
+  backdrop.onclick = closePanel;
 
   function showNode(id) {
     const n = nodeById[id]; if (!n) return;
@@ -261,7 +352,8 @@
       (deps.length ? `<div class="sec">依存（import）${deps.length}</div><div class="dep">${deps.map(d => `<code data-id="${d}">${d}</code>`).join(' ')}</div>` : '') +
       (dependents.length ? `<div class="sec">被依存 ${dependents.length}</div><div class="dep">${dependents.map(d => `<code data-id="${d}">${d}</code>`).join(' ')}</div>` : '');
     body.querySelectorAll('code[data-id]').forEach(c => c.onclick = () => focusNode(c.dataset.id));
-    panel.classList.add('open');
+    panel.classList.add('open'); backdrop.classList.add('open');
+    panel.scrollTop = 0;
   }
 
   function focusNode(id) {
@@ -276,24 +368,46 @@
     showNode(id);
   }
 
+  // single tap: expand a collapsed pillar, collapse an expanded one, or show module detail
   cy.on('tap', 'node', evt => {
     const n = evt.target;
-    if (n.isParent() || n.hasClass('cy-expand-collapse-collapsed-node')) return; // handled by dbltap
+    if (api && n.hasClass('cy-expand-collapse-collapsed-node')) {
+      try { api.expand(n); } catch (e) {}              // expand only the tapped pillar
+      return;
+    }
+    if (n.isParent()) {
+      if (api) { try { api.collapse(n.children()); } catch (e) {} }  // tap pillar body to fold it back
+      return;
+    }
     cy.elements().removeClass('hl');
     n.addClass('hl'); n.connectedEdges().addClass('hl'); n.neighborhood().addClass('hl');
     showNode(n.id());
   });
-  cy.on('dbltap', 'node', evt => {
-    const n = evt.target;
-    if (!api) return;
-    if (n.hasClass('cy-expand-collapse-collapsed-node')) { try { api.expand(n); } catch (e) {} }
-    else if (n.isParent()) { try { api.collapse(n.children()); } catch (e) {} }
-  });
   cy.on('tap', evt => { if (evt.target === cy) { cy.elements().removeClass('hl'); } });
 
-  document.getElementById('expandAll').onclick = () => { if (api) { try { api.expandAll(); } catch (e) {} } };
-  document.getElementById('collapseAll').onclick = () => { if (api) { try { api.collapseAll(); } catch (e) {} } };
-  document.getElementById('fit').onclick = () => cy.animate({ fit: { padding: 40 } }, { duration: 300 });
+  // ---- full report popup (iframe, no page transition) ----
+  const reportModal = document.getElementById('reportModal');
+  const reportFrame = document.getElementById('reportFrame');
+  document.getElementById('openReport').onclick = () => {
+    if (!reportFrame.src) reportFrame.src = 'report.html';
+    reportModal.classList.add('open');
+  };
+  const closeReport = () => reportModal.classList.remove('open');
+  document.getElementById('reportClose').onclick = closeReport;
+  reportModal.onclick = (e) => { if (e.target === reportModal) closeReport(); };
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closePanel(); closeReport(); }
+  });
+
+  // ---- floating reset ----
+  document.getElementById('reset').onclick = () => {
+    if (api) { try { api.collapseAll(); } catch (e) {} }
+    activePillar = null;
+    cy.elements().removeClass('faded');
+    document.querySelectorAll('.lg').forEach(l => l.classList.remove('dim'));
+    cy.animate({ fit: { padding: 40 } }, { duration: 300 });
+  };
 })();
 </script>
 </body>
