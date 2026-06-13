@@ -1,4 +1,4 @@
-# IUT 系3.12 の Lean 形式検証プロジェクト
+# IUT の Lean 形式検証プロジェクト（結論=系3.12 の論争を機械判定）
 
 ## 概要
 
@@ -6,11 +6,13 @@
 |------|------|
 | 種別 | doc / formal-verification |
 | 状態 | done（骨格の形式検証完了） |
-| メインファイル | index.html（検証レポート）+ IUT/*.lean（Lean ソース） |
+| メインファイル | index.html（証明依存グラフ＝入口）+ report.html（詳細レポート）+ IUT/*.lean（Lean ソース） |
 | 関連 | teichmuller/（解説）、verify-teichmuller-errors/（数値検証） |
 
-`teichmuller/pdf/` の原論文6本を一次資料として、宇宙際タイヒミュラー論（IUT）の
-系3.12 をめぐる論争の形式骨格を Lean 4 で公理化し、正しさ/間違いを機械検証した。
+`teichmuller/pdf/` の原論文6本を一次資料として、宇宙際タイヒミュラー論（IUT）全体の
+土台（柱A〜E）を Lean 4 で下から積み上げ、その結論の要である系3.12 をめぐる論争の
+形式骨格を公理化して、正しさ/間違いを機械判定した。系3.12 はスコープの全体ではなく、
+ABC予想に届く決定的な不等式＝論争の係争点として位置づく。
 
 ## 形式検証の結論（二分法、全定理 Lean 検証済み）
 
@@ -182,7 +184,8 @@ Frobenioid の圏論的実体）は mathlib 規模の数論幾何ライブラリ
 
 ```
 iut-lean-verification/
-├── index.html           # 検証レポート（ワンページャー）
+├── index.html           # 入口：Cytoscape 証明依存グラフ（スマホ対応・タップで柱を展開／モジュール詳細はポップアップ／詳細レポートも同一ページ内ポップアップ表示）
+├── report.html          # 詳細レポート（ワンページャー本文）
 ├── dashboard.md         # このファイル
 ├── build.sh             # ビルド+公理チェック
 ├── lakefile.toml        # Lean パッケージ定義（mathlib 非依存）
