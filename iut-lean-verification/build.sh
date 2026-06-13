@@ -949,6 +949,15 @@ import IUT
 #print axioms IUT.theta_refl_coeff
 #print axioms IUT.theta_refl
 #print axioms IUT.theta_refl_eq_funeq
+#print axioms IUT.thetaRelMod_mul
+#print axioms IUT.thetaGrpMod
+#print axioms IUT.theta_comm_mod
+#print axioms IUT.mono_theta_cyclotomic_rigidity_mod
+#print axioms IUT.thetaSectionMod_mul
+#print axioms IUT.tri_period_dvd
+#print axioms IUT.thetaSectionMod_period
+#print axioms IUT.thetaGroupModData
+#print axioms IUT.thetaGroupMod_exists
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

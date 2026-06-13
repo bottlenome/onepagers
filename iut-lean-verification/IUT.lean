@@ -132,6 +132,7 @@ import IUT.ThetaReflection
 import IUT.ThetaGauss
 import IUT.TateQuotient
 import IUT.MonoThetaWitness
+import IUT.ThetaGroupMod
 import IUT.GaussianVolume
 import IUT.RecGluing
 import IUT.FormalGroupPointsLaw
