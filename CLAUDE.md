@@ -16,6 +16,12 @@
 - 既存プロジェクト変更時: `<project>/dashboard.md` の機能リストや説明が現状と一致しているか確認
 - 説明文の変更時: ルート `dashboard.md` のテーブルとルート `index.html` のカードの両方を同期
 
+### iut-lean-verification の証明グラフ
+
+- 入口ページは `iut-lean-verification/index.html`（Cytoscape の依存グラフ）、詳細レポートは `report.html`。
+- **IUT モジュール追加・依存変更時**は `cd iut-lean-verification && python3 tools/gen_graph.py` を再実行して `graph.json` を再生成しコミットする。
+- 新規モジュールの柱（pillar）割当は `tools/gen_graph.py` の `PILLAR` 辞書に追記。文献PDFリンク・capstone/hub 注釈・柱の進捗率は `graph-meta.json` を手動更新する（柱進捗率は `dashboard.md` の証明率表に整合させる）。
+
 ## ゲーム開発の設計指針（櫻井政博メソッド）
 
 ゲームの新規作成・改修時は `sakurai-methodology/index.html` に記載された設計原則を参照すること。

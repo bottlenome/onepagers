@@ -1,0 +1,2466 @@
+{
+  "generated_from": "IUT.lean + IUT/*.lean + build.sh",
+  "module_count": 142,
+  "verified_theorem_total": 1022,
+  "choice_free_count": 102,
+  "nodes": [
+    {
+      "id": "Arithmetic",
+      "label": "Arithmetic",
+      "milestone": "M0",
+      "title": "算術の骨格（高さ・ABC・Szpiro の枠組み）",
+      "pillar": "core",
+      "decl_count": 6,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Arithmetic.lean"
+    },
+    {
+      "id": "Skeleton",
+      "label": "Skeleton",
+      "milestone": "M0",
+      "title": "系3.12 論争の形式骨格",
+      "pillar": "core",
+      "decl_count": 3,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Skeleton.lean"
+    },
+    {
+      "id": "ScholzeStix",
+      "label": "ScholzeStix",
+      "milestone": "S1",
+      "title": "Scholze–Stix の読み（RC 同一視）",
+      "pillar": "core",
+      "decl_count": 2,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ScholzeStix.lean"
+    },
+    {
+      "id": "Mochizuki",
+      "label": "Mochizuki",
+      "milestone": "R1",
+      "title": "望月の読み（同一視拒否）",
+      "pillar": "core",
+      "decl_count": 5,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Mochizuki.lean"
+    },
+    {
+      "id": "Boolean",
+      "label": "Boolean",
+      "milestone": "M0",
+      "title": "命題論理の土台",
+      "pillar": "core",
+      "decl_count": 7,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Boolean.lean"
+    },
+    {
+      "id": "Verdict",
+      "label": "Verdict",
+      "milestone": "M6",
+      "title": "二分法の最終判定（verdict）",
+      "pillar": "core",
+      "decl_count": 2,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Verdict.lean"
+    },
+    {
+      "id": "Anabelian",
+      "label": "Anabelian",
+      "milestone": "M1",
+      "title": "単遠アーベル復元",
+      "pillar": "A",
+      "decl_count": 14,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [
+        "[AbsTopIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Anabelian.lean"
+    },
+    {
+      "id": "HodgeTheater",
+      "label": "HodgeTheater",
+      "milestone": "M2",
+      "title": "Θ±ellNF-Hodge theater",
+      "pillar": "core",
+      "decl_count": 25,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HodgeTheater.lean"
+    },
+    {
+      "id": "LogThetaLattice",
+      "label": "LogThetaLattice",
+      "milestone": "M3",
+      "title": "log-theta 格子と Θ-link / log-link",
+      "pillar": "core",
+      "decl_count": 10,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogThetaLattice.lean"
+    },
+    {
+      "id": "AbcConsequences",
+      "label": "AbcConsequences",
+      "milestone": "M8",
+      "title": "ABC 予想の帰結",
+      "pillar": "core",
+      "decl_count": 5,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbcConsequences.lean"
+    },
+    {
+      "id": "Diophantine",
+      "label": "Diophantine",
+      "milestone": "M7",
+      "title": "IUT IV: log-volume 計算 → Szpiro 型不等式",
+      "pillar": "D",
+      "decl_count": 5,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Diophantine.lean"
+    },
+    {
+      "id": "Multiradial",
+      "label": "Multiradial",
+      "milestone": "M5",
+      "title": "定理3.11: 多輻的表現アルゴリズム",
+      "pillar": "D",
+      "decl_count": 11,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Multiradial.lean"
+    },
+    {
+      "id": "Evaluation",
+      "label": "Evaluation",
+      "milestone": "M4",
+      "title": "IUT II: Hodge–Arakelov 的評価",
+      "pillar": "E",
+      "decl_count": 10,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Evaluation.lean"
+    },
+    {
+      "id": "FundamentalGroup",
+      "label": "FundamentalGroup",
+      "milestone": "M9",
+      "title": "テンパード基本群・数論的基本群の理論",
+      "pillar": "A",
+      "decl_count": 34,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]",
+        "[AbsTopIII]",
+        "[IUTchI]",
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FundamentalGroup.lean"
+    },
+    {
+      "id": "Reconstruction",
+      "label": "Reconstruction",
+      "milestone": "M10",
+      "title": "p進局所体の遠アーベル復元 [AbsTopIII]",
+      "pillar": "A",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[AbsTopIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Reconstruction.lean"
+    },
+    {
+      "id": "EtaleTheta",
+      "label": "EtaleTheta",
+      "milestone": "M11",
+      "title": "エタールテータの cyclotomic rigidity [EtTh]",
+      "pillar": "A",
+      "decl_count": 14,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EtaleTheta.lean"
+    },
+    {
+      "id": "Frobenioid",
+      "label": "Frobenioid",
+      "milestone": "M12",
+      "title": "Frobenioid 圏論 [FrdI]/[FrdII]",
+      "pillar": "C",
+      "decl_count": 12,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[FrdII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Frobenioid.lean"
+    },
+    {
+      "id": "Profinite",
+      "label": "Profinite",
+      "milestone": "M13",
+      "title": "副有限群: 逆極限と ẑ の構成",
+      "pillar": "A",
+      "decl_count": 28,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Profinite.lean"
+    },
+    {
+      "id": "GaloisCategory",
+      "label": "GaloisCategory",
+      "milestone": "M14",
+      "title": "Galois 圏・ファイバー関手・étale π₁",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisCategory.lean"
+    },
+    {
+      "id": "Topology",
+      "label": "Topology",
+      "milestone": "M15",
+      "title": "位相付き副有限群",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Topology.lean"
+    },
+    {
+      "id": "SGA1",
+      "label": "SGA1",
+      "milestone": "M16",
+      "title": "SGA1 主定理の核心: 被覆の分類定理",
+      "pillar": "A",
+      "decl_count": 23,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SGA1.lean"
+    },
+    {
+      "id": "Finiteness",
+      "label": "Finiteness",
+      "milestone": "M17",
+      "title": "有限性の本格的定義",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Finiteness.lean"
+    },
+    {
+      "id": "Compactness",
+      "label": "Compactness",
+      "milestone": "M18",
+      "title": "コンパクト性の一般論",
+      "pillar": "A",
+      "decl_count": 8,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Compactness.lean"
+    },
+    {
+      "id": "CategoryTheory",
+      "label": "CategoryTheory",
+      "milestone": "M19",
+      "title": "圏論インフラと同値の輸送",
+      "pillar": "A",
+      "decl_count": 12,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CategoryTheory.lean"
+    },
+    {
+      "id": "GaloisAxioms",
+      "label": "GaloisAxioms",
+      "milestone": "M20",
+      "title": "Galois 圏の公理系 G1–G6 と主定理の\n  関手的パッケージング",
+      "pillar": "A",
+      "decl_count": 30,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisAxioms.lean"
+    },
+    {
+      "id": "AbstractGalois",
+      "label": "AbstractGalois",
+      "milestone": "M21",
+      "title": "抽象 Galois 圏: 公理系からの一般形",
+      "pillar": "A",
+      "decl_count": 34,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbstractGalois.lean"
+    },
+    {
+      "id": "SGA1Completion",
+      "label": "SGA1Completion",
+      "milestone": "M22",
+      "title": "SGA1 主定理の抽象完成: 比較関手の充満忠実性",
+      "pillar": "A",
+      "decl_count": 14,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SGA1Completion.lean"
+    },
+    {
+      "id": "SGA1Object",
+      "label": "SGA1Object",
+      "milestone": "M23",
+      "title": "SGA1 主定理・対象レベルの完成: 本質的全射性",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SGA1Object.lean"
+    },
+    {
+      "id": "ProObject",
+      "label": "ProObject",
+      "milestone": "M24",
+      "title": "pro-対象: ガロア塔と π₁ の副有限構成",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ProObject.lean"
+    },
+    {
+      "id": "LimitCompact",
+      "label": "LimitCompact",
+      "milestone": "M25",
+      "title": "逆極限のコンパクト性",
+      "pillar": "A",
+      "decl_count": 8,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LimitCompact.lean"
+    },
+    {
+      "id": "SumDecomposition",
+      "label": "SumDecomposition",
+      "milestone": "M26",
+      "title": "有限和分解の簿記: 非連結対象への拡張",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SumDecomposition.lean"
+    },
+    {
+      "id": "LocalCFT",
+      "label": "LocalCFT",
+      "milestone": "M27",
+      "title": "局所類体論の形式化: ℤ_p・不分岐相互法則・\n  LCFT インターフェース",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalCFT.lean"
+    },
+    {
+      "id": "NormCorrespondence",
+      "label": "NormCorrespondence",
+      "milestone": "M28",
+      "title": "ノルム部分群対応: LCFT の第二の柱",
+      "pillar": "B",
+      "decl_count": 6,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NormCorrespondence.lean"
+    },
+    {
+      "id": "PrincipalUnits",
+      "label": "PrincipalUnits",
+      "milestone": "M29",
+      "title": "主単数: ℤ_p の乗法構造と幾何級数可逆性",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrincipalUnits.lean"
+    },
+    {
+      "id": "PrincipalUnitGroup",
+      "label": "PrincipalUnitGroup",
+      "milestone": "M30",
+      "title": "主単数群: (1 + pℤ_p, ×",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrincipalUnitGroup.lean"
+    },
+    {
+      "id": "UnitFiltration",
+      "label": "UnitFiltration",
+      "milestone": "M31",
+      "title": "単数 filtration U^(d",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/UnitFiltration.lean"
+    },
+    {
+      "id": "Fermat",
+      "label": "Fermat",
+      "milestone": "M32",
+      "title": "Fermat の小定理の自前証明: Teichmüller 持ち上げの鍵",
+      "pillar": "B",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Fermat.lean"
+    },
+    {
+      "id": "Teichmuller",
+      "label": "Teichmuller",
+      "milestone": "M33",
+      "title": "Teichmüller 持ち上げ ω(a",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Teichmuller.lean"
+    },
+    {
+      "id": "RootsOfUnity",
+      "label": "RootsOfUnity",
+      "milestone": "M34",
+      "title": "ω の 1 の冪根性: Euler の定理と Teichmüller の可逆性",
+      "pillar": "B",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RootsOfUnity.lean"
+    },
+    {
+      "id": "UnitDecomposition",
+      "label": "UnitDecomposition",
+      "milestone": "M35",
+      "title": "単数分解 O^× = μ_{p−1} × U^(1",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/UnitDecomposition.lean"
+    },
+    {
+      "id": "ZpUnits",
+      "label": "ZpUnits",
+      "milestone": "M36",
+      "title": "単数群 ℤ_p^× の Grp 構成",
+      "pillar": "B",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZpUnits.lean"
+    },
+    {
+      "id": "FullReciprocity",
+      "label": "FullReciprocity",
+      "milestone": "M37",
+      "title": "完全な相互写像 rec : ℚ_p^× → ẑ × ℤ_p^×",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FullReciprocity.lean"
+    },
+    {
+      "id": "Ring",
+      "label": "Ring",
+      "milestone": "M38",
+      "title": "可換環の基盤: ℤ・ℤ/n・ℤ_p は可換環",
+      "pillar": "C",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Ring.lean"
+    },
+    {
+      "id": "PowerSeries",
+      "label": "PowerSeries",
+      "milestone": "M39",
+      "title": "形式冪級数環 R[[X]]: Lubin–Tate 第二層",
+      "pillar": "C",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PowerSeries.lean"
+    },
+    {
+      "id": "Composition",
+      "label": "Composition",
+      "milestone": "M40",
+      "title": "形式冪級数の合成: Lubin–Tate 第三層",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Composition.lean"
+    },
+    {
+      "id": "LubinTateUnique",
+      "label": "LubinTateUnique",
+      "milestone": "M41",
+      "title": "Lubin–Tate 補題: 一意性側",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTateUnique.lean"
+    },
+    {
+      "id": "LubinTateZp",
+      "label": "LubinTateZp",
+      "milestone": "M42",
+      "title": "ℤ_p は Lubin–Tate 消去仮説を満たす",
+      "pillar": "C",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTateZp.lean"
+    },
+    {
+      "id": "PadicDivision",
+      "label": "PadicDivision",
+      "milestone": "M43",
+      "title": "p-進除算と Frobenius 合同: 存在側の除算インフラ",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicDivision.lean"
+    },
+    {
+      "id": "ZpDomain",
+      "label": "ZpDomain",
+      "milestone": "M91F",
+      "title": "柱B: ℤ_p の witness 付き零因子なし —\n  O 整域性への突破口・第一段",
+      "pillar": "B",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZpDomain.lean"
+    },
+    {
+      "id": "Binomial2",
+      "label": "Binomial2",
+      "milestone": "M44",
+      "title": "可換環上の二変数二項定理: 第七層",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Binomial2.lean"
+    },
+    {
+      "id": "Freshman",
+      "label": "Freshman",
+      "milestone": "M45",
+      "title": "新入生の夢: 環レベルと級数レベル、第八層",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Freshman.lean"
+    },
+    {
+      "id": "PSFunctor",
+      "label": "PSFunctor",
+      "milestone": "M46",
+      "title": "冪級数の関手性とモノミアル代数: 第九層",
+      "pillar": "C",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PSFunctor.lean"
+    },
+    {
+      "id": "FrobeniusCharP",
+      "label": "FrobeniusCharP",
+      "milestone": "M47",
+      "title": "標数 p の Frobenius 定理: F^p = F∘X^p",
+      "pillar": "C",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobeniusCharP.lean"
+    },
+    {
+      "id": "LTErrorDivisible",
+      "label": "LTErrorDivisible",
+      "milestone": "M48",
+      "title": "Lubin–Tate 誤差項の p-整除性: 第十一層",
+      "pillar": "C",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LTErrorDivisible.lean"
+    },
+    {
+      "id": "LubinTateExists",
+      "label": "LubinTateExists",
+      "milestone": "M49",
+      "title": "Lubin–Tate 存在定理: 最終層",
+      "pillar": "C",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTateExists.lean"
+    },
+    {
+      "id": "FrobenioidCat",
+      "label": "FrobenioidCat",
+      "milestone": "M48F",
+      "title": "Frobenioid の圏論化",
+      "pillar": "C",
+      "decl_count": 30,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobenioidCat.lean"
+    },
+    {
+      "id": "FrobenioidModel",
+      "label": "FrobenioidModel",
+      "milestone": "M51F",
+      "title": "Frobenioid の圏論的実体と数体での充足",
+      "pillar": "C",
+      "decl_count": 55,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobenioidModel.lean"
+    },
+    {
+      "id": "PolyIsomorphism",
+      "label": "PolyIsomorphism",
+      "milestone": "M53F",
+      "title": "poly-isomorphism と剛性: Frobenius-like /\n  étale-like 二分法の圏論的核",
+      "pillar": "C",
+      "decl_count": 27,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyIsomorphism.lean"
+    },
+    {
+      "id": "SplitFrobenioid",
+      "label": "SplitFrobenioid",
+      "milestone": "M55F",
+      "title": "split Frobenioid: 射の単数成分と\n  (Ind2",
+      "pillar": "C",
+      "decl_count": 32,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SplitFrobenioid.lean"
+    },
+    {
+      "id": "FiberedFrobenioid",
+      "label": "FiberedFrobenioid",
+      "milestone": "M57F",
+      "title": "base 圏上のファイバー構造:\n  素点の離散 base 圏上の Frobenioid 全空間圏",
+      "pillar": "C",
+      "decl_count": 33,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FiberedFrobenioid.lean"
+    },
+    {
+      "id": "SplitFibered",
+      "label": "SplitFibered",
+      "milestone": "M59F",
+      "title": "split × fibered の合成: 離散 base 上の\n  単数つきファイバー Frobenioid",
+      "pillar": "C",
+      "decl_count": 30,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SplitFibered.lean"
+    },
+    {
+      "id": "RamifiedBase",
+      "label": "RamifiedBase",
+      "milestone": "M61F",
+      "title": "base 圏の非自明射:\n  分岐指数つき base 塔とファイバー輸送",
+      "pillar": "C",
+      "decl_count": 46,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RamifiedBase.lean"
+    },
+    {
+      "id": "RamifiedSplit",
+      "label": "RamifiedSplit",
+      "milestone": "M63F",
+      "title": "分岐塔 base 上の単数つき全空間圏:\n  M59F × M61F の合成",
+      "pillar": "C",
+      "decl_count": 27,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RamifiedSplit.lean"
+    },
+    {
+      "id": "PowerSeries2",
+      "label": "PowerSeries2",
+      "milestone": "M50",
+      "title": "二変数冪級数の基盤: 形式群法則への第一層",
+      "pillar": "C",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PowerSeries2.lean"
+    },
+    {
+      "id": "FormalGroupSub",
+      "label": "FormalGroupSub",
+      "milestone": "M51",
+      "title": "二変数→二変数代入と恒等代入: 形式群第二層",
+      "pillar": "C",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupSub.lean"
+    },
+    {
+      "id": "FormalGroupEq",
+      "label": "FormalGroupEq",
+      "milestone": "M52",
+      "title": "形式群方程式の定式化: 形式群第三層",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEq.lean"
+    },
+    {
+      "id": "FormalGroupMap",
+      "label": "FormalGroupMap",
+      "milestone": "M53",
+      "title": "二変数係数持ち上げと方程式の mod-p 還元: 形式群第四層",
+      "pillar": "C",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupMap.lean"
+    },
+    {
+      "id": "FrobeniusGen",
+      "label": "FrobeniusGen",
+      "milestone": "M54",
+      "title": "一般化 Frobenius 定理: F^p = (Frob F",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobeniusGen.lean"
+    },
+    {
+      "id": "Frobenius2",
+      "label": "Frobenius2",
+      "milestone": "M55",
+      "title": "二変数 Frobenius と LT 誤差の mod-p 消滅: 形式群第五層",
+      "pillar": "C",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Frobenius2.lean"
+    },
+    {
+      "id": "FormalGroupErr",
+      "label": "FormalGroupErr",
+      "milestone": "M56",
+      "title": "LT 誤差の係数 p-整除性と誤差/p の構成: 形式群第六層",
+      "pillar": "C",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupErr.lean"
+    },
+    {
+      "id": "FormalGroupCongr",
+      "label": "FormalGroupCongr",
+      "milestone": "M57",
+      "title": "二変数冪の係数合同補題: 形式群第七層",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupCongr.lean"
+    },
+    {
+      "id": "FormalGroupDecomp",
+      "label": "FormalGroupDecomp",
+      "milestone": "M58",
+      "title": "形式群方程式の総次数分解: 形式群第八層",
+      "pillar": "C",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupDecomp.lean"
+    },
+    {
+      "id": "FormalGroupDiag",
+      "label": "FormalGroupDiag",
+      "milestone": "M59",
+      "title": "右辺の対角分離: 形式群第九層",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupDiag.lean"
+    },
+    {
+      "id": "FormalGroupExists",
+      "label": "FormalGroupExists",
+      "milestone": "M60",
+      "title": "LT 形式群法則の存在: 形式群最終層",
+      "pillar": "C",
+      "decl_count": 19,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupExists.lean"
+    },
+    {
+      "id": "FormalGroupUnique",
+      "label": "FormalGroupUnique",
+      "milestone": "M61",
+      "title": "LT 形式群法則の一意性",
+      "pillar": "C",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupUnique.lean"
+    },
+    {
+      "id": "FormalGroupComm",
+      "label": "FormalGroupComm",
+      "milestone": "M62",
+      "title": "LT 形式群法則の可換性",
+      "pillar": "C",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupComm.lean"
+    },
+    {
+      "id": "PowerSeries3",
+      "label": "PowerSeries3",
+      "milestone": "M63",
+      "title": "三変数冪級数の基盤: 結合則キャンペーン第一層",
+      "pillar": "C",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PowerSeries3.lean"
+    },
+    {
+      "id": "FormalGroup3Congr",
+      "label": "FormalGroup3Congr",
+      "milestone": "M64",
+      "title": "三変数冪の係数合同: 結合則キャンペーン第二層",
+      "pillar": "C",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroup3Congr.lean"
+    },
+    {
+      "id": "FormalGroup3Decomp",
+      "label": "FormalGroup3Decomp",
+      "milestone": "M65",
+      "title": "三変数方程式の分解: 結合則キャンペーン第三層",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroup3Decomp.lean"
+    },
+    {
+      "id": "FormalGroup3Unique",
+      "label": "FormalGroup3Unique",
+      "milestone": "M66",
+      "title": "三変数の対角分離と一意性: 結合則キャンペーン第四層",
+      "pillar": "C",
+      "decl_count": 2,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroup3Unique.lean"
+    },
+    {
+      "id": "FormalGroupAssocDef",
+      "label": "FormalGroupAssocDef",
+      "milestone": "M67",
+      "title": "結合則の両辺の構成と一次条件:\n  結合則キャンペーン第五層",
+      "pillar": "C",
+      "decl_count": 31,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupAssocDef.lean"
+    },
+    {
+      "id": "FormalGroupChain",
+      "label": "FormalGroupChain",
+      "milestone": "M68",
+      "title": "連鎖律の基盤: 結合則キャンペーン第六層",
+      "pillar": "C",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupChain.lean"
+    },
+    {
+      "id": "FormalGroupFam",
+      "label": "FormalGroupFam",
+      "milestone": "M69a",
+      "title": "乗法性のための代数基盤: 結合則キャンペーン第七層",
+      "pillar": "C",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupFam.lean"
+    },
+    {
+      "id": "FormalGroupMult",
+      "label": "FormalGroupMult",
+      "milestone": "M69b",
+      "title": "ps23Comp の乗法性: 結合則キャンペーン第八層",
+      "pillar": "C",
+      "decl_count": 2,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupMult.lean"
+    },
+    {
+      "id": "FormalGroupComp1",
+      "label": "FormalGroupComp1",
+      "milestone": "M70a",
+      "title": "合成の代数と連鎖律 CR1: 結合則キャンペーン第九層",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupComp1.lean"
+    },
+    {
+      "id": "FormalGroupComp2",
+      "label": "FormalGroupComp2",
+      "milestone": "M70b",
+      "title": "連鎖律 CR2: 結合則キャンペーン第十層",
+      "pillar": "C",
+      "decl_count": 2,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupComp2.lean"
+    },
+    {
+      "id": "FormalGroupBridge",
+      "label": "FormalGroupBridge",
+      "milestone": "M70c",
+      "title": "FormalGroupBridge",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupBridge.lean"
+    },
+    {
+      "id": "FormalGroupMult3",
+      "label": "FormalGroupMult3",
+      "milestone": "M70F",
+      "title": "ps3Comp3 の乗法性パッケージ: 結合則キャンペーン並行部品",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupMult3.lean"
+    },
+    {
+      "id": "FormalGroupLift",
+      "label": "FormalGroupLift",
+      "milestone": "M70d",
+      "title": "FormalGroupLift",
+      "pillar": "C",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupLift.lean"
+    },
+    {
+      "id": "FormalGroupComp3",
+      "label": "FormalGroupComp3",
+      "milestone": "M70e",
+      "title": "連鎖律 CR3: 結合則キャンペーン第十三層",
+      "pillar": "C",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupComp3.lean"
+    },
+    {
+      "id": "FormalGroupAssoc",
+      "label": "FormalGroupAssoc",
+      "milestone": "M71",
+      "title": "結合則: 結合則キャンペーン最終層",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupAssoc.lean"
+    },
+    {
+      "id": "FormalGroupEval",
+      "label": "FormalGroupEval",
+      "milestone": "M72",
+      "title": "逆元キャンペーン第一層:\n  2 変数法則への 1 変数代入",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEval.lean"
+    },
+    {
+      "id": "FormalGroupEvalMult",
+      "label": "FormalGroupEvalMult",
+      "milestone": "M73",
+      "title": "ps21Comp の乗法性:\n  逆元キャンペーン第二層",
+      "pillar": "C",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEvalMult.lean"
+    },
+    {
+      "id": "FormalGroupEvalComp",
+      "label": "FormalGroupEvalComp",
+      "milestone": "M74",
+      "title": "連鎖律 CR1/CR2 の 1 変数版と\n  注入の橋渡し: 逆元キャンペーン第三層",
+      "pillar": "C",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEvalComp.lean"
+    },
+    {
+      "id": "LTIterate",
+      "label": "LTIterate",
+      "milestone": "M72F",
+      "title": "逆元キャンペーンのサブエージェント並行部品:\n  合成の乗法性パッケージと Lubin–Tate 多項式の反復",
+      "pillar": "C",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LTIterate.lean"
+    },
+    {
+      "id": "FormalGroupInverse",
+      "label": "FormalGroupInverse",
+      "milestone": "M75",
+      "title": "形式群の逆元 [-1] 級数:\n  逆元キャンペーン最終層・完結",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupInverse.lean"
+    },
+    {
+      "id": "FormalGroupOModule",
+      "label": "FormalGroupOModule",
+      "milestone": "M76",
+      "title": "[a] 級数の O-加群構造:\n  形式 ℤ_p-加群キャンペーン第一層",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupOModule.lean"
+    },
+    {
+      "id": "FormalGroupInvLeft",
+      "label": "FormalGroupInvLeft",
+      "milestone": "M75F",
+      "title": "形式群の左逆元:\n  M75 の左右対称化・サブエージェント並行部品",
+      "pillar": "C",
+      "decl_count": 2,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupInvLeft.lean"
+    },
+    {
+      "id": "FormalGroupEnd",
+      "label": "FormalGroupEnd",
+      "milestone": "M76F",
+      "title": "O-加群構造のインターフェース化と\n  剛性: 形式 ℤ_p-加群キャンペーン・パッケージ層",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEnd.lean"
+    },
+    {
+      "id": "FormalGroupPoints",
+      "label": "FormalGroupPoints",
+      "milestone": "M77",
+      "title": "冪級数の点での評価:\n  点の群キャンペーン第一層",
+      "pillar": "C",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPoints.lean"
+    },
+    {
+      "id": "PointValues",
+      "label": "PointValues",
+      "milestone": "M78F",
+      "title": "点での具体値: 点の群キャンペーン並行部品",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PointValues.lean"
+    },
+    {
+      "id": "FormalGroupPointsMul",
+      "label": "FormalGroupPointsMul",
+      "milestone": "M78",
+      "title": "評価の乗法性:\n  点の群キャンペーン第二層",
+      "pillar": "C",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointsMul.lean"
+    },
+    {
+      "id": "FormalGroupPointsComp",
+      "label": "FormalGroupPointsComp",
+      "milestone": "M79",
+      "title": "合成と評価の両立:\n  点の群キャンペーン第三層",
+      "pillar": "C",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointsComp.lean"
+    },
+    {
+      "id": "FormalGroupPoints2",
+      "label": "FormalGroupPoints2",
+      "milestone": "M80",
+      "title": "2 変数評価と輸送連鎖律:\n  点の群キャンペーン第四層",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPoints2.lean"
+    },
+    {
+      "id": "TorsionPoints",
+      "label": "TorsionPoints",
+      "milestone": "M79F",
+      "title": "点レベルの [π]-作用と πⁿ-捻れ点:\n  分岐 LCFT への入口",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TorsionPoints.lean"
+    },
+    {
+      "id": "TorsionTrivial",
+      "label": "TorsionTrivial",
+      "milestone": "M81F",
+      "title": "ℤ_p 内の πⁿ-捻れ点の自明性:\n  非自明な捻れ点には分岐拡大が必要",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TorsionTrivial.lean"
+    },
+    {
+      "id": "EisensteinRing",
+      "label": "EisensteinRing",
+      "milestone": "M82F",
+      "title": "Eisenstein 拡大環\n  O = ℤ_p[[X]]/(X^{p−1} + π",
+      "pillar": "B",
+      "decl_count": 25,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinRing.lean"
+    },
+    {
+      "id": "EisensteinTorsion",
+      "label": "EisensteinTorsion",
+      "milestone": "M83F",
+      "title": "非自明な π-捻れ点 λ の完全認定",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinTorsion.lean"
+    },
+    {
+      "id": "EisensteinConjugates",
+      "label": "EisensteinConjugates",
+      "milestone": "M84F",
+      "title": "共役捻れ点族 {ω(a",
+      "pillar": "B",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinConjugates.lean"
+    },
+    {
+      "id": "RamifiedEntrance",
+      "label": "RamifiedEntrance",
+      "milestone": "M85F",
+      "title": "分岐 LCFT 入口の総括:\n  M79F/M81F/M82F/M83F/M84F の合流インターフェース",
+      "pillar": "B",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RamifiedEntrance.lean"
+    },
+    {
+      "id": "EisensteinGalois",
+      "label": "EisensteinGalois",
+      "milestone": "M86F",
+      "title": "柱B 第2段: Galois 作用の骨格",
+      "pillar": "B",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinGalois.lean"
+    },
+    {
+      "id": "RecRamified",
+      "label": "RecRamified",
+      "milestone": "M87F",
+      "title": "柱B 第3段前半: 分岐相互写像のレベル 1 骨格",
+      "pillar": "B",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RecRamified.lean"
+    },
+    {
+      "id": "EisensteinTower",
+      "label": "EisensteinTower",
+      "milestone": "M89F",
+      "title": "柱B 第3段後半の部品: O の捻れ塔と\n  Galois 加群構造",
+      "pillar": "B",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinTower.lean"
+    },
+    {
+      "id": "EisensteinUpper",
+      "label": "EisensteinUpper",
+      "milestone": "M90F",
+      "title": "柱B 上界・第一段: Λ₁ の\n  Eisenstein 方程式への還元",
+      "pillar": "B",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinUpper.lean"
+    },
+    {
+      "id": "EisDomain",
+      "label": "EisDomain",
+      "milestone": "M93F",
+      "title": "柱B: 整域性 witness 版の O = ℤ_p[π] への\n  移送・第一段 — 係数簿記・λ シフト・λ 割り算・剰余体乗法性",
+      "pillar": "B",
+      "decl_count": 46,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisDomain.lean"
+    },
+    {
+      "id": "EisDomain2",
+      "label": "EisDomain2",
+      "milestone": "M96F",
+      "title": "柱B: O = ℤ_p[π] の witness 付き整域性・\n  第二段 — λ 進付値分解と一般の積の非零性、M93F の正直申告分の回収",
+      "pillar": "B",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisDomain2.lean"
+    },
+    {
+      "id": "EisEndoRigidity",
+      "label": "EisEndoRigidity",
+      "milestone": "M95",
+      "title": "自己同型の上界骨格: 柱B",
+      "pillar": "B",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisEndoRigidity.lean"
+    },
+    {
+      "id": "FactorTheorem",
+      "label": "FactorTheorem",
+      "milestone": "M96",
+      "title": "因数定理と根の個数: 柱B 分類の最終鍵",
+      "pillar": "B",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FactorTheorem.lean"
+    },
+    {
+      "id": "LambdaClassify",
+      "label": "LambdaClassify",
+      "milestone": "M97F",
+      "title": "柱B capstone: Λ₁ と自己準同型の\n  完全分類の組み立て",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaClassify.lean"
+    },
+    {
+      "id": "LaurentCoeff",
+      "label": "LaurentCoeff",
+      "milestone": "M86",
+      "title": "Laurent 係数代数: 柱E 第一層・前半",
+      "pillar": "E",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LaurentCoeff.lean"
+    },
+    {
+      "id": "LaurentRing",
+      "label": "LaurentRing",
+      "milestone": "M87",
+      "title": "Laurent 環の完成: 柱E 第一層後半",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LaurentRing.lean"
+    },
+    {
+      "id": "LaurentMonomial",
+      "label": "LaurentMonomial",
+      "milestone": "M88F",
+      "title": "Laurent 単項式計算: 柱E・E4 関数等式の準備部品",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LaurentMonomial.lean"
+    },
+    {
+      "id": "ThetaSeries",
+      "label": "ThetaSeries",
+      "milestone": "M88",
+      "title": "q-級数環とテータ級数: 柱E・E2+E3",
+      "pillar": "E",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaSeries.lean"
+    },
+    {
+      "id": "ThetaFunctional",
+      "label": "ThetaFunctional",
+      "milestone": "M89",
+      "title": "テータの関数等式: 柱E・E4",
+      "pillar": "E",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaFunctional.lean"
+    },
+    {
+      "id": "ThetaReflection",
+      "label": "ThetaReflection",
+      "milestone": "M98",
+      "title": "テータの反転対称性: 柱E",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaReflection.lean"
+    },
+    {
+      "id": "ThetaGauss",
+      "label": "ThetaGauss",
+      "milestone": "M90",
+      "title": "反復関数等式とガウス簿記: 柱E・E5",
+      "pillar": "E",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaGauss.lean"
+    },
+    {
+      "id": "TateQuotient",
+      "label": "TateQuotient",
+      "milestone": "M91",
+      "title": "Tate 点群 G/q^ℤ: 柱E・E6",
+      "pillar": "E",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateQuotient.lean"
+    },
+    {
+      "id": "MonoThetaWitness",
+      "label": "MonoThetaWitness",
+      "milestone": "M92",
+      "title": "mono-theta witness: 柱E・E7",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaWitness.lean"
+    },
+    {
+      "id": "ThetaGroupMod",
+      "label": "ThetaGroupMod",
+      "milestone": "M98F",
+      "title": "テータ群 mod l: 柱E 拡張",
+      "pillar": "E",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaGroupMod.lean"
+    },
+    {
+      "id": "GaussianVolume",
+      "label": "GaussianVolume",
+      "milestone": "M93",
+      "title": "ガウス体積簿記 vol_q: 柱E・E8",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussianVolume.lean"
+    },
+    {
+      "id": "RecGluing",
+      "label": "RecGluing",
+      "milestone": "M94",
+      "title": "K^× 貼り合わせのレベル 1 骨格: 柱B",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RecGluing.lean"
+    },
+    {
+      "id": "FormalGroupPointsLaw",
+      "label": "FormalGroupPointsLaw",
+      "milestone": "M81",
+      "title": "群法則の点への輸送:\n  点の群キャンペーン第五層",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointsLaw.lean"
+    },
+    {
+      "id": "FormalGroupPoints3",
+      "label": "FormalGroupPoints3",
+      "milestone": "M82",
+      "title": "3 変数評価:\n  点の群キャンペーン第六層・結合則輸送の第一段",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPoints3.lean"
+    },
+    {
+      "id": "FormalGroupPointsMul2",
+      "label": "FormalGroupPointsMul2",
+      "milestone": "M83",
+      "title": "2 変数評価の乗法性:\n  点の群キャンペーン第七層・結合則輸送の第二段",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointsMul2.lean"
+    },
+    {
+      "id": "FormalGroupPointsMul3",
+      "label": "FormalGroupPointsMul3",
+      "milestone": "M84",
+      "title": "3 変数評価の乗法性:\n  点の群キャンペーン第八層・結合則輸送の第三段",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointsMul3.lean"
+    },
+    {
+      "id": "FormalGroupPointsAssoc",
+      "label": "FormalGroupPointsAssoc",
+      "milestone": "M85",
+      "title": "結合則の点輸送:\n  点の群キャンペーン最終層",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointsAssoc.lean"
+    },
+    {
+      "id": "Premises311",
+      "label": "Premises311",
+      "milestone": "M97",
+      "title": "定理3.11 の前提インターフェース: 柱D 入口",
+      "pillar": "D",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Premises311.lean"
+    },
+    {
+      "id": "VolumeModel",
+      "label": "VolumeModel",
+      "milestone": "M99F",
+      "title": "具体的 VolumeTheory モデルの構成",
+      "pillar": "D",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/VolumeModel.lean"
+    },
+    {
+      "id": "DecompositionInertia",
+      "label": "DecompositionInertia",
+      "milestone": "M65F",
+      "title": "複数素点への分解・惰性: efg 簿記",
+      "pillar": "C",
+      "decl_count": 37,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DecompositionInertia.lean"
+    },
+    {
+      "id": "Realification",
+      "label": "Realification",
+      "milestone": "M67F",
+      "title": "realification 実化と可除性",
+      "pillar": "C",
+      "decl_count": 81,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Realification.lean"
+    },
+    {
+      "id": "ArchimedeanPlace",
+      "label": "ArchimedeanPlace",
+      "milestone": "M69F",
+      "title": "アルキメデス素点と可除性の構造的二分法",
+      "pillar": "C",
+      "decl_count": 45,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArchimedeanPlace.lean"
+    },
+    {
+      "id": "FormalGroupEndRing",
+      "label": "FormalGroupEndRing",
+      "milestone": "M100",
+      "title": "End(F",
+      "pillar": "B",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEndRing.lean"
+    }
+  ],
+  "edges": [
+    {
+      "source": "AbstractGalois",
+      "target": "SGA1Completion"
+    },
+    {
+      "source": "Anabelian",
+      "target": "FundamentalGroup"
+    },
+    {
+      "source": "Anabelian",
+      "target": "Reconstruction"
+    },
+    {
+      "source": "Arithmetic",
+      "target": "Evaluation"
+    },
+    {
+      "source": "Arithmetic",
+      "target": "Frobenioid"
+    },
+    {
+      "source": "Arithmetic",
+      "target": "Multiradial"
+    },
+    {
+      "source": "Arithmetic",
+      "target": "Skeleton"
+    },
+    {
+      "source": "Binomial2",
+      "target": "Freshman"
+    },
+    {
+      "source": "Boolean",
+      "target": "Verdict"
+    },
+    {
+      "source": "CategoryTheory",
+      "target": "FrobenioidCat"
+    },
+    {
+      "source": "CategoryTheory",
+      "target": "GaloisAxioms"
+    },
+    {
+      "source": "Compactness",
+      "target": "LimitCompact"
+    },
+    {
+      "source": "Composition",
+      "target": "LubinTateUnique"
+    },
+    {
+      "source": "Diophantine",
+      "target": "Multiradial"
+    },
+    {
+      "source": "EisDomain",
+      "target": "EisDomain2"
+    },
+    {
+      "source": "EisDomain2",
+      "target": "Premises311"
+    },
+    {
+      "source": "EisEndoRigidity",
+      "target": "LambdaClassify"
+    },
+    {
+      "source": "EisEndoRigidity",
+      "target": "Premises311"
+    },
+    {
+      "source": "EisensteinConjugates",
+      "target": "RamifiedEntrance"
+    },
+    {
+      "source": "EisensteinGalois",
+      "target": "RecRamified"
+    },
+    {
+      "source": "EisensteinRing",
+      "target": "EisDomain"
+    },
+    {
+      "source": "EisensteinRing",
+      "target": "EisensteinTorsion"
+    },
+    {
+      "source": "EisensteinTorsion",
+      "target": "EisensteinConjugates"
+    },
+    {
+      "source": "EisensteinTower",
+      "target": "EisEndoRigidity"
+    },
+    {
+      "source": "EisensteinTower",
+      "target": "EisensteinUpper"
+    },
+    {
+      "source": "EisensteinUpper",
+      "target": "EisEndoRigidity"
+    },
+    {
+      "source": "EisensteinUpper",
+      "target": "FactorTheorem"
+    },
+    {
+      "source": "EtaleTheta",
+      "target": "Profinite"
+    },
+    {
+      "source": "EtaleTheta",
+      "target": "TateQuotient"
+    },
+    {
+      "source": "FactorTheorem",
+      "target": "LambdaClassify"
+    },
+    {
+      "source": "Fermat",
+      "target": "Teichmuller"
+    },
+    {
+      "source": "FiberedFrobenioid",
+      "target": "ArchimedeanPlace"
+    },
+    {
+      "source": "FiberedFrobenioid",
+      "target": "RamifiedBase"
+    },
+    {
+      "source": "FiberedFrobenioid",
+      "target": "SplitFibered"
+    },
+    {
+      "source": "Finiteness",
+      "target": "Compactness"
+    },
+    {
+      "source": "FormalGroup3Congr",
+      "target": "FormalGroup3Decomp"
+    },
+    {
+      "source": "FormalGroup3Decomp",
+      "target": "FormalGroup3Unique"
+    },
+    {
+      "source": "FormalGroup3Unique",
+      "target": "FormalGroupAssocDef"
+    },
+    {
+      "source": "FormalGroupAssoc",
+      "target": "FormalGroupEval"
+    },
+    {
+      "source": "FormalGroupAssocDef",
+      "target": "FormalGroupChain"
+    },
+    {
+      "source": "FormalGroupBridge",
+      "target": "FormalGroupLift"
+    },
+    {
+      "source": "FormalGroupChain",
+      "target": "FormalGroupFam"
+    },
+    {
+      "source": "FormalGroupComm",
+      "target": "PowerSeries3"
+    },
+    {
+      "source": "FormalGroupComp1",
+      "target": "FormalGroupComp2"
+    },
+    {
+      "source": "FormalGroupComp1",
+      "target": "FormalGroupMult3"
+    },
+    {
+      "source": "FormalGroupComp2",
+      "target": "FormalGroupBridge"
+    },
+    {
+      "source": "FormalGroupComp3",
+      "target": "FormalGroupAssoc"
+    },
+    {
+      "source": "FormalGroupCongr",
+      "target": "FormalGroupDecomp"
+    },
+    {
+      "source": "FormalGroupDecomp",
+      "target": "FormalGroupDiag"
+    },
+    {
+      "source": "FormalGroupDiag",
+      "target": "FormalGroupExists"
+    },
+    {
+      "source": "FormalGroupEnd",
+      "target": "FormalGroupEndRing"
+    },
+    {
+      "source": "FormalGroupEq",
+      "target": "FormalGroupMap"
+    },
+    {
+      "source": "FormalGroupErr",
+      "target": "FormalGroupCongr"
+    },
+    {
+      "source": "FormalGroupEval",
+      "target": "FormalGroupEvalMult"
+    },
+    {
+      "source": "FormalGroupEval",
+      "target": "LTIterate"
+    },
+    {
+      "source": "FormalGroupEvalComp",
+      "target": "FormalGroupInverse"
+    },
+    {
+      "source": "FormalGroupEvalMult",
+      "target": "FormalGroupEvalComp"
+    },
+    {
+      "source": "FormalGroupExists",
+      "target": "EisensteinRing"
+    },
+    {
+      "source": "FormalGroupExists",
+      "target": "FormalGroupUnique"
+    },
+    {
+      "source": "FormalGroupFam",
+      "target": "FormalGroupMult"
+    },
+    {
+      "source": "FormalGroupInverse",
+      "target": "FormalGroupInvLeft"
+    },
+    {
+      "source": "FormalGroupInverse",
+      "target": "FormalGroupOModule"
+    },
+    {
+      "source": "FormalGroupLift",
+      "target": "FormalGroupAssoc"
+    },
+    {
+      "source": "FormalGroupMap",
+      "target": "FrobeniusGen"
+    },
+    {
+      "source": "FormalGroupMult",
+      "target": "FormalGroupComp1"
+    },
+    {
+      "source": "FormalGroupMult3",
+      "target": "FormalGroupComp3"
+    },
+    {
+      "source": "FormalGroupMult3",
+      "target": "FormalGroupLift"
+    },
+    {
+      "source": "FormalGroupOModule",
+      "target": "FormalGroupEnd"
+    },
+    {
+      "source": "FormalGroupOModule",
+      "target": "FormalGroupPoints"
+    },
+    {
+      "source": "FormalGroupPoints",
+      "target": "FormalGroupPointsMul"
+    },
+    {
+      "source": "FormalGroupPoints",
+      "target": "PointValues"
+    },
+    {
+      "source": "FormalGroupPoints2",
+      "target": "FormalGroupPointsLaw"
+    },
+    {
+      "source": "FormalGroupPoints3",
+      "target": "FormalGroupPointsMul2"
+    },
+    {
+      "source": "FormalGroupPointsComp",
+      "target": "FormalGroupPoints2"
+    },
+    {
+      "source": "FormalGroupPointsComp",
+      "target": "TorsionPoints"
+    },
+    {
+      "source": "FormalGroupPointsLaw",
+      "target": "FormalGroupPoints3"
+    },
+    {
+      "source": "FormalGroupPointsMul",
+      "target": "FormalGroupPointsComp"
+    },
+    {
+      "source": "FormalGroupPointsMul2",
+      "target": "FormalGroupPointsMul3"
+    },
+    {
+      "source": "FormalGroupPointsMul3",
+      "target": "FormalGroupPointsAssoc"
+    },
+    {
+      "source": "FormalGroupSub",
+      "target": "FormalGroupEq"
+    },
+    {
+      "source": "FormalGroupUnique",
+      "target": "FormalGroupComm"
+    },
+    {
+      "source": "Freshman",
+      "target": "PSFunctor"
+    },
+    {
+      "source": "Frobenioid",
+      "target": "FrobenioidCat"
+    },
+    {
+      "source": "Frobenioid",
+      "target": "FrobenioidModel"
+    },
+    {
+      "source": "FrobenioidCat",
+      "target": "FrobenioidModel"
+    },
+    {
+      "source": "FrobenioidCat",
+      "target": "PolyIsomorphism"
+    },
+    {
+      "source": "FrobenioidModel",
+      "target": "PolyIsomorphism"
+    },
+    {
+      "source": "Frobenius2",
+      "target": "FormalGroupErr"
+    },
+    {
+      "source": "FrobeniusCharP",
+      "target": "LTErrorDivisible"
+    },
+    {
+      "source": "FrobeniusGen",
+      "target": "Frobenius2"
+    },
+    {
+      "source": "FullReciprocity",
+      "target": "RecGluing"
+    },
+    {
+      "source": "FullReciprocity",
+      "target": "Ring"
+    },
+    {
+      "source": "FundamentalGroup",
+      "target": "EtaleTheta"
+    },
+    {
+      "source": "FundamentalGroup",
+      "target": "Profinite"
+    },
+    {
+      "source": "GaloisAxioms",
+      "target": "AbstractGalois"
+    },
+    {
+      "source": "GaloisCategory",
+      "target": "CategoryTheory"
+    },
+    {
+      "source": "GaloisCategory",
+      "target": "SGA1"
+    },
+    {
+      "source": "GaussianVolume",
+      "target": "Premises311"
+    },
+    {
+      "source": "LTErrorDivisible",
+      "target": "LubinTateExists"
+    },
+    {
+      "source": "LTIterate",
+      "target": "FormalGroupInverse"
+    },
+    {
+      "source": "LTIterate",
+      "target": "TorsionPoints"
+    },
+    {
+      "source": "LaurentCoeff",
+      "target": "LaurentRing"
+    },
+    {
+      "source": "LaurentMonomial",
+      "target": "ThetaFunctional"
+    },
+    {
+      "source": "LaurentRing",
+      "target": "LaurentMonomial"
+    },
+    {
+      "source": "LaurentRing",
+      "target": "ThetaSeries"
+    },
+    {
+      "source": "LimitCompact",
+      "target": "LocalCFT"
+    },
+    {
+      "source": "LocalCFT",
+      "target": "FrobenioidModel"
+    },
+    {
+      "source": "LocalCFT",
+      "target": "NormCorrespondence"
+    },
+    {
+      "source": "LocalCFT",
+      "target": "PrincipalUnits"
+    },
+    {
+      "source": "LubinTateExists",
+      "target": "PowerSeries2"
+    },
+    {
+      "source": "LubinTateUnique",
+      "target": "LubinTateZp"
+    },
+    {
+      "source": "LubinTateZp",
+      "target": "PadicDivision"
+    },
+    {
+      "source": "LubinTateZp",
+      "target": "TorsionTrivial"
+    },
+    {
+      "source": "Mochizuki",
+      "target": "Verdict"
+    },
+    {
+      "source": "MonoThetaWitness",
+      "target": "GaussianVolume"
+    },
+    {
+      "source": "MonoThetaWitness",
+      "target": "ThetaGroupMod"
+    },
+    {
+      "source": "Multiradial",
+      "target": "Evaluation"
+    },
+    {
+      "source": "Multiradial",
+      "target": "Frobenioid"
+    },
+    {
+      "source": "Multiradial",
+      "target": "Premises311"
+    },
+    {
+      "source": "PSFunctor",
+      "target": "FrobeniusCharP"
+    },
+    {
+      "source": "PadicDivision",
+      "target": "Binomial2"
+    },
+    {
+      "source": "PadicDivision",
+      "target": "ZpDomain"
+    },
+    {
+      "source": "PointValues",
+      "target": "FormalGroupPointsComp"
+    },
+    {
+      "source": "PolyIsomorphism",
+      "target": "FiberedFrobenioid"
+    },
+    {
+      "source": "PolyIsomorphism",
+      "target": "Realification"
+    },
+    {
+      "source": "PolyIsomorphism",
+      "target": "SplitFrobenioid"
+    },
+    {
+      "source": "PowerSeries",
+      "target": "Composition"
+    },
+    {
+      "source": "PowerSeries2",
+      "target": "FormalGroupSub"
+    },
+    {
+      "source": "PowerSeries3",
+      "target": "FormalGroup3Congr"
+    },
+    {
+      "source": "Premises311",
+      "target": "VolumeModel"
+    },
+    {
+      "source": "PrincipalUnitGroup",
+      "target": "UnitFiltration"
+    },
+    {
+      "source": "PrincipalUnits",
+      "target": "PrincipalUnitGroup"
+    },
+    {
+      "source": "ProObject",
+      "target": "LimitCompact"
+    },
+    {
+      "source": "Profinite",
+      "target": "Finiteness"
+    },
+    {
+      "source": "Profinite",
+      "target": "GaloisCategory"
+    },
+    {
+      "source": "Profinite",
+      "target": "Topology"
+    },
+    {
+      "source": "RamifiedBase",
+      "target": "DecompositionInertia"
+    },
+    {
+      "source": "RamifiedBase",
+      "target": "RamifiedSplit"
+    },
+    {
+      "source": "RamifiedEntrance",
+      "target": "EisensteinGalois"
+    },
+    {
+      "source": "RamifiedEntrance",
+      "target": "LaurentCoeff"
+    },
+    {
+      "source": "Realification",
+      "target": "ArchimedeanPlace"
+    },
+    {
+      "source": "RecGluing",
+      "target": "Premises311"
+    },
+    {
+      "source": "RecRamified",
+      "target": "EisensteinTower"
+    },
+    {
+      "source": "RecRamified",
+      "target": "RecGluing"
+    },
+    {
+      "source": "Ring",
+      "target": "PowerSeries"
+    },
+    {
+      "source": "RootsOfUnity",
+      "target": "UnitDecomposition"
+    },
+    {
+      "source": "SGA1",
+      "target": "GaloisAxioms"
+    },
+    {
+      "source": "SGA1Completion",
+      "target": "PolyIsomorphism"
+    },
+    {
+      "source": "SGA1Completion",
+      "target": "SGA1Object"
+    },
+    {
+      "source": "SGA1Object",
+      "target": "ProObject"
+    },
+    {
+      "source": "SGA1Object",
+      "target": "SumDecomposition"
+    },
+    {
+      "source": "ScholzeStix",
+      "target": "Verdict"
+    },
+    {
+      "source": "Skeleton",
+      "target": "Diophantine"
+    },
+    {
+      "source": "Skeleton",
+      "target": "Evaluation"
+    },
+    {
+      "source": "Skeleton",
+      "target": "Frobenioid"
+    },
+    {
+      "source": "Skeleton",
+      "target": "HodgeTheater"
+    },
+    {
+      "source": "Skeleton",
+      "target": "Mochizuki"
+    },
+    {
+      "source": "Skeleton",
+      "target": "Multiradial"
+    },
+    {
+      "source": "Skeleton",
+      "target": "ScholzeStix"
+    },
+    {
+      "source": "SplitFrobenioid",
+      "target": "RamifiedSplit"
+    },
+    {
+      "source": "SplitFrobenioid",
+      "target": "SplitFibered"
+    },
+    {
+      "source": "TateQuotient",
+      "target": "MonoThetaWitness"
+    },
+    {
+      "source": "Teichmuller",
+      "target": "RootsOfUnity"
+    },
+    {
+      "source": "ThetaFunctional",
+      "target": "ThetaGauss"
+    },
+    {
+      "source": "ThetaFunctional",
+      "target": "ThetaReflection"
+    },
+    {
+      "source": "ThetaGauss",
+      "target": "MonoThetaWitness"
+    },
+    {
+      "source": "ThetaSeries",
+      "target": "ThetaFunctional"
+    },
+    {
+      "source": "Topology",
+      "target": "Compactness"
+    },
+    {
+      "source": "Topology",
+      "target": "SGA1"
+    },
+    {
+      "source": "TorsionPoints",
+      "target": "FormalGroupPointsLaw"
+    },
+    {
+      "source": "TorsionPoints",
+      "target": "TorsionTrivial"
+    },
+    {
+      "source": "TorsionTrivial",
+      "target": "EisensteinRing"
+    },
+    {
+      "source": "UnitDecomposition",
+      "target": "ZpUnits"
+    },
+    {
+      "source": "UnitFiltration",
+      "target": "Fermat"
+    },
+    {
+      "source": "ZpDomain",
+      "target": "EisDomain"
+    },
+    {
+      "source": "ZpUnits",
+      "target": "FullReciprocity"
+    }
+  ]
+}
