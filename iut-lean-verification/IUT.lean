@@ -122,6 +122,7 @@ import IUT.EisDomain
 import IUT.EisDomain2
 import IUT.EisEndoRigidity
 import IUT.FactorTheorem
+import IUT.LambdaClassify
 import IUT.LaurentCoeff
 import IUT.LaurentRing
 import IUT.LaurentMonomial

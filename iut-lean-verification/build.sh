@@ -931,6 +931,12 @@ import IUT
 #print axioms IUT.theorem311Premises
 #print axioms IUT.premises_exist
 #print axioms IUT.premises_then_szpiro
+#print axioms IUT.eis_root_meets_family
+#print axioms IUT.eis_torsion_classify_full
+#print axioms IUT.endo_lambda_meets_family
+#print axioms IUT.eis_root_meets_family_dn
+#print axioms IUT.lambdaClassify
+#print axioms IUT.lambdaClassify_exists
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
