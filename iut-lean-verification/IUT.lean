@@ -118,6 +118,8 @@ import IUT.EisensteinGalois
 import IUT.RecRamified
 import IUT.EisensteinTower
 import IUT.EisensteinUpper
+import IUT.EisDomain
+import IUT.EisEndoRigidity
 import IUT.LaurentCoeff
 import IUT.LaurentRing
 import IUT.LaurentMonomial
