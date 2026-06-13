@@ -123,6 +123,7 @@ import IUT.LaurentMonomial
 import IUT.ThetaSeries
 import IUT.ThetaFunctional
 import IUT.ThetaGauss
+import IUT.TateQuotient
 import IUT.FormalGroupPointsLaw
 import IUT.FormalGroupPoints3
 import IUT.FormalGroupPointsMul2
