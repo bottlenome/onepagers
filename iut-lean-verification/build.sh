@@ -867,6 +867,14 @@ import IUT
 #print axioms IUT.zp_ne_zero_mul
 #print axioms IUT.zpDomainData
 #print axioms IUT.zpDomain_nonempty
+#print axioms IUT.cube_expand
+#print axioms IUT.ssq_closed
+#print axioms IUT.stri_closed
+#print axioms IUT.sq_exponent
+#print axioms IUT.ssq_stri
+#print axioms IUT.cube_le_ssq
+#print axioms IUT.gaussianVolume
+#print axioms IUT.gaussian_volume_exists
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
