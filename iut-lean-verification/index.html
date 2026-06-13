@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IUT 系3.12 Lean 形式検証 — 証明依存グラフ</title>
+<title>IUT 形式検証マップ — 宇宙際タイヒミュラー論を Lean で検証</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -30,33 +30,61 @@
   .btn.accent { background: #0c2536; border-color: #0ea5e9; color: #7dd3fc; font-weight: 600; }
   #cy { position: fixed; top: 50px; left: 0; right: 0; bottom: 0; }
 
-  /* overview + legend (collapsible, works on mobile) */
+  /* staged guide + legend (collapsible, doubles as the page's intro story) */
   #info {
-    position: fixed; top: 60px; left: 10px; z-index: 15; width: 250px;
+    position: fixed; top: 60px; left: 10px; z-index: 15; width: 310px;
     max-width: calc(100% - 20px);
-    background: rgba(30,41,59,0.95); border: 1px solid #334155; border-radius: 12px;
-    font-size: 0.76rem; backdrop-filter: blur(6px); overflow: hidden;
+    background: rgba(15,23,42,0.97); border: 1px solid #334155; border-radius: 14px;
+    font-size: 0.78rem; backdrop-filter: blur(6px); overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.45);
   }
   #infoHead {
     display: flex; align-items: center; gap: 0.4rem; cursor: pointer;
-    padding: 0.6rem 0.8rem; font-weight: 600; color: #7dd3fc; user-select: none;
+    padding: 0.65rem 0.85rem; font-weight: 700; color: #7dd3fc; user-select: none;
+    border-bottom: 1px solid #1e293b;
   }
   #infoHead .chev { margin-left: auto; transition: transform 0.2s; color: #94a3b8; }
+  #info.collapsed #infoHead { border-bottom: 0; }
   #info.collapsed #infoHead .chev { transform: rotate(-90deg); }
-  #infoBody { padding: 0 0.8rem 0.8rem; max-height: 65vh; overflow-y: auto; }
+  #infoBody { padding: 0.7rem 0.85rem 0.85rem; max-height: 72vh; overflow-y: auto; }
   #info.collapsed #infoBody { display: none; }
-  #infoBody .lead { color: #cbd5e1; line-height: 1.6; margin-bottom: 0.7rem; }
-  #infoBody .lead b { color: #f1f5f9; }
-  #infoBody .how { color: #94a3b8; line-height: 1.6; margin-bottom: 0.8rem; font-size: 0.72rem; }
-  #infoBody .how .k { color: #7dd3fc; }
-  #infoBody h2 { font-size: 0.74rem; color: #7dd3fc; margin: 0.2rem 0 0.5rem; }
-  .lg { display: flex; align-items: flex-start; gap: 0.45rem; margin-bottom: 0.55rem; cursor: pointer; }
+
+  /* numbered story steps */
+  .gstep { display: flex; gap: 0.55rem; padding: 0.55rem 0; border-top: 1px dashed #1e293b; }
+  .gstep:first-child { border-top: 0; padding-top: 0.2rem; }
+  .gstep .gn {
+    flex: none; width: 22px; height: 22px; border-radius: 50%;
+    background: #0c2536; border: 1px solid #0ea5e9; color: #7dd3fc;
+    font-size: 0.74rem; font-weight: 700; display: grid; place-items: center; margin-top: 1px;
+  }
+  .gstep .gc { flex: 1; min-width: 0; }
+  .gstep .gc h3 { font-size: 0.84rem; color: #f1f5f9; margin-bottom: 0.2rem; }
+  .gstep .gc p { color: #cbd5e1; line-height: 1.65; margin: 0; }
+  .gstep .gc p + p { margin-top: 0.4rem; }
+  .gstep .gc b { color: #f1f5f9; }
+  .gstep .gc .k { color: #7dd3fc; }
+  .gstep .gc .hint { color: #94a3b8; font-size: 0.72rem; margin-top: 0.25rem; }
+  #guideClose { width: 100%; margin-top: 0.7rem; }
+
+  /* pillar legend (lives inside step 4) */
+  .lg { display: flex; align-items: flex-start; gap: 0.45rem; margin-top: 0.5rem; cursor: pointer; }
   .lg .sw { width: 13px; height: 13px; border-radius: 3px; flex: none; margin-top: 2px; }
-  .lg .nm { flex: 1; color: #e2e8f0; }
+  .lg .nm { color: #e2e8f0; }
+  .lg .plain { color: #94a3b8; font-size: 0.72rem; line-height: 1.5; margin: 1px 0 2px; }
   .lg .bar { height: 5px; border-radius: 3px; background: #334155; margin-top: 3px; overflow: hidden; }
   .lg .bar i { display: block; height: 100%; border-radius: 3px; }
   .lg .pc { color: #94a3b8; font-size: 0.68rem; }
   .lg.dim { opacity: 0.35; }
+
+  /* mobile: present the guide as a bottom sheet so it reads as the intro, then closes */
+  @media (max-width: 720px) {
+    #info {
+      top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-width: 100%;
+      border-radius: 16px 16px 0 0; border-bottom: 0;
+    }
+    #infoBody { max-height: 56vh; }
+    #info:not(.collapsed) ~ #reset { display: none; }
+  }
 
   /* detail popup (modal, not a page transition) */
   #backdrop {
@@ -130,28 +158,59 @@
 </head>
 <body>
 <div id="top">
-  <h1>IUT 系3.12 Lean 形式検証</h1>
-  <span class="sub">証明依存グラフ</span>
+  <h1>IUT 形式検証マップ</h1>
+  <span class="sub">宇宙際タイヒミュラー論を Lean で検証 — 結論=系3.12 への土台を柱ごとに</span>
   <span id="stats"></span>
   <button class="btn accent" id="openReport">📄 詳細</button>
 </div>
 
 <div id="info">
-  <div id="infoHead">📖 このグラフについて <span class="chev">▾</span></div>
+  <div id="infoHead">📖 はじめての方へ — このページの読み方 <span class="chev">▾</span></div>
   <div id="infoBody">
-    <div class="lead">
-      Mochizuki <b>IUT 系3.12</b> の証明を <b>Lean4</b> で形式検証した
-      「<b>依存グラフ</b>」です。どのモジュールが何に依存し、証明がどこまで
-      機械チェック済みかが一目で分かります。
-    </div>
-    <div class="how">
-      <span class="k">●</span> Lean モジュール &nbsp; <span class="k">→</span> import 依存 &nbsp;
-      <span class="k">色</span> 証明の柱<br>
-      丸（柱）を<b>タップで展開</b>、もう一度タップで折りたたみ。
-      モジュールを<b>タップで詳細</b>。
-    </div>
-    <h2>柱（タップで絞り込み）</h2>
-    <div id="legendItems"></div>
+
+    <div class="gstep"><span class="gn">1</span><div class="gc">
+      <h3>そもそも IUT って？</h3>
+      <p>数学者 <b>望月新一</b> が約20年かけて書いた4本の論文（IUT I〜IV・あわせて約1000ページ）。
+      超有名な未解決問題 <b>「ABC予想」</b> を証明した、と主張しています。
+      でも一部の数学者が「本当に正しい？」と反論し、いまも<b>論争中</b>です。</p>
+    </div></div>
+
+    <div class="gstep"><span class="gn">2</span><div class="gc">
+      <h3>どこまでコンピュータで確かめた？</h3>
+      <p>この巨大な理論を、コンピュータ（<b>Lean</b>）が1行ずつ厳密にチェックできる形に組み直しています。
+      理論はいくつかの<b>土台（＝柱）</b>の上に建っていて、柱ごとに「どこまで組み直せたか」を％で表示。
+      下のグラフの<span class="k">色</span>＝柱です。</p>
+    </div></div>
+
+    <div class="gstep"><span class="gn">3</span><div class="gc">
+      <h3>「系3.12」はどこにある？</h3>
+      <p>系3.12 は、この理論のいちばん上にある <b>“結論の要”</b>。ABC予想に届くための決定的な不等式で、
+      まさに<b>論争の的（係争点）</b>です。だからこのページは 3.12「だけ」を見ているのではなく、
+      <b>3.12 を支える土台を下から積み上げ</b>、論争がどこに帰着するかを厳密にしています。</p>
+    </div></div>
+
+    <div class="gstep"><span class="gn">4</span><div class="gc">
+      <h3>柱（ベースになる数学）</h3>
+      <p>柱＝3.12 を支えるベースの数学分野。タップすると、その柱のモジュールだけに<b>絞り込み</b>できます。</p>
+      <div id="legendItems"></div>
+    </div></div>
+
+    <div class="gstep"><span class="gn">5</span><div class="gc">
+      <h3>グラフ（地図）の読み方</h3>
+      <p><span class="k">●</span> 丸＝Lean モジュール &nbsp; <span class="k">→</span> 矢印＝「これが無いと成り立たない」依存 &nbsp;
+      <span class="k">色</span>＝同じ柱のまとまり（クラスタ）。</p>
+      <p class="hint">柱の大きな丸を<b>タップで展開</b>／もう一度タップで折りたたみ。モジュールを<b>タップで詳細</b>。</p>
+    </div></div>
+
+    <div class="gstep"><span class="gn">6</span><div class="gc">
+      <h3>結論 — 何が分かった？</h3>
+      <p>Θ-リンクの両側のコピーを「<b>同じ</b>」とみなすかどうか、が全てを決めます。</p>
+      <p>・同じとみなす（<b>Scholze–Stix</b> の読み）→ 3.12 は<b>矛盾</b>＝この読みなら間違い。<br>
+      ・別物とする（<b>望月</b> の読み）→ 矛盾は出ない。ただし 3.12 の正しさは未形式化の定理3.11 に全面的に依存。</p>
+      <p>つまり論争は <b>「コピーを同一視するか否か」の一点に帰着する</b> ——これをコンピュータで証明しました。</p>
+    </div></div>
+
+    <button class="btn accent" id="guideClose">✕ 閉じてグラフを探索する</button>
   </div>
 </div>
 
@@ -279,9 +338,15 @@
 
   // ---- overview / legend ----
   const info = document.getElementById('info');
-  document.getElementById('infoHead').onclick = () => info.classList.toggle('collapsed');
-  // start collapsed on small screens so it doesn't cover the graph
-  if (window.matchMedia('(max-width: 720px)').matches) info.classList.add('collapsed');
+  const GKEY = 'iutGuideCollapsed';
+  function setGuide(collapsed) {
+    info.classList.toggle('collapsed', collapsed);
+    try { localStorage.setItem(GKEY, collapsed ? '1' : '0'); } catch (e) {}
+  }
+  document.getElementById('infoHead').onclick = () => setGuide(!info.classList.contains('collapsed'));
+  document.getElementById('guideClose').onclick = () => setGuide(true);
+  // open by default so first-time visitors read the story; honor a prior "closed" choice
+  try { if (localStorage.getItem(GKEY) === '1') info.classList.add('collapsed'); } catch (e) {}
 
   const legendItems = document.getElementById('legendItems');
   let activePillar = null;
@@ -294,6 +359,7 @@
       `<span class="sw" style="background:${p.color}"></span>` +
       `<span style="flex:1">` +
         `<span class="nm">${p.label} <span class="pc">(${cnt})</span></span>` +
+        (p.plain || p.blurb ? `<div class="plain">${p.plain || p.blurb}</div>` : '') +
         `<div class="bar"><i style="width:${p.progress_pct||0}%;background:${p.color}"></i></div>` +
         `<span class="pc">${p.status||''}</span>` +
       `</span>`;
