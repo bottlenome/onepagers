@@ -937,6 +937,11 @@ import IUT
 #print axioms IUT.eis_root_meets_family_dn
 #print axioms IUT.lambdaClassify
 #print axioms IUT.lambdaClassify_exists
+#print axioms IUT.reflRep_involutive
+#print axioms IUT.isgn_neg_succ
+#print axioms IUT.theta_refl_coeff
+#print axioms IUT.theta_refl
+#print axioms IUT.theta_refl_eq_funeq
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum

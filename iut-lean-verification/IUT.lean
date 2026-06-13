@@ -128,6 +128,7 @@ import IUT.LaurentRing
 import IUT.LaurentMonomial
 import IUT.ThetaSeries
 import IUT.ThetaFunctional
+import IUT.ThetaReflection
 import IUT.ThetaGauss
 import IUT.TateQuotient
 import IUT.MonoThetaWitness
