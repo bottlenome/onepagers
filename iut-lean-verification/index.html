@@ -158,7 +158,241 @@
 </section>
 
 <section>
-  <h2>M1〜M85 の形式化（追加検証）</h2>
+  <h2>M1〜M98 の形式化（追加検証）</h2>
+
+  <h3>M98F: テータ群 mod l — 柱E: mono-theta 環境の l-捻れ骨格（IUT/ThetaGroupMod.lean）</h3>
+  <div class="box">
+    <p><strong>[EtTh] の l-捻れ Heisenberg 群の構成と剛性の移植</strong>（サブエージェント並行開発・統合）: 合同 <code>thetaRelMod l</code>（成分ごと l 整除）の Heisenberg 積との両立・商群 <code>thetaGrpMod l : Grp</code>（M91 と同じ二重 Quot.lift）+ 射影準同型・交換子 <code>theta_comm_mod</code>・<strong>本丸 <code>mono_theta_cyclotomic_rigidity_mod</code>: mod-l cyclotomic rigidity</strong>（M11-5 の交換子論法を商の内側に移植）・<strong>切断の 2l 周期性 <code>thetaSectionMod_period</code></strong>（tri(2l) = l(2l+1) の整除性経由）・総括 <code>ThetaGroupModData</code>。±-構造・μ_l ↔ O^× 同一視・l⋇ ラベリングは次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M98: テータの反転対称性 — 柱E（IUT/ThetaReflection.lean）</h3>
+  <div class="box">
+    <p><strong>テータ係数の u^n ↔ u^{−(n+1)} 反転対称性</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>reflRep</code> / <code>reflRep_involutive</code> (M98-1)</td><td>反転作用素 J(F)_n := F_{−(n+1)} とその<strong>対合性 J² = id</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>isgn_neg</code> / <code>isgn_neg_succ</code> (M98-2)</td><td>符号の反転則——(−1)^{−(n+1)} = −(−1)^n</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>theta_refl_coeff</code> / <code>theta_refl</code> (M98-3, 4)</td><td><strong>本丸: J(Θ) = −Θ</strong>——三角数の中心対称 n(n+1) = (−(n+1))(−(n+1)+1) が台を保ち符号反転が −1 を供給。係数 → 級数（Quot）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>theta_refl_eq_funeq</code> (M98-5)</td><td><strong>M89 との合流: 反転作用素 J と (qu)-代入作用素 T は Θ 上で一致</strong>（ともに −Θ）——テータの自己双対性の係数版</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">l-捻れ係数での反転（mod-l テータ群の ±-構造）は次層。</p>
+  </div>
+
+  <h3>M97F: Λ₁ と自己準同型の完全分類 — 柱B: 剛性の組み立て capstone（IUT/LambdaClassify.lean）</h3>
+  <div class="box">
+    <p><strong>柱B 剛性プログラムの全部品の組み立てによる分類の完成</strong>（hD : NoZeroDiv を法として、サブエージェント並行開発・統合）: choice なし添字関数 rootSeq（i < p−1 は共役 ω(i+1)λ・それ以外は t）・<strong>本丸1 <code>eis_root_meets_family</code>: Eisenstein 根は共役族と必ず交わる</strong>（回避すると p 個の相異なる根 → M96 eis_roots_bound に矛盾）・<strong>本丸2 <code>eis_torsion_classify_full</code>: t ∈ Λ₁ → t = 0 ∨ 共役族と交わる</strong>（排中律不使用）・<strong>本丸3 <code>endo_lambda_meets_family</code>: σ(λ) = ω(a)λ の構成的 ¬∀≠ 形</strong>・総括 <code>LambdaClassifyData</code>。正の ∃ 形は逆極限 O の等値判定が choice なしで不可能なため正直に対象外。<strong>柱B 剛性プログラム（M84F 下界 → M95 拘束 → M96 上界 → 本層組み立て）完結。</strong>全て標準公理のみ。</p>
+  </div>
+
+  <h3>M99F: 具体的 VolumeTheory モデル — 柱D: インターフェースの非空性実証（IUT/VolumeModel.lean）</h3>
+  <div class="box">
+    <p><strong>VolumeTheory インターフェースが非空であることの完全検証</strong>（サブエージェント並行開発・統合）: <code>intVolumeTheory</code>（Region := Int, le := ≤, hull := max, vol := id）で 9 フィールド全証明 → VolumeTheory は inhabited。M97 の sumSq 閉形式/下界の Int 持ち上げ・具体 Skeleton で Cor312 充足可能性の sanity・総括 <code>VolumeModelData</code>（<code>no_multiradial_rep : True</code> の正直マーカー付き）。<strong>正直申告: MultiradialRep は構成していない = 定理3.11 は証明していない。</strong>本層はインターフェースの非空性・整合性の実証のみで、柱D 本丸は未形式化。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M97: 定理3.11 の前提インターフェース — 柱D 入口（IUT/Premises311.lean）</h3>
+  <div class="box">
+    <p><strong>柱B + 柱E の総括 witness を束ね、定理3.11 → 系3.12 → Szpiro の既存パイプラインに接続</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ssq_eq_sumSq</code> (M97-1)</td><td><strong>M1 ↔ M93 の同定（輪の接続）</strong>——系3.12 骨格の Σj² 簿記（M5-2 厳密評価障害で使用中）と E8 のガウス体積簿記は同一の関数</td><td><strong>公理依存ゼロ</strong></td></tr>
+      <tr><td><code>sumSq_closed</code> / <code>cube_le_sumSq</code> (M97-2)</td><td>閉形式 6Σj² = l(l+1)(2l+1) と離散下界 l³ ≤ 3Σj² が定理3.11 の体積側ステートメントへ移送</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>Theorem311Premises</code> / <code>theorem311Premises</code> (M97-3, 4)</td><td><strong>前提の束</strong>——柱B（M94 貼り合わせ・M89F 捻れ塔・M93F+M96F 整域性・M95 自己同型上界）+ 柱E（M92 mono-theta・M93 体積）の 8 フィールド。witness の公理チェックが<strong>柱B+E 全鎖の Classical 不混入の一括確認</strong>を兼ねる</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>premises_then_szpiro</code> (M97-5)</td><td>前提 + MultiradialRep の充足 ⟹ Szpiro 型不等式（M5-5 パイプラインの再確認）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">MultiradialRep の充足（定理3.11 の構成本体）が柱D の本丸で未形式化。柱A の総括は意図的 Classical 22 のため choice-free 束から除外（明記）。</p>
+  </div>
+
+  <h3>M96F: O の witness 付き整域性・第二段（完結） — 柱B: hD の witness 版解消（IUT/EisDomain2.lean）</h3>
+  <div class="box">
+    <p><strong>M93F の正直申告分を全回収</strong>（サブエージェント並行開発・統合）: 逆向きシフト/巻き戻り・λ-除算の全関数化・<strong>本丸1 <code>eisValDecompose</code>: witness 付き λ 進付値分解 x = λ^k·u</strong>（測度 μ = i + (n−1)(p−1)——λ 倍がどちらのシフト域でも μ をちょうど 1 上げる不変量の発見で帰納が閉じる。場合分けは Bool 零テストで choice なし）・<strong>本丸2 <code>eis_mul_ne_zero</code>: witness 付き一般積非零定理 = M90F の整域性仮定 hD の witness 版による無条件解消</strong>・witness 付き積 witness・総括 <code>EisDomain2Data</code>。選言形 NoZeroDiv は排中律が要るため正直に対象外。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M96: 因数定理と根の個数 ≤ 次数 — 柱B: 分類の最終鍵（IUT/FactorTheorem.lean）</h3>
+  <div class="box">
+    <p><strong>「次数 d・最高次係数 ≠ 0 の多項式は d+1 個の相異なる根を持てない」</strong>を任意の可換環 + NoZeroDiv で完全証明——M95 と M84F を完全分類に閉じる最後の鍵:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>geom_factor</code> (M96-2)</td><td><strong>幾何級数の因数分解</strong> x^k − r^k = (x−r)·Σ x^j r^{k−1−j}</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>pEval_div</code> (M96-4)</td><td><strong>除算恒等式（本丸1）</strong> P(x) = (x−r)Q(x) + P(r)——商係数の明示式に対し d 帰納 + 最高次剥がし。<strong>幾何級数が帰納の差を吸収し三角形二重和の交換を完全回避</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>roots_bound</code> (M96-5)</td><td><strong>根の個数 ≤ 次数（本丸2）</strong>——最後の根で割り、残りの根は商の根（零因子なし）、商の最高次係数 = 元と同じで帰納</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>bin_roots_bound</code> / <code>eis_roots_bound</code> (M96-6, 7)</td><td>二項特化 <strong>x^n = a の相異なる解 ≤ n 個</strong>と <strong>Eisenstein 方程式 t^{p−1} = −π の相異なる根 ≤ p−1 個</strong>（柱B 上界の最終段）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">M84F の共役族との結合による Λ₁ = {0} ∪ {ω(a)λ} の明示分類は次層。</p>
+  </div>
+
+  <h3>M95: 自己同型の上界骨格 — 柱B: 分類への第一段（IUT/EisEndoRigidity.lean）</h3>
+  <div class="box">
+    <p><strong>「構成した σ_ζ 族が Galois 群の全てであること」の上界側</strong>——M86F〜M89F の構成（下界）の対:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>endo_eisF_comm</code> / <code>endo_eisIter_comm</code> (M95-1, 2)</td><td><strong>σ ∘ f = f ∘ σ は「ℤ_p の像の固定 + 環準同型性」だけから従う</strong>（Galois 性不要）——反復・捻れ塔の保存も任意の ℤ_p-固定自己準同型へ一般化</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>endo_lambda_torsion</code> (M95-3)</td><td><strong>本丸: σ(λ) ∈ Λ₁（無条件）</strong>——λ の行き先は円分体の中に剛性的に拘束される（mono-anabelian 的上界）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>endo_lambda_classify</code> / <code>endo_lambda_root</code> / <code>EisEndoRigidityData</code> (M95-4, 5)</td><td>NoZeroDiv の下で σ(λ) = 0 ∨ σ(λ)^{p−1} = −π（M90F のインスタンス）+ 総括 witness</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">残るギャップは「Eisenstein 根 ≤ p−1 個（因数定理）」のみ → σ(λ) = ω(a)λ の完全分類は次層。</p>
+  </div>
+
+  <h3>M93F: O の witness 付き整域性・第一段 — 柱B（IUT/EisDomain.lean）</h3>
+  <div class="box">
+    <p><strong>整域性 witness 理論（M91F）の O = ℤ_p[π] への移送</strong>（サブエージェント並行開発・統合）: 核心は<strong>簡約係数写像 <code>eisCoeff</code></strong>——c_i(f) = Σ_j (−π)^j f_{i+j(p−1)} が h·E 上で<strong>望遠鏡和により単一境界項に潰れて well-defined</strong>（Quot.lift・choice なし）。<code>EisNeZeroAt</code>（witness 付き非零）・<strong><code>eisOf_injective</code>（O は ℤ_p を忠実に含む — 無条件の新事実）</strong>・λ-シフト簿記・<strong><code>eis_lambda_mul_ne_zero</code></strong>・<strong>witness 付き λ-除算 <code>eis_lambda_division</code></strong>・剰余乗法性 + 単数剰余の積の非零性・総括 <code>EisDomainData</code>（10 事実）。正直申告: 一般の λ 進付値分解と一般積の非零性（→ M90F の hD 解消）は次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M94: K^× 貼り合わせのレベル 1 骨格 — 柱B（IUT/RecGluing.lean）</h3>
+  <div class="box">
+    <p><strong>ℚ_p^× = p^ℤ × ℤ_p^×（M37）から「Frobenius × O の Galois 作用」への貼り合わされた相互作用</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>zres</code> / <code>res1</code> / <code>res1_mul_congr</code> (M94-1)</td><td><strong>レベル 1 剰余の標準 Int 代表の choice なし抽出</strong>（Quot.lift + emod——∃-witness をデータに使わない）と乗法合同 res1(uv) ≡ res1(u)·res1(v)</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>recInertia</code> + 乗法性・U^(1)・λ-作用 (M94-2)</td><td>慣性作用 u ↦ σ_{res1(u)} ∈ Aut(O)——σ_{uv} = σ_u ∘ σ_v・U^(1) 自明・σ_u(λ) = ω(res1 u)·λ</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>recLevelOne</code> + 乗法性 (M94-3)</td><td><strong>貼り合わせ（本丸）</strong> rec(k, u) = (toZhat(k), σ_{res1(u)})——不分岐・分岐両成分の乗法性</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>recLevelOne_ker</code> / <code>RecGluingData</code> (M94-4, 5)</td><td><strong>レベル 1 の核 = {0} × U^(1)</strong>（toZhat 単射性 + emod 構成的場合分け + eisGal_faithful、排中律不使用）と総括 witness</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">Λₙ（n ≥ 2）の高層・全射性・自己同型全体との一致は次層。</p>
+  </div>
+
+  <h3>M93: ガウス体積簿記 vol_q — 柱E・E8 完結（IUT/GaussianVolume.lean）</h3>
+  <div class="box">
+    <p><strong>「テータ関数 ↔ ガウス積分」類比の離散簿記</strong>——テータパイロットの総 q-次数（log-volume）の閉形式と下界:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ssq_closed</code> / <code>stri_closed</code> (M93-1, 2)</td><td><strong>平方和・四面体数の閉形式</strong> 6·Σj² = l(l+1)(2l+1)・6·Σtri = l(l+1)(l+2)（非線形は展開補題で {l, l², l³} の線形式に落として omega）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>sq_exponent</code> / <code>ssq_stri</code> (M93-3)</td><td><strong>指数橋</strong> j² + j = 2·tri j——[IUTchI] の q^{j²} 正規化と q^{tri j} 座席（M90/M92）の換算式 + 総和形</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>cube_le_ssq</code> (M93-4)</td><td><strong>ガウス積分の離散下界（本丸）</strong> l³ ≤ 3·Σj²（Σx² ~ ∫x² = l³/3 の離散版 = 体積下界）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>GaussianVolumeData</code> / <code>gaussian_volume_exists</code> (M93-5)</td><td><strong>E8 総括 witness</strong>——閉形式・橋・下界・M92 の仮定なしガウス値の束。<strong>柱E（E1〜E8）完結</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">実数 log-volume（ℝ 化接続）・系3.12 の不等式本体（柱D）は未形式化。</p>
+  </div>
+
+  <h3>M92: mono-theta witness — 柱E・E7（IUT/MonoThetaWitness.lean）</h3>
+  <div class="box">
+    <p><strong>柱E の解析側（M86〜M90）と幾何側（M91）を M11 の mono-theta 骨格に接合する capstone</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>tri</code> / <code>tri_nat</code> / <code>tri_int</code> / <code>theta_gauss_tri</code> (M92-1, 2)</td><td>三角数 j(j+1)/2 の分母なし定義と<strong>仮定なしのガウス値</strong>: T^j(Θ) の q^{tri j} u^j 係数 = 1</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>thetaSection_mul</code> / <code>tri_cocycle</code> (M92-3)</td><td><strong>本丸: ガウス指数は Heisenberg 群 thetaGrp の標準切断</strong>——Φ(j) = (j, j, tri j) は準同型（2-コサイクル ij を三角数の加法則が吸収）。コサイクル恒等式は第 3 成分の congrArg で無償回収</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>theta_section_rigid</code> (M92-4)</td><td><strong>切断の一意性</strong>——(1,1,1) を通る乗法的切断は Φ のみ（mono-theta 的剛性の切断版）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>MonoThetaWitness</code> / <code>mono_theta_exists</code> (M92-5)</td><td><strong>E7 総括 witness</strong>——切断・反復関数等式（M90）・ガウス値・cyclotomic rigidity（M11-5）・Tate 降下（M91）の束</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">l-捻れ・±構造込みの完全な mono-theta 環境・ガウス積分 vol_q（E8）は次層。</p>
+  </div>
+
+  <h3>M91F: ℤ_p の witness 付き零因子なし — 柱B: O 整域性への突破口（IUT/ZpDomain.lean）</h3>
+  <div class="box">
+    <p><strong>構成的（witness 付き）整域性の完全証明</strong>（サブエージェント並行開発・統合）: Bool 零テスト <code>zmodIsZero</code>（排中律なしの場合分けの鍵）・<code>NeZeroAt</code>（レベル n 成分 ≠ 0）・<strong><code>zpValDecompose</code>: witness 付き付値分解 x = p^k·u</strong>（zpDivP の構造的再帰）・レベル 1 乗法性（Bezout 経由）・<strong>本丸 <code>zp_mul_ne_zero</code>: NeZeroAt x m → NeZeroAt y n → NeZeroAt (x·y) (m+n)</strong> + x·y ≠ 0・総括 <code>ZpDomainData</code>。正直申告: 無 witness の NoZeroDiv は排中律が必要なため対象外・eisRing への移送は次層。全て標準公理のみ（choice なし）。</p>
+  </div>
+
+  <h3>M91: Tate 点群 G/q^ℤ — 柱E・E6（IUT/TateQuotient.lean）</h3>
+  <div class="box">
+    <p><strong>Tate 曲線の点群 ℚ_p^×/q^ℤ の骨格</strong>——中心元 q を持つ任意の群の q^ℤ 商として構成（ℚ_p^× は可換なので適用可）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>tateRel</code> + 同値関係性・演算両立 (M91-2)</td><td><strong>Tate 関係の Nat 冪対称定義</strong> x ~ y ⟺ ∃ a b, q^a x = q^b y——整数冪の符号場合分けを全廃、pow_add だけで閉じる</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tateGrp</code> / <code>tateOf</code> (M91-3)</td><td><strong>商群 G/q^ℤ</strong>（Quot、群公理は congrArg 一発）と射影準同型</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tate_exact</code> / <code>tate_q_one</code> / <code>tate_ker</code> (M91-4)</td><td>Quot 等式からの関係抽出（propext lift・Quot.exact 不使用）・q ↦ 1・<strong>核の特徴付け ker = q^ℤ</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tate_shift_trivial</code> / <code>tate_deck_collapse</code> (M91-5, 6)</td><td><strong>本丸: 代入 u ↦ q^j u（M89/M90 の T^j の幾何側）は Tate 商上で恒等</strong>——テータの値が Tate 点上 well-defined になる理由。検算: デッキ群 ℤ/⟨1⟩ は一点</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">ℚ_p^× の実装接続（M37 p^ℤ × ℤ_p^× 分解）・q の無限位数・捻れ点 q^{j/N}（E7 mono-theta）は次層。</p>
+  </div>
+
+  <h3>M90: 反復関数等式とガウス簿記 — 柱E・E5（IUT/ThetaGauss.lean）</h3>
+  <div class="box">
+    <p><strong>T^j = q^{j(j+1)/2}·u^j·(u ↦ q^j u) のガウス指数簿記</strong>——IUT の捻れ値 q^{j²/2l} 系簿記の形式版:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>tCoeff</code> / <code>tCoeff_one</code> (M90-2)</td><td>T の j 回反復の係数列（構造的再帰）——j = 1 で M89 の tThetaRep と一致（rfl 一発の検算）</td><td>標準のみ</td></tr>
+      <tr><td><code>tCoeff_eq</code> (M90-3)</td><td><strong>反復関数等式（本丸1）</strong> T^j(Θ) = (−1)^j Θ——M89 の theta_funeq_coeff を j 重否定 negPow ごしに帰納で持ち上げ</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tCoeff_shift</code> / <code>gauss_bridge</code> (M90-4)</td><td><strong>ガウス簿記（本丸2）</strong>——2m = 2i + 2jn − j(j−1) なら T^j(Θ)_m の uⁿ 係数 = Θ_i の u^{n−j} 係数。<strong>u^j 対角で降下量 = ガウス指数 j(j+1)/2</strong>。非線形の橋は gauss_bridge 一本に隔離</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>thetaIter_even</code> / <code>thetaIter_odd</code> / <code>theta_gauss</code> (M90-5, 6)</td><td>級数（Quot）レベルの閉形式 T^{2k}Θ = Θ・T^{2k+1}Θ = −Θ と<strong>対角ガウス値 = 1</strong>（2m = j(j+1) のとき u^j 係数 = (−1)^j·(−1)^j）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">Tate 点群 ℚ_p^×/q^ℤ（E6）・mono-theta witness（E7）は次層。</p>
+  </div>
+
+  <h3>M90F: Λ₁ の上界・第一段 — 柱B: Eisenstein 方程式への還元（IUT/EisensteinUpper.lean）</h3>
+  <div class="box">
+    <p><strong>「Λ₁ の非零元は全て t^{p−1} = −π の根」の条件付き完全証明</strong>（サブエージェント並行開発・統合）: <code>eisF_factor</code>（f(t) = t·(π + t^{p−1})）・<code>NoZeroDiv</code>（公理依存ゼロの述語）・<strong><code>eisTorsion_one_classify</code>: NoZeroDiv の下で t ∈ Λ₁ ⟹ t = 0 ∨ t^{p−1} = −π</strong>・λ と共役 ω(a)λ の根性（共役は無条件）・総括 <code>EisUpperData</code>。正直申告: O の整域性（hD）と根の個数 ≤ p−1（因数定理）は未形式化。全て標準公理のみ（choice なし）。</p>
+  </div>
+
+  <h3>M89: テータの関数等式 — 柱E・E4（IUT/ThetaFunctional.lean）</h3>
+  <div class="box">
+    <p><strong>q·u·Θ(q, qu) = −Θ(q, u) の完全証明</strong>——[EtTh] のテータの本質的対称性（mono-theta 環境の源泉）が機械検証済みに:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>tThetaRep</code> (M89-1)</td><td><strong>作用素 T(F) = q·u·F(q, qu) の Θ への作用の係数公式</strong>（T(Θ)_m の uⁿ 成分 = Θ_{m−n} の u^{n−1} 係数、n ≤ m）——一般の係数列では一様 bound が取れず<strong>三角数の台が両裾を切る Θ でのみ作用素が閉じる</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tri_step</code> / <code>tri_le</code> (M89-2)</td><td><strong>三角数の橋</strong> n(n+1) = (n−1)n + 2n とガード 2m = n(n+1) ⟹ n ≤ m</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>theta_funeq_coeff</code> / <code>theta_funeq</code> (M89-3)</td><td><strong>関数等式（本丸）</strong>——再添字化 n ↦ n−1 一撃: 条件 2(m−n) = (n−1)n ⟺ 2m = n(n+1)・符号は isgn_succ。係数恒等式 → Quot 級数レベル（funext + Quot.sound）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">捻れ値の q^{j²} 簿記（E5）・Tate 点群（E6）は次層。</p>
+  </div>
+
+  <h3>M89F: O の捻れ塔 Λₙ と Galois 加群構造 — 柱B 第3段後半（IUT/EisensteinTower.lean）</h3>
+  <div class="box">
+    <p><strong>Λₙ := ker[πⁿ] の塔の Galois 加群性</strong>（サブエージェント並行開発・統合）: <code>eisIter_add</code>（[π^{m+n}] = [πᵐ]∘[πⁿ]）・<code>eisTorsion_mono</code>（Λₙ ⊆ Λₙ₊₁）・<strong><code>eisAut_preserves_torsion</code>: Galois 作用 σ_ζ は各捻れ層を保つ</strong>・<code>eisIter_semilinear</code>（1 の冪根倍も保つ）・総括 <code>EisTorsionTowerData</code> + witness・<strong>ストレッチ <code>eisTorsion_galois_orbit</code>: λ の Galois 軌道 ⊆ Λ₁ ∖ {0}</strong>。全て標準公理のみ（choice なし）。</p>
+  </div>
+
+  <h3>M88: q-級数環とテータ級数 — 柱E・E2+E3（IUT/ThetaSeries.lean）</h3>
+  <div class="box">
+    <p><strong>Θ(q, u) = Σ_{n∈ℤ} (−1)ⁿ q^{n(n+1)/2} uⁿ が形式体系内のデータに</strong>——[EtTh] のテータ関数の実体化第一歩:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>qLaurent</code> (M88-1)</td><td><strong>q-級数環 R[u^{±1}][[q]] = psRing (laurentRing R)</strong>——PS 理論（M39〜）を無償取得（E2 完了）</td><td>標準のみ</td></tr>
+      <tr><td><code>isgn</code> / <code>isgn_succ</code> / <code>tri_bound</code> (M88-2, 3)</td><td>符号 (−1)ⁿ（natAbs 偶奇）と反転則・<strong>三角数の台</strong> 2m = n(n+1) ⟹ |n| ≤ 2m+1</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>thetaRep</code> / <code>theta</code> / <code>theta_zero_coeff</code> (M88-4, 5)</td><td><strong>テータ級数の実構成</strong>（q^m 係数 = Σ_{2m=n(n+1)} (−1)ⁿuⁿ、分母を払った条件・有界台 Laurent）と<strong>検算: q⁰ 係数 = 1 − u^{−1}</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">関数等式 q·u·Θ(q,qu) = −Θ(q,u)（E4）・捻れ値の q^{j²} 簿記（E5）は次層。</p>
+  </div>
+
+  <h3>M88F: Laurent 単項式計算 — E4 関数等式の準備（IUT/LaurentMonomial.lean）</h3>
+  <div class="box">
+    <p><strong>u^c 倍 = 添字シフトの完全計算</strong>（サブエージェント並行開発・統合）: <code>uMon_mul_coeff</code>（一点窓の崩落）・<code>uMon_mul_uMon</code>（u^a·u^b = u^{a+b}、Quot レベル込み）・<code>uShift</code> 合成則・<strong><code>laurent_uMon_unit</code>: u^c は Laurent 環の単元</strong>（負冪の存在意義の機械検証）。全て標準公理のみ（choice なし）。</p>
+  </div>
+
+  <h3>M87: Laurent 環の完成 laurentRing R : CRing — 柱E・E1 完成（IUT/LaurentRing.lean）</h3>
+  <div class="box">
+    <p><strong>畳み込みの結合則と Quot 環化</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>wsum_shift</code> / <code>lMul_coeff_assoc</code> (M87-1, 2)</td><td>窓和の平行移動と<strong>結合則（本丸）</strong>——共通窓 B = f+g+h+|k|+1 拡大 → h 押し込み → s↔i 交換 → f 括り出し → |i| 場合分け（大: 両辺 0・小: 平行移動 + 窓非依存性で定義窓に着地）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>lMul_coeff_one</code> / <code>lMul_coeff_congr_*</code> (M87-3, 4)</td><td>単位法則（一点窓）・係数一致は積で保たれる（Quot の well-definedness）</td><td>標準のみ</td></tr>
+      <tr><td><code>laurentRing</code> / <code>laurentOf</code> (M87-5)</td><td><strong>laurentRing R : CRing</strong>——演算 = 二重 Quot.lift・<strong>環公理は全て Quot.sound（係数恒等式）一発</strong>・構造射 R → R[u^{±1}]</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">E1 完成。次は E2（q-級数環 = psRing (laurentRing R) で既存 PS 理論を無償取得）→ E3 テータ級数 Θ。</p>
+  </div>
+
+  <h3>M87F: 分岐相互写像のレベル 1 骨格 — 柱B 第3段前半（IUT/RecRamified.lean）</h3>
+  <div class="box">
+    <p><strong>単数の Λ₁ への作用 = rec の分岐成分の witness</strong>（サブエージェント並行開発・統合）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>eisGal_residue</code> / <code>recRam_mul</code> (M87F-1, 2)</td><td><strong>剰余依存性</strong>（p ∣ a−b ⟹ σ_a = σ_b——M35 の teich_congr 再登板 → (ℤ/p)^× から well-defined）と乗法性</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>eisGal_principal_trivial</code> / <code>eisGal_faithful</code> (M87F-3, 4)</td><td><strong>主単数核 U^(1) ⊆ ker</strong>（rec のフィルトレーション両立のレベル 1 影）と忠実性</td><td>標準のみ</td></tr>
+      <tr><td><code>RecRamifiedLevelOneData</code> / <code>recRamLevelOne</code> / <code>recRam_fixes_base</code> (M87F-5, 6)</td><td>総括インターフェース（7 フィールド）+ witness + <strong>分岐作用は ℤ_p の像を固定</strong>（M37 の分解と対をなす独立性）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">Λₙ（n ≥ 2）への作用・K^× 全体からの貼り合わせ・全射性は未形式化（正直申告）。</p>
+  </div>
+
+  <h3>M86F: Eisenstein 環の Galois 作用 — 柱B 第2段（IUT/EisensteinGalois.lean）</h3>
+  <div class="box">
+    <p><strong>σ_ζ: λ ↦ ζλ の環自己準同型族 = Gal(ℚ_p(λ)/ℚ_p) ≅ (ℤ/p)^× の骨格</strong>（サブエージェント並行開発・統合）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>psScale_*</code> / <code>psScale_eisPoly</code> (M86F-1〜3)</td><td>係数スケーリング f_n ↦ zⁿf_n の環準同型性（Cauchy 和の指数分割）と <strong>ζ^{p−1} = 1 ⟹ σ(E) = E</strong>（Eisenstein 多項式の固定）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>eisAut</code> / <code>eisAut_const</code> / <code>eisAut_lambda</code> / <code>eisAut_comp</code> / <code>eisAut_one</code> (M86F-4〜6)</td><td><strong>O に降りる自己準同型 eisAut</strong>——ℤ_p 固定・λ ↦ ζλ・合成則 σ_z∘σ_w = σ_{zw}・恒等</td><td>標準のみ</td></tr>
+      <tr><td><code>eisGal_mul</code> / <code>eisGal_distinct</code> (M86F-7, 8)</td><td>Teichmüller 実体化: σ_a∘σ_b = σ_{ab}（ω の乗法性 M33）・<strong>p ∤ a−b ⟹ σ_a ≠ σ_b = p−1 個の相異なる自己同型の下界</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>eisAut_eisF</code> (M86F-9)</td><td><strong>Galois 作用は Lubin–Tate 作用 f(T) = πT + T^p と可換</strong>——柱B 第3段（rec 接続）への布石</td><td>標準のみ</td></tr>
+    </table>
+    <p class="small">全自己同型の分類・固定環 = ℤ_p・逆写像の明示・rec との接続は未形式化（正直申告）。</p>
+  </div>
+
+  <h3>M86: Laurent 係数代数 — 柱E 幾何層・着工（IUT/LaurentCoeff.lean）</h3>
+  <div class="box">
+    <p><strong>Laurent 多項式環 ℤ[u^{±1}]（一般の R 上）の係数レベル代数</strong> — テータ関数・Tate 曲線（柱E、issue #33 の詳細計画）への第一歩:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>wsum</code> / <code>wsum_supported</code> (M86-1, 2)</td><td><strong>窓和</strong>（Int 添字の有限和を既存 rsum に翻訳）と<strong>窓非依存性</strong>（台 [−S,S] を覆う任意の窓で一致——右トリム = rsum_pad・左トリム = rsum_split + 平行移動）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>LRep</code> / <code>lMul</code> / <code>lMul_coeff_window</code> (M86-3, 4)</td><td><strong>有界台表現</strong>（台の有界性をデータで持つ = choice 回避）・畳み込み積（窓 = 左因子の台）・積係数の窓非依存形</td><td>標準のみ</td></tr>
+      <tr><td><code>lAdd_coeff_*</code> / <code>lMul_coeff_distrib</code> / <code>lMul_coeff_comm</code> (M86-5, 6)</td><td>加法系の法則・分配則（窓共有で点ごと）・<strong>可換則</strong>（余裕つき共通窓への拡大 + rsum_reflect の反転）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">結合則・Quot 環化・テータ級数 Θ = Σ (−1)ⁿ q^{n(n+1)/2} uⁿ は次層（柱E 計画 E1 後半〜E3）。</p>
+  </div>
 
   <h3>M85: 結合則の点輸送 — 点の群キャンペーン最終層・完結（IUT/FormalGroupPointsAssoc.lean）</h3>
   <div class="box">
@@ -1699,6 +1933,30 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/EisensteinConjugates.lean</code></td><td>M84F: 共役捻れ点族 {ω(a)λ}——半線形性・相異性・Λ₁ の p 点下界（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupPointsAssoc.lean</code></td><td>M85: 結合則の点輸送——代入連鎖律・lt_point_assoc = F(pℤ_p) の群公理完結（choice なし）</td></tr>
     <tr><td><code>IUT/RamifiedEntrance.lean</code></td><td>M85F: 分岐 LCFT 入口の総括 RamifiedEntranceData + witness（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/LaurentCoeff.lean</code></td><td>M86: Laurent 係数代数——窓和・有界台表現・畳み込み・窓非依存性・可換則（柱E 第一層前半、choice なし）</td></tr>
+    <tr><td><code>IUT/EisensteinGalois.lean</code></td><td>M86F: Eisenstein 環の Galois 作用——psScale・eisAut/eisGal・合成則・相異性・[π]-作用との可換（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/LaurentRing.lean</code></td><td>M87: Laurent 環の完成——結合則・Quot 環化 laurentRing : CRing・構造射（柱E E1 完成、choice なし）</td></tr>
+    <tr><td><code>IUT/RecRamified.lean</code></td><td>M87F: 分岐相互写像のレベル 1 骨格——剰余依存性・主単数核・RecRamifiedLevelOneData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaSeries.lean</code></td><td>M88: q-級数環とテータ級数 Θ の実構成——三角数の台・符号・先頭係数の検算（柱E E2+E3、choice なし）</td></tr>
+    <tr><td><code>IUT/LaurentMonomial.lean</code></td><td>M88F: Laurent 単項式計算——u^c 倍 = シフト・u^a·u^b = u^{a+b}・u^c は単元（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaFunctional.lean</code></td><td>M89: テータの関数等式 q·u·Θ(q,qu) = −Θ(q,u)——作用素 T の係数公式・三角数の橋・再添字化（柱E E4、choice なし）</td></tr>
+    <tr><td><code>IUT/EisensteinTower.lean</code></td><td>M89F: O の捻れ塔 Λₙ と Galois 加群構造——合成則・単調性・σ_ζ 保存・EisTorsionTowerData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaGauss.lean</code></td><td>M90: 反復関数等式とガウス簿記——T^j(Θ) = (−1)^jΘ・q-次数降下 j(j+1)/2・対角ガウス値 = 1（柱E E5、choice なし）</td></tr>
+    <tr><td><code>IUT/EisensteinUpper.lean</code></td><td>M90F: Λ₁ 上界・第一段——Eisenstein 方程式への還元・NoZeroDiv 条件付き分類・EisUpperData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/TateQuotient.lean</code></td><td>M91: Tate 点群 G/q^ℤ——Nat 冪対称関係・商群・ker = q^ℤ・u ↦ q^j u は商上恒等（柱E E6、choice なし）</td></tr>
+    <tr><td><code>IUT/ZpDomain.lean</code></td><td>M91F: ℤ_p の witness 付き零因子なし——Bool 零テスト・付値分解・zp_mul_ne_zero・ZpDomainData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/MonoThetaWitness.lean</code></td><td>M92: mono-theta witness——ガウス指数 = Heisenberg 標準切断・切断の一意性・MonoThetaWitness 総括（柱E E7、choice なし）</td></tr>
+    <tr><td><code>IUT/GaussianVolume.lean</code></td><td>M93: ガウス体積簿記 vol_q——平方和/四面体数の閉形式・指数橋・離散下界 l³ ≤ 3Σj²（柱E E8 完結、choice なし）</td></tr>
+    <tr><td><code>IUT/RecGluing.lean</code></td><td>M94: K^× 貼り合わせレベル1——res1 標準代表・recLevelOne・核 = {0} × U^(1)（柱B、choice なし）</td></tr>
+    <tr><td><code>IUT/EisDomain.lean</code></td><td>M93F: O の witness 付き整域性・第一段——簡約係数写像・λ-除算・剰余乗法性・EisDomainData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/EisEndoRigidity.lean</code></td><td>M95: 自己同型の上界骨格——σ∘f = f∘σ・σ(λ) ∈ Λ₁ 無条件・Eisenstein 根への分類（柱B、choice なし）</td></tr>
+    <tr><td><code>IUT/FactorTheorem.lean</code></td><td>M96: 因数定理——除算恒等式・根の個数 ≤ 次数・x^n = a の解 ≤ n・Eisenstein 根 ≤ p−1（柱B、choice なし）</td></tr>
+    <tr><td><code>IUT/EisDomain2.lean</code></td><td>M96F: O の witness 付き整域性・第二段——λ 進付値分解・eis_mul_ne_zero・EisDomain2Data（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/Premises311.lean</code></td><td>M97: 定理3.11 の前提インターフェース——ssq = sumSq の輪・Theorem311Premises・パイプライン接続（柱D 入口、choice なし）</td></tr>
+    <tr><td><code>IUT/VolumeModel.lean</code></td><td>M99F: 具体的 VolumeTheory モデル——Int 模型で 9 公理充足・非空性実証（MultiradialRep は未構成と明記）（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/LambdaClassify.lean</code></td><td>M97F: Λ₁ と自己準同型の完全分類——根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaReflection.lean</code></td><td>M98: テータの反転対称性——J(Θ) = −Θ・J² = id・J = T on Θ（M89 合流）（柱E、choice なし）</td></tr>
+    <tr><td><code>IUT/ThetaGroupMod.lean</code></td><td>M98F: テータ群 mod l——Heisenberg 商群・mod-l cyclotomic rigidity・切断の 2l 周期性（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
