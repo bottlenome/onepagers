@@ -904,6 +904,15 @@ import IUT
 #print axioms IUT.endo_lambda_root
 #print axioms IUT.eisEndoRigidity
 #print axioms IUT.eisEndoRigidity_exists
+#print axioms IUT.geom_factor
+#print axioms IUT.qCoeff_peel
+#print axioms IUT.lin_div
+#print axioms IUT.pEval_div
+#print axioms IUT.pEval_root_factor
+#print axioms IUT.roots_bound
+#print axioms IUT.pEval_bin
+#print axioms IUT.bin_roots_bound
+#print axioms IUT.eis_roots_bound
 #print axioms IUT.nsum_congr
 #print axioms IUT.nsum_mul_right
 #print axioms IUT.efSum
