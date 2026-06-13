@@ -1,0 +1,41 @@
+{
+  "_comment": "手動オーバーレイ。graph.json はジェネレータ(tools/gen_graph.py)で自動生成。本ファイルは柱メタ・文献PDFマップ・capstone/hub注釈・一部の精緻化サマリを保持し、index.html がクライアント側でマージする。",
+  "pillars": {
+    "core": { "label": "論争骨格", "color": "#94a3b8", "progress_pct": 100, "status": "二分法 ✅ (sorry なし)", "blurb": "系3.12 の statement・二分法・Szpiro/ABC 帰結の骨格" },
+    "A":    { "label": "柱A 基本群・Galois圏", "color": "#60a5fa", "progress_pct": 85, "status": "SGA1主定理ブロック ✅ / 残件4 (#35)", "blurb": "副有限群・Galois圏・SGA1・π₁。残: ガロア閉包ほか" },
+    "B":    { "label": "柱B 局所類体論", "color": "#34d399", "progress_pct": 70, "status": "剛性プログラム ✅ / 残件4 (#36, B-4済)", "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環" },
+    "C":    { "label": "柱C Lubin–Tate・形式群・Frobenioid", "color": "#fbbf24", "progress_pct": 60, "status": "群法則全公理 ✅ / 残件5 (#37)", "blurb": "形式群法則・点群・Frobenioid 次数層。残: 実数値log-volume等" },
+    "D":    { "label": "柱D 定理3.11", "color": "#f87171", "progress_pct": 15, "status": "入口 🔶 / 本丸 MultiradialRep 未形式化 (#38)", "blurb": "多輻的アルゴリズムの構成本体。IUTの全根拠が集約" },
+    "E":    { "label": "柱E 幾何層 (theta/volume)", "color": "#c084fc", "progress_pct": 80, "status": "E1–E8 ✅ / 残件2 (#39)", "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積。残: ±構造/μ_l同一視" },
+    "unassigned": { "label": "未分類", "color": "#475569", "progress_pct": 0, "status": "—", "blurb": "" }
+  },
+  "refs": {
+    "[IUTchI]":   { "label": "Mochizuki, IUT I — Construction of Hodge Theaters", "pdf": "../teichmuller/pdf/IUT_I_Construction_of_Hodge_Theaters.pdf" },
+    "[IUTchII]":  { "label": "Mochizuki, IUT II — Hodge–Arakelov-theoretic Evaluation", "pdf": "../teichmuller/pdf/IUT_II_Hodge-Arakelov-theoretic_Evaluation.pdf" },
+    "[IUTchIII]": { "label": "Mochizuki, IUT III — Canonical Splittings", "pdf": "../teichmuller/pdf/IUT_III_Canonical_Splittings.pdf" },
+    "[IUTchIV]":  { "label": "Mochizuki, IUT IV — Log-volume Computations", "pdf": "../teichmuller/pdf/IUT_IV_Log-volume_Computations.pdf" },
+    "[EtTh]":     { "label": "Mochizuki, The Étale Theta Function (EtTh)", "pdf": null },
+    "[FrdI]":     { "label": "Mochizuki, The Geometry of Frobenioids I (FrdI)", "pdf": null },
+    "[FrdII]":    { "label": "Mochizuki, The Geometry of Frobenioids II (FrdII)", "pdf": null },
+    "[AbsTopIII]":{ "label": "Mochizuki, Topics in Absolute Anabelian Geometry III (AbsTopIII)", "pdf": null },
+    "[SemiAnbd]": { "label": "Mochizuki, Semi-graphs of Anabelioids (SemiAnbd)", "pdf": null },
+    "[GenEll]":   { "label": "Mochizuki, Arithmetic Elliptic Curves in General Position (GenEll)", "pdf": null }
+  },
+  "modules": {
+    "LocalCFT":          { "is_capstone": true, "summary": "不分岐局所相互法則の完全証明と LocalCFTData インターフェース（柱B 土台）" },
+    "RamifiedEntrance":  { "is_capstone": true, "summary": "Eisenstein 環・捻れ塔 Λₙ・Galois 作用を束ねる柱B capstone (RamifiedEntranceData)" },
+    "LambdaClassify":    { "is_capstone": true, "summary": "Λ₁ と自己準同型の完全分類 — 柱B 剛性プログラム完結" },
+    "FormalGroupEndRing":{ "is_capstone": true, "summary": "End(F) を環として閉じる（M100, B-4）— 形式群加法⊕・合成⊙が可換環公理を充足" },
+    "GaussianVolume":    { "is_capstone": true, "summary": "ガウス体積簿記 vol_q（E8）— 柱E E1–E8 完結 (GaussianVolumeData)" },
+    "MonoThetaWitness":  { "is_capstone": true, "summary": "mono-theta witness（E7）— ガウス指数=Heisenberg標準切断、柱E接合" },
+    "Premises311":       { "is_capstone": true, "summary": "定理3.11 の前提束 Theorem311Premises — 柱B+E witness を系3.12 パイプラインに接続（柱D 入口）" },
+    "VolumeModel":       { "summary": "具体的 VolumeTheory モデル — 9公理充足の非空性実証。MultiradialRep は未構成と明記（柱D）" },
+    "Multiradial":       { "is_hub": true, "summary": "定理3.11 の出力仕様 MultiradialRep と系3.12 証明本体。本丸の構成は未形式化（柱D 中心）" },
+    "EtaleTheta":        { "is_capstone": true, "summary": "[EtTh] Cor 2.19 の cyclotomic rigidity 骨格 — M11、テータ評価の剛性" },
+    "FormalGroupEval":   { "is_hub": true, "summary": "点での評価理論の中核ハブ — 逆元・点群・捻れへ分岐" },
+    "FormalGroupPoints": { "is_hub": true, "summary": "形式群の点 F(pℤ_p) — 捻れ点・Eisenstein へ広がる中心ハブ" },
+    "EisensteinRing":    { "is_hub": true, "summary": "Eisenstein 環 O=ℤ_p[π] — Lubin–Tate と捻れ塔を繋ぐ柱B ハブ" },
+    "LubinTateExists":   { "summary": "Lubin–Tate 補題 — F(0)=0,F(1)=a の解の存在と一意（柱C の心臓）" },
+    "FormalGroupAssoc":  { "summary": "LT 形式群法則の結合則 F(F(X,Y),Z)=F(X,F(Y,Z))（M71）" }
+  }
+}
