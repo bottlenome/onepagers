@@ -151,8 +151,11 @@ theorem ltEnd_gMul_one (p : Nat) (hp : IsPrime p) (a : (Zp p).carrier) :
 
 /-- **M100-5a: End(F) 環パッケージ** — 自己準同型環 End(F) の像
     {[a] : a ∈ ℤ_p} が、形式群加法 ⊕ と合成 ⊙ のもとで**可換環**をなし、
-    包含 ι : ℤ_p → End(F)、a ↦ [a] がその環構造を実現する**単射準同型**
-    であることを束ねた純レコード（ℤ_p ≅ End(F) 像の環同型）。 -/
+    包含 ι : ℤ_p → End(F)、a ↦ [a] がその環構造を実現する
+    **像への単射環準同型**（= 像 {[a]} の上の環同型。End(F) 全体への
+    全射性は主張しない）であることを束ねた純レコード。
+    可換環の全公理（加法/乗法の可換・結合、左右分配、加法単位・逆元、
+    乗法単位）を像の上の演算で保持する。 -/
 structure LTEndRingData (p : Nat) (hp : IsPrime p) where
   /-- 包含 ι : a ↦ [a]。 -/
   incl : (Zp p).carrier → PS (zpRing p)
@@ -184,6 +187,14 @@ structure LTEndRingData (p : Nat) (hp : IsPrime p) where
   left_distrib : ∀ a b c,
       gMul (incl a) (gAdd (incl b) (incl c))
         = gAdd (gMul (incl a) (incl b)) (gMul (incl a) (incl c))
+  right_distrib : ∀ a b c,
+      gMul (gAdd (incl a) (incl b)) (incl c)
+        = gAdd (gMul (incl a) (incl c)) (gMul (incl b) (incl c))
+  -- 加法単位（0 級数）・加法逆元（[−a]）・乗法単位（X）
+  gAdd_zero : ∀ a, gAdd (incl (zpRing p).zero) (incl a) = incl a
+  gAdd_neg : ∀ a,
+      gAdd (incl ((zpRing p).neg a)) (incl a) = psZero (zpRing p)
+  gMul_one : ∀ a, gMul (incl (zpRing p).one) (incl a) = incl a
 
 /-- **M100-5b: witness** — ι := ltSol p hp、⊕ := ps21Comp F、⊙ := psComp。
     各フィールドは M100-1〜4・M76・M76F-3 で充足。 -/
@@ -204,6 +215,10 @@ def ltEndRingData (p : Nat) (hp : IsPrime p) : LTEndRingData p hp where
   mul_comm := fun a b => ltEnd_gMul_comm p hp a b
   mul_assoc := fun a b c => ltEnd_gMul_assoc p hp a b c
   left_distrib := fun a b c => ltEnd_left_distrib p hp a b c
+  right_distrib := fun a b c => ltEnd_right_distrib p hp a b c
+  gAdd_zero := fun a => ltEnd_gAdd_zero p hp a
+  gAdd_neg := fun a => ltEnd_gAdd_neg p hp a
+  gMul_one := fun a => ltEnd_gMul_one p hp a
 
 /-- **M100-5c: 非空性** — End(F) の環パッケージは実在する。 -/
 theorem ltEndRing_exists (p : Nat) (hp : IsPrime p) :
