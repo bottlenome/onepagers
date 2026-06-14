@@ -33,6 +33,7 @@ onepagers/
 | [IUT の Lean 形式検証マップ](iut-lean-verification/index.html) | doc | done | 原論文PDFを一次資料に IUT 全体の土台（柱A〜E）を Lean 4 で積み上げ、結論の要=系3.12 をめぐる論争を機械判定（総合証明率: ページ重み ~28% / 主張平均 ~36%）。系3.12 はスコープ全体ではなくABC予想に届く決定的不等式＝係争点。定理3.11 の出力仕様を原文から形式化し系3.12 の証明本体を公理ゼロで機械化。「仕様充足→系3.12→Szpiro→ABC型帰結」の全経路接続済み。構成の4基盤——基本群（M9）・遠アーベル復元アルゴリズム（M10、選択公理不使用）・cyclotomic rigidity（M11）・Frobenioid 次数層（M12）——も骨格形式化済み。残る未形式化は構成の実体（sorry なし） |
 | [DDD実践入門](learn-ddd/index.html) | doc | done | ドメイン駆動設計の核心をインタラクティブに学べる実践入門 |
 | [LLMアーキテクチャ比較 2026](llm-architecture/index.html) | doc | wip | 2026年4月時点の主要LLM 18モデルを視覚比較。Attention/MoE/1M長文脈/RLHFを図解 |
+| [Open Chatbot](open-chatbot/index.html) | tool | wip | オープンウェイトLLMをWebLLM(WebGPU)でブラウザ内実行するチャットボット。APIキー不要・モデル選択UI付き |
 
 ## 新規プロジェクト追加手順
 
