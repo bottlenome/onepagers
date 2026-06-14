@@ -222,16 +222,33 @@
       els.model.disabled = true;
     }
 
-    // ---- モデル候補（小型優先でキュレーション） --------------------------
+    // ---- モデル候補（軽量→高品質の順でキュレーション） ------------------
     // prebuiltAppConfig.model_list に存在するものだけ採用する。
+    // 注: WebLLM の最小量子化は 4bit(q4)。1bit/BitNet 版は prebuilt に存在しない。
     const CURATED = [
-      { id: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC", label: "Qwen2.5 1.5B Instruct（軽量・約1.0GB）" },
-      { id: "Llama-3.2-1B-Instruct-q4f16_1-MLC", label: "Llama 3.2 1B Instruct（最軽量・約0.9GB）" },
-      { id: "Llama-3.2-3B-Instruct-q4f16_1-MLC", label: "Llama 3.2 3B Instruct（約2.3GB）" },
+      // --- 軽量（多くの端末で動作）---
+      { id: "Qwen3-0.6B-q4f16_1-MLC", label: "Qwen3 0.6B（最軽量・推論対応 / 約0.6GB）" },
+      { id: "gemma3-1b-it-q4f16_1-MLC", label: "Gemma 3 1B IT（新しめ・約0.9GB）" },
+      { id: "Llama-3.2-1B-Instruct-q4f16_1-MLC", label: "Llama 3.2 1B Instruct（約0.9GB）" },
+      { id: "Qwen2.5-1.5B-Instruct-q4f16_1-MLC", label: "Qwen2.5 1.5B Instruct（約1.0GB）" },
+      { id: "Qwen3-1.7B-q4f16_1-MLC", label: "Qwen3 1.7B（推論対応・約1.1GB）" },
+      // --- バランス ---
+      { id: "Qwen3.5-2B-q4f16_1-MLC", label: "Qwen3.5 2B（最新・約1.4GB）" },
+      { id: "gemma-2-2b-jpn-it-q4f16_1-MLC", label: "Gemma 2 2B 日本語IT（日本語特化・約1.6GB）" },
       { id: "gemma-2-2b-it-q4f16_1-MLC", label: "Gemma 2 2B IT（約1.6GB）" },
+      { id: "Llama-3.2-3B-Instruct-q4f16_1-MLC", label: "Llama 3.2 3B Instruct（約2.3GB）" },
+      { id: "Phi-4-mini-instruct-q4f16_1-MLC", label: "Phi-4 mini Instruct（最新・約2.5GB）" },
       { id: "Phi-3.5-mini-instruct-q4f16_1-MLC", label: "Phi-3.5 mini Instruct（約2.5GB）" },
-      { id: "Qwen2.5-7B-Instruct-q4f16_1-MLC", label: "Qwen2.5 7B Instruct（高品質・約5.1GB / 要高性能GPU）" },
-      { id: "Llama-3.1-8B-Instruct-q4f16_1-MLC", label: "Llama 3.1 8B Instruct（高品質・約5.0GB / 要高性能GPU）" },
+      { id: "Qwen3-4B-q4f16_1-MLC", label: "Qwen3 4B（推論対応・約2.8GB）" },
+      { id: "Qwen3.5-4B-q4f16_1-MLC", label: "Qwen3.5 4B（最新・約2.8GB）" },
+      // --- 高品質（要 高性能GPU・大容量メモリ）---
+      { id: "Qwen2.5-7B-Instruct-q4f16_1-MLC", label: "Qwen2.5 7B Instruct（約5.1GB / 要高性能GPU）" },
+      { id: "DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC", label: "DeepSeek-R1 Distill Qwen 7B（推論特化・約5.1GB / 要高性能GPU）" },
+      { id: "Llama-3.1-8B-Instruct-q4f16_1-MLC", label: "Llama 3.1 8B Instruct（約5.0GB / 要高性能GPU）" },
+      { id: "Qwen3-8B-q4f16_1-MLC", label: "Qwen3 8B（推論対応・約5.2GB / 要高性能GPU）" },
+      { id: "DeepSeek-R1-Distill-Llama-8B-q4f16_1-MLC", label: "DeepSeek-R1 Distill Llama 8B（推論特化・約5.2GB / 要高性能GPU）" },
+      { id: "Qwen3.5-9B-q4f16_1-MLC", label: "Qwen3.5 9B（最新・最高品質・約5.8GB / 要高性能GPU）" },
+      { id: "gemma-2-9b-it-q4f16_1-MLC", label: "Gemma 2 9B IT（約6.0GB / 要高性能GPU）" },
     ];
 
     function populateModels() {
