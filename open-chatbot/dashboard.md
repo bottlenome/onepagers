@@ -12,7 +12,8 @@
 
 ## 機能
 
-- モデル選択UI（Qwen2.5 / Llama 3.2 / Gemma 2 / Phi-3.5 など小型〜中型を切替）
+- モデル選択UI（Qwen3 / Qwen3.5 / Gemma 3 / Gemma 2(日本語版含む) / Llama 3.1/3.2 / Phi-4 mini / Phi-3.5 / DeepSeek-R1 Distill(推論特化) / Qwen2.5 を軽量〜高品質で切替）
+  - 注: WebLLM の最小量子化は4bit。1bit/BitNet 版は公式 prebuilt に存在しないため非対応
 - ブラウザ内推論（WebGPU）。初回はモデルをDL、2回目以降はブラウザキャッシュから起動
 - ダウンロード/初期化のプログレスバー表示
 - ストリーミング応答（トークンを逐次描画・生成中は停止可能）
