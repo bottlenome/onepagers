@@ -165,7 +165,7 @@
   <div class="bar">
     <label for="model">モデル</label>
     <select id="model" title="使用するオープンウェイトモデル"></select>
-    <button id="load" class="primary">読込</button>
+    <button id="load" type="button" class="primary">読込</button>
     <div class="status-wrap">
       <div class="status-text" id="status">モデルを選んで「読込」を押してください。</div>
       <div class="progress"><i id="bar"></i></div>
@@ -186,9 +186,9 @@
   <footer>
     <div class="composer">
       <textarea id="input" rows="1" placeholder="メッセージを入力（Enterで送信 / Shift+Enterで改行）" disabled></textarea>
-      <button id="send" class="primary" disabled>送信</button>
-      <button id="stop" class="ghost" style="display:none;">停止</button>
-      <button id="clear" class="danger ghost" title="会話をリセット">クリア</button>
+      <button id="send" type="button" class="primary" disabled>送信</button>
+      <button id="stop" type="button" class="ghost" style="display:none;">停止</button>
+      <button id="clear" type="button" class="danger ghost" title="会話をリセット">クリア</button>
     </div>
     <div class="hint">応答はあなたの端末上で生成されます。サーバーには何も送信されません。</div>
   </footer>
@@ -410,6 +410,8 @@
     }
     els.input.addEventListener("input", autoGrow);
     els.input.addEventListener("keydown", (e) => {
+      // IME 変換確定の Enter（日本語入力中）は送信しない
+      if (e.isComposing || e.keyCode === 229) return;
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         send();
