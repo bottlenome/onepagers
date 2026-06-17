@@ -294,6 +294,7 @@
     elements: els,
     wheelSensitivity: 0.25,
     boxSelectionEnabled: false,
+    autoungrabify: true,   // nodes are fixed in place — taps register cleanly, no accidental drag
     style: [
       { selector: 'node', style: {
         'background-color': 'data(color)', 'label': 'data(label)',
@@ -328,7 +329,7 @@
   try {
     api = cy.expandCollapse({
       layoutBy: layoutOpts, fisheye: false, animate: true, animationDuration: 250,
-      undoable: false, cueEnabled: true, expandCollapseCueSize: 10
+      undoable: false, cueEnabled: false   // we drive expand/collapse on tap; the plugin's cue tap-handler crashes on touch
     });
   } catch (e) {}
 
