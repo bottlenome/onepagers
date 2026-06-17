@@ -71,7 +71,8 @@
   .lg .sw { width: 13px; height: 13px; border-radius: 3px; flex: none; margin-top: 2px; }
   .lg .nm { color: #e2e8f0; }
   .lg .plain { color: #94a3b8; font-size: 0.72rem; line-height: 1.5; margin: 1px 0 2px; }
-  .lg .bar { height: 5px; border-radius: 3px; background: #334155; margin-top: 3px; overflow: hidden; }
+  /* bar: solid fill = 形式化済み / 斜線ハッチ = 未形式化 */
+  .lg .bar { height: 5px; border-radius: 3px; background: #2a3344; background-image: repeating-linear-gradient(45deg, rgba(148,163,184,.28) 0 3px, transparent 3px 6px); margin-top: 3px; overflow: hidden; }
   .lg .bar i { display: block; height: 100%; border-radius: 3px; }
   .lg .pc { color: #94a3b8; font-size: 0.68rem; }
   .lg.dim { opacity: 0.35; }
@@ -180,6 +181,7 @@
       <p>この巨大な理論を、コンピュータ（<b>Lean</b>）が1行ずつ厳密にチェックできる形に組み直しています。
       理論はいくつかの<b>土台（＝柱）</b>の上に建っていて、柱ごとに「どこまで組み直せたか」を％で表示。
       下のグラフの<span class="k">色</span>＝柱です。</p>
+      <p class="hint">進捗バーは <b>色つき＝形式化済み</b>／<b>斜線＝未形式化</b>。未形式化の項目が残るモジュールには <span class="badge amber">未形式化項目あり</span> を表示します。</p>
     </div></div>
 
     <div class="gstep"><span class="gn">3</span><div class="gc">
@@ -362,7 +364,7 @@
         `<span class="nm">${p.label} <span class="pc">(${cnt})</span></span>` +
         (p.plain || p.blurb ? `<div class="plain">${p.plain || p.blurb}</div>` : '') +
         `<div class="bar"><i style="width:${p.progress_pct||0}%;background:${p.color}"></i></div>` +
-        `<span class="pc">${p.status||''}</span>` +
+        `<span class="pc">形式化 ${p.progress_pct||0}% · 未形式化 ${100-(p.progress_pct||0)}%${p.status ? ' · ' + p.status : ''}</span>` +
       `</span>`;
     row.onclick = () => {
       activePillar = (activePillar === code) ? null : code;
@@ -411,7 +413,7 @@
       `<span class="chip" style="background:${p.color}22;color:${p.color};border:1px solid ${p.color}66">${p.label}</span>` +
       `<div class="summary">${summary}</div>` +
       (n.choice_free ? `<span class="badge green">選択公理不使用</span>` : `<span class="badge slate">標準公理</span>`) +
-      (n.has_honest_scope ? `<span class="badge amber">正直申告あり（未形式化部分明記）</span>` : '') +
+      (n.has_honest_scope ? `<span class="badge amber">未形式化項目あり</span>` : '') +
       `<span class="badge slate">宣言数 ${n.decl_count}</span>` +
       `<div class="sec">Lean ソース</div>` +
       `<a href="${n.github_url}" target="_blank">⌁ GitHub で IUT/${n.label}.lean を開く ↗</a>` +
@@ -444,9 +446,9 @@
       `<div class="ms">柱（クラスタ）· モジュール ${mods.length}</div>` +
       `<span class="chip" style="background:${p.color}22;color:${p.color};border:1px solid ${p.color}66">柱</span>` +
       (p.plain || p.blurb ? `<div class="summary">${p.plain || p.blurb}</div>` : '') +
-      `<div style="height:6px;border-radius:3px;background:#334155;overflow:hidden;margin:0.7rem 0 0.35rem">` +
+      `<div style="height:6px;border-radius:3px;background:#2a3344;background-image:repeating-linear-gradient(45deg,rgba(148,163,184,.28) 0 3px,transparent 3px 6px);overflow:hidden;margin:0.7rem 0 0.35rem">` +
         `<i style="display:block;height:100%;width:${p.progress_pct||0}%;background:${p.color};border-radius:3px"></i></div>` +
-      `<div style="color:#94a3b8;font-size:0.82rem">形式化 ${p.progress_pct||0}%${p.status ? ' · ' + p.status : ''}</div>` +
+      `<div style="color:#94a3b8;font-size:0.82rem">形式化 ${p.progress_pct||0}% · 未形式化 ${100-(p.progress_pct||0)}%${p.status ? ' · ' + p.status : ''}</div>` +
       (mods.length ? `<div class="sec">この柱のモジュール ${mods.length}（タップで詳細）</div>` +
         `<div class="dep">${mods.map(m => `<code data-id="${m.id}">${m.label}</code>`).join(' ')}</div>` : '');
     body.querySelectorAll('code[data-id]').forEach(c => c.onclick = () => focusNode(c.dataset.id));
