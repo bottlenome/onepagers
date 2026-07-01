@@ -1099,6 +1099,14 @@ import IUT
 #print axioms IUT.exponent_fold
 #print axioms IUT.exponent_element
 #print axioms IUT.primitive_root_exists
+#print axioms IUT.zmodEqb_true
+#print axioms IUT.zmodEqb_false
+#print axioms IUT.zpPow_zero
+#print axioms IUT.teichBar_pow
+#print axioms IUT.generator_covers
+#print axioms IUT.zmodUnits_cyclic
+#print axioms IUT.mu_powers_distinct
+#print axioms IUT.mu_cyclic
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

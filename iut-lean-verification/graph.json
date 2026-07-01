@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 146,
-  "verified_theorem_total": 1090,
-  "choice_free_count": 106,
+  "module_count": 147,
+  "verified_theorem_total": 1098,
+  "choice_free_count": 107,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1803,6 +1803,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimitiveRoot.lean"
+    },
+    {
+      "id": "CyclicUnits",
+      "label": "CyclicUnits",
+      "milestone": "M104",
+      "title": "B-3 完全終結: 被覆定理と μ_{p−1} への移送",
+      "pillar": "B",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclicUnits.lean"
     }
   ],
   "edges": [
@@ -1953,6 +1965,10 @@
     {
       "source": "Finiteness",
       "target": "Compactness"
+    },
+    {
+      "source": "Finiteness",
+      "target": "CyclicUnits"
     },
     {
       "source": "FormalGroup3Congr",
@@ -2343,6 +2359,10 @@
       "target": "VolumeModel"
     },
     {
+      "source": "PrimitiveRoot",
+      "target": "CyclicUnits"
+    },
+    {
       "source": "PrincipalUnitGroup",
       "target": "UnitFiltration"
     },
@@ -2525,6 +2545,10 @@
     {
       "source": "ZmodOrder",
       "target": "PrimitiveRoot"
+    },
+    {
+      "source": "ZpDomain",
+      "target": "CyclicUnits"
     },
     {
       "source": "ZpDomain",
