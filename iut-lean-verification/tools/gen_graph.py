@@ -55,6 +55,7 @@ PILLAR = {
     "EisensteinTower": "B", "EisensteinUpper": "B", "EisDomain": "B",
     "EisDomain2": "B", "EisEndoRigidity": "B", "FactorTheorem": "B",
     "LambdaClassify": "B", "RecGluing": "B", "FormalGroupEndRing": "B",
+    "MuUnits": "B",
     # 柱C（Lubin–Tate・形式群・Frobenioid）
     "Ring": "C", "PowerSeries": "C", "Composition": "C", "LubinTateUnique": "C",
     "LubinTateZp": "C", "PadicDivision": "C", "Binomial2": "C", "Freshman": "C",

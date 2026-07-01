@@ -1031,6 +1031,36 @@ import IUT
 #print axioms IUT.ltEnd_gMul_one
 #print axioms IUT.ltEndRingData
 #print axioms IUT.ltEndRing_exists
+#print axioms IUT.zpPow_zpPow
+#print axioms IUT.zpPow_mul_dist
+#print axioms IUT.zpPow_zpOne
+#print axioms IUT.zpPow_one_exp
+#print axioms IUT.isMuRoot_mul
+#print axioms IUT.isMuRoot_pow
+#print axioms IUT.muGrp
+#print axioms IUT.muGrp_comm
+#print axioms IUT.muRoot_pow_p
+#print axioms IUT.muRoot_pow_p_pow
+#print axioms IUT.muRoot_level_one_unit
+#print axioms IUT.teichBar
+#print axioms IUT.teichBar_mul
+#print axioms IUT.teichBar_level_one
+#print axioms IUT.teichBar_of_muRoot
+#print axioms IUT.muRoot_iff_teich
+#print axioms IUT.isZpUnit_of_muRoot
+#print axioms IUT.teich_inj
+#print axioms IUT.teichBar_inj
+#print axioms IUT.isZmodUnit_mul
+#print axioms IUT.isZmodUnit_pow
+#print axioms IUT.zmodUnit_inv_mul
+#print axioms IUT.zmodUnits
+#print axioms IUT.zmodUnits_comm
+#print axioms IUT.isZmodUnit_of_muRoot
+#print axioms IUT.isMuRoot_teichBar
+#print axioms IUT.muToUnits
+#print axioms IUT.unitsToMu
+#print axioms IUT.muUnitsIsoData
+#print axioms IUT.muUnitsIso_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

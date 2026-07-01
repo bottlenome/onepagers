@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 142,
-  "verified_theorem_total": 1022,
-  "choice_free_count": 102,
+  "module_count": 143,
+  "verified_theorem_total": 1052,
+  "choice_free_count": 103,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1755,6 +1755,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupEndRing.lean"
+    },
+    {
+      "id": "MuUnits",
+      "label": "MuUnits",
+      "milestone": "M101",
+      "title": "B-3 前半: μ_{p−1} ≅ (ℤ/p",
+      "pillar": "B",
+      "decl_count": 35,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuUnits.lean"
     }
   ],
   "edges": [
@@ -2333,6 +2345,10 @@
     {
       "source": "RecRamified",
       "target": "RecGluing"
+    },
+    {
+      "source": "Ring",
+      "target": "MuUnits"
     },
     {
       "source": "Ring",
