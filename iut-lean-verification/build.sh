@@ -1137,6 +1137,20 @@ import IUT
 #print axioms IUT.eisBr_conj_scale
 #print axioms IUT.zpPow_eq_rpow_zp
 #print axioms IUT.eisAut_teich_eisBr
+#print axioms IUT.psMul_psX_coeff
+#print axioms IUT.psX_shift_split
+#print axioms IUT.psZero_mul
+#print axioms IUT.psComp_psZero_right
+#print axioms IUT.ps21Comp_add
+#print axioms IUT.ps21Comp_Y
+#print axioms IUT.ps21Comp_split
+#print axioms IUT.lt2Sol_row_zero
+#print axioms IUT.eisRel_FG_absorb
+#print axioms IUT.ltSol_teich
+#print axioms IUT.eisBr_principal
+#print axioms IUT.eisBr_reciprocity
+#print axioms IUT.ramifiedReciprocityData
+#print axioms IUT.ramifiedReciprocity_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

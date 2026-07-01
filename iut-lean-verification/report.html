@@ -158,7 +158,90 @@
 </section>
 
 <section>
-  <h2>M1〜M100 の形式化（追加検証）</h2>
+  <h2>M1〜M106 の形式化（追加検証）</h2>
+
+  <h3>M106: [c]-作用の半線形性と Galois 同変性 — 柱B B-1 第二段（issue #36）（IUT/LambdaSemilinear.lean）</h3>
+  <div class="box">
+    <p><strong>M105 で構成した [c]-倍作用 [c]λ の Galois 同変性と半線形性の完全証明</strong>（柱B B-1 第二段）: Λ₁ = {0} ∪ {ω(a)λ}（M84F+M95+M96+M97F の分類）の<strong>全点</strong>で [c]-作用を確定させ、Λ₁ の ℤ_p[Gal]-加群構造を完成させる:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>ltSol_dilate</code> (M106-1)</td><td><strong>本丸1: 半線形性の核</strong> [c](zX) = z·[c](X)（z^{p−1} = 1）——W := [c]∘(zX) と W' := z·[c] が共に LT 方程式 + 境界条件 F(0) = 0・F(1) = zc を満たすことを示し、<strong>M49 の一意性で両者を同定</strong>（係数の台の性質を経由しない）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>psScale</code> の同定 (M106-2)</td><td>M86F の Galois 作用 <code>eisGal</code> = dilation 合成（右合成 f ↦ f∘(zX)）であることの同定。f∘(zX) = z·f・smul/単項式の簿記を経由</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>σ_ζ([c]λ) = ζ·[c]λ</code> (M106-3)</td><td><strong>本丸2: Galois 同変性</strong>——M89F-5 の「[c] 一般化」。M106-1・M106-2 を合流させ、Galois 作用と [c]-倍作用が可換であることを機械証明</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>[c](ω(a)λ) = ω(a)·[c]λ</code> (M106-4)</td><td><strong>本丸3: 半線形性</strong>——共役点 ω(a)λ 上でも [c]-作用が ω(a) 倍で可換。<strong>M105 の 0 での作用 + 本結果で Λ₁ の全点（0 と共役族）における [c]-作用が確定</strong> = Λ₁ の ℤ_p[Gal]-加群構造の完成</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">柱B B-1 第二段完結。Λₙ（n ≥ 2）への塔の拡張・O 全体（完備化後）への作用は次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M105: λ の [c]-倍作用と Λ₁ の位数 p — 柱B B-1 第一段（issue #36）（IUT/LambdaModule.lean）</h3>
+  <div class="box">
+    <p><strong>M89F の「一般 [c]-作用・位数」申告のうち Λ₁ 部分を解消</strong>（柱B B-1 第一段）: Lubin–Tate 多項式 f の [c]-倍作用を λ 上に実構成し、⟨λ⟩ ≅ ℤ/p を証明する:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>f = X·E</code> の因数分解 (M105-1)</td><td>Lubin–Tate 多項式 f は Eisenstein 多項式 E の X 倍——f(X) = X·E(X) の明示分解</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>合成イデアル補題 (M105-2)</td><td>S(0) = 0, T = w·E ⟹ S∘T ∈ (E)——頭出し分解 + 合成の乗法性で<strong>係数計算ゼロ</strong>で証明</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>[c]λ := ltSol(c) mod E</code> (M105-3)</td><td><strong>[c]-倍作用の実構成</strong>（評価 = 商写像。O の完備性は不要）。[0]/[1]/加法/乗法の降下、[π] = f の同定</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>[πⁿc]λ = 0</code> / 単数の非消滅 (M105-4)</td><td>π 倍の消滅（合成イデアル補題の反復）と X = [c⁻¹]∘[c]（c が単数のとき）から λ ≠ 0 なら [c]λ ≠ 0</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>位数の分類 (M105-5)</td><td><strong>本丸: [c]λ = 0 ⟺ π ∣ c</strong>——⟨λ⟩ ≅ ℤ/p（M84F の p 点下界と合わせ位数がちょうど p であることを確定）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">柱B B-1 第一段完結。Galois 同変性・共役族への半線形性の拡張は M106 に接続。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M104: 被覆定理と μ_{p−1} の巡回性 — 柱B B-3 完全終結（issue #36）（IUT/CyclicUnits.lean）</h3>
+  <div class="box">
+    <p><strong>(ℤ/p)^× と μ_{p−1} が巡回群であることの完全証明</strong>（柱B B-3 完全終結）: M103 の原始根 g を使い、任意の単数が g の冪であること（被覆）を構成的に確立する:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>generator_covers</code> (M104-1)</td><td><strong>本丸: 任意の単数は g^k</strong>——有界探索（<code>decidableBoundedExists</code>）で witness を構成的に取得。不在なら g の p−1 個の冪と c の p 個の相異なる根が<strong>合わせて roots_bound（M96）に矛盾</strong>という背理法（choice なし）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>zmodUnits_cyclic</code> (M104-2)</td><td>(ℤ/p)^× は巡回群——g が生成元であることの群 witness</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>mu_cyclic</code> (M104-3)</td><td>μ_{p−1} は巡回群——M101 の同型 ω̄ を経由して zmodUnits_cyclic から移送</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small"><strong>issue #36 柱B B-3 の残件ゼロ</strong>: μ_{p−1} ≅ (ℤ/p)^× の群同型（M101）・位数理論（M102）・原始根の存在（M103）・被覆と巡回性（M104）で B-3 プログラムが完全終結。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M103: 原始根の存在 = (ℤ/p)^× の巡回性 — 柱B B-3 後半完結（issue #36）（IUT/PrimitiveRoot.lean）</h3>
+  <div class="box">
+    <p><strong>(ℤ/p)^× に原始根（位数 p−1 の元）が存在することの完全証明</strong>: M102/M102F の位数理論と付値ギャップ補題を組み合わせ、位数の最大元が p−1 に達することを示す:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td>零因子なし (M103-1)</td><td>ℤ/p は零因子なし（Euclid の商への降下）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>位数の積公式 (M103-2)</td><td>互いに素な位数を持つ元の積の位数 = 位数の積（Bezout による消去論法）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>位数結合 (M103-3)</td><td>M102F の付値ギャップ補題の素数 q の冪部分を移植し、<strong>位数を厳密に増大</strong>させる帰納構成（位数 ≤ p−1 が燃料となり再帰は必ず停止）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>指数元の構成 (M103-4)</td><td>1..p−1 の畳み込みにより<strong>指数元</strong>（全単数の位数を割る位数を持つ元）を構成</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>primitive_root_exists</code> (M103-5)</td><td><strong>本丸</strong>: ord g &lt; p−1 と仮定すると剰余 1..(ord g)+1 が X^{ord g} − 1 の ord g + 1 個の相異なる根となり<strong>roots_bound（M96）に矛盾</strong>——∃g, ord g = p−1</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small"><strong>公理衛生の発見</strong>: 非算術的なゴール（∃ を含む）に対する <code>omega</code> と core の <code>Nat.pow_lt_pow_right</code> が <code>Classical.choice</code> を混入させることを特定し、choice-free な代替に置換して回避した。被覆（全単数 = g の冪）と μ_{p−1} への移送は M104 に接続。全て標準公理のみ（choice なし）。</p>
+  </div>
+
+  <h3>M102: (ℤ/p)^× の位数理論 + M102F: Nat 素数道具 — 柱B B-3 後半・第一層（IUT/ZmodOrder.lean・IUT/NatPrimeParts.lean）</h3>
+  <div class="box">
+    <p><strong>M102: 位数 zmodOrd の実構成</strong>: <strong>fuel 付き最小 witness 探索</strong>による位数 <code>zmodOrd</code> の実構成（c^d = 1・1 ≤ d ≤ p−1・最小性、選択公理不使用）・c^k = 1 のときの整除性 d ∣ k、および d ∣ p−1（Fermat 経由）・単数の簡約律・冪 c^0..c^{d−1} の相異性・冪の位数公式 e ∣ d ⟹ ord(c^e) = d/e。<strong>M102F: Nat 素数道具</strong>（サブエージェント並行開発・統合）: 素因数の存在（fuel 付き最小約数探索）・n の q 冪部分の抽出 n = q^α·n'・Bezout による<strong>互いに素の割り切り補題</strong>・<strong>付値ギャップ</strong> s ∤ m ⟹ ∃q: v_q(m) &lt; v_q(s)（gcd 商の素因数を取る純整除簿記——付値理論・素因数分解の一般論は経由しない）。</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>zmodOrd</code> (M102-1)</td><td>fuel 付き最小 witness 探索による位数の実構成（c^d = 1・1 ≤ d ≤ p−1・最小性）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>整除性 (M102-2)</td><td>c^k = 1 ⟹ ord c ∣ k、および ord c ∣ p−1（Fermat の小定理経由）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>簡約律・冪の相異性 (M102-3)</td><td>単数の簡約律と c^0, c^1, …, c^{d−1} の相異性（d = ord c）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>冪の位数公式 (M102-4)</td><td>e ∣ d ⟹ ord(c^e) = d/e</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>素因数の存在・q 冪部分の抽出 (M102F-1)</td><td>fuel 付き最小約数探索による素因数の存在と n = q^α·n' の抽出</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>Bezout 割り切り補題 (M102F-2)</td><td>互いに素な二数の割り切りに関する Bezout 補題</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>付値ギャップ (M102F-3)</td><td>s ∤ m ⟹ ∃q: v_q(m) &lt; v_q(s)（純整除簿記、M103 の位数結合で使用）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">原始根の存在（巡回性）は M103 に接続。全て標準公理のみ（choice なし）。</p>
+  </div>
+
+  <h3>M101: μ_{p−1} ≅ (ℤ/p)^× の群同型 — 柱B B-3 前半（issue #36）（IUT/MuUnits.lean）</h3>
+  <div class="box">
+    <p><strong>Teichmüller 代表の像 μ_{p−1}（1 の (p−1) 乗根全体）と (ℤ/p)^× が群として同型であることの完全証明</strong>（issue #36 柱B B-3 前半）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>teichBar_of_muRoot</code> (M101-1)</td><td><strong>核心: ℤ_p 内の 1 の (p−1) 乗根は Teichmüller 代表に他ならない</strong>——x^{p−1} = 1 ⟹ x = ω(x mod p)（Frobenius 固定 x = x^{p^n} と持ち上げ補題の合流）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>muGrp</code> / <code>zmodUnits</code> (M101-2)</td><td>μ_{p−1} と (ℤ/p)^× を実際の <strong>Grp</strong> として構成（逆元 = ^{p−2} 冪の明示式、choice 回避）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>teichBar</code> (M101-3)</td><td>ω の <strong>Quot.lift による降下</strong>（<code>teich_congr</code> で well-defined 性を確認——代表元抽出なし）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td>単射性・全射性 (M101-4)</td><td>teichBar の単射性（M101-1 の対偶）と全射性（ω(a) が任意の μ_{p−1} 元を尽くす）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>MuUnitsIsoData</code> (M101-5)</td><td><strong>総括 witness</strong>——μ_{p−1} ≅ (ℤ/p)^× の群同型を束ねた純レコード</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">巡回性（原始根の存在）は柱B B-3 後半（M102–M104）に接続。全て標準公理のみ（choice なし）。</p>
+  </div>
 
   <h3>M100: End(F) を環として閉じる — 柱B B-4（issue #36）（IUT/FormalGroupEndRing.lean）</h3>
   <div class="box">
@@ -1972,6 +2055,13 @@ $ lake env lean check_axioms.lean
     <tr><td><code>IUT/ThetaReflection.lean</code></td><td>M98: テータの反転対称性——J(Θ) = −Θ・J² = id・J = T on Θ（M89 合流）（柱E、choice なし）</td></tr>
     <tr><td><code>IUT/ThetaGroupMod.lean</code></td><td>M98F: テータ群 mod l——Heisenberg 商群・mod-l cyclotomic rigidity・切断の 2l 周期性（サブエージェント並行開発、choice なし）</td></tr>
     <tr><td><code>IUT/FormalGroupEndRing.lean</code></td><td>M100: End(F) を環として閉じる（柱B B-4）——形式群加法 ⊕・合成 ⊙ が LT 像上で可換環公理を充足・ι:ℤ_p≅End(F) 像の単射準同型・LTEndRingData（choice なし）</td></tr>
+    <tr><td><code>IUT/MuUnits.lean</code></td><td>M101: μ_{p−1} ≅ (ℤ/p)^× の群同型（柱B B-3 前半）——teichBar_of_muRoot・muGrp/zmodUnits の Grp 構成・teichBar の Quot.lift 降下・MuUnitsIsoData（choice なし）</td></tr>
+    <tr><td><code>IUT/ZmodOrder.lean</code></td><td>M102: (ℤ/p)^× の位数理論——fuel 探索による zmodOrd 実構成・整除性・冪の相異性・ord(c^e)=d/e（choice なし）</td></tr>
+    <tr><td><code>IUT/NatPrimeParts.lean</code></td><td>M102F: Nat 素数道具——素因数存在・q 冪抽出・Bezout 割り切り補題・付値ギャップ（サブエージェント並行開発、choice なし）</td></tr>
+    <tr><td><code>IUT/PrimitiveRoot.lean</code></td><td>M103: 原始根の存在 = (ℤ/p)^× の巡回性（柱B B-3 後半完結）——位数結合・指数元・primitive_root_exists（roots_bound 合流、choice なし）</td></tr>
+    <tr><td><code>IUT/CyclicUnits.lean</code></td><td>M104: 被覆定理と μ_{p−1} の巡回性（柱B B-3 完全終結）——generator_covers・zmodUnits_cyclic・mu_cyclic（choice なし）</td></tr>
+    <tr><td><code>IUT/LambdaModule.lean</code></td><td>M105: λ の [c]-倍作用と Λ₁ の位数 p（柱B B-1 第一段）——f = X·E 分解・合成イデアル補題・[c]λ = 0 ⟺ π ∣ c（choice なし）</td></tr>
+    <tr><td><code>IUT/LambdaSemilinear.lean</code></td><td>M106: [c]-作用の半線形性と Galois 同変性（柱B B-1 第二段）——ltSol_dilate・σ_ζ([c]λ) = ζ·[c]λ・Λ₁ の ℤ_p[Gal]-加群構造の完成（choice なし）</td></tr>
     <tr><td><code>IUT/Diophantine.lean</code></td><td>M7: 系3.12 ＋ 体積評価 ⟹ Szpiro 型不等式（条件付き導出）</td></tr>
     <tr><td><code>IUT/AbcConsequences.lean</code></td><td>M8: ABC ⟹ 漸近フェルマー（radical 公理上の完全証明）</td></tr>
     <tr><td><code>IUT/Skeleton.lean</code></td><td>形式骨格 <code>Skeleton</code>・系3.12 <code>Cor312</code>・RC 評価 <code>RCEval</code> の定義</td></tr>
