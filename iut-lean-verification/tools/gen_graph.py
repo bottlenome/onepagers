@@ -45,6 +45,7 @@ PILLAR = {
     "SGA1": "A", "Finiteness": "A", "Compactness": "A", "CategoryTheory": "A",
     "GaloisAxioms": "A", "AbstractGalois": "A", "SGA1Completion": "A",
     "SGA1Object": "A", "ProObject": "A", "LimitCompact": "A", "SumDecomposition": "A",
+    "FlUnits": "A",
     # 柱B（局所類体論・Eisenstein）
     "LocalCFT": "B", "NormCorrespondence": "B", "PrincipalUnits": "B",
     "PrincipalUnitGroup": "B", "UnitFiltration": "B", "Fermat": "B",
@@ -60,6 +61,7 @@ PILLAR = {
     "CyclicUnits": "B",
     "LambdaModule": "B",
     "LambdaSemilinear": "B",
+    "RamifiedReciprocity": "B", "PadicSeries": "B",
     # 柱C（Lubin–Tate・形式群・Frobenioid）
     "Ring": "C", "PowerSeries": "C", "Composition": "C", "LubinTateUnique": "C",
     "LubinTateZp": "C", "PadicDivision": "C", "Binomial2": "C", "Freshman": "C",

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 149,
-  "verified_theorem_total": 1128,
-  "choice_free_count": 109,
+  "module_count": 152,
+  "verified_theorem_total": 1156,
+  "choice_free_count": 112,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1839,6 +1839,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaSemilinear.lean"
+    },
+    {
+      "id": "RamifiedReciprocity",
+      "label": "RamifiedReciprocity",
+      "milestone": "M107",
+      "title": "柱B B-2 の心臓部:\n  レベル 1 分岐相互法則 [u]λ = ω(ū",
+      "pillar": "B",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RamifiedReciprocity.lean"
+    },
+    {
+      "id": "FlUnits",
+      "label": "FlUnits",
+      "milestone": "M108F",
+      "title": "素数性を使う F_l^× の群構造",
+      "pillar": "A",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FlUnits.lean"
+    },
+    {
+      "id": "PadicSeries",
+      "label": "PadicSeries",
+      "milestone": "M107F",
+      "title": "柱B B-1 第三段: ℤ_p の p 進級数和の実構成",
+      "pillar": "B",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicSeries.lean"
     }
   ],
   "edges": [
@@ -2248,6 +2284,10 @@
     },
     {
       "source": "FundamentalGroup",
+      "target": "FlUnits"
+    },
+    {
+      "source": "FundamentalGroup",
       "target": "Profinite"
     },
     {
@@ -2267,6 +2307,10 @@
       "target": "Premises311"
     },
     {
+      "source": "HodgeTheater",
+      "target": "FlUnits"
+    },
+    {
       "source": "LTErrorDivisible",
       "target": "LubinTateExists"
     },
@@ -2281,6 +2325,14 @@
     {
       "source": "LambdaModule",
       "target": "LambdaSemilinear"
+    },
+    {
+      "source": "LambdaSemilinear",
+      "target": "PadicSeries"
+    },
+    {
+      "source": "LambdaSemilinear",
+      "target": "RamifiedReciprocity"
     },
     {
       "source": "LaurentCoeff",
@@ -2357,6 +2409,10 @@
     {
       "source": "Multiradial",
       "target": "Premises311"
+    },
+    {
+      "source": "NatPrimeParts",
+      "target": "FlUnits"
     },
     {
       "source": "NatPrimeParts",

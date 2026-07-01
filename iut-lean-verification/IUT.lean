@@ -154,3 +154,5 @@ import IUT.CyclicUnits
 import IUT.LambdaModule
 import IUT.LambdaSemilinear
 import IUT.RamifiedReciprocity
+import IUT.FlUnits
+import IUT.PadicSeries

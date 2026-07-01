@@ -1151,6 +1151,20 @@ import IUT
 #print axioms IUT.eisBr_reciprocity
 #print axioms IUT.ramifiedReciprocityData
 #print axioms IUT.ramifiedReciprocity_exists
+#print axioms IUT.mulMod_assoc
+#print axioms IUT.mulMod_ne_zero
+#print axioms IUT.flInv_exists
+#print axioms IUT.flInv_spec
+#print axioms IUT.flUnits
+#print axioms IUT.flUnits_comm
+#print axioms IUT.rpow_pi_val_zero
+#print axioms IUT.zpTerm_val_zero
+#print axioms IUT.zpSum_val_stable
+#print axioms IUT.zpSeriesSum_partial
+#print axioms IUT.zpSeriesSum_add
+#print axioms IUT.zpSeriesSum_head
+#print axioms IUT.padicSeriesData
+#print axioms IUT.padicSeries_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
