@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 148,
-  "verified_theorem_total": 1112,
-  "choice_free_count": 108,
+  "module_count": 149,
+  "verified_theorem_total": 1128,
+  "choice_free_count": 109,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1827,6 +1827,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaModule.lean"
+    },
+    {
+      "id": "LambdaSemilinear",
+      "label": "LambdaSemilinear",
+      "milestone": "M106",
+      "title": "柱B B-1 第二段: [c]-作用の半線形性と\n  Galois 同変性",
+      "pillar": "B",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaSemilinear.lean"
     }
   ],
   "edges": [
@@ -1883,6 +1895,10 @@
       "target": "LubinTateUnique"
     },
     {
+      "source": "CyclicUnits",
+      "target": "LambdaSemilinear"
+    },
+    {
       "source": "Diophantine",
       "target": "Multiradial"
     },
@@ -1909,6 +1925,10 @@
     {
       "source": "EisensteinConjugates",
       "target": "RamifiedEntrance"
+    },
+    {
+      "source": "EisensteinGalois",
+      "target": "LambdaSemilinear"
     },
     {
       "source": "EisensteinGalois",
@@ -2257,6 +2277,10 @@
     {
       "source": "LTIterate",
       "target": "TorsionPoints"
+    },
+    {
+      "source": "LambdaModule",
+      "target": "LambdaSemilinear"
     },
     {
       "source": "LaurentCoeff",

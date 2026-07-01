@@ -1121,6 +1121,22 @@ import IUT
 #print axioms IUT.eisBr_eq_zero_iff
 #print axioms IUT.lambdaModuleData
 #print axioms IUT.lambdaModule_exists
+#print axioms IUT.psSingle_mul_single
+#print axioms IUT.psSingleOne_pow
+#print axioms IUT.psScale_eq_comp
+#print axioms IUT.psComp_smul_left
+#print axioms IUT.psSmul_add
+#print axioms IUT.psSmul_swap
+#print axioms IUT.psPow_smul
+#print axioms IUT.rpow_fixed_of_root
+#print axioms IUT.ltPoly_dilate
+#print axioms IUT.ltSol_dilate
+#print axioms IUT.psScale_ltSol
+#print axioms IUT.psSmul_eq_psC_mul
+#print axioms IUT.eisAut_eisBr
+#print axioms IUT.eisBr_conj_scale
+#print axioms IUT.zpPow_eq_rpow_zp
+#print axioms IUT.eisAut_teich_eisBr
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

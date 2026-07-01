@@ -152,3 +152,4 @@ import IUT.NatPrimeParts
 import IUT.PrimitiveRoot
 import IUT.CyclicUnits
 import IUT.LambdaModule
+import IUT.LambdaSemilinear

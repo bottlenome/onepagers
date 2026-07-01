@@ -59,6 +59,7 @@ PILLAR = {
     "ZmodOrder": "B", "NatPrimeParts": "B", "PrimitiveRoot": "B",
     "CyclicUnits": "B",
     "LambdaModule": "B",
+    "LambdaSemilinear": "B",
     # 柱C（Lubin–Tate・形式群・Frobenioid）
     "Ring": "C", "PowerSeries": "C", "Composition": "C", "LubinTateUnique": "C",
     "LubinTateZp": "C", "PadicDivision": "C", "Binomial2": "C", "Freshman": "C",
