@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 147,
-  "verified_theorem_total": 1098,
-  "choice_free_count": 107,
+  "module_count": 148,
+  "verified_theorem_total": 1112,
+  "choice_free_count": 108,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1815,6 +1815,18 @@
       "has_honest_scope": false,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclicUnits.lean"
+    },
+    {
+      "id": "LambdaModule",
+      "label": "LambdaModule",
+      "milestone": "M105",
+      "title": "柱B B-1 第一段: λ の [c]-倍作用と Λ₁ の位数 p",
+      "pillar": "B",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaModule.lean"
     }
   ],
   "edges": [
@@ -1879,6 +1891,10 @@
       "target": "EisDomain2"
     },
     {
+      "source": "EisDomain",
+      "target": "LambdaModule"
+    },
+    {
       "source": "EisDomain2",
       "target": "Premises311"
     },
@@ -1917,6 +1933,10 @@
     {
       "source": "EisensteinTower",
       "target": "EisensteinUpper"
+    },
+    {
+      "source": "EisensteinTower",
+      "target": "LambdaModule"
     },
     {
       "source": "EisensteinUpper",
@@ -2105,6 +2125,10 @@
     {
       "source": "FormalGroupOModule",
       "target": "FormalGroupPoints"
+    },
+    {
+      "source": "FormalGroupOModule",
+      "target": "LambdaModule"
     },
     {
       "source": "FormalGroupPoints",
@@ -2553,6 +2577,10 @@
     {
       "source": "ZpDomain",
       "target": "EisDomain"
+    },
+    {
+      "source": "ZpDomain",
+      "target": "LambdaModule"
     },
     {
       "source": "ZpUnits",

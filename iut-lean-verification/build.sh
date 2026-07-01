@@ -1107,6 +1107,20 @@ import IUT
 #print axioms IUT.zmodUnits_cyclic
 #print axioms IUT.mu_powers_distinct
 #print axioms IUT.mu_cyclic
+#print axioms IUT.ltPoly_factor
+#print axioms IUT.psX_factor
+#print axioms IUT.eisRel_comp_ideal
+#print axioms IUT.eisBr_zero
+#print axioms IUT.eisBr_one
+#print axioms IUT.eisBr_add_series
+#print axioms IUT.eisBr_mul_series
+#print axioms IUT.ltSol_pi
+#print axioms IUT.eisBr_pi_mul
+#print axioms IUT.eisBr_pi_pow
+#print axioms IUT.eisBr_unit_ne_zero
+#print axioms IUT.eisBr_eq_zero_iff
+#print axioms IUT.lambdaModuleData
+#print axioms IUT.lambdaModule_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

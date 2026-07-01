@@ -29,6 +29,7 @@
     "MuUnits":           { "is_capstone": true, "summary": "μ_{p−1} ≅ (ℤ/p)^× の群同型（M101, B-3前半）— x^{p−1}=1 ⟹ x=ω(x mod p)、巡回性は未" },
     "PrimitiveRoot":     { "is_capstone": true, "summary": "原始根の存在 = (ℤ/p)^× の巡回性（M103, B-3完結）— 位数結合と roots_bound の合流、被覆は M104" },
     "CyclicUnits":       { "is_capstone": true, "summary": "被覆定理と μ_{p−1} の巡回性（M104, B-3 完全終結）— (ℤ/p)^× と μ_{p−1} が巡回群" },
+    "LambdaModule":      { "is_capstone": true, "summary": "λ の [c]-倍作用と Λ₁ の位数 p（M105, B-1 第一段）— f = X·E と合成イデアル補題、[c]λ=0 ⟺ π∣c" },
     "GaussianVolume":    { "is_capstone": true, "summary": "ガウス体積簿記 vol_q（E8）— 柱E E1–E8 完結 (GaussianVolumeData)" },
     "MonoThetaWitness":  { "is_capstone": true, "summary": "mono-theta witness（E7）— ガウス指数=Heisenberg標準切断、柱E接合" },
     "Premises311":       { "is_capstone": true, "summary": "定理3.11 の前提束 Theorem311Premises — 柱B+E witness を系3.12 パイプラインに接続（柱D 入口）" },
