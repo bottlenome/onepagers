@@ -147,3 +147,6 @@ import IUT.Realification
 import IUT.ArchimedeanPlace
 import IUT.FormalGroupEndRing
 import IUT.MuUnits
+import IUT.ZmodOrder
+import IUT.NatPrimeParts
+import IUT.PrimitiveRoot

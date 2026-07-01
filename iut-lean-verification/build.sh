@@ -1061,6 +1061,44 @@ import IUT
 #print axioms IUT.unitsToMu
 #print axioms IUT.muUnitsIsoData
 #print axioms IUT.muUnitsIso_exists
+#print axioms IUT.sub_one_emod_congr
+#print axioms IUT.zmodIsOne_true
+#print axioms IUT.zmodIsOne_one
+#print axioms IUT.zmodIsOne_false
+#print axioms IUT.zmodMul_assoc
+#print axioms IUT.zmodOne_mul
+#print axioms IUT.zmodPow_add
+#print axioms IUT.zmodPow_mul
+#print axioms IUT.zmodPow_one_base
+#print axioms IUT.zmodUnit_pow_card
+#print axioms IUT.ordSearch_spec
+#print axioms IUT.zmodOrd_spec
+#print axioms IUT.zmodOrd_pow_eq_one
+#print axioms IUT.zmodOrd_pos
+#print axioms IUT.zmodOrd_le
+#print axioms IUT.zmodOrd_dvd
+#print axioms IUT.zmodOrd_dvd_card
+#print axioms IUT.zmod_unit_cancel
+#print axioms IUT.zmodOrd_powers_distinct
+#print axioms IUT.zmodOrd_pow_div
+#print axioms IUT.prime_factor_exists
+#print axioms IUT.prime_pow_extract
+#print axioms IUT.prime_dvd_prime_pow
+#print axioms IUT.coprime_dvd_cancel
+#print axioms IUT.coprime_mul_dvd
+#print axioms IUT.coprime_of_not_dvd_prime_pow
+#print axioms IUT.dvd_or_valuation_gap
+#print axioms IUT.zmodPow_mul_dist
+#print axioms IUT.zmodPow_succ
+#print axioms IUT.zmodMul_one
+#print axioms IUT.zmod_no_zero_div
+#print axioms IUT.zmodRing_one_ne_zero
+#print axioms IUT.zmodPow_eq_rpow
+#print axioms IUT.zmodOrd_mul_coprime
+#print axioms IUT.zmodOrd_combine
+#print axioms IUT.exponent_fold
+#print axioms IUT.exponent_element
+#print axioms IUT.primitive_root_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

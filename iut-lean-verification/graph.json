@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 143,
-  "verified_theorem_total": 1052,
-  "choice_free_count": 103,
+  "module_count": 146,
+  "verified_theorem_total": 1090,
+  "choice_free_count": 106,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1767,6 +1767,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuUnits.lean"
+    },
+    {
+      "id": "ZmodOrder",
+      "label": "ZmodOrder",
+      "milestone": "M102",
+      "title": "B-3 後半・第一層: (ℤ/p",
+      "pillar": "B",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZmodOrder.lean"
+    },
+    {
+      "id": "NatPrimeParts",
+      "label": "NatPrimeParts",
+      "milestone": "M103",
+      "title": "NatPrimeParts",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NatPrimeParts.lean"
+    },
+    {
+      "id": "PrimitiveRoot",
+      "label": "PrimitiveRoot",
+      "milestone": "M103",
+      "title": "B-3 後半完結: 原始根の存在 = (ℤ/p",
+      "pillar": "B",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimitiveRoot.lean"
     }
   ],
   "edges": [
@@ -1889,6 +1925,14 @@
     {
       "source": "FactorTheorem",
       "target": "LambdaClassify"
+    },
+    {
+      "source": "FactorTheorem",
+      "target": "PrimitiveRoot"
+    },
+    {
+      "source": "Fermat",
+      "target": "NatPrimeParts"
     },
     {
       "source": "Fermat",
@@ -2235,6 +2279,10 @@
       "target": "ThetaGroupMod"
     },
     {
+      "source": "MuUnits",
+      "target": "ZmodOrder"
+    },
+    {
       "source": "Multiradial",
       "target": "Evaluation"
     },
@@ -2245,6 +2293,10 @@
     {
       "source": "Multiradial",
       "target": "Premises311"
+    },
+    {
+      "source": "NatPrimeParts",
+      "target": "PrimitiveRoot"
     },
     {
       "source": "PSFunctor",
@@ -2469,6 +2521,10 @@
     {
       "source": "UnitFiltration",
       "target": "Fermat"
+    },
+    {
+      "source": "ZmodOrder",
+      "target": "PrimitiveRoot"
     },
     {
       "source": "ZpDomain",

@@ -1370,7 +1370,7 @@
       <tr><td><code>flt_unit</code> / <code>euler_pow</code> (M34-3〜4)</td><td><strong>古典形 Fermat</strong> a^{p−1} ≡ 1 (mod p) と <strong>Euler の定理の p 冪版</strong> p^{n+1} ∣ a^{p^n(p−1)} − 1（持ち上げ補題で反復昇格）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>teich_root_of_unity</code> / <code>teich_invertible</code> (M34-5〜6)</td><td><strong>ω(a)^{p−1} = 1</strong>（p ∤ a）と <strong>ω(a) は ℤ_p の単元</strong>（逆元 = ω(a)^{p−2} の明示構成）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">μ_{p−1} ≅ (ℤ/p)^× の群同型は M101 で形式化済み（巡回性 = 原始根の存在のみ未形式化）。未形式化: Lubin–Tate。（O^× = μ × U^(1) の直積分解は M35 で解消済。）</p>
+    <p class="small">μ_{p−1} ≅ (ℤ/p)^× の群同型は M101、巡回性（原始根の存在）は M102–M103 で形式化済み。未形式化: Lubin–Tate。（O^× = μ × U^(1) の直積分解は M35 で解消済。）</p>
   </div>
 
   <h3>M33: Teichmüller 持ち上げ ω(a) = lim a^{p^n}（IUT/Teichmuller.lean）</h3>
@@ -1382,7 +1382,7 @@
       <tr><td><code>teich_step</code> / <code>teich</code> (M33-5〜6)</td><td><strong>整合性</strong> p^{n+1} ∣ a^{p^{n+1}} − a^{p^n}（基底 = FLT、帰納段 = 持ち上げ補題）と <strong>ω(a) = lim a^{p^n} : ℤ_p の実構成</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>teich_reduction</code> / <code>teich_mul</code> / <code>teich_frobenius</code> (M33-7〜9)</td><td><strong>剰余の復元</strong> ω(a) ≡ a (mod p)・<strong>乗法性</strong> ω(ab) = ω(a)ω(b)・ω(1) = 1・<strong>Frobenius 不変性</strong> ω(a^p) = ω(a)——Teichmüller 代表系が乗法的切断であること</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p class="small">ω の像 = μ_{p−1} と (ℤ/p)^× の群同型は M101 で形式化済み（巡回性 = 原始根の存在のみ未形式化）。未形式化: Lubin–Tate。（O^× = μ × U^(1) の直積分解そのものは M35 で解消済。）</p>
+    <p class="small">ω の像 = μ_{p−1} と (ℤ/p)^× の群同型は M101、巡回性（原始根の存在）は M102–M103 で形式化済み。未形式化: Lubin–Tate。（O^× = μ × U^(1) の直積分解そのものは M35 で解消済。）</p>
   </div>
 
   <h3>M32: Fermat の小定理の自前証明（IUT/Fermat.lean）</h3>
