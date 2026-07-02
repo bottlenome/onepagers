@@ -1165,6 +1165,31 @@ import IUT
 #print axioms IUT.zpSeriesSum_head
 #print axioms IUT.padicSeriesData
 #print axioms IUT.padicSeries_exists
+#print axioms IUT.quotCRing
+#print axioms IUT.quotOf
+#print axioms IUT.quot_exact_ideal
+#print axioms IUT.quot_rpow_mk
+#print axioms IUT.psSmul_psX
+#print axioms IUT.rpow_psX
+#print axioms IUT.towerStep_shape
+#print axioms IUT.towerLevel
+#print axioms IUT.tower_shape
+#print axioms IUT.ringFIter_hom
+#print axioms IUT.tower_base_torsion
+#print axioms IUT.tower_torsion
+#print axioms IUT.eisTowerData
+#print axioms IUT.eisTower_exists
+#print axioms IUT.negMod_mulMod_left
+#print axioms IUT.pmCong
+#print axioms IUT.flStar
+#print axioms IUT.flStar_comm
+#print axioms IUT.flStar_rep
+#print axioms IUT.flStarData
+#print axioms IUT.zpSeriesSum_zero_fun
+#print axioms IUT.zpSeriesSum_smul
+#print axioms IUT.zpSeriesSum_split
+#print axioms IUT.zpSeriesSum_tail_dvd
+#print axioms IUT.padicSeriesSplitData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

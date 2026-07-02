@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 152,
-  "verified_theorem_total": 1156,
-  "choice_free_count": 112,
+  "module_count": 155,
+  "verified_theorem_total": 1181,
+  "choice_free_count": 115,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -1875,6 +1875,42 @@
       "has_honest_scope": false,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicSeries.lean"
+    },
+    {
+      "id": "EisTowerRings",
+      "label": "EisTowerRings",
+      "milestone": "M109",
+      "title": "柱B B-1: Λₙ 塔の環骨格を全レベルで構成",
+      "pillar": "B",
+      "decl_count": 28,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisTowerRings.lean"
+    },
+    {
+      "id": "FlStar",
+      "label": "FlStar",
+      "milestone": "M109F",
+      "title": "乗法的対称性 F_l^* = F_l^×/{±1} の商群構成",
+      "pillar": "A",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FlStar.lean"
+    },
+    {
+      "id": "PadicSeries2",
+      "label": "PadicSeries2",
+      "milestone": "M110F",
+      "title": "柱B B-1 第三段: p 進級数和・第二層",
+      "pillar": "B",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicSeries2.lean"
     }
   ],
   "edges": [
@@ -2045,6 +2081,10 @@
     {
       "source": "Finiteness",
       "target": "CyclicUnits"
+    },
+    {
+      "source": "FlUnits",
+      "target": "FlStar"
     },
     {
       "source": "FormalGroup3Congr",
@@ -2431,6 +2471,10 @@
       "target": "ZpDomain"
     },
     {
+      "source": "PadicSeries",
+      "target": "PadicSeries2"
+    },
+    {
       "source": "PointValues",
       "target": "FormalGroupPointsComp"
     },
@@ -2505,6 +2549,10 @@
     {
       "source": "RamifiedEntrance",
       "target": "LaurentCoeff"
+    },
+    {
+      "source": "RamifiedReciprocity",
+      "target": "EisTowerRings"
     },
     {
       "source": "Realification",

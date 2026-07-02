@@ -32,6 +32,7 @@
     "LambdaModule":      { "is_capstone": true, "summary": "λ の [c]-倍作用と Λ₁ の位数 p（M105, B-1 第一段）— f = X·E と合成イデアル補題、[c]λ=0 ⟺ π∣c" },
     "LambdaSemilinear":  { "is_capstone": true, "summary": "[c]-作用の半線形性と Galois 同変性（M106, B-1 第二段）— [c](zX)=z·[c]、σ_ζ([c]λ)=ζ·[c]λ、Λ₁ の ℤ_p[Gal]-加群構造" },
     "RamifiedReciprocity": { "is_capstone": true, "summary": "レベル1 分岐相互法則 [u]λ = ω(ū)λ（M107, B-2 心臓部）— 主単数固定・吸収補題・M87F witness の実証明化" },
+    "EisTowerRings": { "is_capstone": true, "summary": "Λₙ 塔の環骨格を全レベルで構成（M109）— quotCRing の再帰、f(λ_{n+1})=λₙ・[π^{n+1}]λ_{n+1}=0、非自明性は未" },
     "GaussianVolume":    { "is_capstone": true, "summary": "ガウス体積簿記 vol_q（E8）— 柱E E1–E8 完結 (GaussianVolumeData)" },
     "MonoThetaWitness":  { "is_capstone": true, "summary": "mono-theta witness（E7）— ガウス指数=Heisenberg標準切断、柱E接合" },
     "Premises311":       { "is_capstone": true, "summary": "定理3.11 の前提束 Theorem311Premises — 柱B+E witness を系3.12 パイプラインに接続（柱D 入口）" },

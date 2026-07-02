@@ -156,3 +156,6 @@ import IUT.LambdaSemilinear
 import IUT.RamifiedReciprocity
 import IUT.FlUnits
 import IUT.PadicSeries
+import IUT.EisTowerRings
+import IUT.FlStar
+import IUT.PadicSeries2
