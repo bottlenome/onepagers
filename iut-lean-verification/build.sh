@@ -1220,6 +1220,15 @@ import IUT
 #print axioms IUT.tower_iota_lam_torsion
 #print axioms IUT.towerTorsionData
 #print axioms IUT.towerTorsionData_exists
+#print axioms IUT.rpow_rpow
+#print axioms IUT.ringF_pi_zero
+#print axioms IUT.ringFIter_pi_zero
+#print axioms IUT.one_le_pow
+#print axioms IUT.zmod_rpow_eq_zero
+#print axioms IUT.towerTorsion_res_zero
+#print axioms IUT.towerTorsion_not_unit
+#print axioms IUT.torsionResidueData
+#print axioms IUT.torsionResidue_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
