@@ -1315,6 +1315,18 @@ import IUT
 #print axioms IUT.tower_lam_one_ne_zero_of_base
 #print axioms IUT.towerNonzeroData
 #print axioms IUT.towerNonzero_exists
+#print axioms IUT.int_ediv_unique
+#print axioms IUT.prFloor_spec
+#print axioms IUT.ratRel_floor
+#print axioms IUT.qFloor
+#print axioms IUT.qFloor_le
+#print axioms IUT.qFloor_lt
+#print axioms IUT.qFloorNat_upper
+#print axioms IUT.qAbs_nonneg
+#print axioms IUT.qAbs_le_add_sub
+#print axioms IUT.rBound_spec
+#print axioms IUT.ratFloorData
+#print axioms IUT.ratFloor_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
