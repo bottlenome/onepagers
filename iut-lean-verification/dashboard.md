@@ -356,6 +356,7 @@ iut-lean-verification/
     ├── RealPosMul.lean # M129F: 正値の乗法閉性 pos·pos = pos（柱C、choice なし）
     ├── RealLe.lean # M130: 非厳密順序 rLe — 反対称律で realEq が返る・望遠鏡分解の定型（柱C 第92弾本線、choice なし）
     ├── LogVolBridge.lean # M131F: 実数値 log-volume への橋 — Frobenioid 次数 × 本物の ℝ（柱C C-1、choice なし）
+    ├── VolumeReal.lean # M132: ガウス体積簿記の ℝ 化 — 系3.12 不等式の実数形（柱E E-2、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -572,6 +573,7 @@ iut-lean-verification/
 | M129F: **正値の乗法閉性（柱C — issue #37、第91弾）**（M125 の正直申告解消: **pos·pos = pos**。分数の積 qFrac_mul（(k+1)(k'+1)−1 への着地、Nat 減算の復元は Nat.mul_pos + omega）、witness からの一様下界 isPos_lower（j ≥ 2n+1 で x_j ≥ 1/(2n+2)）、**本丸 isPos_mul**（witness M = 2(E−1)+1、E = (2N+2)² を単一原子として omega が処理 — 非線形の隔離定型）、系 rLt_mul_pos（0 < x, 0 < y → 0 < x·y）・RealPosMulData。正直申告: 一般形 x < y → xz < yz は分配律（M123F 次層）待ち） — サブエージェント並行開発・第91弾統合 | done（choice なし） |
 | M130 **実数の非厳密順序 ≤（柱C — issue #37、第92弾・本線）** | **rLe x y = ∀n, xₙ ≤ yₙ + 2/(n+1)（witness 形）**。設計の鍵: 合成は**望遠鏡分解** a−c = (a−b)+(b−c)（qSub_split）で片側差に割り定数側だけ折り畳んで ε-消去 — M125 で苦しんだ大域並べ替えを完全回避する定型を確立。≈ から ≤・反射・**推移律**（4 分割 + ε c=6）・**反対称律（本丸）: rLe 両側 → realEq**・congruence（of_realEq + 推移で無償）・加法両立（2u_{2n+1} = u_n の相殺）・**rLt → rLe**（spread の片側読み + ε c=2）・**強排反 rLt y x → ¬rLe x y**（witness 添字で 2/(2n+2) 対 2/(n+1) の具体矛盾）・RealLeData。正直申告: 線形性は排中律相当で対象外（共推移性が代替）、¬rLt → rLe は代表抽出 δ-論法で次層 | 実体構成 |
 | M131F: **実数値 log-volume への橋（柱C C-1 — issue #37、第92弾）**（**Frobenioid 次数理論（M12 QDiv・M67F RDiv）× スクラッチ ℝ（M115F〜M130）の接続**: qdegQ = ratOfInt ∘ degZ の有理数化と加法性・Frobenius 共変性、埋め込みの順序保存 qToReal_mono、**本丸 rlogVol = qToReal ∘ qdegQ**（realEq/realAdd/rmul/rLe の言葉で加法的・Frobenius 共変・非負・単調）、比較射 nnqToQ : NNQ → QRat による **RDiv 実化との値一致 rlogVol_compat**（degR_realify と可換 — 次層送りにせず完遂）・LogVolBridgeData。**log-volume が本物の実数として振る舞うことの機械検証 = C-1 の骨格**。柱E E-2（系3.12 の ℝ 化）・柱D（定理3.11 体積側）への供給線。正直申告: 一般実数スカラー倍・因子順序からの degZ 比較簿記・nnqToQ の加法性は次層） — サブエージェント並行開発・第92弾統合 | done（choice なし） |
+| M132 **ガウス体積簿記の ℝ 化（柱E E-2 — issue #39、第93弾・本線）** | **M93（E-8 離散ガウス体積）× M131F（C-1 橋）の合流 = E-2 の橋部分**: ℕ → ℝ 埋め込み natToReal の単調・加法・乗法、**閉形式の実数形**（6·Σj² = l(l+1)(2l+1)・6·Σtri = l(l+1)(l+2) が realEq として成立）、指数橋 Σj² + Σj = 2Σtri の実数化、**本丸 cube_le_ssq_real: 体積下界 l³ ≤ 3Σj² が rLe として成立** — テータパイロット総 q-次数の実数下界 = [IUTchIV] log-volume 計算・系3.12 の体積側ステートメントが本物の実数の不等式として機械検証の土俵に乗った。VolumeRealData 総括。正直申告: rlogVol との合流（ガウス因子の QDiv 実装）は M12 側の因子構成を要し次層・実数除算形は逆元理論後 | 実体構成 |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

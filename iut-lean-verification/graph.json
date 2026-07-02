@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 177,
-  "verified_theorem_total": 1437,
-  "choice_free_count": 137,
+  "module_count": 178,
+  "verified_theorem_total": 1446,
+  "choice_free_count": 138,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2185,6 +2185,21 @@
         "[IUTchIII]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolBridge.lean"
+    },
+    {
+      "id": "VolumeReal",
+      "label": "VolumeReal",
+      "milestone": "M132",
+      "title": "ガウス体積簿記の ℝ 化",
+      "pillar": "E",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchI]",
+        "[IUTchIV]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/VolumeReal.lean"
     }
   ],
   "edges": [
@@ -2657,6 +2672,10 @@
       "target": "Premises311"
     },
     {
+      "source": "GaussianVolume",
+      "target": "VolumeReal"
+    },
+    {
       "source": "HodgeTheater",
       "target": "FlUnits"
     },
@@ -2719,6 +2738,10 @@
     {
       "source": "LocalCFT",
       "target": "PrincipalUnits"
+    },
+    {
+      "source": "LogVolBridge",
+      "target": "VolumeReal"
     },
     {
       "source": "LubinTateExists",

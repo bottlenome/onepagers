@@ -181,3 +181,4 @@ import IUT.RealComplete
 import IUT.RealPosMul
 import IUT.RealLe
 import IUT.LogVolBridge
+import IUT.VolumeReal

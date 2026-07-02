@@ -1446,6 +1446,15 @@ import IUT
 #print axioms IUT.rlogVol_compat
 #print axioms IUT.logVolBridgeData
 #print axioms IUT.logVolBridge_exists
+#print axioms IUT.natToReal_mono
+#print axioms IUT.natToReal_add
+#print axioms IUT.natToReal_mul
+#print axioms IUT.ssq_closed_real
+#print axioms IUT.stri_closed_real
+#print axioms IUT.ssq_stri_real
+#print axioms IUT.cube_le_ssq_real
+#print axioms IUT.volumeRealData
+#print axioms IUT.volumeReal_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
