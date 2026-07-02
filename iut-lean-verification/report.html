@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M133 の形式化（追加検証）</h2>
+  <h2>M1〜M134 の形式化（追加検証）</h2>
+
+  <h3>M134: 定理3.11 の実数値前提束 — 第86〜94弾総括 capstone（柱D 入口）（IUT/Premises311Real.lean）</h3>
+  <div class="box">
+    <p><strong>M97 の前提束を第86〜94弾の実数値の土台で強化・実数化する柱D 入口の capstone</strong>（第95弾本線）: base（M97）+ 柱B（剰余塔 M111・塔捻れ M112F・座標忠実性 M122 = <strong>λ₂ ≠ 0 無条件</strong>・捻れ×剰余 M113F・ℤ_p^× 完全分解 M118F）+ 柱C（スクラッチ ℝ の全 8 束: ℚ 体〜乗法〜順序・共推移性〜絶対値〜完備性）+ <strong>三橋</strong>（M131F 次数橋・M132 体積 ℝ 化・M133 ガウス因子同定）+ 柱E（± M116F・μ_l M121F・シクロトミック同期 M124F・商持ち上げ M126F）を単一レコード <code>Theorem311RealPremises</code> に束ねる。<strong>見出し: 定理3.11 の体積側前提（閉形式 6·vol(gaussDiv l) = l(l+1)(2l+1)・下界 l³ ≤ 3·vol）が実際のガウス因子の実数値 log-volume の言明として供給される</strong>。witness は既存総括定理の組み立てのみ（新規証明ゼロで閉じる = 各層の総括設計の正しさの証明）で、<code>#print axioms theorem311RealPremises = [propext, Quot.sound]</code> が<strong>第86〜94弾全鎖の choice-free 性の一括 certification</strong>。正直な限定: MultiradialRep（定理3.11 の構成本体 = 柱D 本丸）は依然未形式化 — 本束は前提の実数化の総括であり充足可能性の主張ではない。全て標準公理のみ。</p>
+  </div>
 
   <h3>M133: ガウス因子 — rlogVol と Σj² の同定（C-1 × E-2 × M12 の接合）（IUT/GaussianDivisor.lean）</h3>
   <div class="box">
