@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 176,
-  "verified_theorem_total": 1425,
-  "choice_free_count": 136,
+  "module_count": 177,
+  "verified_theorem_total": 1437,
+  "choice_free_count": 137,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2171,6 +2171,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealLe.lean"
+    },
+    {
+      "id": "LogVolBridge",
+      "label": "LogVolBridge",
+      "milestone": "M131F",
+      "title": "実数値 log-volume への橋",
+      "pillar": "C",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolBridge.lean"
     }
   ],
   "edges": [
@@ -2887,6 +2901,10 @@
       "target": "RealPosMul"
     },
     {
+      "source": "RealLe",
+      "target": "LogVolBridge"
+    },
+    {
       "source": "RealMul",
       "target": "RealAbs"
     },
@@ -2909,6 +2927,10 @@
     {
       "source": "Realification",
       "target": "ArchimedeanPlace"
+    },
+    {
+      "source": "Realification",
+      "target": "LogVolBridge"
     },
     {
       "source": "RecGluing",

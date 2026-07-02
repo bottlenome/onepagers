@@ -1434,6 +1434,18 @@ import IUT
 #print axioms IUT.rLt_not_le
 #print axioms IUT.realLeData
 #print axioms IUT.realLe_exists
+#print axioms IUT.qdegQ_add
+#print axioms IUT.qdegQ_frob
+#print axioms IUT.qToReal_mono
+#print axioms IUT.rlogVol_add
+#print axioms IUT.rlogVol_frob
+#print axioms IUT.rlogVol_zero
+#print axioms IUT.rlogVol_nonneg
+#print axioms IUT.rlogVol_mono
+#print axioms IUT.qdegQ_compat_realify
+#print axioms IUT.rlogVol_compat
+#print axioms IUT.logVolBridgeData
+#print axioms IUT.logVolBridge_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
