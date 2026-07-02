@@ -90,7 +90,7 @@ PILLAR = {
     "TorsionPoints": "C", "FormalGroupPointsLaw": "C", "FormalGroupPoints3": "C",
     "FormalGroupPointsMul2": "C", "FormalGroupPointsMul3": "C",
     "FormalGroupPointsAssoc": "C", "DecompositionInertia": "C", "Realification": "C",
-    "ArchimedeanPlace": "C", "Rationals": "C", "RegularReal": "C", "RatFloor": "C", "RealMul": "C", "RealOrder": "C", "RealAbs": "C", "RealComplete": "C", "RealPosMul": "C",
+    "ArchimedeanPlace": "C", "Rationals": "C", "RegularReal": "C", "RatFloor": "C", "RealMul": "C", "RealOrder": "C", "RealAbs": "C", "RealComplete": "C", "RealPosMul": "C", "RealLe": "C",
     # 柱D（定理3.11）
     "Multiradial": "D", "Diophantine": "D", "Premises311": "D", "VolumeModel": "D",
     # 柱E（幾何層: theta/volume）

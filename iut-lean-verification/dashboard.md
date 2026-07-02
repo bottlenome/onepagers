@@ -354,6 +354,7 @@ iut-lean-verification/
     ├── RealAbs.lean # M127F: 実数の絶対値 — 逆三角不等式（柱C、choice なし）
     ├── RealComplete.lean # M128: 実数の完備性 — 対角極限・収束・一意性（柱C 最終解析部品、choice なし）
     ├── RealPosMul.lean # M129F: 正値の乗法閉性 pos·pos = pos（柱C、choice なし）
+    ├── RealLe.lean # M130: 非厳密順序 rLe — 反対称律で realEq が返る・望遠鏡分解の定型（柱C 第92弾本線、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -568,6 +569,7 @@ iut-lean-verification/
 | M127F: **実数の絶対値（柱C — issue #37、第90弾）**（**Int の逆三角 \|\|x\|−\|y\|\| ≤ \|x−y\|**（片側化補題 + 符号場合分け）→ ℚ の逆三角（qAbs は分母保存なので交差積が直結）→ **rabs（点ごと qAbs、添字加速なしで正則性維持）**。congruence・neg/zero・埋め込み・三角（点ごと witness 形）・**rabs_mul: \|xy\| ≈ \|x\|\|y\|**（rBound の qAbs 冪等性 rBound_rabs = rBound で添字が自動一致）・非負性・RealAbsData。順序（M125）・完備性の前提部品） — サブエージェント並行開発・第90弾統合 | done（choice なし） |
 | M128 **実数の完備性（柱C — issue #37、第91弾・本線）** | **実数の正則列の対角極限**: IsCauchyReals（witness 形 \|X_m − X_n\| ≤ 1/(m+1)+1/(n+1)、成分固有の揺らぎ 2/(j+1) 込みの一様評価）、**rlim = 対角 Y_n = (X_{4n+3})_{4n+3}**（4 倍加速で正則性 4u_{4m+3} + 2u_{4n+3} ≤ u_m + u_n が閉じる）、**収束（本丸1）: \|Y − X_m\| ≤ 1/(m+1)**（witness 形、u_m + 4u_{4j+3} + u_j ≤ u_m + 2u_j）、**一意性（本丸2）**: 同じ収束評価の Z は Y ≈ Z（3 点分割 k = m + ε-消去 c = 8）、RealCompleteData 総括。**ℝ は ℚ 体 → 加法群 → 床・上界 → 乗法 → 順序・共推移 → 絶対値 → 完備性まで到達 — C-1（実数値 log-volume）の解析基盤が完成**。正直申告: 一般 modulus のコーシー列の正則化（添字付け替え）は次層 | 実体構成 |
 | M129F: **正値の乗法閉性（柱C — issue #37、第91弾）**（M125 の正直申告解消: **pos·pos = pos**。分数の積 qFrac_mul（(k+1)(k'+1)−1 への着地、Nat 減算の復元は Nat.mul_pos + omega）、witness からの一様下界 isPos_lower（j ≥ 2n+1 で x_j ≥ 1/(2n+2)）、**本丸 isPos_mul**（witness M = 2(E−1)+1、E = (2N+2)² を単一原子として omega が処理 — 非線形の隔離定型）、系 rLt_mul_pos（0 < x, 0 < y → 0 < x·y）・RealPosMulData。正直申告: 一般形 x < y → xz < yz は分配律（M123F 次層）待ち） — サブエージェント並行開発・第91弾統合 | done（choice なし） |
+| M130 **実数の非厳密順序 ≤（柱C — issue #37、第92弾・本線）** | **rLe x y = ∀n, xₙ ≤ yₙ + 2/(n+1)（witness 形）**。設計の鍵: 合成は**望遠鏡分解** a−c = (a−b)+(b−c)（qSub_split）で片側差に割り定数側だけ折り畳んで ε-消去 — M125 で苦しんだ大域並べ替えを完全回避する定型を確立。≈ から ≤・反射・**推移律**（4 分割 + ε c=6）・**反対称律（本丸）: rLe 両側 → realEq**・congruence（of_realEq + 推移で無償）・加法両立（2u_{2n+1} = u_n の相殺）・**rLt → rLe**（spread の片側読み + ε c=2）・**強排反 rLt y x → ¬rLe x y**（witness 添字で 2/(2n+2) 対 2/(n+1) の具体矛盾）・RealLeData。正直申告: 線形性は排中律相当で対象外（共推移性が代替）、¬rLt → rLe は代表抽出 δ-論法で次層 | 実体構成 |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

@@ -1423,6 +1423,17 @@ import IUT
 #print axioms IUT.rLt_mul_pos
 #print axioms IUT.realPosMulData
 #print axioms IUT.realPosMul_exists
+#print axioms IUT.qLe_sub_move
+#print axioms IUT.qSub_le_of_le
+#print axioms IUT.rLe_of_realEq
+#print axioms IUT.rLe_trans
+#print axioms IUT.rLe_antisym
+#print axioms IUT.rLe_congr
+#print axioms IUT.rLe_add
+#print axioms IUT.rLt_le
+#print axioms IUT.rLt_not_le
+#print axioms IUT.realLeData
+#print axioms IUT.realLe_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

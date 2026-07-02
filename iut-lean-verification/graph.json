@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 175,
-  "verified_theorem_total": 1414,
-  "choice_free_count": 135,
+  "module_count": 176,
+  "verified_theorem_total": 1425,
+  "choice_free_count": 136,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2159,6 +2159,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealPosMul.lean"
+    },
+    {
+      "id": "RealLe",
+      "label": "RealLe",
+      "milestone": "M130",
+      "title": "実数の非厳密順序 ≤",
+      "pillar": "C",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealLe.lean"
     }
   ],
   "edges": [
@@ -2885,6 +2897,10 @@
     {
       "source": "RealOrder",
       "target": "RealComplete"
+    },
+    {
+      "source": "RealOrder",
+      "target": "RealLe"
     },
     {
       "source": "RealOrder",
