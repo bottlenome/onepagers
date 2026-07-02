@@ -173,3 +173,4 @@ import IUT.RatFloor
 import IUT.MuLSubgroup
 import IUT.EisFaithful
 import IUT.CyclotomicSync
+import IUT.RealMul

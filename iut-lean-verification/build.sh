@@ -1365,6 +1365,23 @@ import IUT
 #print axioms IUT.theta_center_neg_invariant
 #print axioms IUT.cyclotomicSyncData
 #print axioms IUT.cyclotomicSync_exists
+#print axioms IUT.qMul_comm
+#print axioms IUT.qLe_mul_right
+#print axioms IUT.qAbs_mul_sub
+#print axioms IUT.mulIdx_cast
+#print axioms IUT.ratOfInt_mul_qFrac
+#print axioms IUT.qFrac_two_bound
+#print axioms IUT.mul_seq_reg
+#print axioms IUT.rmul
+#print axioms IUT.rmul_comm
+#print axioms IUT.rmul_one
+#print axioms IUT.rmul_zero
+#print axioms IUT.qToReal_mul
+#print axioms IUT.mul_seq_congr
+#print axioms IUT.rmul_congr_left
+#print axioms IUT.rmul_congr_right
+#print axioms IUT.realMulData
+#print axioms IUT.realMul_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
