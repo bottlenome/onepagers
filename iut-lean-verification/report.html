@@ -158,7 +158,32 @@
 </section>
 
 <section>
-  <h2>M1〜M139 の形式化（追加検証）</h2>
+  <h2>M1〜M144 の形式化（追加検証）</h2>
+
+  <h3>M144: λ の全レベル伝播 — 塔の非退化性の完結（柱B 本線）（IUT/LambdaPropagation.lean）</h3>
+  <div class="box">
+    <p><strong>第88〜89弾の 3 段リレー（M111 剰余塔 → M119 一段昇り → M122 座標忠実性 = λ₂ ≠ 0 無条件）の最終段</strong>（第97弾本線）。M119 の正直申告「λₙ の平明正則性が全レベルに伝播すれば λₙ ≠ 0 が全レベルで出る」の伝播そのものを閉じた。<strong>鍵となる発見: R[[Y]] で Y は環の仮定なしに正則（係数シフト）</strong>。これにより λ 正則 ⟹ λ' = Y mod (πY + Y^p − λ) 正則の一段昇りが座標理論なしで回る: h·Y = w·g の 0 次係数で w₀·λ = 0 ⟹ w₀ = 0（λ 正則）⟹ w = Y·w'（シフト）⟹ h = w'·g ⟹ [h] = 0。部品は Y-乗算の係数シフト <code>(h·Y)_{m+1} = h_m</code>（rsum の末項単離）と先頭消滅シフト <code>(w·g)_{m+1} = (w'·g)_m</code>（rsum_head の頭出し）のみ。基底 M122-7（eisLambda_regular）からの帰納で<strong>全レベル正則性</strong>、M111 の非自明性と合流して<strong>見出し tower_lam_ne_zero_all: ∀ n, λₙ ≠ 0 — Lubin–Tate 塔の全レベルの非退化性が公理仮定なしに成立</strong>（M122-8 の λ₂ ≠ 0 を ∀ n に拡張、柱B キャンペーンの完結）。正直な限定: λ-adic 付値（分岐簿記）と Oₙ 座標系の忠実性（M122 の塔版）は次層。全 9 宣言 [propext, Quot.sound] 以下。</p>
+  </div>
+
+  <h3>M143F: 平方・三角数の換算簿記（柱E E-2）（IUT/TriSquare.lean）</h3>
+  <div class="box">
+    <p>[IUTchI] の q<sup>j²</sup> 正規化と q<sup>tri j</sup> 座席の換算の<strong>局所単位</strong>（サブエージェント並行部品）: <strong>tri j + tri(j+1) = (j+1)² — 隣接ガウス座席の和 = 平方ラベル</strong>とその realEq 形、<strong>六角数分割 ssq(l+1) = stri(l+1) + stri l</strong>（大域形 — M132 の大域橋 ssq_stri の分割版）とその realEq 形、<strong>M137F の Heisenberg 辞書との接続 dict_adjacent_centers: Φ(j)・Φ(j+1) の中心成分の和 = 平方ラベル</strong>。テータ値ラベルの組合せ論核が辞書と合流。全 7 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M142F: 整数・実数橋の環準同型性（柱C C-1）（IUT/IntRealBridge.lean）</h3>
+  <div class="box">
+    <p>M139 の intToReal を順序埋め込みから<strong>環準同型 + 順序忠実</strong>に格上げ（サブエージェント並行部品）: 加法・乗法・負元・減法との両立（realEq — ratOfInt.map_add/mul + qToReal_add/mul、負元は qNeg (ι a) = ι (−a) が rfl で通る代表一致）、<strong>natToReal との整合 intToReal ∘ (ℕ→ℤ) = natToReal（rfl）</strong>、<strong>rlogVol w x = intToReal (degZ w x)（rfl — 実数値 log-volume は整数次数の intToReal 像そのもの、M131F の橋の最短表示）</strong>、natToReal の順序忠実性（reflect）。全 10 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M141F: ガウスパイロット模型 — Θ-正則包 = 実際のガウス因子の log-volume（柱D）（IUT/GaussPilotRep.lean）</h3>
+  <div class="box">
+    <p>M139 × M133 の接合（サブエージェント並行部品）: <strong>Θ-正則包の体積が「実際のガウス因子の log-volume」そのものである RealMultiradialRep の充足模型</strong>。gaussSkeleton（logTheta = −Σj² の符号仕込み）、hullTheta = shell = rlogVol 1 (gaussDiv l)、image = rmax(intToReal (−1), vol)、qRegion = intToReal (−1)。<strong>gaussPilot_cor312: 実際のガウス因子の体積簿記で系3.12 の結論形が実数経由で降りる</strong>（cor312_of_realMultiradial 直結）、Θ-包の体積 = Σj²。正直な限定: 体積値そのものを領域とする充足デモ模型であり、遠アーベル復元による MultiradialRep の構成（柱D 本丸)ではない。全 7 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M140F: 実数 max の代数法則（柱C）（IUT/RealMaxLaws.lean）</h3>
+  <div class="box">
+    <p>M139 の qMax/rmax の代数的健全性（サブエージェント並行部品）: <strong>qMax の可換・冪等・結合</strong>（qLe_antisym + 最小上界性のみの term-mode 証明 — 場合分け不要）、<strong>rmax の可換・冪等・結合（realEq）</strong>（点ごと defeq + realEq_of_seq_eq で各 1 行）、<strong>本丸 rmax_congr: realEq x x' → realEq y y' → realEq (rmax x y) (rmax x' y')</strong>（qMax_cases の 4 分岐 + 腕張り替え — M139 の正則性証明と同型のパターン）。<strong>正則包 rmax が realEq 商の上で well-defined な join 半束をなす</strong>ことの検証。全 9 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M139: 実数値体積理論 — 柱D 入口: 定理3.11 インターフェースの ℝ 化（IUT/RealVolumeTheory.lean）</h3>
   <div class="box">

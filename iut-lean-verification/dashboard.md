@@ -364,6 +364,11 @@ iut-lean-verification/
     ├── FuneqLift.lean       # M137F: 関数等式の Heisenberg 辞書 — T^j ↔ Φ(j)・中心成分 = tri j（choice なし）
     ├── ScalarDistrib.lean   # M138F: 有理スカラー分配律 (x+y)·c ≈ x·c + y·c（choice なし）
     ├── RealVolumeTheory.lean # M139: 実数値体積理論 — rmax・RealMultiradialRep・系3.12 実数経由導出（柱D 入口、choice なし）
+    ├── RealMaxLaws.lean     # M140F: 実数 max の代数法則 — rmax の可換・冪等・結合・congruence（choice なし）
+    ├── GaussPilotRep.lean   # M141F: ガウスパイロット模型 — Θ-正則包 = 実際のガウス因子の log-volume（choice なし）
+    ├── IntRealBridge.lean   # M142F: 整数・実数橋の環準同型性 — intToReal の加法・乗法・負元・忠実性（choice なし）
+    ├── TriSquare.lean       # M143F: 平方・三角数の換算簿記 — tri j + tri(j+1) = (j+1)²（choice なし）
+    ├── LambdaPropagation.lean # M144: λ の全レベル伝播 — ∀n λₙ ≠ 0 の完結（柱B 本線、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -588,6 +593,11 @@ iut-lean-verification/
 | M137F **関数等式の Heisenberg 辞書（柱E E-1 — 第96弾・並行部品）** | テータ関数等式の平行移動 T^j と Heisenberg 群の切断 Φ(j) = (j, j, tri j) の**辞書 FuneqDict**: 中心成分 = ガウス指数 tri j（section_gauss_component）、**T^j の q-次数降下量 = 中心成分（funeq_gauss_descent — tCoeff_shift の対角インスタンス）**、乗法性 Φ(i)·Φ(j) = Φ(i+j)、**コサイクル tri(i+j) = tri i + tri j + ij（Nat 版）**、±-対 ι(Φ(j))·Φ(j) = (0,0,j)（M116F 再輸出）、反転との整合（M98 theta_refl_eq_funeq）・FuneqLiftData。**[EtTh] の関数等式の群論的正体（Heisenberg 中心 = ガウス指数）が辞書として機械検証** | 実体構成 |
 | M138F **有理スカラー分配律（柱C — 第96弾・並行部品）** | 一般 assoc/distrib の bound-chain 係数問題（第90弾で特定）を**有理スカラーの場合に完全解決**: **(x+y)·c ≈ x·c + y·c（rmul_scalar_distrib、c : QRat 定数・x,y 任意の実数で一般形成立）**。三つの加速添字が「+1 = 4K(n+1)」形に揃い 4 項が各 ≤ 1/(4n+4) で ε-消去不要で閉じる設計。qAdd_mul/qSub_mul（ℚ 側分配）・qFrac_scalar_bound・Nat キャスト系 rmul_scalar_distrib_nat・ScalarDistribData。正直申告: 実数×実数の一般分配律は rBound の乗法評価を要し次層 | 実体構成 |
 | M139 **実数値体積理論（柱D 入口 — 第96弾・本線）** | M5 の VolumeTheory（Int 値 log-volume）を**構成的 ℝ に持ち上げる**: **qMax（PreRat 決定的交差比較の Quot.lift、prLe 関係両立の再利用で井戸定義）→ rmax（ℝ の max = 正則包の実体 — 点ごと max が正則性を保つ、4 分岐とも共通上界 u_m+u_n）**、RealVolumeTheory（vol : Region → ℝ の M5 鏡映）と ℝ モデル（Region = ℝ・le = rLe・hull = rmax）、intToReal の**順序反映（ε-消去 c = 2）**、RealVolumeTheory.ofInt（任意の Int 値理論の実数化）、**RealMultiradialRep（定理3.11 出力仕様の実数値版）と系3.12 の実数経由導出 cor312_of_realMultiradial（実数の体積比較 → 反映で整数 Cor312 に降下）**、Int 値表現の持ち上げ・Szpiro 型不等式への full pipeline 実数版・充足可能性・RealVolumeTheoryData。正直申告: MultiradialRep の充足本体（遠アーベル構成 = 柱D 本丸）は依然未形式化 | 実体構成 |
+| M140F **実数 max の代数法則（柱C — 第97弾・並行部品）** | M139 の qMax/rmax の代数的健全性: **qMax の可換・冪等・結合**（qLe_antisym + 最小上界性のみの term-mode、場合分け不要）、**rmax の可換・冪等・結合（realEq）**（点ごと defeq + realEq_of_seq_eq で 1 行）、**congruence rmax_congr: realEq x x' → realEq y y' → realEq (rmax x y) (rmax x' y')**（qMax_cases 4 分岐 + 腕張り替え — M139 の正則性証明と同型）・RealMaxLawsData。**正則包 rmax が realEq 商の上で well-defined な join 半束をなす** | 実体構成 |
+| M141F **ガウスパイロット模型（柱D — 第97弾・並行部品）** | M139 × M133 の接合: **Θ-正則包の体積が「実際のガウス因子の log-volume」そのものである RealMultiradialRep の充足模型**。gaussSkeleton（logTheta = −Σj² の符号仕込み）、hullTheta = shell = rlogVol 1 (gaussDiv l)、image = rmax(−1, vol)、**gaussPilot_cor312: 実際のガウス因子の体積簿記で系3.12 の結論形が実数経由で降りる**・Θ-包の体積 = Σj²・GaussPilotData。正直申告: 体積値そのものを領域とする充足デモ模型であり遠アーベル復元による柱D 本丸ではない | 実体構成 |
+| M142F **整数・実数橋の環準同型性（柱C C-1 — 第97弾・並行部品）** | M139 の intToReal を順序埋め込みから**環準同型 + 順序忠実**に格上げ: 加法・乗法・負元・減法との両立（realEq、ratOfInt.map_add/mul + qToReal_add/mul）、**natToReal との整合 intToReal ∘ (ℕ→ℤ) = natToReal（rfl）**、**rlogVol w x = intToReal (degZ w x)（rfl — 実数値 log-volume は整数次数の像そのもの、M131F の橋の最短表示）**、natToReal の順序忠実性・IntRealBridgeData | 実体構成 |
+| M143F **平方・三角数の換算簿記（柱E E-2 — 第97弾・並行部品）** | [IUTchI] の q^{j²} 正規化と q^{tri j} 座席の換算の**局所単位**: **tri j + tri(j+1) = (j+1)²（隣接ガウス座席の和 = 平方ラベル）**とその realEq 形、**六角数分割 ssq(l+1) = stri(l+1) + stri l**（大域形）とその realEq 形、**M137F 辞書との接続 dict_adjacent_centers（Φ(j)・Φ(j+1) の中心成分の和 = 平方ラベル）**・TriSquareData。M132 の大域橋 ssq_stri の局所版が Heisenberg 辞書と合流 | 実体構成 |
+| M144 **λ の全レベル伝播（柱B 本線 — 第97弾・キャンペーン完結）** | M111 → M119 → M122 の 3 段リレーの**最終段**: **鍵の発見「R[[Y]] で Y は環の仮定なしに正則（係数シフト）」**により λₙ 正則 ⟹ λₙ₊₁ 正則の一段昇りが座標理論なしで回る（h·Y = w·g の 0 次で w₀λ = 0 → w₀ = 0（λ 正則）→ w = Y·w' → h = w'·g）。Y-乗算の係数シフト (h·Y)_{m+1} = h_m・先頭消滅シフト・**towerLam_regular_step（本丸）**・基底 M122-7 からの全レベル帰納・**tower_lam_ne_zero_all: ∀n, λₙ ≠ 0（Lubin–Tate 塔の全レベル非退化性が公理仮定なしに成立 — M122-8 の λ₂ ≠ 0 を全レベルに拡張）**・LambdaPropagationData。正直申告: λ-adic 付値（分岐簿記）と Oₙ 座標系の忠実性（M122 の塔版）は次層 | 実体構成 |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

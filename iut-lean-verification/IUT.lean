@@ -189,3 +189,8 @@ import IUT.RealOrderComplete
 import IUT.FuneqLift
 import IUT.ScalarDistrib
 import IUT.RealVolumeTheory
+import IUT.RealMaxLaws
+import IUT.GaussPilotRep
+import IUT.IntRealBridge
+import IUT.TriSquare
+import IUT.LambdaPropagation

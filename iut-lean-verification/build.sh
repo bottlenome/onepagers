@@ -1514,6 +1514,46 @@ import IUT
 #print axioms IUT.realMultiradial_consistent
 #print axioms IUT.realVolumeTheoryData
 #print axioms IUT.realVolumeTheoryData_exists
+#print axioms IUT.qMax_comm
+#print axioms IUT.qMax_idem
+#print axioms IUT.qMax_assoc
+#print axioms IUT.rmax_comm
+#print axioms IUT.rmax_idem
+#print axioms IUT.rmax_assoc
+#print axioms IUT.rmax_congr
+#print axioms IUT.realMaxLawsData
+#print axioms IUT.realMaxLaws_exists
+#print axioms IUT.gaussSkeleton
+#print axioms IUT.gaussPilotRep
+#print axioms IUT.gaussPilot_cor312
+#print axioms IUT.gaussPilot_vol_theta
+#print axioms IUT.gaussPilotData
+#print axioms IUT.gaussPilot_exists
+#print axioms IUT.intToReal_natCast
+#print axioms IUT.intToReal_add
+#print axioms IUT.intToReal_mul
+#print axioms IUT.intToReal_neg
+#print axioms IUT.intToReal_sub
+#print axioms IUT.rlogVol_eq_intToReal
+#print axioms IUT.natToReal_reflect
+#print axioms IUT.intRealBridgeData
+#print axioms IUT.intRealBridge_exists
+#print axioms IUT.tri_adjacent_sq
+#print axioms IUT.tri_adjacent_sq_real
+#print axioms IUT.ssq_stri_split
+#print axioms IUT.ssq_stri_split_real
+#print axioms IUT.dict_adjacent_centers
+#print axioms IUT.triSquareData
+#print axioms IUT.triSquare_exists
+#print axioms IUT.rsum_tail_single
+#print axioms IUT.psMul_X_coeff_succ
+#print axioms IUT.psMul_shift_zero
+#print axioms IUT.towerLam_regular_step
+#print axioms IUT.tower_lam_regular
+#print axioms IUT.regular_ne_zero
+#print axioms IUT.tower_lam_ne_zero_all
+#print axioms IUT.lambdaPropagationData
+#print axioms IUT.lambdaPropagation_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

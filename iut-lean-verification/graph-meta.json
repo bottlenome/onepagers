@@ -20,32 +20,32 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 72,
-      "status": "剛性プログラム ✅ / 塔の非自明性・捻れ理論済・残件4 (#36, B-4済)",
-      "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔",
+      "progress_pct": 75,
+      "status": "剛性プログラム ✅ / λ 全レベル伝播完結（∀n λₙ≠0）・残件減 (#36)",
+      "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 70,
-      "status": "群法則全公理 ✅ / ℝ 構成完走（乗法・順序 ≤/< 完全整合・絶対値・完備性・スカラー分配）・C-1 橋開通 (#37)",
+      "progress_pct": 71,
+      "status": "群法則全公理 ✅ / ℝ 構成完走・rmax 半束・intToReal 環準同型・C-1 橋開通 (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（正則列〜完備性・≤/< 整合・qMax/rmax）・実数値 log-volume 橋。残: 逆元・一般分配律等の細部",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 20,
-      "status": "入口 🔶 / 実数値体積理論・系3.12 実数経由導出済、本丸 MultiradialRep 未形式化 (#38)",
+      "progress_pct": 22,
+      "status": "入口 🔶 / 実数値体積理論・ガウスパイロット模型で系3.12 実数経由デモ済、本丸 MultiradialRep 未形式化 (#38)",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },
     "E": {
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
-      "progress_pct": 86,
-      "status": "E1–E8 ✅ / E-1 Heisenberg 辞書済・E-2 重み付き体積まで完成・残件減 (#39)",
+      "progress_pct": 87,
+      "status": "E1–E8 ✅ / Heisenberg 辞書・平方↔三角換算・重み付き体積まで完成 (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
     },

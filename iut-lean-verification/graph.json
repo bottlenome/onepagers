@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 185,
-  "verified_theorem_total": 1505,
-  "choice_free_count": 145,
+  "module_count": 190,
+  "verified_theorem_total": 1545,
+  "choice_free_count": 150,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2290,6 +2290,71 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealVolumeTheory.lean"
+    },
+    {
+      "id": "RealMaxLaws",
+      "label": "RealMaxLaws",
+      "milestone": "M140F",
+      "title": "実数 max の代数法則",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealMaxLaws.lean"
+    },
+    {
+      "id": "GaussPilotRep",
+      "label": "GaussPilotRep",
+      "milestone": "M141F",
+      "title": "ガウスパイロット模型",
+      "pillar": "D",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchIII]",
+        "[IUTchIV]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussPilotRep.lean"
+    },
+    {
+      "id": "IntRealBridge",
+      "label": "IntRealBridge",
+      "milestone": "M142F",
+      "title": "整数・実数橋の環準同型性",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IntRealBridge.lean"
+    },
+    {
+      "id": "TriSquare",
+      "label": "TriSquare",
+      "milestone": "M143F",
+      "title": "平方・三角数の換算簿記",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TriSquare.lean"
+    },
+    {
+      "id": "LambdaPropagation",
+      "label": "LambdaPropagation",
+      "milestone": "M144",
+      "title": "λ の全レベル伝播",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaPropagation.lean"
     }
   ],
   "edges": [
@@ -2392,6 +2457,10 @@
     {
       "source": "EisEndoRigidity",
       "target": "Premises311"
+    },
+    {
+      "source": "EisFaithful",
+      "target": "LambdaPropagation"
     },
     {
       "source": "EisFaithful",
@@ -2754,6 +2823,10 @@
       "target": "Profinite"
     },
     {
+      "source": "FuneqLift",
+      "target": "TriSquare"
+    },
+    {
       "source": "GaloisAxioms",
       "target": "AbstractGalois"
     },
@@ -3086,6 +3159,18 @@
       "target": "Premises311Real"
     },
     {
+      "source": "RealVolumeTheory",
+      "target": "GaussPilotRep"
+    },
+    {
+      "source": "RealVolumeTheory",
+      "target": "IntRealBridge"
+    },
+    {
+      "source": "RealVolumeTheory",
+      "target": "RealMaxLaws"
+    },
+    {
       "source": "Realification",
       "target": "ArchimedeanPlace"
     },
@@ -3292,6 +3377,10 @@
     {
       "source": "VolumeReal",
       "target": "ScalarDistrib"
+    },
+    {
+      "source": "VolumeReal",
+      "target": "TriSquare"
     },
     {
       "source": "ZmodOrder",
