@@ -1649,6 +1649,38 @@ import IUT
 #print axioms IUT.galois_closure_abstract
 #print axioms IUT.cosetGaloisWitness
 #print axioms IUT.cosetGalois_exists
+#print axioms IUT.isIn2Pow_neg
+#print axioms IUT.isIn2Pow_collapse
+#print axioms IUT.psMul_g_coeff_three
+#print axioms IUT.depth_of_bounded_image
+#print axioms IUT.sep_poly_faithful
+#print axioms IUT.zp_pow_mul_val_rep
+#print axioms IUT.zp_separated
+#print axioms IUT.zp_step_faithful
+#print axioms IUT.towerSeparationData
+#print axioms IUT.towerSeparation_exists
+#print axioms IUT.constructiveOrderedFieldData
+#print axioms IUT.constructiveOrderedField_exists
+#print axioms IUT.real_field_complete_profile
+#print axioms IUT.real_field_distrib
+#print axioms IUT.natFact_le_divides
+#print axioms IUT.intMulSubgroup
+#print axioms IUT.intSub_le
+#print axioms IUT.subgroup_ext
+#print axioms IUT.abelian_core_eq
+#print axioms IUT.intCoset_galois
+#print axioms IUT.factorialTower
+#print axioms IUT.galoisTower_inhabited_nontrivial
+#print axioms IUT.factTower_fiber_nontrivial
+#print axioms IUT.factorialTowerWitness
+#print axioms IUT.factorialTower_exists
+#print axioms IUT.gaussSkeletonW
+#print axioms IUT.gaussPilotRepW
+#print axioms IUT.gaussPilotW_cor312
+#print axioms IUT.gaussPilotW_vol_theta
+#print axioms IUT.gaussPilotW_volume_lower
+#print axioms IUT.gaussPilotWeightedData
+#print axioms IUT.gaussPilotWeighted_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

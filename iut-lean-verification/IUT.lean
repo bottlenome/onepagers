@@ -204,3 +204,7 @@ import IUT.PolyDivision
 import IUT.ApartInv
 import IUT.RealRingLaws
 import IUT.CosetGalois
+import IUT.TowerSeparation
+import IUT.RealFieldCapstone
+import IUT.FactorialTower
+import IUT.GaussPilotWeighted

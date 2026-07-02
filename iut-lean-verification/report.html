@@ -158,7 +158,27 @@
 </section>
 
 <section>
-  <h2>M1〜M154 の形式化（追加検証）</h2>
+  <h2>M1〜M158 の形式化（追加検証）</h2>
+
+  <h3>M155: (λ,π)-adic 分離性への局在 — 塔座標の一般忠実性の正確な条件（柱B 本線）（IUT/TowerSeparation.lean）</h3>
+  <div class="box">
+    <p><strong>M147F/M152F の多項式 witness 限定を撤廃する正確な条件の切り出し</strong>（第100弾本線）。h·g が多項式（次数 &lt; p）なら 3 点台の係数公式 (w·g)_{j+p} = (w_j·1 + w_{j+p−1}·π) + w_{j+p}·(−λ) が係数再帰 <strong>w_j = λ·w_{j+p} − π·w_{j+p−1}</strong> を与え、<strong>深度補題: w の全係数が (λ,π) 冪イデアルの全深度に沈む — 分離性なしで構成的に成立</strong>。IsIn2Pow ∃-述語（neg 閉性・生成元一致時の主冪 collapse）。<strong>局在の本丸 sep_poly_faithful: (λ,π)-adic 分離性（∩ₖ(λ,π)^k = 0）の下で、次数 &lt; p 剰余は任意の冪級数 witness に対して単射</strong>。さらに <strong>zp_separated: ℤ_p は (p,p)-adic 分離的</strong>（レベル別簿記 val_p_mul の反復で x = π^k c の第 k 成分が消える）→ 台での instance zp_step_faithful（ℤ_p[[Y]]/(pY + Y^p − p) の剰余一意性、任意 witness）。正直な限定: 実際の塔レベル（eisRing・towerLevel）の分離性は各レベルの座標理論として次層 — 本層はその成立条件を単一インターフェースに正確に局在させた。全 10 宣言 [propext, Quot.sound] 以下。</p>
+  </div>
+
+  <h3>M156F: 構成的順序体の総括 capstone — 46 法則の一括 certification（柱C）（IUT/RealFieldCapstone.lean）</h3>
+  <div class="box">
+    <p>第87〜99弾のスクラッチ構成的 ℝ の全法則を<strong>単一レコード ConstructiveOrderedFieldData（46 フィールド）に束ね、witness は既存定理名のみ — 新規証明ゼロで閉じる</strong>（サブエージェント並行部品、M134 方式）: 等値（realEq 同値関係）・加法群（M117F）・乗法（M123F）・環法則（M150 結合・分配）・順序（M125/M130/M136F: ≤/&lt; 完全整合・共推移）・正値乗法（M129F）・絶対値（M127F）・max 半束（M139/M140F）・完備性（M128 rlim）・逆元（M145 正値/M153F apart）・rate-bound master（M150）・ℚ 埋め込み。<code>#print axioms constructiveOrderedFieldData = [propext, Quot.sound]</code> が<strong>全鎖の choice-free 性の一括 certification</strong>。全 5 宣言クリーン。</p>
+  </div>
+
+  <h3>M157F: 階乗塔の GaloisTower 実構成 — ẑ 型 pro-対象の圏論版（柱A A-1 最終段）（IUT/FactorialTower.lean）</h3>
+  <div class="box">
+    <p>M24（ProObject）の正直申告「ガロア塔は構造体データ（未形式化の入力）」を<strong>非自明な実構成で解消</strong>（サブエージェント並行部品、issue #35 A-1）: <strong>ℤ の階乗塔 A n := ℤ/(n!)</strong> — natFact 自作（core に階乗なし）、(n!)ℤ 部分群（∃-witness 形の倍元述語）、包含 (j!)ℤ ⊆ (i!)ℤ からの塔射（cosetMapOfLe — M148F coreToCoset の一般包含版）、<strong>可換群では core(H) = H（subgroup_ext + abelian_core_eq — Subgroup の実等式）で M154F の抽象 IsGalois がそのまま適用</strong>。P_self/P_comp/P_pt は ActHom.ext + Quot.ind。ファイバー非自明性 [0] ≠ [1] in ℤ/2! 込み。<strong>A-1 が「モデル閉包（M148F）→ 抽象述語充足（M154F）→ 実際の塔（本層）」の三段で完結</strong>。正直申告: IsGalois 系 5 宣言は G6 型継承の Classical（本モジュールでの使用ゼロ）。構成部は [propext, Quot.sound] 以下。</p>
+  </div>
+
+  <h3>M158F: 重み付きガウスパイロット模型（柱D）（IUT/GaussPilotWeighted.lean）</h3>
+  <div class="box">
+    <p>M141F × M135F の合流（サブエージェント並行部品): <strong>一般素点重み w : Nat → Nat での RealMultiradialRep 充足模型</strong> — hullTheta = shell = rlogVol w (gaussDiv l)、logTheta = −wssq w l の符号仕込み。系3.12 の結論形が実数経由で降り（gaussPilotW_cor312）、Θ-包の体積 = Σw(j)·j²（realEq）、<strong>w ≥ 1 では体積下界 l³ ≤ 3·vol(Θ-包) が模型内の言明として成立</strong>（M135F の重み付き下界の模型内表示）。正直な限定: 充足デモ模型であり柱D 本丸ではない。全 8 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M154F: 剰余類対象の抽象ガロア性 — M148F の閉包を M21 IsGalois へ接合（柱A A-1）（IUT/CosetGalois.lean）</h3>
   <div class="box">
