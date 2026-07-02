@@ -1382,6 +1382,35 @@ import IUT
 #print axioms IUT.rmul_congr_right
 #print axioms IUT.realMulData
 #print axioms IUT.realMul_exists
+#print axioms IUT.qLe_abs_move
+#print axioms IUT.isPos_spread
+#print axioms IUT.isPos_congr
+#print axioms IUT.isPos_zero_false
+#print axioms IUT.isPos_add
+#print axioms IUT.rLt_congr
+#print axioms IUT.rLt_irrefl
+#print axioms IUT.rLt_trans
+#print axioms IUT.rLt_cotrans
+#print axioms IUT.realOrderData
+#print axioms IUT.realOrder_exists
+#print axioms IUT.centerFun_congr
+#print axioms IUT.centerToMuMod
+#print axioms IUT.centerToMuMod_red_center
+#print axioms IUT.centerToMuMod_mul_center
+#print axioms IUT.centerToMuMod_faithful_center
+#print axioms IUT.centerToMuMod_period_center
+#print axioms IUT.centerToMuMod_neg
+#print axioms IUT.thetaCenterModData
+#print axioms IUT.thetaCenterMod_exists
+#print axioms IUT.intAbs_sub_intAbs
+#print axioms IUT.qAbs_abs_sub_abs
+#print axioms IUT.rabs
+#print axioms IUT.rabs_congr
+#print axioms IUT.rabs_neg
+#print axioms IUT.rabs_add_le
+#print axioms IUT.rabs_mul
+#print axioms IUT.realAbsData
+#print axioms IUT.realAbs_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

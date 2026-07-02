@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 170,
-  "verified_theorem_total": 1373,
-  "choice_free_count": 130,
+  "module_count": 173,
+  "verified_theorem_total": 1402,
+  "choice_free_count": 133,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2097,6 +2097,44 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealMul.lean"
+    },
+    {
+      "id": "RealOrder",
+      "label": "RealOrder",
+      "milestone": "M125",
+      "title": "実数の順序",
+      "pillar": "C",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealOrder.lean"
+    },
+    {
+      "id": "ThetaCenterMod",
+      "label": "ThetaCenterMod",
+      "milestone": "M126F",
+      "title": "テータ中心の商持ち上げ",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCenterMod.lean"
+    },
+    {
+      "id": "RealAbs",
+      "label": "RealAbs",
+      "milestone": "M127F",
+      "title": "実数の絶対値",
+      "pillar": "C",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealAbs.lean"
     }
   ],
   "edges": [
@@ -2159,6 +2197,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuLSubgroup"
+    },
+    {
+      "source": "CyclotomicSync",
+      "target": "ThetaCenterMod"
     },
     {
       "source": "Diophantine",
@@ -2803,6 +2845,14 @@
     {
       "source": "Rationals",
       "target": "RegularReal"
+    },
+    {
+      "source": "RealMul",
+      "target": "RealAbs"
+    },
+    {
+      "source": "RealMul",
+      "target": "RealOrder"
     },
     {
       "source": "Realification",

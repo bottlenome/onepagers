@@ -174,3 +174,6 @@ import IUT.MuLSubgroup
 import IUT.EisFaithful
 import IUT.CyclotomicSync
 import IUT.RealMul
+import IUT.RealOrder
+import IUT.ThetaCenterMod
+import IUT.RealAbs
