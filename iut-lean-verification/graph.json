@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 167,
-  "verified_theorem_total": 1326,
-  "choice_free_count": 127,
+  "module_count": 168,
+  "verified_theorem_total": 1339,
+  "choice_free_count": 128,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2059,6 +2059,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuLSubgroup.lean"
+    },
+    {
+      "id": "EisFaithful",
+      "label": "EisFaithful",
+      "milestone": "M93F",
+      "title": "EisFaithful",
+      "pillar": "B",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisFaithful.lean"
     }
   ],
   "edges": [
@@ -2129,6 +2141,10 @@
     {
       "source": "EisDomain",
       "target": "EisDomain2"
+    },
+    {
+      "source": "EisDomain",
+      "target": "EisFaithful"
     },
     {
       "source": "EisDomain",
@@ -2905,6 +2921,10 @@
     {
       "source": "TorsionTrivial",
       "target": "EisensteinRing"
+    },
+    {
+      "source": "TowerNonzero",
+      "target": "EisFaithful"
     },
     {
       "source": "TowerTorsion",

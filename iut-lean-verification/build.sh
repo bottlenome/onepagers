@@ -1335,6 +1335,19 @@ import IUT
 #print axioms IUT.mu_l_zp_exists
 #print axioms IUT.muLSubgroupData
 #print axioms IUT.muLSubgroup_exists
+#print axioms IUT.eisCoeffZp_val_stable
+#print axioms IUT.eisCoeffStab
+#print axioms IUT.eisCoeffZp_head
+#print axioms IUT.eisCoeffStab_rec
+#print axioms IUT.eisCoeffStab_solve
+#print axioms IUT.weierstrass_division
+#print axioms IUT.eisCoeffZp_zero_series
+#print axioms IUT.eisCoeff_faithful
+#print axioms IUT.zp_pi_regular
+#print axioms IUT.eisLambda_regular
+#print axioms IUT.tower_lam_two_ne_zero
+#print axioms IUT.eisFaithfulData
+#print axioms IUT.eisFaithful_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -64,7 +64,7 @@ PILLAR = {
     "LambdaModule": "B",
     "LambdaSemilinear": "B",
     "RamifiedReciprocity": "B", "PadicSeries": "B", "EisTowerRings": "B", "PadicSeries2": "B",
-    "ResidueTower": "B", "ZpUnitDecomp": "B", "TowerNonzero": "B", "TowerTorsion": "B", "TorsionResidue": "B",
+    "ResidueTower": "B", "ZpUnitDecomp": "B", "TowerNonzero": "B", "EisFaithful": "B", "TowerTorsion": "B", "TorsionResidue": "B",
     "PadicGeometric": "B",
     # 柱C（Lubin–Tate・形式群・Frobenioid）
     "Ring": "C", "PowerSeries": "C", "Composition": "C", "LubinTateUnique": "C",
