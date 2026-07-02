@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 163,
-  "verified_theorem_total": 1276,
-  "choice_free_count": 123,
+  "module_count": 164,
+  "verified_theorem_total": 1298,
+  "choice_free_count": 124,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2009,6 +2009,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZpUnitDecomp.lean"
+    },
+    {
+      "id": "RegularReal",
+      "label": "RegularReal",
+      "milestone": "M117F",
+      "title": "Bishop 流正則実数列",
+      "pillar": "C",
+      "decl_count": 50,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RegularReal.lean"
     }
   ],
   "edges": [
@@ -2695,6 +2707,10 @@
     {
       "source": "RamifiedReciprocity",
       "target": "EisTowerRings"
+    },
+    {
+      "source": "Rationals",
+      "target": "RegularReal"
     },
     {
       "source": "Realification",

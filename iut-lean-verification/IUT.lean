@@ -167,3 +167,4 @@ import IUT.ThetaPM
 import IUT.Rationals
 import IUT.FlStarCount
 import IUT.ZpUnitDecomp
+import IUT.RegularReal

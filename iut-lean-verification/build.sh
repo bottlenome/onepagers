@@ -1285,6 +1285,28 @@ import IUT
 #print axioms IUT.zp_unit_one
 #print axioms IUT.zpUnitGroupData
 #print axioms IUT.zpUnitGroup_exists
+#print axioms IUT.qFrac_le
+#print axioms IUT.qFrac_add
+#print axioms IUT.qLe_add_two
+#print axioms IUT.qAbs_neg
+#print axioms IUT.qAbs_sub_split
+#print axioms IUT.int_eps_cancel
+#print axioms IUT.qLe_of_forall_add_frac
+#print axioms IUT.qToReal
+#print axioms IUT.realEq_refl
+#print axioms IUT.realEq_symm
+#print axioms IUT.realEq_trans
+#print axioms IUT.realAdd
+#print axioms IUT.realNeg
+#print axioms IUT.realAdd_congr_left
+#print axioms IUT.realAdd_congr_right
+#print axioms IUT.realAdd_comm
+#print axioms IUT.realAdd_assoc
+#print axioms IUT.realAdd_zero
+#print axioms IUT.realAdd_neg
+#print axioms IUT.qToReal_add
+#print axioms IUT.regularRealData
+#print axioms IUT.regularReal_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
