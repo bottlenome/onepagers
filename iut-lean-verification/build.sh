@@ -1681,6 +1681,13 @@ import IUT
 #print axioms IUT.gaussPilotW_volume_lower
 #print axioms IUT.gaussPilotWeightedData
 #print axioms IUT.gaussPilotWeighted_exists
+#print axioms IUT.natConst_le_rBound
+#print axioms IUT.rLe_mul_const_seq
+#print axioms IUT.rLe_mul_natConst_left
+#print axioms IUT.strict_evaluation_obstruction_real
+#print axioms IUT.padding_necessary_real
+#print axioms IUT.realObstructionData
+#print axioms IUT.realObstruction_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

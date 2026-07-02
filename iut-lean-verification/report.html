@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M158 の形式化（追加検証）</h2>
+  <h2>M1〜M159 の形式化（追加検証）</h2>
+
+  <h3>M159F: 厳密評価障害の実数版 — Scholze–Stix 議論の実数値インターフェースへの持ち上げ（柱D）（IUT/RealObstruction.lean）</h3>
+  <div class="box">
+    <p>M5-2/M5-3（Int 版の厳密評価障害・膨張必然性）の<strong>実数値インターフェース（M139 RealMultiradialRep）への持ち上げ</strong>（サブエージェント並行部品）。技術的本丸は <strong>rLe_mul_natConst_left: 非負整数定数 intToReal k の左乗法は rLe を保つ</strong> — rmul の左右で添字加速定数（rBound 和）が異なる問題を、k が定数列であることを利用した M130 望遠鏡分解 + qLe_mul_right での伝播 + 相殺補題 qFrac_two_bound + ε-消去で解決した新規補題。これにより <strong>strict_evaluation_obstruction_real: 厳密テータ評価（∀i, realEq (l⋇·vol(image i)) (intToReal(−Σj²·logq))）を課すと実数値の出力仕様は充足不能</strong>（intToReal_mul で両端を intToReal 定数化 → intToReal_reflect で整数に降下 → sumSq_gt_int + logq &gt; 0 で矛盾）、および <strong>padding_necessary_real: 充足には可能な像の体積が −|log q| まで膨らむことが必然</strong>。<strong>二分法の精密化（インターフェース充足可能・厳密評価とは非両立・膨張必然）が M139〜M141F/M158F の実数の土俵に完全移設された</strong>。全 8 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M155: (λ,π)-adic 分離性への局在 — 塔座標の一般忠実性の正確な条件（柱B 本線）（IUT/TowerSeparation.lean）</h3>
   <div class="box">
