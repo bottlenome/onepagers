@@ -1411,6 +1411,12 @@ import IUT
 #print axioms IUT.rabs_mul
 #print axioms IUT.realAbsData
 #print axioms IUT.realAbs_exists
+#print axioms IUT.qAbs_sub_comm
+#print axioms IUT.rlim
+#print axioms IUT.rlim_close
+#print axioms IUT.rlim_unique
+#print axioms IUT.realCompleteData
+#print axioms IUT.realComplete_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -177,3 +177,4 @@ import IUT.RealMul
 import IUT.RealOrder
 import IUT.ThetaCenterMod
 import IUT.RealAbs
+import IUT.RealComplete

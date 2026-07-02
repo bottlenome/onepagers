@@ -352,6 +352,7 @@ iut-lean-verification/
     ├── RealOrder.lean # M125: 実数の順序 — witness 形正値性・共推移性（柱C 第90弾本線、choice なし）
     ├── ThetaCenterMod.lean # M126F: テータ中心の商持ち上げ — centerToMuMod（柱E E-1、choice なし）
     ├── RealAbs.lean # M127F: 実数の絶対値 — 逆三角不等式（柱C、choice なし）
+    ├── RealComplete.lean # M128: 実数の完備性 — 対角極限・収束・一意性（柱C 最終解析部品、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -564,6 +565,7 @@ iut-lean-verification/
 | M125 **実数の順序（柱C — issue #37、第90弾・本線）** | **Bishop 流の構成的順序**: witness 形正値性 IsPos x = ∃n, 2/(n+1) ≤ xₙ（margin 2 が正則性の揺らぎを吸収）、伝播 isPos_spread、**≈ 不変性**（添字 5n+4 で 5/(m+1) = 1/(n+1) がちょうど相殺）、加法閉性（添字 3N+2 の合流）、rLt x y = IsPos(y−x)・congruence・非反射・**推移律**（(z−y)+(y−x) ≈ z−x の群法則連鎖 + 加法閉性）、**共推移性（本丸）: x < y → ∀z, x < z ∨ z < y** — qLe_total（有理数の全順序）による構成的場合分けで排中律なしの三分律代替を実現（margin 計算 u_n − u_s − u_t = 7/16·u_n ≥ 2u_m、比較点 t = 16n+15）。正直申告: pos·pos → pos と ≤ の整合は次層 | 実体構成 |
 | M126F: **テータ中心の商持ち上げ（柱E E-1 — issue #39、第90弾）**（M124F の正直申告解消: 全域代表関数 centerFun（中心系の類で centerToMu・他で 1、Int.decEq の if で choice なし）が thetaRelMod と両立し **Quot.lift で thetaGrpMod l の商 carrier 全体へ降下**（centerToMuMod）。標準類での値・**中心類上の準同型性**・忠実性（値 1 → 類 = red(0,0,0)）・thetaNegMod との可換（rfl）・ThetaCenterModData。シクロトミック同期が実際の mod-l テータ群の土俵で完結。ite_congr + propext の if-書き換え技法） — サブエージェント並行開発・第90弾統合 | done（choice なし） |
 | M127F: **実数の絶対値（柱C — issue #37、第90弾）**（**Int の逆三角 \|\|x\|−\|y\|\| ≤ \|x−y\|**（片側化補題 + 符号場合分け）→ ℚ の逆三角（qAbs は分母保存なので交差積が直結）→ **rabs（点ごと qAbs、添字加速なしで正則性維持）**。congruence・neg/zero・埋め込み・三角（点ごと witness 形）・**rabs_mul: \|xy\| ≈ \|x\|\|y\|**（rBound の qAbs 冪等性 rBound_rabs = rBound で添字が自動一致）・非負性・RealAbsData。順序（M125）・完備性の前提部品） — サブエージェント並行開発・第90弾統合 | done（choice なし） |
+| M128 **実数の完備性（柱C — issue #37、第91弾・本線）** | **実数の正則列の対角極限**: IsCauchyReals（witness 形 \|X_m − X_n\| ≤ 1/(m+1)+1/(n+1)、成分固有の揺らぎ 2/(j+1) 込みの一様評価）、**rlim = 対角 Y_n = (X_{4n+3})_{4n+3}**（4 倍加速で正則性 4u_{4m+3} + 2u_{4n+3} ≤ u_m + u_n が閉じる）、**収束（本丸1）: \|Y − X_m\| ≤ 1/(m+1)**（witness 形、u_m + 4u_{4j+3} + u_j ≤ u_m + 2u_j）、**一意性（本丸2）**: 同じ収束評価の Z は Y ≈ Z（3 点分割 k = m + ε-消去 c = 8）、RealCompleteData 総括。**ℝ は ℚ 体 → 加法群 → 床・上界 → 乗法 → 順序・共推移 → 絶対値 → 完備性まで到達 — C-1（実数値 log-volume）の解析基盤が完成**。正直申告: 一般 modulus のコーシー列の正則化（添字付け替え）は次層 | 実体構成 |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |
