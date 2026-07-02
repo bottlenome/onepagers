@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 178,
-  "verified_theorem_total": 1446,
-  "choice_free_count": 138,
+  "module_count": 179,
+  "verified_theorem_total": 1453,
+  "choice_free_count": 139,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2200,6 +2200,20 @@
         "[IUTchIV]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/VolumeReal.lean"
+    },
+    {
+      "id": "GaussianDivisor",
+      "label": "GaussianDivisor",
+      "milestone": "M133",
+      "title": "ガウス因子",
+      "pillar": "E",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchIV]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussianDivisor.lean"
     }
   ],
   "edges": [
@@ -3126,6 +3140,10 @@
     {
       "source": "UnitFiltration",
       "target": "Fermat"
+    },
+    {
+      "source": "VolumeReal",
+      "target": "GaussianDivisor"
     },
     {
       "source": "ZmodOrder",

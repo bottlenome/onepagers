@@ -1455,6 +1455,13 @@ import IUT
 #print axioms IUT.cube_le_ssq_real
 #print axioms IUT.volumeRealData
 #print axioms IUT.volumeReal_exists
+#print axioms IUT.gaussDiv_deg
+#print axioms IUT.rlogVol_gauss_eq
+#print axioms IUT.rlogVol_gauss_closed
+#print axioms IUT.rlogVol_gauss_bound
+#print axioms IUT.rlogVol_gauss_frob
+#print axioms IUT.gaussianDivisorData
+#print axioms IUT.gaussianDivisor_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

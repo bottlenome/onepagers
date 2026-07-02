@@ -158,7 +158,33 @@
 </section>
 
 <section>
-  <h2>M1〜M129F の形式化（追加検証）</h2>
+  <h2>M1〜M132 の形式化（追加検証）</h2>
+
+  <h3>M132: ガウス体積簿記の ℝ 化 — 系3.12 不等式の実数形 — 柱E E-2（issue #39）（IUT/VolumeReal.lean）</h3>
+  <div class="box">
+    <p><strong>M93（柱E E-8: 離散ガウス体積簿記）の閉形式と下界を、M131F の橋（C-1）を通して本物の実数 ℝ（M115F〜M130）の言葉に持ち上げ、[IUTchIV] の log-volume 計算を実数の等式・不等式として機械検証の土俵に乗せる柱E E-2 の橋部分</strong>（第93弾本線）: <strong>ℕ → ℝ 埋め込み <code>natToReal</code></strong>（定数列 qToReal ∘ ratOfInt）とその単調性 <code>natToReal_mono</code>・加法性 <code>natToReal_add</code>・乗法性 <code>natToReal_mul</code>・<strong>閉形式の実数化 <code>ssq_closed_real</code> / <code>stri_closed_real</code>: 6·Σj² = l(l+1)(2l+1)・6·Σtri = l(l+1)(l+2) が realEq として成立</strong>・指数橋の実数化 <code>ssq_stri_real</code>: Σj² + Σj = 2Σtri（[IUTchI] の q<sup>j²</sup> 正規化と q<sup>tri j</sup> 座席の換算の実数版）・<strong>本丸 <code>cube_le_ssq_real</code>: 体積下界 l³ ≤ 3·Σj² が rLe として成立</strong>——テータパイロットの総 q-次数の実数下界 = <strong>系3.12 の体積側ステートメントが本物の実数の不等式になった</strong>（natToReal_mono で離散下界 M93 を持ち上げ、rLe_trans + rLe_of_realEq で乗法閉形式に接続）・総括 <code>VolumeRealData</code>（単調・加法・乗法・閉形式×2・指数橋・体積下界の witness 束）。正直な限定: rlogVol（M131F）との合流（ガウス因子の QDiv 実装とその次数 = ssq の同定）は M12 側の因子構成を要し次層。実数の除算（l³/3 形の言い直し）は逆元理論の整備後。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M131F: 実数値 log-volume への橋 — rlogVol = qToReal ∘ ratOfInt ∘ degZ — 柱C C-1（issue #37）（IUT/LogVolBridge.lean）</h3>
+  <div class="box">
+    <p><strong>柱C C-1 の橋渡し: M12/M51F（Frobenioid 次数理論 QDiv・degZ）と M67F（形式実化 RDiv・degR）を、M115F〜M130 でスクラッチ構成した本物の ℝ（Bishop 流正則実数列 RReal）に接続し、合成準同型 QDiv →<sup>degZ</sup> ℤ →<sup>ratOfInt</sup> ℚ →<sup>qToReal</sup> ℝ を <code>rlogVol</code> として実体化</strong>（サブエージェント並行開発・第92弾統合）: これまで Int / ℚ≥0 値の形式簿記だった log-volume を、RReal の言葉（realEq / rLe / realAdd / rmul）で言い直して機械検証する。<strong>次数の有理数化 <code>qdegQ</code> = ratOfInt ∘ degZ</strong>（加法性 <code>qdegQ_add</code>・Frobenius 斉次性 <code>qdegQ_frob</code>・零・非負性、M51F の degZ 法則 + ratOfInt の準同型性）・<strong>埋め込み ℚ → ℝ の単調性 <code>qToReal_mono</code></strong>（定数列なので各 n で a ≤ b + 2/(n+1)、M130 の rLe_refl の踏襲）・<strong>本丸 <code>rlogVol</code>: 実数値 log-volume</strong>——加法性 <code>rlogVol_add</code>（realAdd）・Frobenius スケーリング <code>rlogVol_frob</code>（rmul）・<code>rlogVol_zero</code>・非負性 <code>rlogVol_nonneg</code>・単調性 <code>rlogVol_mono</code>・<strong>比較射 <code>nnqToQ</code>: ℚ≥0 → ℚ</strong>（M67F の商 NNQ から M115F の商 QRat へ、a/(b+1) ↦ a/(b+1)）・<strong>M67F との整合 <code>qdegQ_compat_realify</code> / <code>rlogVol_compat</code></strong>: 形式実化次数 degR ∘ realify と本橋 qdegQ が nnqToQ を通して同じ ℚ 値（従って同じ実数値）に落ちる可換図式・総括 <code>LogVolBridgeData</code>。M12 接続: rationalFrobenioid（M51F）の deg はまさに degZ w なので、<strong>M12 の次数＝log-volume 両立（vol_q 供給・定理3.11 (i)(c) 骨格）が本橋によりそのまま実数値 log-volume の言明に持ち上がる</strong>——柱E E-2（系3.12 の ℝ 化、M132）と柱D（定理3.11 の体積側）への供給線。正直申告: 実数側の Frobenius 係数は qToReal (ratOfInt e)（自然数 e の定数列）で一般実数係数のスカラー倍構造は未形式化（rmul で代用）・単調性は「degZ の比較 ⟹ rlogVol の比較」の形で、因子の効果性順序から degZ の比較を導く nsum の単調性簿記は本層外・M67F との整合は「値の一致」で言明し nnqToQ のモノイド準同型性（加法保存）は本橋の定理に不要のため次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M130: 実数の非厳密順序 ≤ — witness 形と反対称律 — 柱C ℝ 構成・M125 正直申告の解消（issue #37）（IUT/RealLe.lean）</h3>
+  <div class="box">
+    <p><strong>M125 の正直申告「≤（非厳密順序）との整合は次層」を解消する構成的 ≤ = 「各添字で固有の揺らぎを許した比較」rLe x y := ∀n, x_n ≤ y_n + 2/(n+1) を構成し、反対称律から realEq が返るところまで機械検証</strong>（第92弾本線）。設計の鍵は、推移律などの合成を<strong>望遠鏡分解</strong> a − c = (a − b) + (b − c)（qSub_split）で片側差に割り、定数側だけを qFrac の折り畳みで濃縮して ε-消去する定型——M125 で苦しんだ大域並べ替えを完全回避する:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>qLe_sub_move</code> / <code>qSub_le_of_le</code> / <code>reg_sub_le</code> (M130-1)</td><td>補助: 片側差の移項（a − c ≤ B ⟺ a ≤ B + c）と正則性の片側読み x_n − x_m ≤ u_n + u_m</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLe</code> / <code>rLe_of_realEq</code> / <code>rLe_refl</code> (M130-2)</td><td><strong>非厳密順序（witness 形）</strong>の定義・≈ から ≤（|x_n − y_n| ≤ 2u_n の片側読み）・反射律</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLe_trans</code> (M130-3)</td><td><strong>推移律</strong>: 望遠鏡分解 x_n − z_n = (x_n − x_m) + ((x_m − y_m) + ((y_m − z_m) + (z_m − z_n))) + 定数側の折り畳み（≤ 2u_n + 6/(m+1)）、ε-消去 c = 6</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLe_antisym</code> (M130-4)</td><td><strong>反対称律（本丸）</strong>: rLe x y → rLe y x → x ≈ y——≤ の両向きから realEq が返り、順序が同値関係と正しく噛み合う</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLe_congr</code> / <code>rLe_add</code> (M130-5)</td><td>congruence（rLe_of_realEq + 推移律で無償）と加法両立</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLt_le</code> / <code>rLt_not_le</code> (M130-6)</td><td><strong>rLt との整合</strong>: rLt → rLe（spread + ε-消去 c = 2）・rLt y x → ¬ rLe x y（<strong>強排反</strong>）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>RealLeData</code> (M130-7)</td><td>総括</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p>正直な限定: 線形性（rLe x y ∨ rLe y x）は排中律相当のため対象外（共推移性 M125 が構成的代替）。¬rLt → rLe の向きは代表抽出の δ-論法を要するため次層。全て標準公理のみ。</p>
+  </div>
 
   <h3>M129F: 正値の乗法閉性 — pos·pos = pos — 柱C ℝ 構成・順序×乗法の橋（issue #37）（IUT/RealPosMul.lean）</h3>
   <div class="box">
@@ -204,7 +230,7 @@
       <tr><td><code>rLt_cotrans</code> (M125-7)</td><td><strong>共推移性（本丸）</strong>: x &lt; y なら任意の z に対し x &lt; z ∨ z &lt; y。qLe_total（有理数の全順序）による構成的場合分け——排中律なしの三分律の代替（Bishop の順序の核心）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
       <tr><td><code>RealOrderData</code> (M125-8)</td><td>総括</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
-    <p>正直な限定: 正値と乗法の両立（pos·pos → pos）は次層（M129F が解消）・≤（非厳密順序、¬(y &lt; x) 形）との整合は次層。全て標準公理のみ。</p>
+    <p>正直な限定: 正値と乗法の両立（pos·pos → pos）は次層（M129F が解消）・≤（非厳密順序）との整合は次層（M130 が witness 形 rLe で解消。¬(y &lt; x) 形からの復元 = ¬rLt → rLe は M130 でも次層）。全て標準公理のみ。</p>
   </div>
 
   <h3>M124F: シクロトミック同期 — テータ中心 (0,0,z) ↦ ζ^z と μ_l の同一視 — 柱E E-1 接合層（issue #39）（IUT/CyclotomicSync.lean）</h3>
