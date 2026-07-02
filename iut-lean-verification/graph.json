@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 174,
-  "verified_theorem_total": 1408,
-  "choice_free_count": 134,
+  "module_count": 175,
+  "verified_theorem_total": 1414,
+  "choice_free_count": 135,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2147,6 +2147,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealComplete.lean"
+    },
+    {
+      "id": "RealPosMul",
+      "label": "RealPosMul",
+      "milestone": "M129F",
+      "title": "正値の乗法閉性",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealPosMul.lean"
     }
   ],
   "edges": [
@@ -2859,6 +2871,10 @@
       "target": "RegularReal"
     },
     {
+      "source": "RealAbs",
+      "target": "RealPosMul"
+    },
+    {
       "source": "RealMul",
       "target": "RealAbs"
     },
@@ -2869,6 +2885,10 @@
     {
       "source": "RealOrder",
       "target": "RealComplete"
+    },
+    {
+      "source": "RealOrder",
+      "target": "RealPosMul"
     },
     {
       "source": "Realification",

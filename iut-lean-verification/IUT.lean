@@ -178,3 +178,4 @@ import IUT.RealOrder
 import IUT.ThetaCenterMod
 import IUT.RealAbs
 import IUT.RealComplete
+import IUT.RealPosMul

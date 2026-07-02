@@ -1417,6 +1417,12 @@ import IUT
 #print axioms IUT.rlim_unique
 #print axioms IUT.realCompleteData
 #print axioms IUT.realComplete_exists
+#print axioms IUT.qFrac_mul
+#print axioms IUT.isPos_lower
+#print axioms IUT.isPos_mul
+#print axioms IUT.rLt_mul_pos
+#print axioms IUT.realPosMulData
+#print axioms IUT.realPosMul_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
