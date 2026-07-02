@@ -158,7 +158,17 @@
 </section>
 
 <section>
-  <h2>M1〜M116F の形式化（追加検証）</h2>
+  <h2>M1〜M118F の形式化（追加検証）</h2>
+
+  <h3>M118F: ℤ_p^× = μ_{p−1} × (1+pℤ_p) の完全分解 witness 束 — 柱B B-2 単数群側完結（issue #36）（IUT/ZpUnitDecomp.lean）</h3>
+  <div class="box">
+    <p><strong>ℤ_p^× = μ_{p−1} × U^(1) の分解定理群を一箇所に束ね、単数群側の構造論を完結させる</strong>（サブエージェント並行開発・第87弾統合）: 分解の存在（M35 <code>unit_decomposition</code>）に<strong>分解の一意性 <code>unit_decomposition_unique</code></strong>（ω(a)·v = ω(a')·v' なら ω(a) = ω(a') かつ v = v'）・<strong>Teichmüller 部分の可逆性 <code>teich_inv_exists</code></strong>（b = a^{p−2} の明示構成: Fermat の小定理 a·a^{p−2} = a^{p−1} ≡ 1 (mod p) と ω の剰余依存性。Bezout 不要）・<strong>全単数の可逆性 <code>zp_unit_inv_exists</code></strong>（M36 の明示逆元 x^{p−2}·(x^{p−1})⁻¹ を使用）・乗法閉性を加え、<strong>ℤ_p^× が μ_{p−1} × (1+pℤ_p) の内部直積であることの witness 束 <code>ZpUnitGroupData</code></strong> を構成。M107 の [u]λ = ω(u mod p)·λ・M94 recLevelOne と合わせ <strong>K^× = p^ℤ × μ_{p−1} × U^(1) の作用の完全記述に接近</strong>。正直申告: 本モジュールは witness 束（Prop 構造体）であり ℤ_p^× の Grp 化そのものは M36 <code>zpUnits</code> が担う。K^× 全体の直積分解の明示同型は次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M117F: Bishop 流正則実数列 — 柱C ℝ 基盤・第二段（issue #37）（IUT/RegularReal.lean）</h3>
+  <div class="box">
+    <p><strong>柱C（#37）「ℝ の自前構成」の第二段（第一段 = M115F の ℚ）として、Bishop の正則列 |x_m − x_n| ≤ 1/(m+1) + 1/(n+1) による実数の骨格を構成</strong>: 正則列は収束の modulus が添字に固定されているため modulus 抽出（= 選択公理の使用点）が不要になる choice-free ℝ 構成の標準法。基本分数 <code>qFrac</code> c/(m+1) の線形比較・合併（有理数簿記をこの 2 本に還元）・<strong>ε-消去 <code>qLe_of_forall_add_frac</code>: ∀m, a ≤ b + c/(m+1) ⟹ a ≤ b</strong>（アルキメデス性の使用点。m = c·分母積の明示 witness で排中律なしに閉じる）・正則列述語 <code>IsRegular</code> と定数列埋め込み <code>qToReal</code>・<strong>同値関係 <code>realEq</code></strong>（|xₙ−yₙ| ≤ 2/(n+1)。推移律は 4 項三角分割 + ε-消去 (c = 6) が本丸）・<strong>加法 <code>realAdd</code>（添字 2n+1 倍速化で正則性維持）と反元・≈ の下での加法群法則</strong>（可換・結合・零・反元・埋め込みの加法性）・総括 <code>RegularRealData</code>。正直申告: 乗法・順序（x &lt; y の witness 形）・完備性（柱C-1 の本丸）・realEq による Quot 商型化は次層——本層は setoid レベルの群法則まで。全て標準公理のみ。</p>
+  </div>
 
   <h3>M116F: テータ群の ±-構造 — 柱E E-1 第一切片（issue #39）（IUT/ThetaPM.lean）</h3>
   <div class="box">
@@ -201,6 +211,36 @@
       <tr><td><code>tower_one_ne_zero</code> ほか (M111-8)</td><td><strong>本丸: 非自明性</strong>——全レベルで Oₙ ≠ 0 かつ λₙ, πₙ ∉ Oₙ^×（剰余射の存在から 1 ↦ 1 ≠ 0・λₙ/πₙ ↦ 0 は単元になれない）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
     </table>
     <p class="small">正直な限定: ρₙ の存在は「Oₙ ≠ 0」と「λₙ が非単元」を与えるが、λₙ ≠ 0 自体は与えない（それには各レベルの整域性が必要で、レベルごとの Eisenstein 係数論法として今後の課題）。総括 <code>ResidueTowerData</code>。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M110F: p 進級数和の分割 Σ = 部分和 + πᵐ·尾部 — 柱B B-1 第三段・第二層（IUT/PadicSeries2.lean）</h3>
+  <div class="box">
+    <p><strong>M107F の p 進級数和 <code>zpSeriesSum</code> に、O = ℤ_p[[X]]/(E) の完備性論法で直接使う主 API を追加供給</strong>（サブエージェント並行開発・第85弾統合）: 鍵となる技法は全ての等式を <strong>zpRing レベル</strong>（成分ごとのレベル m へ降りずに環公理 left_distrib / mul_assoc / add_assoc から直接）で閉じること——零関数の級数和 = 0・<strong>スカラー倍 <code>zpSeriesSum_smul</code>: c·Σg = Σ(c·g)</strong>・<strong>本丸 <code>zpSeriesSum_split</code>: m 段の頭出し分割 Σg = (m 項までの部分和) + πᵐ·Σ(shift_m g)</strong>（m の帰納法、succ 段は M107F-9 の頭出しを尾部に一段適用 + 分配 + rpow の succ 段。添字の付け替えは congrArg g で処理）・<strong>系 <code>zpSeriesSum_tail_dvd</code>: Σg − 部分和は πᵐ の倍数</strong>（witness = 尾部の和）・総括 <code>PadicSeriesSplitData</code>。M114F の幾何級数逆元がこの API の直接の応用先。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M109F: 乗法的対称性 F_l⋇ = F_l^×/{±1} の商群構成 — 柱A A-4（issue #35）（IUT/FlStar.lean）</h3>
+  <div class="box">
+    <p><strong>HodgeTheater M2 が台集合 {1, …, l⋇} の整合確認のみで骨格化していた乗法的対称性 F_l^* = F_l^×/{±1}（ΘNF-Hodge theater 側）を実際の商群として構成</strong>（サブエージェント並行開発・第85弾統合）: <strong>±1 倍と乗法の両立 <code>negMod_mulMod_left/right</code></strong>（(−a)·b ≡ −(a·b) mod l——div/mod 分解と切り捨て減算の分配則だけの純 Nat 簿記、乗法項は omega に不透明な原子として渡す）・<strong>合同関係 <code>pmCong</code>: GrpCong (flUnits l)</strong>（rel x y := x = y ∨ x = −y。反射・対称・推移・積との両立を全証明）・<strong>M13 の一般商群構成 quotGrp の適用で <code>flStar</code> = F_l^×/{±1} : Grp</strong> と可換性・<strong>標準代表の存在 <code>flStar_rep</code></strong>（任意の元は 1 ≤ j かつ 2j ≤ l−1（= j ≤ l⋇）の像。l 奇数、範囲外は l−j 折り返し）・接続サニティ <code>flStar_rep_bound</code>・総括 <code>FlStarData</code>。issue #35 A-4「素数性を使う F_l^* の群構造」を商群レベルで解消（台の全単射の数え上げは M111F が完結させる）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M109: 分岐拡大の塔 O₁ ⊆ O₂ ⊆ … の環骨格 — 柱B B-1 塔の全レベル構成（issue #36）（IUT/EisTowerRings.lean）</h3>
+  <div class="box">
+    <p><strong>B-1/B-2 の最後の壁だった Λₙ(n ≥ 2) の生成元の住処——次数 p^{n−1}(p−1) の分岐拡大の塔——を、一般単項イデアル商環と一段昇りの再帰で全レベル一気に構成</strong>（第85弾本線）: <strong>一般単項イデアル商環 S/(E) <code>quotCRing</code></strong>（M82F の Eisenstein 構成の完全一般化。idealRel 両立補題で Quot.lift、環法則は代表の法則 + congrArg）・構造射 <code>quotOf</code> の環準同型性・分離性・冪の交換・<strong>一段昇り <code>towerStep</code>: O_{n+1} := O_n[[Y]]/(f_πₙ(Y) − λₙ)、λ_{n+1} := Y mod (…)</strong>・LT 多項式作用 f_π(t) = πt + t^p の環準同型交換・<strong>塔の関係式 <code>towerStep_shape</code>: f(λ_{n+1}) = ι(λₙ)</strong>（witness 1 の即物的なイデアル計算、無条件）・<strong>塔の再帰構成 <code>towerLevel</code></strong>（基底 = M82F の O）・<strong>捻れ <code>tower_torsion</code>: [π^{n+1}]λ_{n+1} = 0</strong>（基底 = M82F-7 の πλ + λ^p = 0、帰納段 = 関係式 + 準同型交換）——M89F の「塔の生成元 λₙ は未形式化」申告の構成部分を全レベルで解消・総括 <code>EisTowerData</code>。正直申告: 各レベルの非自明性（Oₙ ≠ 0・λₙ ≠ 0・ι の単射性）は次層（Oₙ ≠ 0 と λₙ の非単元性は後の M111 が解消）、[c]-作用・Galois 作用・相互法則の塔への持ち上げも次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M108F: F_l^× の群構造 — 柱A A-4（issue #35）（IUT/FlUnits.lean）</h3>
+  <div class="box">
+    <p><strong>HodgeTheater M2 が未形式化と正直申告していた「素数性を使う F_l^× の群構造」——F_l^× = {1, …, l−1} が乗法で群をなす（l 素数）——を mathlib なし・Bezout（M32-3）・Euclid の補題のみの純 Nat 算術で完全証明</strong>（サブエージェント並行開発・第84弾統合）: 乗法 <code>mulMod</code> の結合則・可換則・単位律・<strong>非零性の閉性 <code>mulMod_ne_zero</code></strong>（Euclid の補題の対偶）・<strong>逆元の存在 <code>flInv_exists</code></strong>（Bezout 1 = a·x + l·y の係数 x を x % l に正規化——代表元の抽出なし）・<strong>逆元の実構成 <code>flInv</code></strong>（fuel 付き有界探索 <code>flInvSearch</code>、ZmodOrder の ordSearch の汎用 witness 版）・<strong>乗法群 <code>flUnits</code> : Grp</strong> と可換性・HodgeTheater への接続サニティ。正直申告: F_l^* = F_l^×/{±1} の商群構造・prime-strip の圏論的データは次層（商群は M109F が解消）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M107F: p 進級数和 Σ πⁿ·g(n) の実構成 — 柱B B-1 第三段（IUT/PadicSeries.lean）</h3>
+  <div class="box">
+    <p><strong>O = ℤ_p[[X]]/(E) の完備性（B-1 第三段）の基盤として、各項が πⁿ で割れる級数 Σₙ πⁿ·g(n) の和を choice なしで実構成</strong>（サブエージェント並行開発・第84弾統合。witness 付きスタイル: 割れることは入力 g が担う）: 鍵となる観察は<strong>有限部分和のレベル m での値が j ≥ m で安定する</strong>こと（第 m 項以降は πᵐ で割れるので ℤ/pᵐ 上で消える、<code>zpSum_val_stable</code>）——この安定値をレベル m の値として採用すれば<strong>整合族 = 逆極限 ℤ_p の元が構成的に得られる（<code>zpSeriesSum</code>）</strong>。部分和との一致 <code>zpSeriesSum_partial</code>・<strong>加法性</strong> Σ(g+h) = Σg + Σh・<strong>頭出し分解 <code>zpSeriesSum_head</code>: Σₙπⁿg(n) = g(0) + π·Σₙπⁿg(n+1)</strong>（有限レベルの帰納的恒等式を全レベルへ持ち上げ）・総括 <code>PadicSeriesData</code>。スカラー倍・m 段分割は M110F、幾何級数逆元への応用は M114F に接続。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M107: レベル 1 分岐相互法則 [u]λ = ω(u mod p)·λ — 柱B B-2 の心臓部（issue #36）（IUT/RamifiedReciprocity.lean）</h3>
+  <div class="box">
+    <p><strong>M105/M106 で構成した λ 上の [c]-倍作用について、単数 u ∈ ℤ_p^× の作用が剰余 ū = u mod p だけで決まること——分岐局所類体論のレベル 1 の実体——を完全証明</strong>（第84弾本線）: M87F の RecRamified が「witness 付きインターフェース」として持っていた法則を、<strong>本物の Lubin–Tate 作用が満たすことを機械検証</strong>する。鍵は三つ——(1) <strong>[ζ] = ζX の厳密同定 <code>ltSol_teich</code></strong>（ζ^{p−1} = 1 なら [ζ] 級数は文字どおり一次式 ζX。M106 の f∘(ζX) = ζf と M49 一意性）・(2) <strong>形式群の行分解と吸収 <code>ps21Comp_split</code> / <code>eisRel_FG_absorb</code></strong>: F(S,T) = row₀∘S + T·(shift F)(S,T) と row₀(F) = X（F(X,0) = X を CR1/CR2 の (X,0) 特殊化 + 一意性で）から <strong>E ∣ T なら F(S,T) ≡ S (mod E)</strong>——主単数の作用が λ を動かさない理由・(3) <strong>主単数の分解</strong> v = 1 + πd（M43 level-1 判定）と M76 加法則で [v] = F([1], [πd])、[πd] ∈ (E)（M105）を (2) が吸収。<strong>本丸 <code>eisBr_principal</code>: [v]λ = λ・<code>eisBr_reciprocity</code>: u ≡ a (mod p)、p ∤ a なら [u]λ = ω(a)·λ</strong>・総括 <code>RamifiedReciprocityData</code>。正直申告: Λₙ(n ≥ 2) での相互法則（塔の環構成が先）・rec 全体（K^× = p^ℤ × ℤ_p^×）との貼り合わせの O-レベル実証は次層。全て標準公理のみ。</p>
   </div>
 
   <h3>M106: [c]-作用の半線形性と Galois 同変性 — 柱B B-1 第二段（issue #36）（IUT/LambdaSemilinear.lean）</h3>
