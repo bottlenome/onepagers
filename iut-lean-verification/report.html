@@ -158,11 +158,58 @@
 </section>
 
 <section>
-  <h2>M1〜M124F の形式化（追加検証）</h2>
+  <h2>M1〜M129F の形式化（追加検証）</h2>
+
+  <h3>M129F: 正値の乗法閉性 — pos·pos = pos — 柱C ℝ 構成・順序×乗法の橋（issue #37）（IUT/RealPosMul.lean）</h3>
+  <div class="box">
+    <p><strong>M125 の正直申告「正値と乗法の両立（pos·pos → pos）は次層」を解消し、順序体の最後の公理側部品を供給</strong>（サブエージェント並行開発・第91弾統合）: <strong>分数の積 <code>qFrac_mul</code>: (c/(k+1))·(d/(k'+1)) = cd/((k+1)(k'+1))</strong>（代表の Quot.sound、Nat 減算の −1+1 は 1 ≤ (k+1)(k'+1) で復元、キャストは Int.natCast_mul）・witness n から任意の添字 j ≥ 2n+1 での一様下界 x_j ≥ 1/(2n+2) を取り出す <code>isPos_lower</code>/<code>isPos_lower_weak</code>（isPos_spread + qLe_cancel_right の消去、witness の弱め n ≤ n' つき）・<strong>本丸 <code>isPos_mul</code>: IsPos x → IsPos y → IsPos (x·y)</strong>——N = n₁+n₂、E = (2N+2)² を<strong>単一原子として隔離</strong>し witness M = 2(E−1)+1、加速添字 s = mulIdx K M ≥ M ≥ 2N+1 で両因子の下界 1/(2N+2) を確保し、正×正の単調性 qLe_mul_two で積の下界 1/E = 2/(M+1) に着地（非線形は (2N+2)·(2N+2) を単一原子として omega が扱う隔離定型）・系 <code>rLt_mul_pos</code>: 0 &lt; x, 0 &lt; y → 0 &lt; x·y（x − 0 ≈ x の橋 <code>realSub_zero</code> ×3 で isPos_mul に還元）・総括 <code>RealPosMulData</code>。正直申告: rLt の乗法両立は 0 &lt; x, 0 &lt; y → 0 &lt; x·y の形（一般形 x &lt; y → x·z &lt; y·z は乗法の分配律——M123F の正直申告の次層——待ち）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M128: 実数の完備性 — 対角極限と ℝ 構成の完走 — 柱C ℝ 基盤・最終解析部品（issue #37）（IUT/RealComplete.lean）</h3>
+  <div class="box">
+    <p><strong>実数の正則列（|X_m − X_n| ≤ 1/(m+1) + 1/(n+1)、witness 形 = 各成分に固有の揺らぎ 2/(j+1) を許した一様評価）が極限を持つことを、対角列 Y_n := (X_{4n+3}).seq (4n+3)（4 倍加速で正則性が閉じる）の明示構成で機械検証する柱C の最終解析部品</strong>（第91弾本線）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>qAbs_sub_comm</code> (M128-1)</td><td>補助: |a−b| = |b−a|（qNeg_sub + qAbs_neg）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>IsCauchyReals</code> (M128-2)</td><td>実数列の正則性（witness 形）: ∀j, |(X_m)_j − (X_n)_j| ≤ (1/(m+1) + 1/(n+1)) + 2/(j+1)（末項は各実数の固有の揺らぎ）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rlim</code> (M128-3)</td><td><strong>対角極限の構成</strong> Y_n = (X_{4n+3})_{4n+3}（正則性: 4u_{4m+3} + 2u_{4n+3} ≤ u_m + u_n）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rlim_close</code> (M128-4)</td><td><strong>収束（本丸1）</strong>: |Y − X_m| ≤ 1/(m+1)（witness 形: ∀j, |Y_j − (X_m)_j| ≤ u_m + 2u_j）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rlim_unique</code> (M128-5)</td><td><strong>極限の一意性（本丸2）</strong>: 同じ収束評価を満たす Z は Y に ≈（k = m の 3 点分割 + ε-消去 c = 8）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>RealCompleteData</code> (M128-6)</td><td>総括</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p>これで <strong>ℝ の自前構成が完走</strong>: ℚ 体（M115F）→ 加法群（M117F）→ 床・上界（M120F）→ 乗法（M123F）→ 順序・共推移性（M125）→ 絶対値（M127F）→ <strong>完備性（本層）</strong>——C-1（実数値 log-volume）の解析基盤が揃った。正直な限定: 「任意のコーシー列」でなく正則列（modulus 固定形）に対する完備性——Bishop 流ではこれが標準（一般 modulus からの正則化は添字の付け替えで、次層の整備課題）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M127F: 実数の絶対値 — 逆三角不等式の Int→ℚ→ℝ 持ち上げ — 柱C ℝ 基盤・順序・完備性の前提部品（issue #37）（IUT/RealAbs.lean）</h3>
+  <div class="box">
+    <p><strong>柱C（#37）「ℝ の自前構成」の第五段部品として、順序（M125）・完備性（M128）の前提となる実数の絶対値 <code>rabs</code>（点ごと qAbs）とその法則を構成</strong>（サブエージェント並行開発・第90弾統合）: <strong>Int の逆三角不等式 <code>intAbs_sub_intAbs</code>: ||x| − |y|| ≤ |x − y|</strong>（符号 4 場合の cases + omega、外側は「t ≤ M かつ −t ≤ M なら |t| ≤ M」の片側化補題で閉じる）→ <strong>有理数の逆三角不等式 <code>qAbs_abs_sub_abs</code></strong>（qAbs は分母保存なので代表レベルで同分母となり、|num·den'| = |num|·den' の乗法性で Int の逆三角に直結）→ <strong><code>rabs</code> の正則性</strong>（点ごと qAbs、添字加速なし: ||x_m| − |x_n|| ≤ |x_m − x_n| ≤ u_m + u_n の 2 段 trans）の 3 段持ち上げが核。法則は <code>rabs_congr</code>（≈ との両立）・<code>rabs_neg</code>・<code>rabs_zero</code>・<code>qToReal_abs</code>（埋め込みとの両立）・<code>rabs_add_le</code>（三角不等式の点ごと witness 形、添字が両辺 2n+1 で自動的に揃う）・<strong><code>rabs_mul</code>（乗法性、rBound の qAbs 冪等性で添字が揃う）</strong>・<code>rabs_nonneg_seq</code>（非負性の点ごと witness 形）・総括 <code>RealAbsData</code>。正直申告: <code>rabs_add_le</code>・<code>rabs_nonneg_seq</code> は realEq/順序による総括形ではなく点ごと witness 形（実数の順序 x ≤ y は次層で導入されるため）。rBound (rabs x) = rBound x は defeq では通らず（qFloorNat の中の qAbs (qAbs …) の書き換えが必要）、<code>rBound_rabs</code> の Nat 等式を経由した。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M126F: テータ中心の商持ち上げ — centerToMu の thetaGrpMod レベル化 — 柱E E-1（issue #39）（IUT/ThetaCenterMod.lean）</h3>
+  <div class="box">
+    <p><strong>M124F の正直申告「商群 thetaGrpMod l レベルの言明ではなく thetaGrp レベル + mod-l 降下の組で表現した」を解消し、centerToMu を商群 thetaGrpMod l（M98F）の carrier 全体からの関数に持ち上げる</strong>（サブエージェント並行開発・第90弾統合）: 中心系の類（第1・2成分が l で割り切れる代表）でのみ centerToMu・他では 1 とする<strong>全域代表関数 <code>centerFun</code></strong>（if 条件は Int の等式の And——Int.decEq + instDecidableAnd で決定可能、選択公理なし）・well-definedness <code>centerFun_congr</code>（第1・2成分の合同は int_emod_congr で if 条件の同値に、第3成分の合同は centerToMu_congr で then 分岐の一致に変換し ite_congr + propext で閉じる）・<strong>Quot.lift による商関数 <code>centerToMuMod</code>: (thetaGrpMod l).carrier → ℤ_p</strong>（M124F の目標だった持ち上げ本体）・標準類での値（中心類 red(0,0,z) では centerToMu z、非中心類では 1）・<strong>本丸 <code>centerToMuMod_mul_center</code>: 中心類上の準同型性</strong>（商の積を thetaRed の map_mul + theta_center_mul 経由で計算）・<strong>忠実性の商版 <code>centerToMuMod_faithful_center</code></strong>: 値が 1 なら中心類そのものが自明類 red(0,0,0) に一致（Quot.sound で witness を上げる）+ 逆向き <code>centerToMuMod_period_center</code> = 中心類上の核はちょうど自明類・±-両立の商版 <code>centerToMuMod_neg</code>（ι の mod-l 降下 thetaNegMod（M116F）と可換、thetaNegMod_red が rfl なので rfl）・総括 <code>ThetaCenterModData</code> と witness・Nonempty。<strong>シクロトミック同期が商群 = 実際の mod-l テータ群の土俵で完結し、[EtTh] の「テータ環境のシクロトームと基礎体のシクロトームの同期」が mono-theta 環境の l-捻れ骨格そのものの上の言明になる</strong>。正直申告: centerToMuMod は thetaGrpMod l 全体からの大域準同型では<strong>ない</strong>（Heisenberg コサイクル a·b' が非中心成分で値に混入するため、準同型性は中心類上のみ）。<code>centerFun_congr</code>/<code>centerToMuMod</code> は指示の仮定 hζl（ζ^l = 1）を必要としなかったため除いた——hζl は準同型性のみで、hdist（冪の相異性）は忠実性のみで使用。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M125: 実数の順序 — Bishop 流 witness 形正値性と共推移性 — 柱C ℝ 基盤・第五段（issue #37）（IUT/RealOrder.lean）</h3>
+  <div class="box">
+    <p><strong>Bishop 流の構成的順序を witness 形正値性 IsPos x := ∃n, 2/(n+1) ≤ x_n（margin 2 が正則性の揺らぎ 1/(n+1) を吸収して全添字に伝播する）で構成し、排中律なしの三分律の代替 = 共推移性まで機械検証する ℝ 構成の第五段</strong>（第90弾本線）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>qLe_self_abs</code> / <code>qLe_neg_flip</code> / <code>qLe_cancel_right</code> / <code>qLe_abs_move</code> (M125-1)</td><td>補助: a ≤ |a|・neg 反転・加法消去・「|a−b| ≤ B なら a ≤ B + b」の移項</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>IsPos</code> / <code>isPos_spread</code> (M125-2)</td><td><strong>witness 形正値性</strong>と伝播（witness は任意添字の下界を与える）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>isPos_congr</code> (M125-3)</td><td>≈ 不変性（添字 5n+4 の margin 計算）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>isPos_zero_false</code> / <code>isPos_add</code> (M125-4)</td><td>0 は正でない・正+正=正（添字 3N+2 の合流）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLt</code> と congruence・非反射律 (M125-5)</td><td>厳密順序 rLt x y := IsPos (y − x) の定義と ≈ 両立・¬(x &lt; x)</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLt_trans</code> (M125-6)</td><td>推移律（(z−x) ≈ (z−y)+(y−x) の代数 + isPos_add）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>rLt_cotrans</code> (M125-7)</td><td><strong>共推移性（本丸）</strong>: x &lt; y なら任意の z に対し x &lt; z ∨ z &lt; y。qLe_total（有理数の全順序）による構成的場合分け——排中律なしの三分律の代替（Bishop の順序の核心）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>RealOrderData</code> (M125-8)</td><td>総括</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p>正直な限定: 正値と乗法の両立（pos·pos → pos）は次層（M129F が解消）・≤（非厳密順序、¬(y &lt; x) 形）との整合は次層。全て標準公理のみ。</p>
+  </div>
 
   <h3>M124F: シクロトミック同期 — テータ中心 (0,0,z) ↦ ζ^z と μ_l の同一視 — 柱E E-1 接合層（issue #39）（IUT/CyclotomicSync.lean）</h3>
   <div class="box">
-    <p><strong>テータ群 mod l（M98F）の中心 (0,0,z) と μ_l（M121F）の同一視 = cyclotomic synchronization の witness 形を機械検証し、柱E のシクロトミック同期を閉環させる</strong>（サブエージェント並行開発・第89弾統合）: M98F の mod-l cyclotomic rigidity が指定する中心生成元 (0,0,1) を μ_l の生成元 ζ に対応させる標準写像 <code>centerToMu</code>: z ↦ ζ^{(z mod l)} を構成——ℤ_p 冪の加法則 <code>zpPow_add</code> と l 周期性 <code>zpPow_mul_period</code>・Int の余りの一意性 <code>int_emod_unique</code>（M120F <code>int_ediv_unique</code> の % 版、除算項を ∀ d r 形に隔離して omega の変数除算制限を回避）と well-definedness <code>centerToMu_congr</code>・<strong>本丸1 <code>centerToMu_add</code>: 準同型性 ζ^{(z+z') mod l} = ζ^{z mod l}·ζ^{z' mod l}</strong>（余りの和の δ ∈ {0,1} 二分岐 + l 周期性で余分な l を消去）と <strong>1 ↦ ζ</strong>（中心生成元 ↦ μ_l 生成元）・<strong>本丸2 <code>centerToMu_faithful</code>: 忠実性 ζ^{z mod l} = 1 ⟹ l ∣ z</strong>（冪の相異性との背理）と逆向き <code>centerToMu_period</code> = 核がちょうど l·ℤ・<strong>テータ群との接合</strong>: 中心の Heisenberg 積は z+z'（コサイクル 0·0 消滅）、thetaRelMod で centerToMu は降下（<code>theta_center_descend</code>）、中心部分群 → μ_l の準同型 <code>theta_center_to_mu_hom</code>、M116F の ι は中心を固定するので ±-構造と自明に両立・総括 <code>CyclotomicSyncData</code>。<strong>M98F（テータ群 mod l）× M116F（±-構造）× M121F（μ_l）を束ねる [EtTh] の「テータ環境のシクロトームと基礎体のシクロトームの同期」の離散核</strong>。正直申告: 商群 thetaGrpMod l レベルの言明ではなく thetaGrp レベルの中心 + mod-l 降下の組で商レベルの内容を表現（商 carrier からの Quot.lift には全成分不変性が必要で中心以外の成分を持つ代表への拡張は本層の範囲外）。<code>centerToMu_faithful</code> は ζ^l = 1 の仮定を、<code>centerToMu_period</code> は ζ^l = 1・相異性の仮定を必要としなかったため除いた。全て標準公理のみ。</p>
+    <p><strong>テータ群 mod l（M98F）の中心 (0,0,z) と μ_l（M121F）の同一視 = cyclotomic synchronization の witness 形を機械検証し、柱E のシクロトミック同期を閉環させる</strong>（サブエージェント並行開発・第89弾統合）: M98F の mod-l cyclotomic rigidity が指定する中心生成元 (0,0,1) を μ_l の生成元 ζ に対応させる標準写像 <code>centerToMu</code>: z ↦ ζ^{(z mod l)} を構成——ℤ_p 冪の加法則 <code>zpPow_add</code> と l 周期性 <code>zpPow_mul_period</code>・Int の余りの一意性 <code>int_emod_unique</code>（M120F <code>int_ediv_unique</code> の % 版、除算項を ∀ d r 形に隔離して omega の変数除算制限を回避）と well-definedness <code>centerToMu_congr</code>・<strong>本丸1 <code>centerToMu_add</code>: 準同型性 ζ^{(z+z') mod l} = ζ^{z mod l}·ζ^{z' mod l}</strong>（余りの和の δ ∈ {0,1} 二分岐 + l 周期性で余分な l を消去）と <strong>1 ↦ ζ</strong>（中心生成元 ↦ μ_l 生成元）・<strong>本丸2 <code>centerToMu_faithful</code>: 忠実性 ζ^{z mod l} = 1 ⟹ l ∣ z</strong>（冪の相異性との背理）と逆向き <code>centerToMu_period</code> = 核がちょうど l·ℤ・<strong>テータ群との接合</strong>: 中心の Heisenberg 積は z+z'（コサイクル 0·0 消滅）、thetaRelMod で centerToMu は降下（<code>theta_center_descend</code>）、中心部分群 → μ_l の準同型 <code>theta_center_to_mu_hom</code>、M116F の ι は中心を固定するので ±-構造と自明に両立・総括 <code>CyclotomicSyncData</code>。<strong>M98F（テータ群 mod l）× M116F（±-構造）× M121F（μ_l）を束ねる [EtTh] の「テータ環境のシクロトームと基礎体のシクロトームの同期」の離散核</strong>。正直申告: 商群 thetaGrpMod l レベルの言明ではなく thetaGrp レベルの中心 + mod-l 降下の組で商レベルの内容を表現（商 carrier からの Quot.lift には全成分不変性が必要で中心以外の成分を持つ代表への拡張は本層の範囲外——M126F が解消）。<code>centerToMu_faithful</code> は ζ^l = 1 の仮定を、<code>centerToMu_period</code> は ζ^l = 1・相異性の仮定を必要としなかったため除いた。全て標準公理のみ。</p>
   </div>
 
   <h3>M123F: 実数の乗法 — Bishop 流添字スケーリング — 柱C ℝ 基盤・第四段（issue #37）（IUT/RealMul.lean）</h3>
