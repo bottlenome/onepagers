@@ -1238,6 +1238,19 @@ import IUT
 #print axioms IUT.principal_unit_is_unit
 #print axioms IUT.padicGeometricData
 #print axioms IUT.padicGeometric_exists
+#print axioms IUT.thetaNeg
+#print axioms IUT.thetaNeg_involutive
+#print axioms IUT.thetaNeg_center
+#print axioms IUT.thetaNeg_section_mul
+#print axioms IUT.thetaNeg_section_inv
+#print axioms IUT.thetaRelMod_neg
+#print axioms IUT.thetaNegMod
+#print axioms IUT.thetaNegMod_involutive
+#print axioms IUT.thetaNegMod_red
+#print axioms IUT.thetaNegMod_section
+#print axioms IUT.thetaNeg_label_center
+#print axioms IUT.thetaPMData
+#print axioms IUT.thetaPM_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
