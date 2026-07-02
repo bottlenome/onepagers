@@ -1267,6 +1267,16 @@ import IUT
 #print axioms IUT.rat_archimedean
 #print axioms IUT.ratFieldData
 #print axioms IUT.ratField_exists
+#print axioms IUT.prime_odd
+#print axioms IUT.flStar_rep_unique
+#print axioms IUT.flStarRep
+#print axioms IUT.flStarRep_range
+#print axioms IUT.flStarRep_lt
+#print axioms IUT.flStarRep_section
+#print axioms IUT.flStarRep_complete
+#print axioms IUT.flStarRep_inj
+#print axioms IUT.flStarCountData
+#print axioms IUT.flStarCountData_nonempty
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
