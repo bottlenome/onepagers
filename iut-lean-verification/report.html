@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M132 の形式化（追加検証）</h2>
+  <h2>M1〜M133 の形式化（追加検証）</h2>
+
+  <h3>M133: ガウス因子 — rlogVol と Σj² の同定（C-1 × E-2 × M12 の接合）（IUT/GaussianDivisor.lean）</h3>
+  <div class="box">
+    <p><strong>第92〜94弾の三橋の完結（第94弾本線）: テータパイロットの q-次数簿記を担うガウス因子 Σ_{j≤l} j²·[p_j] を QDiv として実装し、その実数値 log-volume が Σj² に一致することを同定</strong>——<code>gaussDiv</code>（重複度 if j ≤ l then j² else 0・上界 l+1）、<strong>次数の同定（本丸）<code>gaussDiv_deg</code>: 単位重みの degN = Σj²</strong>（nsum の if 剥がし <code>gauss_nsum</code> + 平方和への帰着 <code>nsum_sq</code>）、<strong><code>rlogVol_gauss_eq</code>: rlogVol 1 (gaussDiv l) = natToReal (ssq l) が実数の等式そのもの</strong>として成立。帰結: 閉形式 6·vol = l(l+1)(2l+1)（realEq）・<strong>体積下界 l³ ≤ 3·vol（rLe）・Frobenius 共変性 vol(φ_e D) = e·vol(D) が実際の因子の log-volume の言明として成立</strong>——[IUTchIV] の log-volume 計算の対象（因子）と評価（実数値体積）が両方とも形式体系内に存在する。総括 <code>GaussianDivisorData</code>。正直な限定: 実素点重み（log p_k の実数化）での評価は重み付き Σj² 簿記として次層。全て標準公理のみ。</p>
+  </div>
 
   <h3>M132: ガウス体積簿記の ℝ 化 — 系3.12 不等式の実数形 — 柱E E-2（issue #39）（IUT/VolumeReal.lean）</h3>
   <div class="box">
