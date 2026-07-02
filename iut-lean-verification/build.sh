@@ -1327,6 +1327,14 @@ import IUT
 #print axioms IUT.rBound_spec
 #print axioms IUT.ratFloorData
 #print axioms IUT.ratFloor_exists
+#print axioms IUT.order_l_exists
+#print axioms IUT.mu_l_root
+#print axioms IUT.mu_l_powers_distinct
+#print axioms IUT.mu_l_pow_root
+#print axioms IUT.mu_l_complete
+#print axioms IUT.mu_l_zp_exists
+#print axioms IUT.muLSubgroupData
+#print axioms IUT.muLSubgroup_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

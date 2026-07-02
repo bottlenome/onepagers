@@ -345,6 +345,7 @@ iut-lean-verification/
     ├── RegularReal.lean # M117F: Bishop 流正則実数列 — ε-消去・同値関係・加法群構造（柱C ℝ 基盤第二段、choice なし）
     ├── TowerNonzero.lean # M119: 塔の λ 非零性 — 正則性への還元 λₙ 正則 ⟹ λₙ₊₁ ≠ 0（柱B、choice なし）
     ├── RatFloor.lean # M120F: 床関数 qFloor と正則列の標準上界 rBound（柱C ℝ 乗法の準備、choice なし）
+    ├── MuLSubgroup.lean # M121F: μ_l 部分群 — 位数 l の元・冪の相異・l 乗根の完全性・ℤ_p 持ち上げ（柱E E-1、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -550,6 +551,7 @@ iut-lean-verification/
 | M117F: **Bishop 流正則実数列（柱C ℝ 基盤第二段 — issue #37）**（**正則列 \|x_m − x_n\| ≤ 1/(m+1) + 1/(n+1) による ℝ 骨格** — 正則列は modulus 抽出不要 = choice-free の標準構成。基本分数 qFrac c/(m+1) の線形比較・合併に全簿記を還元、**ε-消去 qLe_of_forall_add_frac**（∀m, a ≤ b + c/(m+1) ⟹ a ≤ b — witness m = c·分母積 の明示構成、アルキメデス性の使用点）、同値関係 realEq（**推移律 = 4 項三角分割 + ε-消去 c=6 が本丸**）、加法 realAdd（添字 2n+1 倍速化で正則性維持）・反元 realNeg・congruence・**加法群法則（可換・結合・零・反元）**・埋め込み ℚ → ℝ の加法性・RegularRealData 総括。乗法・順序・完備性（C-1 本丸）は次層（正直申告） | done（choice なし） |
 | M119 **塔の λ の非零性（柱B — issue #36、第88弾）** | **「λₙ₊₁ ≠ 0」を一段下の正則性に還元する完全な一段昇り定理**: Y = h·(πY + Y^p − λ) の 0 次係数比較で h₀·λ = 0 → 正則性で h₀ = 0、1 次係数比較で 1 = −h₁λ → **λ が単元となり M111 の tower_lam_not_unit（剰余塔の非単元性）に矛盾** — 非単元性と正則性が合流して非零性を生む設計。積級数の 1 次係数 psMul_coeff_one・一段多項式の 1 次係数 = π・一般環での本丸 towerLam_ne_zero・塔 instance（λₙ 正則 ⟹ λₙ₊₁ ≠ 0）・基底形（eisLambda 正則 ⟹ λ₂ ≠ 0）・TowerNonzeroData 総括。正直申告: 基底 λ₁ の平明正則性（∀h, hλ=0→h=0）は witness 形整域性からは出ず、簡約係数の単射性として次層の課題（それが済めば全レベルに伝播） | 実体構成 |
 | M120F: **床関数と正則列の標準上界（柱C — issue #37、第88弾）**（**qFloor : ℚ → ℤ の Quot.lift 構成** — floor は有理数の値のみに依存するため商から Int/Nat を choice なしに抽出できる稀有な装置。Euclid 除算の一意性 int_ediv_unique（変数除数は omega 不可 → 除算項を補助命題に隔離して積原子を b·q に正規化する定型を確立）・well-definedness ratRel_floor（交差積 + 一意性）・床の挟み込み qFloor_le/qFloor_lt・非負値の Nat 化 qFloorNat_upper・\|a\| ≤ \|b\| + \|a−b\|・**正則列の一様上界 rBound x = floorNat(\|x₀\|)+3 と rBound_spec（∀n, \|xₙ\| ≤ rBound x）** — Bishop 乗法の添字スケールを供給・RatFloorData 総括） — サブエージェント並行開発・第88弾統合 | done（choice なし） |
+| M121F: **μ_l 部分群（柱E E-1 第二切片 — issue #39、第88弾）**（l ∣ p−1 のとき **位数ちょうど l の元の存在**（原始根 g の (p−1)/l 乗 + zmodOrd_pow_div）・c^l = 1・冪 c^0..c^{l−1} の相異性・**l 乗根の完全性（本丸）: x^l = 1 なら ∃ k ≤ l−1, x = c^k**（decidableBoundedExists による構成的 witness 抽出 + 失敗時は l+1 個の相異なる根で bin_roots_bound に矛盾 — 指示の ¬∀≠ 形より強い ∃ 形で達成）・**ℤ_p への持ち上げ mu_l_zp_exists**（teichBar 経由、z^l = 1 + 冪の相異性 = 位数ちょうど l まで移送）・MuLSubgroupData 総括。μ_l 係数シクロトーム ↔ O^× 同一視の ℤ/p・ℤ_p 側半分 — テータ群 mod l の中心（M98F/M116F）との接合は次層） — サブエージェント並行開発・第88弾統合 | done（choice なし） |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

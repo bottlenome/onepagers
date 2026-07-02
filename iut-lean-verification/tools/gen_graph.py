@@ -97,7 +97,7 @@ PILLAR = {
     "Evaluation": "E", "LaurentCoeff": "E", "LaurentRing": "E", "LaurentMonomial": "E",
     "ThetaSeries": "E", "ThetaFunctional": "E", "ThetaReflection": "E",
     "ThetaGauss": "E", "TateQuotient": "E", "MonoThetaWitness": "E",
-    "ThetaGroupMod": "E", "GaussianVolume": "E", "ThetaPM": "E",
+    "ThetaGroupMod": "E", "GaussianVolume": "E", "ThetaPM": "E", "MuLSubgroup": "E",
 }
 
 # マイルストーン id を持たない初期ファイルのフォールバック

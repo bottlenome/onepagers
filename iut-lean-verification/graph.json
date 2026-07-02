@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 166,
-  "verified_theorem_total": 1318,
-  "choice_free_count": 126,
+  "module_count": 167,
+  "verified_theorem_total": 1326,
+  "choice_free_count": 127,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2045,6 +2045,20 @@
       "has_honest_scope": false,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RatFloor.lean"
+    },
+    {
+      "id": "MuLSubgroup",
+      "label": "MuLSubgroup",
+      "milestone": "M121F",
+      "title": "μ_l 部分群",
+      "pillar": "E",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuLSubgroup.lean"
     }
   ],
   "edges": [
@@ -2103,6 +2117,10 @@
     {
       "source": "CyclicUnits",
       "target": "LambdaSemilinear"
+    },
+    {
+      "source": "CyclicUnits",
+      "target": "MuLSubgroup"
     },
     {
       "source": "Diophantine",

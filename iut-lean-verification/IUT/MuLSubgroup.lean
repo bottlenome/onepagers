@@ -48,8 +48,10 @@ namespace IUT
 /-- **定理 (M121F-1): 位数 l の元の存在** — l ∣ p−1 なら (ℤ/p)^× に
     位数ちょうど l の元（1 の原始 l 乗根）が存在する。原始根 g
     （ord g = p−1、M103）の m = (p−1)/l 乗を取り、冪の位数公式
-    ord(g^m) = (p−1)/m = l（M102-9）で位数を計算する。 -/
-theorem order_l_exists (p l : Nat) (hp : IsPrime p) (hl : 1 ≤ l)
+    ord(g^m) = (p−1)/m = l（M102-9）で位数を計算する。
+    （l ≥ 1 は hdvd と p ≥ 2 から自動的に従うため証明では未使用だが、
+    API の一様性のため引数に保持する。） -/
+theorem order_l_exists (p l : Nat) (hp : IsPrime p) (_hl : 1 ≤ l)
     (hdvd : l ∣ p - 1) :
     ∃ c, IsZmodUnit p c ∧ zmodOrd p c = l := by
   obtain ⟨g, hg, hord⟩ := primitive_root_exists p hp
@@ -157,14 +159,17 @@ theorem mu_l_complete (p l : Nat) (hp : IsPrime p) (hl : 1 ≤ l)
           = zmodPow (p ^ 1)
             (if i ≤ l - 1 then zmodPow (p ^ 1) c i else x) l :=
         congrArg (zmodPow (p ^ 1) _) (by omega)
-      rw [hcong]
-      cases Nat.lt_or_ge (l - 1) i with
-      | inr hile =>
-        rw [if_pos hile]
-        exact mu_l_pow_root p l hp hc ha i
-      | inl higt =>
-        rw [if_neg (by omega : ¬ i ≤ l - 1)]
-        exact hx
+      have hval : zmodPow (p ^ 1)
+          (if i ≤ l - 1 then zmodPow (p ^ 1) c i else x) l
+          = Quot.mk (modCong (p ^ 1)).rel 1 := by
+        cases Nat.lt_or_ge (l - 1) i with
+        | inr hile =>
+          rw [if_pos hile]
+          exact mu_l_pow_root p l hp hc ha i
+        | inl higt =>
+          rw [if_neg (by omega : ¬ i ≤ l - 1)]
+          exact hx
+      exact hcong.trans hval
     exact bin_roots_bound (zmodRing (p ^ 1)) (zmod_no_zero_div p hp)
       (zmodRing_one_ne_zero p hp) (zmodRing (p ^ 1)).one (l - 1)
       (fun i => if i ≤ l - 1 then zmodPow (p ^ 1) c i else x)
@@ -193,6 +198,7 @@ theorem mu_l_zp_exists (p l : Nat) (hp : IsPrime p) (hl : 1 ≤ l)
   · obtain ⟨a, hca, hpa⟩ := hc
     refine ⟨a, hpa, ?_⟩
     rw [hca]
+    rfl
 
 /-! ## 総括レコード -/
 
@@ -230,10 +236,10 @@ structure MuLSubgroupData (p l : Nat) (hp : IsPrime p) (hl : 1 ≤ l)
 def muLSubgroupData (p l : Nat) (hp : IsPrime p) (hl : 1 ≤ l)
     (hdvd : l ∣ p - 1) : MuLSubgroupData p l hp hl hdvd where
   order_l := order_l_exists p l hp hl hdvd
-  root := fun c hc ha => mu_l_root p l hp hc ha
-  powers_distinct := fun c hc ha => mu_l_powers_distinct p l hp hc ha
-  pow_root := fun c hc ha k => mu_l_pow_root p l hp hc ha k
-  complete := fun c hc ha x hx => mu_l_complete p l hp hl hc ha hx
+  root := fun _ hc ha => mu_l_root p l hp hc ha
+  powers_distinct := fun _ hc ha => mu_l_powers_distinct p l hp hc ha
+  pow_root := fun _ hc ha k => mu_l_pow_root p l hp hc ha k
+  complete := fun _ hc ha _ hx => mu_l_complete p l hp hl hc ha hx
   zp_lift := mu_l_zp_exists p l hp hl hdvd
 
 /-- **定理 (M121F-5c): μ_l 部分群データの存在**。 -/
