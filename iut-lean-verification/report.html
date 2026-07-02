@@ -158,7 +158,47 @@
 </section>
 
 <section>
-  <h2>M1〜M118F の形式化（追加検証）</h2>
+  <h2>M1〜M124F の形式化（追加検証）</h2>
+
+  <h3>M124F: シクロトミック同期 — テータ中心 (0,0,z) ↦ ζ^z と μ_l の同一視 — 柱E E-1 接合層（issue #39）（IUT/CyclotomicSync.lean）</h3>
+  <div class="box">
+    <p><strong>テータ群 mod l（M98F）の中心 (0,0,z) と μ_l（M121F）の同一視 = cyclotomic synchronization の witness 形を機械検証し、柱E のシクロトミック同期を閉環させる</strong>（サブエージェント並行開発・第89弾統合）: M98F の mod-l cyclotomic rigidity が指定する中心生成元 (0,0,1) を μ_l の生成元 ζ に対応させる標準写像 <code>centerToMu</code>: z ↦ ζ^{(z mod l)} を構成——ℤ_p 冪の加法則 <code>zpPow_add</code> と l 周期性 <code>zpPow_mul_period</code>・Int の余りの一意性 <code>int_emod_unique</code>（M120F <code>int_ediv_unique</code> の % 版、除算項を ∀ d r 形に隔離して omega の変数除算制限を回避）と well-definedness <code>centerToMu_congr</code>・<strong>本丸1 <code>centerToMu_add</code>: 準同型性 ζ^{(z+z') mod l} = ζ^{z mod l}·ζ^{z' mod l}</strong>（余りの和の δ ∈ {0,1} 二分岐 + l 周期性で余分な l を消去）と <strong>1 ↦ ζ</strong>（中心生成元 ↦ μ_l 生成元）・<strong>本丸2 <code>centerToMu_faithful</code>: 忠実性 ζ^{z mod l} = 1 ⟹ l ∣ z</strong>（冪の相異性との背理）と逆向き <code>centerToMu_period</code> = 核がちょうど l·ℤ・<strong>テータ群との接合</strong>: 中心の Heisenberg 積は z+z'（コサイクル 0·0 消滅）、thetaRelMod で centerToMu は降下（<code>theta_center_descend</code>）、中心部分群 → μ_l の準同型 <code>theta_center_to_mu_hom</code>、M116F の ι は中心を固定するので ±-構造と自明に両立・総括 <code>CyclotomicSyncData</code>。<strong>M98F（テータ群 mod l）× M116F（±-構造）× M121F（μ_l）を束ねる [EtTh] の「テータ環境のシクロトームと基礎体のシクロトームの同期」の離散核</strong>。正直申告: 商群 thetaGrpMod l レベルの言明ではなく thetaGrp レベルの中心 + mod-l 降下の組で商レベルの内容を表現（商 carrier からの Quot.lift には全成分不変性が必要で中心以外の成分を持つ代表への拡張は本層の範囲外）。<code>centerToMu_faithful</code> は ζ^l = 1 の仮定を、<code>centerToMu_period</code> は ζ^l = 1・相異性の仮定を必要としなかったため除いた。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M123F: 実数の乗法 — Bishop 流添字スケーリング — 柱C ℝ 基盤・第四段（issue #37）（IUT/RealMul.lean）</h3>
+  <div class="box">
+    <p><strong>柱C（#37）「ℝ の自前構成」の第四段（M115F ℚ → M117F 正則列 → M120F 床関数・標準上界に続く）として、Bishop 流の実数乗法を構成</strong>（サブエージェント並行開発・第89弾統合）: 標準上界 K = rBound x + rBound y による<strong>添字加速 s n = 2K(n+1) − 1</strong>（<code>mulIdx</code>）で積列 z_n := x_{s n}·y_{s n} の正則性を維持するのが核——<strong>積の差の分解 <code>qAbs_mul_sub</code>: |ab − cd| ≤ |a||b−d| + |d||a−c|</strong>（等式 ab − cd = a(b−d) + d(a−c)）と<strong>相殺補題 <code>qFrac_two_bound</code>: (K+K)/(mulIdx K t + 1) ≤ 1/(t+1)</strong>（K·(1/(2K(m+1))) = 1/(2(m+1)) の相殺）を合流させて<strong>本丸 <code>rmul</code> の正則性 <code>mul_seq_reg</code></strong> を閉じる。乗法ラッパー（ratRing の法則の qMul 構文再輸出）・乗法の単調性（加法の橋 <code>qLe_sub_nonneg</code> 経由）・スカラー×分数 <code>ratOfInt_mul_qFrac</code>・法則（可換・<strong>congruence の ε-消去（c = 4K + 2K'、K ≠ K' の 4 点比較）</strong>・単位元・零元・埋め込みの乗法性）・総括 <code>RealMulData</code>。正直申告: 乗法の結合律・加法との分配律は次層（添字スケールが三重にズレるため 4 点比較の一般化が要る）——congruence は ε-消去で本層に収めた。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M122: 座標忠実性 — Weierstrass 割り算と λ の平明正則性、λ₂ ≠ 0 無条件 — 柱B（issue #36）（IUT/EisFaithful.lean）</h3>
+  <div class="box">
+    <p><strong>M93F の簡約係数写像 c_i : O → ℤ_p（i &lt; p−1）の単射性（座標忠実性）を、Eisenstein 多項式 E = X^{p−1} + π による Weierstrass 割り算 f = q·E + r の明示構成で証明し、M111（非単元性）→ M119（正則性⟹非零性の還元）→ M122（正則性の充足）の3弾リレーを完結させる本キャンペーンの本丸</strong>（第89弾本線）: 商の係数 q_k = Σ_j (−π)^j f_{k+(j+1)(p−1)} は M93F と同じレベル打ち切り機構で ℤ_p 元として安定化する（<code>eisCoeffStab</code>）。帰結として <strong>λ の平明正則性 IsRegularElem O λ（∀h, hλ = 0 → h = 0）——witness 形整域性（M91F/M93F/M96F）では届かなかった選言なしの形——が成立し、M119 と合成して λ₂ ≠ 0 が無条件に成立する</strong>:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>eisCoeffZp_val_stable</code> / <code>eisCoeffStab</code> (M122-1, 2)</td><td><strong>打ち切り安定性</strong>（余分な項は (−π)^j の p 進消滅で死ぬ）と安定化された簡約係数（ℤ_p 元）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>eisCoeffStab_rec</code> / <code>eisCoeffStab_solve</code> (M122-3)</td><td>係数再帰 c_k = f_k + (−π)·c_{k+(p−1)} とその解 f_k = c_{k+(p−1)}·π + c_k</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>eisDivQ</code> / <code>eisDivR</code> / <code>weierstrass_division</code> (M122-4)</td><td><strong>Weierstrass 割り算</strong> f = q·E + r、r = Σ_{i&lt;p−1} c_i(f) X^i（係数ごとの検証、psMul_eisPoly_low/high）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>eisCoeff_faithful</code> (M122-5)</td><td><strong>単射性（本丸）</strong>: 全簡約係数が全レベルで 0 なら x = 0——座標系 O ≅ ℤ_p^{p−1} の忠実性</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>zp_pi_regular</code> / <code>eisLambda_regular</code> (M122-6, 7)</td><td>π の平明正則性（p_mul_val_zero の束）と <strong>λ の平明正則性</strong>（シフト簿記 M93F-2a/2b で λx = 0 から全係数消滅へ）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tower_lam_two_ne_zero</code> / <code>EisFaithfulData</code> (M122-8, 9)</td><td><strong>λ₂ ≠ 0（無条件）</strong>——M111 の非単元性 × M119 の還元 × 本層の正則性の合成——と総括</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p>正直な限定: 高レベル λₙ (n ≥ 2) の正則性（→ λₙ₊₁ ≠ 0 の伝播）は各レベルの座標理論（本層の塔版）として次層。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M121F: μ_l 部分群 — l ∣ p−1 の原始 l 乗根と完全性 — 柱E E-1 第二切片（issue #39）（IUT/MuLSubgroup.lean）</h3>
+  <div class="box">
+    <p><strong>μ_l 係数シクロトーム ↔ O^× 同一視の ℤ/p・ℤ_p 側の材料を機械検証</strong>（サブエージェント並行開発・第88弾統合）: l ∣ p−1 のとき<strong>位数ちょうど l の元（原始 l 乗根）の存在 <code>order_l_exists</code></strong>（原始根 g（M103）の (p−1)/l 乗 + M102-9 の冪位数公式）・その冪 c^0, …, c^{l−1} が相異なる l 個の l 乗根を与えること（<code>mu_l_powers_distinct</code>、M102-8）・<strong>完全性（本丸）<code>mu_l_complete</code>: x^l = 1 の任意の解はこの冪のどれか</strong>（有界探索 M17 の決定可能性で witness を構成的に取り、見つからなければ l+1 個の相異なる元が全て X^l − 1 の根となり bin_roots_bound（M96 の因数定理）に矛盾。M104-3 generator_covers の l = p−1 特殊形の一般化）・<strong>ℤ_p への持ち上げ <code>mu_l_zp_exists</code></strong>: ∃ z ∈ ℤ_p, z^l = 1 ∧ 冪 z^0, …, z^{l−1} 相異 ∧ z = ω(a)（Teichmüller 持ち上げ teichBar_pow M104-2 + 単射性 M101-7 による移送）・総括 <code>MuLSubgroupData</code> と witness・Nonempty。[EtTh] の μ_l 同一視の半分——テータ群 mod l の中心（M98F/M116F）との接合は次層（M124F が解消）。正直申告: 完全性は指示の ¬∀≠ 形より<strong>強い ∃ 形（∃ k ≤ l−1, c^k = x）</strong>で証明（decidableBoundedExists による構成的 witness 抽出）、x^l = 1 から単数性は自動的に従うため x の単数性仮定は不要、ℤ_p 側は冪の相異性（位数ちょうど l）まで持ち上げ済み。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M120F: 有理数の床関数と正則列の標準上界 — 柱C ℝ 基盤・第三段の準備（issue #37）（IUT/RatFloor.lean）</h3>
+  <div class="box">
+    <p><strong>柱C（#37）「ℝ の自前構成」第三段（乗法）の準備として、正則列から Nat 上界を choice なしで抽出する装置を構成</strong>（サブエージェント並行開発・第88弾統合）: 床関数は有理数の<strong>値のみ</strong>に依存する（代表の取り方に依らない）ため、<strong>Quot.lift で商から Int/Nat を選択公理なしに取り出せる稀有な関数</strong>である点が本層の要——Int の Euclid 除算の一意性 <code>int_ediv_unique</code>（q·b ≤ a &lt; (q+1)·b なら a / b = q。core の除算補題を ∀ d r 形の補助命題に隔離して omega の変数除算制限を回避）・代表定義 <code>prFloor</code> と well-definedness <code>ratRel_floor</code>（交差積で商の特徴付けを移送して一意性で閉じる）から<strong>商上の <code>qFloor</code></strong> と上下界・非負有理数の床の Nat 化 <code>qFloorNat</code> と床+1 上界・三角系 <code>qAbs_le_add_sub</code>: |a| ≤ |b| + |a−b|・<strong>本丸 <code>rBound</code>: 正則列の標準 Nat 上界</strong> ∀n, |xₙ| ≤ floorNat(|x₀|) + 3（|xₙ| ≤ |x₀| + 1/(n+1) + 1/1 ≤ (floor+1) + 2）——Bishop 乗法（M123F）の添字スケールを供給・総括 <code>RatFloorData</code>。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M119: 塔の λ の非零性（正則性を法とする完全解決）— 柱B 一段昇り・M111 との合流（issue #36）（IUT/TowerNonzero.lean）</h3>
+  <div class="box">
+    <p><strong>M111（剰余塔）が「λₙ 非単元」まで与えて残した「λₙ₊₁ ≠ 0」を、一段下の λₙ の正則性（非零因子性）に還元する一段昇り</strong>（第88弾本線）: λₙ が Oₙ の正則元かつ非単元 ⟹ λₙ₊₁ ≠ 0 in Oₙ₊₁。証明の核は Y = h·(πY + Y^p − λ) と書けたとすると Y⁰ 係数 0 = h₀·(−λ) → 正則性で h₀ = 0、Y¹ 係数 1 = −h₁λ → λ が単元 → M111 に矛盾——つまり <strong>λ の非単元性（M111 の剰余塔）と正則性が合流して非零性を生む</strong>。積級数の 1 次係数 <code>psMul_coeff_one</code>・一段多項式の 1 次係数は π（<code>towerStepPoly_coeff_one</code>）・正則元（非零因子）述語 <code>IsRegularElem</code>・<strong>一般環での本丸 <code>towerLam_ne_zero</code></strong>・塔への instance <code>tower_lam_step_ne_zero</code>（非単元性は M111 の <code>tower_lam_not_unit</code> が無条件供給）・総括 <code>TowerNonzeroData</code>。正直な限定: 基底 λ₁ = eisLambda の<strong>平明な正則性</strong>（∀h, hλ = 0 → h = 0）は witness 形整域性（M91F/M93F/M96F）からは選択公理なしに出ない（x ≠ 0 から witness を取り出せない）——簡約係数の単射性（座標系 O ≅ ℤ_p^{p−1} の忠実性）として次層の課題（M122 が解消し λₙ ≠ 0 が伝播開始）。全て標準公理のみ。</p>
+  </div>
 
   <h3>M118F: ℤ_p^× = μ_{p−1} × (1+pℤ_p) の完全分解 witness 束 — 柱B B-2 単数群側完結（issue #36）（IUT/ZpUnitDecomp.lean）</h3>
   <div class="box">
