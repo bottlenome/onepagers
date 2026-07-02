@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 179,
-  "verified_theorem_total": 1453,
-  "choice_free_count": 139,
+  "module_count": 180,
+  "verified_theorem_total": 1457,
+  "choice_free_count": 140,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2214,6 +2214,18 @@
         "[IUTchIV]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussianDivisor.lean"
+    },
+    {
+      "id": "Premises311Real",
+      "label": "Premises311Real",
+      "milestone": "M134",
+      "title": "定理3.11 の実数値前提束",
+      "pillar": "D",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Premises311Real.lean"
     }
   ],
   "edges": [
@@ -2279,6 +2291,10 @@
     },
     {
       "source": "CyclotomicSync",
+      "target": "Premises311Real"
+    },
+    {
+      "source": "CyclotomicSync",
       "target": "ThetaCenterMod"
     },
     {
@@ -2312,6 +2328,10 @@
     {
       "source": "EisEndoRigidity",
       "target": "Premises311"
+    },
+    {
+      "source": "EisFaithful",
+      "target": "Premises311Real"
     },
     {
       "source": "EisTowerRings",
@@ -2682,6 +2702,10 @@
       "target": "SGA1"
     },
     {
+      "source": "GaussianDivisor",
+      "target": "Premises311Real"
+    },
+    {
       "source": "GaussianVolume",
       "target": "Premises311"
     },
@@ -2867,6 +2891,10 @@
     },
     {
       "source": "Premises311",
+      "target": "Premises311Real"
+    },
+    {
+      "source": "Premises311",
       "target": "VolumeModel"
     },
     {
@@ -2938,8 +2966,16 @@
       "target": "RealPosMul"
     },
     {
+      "source": "RealComplete",
+      "target": "Premises311Real"
+    },
+    {
       "source": "RealLe",
       "target": "LogVolBridge"
+    },
+    {
+      "source": "RealLe",
+      "target": "Premises311Real"
     },
     {
       "source": "RealMul",
@@ -2960,6 +2996,10 @@
     {
       "source": "RealOrder",
       "target": "RealPosMul"
+    },
+    {
+      "source": "RealPosMul",
+      "target": "Premises311Real"
     },
     {
       "source": "Realification",
@@ -3078,6 +3118,10 @@
       "target": "RootsOfUnity"
     },
     {
+      "source": "ThetaCenterMod",
+      "target": "Premises311Real"
+    },
+    {
       "source": "ThetaFunctional",
       "target": "ThetaGauss"
     },
@@ -3116,6 +3160,10 @@
     {
       "source": "TorsionPoints",
       "target": "TorsionTrivial"
+    },
+    {
+      "source": "TorsionResidue",
+      "target": "Premises311Real"
     },
     {
       "source": "TorsionTrivial",
@@ -3160,6 +3208,10 @@
     {
       "source": "ZpDomain",
       "target": "LambdaModule"
+    },
+    {
+      "source": "ZpUnitDecomp",
+      "target": "Premises311Real"
     },
     {
       "source": "ZpUnits",

@@ -1462,6 +1462,10 @@ import IUT
 #print axioms IUT.rlogVol_gauss_frob
 #print axioms IUT.gaussianDivisorData
 #print axioms IUT.gaussianDivisor_exists
+#print axioms IUT.theorem311RealPremises
+#print axioms IUT.premises311Real_exist
+#print axioms IUT.real_theta_bookkeeping_holds
+#print axioms IUT.real_volume_lower_holds
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
