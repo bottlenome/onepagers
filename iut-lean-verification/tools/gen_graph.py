@@ -97,7 +97,7 @@ PILLAR = {
     "Evaluation": "E", "LaurentCoeff": "E", "LaurentRing": "E", "LaurentMonomial": "E",
     "ThetaSeries": "E", "ThetaFunctional": "E", "ThetaReflection": "E",
     "ThetaGauss": "E", "TateQuotient": "E", "MonoThetaWitness": "E",
-    "ThetaGroupMod": "E", "GaussianVolume": "E", "ThetaPM": "E", "MuLSubgroup": "E", "CyclotomicSync": "E", "ThetaCenterMod": "E", "VolumeReal": "E", "GaussianDivisor": "E", "Premises311Real": "D",
+    "ThetaGroupMod": "E", "GaussianVolume": "E", "ThetaPM": "E", "MuLSubgroup": "E", "CyclotomicSync": "E", "ThetaCenterMod": "E", "VolumeReal": "E", "GaussianDivisor": "E", "Premises311Real": "D", "WeightedGauss": "E", "RealOrderComplete": "C", "FuneqLift": "E", "ScalarDistrib": "C", "RealVolumeTheory": "D",
 }
 
 # マイルストーン id を持たない初期ファイルのフォールバック

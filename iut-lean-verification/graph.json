@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 180,
-  "verified_theorem_total": 1457,
-  "choice_free_count": 140,
+  "module_count": 185,
+  "verified_theorem_total": 1505,
+  "choice_free_count": 145,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2226,6 +2226,70 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Premises311Real.lean"
+    },
+    {
+      "id": "WeightedGauss",
+      "label": "WeightedGauss",
+      "milestone": "M135F",
+      "title": "重み付きガウス因子",
+      "pillar": "E",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchIV]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/WeightedGauss.lean"
+    },
+    {
+      "id": "RealOrderComplete",
+      "label": "RealOrderComplete",
+      "milestone": "M136F",
+      "title": "順序の完全整合",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealOrderComplete.lean"
+    },
+    {
+      "id": "FuneqLift",
+      "label": "FuneqLift",
+      "milestone": "M137F",
+      "title": "関数等式の Heisenberg 辞書",
+      "pillar": "E",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FuneqLift.lean"
+    },
+    {
+      "id": "ScalarDistrib",
+      "label": "ScalarDistrib",
+      "milestone": "M138F",
+      "title": "有理スカラーの分配律",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ScalarDistrib.lean"
+    },
+    {
+      "id": "RealVolumeTheory",
+      "label": "RealVolumeTheory",
+      "milestone": "M139",
+      "title": "実数値体積理論",
+      "pillar": "D",
+      "decl_count": 29,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealVolumeTheory.lean"
     }
   ],
   "edges": [
@@ -2706,6 +2770,10 @@
       "target": "Premises311Real"
     },
     {
+      "source": "GaussianDivisor",
+      "target": "WeightedGauss"
+    },
+    {
       "source": "GaussianVolume",
       "target": "Premises311"
     },
@@ -2800,6 +2868,10 @@
     {
       "source": "Mochizuki",
       "target": "Verdict"
+    },
+    {
+      "source": "MonoThetaWitness",
+      "target": "FuneqLift"
     },
     {
       "source": "MonoThetaWitness",
@@ -2898,6 +2970,10 @@
       "target": "VolumeModel"
     },
     {
+      "source": "Premises311Real",
+      "target": "RealVolumeTheory"
+    },
+    {
       "source": "PrimitiveRoot",
       "target": "CyclicUnits"
     },
@@ -2976,6 +3052,14 @@
     {
       "source": "RealLe",
       "target": "Premises311Real"
+    },
+    {
+      "source": "RealLe",
+      "target": "RealOrderComplete"
+    },
+    {
+      "source": "RealLe",
+      "target": "ScalarDistrib"
     },
     {
       "source": "RealMul",
@@ -3142,6 +3226,14 @@
       "target": "CyclotomicSync"
     },
     {
+      "source": "ThetaPM",
+      "target": "FuneqLift"
+    },
+    {
+      "source": "ThetaReflection",
+      "target": "FuneqLift"
+    },
+    {
       "source": "ThetaSeries",
       "target": "ThetaFunctional"
     },
@@ -3190,8 +3282,16 @@
       "target": "Fermat"
     },
     {
+      "source": "VolumeModel",
+      "target": "RealVolumeTheory"
+    },
+    {
       "source": "VolumeReal",
       "target": "GaussianDivisor"
+    },
+    {
+      "source": "VolumeReal",
+      "target": "ScalarDistrib"
     },
     {
       "source": "ZmodOrder",

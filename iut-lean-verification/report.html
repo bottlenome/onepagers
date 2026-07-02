@@ -158,7 +158,32 @@
 </section>
 
 <section>
-  <h2>M1〜M134 の形式化（追加検証）</h2>
+  <h2>M1〜M139 の形式化（追加検証）</h2>
+
+  <h3>M139: 実数値体積理論 — 柱D 入口: 定理3.11 インターフェースの ℝ 化（IUT/RealVolumeTheory.lean）</h3>
+  <div class="box">
+    <p><strong>M5 の VolumeTheory（Int 値 log-volume）を構成的 ℝ に持ち上げる柱D 入口</strong>（第96弾本線）: <strong>qMax</strong>（PreRat の決定的交差比較の Quot.lift — 井戸定義性は既存の prLe 関係両立 <code>prLe_of_rel_left/right</code> の再利用で、cross case は条件の同値性から消滅）→ <strong>rmax（ℝ の max = 正則包の実体）</strong>: 点ごと max が正則性を保つ（4 分岐とも共通上界 u_m + u_n — cross case は片腕優越の連鎖 y_m − x_n ≤ y_m − y_n ≤ |y_m − y_n|）。<code>RealVolumeTheory</code>（vol : Region → ℝ・vol_mono : rLe の M5 鏡映インターフェース）と ℝ モデル（Region = ℝ・le = rLe・hull = rmax・vol = id）、<code>intToReal</code> の単調性 + <strong>順序反映（ε-消去 c = 2 + 代表計算で実数の不等式から整数の不等式へ降下）</strong>、任意の Int 値理論の実数化 <code>RealVolumeTheory.ofInt</code>。<strong>本丸: RealMultiradialRep（定理3.11 出力仕様の実数値版 — 体積側の言明が realEq になる）と系3.12 の実数経由導出 <code>cor312_of_realMultiradial</code></strong>（実数値の体積比較 → realEq 書き換え → intToReal 反映で整数 Cor312 に降下）。Int 値表現の持ち上げ <code>RealMultiradialRep.ofInt</code>・Szpiro 型不等式への full pipeline 実数版・充足可能性（M5-4 の実数版）。正直な限定: MultiradialRep の充足本体（遠アーベル構成 = 柱D 本丸）は依然未形式化。全 26 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M138F: 有理スカラー分配律（柱C）（IUT/ScalarDistrib.lean）</h3>
+  <div class="box">
+    <p>第90弾で特定した一般 assoc/distrib の bound-chain 係数問題を<strong>有理スカラーの場合に完全解決</strong>（サブエージェント並行部品）: <strong>(x+y)·c ≈ x·c + y·c（rmul_scalar_distrib — c : QRat 定数、x,y は任意の実数、弱形への後退なしの一般形）</strong>。設計の鍵: 三つの加速添字（2·mulIdx K₁ n + 1・mulIdx K₂ (2n+1)・mulIdx K₃ (2n+1)）がいずれも「+1 = 4K(n+1)、K ≥ C = |c| の上界」の形に揃うため、4 つの C/(添字+1) 項が各 ≤ 1/(4n+4) で合計 u_n に直接収まり <strong>ε-消去不要で閉じる</strong>（mul_seq_congr の 4 点比較より軽い）。ℚ 側分配 qAdd_mul/qSub_mul・キャスト橋・qFrac_scalar_bound・Nat 系 rmul_scalar_distrib_nat・ScalarDistribData。正直申告: 実数×実数の一般分配律は rBound の乗法評価を要し次層。全宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M137F: 関数等式の Heisenberg 辞書（柱E E-1）（IUT/FuneqLift.lean）</h3>
+  <div class="box">
+    <p>テータ関数等式の平行移動 T^j と Heisenberg 群の切断 Φ(j) = (j, j, tri j) の<strong>辞書 FuneqDict</strong>（サブエージェント並行部品）: 中心成分 = ガウス指数 tri j（rfl）、<strong>T^j の q-次数降下量 = 中心成分（funeq_gauss_descent — M90 tCoeff_shift の対角インスタンス、2·tri j = 2j² − j(j−1) を不透明原子 omega で）</strong>、乗法性 Φ(i)·Φ(j) = Φ(i+j)（M92 thetaSection_mul の向き反転再輸出）、<strong>コサイクル tri(i+j) = tri i + tri j + ij の Nat 版</strong>（M92 Int 版から Int.natCast_mul + omega で降下）、±-対 ι(Φ(j))·Φ(j) = (0,0,j)（M116F 再輸出）、反転との整合（M98 theta_refl_eq_funeq）。<strong>[EtTh] の関数等式の群論的正体 — 「テータの q-次数簿記は Heisenberg 群の中心成分の簿記である」— が辞書として機械検証された</strong>。全 8 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M136F: 順序の完全整合 — ¬(y &lt; x) → x ≤ y（柱C）（IUT/RealOrderComplete.lean）</h3>
+  <div class="box">
+    <p>構成的実数の順序 rLe（M130）と狭義順序 rLt（M125）の<strong>完全整合</strong>（サブエージェント並行部品）: <strong>not_lt_le: ¬ rLt y x → rLe x y の δ-論法</strong> — 各添字 n で ε-消去 c = 5、比較点 N で qLe_total(x_N, y_N + 3/(N+1)) 分岐。上側は M130 望遠鏡パターン（qSub_split 2 回 + 濃縮 F5N）、下側は <strong>witness m = 4N+3（s = 8N+7）で rLt y x を構成して仮定と矛盾</strong>（伝播は分母 8N+8 の族 F4+F9+F9 = F22 ≤ F3N の濃縮）。<strong>le_iff_not_lt: rLe x y ↔ ¬ rLt y x</strong>・lt_iff_not_le・RealOrderCompleteData。正直申告: 逆向き ¬rLe → rLt は二重否定除去相当のため構成的枠組みでは対象外。全 5 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M135F: 重み付きガウス因子 — 素点重み w での log-volume 評価（柱E E-2）（IUT/WeightedGauss.lean）</h3>
+  <div class="box">
+    <p>M133 の正直申告（単位重み限定）の解消（サブエージェント並行部品）: <strong>一般の素点重み w : Nat → Nat でのガウス因子 log-volume 評価</strong>。重み付き平方和 wssq w l = Σ_{k≤l} w(k)·k²（nsum 直接定義）、<strong>次数の同定 degN w (gaussDiv l) = wssq w l</strong>（M133 の if 剥がし帰納の w-一般化）、<strong>rlogVol w (gaussDiv l) = natToReal (wssq w l)（実数の等式そのもの）</strong>、重み単調性（nsum_mono → natToReal_mono で rLe へ）、単位重みで ssq に退化（M133-3 の再導出 = 整合確認）、<strong>w ≥ 1 での体積下界 l³ ≤ 3·vol_w（rLe）</strong>・WeightedGaussData。正直申告: 実数値 log p の構成（対数関数）は ℝ の冪級数論として将来層。全 13 宣言 [propext, Quot.sound] 以下。</p>
+  </div>
 
   <h3>M134: 定理3.11 の実数値前提束 — 第86〜94弾総括 capstone（柱D 入口）（IUT/Premises311Real.lean）</h3>
   <div class="box">

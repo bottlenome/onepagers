@@ -184,3 +184,8 @@ import IUT.LogVolBridge
 import IUT.VolumeReal
 import IUT.GaussianDivisor
 import IUT.Premises311Real
+import IUT.WeightedGauss
+import IUT.RealOrderComplete
+import IUT.FuneqLift
+import IUT.ScalarDistrib
+import IUT.RealVolumeTheory
