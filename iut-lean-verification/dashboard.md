@@ -343,6 +343,7 @@ iut-lean-verification/
     ├── ThetaPM.lean # M116F: テータ群の ±-構造（柱E E-1 第一切片） — ι(a,b,c)=(−a,−b,c)・中心固定・±-対 = 中心^j・中心捻れ付き j↔l−j（choice なし）
     ├── ZpUnitDecomp.lean # M118F: ℤ_p^× の完全分解 — 一意分解・ω 逆元・全単数の可逆性（柱B B-2、choice なし）
     ├── RegularReal.lean # M117F: Bishop 流正則実数列 — ε-消去・同値関係・加法群構造（柱C ℝ 基盤第二段、choice なし）
+    ├── TowerNonzero.lean # M119: 塔の λ 非零性 — 正則性への還元 λₙ 正則 ⟹ λₙ₊₁ ≠ 0（柱B、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -546,6 +547,7 @@ iut-lean-verification/
 | M116F: **テータ群の ±-構造（柱E E-1 第一切片 — issue #39）**（**インバージョン自己同型 ι(a,b,c) = (−a,−b,c)**（2-コサイクル ab' は符号反転で不変 (−a)(−b') = ab'）・対合 ι² = id・**中心（シクロトーム）固定** = cyclotomic rigidity（M11-5）と両立・**±-対 ι(Φ(j))·Φ(j) = 中心^j = ガウス指数の線形化**（2·tri j − j² = j）・mod-l 降下 thetaNegMod（Quot.lift・射影と可換）・**ラベル j ↔ l−j の同一視は中心捻れ z = tri j − tri(l−j) 付きでのみ成立**（tri j ≢ tri(l−j) mod l — [EtTh] の central slippage の形式化）・ThetaPMData。μ_l ↔ O^× 同一視・tempered π₁ の商としての実現は次層（正直申告）） — サブエージェント並行開発・第87弾統合 | done（choice なし） |
 | M118F: **ℤ_p^× の完全分解（柱B B-2 — issue #36）**（**ℤ_p^× = μ_{p−1} × (1+pℤ_p) の witness 束**: 分解の一意性（M35-5 再輸出）・**Teichmüller 部の可逆性 teich_inv_exists**（Bezout 不要 — b = a^{p−2} の明示構成 + flt_unit + teich_congr）・**全単数の可逆性 zp_unit_inv_exists**（M36 の zpUnitInv 接続）・乗法閉性・ZpUnitGroupData 総括。M107 の [u]λ = ω(u mod p)λ・M94 recLevelOne と合わせ K^× 作用の完全記述に接近） — サブエージェント並行開発・第87弾統合 | done（choice なし） |
 | M117F: **Bishop 流正則実数列（柱C ℝ 基盤第二段 — issue #37）**（**正則列 \|x_m − x_n\| ≤ 1/(m+1) + 1/(n+1) による ℝ 骨格** — 正則列は modulus 抽出不要 = choice-free の標準構成。基本分数 qFrac c/(m+1) の線形比較・合併に全簿記を還元、**ε-消去 qLe_of_forall_add_frac**（∀m, a ≤ b + c/(m+1) ⟹ a ≤ b — witness m = c·分母積 の明示構成、アルキメデス性の使用点）、同値関係 realEq（**推移律 = 4 項三角分割 + ε-消去 c=6 が本丸**）、加法 realAdd（添字 2n+1 倍速化で正則性維持）・反元 realNeg・congruence・**加法群法則（可換・結合・零・反元）**・埋め込み ℚ → ℝ の加法性・RegularRealData 総括。乗法・順序・完備性（C-1 本丸）は次層（正直申告） | done（choice なし） |
+| M119 **塔の λ の非零性（柱B — issue #36、第88弾）** | **「λₙ₊₁ ≠ 0」を一段下の正則性に還元する完全な一段昇り定理**: Y = h·(πY + Y^p − λ) の 0 次係数比較で h₀·λ = 0 → 正則性で h₀ = 0、1 次係数比較で 1 = −h₁λ → **λ が単元となり M111 の tower_lam_not_unit（剰余塔の非単元性）に矛盾** — 非単元性と正則性が合流して非零性を生む設計。積級数の 1 次係数 psMul_coeff_one・一段多項式の 1 次係数 = π・一般環での本丸 towerLam_ne_zero・塔 instance（λₙ 正則 ⟹ λₙ₊₁ ≠ 0）・基底形（eisLambda 正則 ⟹ λ₂ ≠ 0）・TowerNonzeroData 総括。正直申告: 基底 λ₁ の平明正則性（∀h, hλ=0→h=0）は witness 形整域性からは出ず、簡約係数の単射性として次層の課題（それが済めば全レベルに伝播） | 実体構成 |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

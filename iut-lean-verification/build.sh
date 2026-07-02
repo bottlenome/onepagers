@@ -1307,6 +1307,14 @@ import IUT
 #print axioms IUT.qToReal_add
 #print axioms IUT.regularRealData
 #print axioms IUT.regularReal_exists
+#print axioms IUT.psMul_coeff_one
+#print axioms IUT.towerStepPoly_coeff_one
+#print axioms IUT.neg_eq_zero_iff
+#print axioms IUT.towerLam_ne_zero
+#print axioms IUT.tower_lam_step_ne_zero
+#print axioms IUT.tower_lam_one_ne_zero_of_base
+#print axioms IUT.towerNonzeroData
+#print axioms IUT.towerNonzero_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
