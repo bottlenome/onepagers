@@ -1251,6 +1251,22 @@ import IUT
 #print axioms IUT.thetaNeg_label_center
 #print axioms IUT.thetaPMData
 #print axioms IUT.thetaPM_exists
+#print axioms IUT.ratRing
+#print axioms IUT.ratOfInt
+#print axioms IUT.quot_exact_rat
+#print axioms IUT.ratOfInt_inj
+#print axioms IUT.qLe_refl
+#print axioms IUT.qLe_trans
+#print axioms IUT.qLe_antisym
+#print axioms IUT.qLe_total
+#print axioms IUT.qLe_add
+#print axioms IUT.qLe_mul_nonneg
+#print axioms IUT.qMul_inv
+#print axioms IUT.qAbs_add_le
+#print axioms IUT.qAbs_mul
+#print axioms IUT.rat_archimedean
+#print axioms IUT.ratFieldData
+#print axioms IUT.ratField_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
