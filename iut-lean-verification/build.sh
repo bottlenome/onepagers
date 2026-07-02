@@ -1348,6 +1348,23 @@ import IUT
 #print axioms IUT.tower_lam_two_ne_zero
 #print axioms IUT.eisFaithfulData
 #print axioms IUT.eisFaithful_exists
+#print axioms IUT.zpPow_add
+#print axioms IUT.zpPow_mul_period
+#print axioms IUT.int_emod_unique
+#print axioms IUT.int_emod_congr
+#print axioms IUT.centerToMu
+#print axioms IUT.centerToMu_congr
+#print axioms IUT.centerToMu_add
+#print axioms IUT.centerToMu_zero
+#print axioms IUT.centerToMu_one_gen
+#print axioms IUT.centerToMu_faithful
+#print axioms IUT.centerToMu_period
+#print axioms IUT.theta_center_mul
+#print axioms IUT.theta_center_descend
+#print axioms IUT.theta_center_to_mu_hom
+#print axioms IUT.theta_center_neg_invariant
+#print axioms IUT.cyclotomicSyncData
+#print axioms IUT.cyclotomicSync_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

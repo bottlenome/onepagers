@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 168,
-  "verified_theorem_total": 1339,
-  "choice_free_count": 128,
+  "module_count": 169,
+  "verified_theorem_total": 1356,
+  "choice_free_count": 129,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2071,6 +2071,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisFaithful.lean"
+    },
+    {
+      "id": "CyclotomicSync",
+      "label": "CyclotomicSync",
+      "milestone": "M124F",
+      "title": "シクロトミック同期",
+      "pillar": "E",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicSync.lean"
     }
   ],
   "edges": [
@@ -2631,6 +2645,10 @@
       "target": "ThetaGroupMod"
     },
     {
+      "source": "MuLSubgroup",
+      "target": "CyclotomicSync"
+    },
+    {
       "source": "MuUnits",
       "target": "ZmodOrder"
     },
@@ -2897,6 +2915,10 @@
     {
       "source": "ThetaGroupMod",
       "target": "ThetaPM"
+    },
+    {
+      "source": "ThetaPM",
+      "target": "CyclotomicSync"
     },
     {
       "source": "ThetaSeries",
