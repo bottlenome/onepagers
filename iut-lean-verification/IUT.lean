@@ -199,3 +199,8 @@ import IUT.PolyWeierstrass
 import IUT.GaloisClosureModel
 import IUT.GSetQuotient
 import IUT.RealInv
+import IUT.LambdaValuation
+import IUT.PolyDivision
+import IUT.ApartInv
+import IUT.RealRingLaws
+import IUT.CosetGalois

@@ -12,25 +12,25 @@
     "A": {
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
-      "progress_pct": 89,
-      "status": "SGA1主定理ブロック ✅ / A-1 モデル側閉包・A-2 商公理モデル充足済・残: 抽象持ち上げ + A-3 幾何入力 (#35)",
+      "progress_pct": 91,
+      "status": "SGA1主定理ブロック ✅ / A-1 モデル+抽象 IsGalois 充足・A-2 商公理済・残: pro-対象 + A-3 幾何入力 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
     },
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 77,
-      "status": "剛性プログラム ✅ / λ 全伝播・全冪非零・多項式 Weierstrass 一意性済 (#36)",
+      "progress_pct": 79,
+      "status": "剛性プログラム ✅ / λ 全伝播・付値階段・多項式 Weierstrass 完結（存在+一意性）(#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 73,
-      "status": "群法則全公理 ✅ / ℝ 構成完走・正値逆元 x·x⁻¹≈1 構成済・C-1 橋開通 (#37)",
-      "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（完備性・順序整合・max・正値逆元）・実数値 log-volume 橋。残: apart 一般逆元・一般分配律",
+      "progress_pct": 76,
+      "status": "構成的順序体の全景 ✅ — 環法則（結合・分配）・順序整合・完備性・apart 逆元まで完走 (#37)",
+      "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
     "D": {

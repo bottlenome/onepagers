@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 195,
-  "verified_theorem_total": 1596,
-  "choice_free_count": 155,
+  "module_count": 200,
+  "verified_theorem_total": 1640,
+  "choice_free_count": 160,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2415,6 +2415,66 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealInv.lean"
+    },
+    {
+      "id": "LambdaValuation",
+      "label": "LambdaValuation",
+      "milestone": "M151F",
+      "title": "λ-adic 付値の階段",
+      "pillar": "B",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaValuation.lean"
+    },
+    {
+      "id": "PolyDivision",
+      "label": "PolyDivision",
+      "milestone": "M152F",
+      "title": "多項式割り算の存在",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyDivision.lean"
+    },
+    {
+      "id": "ApartInv",
+      "label": "ApartInv",
+      "milestone": "M153F",
+      "title": "apart 一般の逆元",
+      "pillar": "C",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ApartInv.lean"
+    },
+    {
+      "id": "RealRingLaws",
+      "label": "RealRingLaws",
+      "milestone": "M150",
+      "title": "ℝ の環法則の完成",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealRingLaws.lean"
+    },
+    {
+      "id": "CosetGalois",
+      "label": "CosetGalois",
+      "milestone": "M148F",
+      "title": "CosetGalois",
+      "pillar": "A",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CosetGalois.lean"
     }
   ],
   "edges": [
@@ -2887,6 +2947,10 @@
       "target": "TriSquare"
     },
     {
+      "source": "GSetQuotient",
+      "target": "CosetGalois"
+    },
+    {
       "source": "GaloisAxioms",
       "target": "AbstractGalois"
     },
@@ -2897,6 +2961,10 @@
     {
       "source": "GaloisCategory",
       "target": "SGA1"
+    },
+    {
+      "source": "GaloisClosureModel",
+      "target": "CosetGalois"
     },
     {
       "source": "GaussianDivisor",
@@ -3091,6 +3159,10 @@
       "target": "SplitFrobenioid"
     },
     {
+      "source": "PolyWeierstrass",
+      "target": "PolyDivision"
+    },
+    {
       "source": "PowerSeries",
       "target": "Composition"
     },
@@ -3191,6 +3263,14 @@
       "target": "RealInv"
     },
     {
+      "source": "RealInv",
+      "target": "ApartInv"
+    },
+    {
+      "source": "RealInv",
+      "target": "RealRingLaws"
+    },
+    {
       "source": "RealLe",
       "target": "LogVolBridge"
     },
@@ -3265,6 +3345,10 @@
     {
       "source": "RecRamified",
       "target": "RecGluing"
+    },
+    {
+      "source": "RegularPowers",
+      "target": "LambdaValuation"
     },
     {
       "source": "RegularReal",

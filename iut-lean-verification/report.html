@@ -158,7 +158,32 @@
 </section>
 
 <section>
-  <h2>M1〜M149 の形式化（追加検証）</h2>
+  <h2>M1〜M154 の形式化（追加検証）</h2>
+
+  <h3>M154F: 剰余類対象の抽象ガロア性 — M148F の閉包を M21 IsGalois へ接合（柱A A-1）（IUT/CosetGalois.lean）</h3>
+  <div class="box">
+    <p>M148F（モデル側ガロア閉包）の<strong>抽象公理系への持ち上げ第一歩</strong>（サブエージェント並行部品、issue #35 A-1）: 剰余類作用 G/K を G-Set 圏の対象 cosetGSet として実現し、<strong>M21（AbstractGalois）の Connected・IsGalois を原形のまま充足</strong>。部品: 左移動の推移性、圏論的 Mono ⟹ ファイバー単射（regAction からの軌道写像をテスト射に）、<strong>Connected の同型復元 — 非空モノ部分対象の逆射を剰余類代表元の Quot.lift で choice なしに明示構成</strong>（全単射からの逆関数抽出 = choice を回避する構成的核心）、M148F の右移動自己同型が抽象 IsIso。<strong>本丸 cosetGSet_core_galois: G/core(H) が抽象 IsGalois を充足</strong>、見出し galois_closure_abstract: Connected な剰余類対象は IsGalois 対象からファイバー全射で支配される。正直申告: IsGalois 系宣言は gsetGaloisData の G6 フィールド（M21-8、Classical.choice）の型経由の<strong>継承</strong>のみ（本モジュールでの使用ゼロ）。構成部（M154F-1〜4）は [Quot.sound] 以下。</p>
+  </div>
+
+  <h3>M150: ℝ の環法則の完成 — 一般 rate-bound 補題による分配律・結合律（柱C 本線）（IUT/RealRingLaws.lean）</h3>
+  <div class="box">
+    <p><strong>第90弾で特定され続けてきた bound-chain 係数問題（rmul の添字スケジュール K が相手の評価定数を知らない）の全面解決</strong>（第99弾本線）。鍵は M145 のミニ極限補題の二変数一般化 <strong>realEq_of_rate_bound: 速度 C の点ごと近似 |w_n − w'_n| ≤ C/(n+1) は realEq w w' を与える</strong>（3 項望遠鏡 w_n − w'_n = (w_n − w_m) + (w_m − w'_m) + (w'_m − w'_n) + ε-消去 c = C+2）。これにより「積の列同士の差を C·uₙ で押さえる」だけでよくなり、C に rBound の積・和がいくら入っても構わない — 添字スケジュールの不一致が無害化される。<strong>右・左分配律 (x+y)·z ≈ x·z + y·z</strong>（C = Bx·2+Bz·2+(By·2+Bz·2)、差の 2 分割 + qAbs_mul_sub + rBound_spec + スカラー×分数の定数化）と<strong>結合律 (x·y)·z ≈ x·(y·z)</strong>（C = BxBy·2 + Bz(Bx·2+By·2)、三重積の qAbs_mul_sub 入れ子）が realEq で成立。<strong>これで自前 ℝ は加法群・乗法可換モノイド・結合律・分配律・順序（≤/< 完全整合）・絶対値・完備性・正値/apart 逆元を備えた構成的順序体の全景に到達</strong>（realEq を等号とする商の意味で）。全 9 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M153F: apart 一般の逆元 — 符号二分法と負側の逆元（柱C）（IUT/ApartInv.lean）</h3>
+  <div class="box">
+    <p>M145 の正直申告解消（サブエージェント並行部品）: <strong>符号二分法 isPos_abs_cases: IsPos |x| → IsPos x ∨ IsPos (−x)</strong> — witness 精度での qLe_total 分岐により構成的に成立（qAbs_of_nonneg / qAbs_of_nonpos を代表計算で新設）。負側の符号引き回し（rBound_neg — rBound は qAbs_neg で符号不変、rmul_neg_right/left、realNeg_neg）を経て<strong>本丸 apart_inv_exists: IsPos |x| → ∃ y, x·y ≈ 1</strong>。自前 ℝ が<strong>構成的（Heyting）体の乗法逆元公理</strong>を充足。正直申告: 論理的非零 x ≠ 0 からは出ない（排中律相当）ことの対比・逆元の一意性・除算代数は次層。全 10 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M152F: 多項式割り算の存在 — 多項式 Weierstrass 準備の完結（柱B）（IUT/PolyDivision.lean）</h3>
+  <div class="box">
+    <p>M147F（一意性）の対（サブエージェント並行部品）: <strong>モニック g = πY + Y^p − λ による多項式割り算の存在</strong>を上界 N の帰納で witness 明示構成（choice 不要）。単項式×g の係数公式 (c·Y^k·g)_j = if k ≤ j then c·g_{j−k} else 0（rsum_single_middle / rsum_congr）、頂点消去 sub_top_bounded（w − w_{N+p}·Y^N·g は上界が 1 下がる — g_p = 1 の打ち消し）、帰納の組み上げ q = q' + w_{N+p}·Y^N。<strong>poly_weierstrass_complete: 存在 + 一意性（q・r 両方）の一本化 — 多項式 Weierstrass 準備の完結</strong>。O' = R[[Y]]/(g) の多項式部分に R^p 座標（次数 < p 剰余）が存在・一意の両輪で立つ。残: 冪級数全体への拡張（λ-adic 収束）= M122 の塔版本体。全 6 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M151F: λ-adic 付値の階段 — イデアル膜の厳密降下と値の井戸定義性（柱B）（IUT/LambdaValuation.lean）</h3>
+  <div class="box">
+    <p>M146F の λₙ^k ≠ 0 の強化（サブエージェント並行部品）: 「値 ≥ k」を ∃-述語 IsValAtLeast（x ∈ (λ^k)）で定式化し、<strong>厳密降下 lam_pow_strict: λ 正則・非単元なら λ^k ∉ (λ^{k+1})</strong>（λ^k(1 − hλ) = 0 → regular_rpow の正則性 → 1 = hλ → 非単元性と矛盾）と<strong>排他性 lam_pow_val_exact: λ^j ∈ (λ^k) ⟺ k ≤ j — v(λ^j) = j の井戸定義性</strong>。膜の入れ子・単調降下・<strong>塔全レベル instance</strong>（M144 の正則性 × M111 の非単元性）。正直申告: 付値の加法性 v(xy) = v(x)+v(y) は座標理論（M147F/M152F の次層）を要し次層。全 12 宣言 [propext, Quot.sound] 以下。</p>
+  </div>
 
   <h3>M145: 正値実数の逆元 — x·x⁻¹ ≈ 1 の構成（柱C 本線）（IUT/RealInv.lean）</h3>
   <div class="box">
