@@ -158,7 +158,50 @@
 </section>
 
 <section>
-  <h2>M1〜M106 の形式化（追加検証）</h2>
+  <h2>M1〜M116F の形式化（追加検証）</h2>
+
+  <h3>M116F: テータ群の ±-構造 — 柱E E-1 第一切片（issue #39）（IUT/ThetaPM.lean）</h3>
+  <div class="box">
+    <p><strong>[EtTh] の mono-theta 環境が持つ ±-構造（u ↦ u⁻¹ 対称性）の群論核を離散 Heisenberg 骨格（M11）と l-捻れ骨格（M98F）の上に実装</strong>（サブエージェント並行開発・第87弾統合）: インバージョン自己同型 <code>thetaNeg</code>: ι(a, b, c) = (−a, −b, c) の準同型性（2-コサイクル ab' は符号反転で不変 (−a)(−b') = ab'）・対合 ι² = id・<strong>ι は中心（シクロトーム）を固定する</strong>（cyclotomic rigidity M11-5 と両立: ±-作用はシクロトームに符号を落とさない）・<strong>本丸1 <code>thetaNeg_section_mul</code>: ±-対 ι(Φ(j))·Φ(j) = (0, 0, j) = 中心の j 乗</strong>——±-対がガウス指数簿記 tri j を線形化する（2·tri j − j² = j）・ι の mod-l 降下 <code>thetaNegMod</code>（Quot.lift、射影と可換）・<strong>本丸2 <code>thetaNeg_label_center</code>: ι(Φ(j)) ≡ Φ(l−j)·(0, 0, z) (mod l)、中心捻れ z = tri j − tri(l−j)</strong>——テータラベル j ↔ l−j の ±-同一視は<strong>中心捻れ付きでのみ</strong>成立する（tri j ≢ tri(l−j) mod l = [EtTh] の central slippage の形式化）・総括 <code>ThetaPMData</code>。μ_l ↔ O^× 同一視・tempered π₁ の商としての実現・関数等式の Heisenberg リフトは次層（正直申告）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M115F: 有理数体 ℚ の自前構成 — 柱C ℝ 基盤・第一段（issue #37）（IUT/Rationals.lean）</h3>
+  <div class="box">
+    <p><strong>柱C（#37）の共通基盤「ℝ 自前構成」の第一段として、有理数体 ℚ を交差積 Quot 商で from-scratch 構成</strong>（サブエージェント並行開発・第87弾統合、~640行/77宣言）: 前分数（分子・正分母）と交差積関係 a₁/d₁ ~ a₂/d₂ ⟺ a₁d₂ = a₂d₁（推移律は正分母の消去補題）・<strong><code>ratRing : CRing</code> = ℚ は可換環</strong>（分母が真に異なる法則は prScale 経由の Quot.sound）・<strong><code>ratOfInt</code>: ℤ → ℚ の単射環準同型性</strong>（分離性は propext lift の標準トリック）・<strong>全順序 <code>qLe</code></strong>（refl / trans / antisym / total / 加法両立 / 非負積閉性）・<strong>witness 形の体公理 <code>qMul_inv</code></strong>（natAbs 分母 + 符号分子の逆元）・絶対値と三角不等式・乗法性・<strong>代表 witness 形アルキメデス性 <code>rat_archimedean</code></strong>・総括 <code>RatFieldData</code>。C-1/C-3/C-5/E-2 が本基盤に依存し、次層で Bishop 流正則列による ℝ へ。正直申告: 商上のゼロ判定選言（∀q, q = 0 ∨ q ≠ 0）は排中律要のため対象外、逆元・アルキメデス性は代表 witness 形。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M114F: 主単数の幾何級数逆元 (1+πd)⁻¹ = Σ (−πd)ⁿ — 柱B（IUT/PadicGeometric.lean）</h3>
+  <div class="box">
+    <p><strong>主単数 1 + πd が ℤ_p の単元であることを choice なしで証明</strong>（サブエージェント並行開発・第86弾統合）: 逆元は幾何級数 S := Σₙ πⁿ·(−d)ⁿ の実構成（M107F/M110F の p 進級数和 API <code>zpSeriesSum</code>）。頭出し分解とスカラー倍から<strong>自己言及等式 S = 1 − (πd)·S</strong>（<code>principalUnitInv_eq</code>）が従い、<strong>本丸 <code>principal_unit_mul_inv</code>: (1+πd)·S = S + (πd)·S = 1</strong>。系 <code>principal_unit_is_unit</code> と総括 <code>PadicGeometricData</code>。M107 の u = ω(a)·(1+πd) 分解と合わせ、<strong>ℤ_p^× = μ_{p−1} × (1+pℤ_p) の主単数側の単元性を充足</strong>し単元群の完全記述に接近。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M113F: 捻れ元は極大イデアルに入る ρₙ(捻れ) = 0 — 柱B・M111×M112F の合流点（IUT/TorsionResidue.lean）</h3>
+  <div class="box">
+    <p><strong>M112F の捻れ述語 IsTowerTorsion と M111 の剰余射 ρₙ : Oₙ → ℤ/p の統合</strong>（サブエージェント並行開発・第86弾統合）: 鍵は「ρₙ(π) = 0 だから ℤ/p では LT 反復 [πᵏ] が単なる p^k 乗写像に退化する」こと——冪の合成則 <code>rpow_rpow</code>・<strong>退化定理 <code>ringFIter_pi_zero</code>: π = 0 の環では f_π(t) = t^p・[πᵏ]t = t^{p^k}</strong>・<strong>ℤ/p の被約性</strong> x^m = 0 (m ≥ 1) ⟹ x = 0（零因子なし M103-2 の帰納）を合流させ、<strong>本丸 <code>towerTorsion_res_zero</code>: 捻れ元 t ∈ Λₖ は剰余射の核に入る ρₙ(t) = 0</strong>。従って<strong>捻れ元は全て非単元</strong>（t·v = 1 なら ℤ/p で 0 = 1 の矛盾、<code>towerTorsion_not_unit</code>）・総括 <code>TorsionResidueData</code>。塔の捻れ加群が極大イデアル内にあることの形式化。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M112F: 塔の捻れ述語 IsTowerTorsion — 柱B: M89F の捻れ塔 × M109 の塔の統合（IUT/TowerTorsion.lean）</h3>
+  <div class="box">
+    <p><strong>捻れ述語を M109 の分岐塔 O₁ ⊆ O₂ ⊆ … の全レベルへ一般化</strong>（サブエージェント並行開発・第86弾統合）: 一般環版の f_π(0) = 0・<strong>外側剥がし <code>ringFIter_succ_comm</code>: [πⁿ⁺¹] = f_π ∘ [πⁿ]</strong>（M89F eisIter_succ_comm の一般化）・捻れ述語 <code>IsTowerTorsion</code> と基本事実（0 は常に捻れ・単調性 Λₖ ⊆ Λₖ₊₁・一段降下・<strong>環準同型輸送</strong>: φ が π を運べば捻れも運ぶ）・<strong>基底互換 <code>towerTorsion_base_iff</code></strong>: towerLevel p 0 上の ringF/ringFIter は eisRing p 上の eisF/eisIter に defeq で一致し IsTowerTorsion ⟺ IsEisTorsion・<strong><code>tower_iota_lam_torsion</code>: ι(λₙ) は一段上でも π^{n+1}-捻れ = Λₙ ⊆ Λₙ₊₁ の塔版</strong>・総括 <code>TowerTorsionData</code> と存在定理。Λₖ の非自明性の塔版（λₙ ≠ 0）・Galois/[c]-作用の塔への持ち上げは次層（正直申告）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M111F: |F_l⋇| = l⋇ の全単射 — 柱A A-4 磨き切り（issue #35）（IUT/FlStarCount.lean）</h3>
+  <div class="box">
+    <p><strong>F_l^* = F_l^×/{±1}（M109F）の台が {1, …, l⋇}（l⋇ = (l−1)/2）と過不足なく一対一対応することを閉じる</strong>（サブエージェント並行開発・第86弾統合）: l 素数 ≥ 3 の奇数性・<strong>標準代表の一意性 <code>flStar_rep_unique</code></strong>（折り返し分岐 j = l − j' は 2j ≤ l−1 と 2j' ≤ l−1 から l ≤ l−2 の矛盾）・<strong>標準代表関数 <code>flStarRep</code> = Quot.lift (fun u => if 2u ≤ l−1 then u else l−u) の choice なし関数化</strong>・値域 {1..l⋇}・<strong>切断性</strong>（範囲内の j の類の rep は j 自身）・<strong>完全性（全射性）</strong>・<strong>単射性</strong>・総括 <code>FlStarCountData</code> = 台 {1..l⋇} との全単射。<strong>HodgeTheater M2 の乗法的対称性の台の同定がこれで完成（issue #35 A-4 の数え上げ側完結）</strong>。発見: この core では ∧ ゴールへの omega 直適用が Classical.choice を混入する（ゴール分割で回避）。全て標準公理のみ。</p>
+  </div>
+
+  <h3>M111: 剰余塔と非自明性 ρₙ : Oₙ → ℤ/p — 柱B 塔の非自明性（issue #36）（IUT/ResidueTower.lean）</h3>
+  <div class="box">
+    <p><strong>M109 の分岐塔の各レベルから剰余体 ℤ/p への剰余射 ρₙ を再帰構成し、塔の非自明性を導く</strong>（M109 の「非自明性は次層」申告の解消・第86弾本線）:</p>
+    <table>
+      <tr><th>定理</th><th>内容</th><th>依存公理</th></tr>
+      <tr><td><code>eisResFun_congr</code> / <code>eisRes</code> (M111-2)</td><td><strong>基底剰余射</strong> O = ℤ_p[[X]]/(E) → ℤ/p（定数項 → mod p。well-defined 性は (h·E)₀ = h₀·π と proj_p_zero の消滅）、ρ₁(π) = ρ₁(λ) = 0</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>towerResStep</code> (M111-4, 5)</td><td><strong>一般降下</strong>: ρ(λ) = 0 なる ρ : R → ℤ/p は R[[Y]]/(πY + Y^p − λ) を通る（一段多項式の定数項が −λ で ρ に消える）。π'・λ' も消える</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>towerRes</code> / <code>towerRes_compat</code> (M111-6, 7)</td><td>全レベルの剰余射の再帰構成と<strong>塔両立 ρₙ₊₁∘ι = ρₙ（rfl!）</strong></td><td><strong>標準のみ（choice なし）</strong></td></tr>
+      <tr><td><code>tower_one_ne_zero</code> ほか (M111-8)</td><td><strong>本丸: 非自明性</strong>——全レベルで Oₙ ≠ 0 かつ λₙ, πₙ ∉ Oₙ^×（剰余射の存在から 1 ↦ 1 ≠ 0・λₙ/πₙ ↦ 0 は単元になれない）</td><td><strong>標準のみ（choice なし）</strong></td></tr>
+    </table>
+    <p class="small">正直な限定: ρₙ の存在は「Oₙ ≠ 0」と「λₙ が非単元」を与えるが、λₙ ≠ 0 自体は与えない（それには各レベルの整域性が必要で、レベルごとの Eisenstein 係数論法として今後の課題）。総括 <code>ResidueTowerData</code>。全て標準公理のみ。</p>
+  </div>
 
   <h3>M106: [c]-作用の半線形性と Galois 同変性 — 柱B B-1 第二段（issue #36）（IUT/LambdaSemilinear.lean）</h3>
   <div class="box">

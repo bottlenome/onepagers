@@ -1277,6 +1277,14 @@ import IUT
 #print axioms IUT.flStarRep_inj
 #print axioms IUT.flStarCountData
 #print axioms IUT.flStarCountData_nonempty
+#print axioms IUT.teich_val_one
+#print axioms IUT.teich_inv_exists
+#print axioms IUT.unit_decomposition_unique
+#print axioms IUT.zp_unit_inv_exists
+#print axioms IUT.zp_unit_mul
+#print axioms IUT.zp_unit_one
+#print axioms IUT.zpUnitGroupData
+#print axioms IUT.zpUnitGroup_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

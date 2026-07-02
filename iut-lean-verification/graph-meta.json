@@ -2,11 +2,11 @@
   "_comment": "手動オーバーレイ。graph.json はジェネレータ(tools/gen_graph.py)で自動生成。本ファイルは柱メタ・文献PDFマップ・capstone/hub注釈・一部の精緻化サマリを保持し、index.html がクライアント側でマージする。",
   "pillars": {
     "core": { "label": "論争骨格", "color": "#94a3b8", "progress_pct": 100, "status": "二分法 ✅ (sorry なし)", "blurb": "系3.12 の statement・二分法・Szpiro/ABC 帰結の骨格", "plain": "結論＝系3.12 の主張と「正しい／間違い」の判定、そしてABC予想への道すじ" },
-    "A":    { "label": "柱A 基本群・Galois圏", "color": "#60a5fa", "progress_pct": 85, "status": "SGA1主定理ブロック ✅ / 残件4 (#35)", "blurb": "副有限群・Galois圏・SGA1・π₁。残: ガロア閉包ほか", "plain": "図形を「群」という代数で捉えるための土台" },
-    "B":    { "label": "柱B 局所類体論", "color": "#34d399", "progress_pct": 70, "status": "剛性プログラム ✅ / 残件4 (#36, B-4済)", "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環", "plain": "素数1つの周りの「小さな数の世界」の数論" },
-    "C":    { "label": "柱C Lubin–Tate・形式群・Frobenioid", "color": "#fbbf24", "progress_pct": 60, "status": "群法則全公理 ✅ / 残件5 (#37)", "blurb": "形式群法則・点群・Frobenioid 次数層。残: 実数値log-volume等", "plain": "足し算のしかたを作り替える「形式群」の理論" },
+    "A":    { "label": "柱A 基本群・Galois圏", "color": "#60a5fa", "progress_pct": 86, "status": "SGA1主定理ブロック ✅ / A-4 数え上げ完結・残件3 (#35)", "blurb": "副有限群・Galois圏・SGA1・π₁・|F_l^*| = l⋇。残: ガロア閉包ほか", "plain": "図形を「群」という代数で捉えるための土台" },
+    "B":    { "label": "柱B 局所類体論", "color": "#34d399", "progress_pct": 72, "status": "剛性プログラム ✅ / 塔の非自明性・捻れ理論済・残件4 (#36, B-4済)", "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔", "plain": "素数1つの周りの「小さな数の世界」の数論" },
+    "C":    { "label": "柱C Lubin–Tate・形式群・Frobenioid", "color": "#fbbf24", "progress_pct": 62, "status": "群法則全公理 ✅ / ℝ 基盤第一段（ℚ 構成）着手・残件5 (#37)", "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成。残: ℝ 構成・実数値log-volume等", "plain": "足し算のしかたを作り替える「形式群」の理論" },
     "D":    { "label": "柱D 定理3.11", "color": "#f87171", "progress_pct": 15, "status": "入口 🔶 / 本丸 MultiradialRep 未形式化 (#38)", "blurb": "多輻的アルゴリズムの構成本体。IUTの全根拠が集約", "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成" },
-    "E":    { "label": "柱E 幾何層 (theta/volume)", "color": "#c084fc", "progress_pct": 80, "status": "E1–E8 ✅ / 残件2 (#39)", "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積。残: ±構造/μ_l同一視", "plain": "テータ関数と「体積」の計算" },
+    "E":    { "label": "柱E 幾何層 (theta/volume)", "color": "#c084fc", "progress_pct": 82, "status": "E1–E8 ✅ / E-1 ±構造の第一切片済・残件2 (#39)", "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積・±構造の群論核。残: μ_l同一視ほか", "plain": "テータ関数と「体積」の計算" },
     "unassigned": { "label": "未分類", "color": "#475569", "progress_pct": 0, "status": "—", "blurb": "", "plain": "" }
   },
   "refs": {
@@ -32,7 +32,8 @@
     "LambdaModule":      { "is_capstone": true, "summary": "λ の [c]-倍作用と Λ₁ の位数 p（M105, B-1 第一段）— f = X·E と合成イデアル補題、[c]λ=0 ⟺ π∣c" },
     "LambdaSemilinear":  { "is_capstone": true, "summary": "[c]-作用の半線形性と Galois 同変性（M106, B-1 第二段）— [c](zX)=z·[c]、σ_ζ([c]λ)=ζ·[c]λ、Λ₁ の ℤ_p[Gal]-加群構造" },
     "RamifiedReciprocity": { "is_capstone": true, "summary": "レベル1 分岐相互法則 [u]λ = ω(ū)λ（M107, B-2 心臓部）— 主単数固定・吸収補題・M87F witness の実証明化" },
-    "EisTowerRings": { "is_capstone": true, "summary": "Λₙ 塔の環骨格を全レベルで構成（M109）— quotCRing の再帰、f(λ_{n+1})=λₙ・[π^{n+1}]λ_{n+1}=0、非自明性は未" },
+    "EisTowerRings": { "is_capstone": true, "summary": "Λₙ 塔の環骨格を全レベルで構成（M109）— quotCRing の再帰、f(λ_{n+1})=λₙ・[π^{n+1}]λ_{n+1}=0、非自明性は M111" },
+    "ResidueTower": { "is_capstone": true, "summary": "剰余塔と非自明性（M111）— ρₙ : Oₙ → ℤ/p の再帰構成・塔両立 rfl・Oₙ ≠ 0・λₙ/πₙ 非単元。λₙ ≠ 0 は次層" },
     "GaussianVolume":    { "is_capstone": true, "summary": "ガウス体積簿記 vol_q（E8）— 柱E E1–E8 完結 (GaussianVolumeData)" },
     "MonoThetaWitness":  { "is_capstone": true, "summary": "mono-theta witness（E7）— ガウス指数=Heisenberg標準切断、柱E接合" },
     "Premises311":       { "is_capstone": true, "summary": "定理3.11 の前提束 Theorem311Premises — 柱B+E witness を系3.12 パイプラインに接続（柱D 入口）" },
