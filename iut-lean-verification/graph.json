@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 190,
-  "verified_theorem_total": 1545,
-  "choice_free_count": 150,
+  "module_count": 195,
+  "verified_theorem_total": 1596,
+  "choice_free_count": 155,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2355,6 +2355,66 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaPropagation.lean"
+    },
+    {
+      "id": "RegularPowers",
+      "label": "RegularPowers",
+      "milestone": "M146F",
+      "title": "正則元の冪",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RegularPowers.lean"
+    },
+    {
+      "id": "PolyWeierstrass",
+      "label": "PolyWeierstrass",
+      "milestone": "M147F",
+      "title": "多項式 Weierstrass 一意性",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyWeierstrass.lean"
+    },
+    {
+      "id": "GaloisClosureModel",
+      "label": "GaloisClosureModel",
+      "milestone": "M148F",
+      "title": "ガロア閉包のモデル側",
+      "pillar": "A",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisClosureModel.lean"
+    },
+    {
+      "id": "GSetQuotient",
+      "label": "GSetQuotient",
+      "milestone": "M149F",
+      "title": "G-集合の商構成",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GSetQuotient.lean"
+    },
+    {
+      "id": "RealInv",
+      "label": "RealInv",
+      "milestone": "M145",
+      "title": "正値実数の逆元",
+      "pillar": "C",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealInv.lean"
     }
   ],
   "edges": [
@@ -2879,6 +2939,14 @@
       "target": "LambdaSemilinear"
     },
     {
+      "source": "LambdaPropagation",
+      "target": "PolyWeierstrass"
+    },
+    {
+      "source": "LambdaPropagation",
+      "target": "RegularPowers"
+    },
+    {
       "source": "LambdaSemilinear",
       "target": "PadicSeries"
     },
@@ -3119,6 +3187,10 @@
       "target": "Premises311Real"
     },
     {
+      "source": "RealComplete",
+      "target": "RealInv"
+    },
+    {
       "source": "RealLe",
       "target": "LogVolBridge"
     },
@@ -3157,6 +3229,10 @@
     {
       "source": "RealPosMul",
       "target": "Premises311Real"
+    },
+    {
+      "source": "RealPosMul",
+      "target": "RealInv"
     },
     {
       "source": "RealVolumeTheory",
@@ -3223,6 +3299,14 @@
       "target": "GaloisAxioms"
     },
     {
+      "source": "SGA1",
+      "target": "GaloisClosureModel"
+    },
+    {
+      "source": "SGA1Completion",
+      "target": "GSetQuotient"
+    },
+    {
       "source": "SGA1Completion",
       "target": "PolyIsomorphism"
     },
@@ -3237,6 +3321,10 @@
     {
       "source": "SGA1Object",
       "target": "SumDecomposition"
+    },
+    {
+      "source": "ScalarDistrib",
+      "target": "RealInv"
     },
     {
       "source": "ScholzeStix",

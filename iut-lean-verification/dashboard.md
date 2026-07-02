@@ -369,6 +369,11 @@ iut-lean-verification/
     ├── IntRealBridge.lean   # M142F: 整数・実数橋の環準同型性 — intToReal の加法・乗法・負元・忠実性（choice なし）
     ├── TriSquare.lean       # M143F: 平方・三角数の換算簿記 — tri j + tri(j+1) = (j+1)²（choice なし）
     ├── LambdaPropagation.lean # M144: λ の全レベル伝播 — ∀n λₙ ≠ 0 の完結（柱B 本線、choice なし）
+    ├── RegularPowers.lean   # M146F: 正則元の冪 — λₙ^k ≠ 0 の全レベル・全冪伝播（choice なし）
+    ├── PolyWeierstrass.lean # M147F: 多項式 Weierstrass 一意性 — 塔一段多項式のモニック正則性（choice なし）
+    ├── GaloisClosureModel.lean # M148F: ガロア閉包のモデル側 — core 部分群による支配（柱A A-1、choice なし）
+    ├── GSetQuotient.lean    # M149F: G-集合の商構成 — 商公理 G2 後半のモデル側充足（柱A A-2 入口、choice なし）
+    ├── RealInv.lean         # M145: 正値実数の逆元 — x·x⁻¹ ≈ 1 の構成（柱C 本線、choice なし）
     ├── LambdaClassify.lean  # M97F: Λ₁ と自己準同型の完全分類 — 根は共役族と交わる・LambdaClassifyData（サブエージェント並行開発、choice なし）
     ├── DecompositionInertia.lean # M65F: 複数素点への分解・惰性の efg 簿記 — 半局所圏・引き戻し/ノルム関手・efg 恒等式・「ノルム ∘ 引き戻し = [L:K] 倍」（choice なし）
     ├── Realification.lean   # M67F: realification 実化と可除性 — ℚ≥0 の Quot 自前構成・実化因子/次数/圏/関手・「実化 = 可除性の獲得」の両側検証（choice なし）
@@ -598,6 +603,11 @@ iut-lean-verification/
 | M142F **整数・実数橋の環準同型性（柱C C-1 — 第97弾・並行部品）** | M139 の intToReal を順序埋め込みから**環準同型 + 順序忠実**に格上げ: 加法・乗法・負元・減法との両立（realEq、ratOfInt.map_add/mul + qToReal_add/mul）、**natToReal との整合 intToReal ∘ (ℕ→ℤ) = natToReal（rfl）**、**rlogVol w x = intToReal (degZ w x)（rfl — 実数値 log-volume は整数次数の像そのもの、M131F の橋の最短表示）**、natToReal の順序忠実性・IntRealBridgeData | 実体構成 |
 | M143F **平方・三角数の換算簿記（柱E E-2 — 第97弾・並行部品）** | [IUTchI] の q^{j²} 正規化と q^{tri j} 座席の換算の**局所単位**: **tri j + tri(j+1) = (j+1)²（隣接ガウス座席の和 = 平方ラベル）**とその realEq 形、**六角数分割 ssq(l+1) = stri(l+1) + stri l**（大域形）とその realEq 形、**M137F 辞書との接続 dict_adjacent_centers（Φ(j)・Φ(j+1) の中心成分の和 = 平方ラベル）**・TriSquareData。M132 の大域橋 ssq_stri の局所版が Heisenberg 辞書と合流 | 実体構成 |
 | M144 **λ の全レベル伝播（柱B 本線 — 第97弾・キャンペーン完結）** | M111 → M119 → M122 の 3 段リレーの**最終段**: **鍵の発見「R[[Y]] で Y は環の仮定なしに正則（係数シフト）」**により λₙ 正則 ⟹ λₙ₊₁ 正則の一段昇りが座標理論なしで回る（h·Y = w·g の 0 次で w₀λ = 0 → w₀ = 0（λ 正則）→ w = Y·w' → h = w'·g）。Y-乗算の係数シフト (h·Y)_{m+1} = h_m・先頭消滅シフト・**towerLam_regular_step（本丸）**・基底 M122-7 からの全レベル帰納・**tower_lam_ne_zero_all: ∀n, λₙ ≠ 0（Lubin–Tate 塔の全レベル非退化性が公理仮定なしに成立 — M122-8 の λ₂ ≠ 0 を全レベルに拡張）**・LambdaPropagationData。正直申告: λ-adic 付値（分岐簿記）と Oₙ 座標系の忠実性（M122 の塔版）は次層 | 実体構成 |
+| M145 **正値実数の逆元（柱C 本線 — 第98弾）** | M115F の正直申告（逆元は代表 witness 形）を実数まで持ち上げ **IsPos x なら ∃y, x·y ≈ 1 を choice なしに構成**。設計の鍵 2 つ: **添字シフト rshift**（IsPos witness から尾部一様下界 1/(2N+2) を持つ realEq-同値な実数）と**ミニ極限補題 realEq_qconst_of_bound（速度 C の定数近似 \|w_n − y\| ≤ C/(n+1) ⟹ realEq — 望遠鏡 + ε-消去 c = 1+C）**で、rmul の添字スケジュール K が逆元 modulus N を知らない bound-chain 問題を回避。ℚ 逆元ツールキット（体公理の関数形・\|a⁻¹\| ≤ N+1・差の展開・Lipschitz (N+1)²）、rinvPos（加速添字 (N+1)²(n+1)−1）、**rinvPos_mul_self（本丸）**・pos_inv_exists（∃→∃ で witness 抽出不要）・RealInvData。正直申告: 負の実数・apart 一般の逆元は符号分岐経由で次層 | 実体構成 |
+| M146F **正則元の冪（柱B — 第98弾・並行部品）** | λ-adic 付値への入口: 正則元の乗法・冪閉性（regular_one/mul/rpow — 公理ゼロ）、**tower_lam_pow_ne_zero_all: ∀ n k, λₙ^k ≠ 0（Lubin–Tate 塔の分岐フィルトレーションの全段が生きている）**、π 側の基底 π^k ≠ 0 in ℤ_p（zp_pi_regular の IsRegularElem 形包み直し + 1 ≠ 0 のレベル 1 射影）・RegularPowersData。正直申告: 付値関数 v(λₙ^k) = k そのものは次層 | 実体構成 |
+| M147F **多項式 Weierstrass 一意性（柱B — 第98弾・並行部品）** | Oₙ 座標系忠実性（M122 の塔版）の第一切片: 塔一段多項式 g = πY + Y^p − λ の**モニック性（g_p = 1・台 {0,1,p}）だけで多項式部分の座標一意性が任意の可換環で閉じる**。中央 1 項和 rsum_single_middle・頂点係数抽出 (w·g)_{M+p} = w_M・**poly_mul_g_bounded_zero（本丸）: 有界 w で (w·g) の次数 ≥ p 部分が 0 なら w = 0（上界の下向き帰納）**・**剰余一意性 poly_division_unique（q·g + r = q'·g + r' ⟹ q = q' ∧ r = r'、完全形）**・PolyWeierstrassData。正直申告: 割り算の存在と冪級数全体への拡張（λ-adic 収束）は次層 | 実体構成 |
+| M148F **ガロア閉包のモデル側（柱A A-1 — 第98弾・並行部品）** | ProObject（M24）の正直申告「ガロア閉包は未形式化の入力」の**剰余類モデル側を完結**: core(H) = {g \| ∀a, a⁻¹ga ∈ H} の部分群性・**正規性**・core ⊆ H・**支配射 G/core ↠ G/H（同変全射、M16 coset_hom_iff の instance）**・**ガロア性の 2 読み（全点で Stab = core の基点非依存性 + 右移動自己同型のファイバー推移性）**・総合定理 galois_closure_model（5 連言の ∃N 形）・GaloisClosureModelData。純群論部は公理ゼロ。正直申告: 位相条件（開性・有限指数）・GaloisTower への組み込み・抽象公理系（M21）への持ち上げは次層 | 実体構成 |
+| M149F **G-集合の商構成（柱A A-2 入口 — 第98弾・並行部品）** | SGA1 主定理の対象レベル（本質的全射性）に必要な**商公理（G2 後半: 有限自己同型族による商）のモデル側を Quot 構成で充足**: 一歩関係 autOrbitRel の G-作用不変性（同変性が核心）→ gsetQuot（軌道空間の G-集合化）→ 射影・不変性・**普遍性 gsetQuot_univ（存在 = Quot.lift・一意性 = Quot.ind + ext）**→ QuotientAxiom の定式化と **gsetQuotientAxiom: G-Set モデルは商公理を満たす（[Quot.sound] のみ = choice-free、M22-8 の降下射 choice と対照）**・GSetQuotientData。正直申告: gset_satisfies_quotient のみ既存 gsetGaloisData の G6（M21-8）由来の Classical.choice を型経由で継承（本モジュールでの使用ではない）。pro-対象と抽象側の本質的全射性の導出は次層 | 実体構成 |
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |

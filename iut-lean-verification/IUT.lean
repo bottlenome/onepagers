@@ -194,3 +194,8 @@ import IUT.GaussPilotRep
 import IUT.IntRealBridge
 import IUT.TriSquare
 import IUT.LambdaPropagation
+import IUT.RegularPowers
+import IUT.PolyWeierstrass
+import IUT.GaloisClosureModel
+import IUT.GSetQuotient
+import IUT.RealInv

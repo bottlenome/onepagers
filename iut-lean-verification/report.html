@@ -158,7 +158,32 @@
 </section>
 
 <section>
-  <h2>M1〜M144 の形式化（追加検証）</h2>
+  <h2>M1〜M149 の形式化（追加検証）</h2>
+
+  <h3>M145: 正値実数の逆元 — x·x⁻¹ ≈ 1 の構成（柱C 本線）（IUT/RealInv.lean）</h3>
+  <div class="box">
+    <p><strong>M115F の正直申告「逆元の体公理は代表 witness 形」を実数まで持ち上げ、IsPos x なら ∃y, x·y ≈ 1 を選択公理なしに構成</strong>（第98弾本線）。設計の鍵は二つ: (1) <strong>添字シフト rshift</strong> — IsPos の witness N から尾部一様下界 1/(2N+2) ≤ x'_m を持つ realEq-同値な実数を作る（シフトは正則性を保ち realEq 不変）。(2) <strong>ミニ極限補題 realEq_qconst_of_bound</strong> — 速度 C の定数近似 |w_n − y| ≤ C/(n+1) は realEq w (qToReal y) を与える（望遠鏡 + ε-消去 c = 1+C）。これにより <strong>rmul の添字スケジュール K が逆元の modulus N を知らないという bound-chain 問題</strong>（一般 assoc/distrib を阻んでいるのと同種）を、積列の C·uₙ 評価に緩めてから極限で回収して回避する。ℚ 逆元ツールキット（下界 1/(N+1) ≤ a のもとで a·a⁻¹ = 1 の関数形・|a⁻¹| ≤ N+1・差の展開 a⁻¹ − b⁻¹ = (b−a)a⁻¹b⁻¹・Lipschitz (N+1)²）、rinvPos（加速添字 (N+1)²(n+1)−1 で Lipschitz と相殺）、<strong>本丸 rinvPos_mul_self: x·x⁻¹ ≈ 1</strong>、見出し pos_inv_exists（∃ から ∃ への写像なので witness 抽出不要 = choice なし）。正直な限定: apart 一般（負含む）の逆元・一意性・除算代数は次層。全 17 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M146F: 正則元の冪 — λₙ^k ≠ 0 の全レベル・全冪伝播（柱B）（IUT/RegularPowers.lean）</h3>
+  <div class="box">
+    <p>λ-adic 付値への入口（サブエージェント並行部品）: 正則元（非零因子）の乗法・冪閉性（regular_one / regular_mul / regular_rpow — <strong>公理ゼロ</strong>）と、M144 の全レベル正則性の帰結として<strong>見出し tower_lam_pow_ne_zero_all: ∀ n k, λₙ^k ≠ 0 — Lubin–Tate 塔の分岐フィルトレーション (λₙ^k) の全段が生きている</strong>。π 側の基底 π^k ≠ 0 in ℤ_p（M122-6 の IsRegularElem 形包み直し + 1 ≠ 0 のレベル 1 射影による新規証明）も完備。正直な限定: 付値関数 v(λₙ^k) = k そのもの（min の構成的定義）は次層。全宣言 [propext, Quot.sound] 以下。</p>
+  </div>
+
+  <h3>M147F: 多項式 Weierstrass 一意性 — 塔一段多項式のモニック正則性（柱B）（IUT/PolyWeierstrass.lean）</h3>
+  <div class="box">
+    <p>Oₙ 座標系忠実性（M122 の塔版）への第一切片（サブエージェント並行部品）: 塔一段多項式 g = πY + Y^p − λ は <strong>Y^p がモニック（g_p = 1、台 {0,1,p}）で、これだけで多項式（有限台冪級数）部分の座標一意性が任意の可換環 R で閉じる</strong> — M122 の π-adic 収束と対照的に環の仮定ゼロ。中央 1 項和 rsum_single_middle、頂点係数抽出 (w·g)_{M+p} = w_M（有界性で上を、台の外で下を消す）、<strong>本丸 poly_mul_g_bounded_zero: 有界 w について (w·g) の次数 ≥ p 部分が全て 0 なら w = 0</strong>（上界の下向き帰納 = g の多項式正則性）、<strong>剰余一意性 poly_division_unique: q·g + r = q'·g + r'（deg r, r' &lt; p）⟹ q = q' ∧ r = r'（完全形、弱め版への後退なし）</strong>。正直な限定: 割り算アルゴリズムの存在と冪級数全体への拡張（λ-adic 収束）は次層。全 9 宣言 [propext, Quot.sound] 以下。</p>
+  </div>
+
+  <h3>M148F: ガロア閉包のモデル側 — core 部分群による支配（柱A A-1）（IUT/GaloisClosureModel.lean）</h3>
+  <div class="box">
+    <p>ProObject（M24）の正直申告「ガロア閉包（任意の連結対象がガロア対象に支配される）は未形式化の入力」の<strong>剰余類作用モデル側を完結</strong>（サブエージェント並行部品、issue #35 A-1）: core(H) = {g | ∀a, a⁻¹ga ∈ H}（剰余類作用の核）の部分群性・<strong>正規性</strong>・core ⊆ H、<strong>支配射 G/core(H) ↠ G/H（同変全射 — M16 の Galois 対応射側 coset_hom_iff の instance 化込み）</strong>、<strong>ガロア性の 2 つの読み: G/core の全点で安定化群 = core（基点非依存）と、右移動自己同型群のファイバー推移性</strong>（M21 IsGalois のモデル読み）。総合定理 galois_closure_model は「任意の剰余類対象は正規部分群による剰余類対象から同変全射で支配される」の 5 連言 ∃ 形。純群論部は公理ゼロ、全 22 宣言 [propext, Quot.sound] 以下。正直な限定: 位相条件（core の開性・有限指数）・M24 GaloisTower への組み込み・M21 抽象公理系への持ち上げは次層。</p>
+  </div>
+
+  <h3>M149F: G-集合の商構成 — 商公理（G2 後半）のモデル側充足（柱A A-2 入口）（IUT/GSetQuotient.lean）</h3>
+  <div class="box">
+    <p>SGA1 主定理の対象レベル（本質的全射性 = A-2）に必要な<strong>商公理（G2 後半: 有限自己同型族による商の存在）のモデル側を Quot 構成で充足</strong>（サブエージェント並行部品、issue #35 A-2）: 同変自己写像リストの一歩関係 autOrbitRel の <strong>G-作用不変性（自己同型の同変性が核心 — g·(a x) = a(g·x)）</strong>で作用が商 gsetQuot に降り、射影・不変性（余等化）・<strong>普遍性 gsetQuot_univ（存在 = Quot.lift、一意性 = Quot.ind + 同変射の外延性）</strong>。QuotientAxiom を圏構造のみでパラメータ化する設計判断により<strong>本丸 gsetQuotientAxiom: G-Set モデルは商公理を満たす、が [Quot.sound] のみ（choice-free）</strong>で成立 — M22-8（降下射の構成に Classical.choice）との対照が本モジュールの眼目。正直申告: 橋渡し gset_satisfies_quotient のみ既存 gsetGaloisData の G6（M21-8）由来の Classical.choice を型経由で継承（本モジュールでの使用ではない — build.sh の意図的 Classical は 23 → 24 件に）。pro-対象と抽象側の本質的全射性の導出は次層。</p>
+  </div>
 
   <h3>M144: λ の全レベル伝播 — 塔の非退化性の完結（柱B 本線）（IUT/LambdaPropagation.lean）</h3>
   <div class="box">
