@@ -7,7 +7,7 @@ iut-lean-verification/ の Lean ソースを解析し、インタラクティブ
 グラフ（index.html / Cytoscape）が読み込む graph.json を生成する。
 
 抽出するもの:
-  - ノード集合: IUT.lean の `import IUT.X` 並び（= 142 モジュールの正準集合）
+  - ノード集合: IUT.lean の `import IUT.X` 並び（= 全モジュールの正準集合）
   - 依存エッジ: 各 IUT/X.lean 冒頭の `import IUT.Y`（依存 Y → 被依存 X の有向辺）
   - マイルストーン id・タイトル: ヘッダコメント（行頭の `IUT/X.lean — Mxx（…）`）
   - choice-free フラグ: 「選択公理不使用」/「choice なし」の有無
@@ -45,6 +45,9 @@ PILLAR = {
     "SGA1": "A", "Finiteness": "A", "Compactness": "A", "CategoryTheory": "A",
     "GaloisAxioms": "A", "AbstractGalois": "A", "SGA1Completion": "A",
     "SGA1Object": "A", "ProObject": "A", "LimitCompact": "A", "SumDecomposition": "A",
+    "FlUnits": "A",
+    "FlStar": "A",
+    "FlStarCount": "A",
     # 柱B（局所類体論・Eisenstein）
     "LocalCFT": "B", "NormCorrespondence": "B", "PrincipalUnits": "B",
     "PrincipalUnitGroup": "B", "UnitFiltration": "B", "Fermat": "B",
@@ -55,6 +58,14 @@ PILLAR = {
     "EisensteinTower": "B", "EisensteinUpper": "B", "EisDomain": "B",
     "EisDomain2": "B", "EisEndoRigidity": "B", "FactorTheorem": "B",
     "LambdaClassify": "B", "RecGluing": "B", "FormalGroupEndRing": "B",
+    "MuUnits": "B",
+    "ZmodOrder": "B", "NatPrimeParts": "B", "PrimitiveRoot": "B",
+    "CyclicUnits": "B",
+    "LambdaModule": "B",
+    "LambdaSemilinear": "B",
+    "RamifiedReciprocity": "B", "PadicSeries": "B", "EisTowerRings": "B", "PadicSeries2": "B",
+    "ResidueTower": "B", "ZpUnitDecomp": "B", "TowerNonzero": "B", "EisFaithful": "B", "TowerTorsion": "B", "TorsionResidue": "B",
+    "PadicGeometric": "B",
     # 柱C（Lubin–Tate・形式群・Frobenioid）
     "Ring": "C", "PowerSeries": "C", "Composition": "C", "LubinTateUnique": "C",
     "LubinTateZp": "C", "PadicDivision": "C", "Binomial2": "C", "Freshman": "C",
@@ -79,14 +90,14 @@ PILLAR = {
     "TorsionPoints": "C", "FormalGroupPointsLaw": "C", "FormalGroupPoints3": "C",
     "FormalGroupPointsMul2": "C", "FormalGroupPointsMul3": "C",
     "FormalGroupPointsAssoc": "C", "DecompositionInertia": "C", "Realification": "C",
-    "ArchimedeanPlace": "C",
+    "ArchimedeanPlace": "C", "Rationals": "C", "RegularReal": "C", "RatFloor": "C", "RealMul": "C", "RealOrder": "C", "RealAbs": "C", "RealComplete": "C", "RealPosMul": "C", "RealLe": "C", "LogVolBridge": "C",
     # 柱D（定理3.11）
     "Multiradial": "D", "Diophantine": "D", "Premises311": "D", "VolumeModel": "D",
     # 柱E（幾何層: theta/volume）
     "Evaluation": "E", "LaurentCoeff": "E", "LaurentRing": "E", "LaurentMonomial": "E",
     "ThetaSeries": "E", "ThetaFunctional": "E", "ThetaReflection": "E",
     "ThetaGauss": "E", "TateQuotient": "E", "MonoThetaWitness": "E",
-    "ThetaGroupMod": "E", "GaussianVolume": "E",
+    "ThetaGroupMod": "E", "GaussianVolume": "E", "ThetaPM": "E", "MuLSubgroup": "E", "CyclotomicSync": "E", "ThetaCenterMod": "E", "VolumeReal": "E", "GaussianDivisor": "E", "Premises311Real": "D", "WeightedGauss": "E", "RealOrderComplete": "C", "FuneqLift": "E", "ScalarDistrib": "C", "RealVolumeTheory": "D", "RealMaxLaws": "C", "GaussPilotRep": "D", "IntRealBridge": "C", "TriSquare": "E", "LambdaPropagation": "B",
 }
 
 # マイルストーン id を持たない初期ファイルのフォールバック
@@ -106,8 +117,8 @@ REF_TOKENS = ["[EtTh]", "[FrdI]", "[FrdII]", "[AbsTopIII]",
 DECL_RE = re.compile(r"^(?:theorem|lemma|def|structure|instance|abbrev)\s")
 IMPORT_RE = re.compile(r"^import\s+IUT\.(\S+)\s*$")
 MS_EMDASH = re.compile(r"[—–-]\s*(M\d+\w*)")          # IUT/X.lean — M100（…
-MS_COLON = re.compile(r"^\s*(M\d+\w*)\s*[:：]")        # M70c: …
-TITLE_PAREN = re.compile(r"M\d+\w*[（(]([^）)]+)")     # （タイトル…）
+MS_COLON = re.compile(r"^\s*#*\s*(M\d+\w*)\s*[:：]\s*(.*)$")  # M70c: … / # M111: …
+TITLE_PAREN = re.compile(r"(M\d+\w*)[（(]([^）)]+)")   # Mxx（タイトル…）
 
 
 def read_modules():
@@ -138,6 +149,7 @@ def parse_module(name):
     header = header_block(text)
     # milestone id
     ms = None
+    colon_title = None
     m = MS_EMDASH.search(header[:400])
     if m:
         ms = m.group(1)
@@ -146,12 +158,22 @@ def parse_module(name):
             m2 = MS_COLON.match(ln.strip())
             if m2:
                 ms = m2.group(1)
+                colon_title = m2.group(2).strip()
                 break
     # title
     title = None
     mt = TITLE_PAREN.search(header[:400])
-    if mt:
-        title = mt.group(1).strip().rstrip("：:、 ")
+    if mt and (ms is None or mt.group(1) == ms):
+        title = mt.group(2).strip().rstrip("：:、 ")
+    if title is None and colon_title:
+        title = colon_title.split("—")[0].strip().rstrip("：:、 ")
+    if title is None and ms:
+        # 「… — Mxx: タイトル — …」形式（emdash 見出し + コロン）
+        mc = re.search(re.escape(ms) + r"\s*[:：]\s*([^\n]+)", header[:400])
+        if mc:
+            title = mc.group(1).split("—")[0].strip().rstrip("：:、 ")
+    if title is not None:
+        title = re.sub(r"\s+", " ", title)
     if (ms is None or title is None) and name in FALLBACK:
         fms, ftitle = FALLBACK[name]
         ms = ms or fms
