@@ -1190,6 +1190,36 @@ import IUT
 #print axioms IUT.zpSeriesSum_split
 #print axioms IUT.zpSeriesSum_tail_dvd
 #print axioms IUT.padicSeriesSplitData
+#print axioms IUT.towerStepPoly_coeff_zero
+#print axioms IUT.eisResFun_congr
+#print axioms IUT.eisRes
+#print axioms IUT.eisRes_pi
+#print axioms IUT.eisRes_lambda
+#print axioms IUT.towerResFun_congr
+#print axioms IUT.towerResStep
+#print axioms IUT.towerResStep_pi
+#print axioms IUT.towerResStep_lam
+#print axioms IUT.towerRes
+#print axioms IUT.towerRes_compat
+#print axioms IUT.tower_one_ne_zero
+#print axioms IUT.tower_lam_not_unit
+#print axioms IUT.tower_pi_not_unit
+#print axioms IUT.residueTowerData
+#print axioms IUT.residueTower_exists
+#print axioms IUT.ringF_zero
+#print axioms IUT.ringFIter_succ_comm
+#print axioms IUT.towerTorsion_zero
+#print axioms IUT.towerTorsion_mono
+#print axioms IUT.towerTorsion_step
+#print axioms IUT.towerTorsion_hom
+#print axioms IUT.ringF_eisF
+#print axioms IUT.ringFIter_eisIter
+#print axioms IUT.towerTorsion_base_iff
+#print axioms IUT.tower_lam_torsion
+#print axioms IUT.tower_lam_torsion_ge
+#print axioms IUT.tower_iota_lam_torsion
+#print axioms IUT.towerTorsionData
+#print axioms IUT.towerTorsionData_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

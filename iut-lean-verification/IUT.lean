@@ -159,3 +159,5 @@ import IUT.PadicSeries
 import IUT.EisTowerRings
 import IUT.FlStar
 import IUT.PadicSeries2
+import IUT.ResidueTower
+import IUT.TowerTorsion
