@@ -1229,6 +1229,15 @@ import IUT
 #print axioms IUT.towerTorsion_not_unit
 #print axioms IUT.torsionResidueData
 #print axioms IUT.torsionResidue_exists
+#print axioms IUT.geomSeq_zero
+#print axioms IUT.geomSeq_succ
+#print axioms IUT.geomSeq_shift
+#print axioms IUT.principalUnitInv_shift
+#print axioms IUT.principalUnitInv_eq
+#print axioms IUT.principal_unit_mul_inv
+#print axioms IUT.principal_unit_is_unit
+#print axioms IUT.padicGeometricData
+#print axioms IUT.padicGeometric_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
