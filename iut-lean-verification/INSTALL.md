@@ -60,6 +60,33 @@ lean --version   # 4.30.0 を確認
 github.com のリリース URL が一律 403 だった**（プロキシポリシー起因）ので、
 その場合は §3 へ。
 
+## 2.5 方法 C: Nix 経由（**GitHub 遮断環境で実証済みの経路**）
+
+元コンテナの Lean はこの経路で入っている（`/nix/store/<hash>-lean4-4.30.0` に
+nixpkgs ビルドの閉包が存在、apt/elan の痕跡なし）。**鍵となる事実（2026-07-03 検証）**:
+Claude Code の既定プロキシは github.com のリリース資材を 403 で遮断する一方、
+**パッケージ配布インフラは許可している** — cache.nixos.org / nixos.org /
+install.determinate.systems / PyPI / archive.ubuntu.com はすべて 200 で到達可能。
+
+```bash
+# Nix をインストール（どちらも到達確認済み。single-user で十分）
+curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+. $HOME/.nix-profile/etc/profile.d/nix.sh
+# lean4 を Nix バイナリキャッシュから取得（ビルドではなくキャッシュダウンロード）
+nix profile install nixpkgs#lean4 --extra-experimental-features "nix-command flakes"
+lean --version
+```
+
+**注意**: nixpkgs の lean4 の版は channel に依存する。`lean --version` が 4.30.0 で
+なければ、4.30.0 を含む nixpkgs リビジョンを指定する:
+```bash
+# nixpkgs の履歴から lean4 = 4.30.0 のリビジョンを探して固定
+nix profile install github:NixOS/nixpkgs/<rev>#lean4 ...
+# github: 参照が遮断される場合は https://channels.nixos.org の tarball 指定で代替
+```
+版がどうしても合わない場合でも、まず入った lean で `lake build` を試す価値はある
+（壊れたら `lean-toolchain` の版に合わせるのが原則 — §5 参照）。
+
 ## 3. 【本筋】環境のネットワークポリシー / セットアップスクリプト設定
 
 「インストールできない」の典型原因はセッションのネットワークポリシーである。
@@ -108,3 +135,4 @@ bash build.sh 2>/dev/null | grep -c Classical   # 意図的 Classical の台帳�
 | `lean: command not found`（インストール直後） | PATH 未設定 | `export PATH="$HOME/.elan/bin:$PATH"`（新しいシェルごとに） |
 | `lake build` が toolchain を再ダウンロードしようとする | 別バージョンが default になっている | リポジトリ直下で実行しているか確認（`lean-toolchain` が読まれる）。`elan toolchain list` で v4.30.0 の有無を確認 |
 | ビルドが `unknown identifier` 等で大量エラー | Lean の版違い | `lean --version` を確認し v4.30.0 に固定 |
+| GitHub は 403 だが何か入れたい | 既定プロキシはパッケージ配布インフラ（Nix キャッシュ・PyPI・apt）を許可している | §2.5 の Nix 経路（検証済み）を使う |
