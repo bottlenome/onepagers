@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M166 の形式化（追加検証）</h2>
+  <h2>M1〜M167 の形式化（追加検証）</h2>
+
+  <h3>M167: 実数の冪法則 II — 積・反復・単位（柱C）（IUT/RealPowMul.lean）</h3>
+  <div class="box">
+    <p>M166（指数法則 r^{m+n} ≈ r^m·r^n・底 congruence）の続き（第101弾）。実数の冪 realPow の残りの基本法則を realEq 下で閉じる: <strong>realPow_one</strong>（r^1 ≈ r）・<strong>realPow_mul_base: (r·s)^k ≈ r^k · s^k</strong>（k の帰納 + M162 の実数版中央四項入替 rmul_mul_mul_comm）・<strong>realPow_mul_exp: r^{m·n} ≈ (r^m)^n</strong>（反復冪、n の帰納 + M166 realPow_add）・RealPowMulData。M166 と併せ、<strong>realPow が可換モノイド準同型的な全法則</strong>（r^0 = 1・r^{m+n} = r^m·r^n・(r·s)^k = r^k·s^k・(r^m)^n = r^{m·n}）を realEq 下で満たすことが確立 — 実数の冪級数・多項式評価の代数基盤。正直な限定: 順序・収束（r^k の単調性や極限）は rate-bound の次層で、本層は純代数の冪法則のみ。全 5 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M166: 実数の冪法則 — realPow の加法性と congruence（柱C）（IUT/RealPow.lean）</h3>
   <div class="box">

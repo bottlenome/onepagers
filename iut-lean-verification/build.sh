@@ -1721,6 +1721,11 @@ import IUT
 #print axioms IUT.realPow_congr
 #print axioms IUT.realPowData
 #print axioms IUT.realPow_exists
+#print axioms IUT.realPow_one
+#print axioms IUT.realPow_mul_base
+#print axioms IUT.realPow_mul_exp
+#print axioms IUT.realPowMulData
+#print axioms IUT.realPowMul_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

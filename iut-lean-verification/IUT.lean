@@ -215,3 +215,4 @@ import IUT.GeomSeries
 import IUT.LambdaIdeal
 import IUT.RealGeom
 import IUT.RealPow
+import IUT.RealPowMul
