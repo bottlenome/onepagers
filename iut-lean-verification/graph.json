@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 210,
-  "verified_theorem_total": 1708,
-  "choice_free_count": 170,
+  "module_count": 211,
+  "verified_theorem_total": 1712,
+  "choice_free_count": 171,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2595,6 +2595,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeom.lean"
+    },
+    {
+      "id": "RealPow",
+      "label": "RealPow",
+      "milestone": "M166",
+      "title": "実数の冪法則",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealPow.lean"
     }
   ],
   "edges": [
@@ -3425,6 +3437,10 @@
     {
       "source": "RealComplete",
       "target": "RealInv"
+    },
+    {
+      "source": "RealGeom",
+      "target": "RealPow"
     },
     {
       "source": "RealInv",

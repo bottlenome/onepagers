@@ -1717,6 +1717,10 @@ import IUT
 #print axioms IUT.real_geom_closed
 #print axioms IUT.realGeomData
 #print axioms IUT.realGeom_exists
+#print axioms IUT.realPow_add
+#print axioms IUT.realPow_congr
+#print axioms IUT.realPowData
+#print axioms IUT.realPow_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

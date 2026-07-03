@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M165 の形式化（追加検証）</h2>
+  <h2>M1〜M166 の形式化（追加検証）</h2>
+
+  <h3>M166: 実数の冪法則 — realPow の加法性と congruence（柱C）（IUT/RealPow.lean）</h3>
+  <div class="box">
+    <p>M165 で定義した実数の冪 realPow（r^0 = 1・r^{k+1} = r^k · r）の基本法則を realEq 下で閉じる（第101弾）。<strong>realPow_add: r^{m+n} ≈ r^m · r^n</strong>（指数法則、n の帰納 + rmul_one + M150 結合 rmul_assoc_real + 左 congruence）・<strong>realPow_congr: r ≈ r' ⟹ r^k ≈ r'^k</strong>（底の well-defined 性 = 冪が RReal/≈ 上の写像として井戸定義）・RealPowData。M165 の幾何級数と併せ、<strong>実数の冪級数を扱う最小限の代数語彙（指数法則 + 底 well-defined）を realEq 下で確立</strong>。正直な限定: 冪の順序的性質（0 ≤ r ≤ 1 での r^k の単調減少・r^k → 0 の収束）は rate-bound を要し次層。本層は純代数の指数法則と congruence のみ。全 4 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M165: 幾何級数の実数版 — realEq 下の閉形式（柱E→C 橋）（IUT/RealGeom.lean）</h3>
   <div class="box">
