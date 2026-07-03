@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 208,
-  "verified_theorem_total": 1698,
-  "choice_free_count": 168,
+  "module_count": 209,
+  "verified_theorem_total": 1704,
+  "choice_free_count": 169,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2571,6 +2571,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomSeries.lean"
+    },
+    {
+      "id": "LambdaIdeal",
+      "label": "LambdaIdeal",
+      "milestone": "M164",
+      "title": "λ-adic 膜 (λ^k) のイデアル構造と冪法則（柱B）",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaIdeal.lean"
     }
   ],
   "edges": [
@@ -3145,6 +3157,10 @@
     {
       "source": "LambdaValuation",
       "target": "LambdaValuationMul"
+    },
+    {
+      "source": "LambdaValuationMul",
+      "target": "LambdaIdeal"
     },
     {
       "source": "LaurentCoeff",

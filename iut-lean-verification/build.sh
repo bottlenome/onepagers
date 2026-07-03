@@ -1707,6 +1707,12 @@ import IUT
 #print axioms IUT.geom_closed_right
 #print axioms IUT.geomSeriesData
 #print axioms IUT.geomSeries_exists
+#print axioms IUT.isValAtLeast_add
+#print axioms IUT.isValAtLeast_neg
+#print axioms IUT.isValAtLeast_smul
+#print axioms IUT.isValAtLeast_pow
+#print axioms IUT.lambdaIdealData
+#print axioms IUT.lambdaIdeal_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

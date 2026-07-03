@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M163 の形式化（追加検証）</h2>
+  <h2>M1〜M164 の形式化（追加検証）</h2>
+
+  <h3>M164: λ-adic 膜 (λ^k) のイデアル構造と冪法則（柱B）（IUT/LambdaIdeal.lean）</h3>
+  <div class="box">
+    <p>M151F（値の ∃-述語 IsValAtLeast）・M161（積の値の下界）の直上（第101弾）。膜 (λ^k) =「値 ≥ k の元」が<strong>イデアルの公理をすべて満たす</strong>ことを閉じる: <strong>isValAtLeast_add</strong>（加法閉性、x = a·λ^k・y = b·λ^k から x+y = (a+b)·λ^k、right_distrib）・<strong>isValAtLeast_neg</strong>（反元閉性、neg_mul）・<strong>isValAtLeast_smul</strong>（任意の環元 r による環倍閉性、r·x = (r·a)·λ^k、mul_assoc）——加法群 + 環倍で (λ^k) は正真正銘の<strong>イデアル</strong>。さらに <strong>isValAtLeast_pow: x ∈ (λ^j) ⟹ x^n ∈ (λ^{n·j})</strong>（v(x^n) ≥ n·v(x) の下界形、M161 isValAtLeast_mul の n 回反復 + Nat.succ_mul）・LambdaIdealData。<strong>公理ゼロ</strong>。これで<strong>λ-adic フィルトレーション R = (λ^0) ⊇ (λ^1) ⊇ … が「イデアルの降下鎖」であることが確立</strong>。正直な限定: 値の下界（所属）の閉性のみで、等号（非アルキメデス付値の v(x+y) = min・v(x^n) = n·v(x) の上界）や商環 R/(λ^k) の構造は一般元の付値関数の全域構成（M147F 座標理論）を要し次層。全 6 宣言 [propext, Quot.sound] 以下（大半は公理ゼロ）。</p>
+  </div>
 
   <h3>M163: 幾何級数の代数核 — 部分和の望遠鏡的閉形式（柱E→C 橋）（IUT/GeomSeries.lean）</h3>
   <div class="box">

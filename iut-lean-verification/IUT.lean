@@ -212,3 +212,4 @@ import IUT.RealObstruction
 import IUT.LambdaValuationMul
 import IUT.RealDivision
 import IUT.GeomSeries
+import IUT.LambdaIdeal
