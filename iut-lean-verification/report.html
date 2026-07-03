@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M164 の形式化（追加検証）</h2>
+  <h2>M1〜M165 の形式化（追加検証）</h2>
+
+  <h3>M165: 幾何級数の実数版 — realEq 下の閉形式（柱E→C 橋）（IUT/RealGeom.lean）</h3>
+  <div class="box">
+    <p>M163（任意可換環での幾何級数の閉形式 (1 − r)·s_k = 1 − r^k）を<strong>自前 ℝ の土俵へ移設</strong>（第101弾）。RReal は CRing ではなく realEq 商上の構造なので、閉形式は「厳密な等式」ではなく <strong>realEq 下の等式</strong>として実数乗法代数（M123F 可換・M150 結合分配・M153F 負号引き出し）の congruence 連鎖で閉じる。実数の冪 realPow・部分和 realGeomSum を定義し、realEq 版相殺補題 real_add_cancel_middle（(a ⊕ (⊖b)) ⊕ (b ⊕ d) ≈ a ⊕ d）を経て <strong>本丸 real_geom_closed: (1 ⊖ r)·s_k ≈ 1 ⊖ r^k</strong> を k の帰納 + 実分配 rmul_add_left + 補助 (1 ⊖ r)·r^k ≈ r^k ⊕ (⊖r^{k+1}) で閉じる・RealGeomData。<strong>幾何級数の閉形式が ℝ の土俵に乗った</strong> = テータ級数・log-volume の収束論の実数側入口。正直な限定: 本層は有限部分和の realEq 恒等式のみで、極限 s_k の Cauchy 性と (1 ⊖ r)⁻¹ への収束（rate-bound master + |r| < 1 = IsPos(1 ⊖ rabs r) 前提）は次層 — M163 同様「収束」ではなく「閉形式」まで。全 5 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M164: λ-adic 膜 (λ^k) のイデアル構造と冪法則（柱B）（IUT/LambdaIdeal.lean）</h3>
   <div class="box">

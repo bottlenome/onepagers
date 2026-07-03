@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 209,
-  "verified_theorem_total": 1704,
-  "choice_free_count": 169,
+  "module_count": 210,
+  "verified_theorem_total": 1708,
+  "choice_free_count": 170,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2583,6 +2583,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaIdeal.lean"
+    },
+    {
+      "id": "RealGeom",
+      "label": "RealGeom",
+      "milestone": "M165",
+      "title": "幾何級数の実数版",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeom.lean"
     }
   ],
   "edges": [
@@ -2605,6 +2617,10 @@
     {
       "source": "ApartInv",
       "target": "RealFieldCapstone"
+    },
+    {
+      "source": "ApartInv",
+      "target": "RealGeom"
     },
     {
       "source": "Arithmetic",
@@ -3452,6 +3468,10 @@
     },
     {
       "source": "RealOrder",
+      "target": "RealGeom"
+    },
+    {
+      "source": "RealOrder",
       "target": "RealLe"
     },
     {
@@ -3477,6 +3497,10 @@
     {
       "source": "RealRingLaws",
       "target": "RealFieldCapstone"
+    },
+    {
+      "source": "RealRingLaws",
+      "target": "RealGeom"
     },
     {
       "source": "RealVolumeTheory",

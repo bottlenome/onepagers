@@ -1713,6 +1713,10 @@ import IUT
 #print axioms IUT.isValAtLeast_pow
 #print axioms IUT.lambdaIdealData
 #print axioms IUT.lambdaIdeal_exists
+#print axioms IUT.real_add_cancel_middle
+#print axioms IUT.real_geom_closed
+#print axioms IUT.realGeomData
+#print axioms IUT.realGeom_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

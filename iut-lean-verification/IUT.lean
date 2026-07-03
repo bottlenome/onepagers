@@ -213,3 +213,4 @@ import IUT.LambdaValuationMul
 import IUT.RealDivision
 import IUT.GeomSeries
 import IUT.LambdaIdeal
+import IUT.RealGeom
