@@ -1702,6 +1702,11 @@ import IUT
 #print axioms IUT.apart_inv_unique
 #print axioms IUT.realDivisionData
 #print axioms IUT.realDivision_exists
+#print axioms IUT.crGeomSum_succ
+#print axioms IUT.geom_closed
+#print axioms IUT.geom_closed_right
+#print axioms IUT.geomSeriesData
+#print axioms IUT.geomSeries_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

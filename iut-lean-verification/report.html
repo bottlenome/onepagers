@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M162 の形式化（追加検証）</h2>
+  <h2>M1〜M163 の形式化（追加検証）</h2>
+
+  <h3>M163: 幾何級数の代数核 — 部分和の望遠鏡的閉形式（柱E→C 橋）（IUT/GeomSeries.lean）</h3>
+  <div class="box">
+    <p>ℝ 冪級数の入口（issue #48 §4 M163）のうち<strong>任意の可換環で成り立つ代数的核</strong>を先に確立（第101弾）。部分和 <code>crGeomSum</code> s_k = Σ_{i&lt;k} r^i を再帰定義（s_0 = 0・s_{k+1} = s_k + r^k）し、<strong>本丸 geom_closed: (1 − r)·s_k = 1 − r^k</strong> を k の帰納 + 分配 + 相殺補題 add_cancel_middle（(a + (−b)) + (b + d) = a + d）で閉じる。右版 geom_closed_right（可換）・GeomSeriesData。<strong>公理ゼロ</strong>。幾何級数はテータ級数・log-volume の収束の最も基本的な雛形で、その代数骨格は付値環（ℤ_p・eisRing・塔）でも実数でも共通 — 各具体環へ instance 化できる。(1 − r)·s_k = 1 − r^k は |r| &lt; 1 での収束評価 s_k → (1 − r)⁻¹（残差 r^k/(1 − r)）の出発点。正直な限定: 本層は有限部分和の恒等式のみで、実数値 ℝ 上の収束（rate-bound master による Cauchy 性と極限 (1 − r)⁻¹ の同定）・具体的な級数への適用は次層。全 6 宣言 [propext, Quot.sound] 以下（大半は公理ゼロ）。</p>
+  </div>
 
   <h3>M162: 除算代数 — 逆元の一意性・congruence・積の逆元（柱C）（IUT/RealDivision.lean）</h3>
   <div class="box">
