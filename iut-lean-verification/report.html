@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M167 の形式化（追加検証）</h2>
+  <h2>M1〜M168 の形式化（追加検証）</h2>
+
+  <h3>M168: 実数幾何級数の漸化式・残差恒等式（柱E→C 橋）（IUT/RealGeomRec.lean）</h3>
+  <div class="box">
+    <p>M165（実数幾何級数の閉形式 (1 ⊖ r)·s_k ≈ 1 ⊖ r^k）の続き、ℝ 上の幾何級数 API を完成（第101弾）。<strong>real_geom_rec_left: s_{k+1} ≈ 1 ⊕ r·s_k</strong>（左漸化式、s_{k+1} = 1 + r + … + r^k = 1 + r·(1 + … + r^{k-1})、k の帰納 + 実左分配 rmul_add_left + rmul_comm）・<strong>real_geom_residual: (1 ⊖ r)·s_k ⊕ r^k ≈ 1</strong>（閉形式 M165 の移項形——部分和に欠けているのはちょうど末尾 r^k だけ）・RealGeomRecData。残差恒等式は |r| &lt; 1 での収束 s_k → (1 ⊖ r)⁻¹ において<strong>残差が r^k で支配される</strong>ことを述べる直前の一歩（次層の rate-bound 評価の代数的下地）。正直な限定: 収束そのもの（r^k → 0 と極限の同定）は次層で、本層は有限 k での realEq 恒等式のみ。全 4 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M167: 実数の冪法則 II — 積・反復・単位（柱C）（IUT/RealPowMul.lean）</h3>
   <div class="box">

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 212,
-  "verified_theorem_total": 1717,
-  "choice_free_count": 172,
+  "module_count": 213,
+  "verified_theorem_total": 1721,
+  "choice_free_count": 173,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2619,6 +2619,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealPowMul.lean"
+    },
+    {
+      "id": "RealGeomRec",
+      "label": "RealGeomRec",
+      "milestone": "M168",
+      "title": "実数幾何級数の漸化式と残差恒等式（柱E→C 橋）",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomRec.lean"
     }
   ],
   "edges": [
@@ -3453,6 +3465,10 @@
     {
       "source": "RealDivision",
       "target": "RealPowMul"
+    },
+    {
+      "source": "RealGeom",
+      "target": "RealGeomRec"
     },
     {
       "source": "RealGeom",
