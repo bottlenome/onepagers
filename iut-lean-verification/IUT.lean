@@ -209,3 +209,5 @@ import IUT.RealFieldCapstone
 import IUT.FactorialTower
 import IUT.GaussPilotWeighted
 import IUT.RealObstruction
+import IUT.LambdaValuationMul
+import IUT.RealDivision

@@ -1688,6 +1688,20 @@ import IUT
 #print axioms IUT.padding_necessary_real
 #print axioms IUT.realObstructionData
 #print axioms IUT.realObstruction_exists
+#print axioms IUT.mul_middle4
+#print axioms IUT.isValAtLeast_mul
+#print axioms IUT.tower_isValAtLeast_mul
+#print axioms IUT.lam_pow_mul_unit_strict
+#print axioms IUT.tower_lam_pow_mul_unit_strict
+#print axioms IUT.lambdaValMulData
+#print axioms IUT.lambdaValMul_exists
+#print axioms IUT.rinv_unique
+#print axioms IUT.rinv_congr
+#print axioms IUT.rmul_mul_mul_comm
+#print axioms IUT.rmul_inv_mul
+#print axioms IUT.apart_inv_unique
+#print axioms IUT.realDivisionData
+#print axioms IUT.realDivision_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

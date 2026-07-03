@@ -158,7 +158,17 @@
 </section>
 
 <section>
-  <h2>M1〜M159 の形式化（追加検証）</h2>
+  <h2>M1〜M162 の形式化（追加検証）</h2>
+
+  <h3>M162: 除算代数 — 逆元の一意性・congruence・積の逆元（柱C）（IUT/RealDivision.lean）</h3>
+  <div class="box">
+    <p>M153F（apart 一般の逆元存在 apart_inv_exists）の正直申告「逆元の一意性・除算代数は次層」を<strong>rate-bound を一切使わず既存の realEq 乗法代数だけで解消</strong>（第101弾）。<strong>rinv_unique: x·y ≈ 1 かつ x·y' ≈ 1 なら y ≈ y'</strong> — y ≈ y·1 ≈ y·(x·y') ≈ (y·x)·y' ≈ (x·y)·y' ≈ 1·y' ≈ y' の連鎖（M150 結合 + M123F 可換 + congruence のみ）。<strong>rinv_congr: 底の realEq に関する逆元関係の congruence</strong>（x ≈ x' ∧ x·y ≈ 1 ⟹ x'·y ≈ 1）。<strong>rmul_inv_mul: x·a ≈ 1 ∧ y·b ≈ 1 ⟹ (x·y)·(a·b) ≈ 1</strong>（= (xy)⁻¹ ≈ x⁻¹·y⁻¹、実数版中央四項入替 rmul_mul_mul_comm 経由）。apart_inv_unique・RealDivisionData。<strong>逆元「関数」を choice で取り出さず、逆元「関係」x·y ≈ 1 のレベルで除算代数を閉じる</strong>（∃ から関数を作らない設計）。正直な限定: 全域逆元関数 r⁻¹ の構成（各元へ apartness 証明を伴わせる必要）・論理的非零 ¬(x ≈ 0) からの逆元（Markov 原理相当）は対象外。全 6 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
+
+  <h3>M161: λ-adic 付値の加法性・第一切片 — 積の値の下界と単元倍の厳密性（柱B）（IUT/LambdaValuationMul.lean）</h3>
+  <div class="box">
+    <p>M151F（λ-adic 値 v(λ^j) = j の井戸定義性と膜 (λ^k) の厳密降下）の直上に立つ柱B の一歩（第101弾）。付値の加法性を二方向で。<strong>isValAtLeast_mul: x ∈ (λ^j)・y ∈ (λ^k) ⟹ x·y ∈ (λ^{j+k})</strong>（下界側 = 積のイデアル所属）——witness は係数の積 a·b、λ^{j+k} = λ^j·λ^k（rpow_add）と可換環の中央四項入替 mul_middle4 で着地（公理ゼロ）。逆向きに <strong>lam_pow_mul_unit_strict: λ 正則・非単元、u 単元なら λ^j·u ∉ (λ^{j+1})</strong>——λ^j·u = h·λ^{j+1} と仮定すると λ^j の正則性（M146F-3 regular_rpow）で u = h·λ、単元性 u·w = 1 に代入して λ·(h·w) = 1 となり非単元性に矛盾（M151F-5 lam_pow_strict の u = 1 からの一般化）。<strong>単元倍が値を上げない = λ^j·(単元) の値がちょうど j</strong>。塔全レベル版 + LambdaValMulData。正直な限定: 完全な等号 v(xy) = v(x)+v(y)（一般元の上界 = min の実現・一般座標の追跡）は M147F 座標理論の次層。全 14 宣言 [propext, Quot.sound] 以下（うち mul_middle4・isValAtLeast_mul・lam_pow_mul_unit_strict は公理ゼロ）。</p>
+  </div>
 
   <h3>M159F: 厳密評価障害の実数版 — Scholze–Stix 議論の実数値インターフェースへの持ち上げ（柱D）（IUT/RealObstruction.lean）</h3>
   <div class="box">

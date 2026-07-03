@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 205,
-  "verified_theorem_total": 1679,
-  "choice_free_count": 165,
+  "module_count": 207,
+  "verified_theorem_total": 1693,
+  "choice_free_count": 167,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2535,6 +2535,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealObstruction.lean"
+    },
+    {
+      "id": "LambdaValuationMul",
+      "label": "LambdaValuationMul",
+      "milestone": "M161",
+      "title": "λ-adic 付値の加法性・第一切片",
+      "pillar": "B",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaValuationMul.lean"
+    },
+    {
+      "id": "RealDivision",
+      "label": "RealDivision",
+      "milestone": "M162",
+      "title": "除算代数",
+      "pillar": "C",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealDivision.lean"
     }
   ],
   "edges": [
@@ -2549,6 +2573,10 @@
     {
       "source": "Anabelian",
       "target": "Reconstruction"
+    },
+    {
+      "source": "ApartInv",
+      "target": "RealDivision"
     },
     {
       "source": "ApartInv",
@@ -3099,6 +3127,10 @@
       "target": "RamifiedReciprocity"
     },
     {
+      "source": "LambdaValuation",
+      "target": "LambdaValuationMul"
+    },
+    {
       "source": "LaurentCoeff",
       "target": "LaurentRing"
     },
@@ -3405,6 +3437,10 @@
     {
       "source": "RealPosMul",
       "target": "RealInv"
+    },
+    {
+      "source": "RealRingLaws",
+      "target": "RealDivision"
     },
     {
       "source": "RealRingLaws",
