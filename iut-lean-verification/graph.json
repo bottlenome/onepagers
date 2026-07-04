@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 220,
-  "verified_theorem_total": 1751,
-  "choice_free_count": 180,
+  "module_count": 221,
+  "verified_theorem_total": 1755,
+  "choice_free_count": 181,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2715,6 +2715,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomAbs.lean"
+    },
+    {
+      "id": "LambdaInvApprox",
+      "label": "LambdaInvApprox",
+      "milestone": "M176",
+      "title": "幾何級数による逆元近似",
+      "pillar": "B",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaInvApprox.lean"
     }
   ],
   "edges": [
@@ -3251,6 +3263,10 @@
       "target": "LambdaGeom"
     },
     {
+      "source": "GeomSeriesRec",
+      "target": "LambdaInvApprox"
+    },
+    {
       "source": "HodgeTheater",
       "target": "FlUnits"
     },
@@ -3277,6 +3293,10 @@
     {
       "source": "LambdaIdeal",
       "target": "LambdaGeom"
+    },
+    {
+      "source": "LambdaIdeal",
+      "target": "LambdaInvApprox"
     },
     {
       "source": "LambdaModule",

@@ -1760,6 +1760,10 @@ import IUT
 #print axioms IUT.rabs_geomSum_le
 #print axioms IUT.realGeomAbsData
 #print axioms IUT.realGeomAbs_exists
+#print axioms IUT.sub_one_eq_neg_of_add_eq_one
+#print axioms IUT.isValAtLeast_inv_approx
+#print axioms IUT.lambdaInvApproxData
+#print axioms IUT.lambdaInvApprox_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

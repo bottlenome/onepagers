@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M175 の形式化（追加検証）</h2>
+  <h2>M1〜M176 の形式化（追加検証）</h2>
+
+  <h3>M176: 幾何級数による逆元近似 — (1−r)·s_k ≡ 1 mod (λ^{km})（柱B）（IUT/LambdaInvApprox.lean）</h3>
+  <div class="box">
+    <p>M170（環の幾何級数の残差 (1 − r)·s_k + r^k = 1）と M164（膜のイデアル・冪法則 r ∈ (λ^m) ⟹ r^k ∈ (λ^{km})）の合流（第101弾）。整形補題 sub_one_eq_neg_of_add_eq_one（a + b = 1 ⟹ a − 1 = −b、a を不透明に扱い a 内部の 1 と衝突させない）と <strong>isValAtLeast_inv_approx: r ∈ (λ^m) ⟹ (1 − r)·s_k − 1 ∈ (λ^{km})</strong>（残差より誤差 (1 − r)·s_k − 1 = −r^k、冪法則で r^k ∈ (λ^{km})、反元閉性で −r^k ∈ (λ^{km})）・LambdaInvApproxData。<strong>公理ゼロ</strong>。<strong>公比 r が (λ^m) に入るとき幾何部分和 s_k は 1 − r の逆元を精度 (λ^{km}) で近似する</strong>（誤差が深さ km で 0 に近づく）= 完備付値環で 1 − r（r が位相的に小さい）が可逆であることの代数的核心。M172（s_k ≡ 1 mod (λ^m)）を「逆元近似」の水準へ引き上げる。正直な限定: 実際の逆元 (1 − r)⁻¹ の存在（k → ∞ の極限 = ∩(λ^{km}) = 0 の完備性・∑r^i の収束）は位相・完備化を要し次層。全 4 宣言 [propext, Quot.sound] 以下（本体2つは公理ゼロ）。</p>
+  </div>
 
   <h3>M175: 幾何部分和の絶対値評価 — |Σ rⁱ| ≤ Σ |r|ⁱ（柱C）（IUT/RealGeomAbs.lean）</h3>
   <div class="box">
