@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M180 の形式化（追加検証）</h2>
+  <h2>M1〜M181 の形式化（追加検証）</h2>
+
+  <h3>M181: 実数幾何級数の減衰 — |r|^k → 0 の明示モジュラス（柱C・tier L / Fable）（IUT/RealGeomDecay.lean）</h3>
+  <div class="box">
+    <p>幾何級数収束のステップ(c)（第101弾・Fable スポットセッション）。ℚ の冪 qpow を新設し、<strong>qpow_frac_repr</strong>（qpow (N/(N+1)) k = N^k/(N+1)^k を PreRat 代表 ⟨N^k, (N+1)^k⟩ で計算、qMul が Quot.mk 上で prMul に簡約するのを利用）・<strong>qpow_frac_le: 1 ≤ N ∧ N·m ≤ k ⟹ qLe (qpow (N/(N+1)) k) (1/(m+1))</strong>（qLe が prLe = N^k·(m+1) ≤ (N+1)^k に簡約し、M179 減衰モジュラスの Int キャストで閉じる）・<strong>realPow_qToReal: realPow (q↑) k ≈ (q^k)↑</strong>（埋め込みと冪の交換、qToReal_mul の反復）を経て、<strong>本丸 realPow_rabs_decay: |r| ≤ N/(N+1) ∧ 1 ≤ N ∧ N·m ≤ k ⟹ |r|^k ≤ 1/(m+1)</strong>（M180 realPow_le + M173 rabs_nonneg → M181 realPow_qToReal → M174 rLe_qToReal + M181 qpow_frac_le の rLe 連鎖）・RealGeomDecayData。<strong>公理ゼロ</strong>。<strong>|r|^k → 0 が明示速度つきで確定</strong>（k ≥ N·m で 1/(m+1) 以下）= 幾何級数収束の解析的核。正直な限定: 最終組み上げ(d)（部分和 s_k の IsCauchyReals 性 + rlim（M128 完備性）での極限構成 + (1⊖r)·L ≈ 1）は次層。全 9 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M180: 実数乗法の順序単調性 — rLe の右乗法単調性（柱C・tier L / Fable）（IUT/RealMulOrder.lean）</h3>
   <div class="box">

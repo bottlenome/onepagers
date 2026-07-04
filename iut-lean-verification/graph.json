@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 225,
-  "verified_theorem_total": 1775,
-  "choice_free_count": 185,
+  "module_count": 226,
+  "verified_theorem_total": 1782,
+  "choice_free_count": 186,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2775,6 +2775,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealMulOrder.lean"
+    },
+    {
+      "id": "RealGeomDecay",
+      "label": "RealGeomDecay",
+      "milestone": "M181",
+      "title": "実数幾何級数の減衰",
+      "pillar": "C",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomDecay.lean"
     }
   ],
   "edges": [
@@ -3303,6 +3315,10 @@
       "target": "VolumeReal"
     },
     {
+      "source": "GeomDecayNat",
+      "target": "RealGeomDecay"
+    },
+    {
       "source": "GeomSeries",
       "target": "GeomSeriesRec"
     },
@@ -3651,6 +3667,10 @@
       "target": "RealGeomAbs"
     },
     {
+      "source": "RealAbsTriangle",
+      "target": "RealGeomDecay"
+    },
+    {
       "source": "RealComplete",
       "target": "Premises311Real"
     },
@@ -3735,6 +3755,10 @@
       "target": "RealOrder"
     },
     {
+      "source": "RealMulOrder",
+      "target": "RealGeomDecay"
+    },
+    {
       "source": "RealOrder",
       "target": "RealAbsLe"
     },
@@ -3773,6 +3797,10 @@
     {
       "source": "RealPow",
       "target": "RealGeomCongr"
+    },
+    {
+      "source": "RealPow",
+      "target": "RealGeomDecay"
     },
     {
       "source": "RealPow",

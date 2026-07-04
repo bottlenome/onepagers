@@ -1784,6 +1784,13 @@ import IUT
 #print axioms IUT.realPow_le
 #print axioms IUT.realMulOrderData
 #print axioms IUT.realMulOrder_exists
+#print axioms IUT.int_add_one_pow_pos
+#print axioms IUT.qpow_frac_repr
+#print axioms IUT.qpow_frac_le
+#print axioms IUT.realPow_qToReal
+#print axioms IUT.realPow_rabs_decay
+#print axioms IUT.realGeomDecayData
+#print axioms IUT.realGeomDecay_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

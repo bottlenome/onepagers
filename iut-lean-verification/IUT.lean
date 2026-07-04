@@ -229,3 +229,4 @@ import IUT.RealGeomInv
 import IUT.GeometricSeriesProgram
 import IUT.GeomDecayNat
 import IUT.RealMulOrder
+import IUT.RealGeomDecay
