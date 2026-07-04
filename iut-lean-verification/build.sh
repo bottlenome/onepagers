@@ -1922,6 +1922,10 @@ import IUT
 #print axioms IUT.proRepresentation_of_domination
 #print axioms IUT.connected_proRepresented
 #print axioms IUT.proRepresentable_exists
+#print axioms IUT.cor312_of_input
+#print axioms IUT.iut_localized
+#print axioms IUT.rep_of_input
+#print axioms IUT.multiradialInput_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

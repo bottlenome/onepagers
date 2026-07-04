@@ -264,6 +264,7 @@ import IUT.LogKummer
 import IUT.FormalEndRing
 import IUT.Multiradial311
 import IUT.PillarDFoundation
+import IUT.MultiradialInput
 import IUT.ThetaLabelInjective
 import IUT.LambdaTowerExactVal
 import IUT.ProRepresentable

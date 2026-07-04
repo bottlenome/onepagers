@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M214 の形式化（追加検証）</h2>
+  <h2>M1〜M215 の形式化（追加検証）</h2>
+
+  <h3>M215F: MultiradialInput — IUT の正否の単一レコードへの局在（柱D D-α-7・並行部品）（IUT/MultiradialInput.lean）</h3>
+  <div class="box">
+    <p><a href="https://github.com/bottlenome/onepagers/issues/38">#38 の D-1 詳細化ラウンド</a>の<strong>核心的到達点</strong>を第101弾で実装。定理3.11 の構成本体 D-β を<strong>名前を持つ単一レコード MultiradialInput</strong> として明示化し、IUT の正否をその inhabit 問題に局在させる。<strong>MultiradialInput (V s)</strong>: <code>base : MultiradialRep V s</code> + <code>padded : ∃ i, −s.logq ≤ V.vol (base.image i)</code>（M5-3 <code>padding_necessary</code> による膨張の整合スタンプ）+ <code>not_strict : ¬ StrictEvaluation base</code>（M5-2 <code>strict_evaluation_obstruction</code> の整合スタンプ）。<code>inputOfRep</code>（任意の <code>MultiradialRep</code> から障害フィールドを自動充足）・<strong>cor312_of_input : MultiradialInput ⟹ Cor312 s</strong>（局在降下、<code>cor312_of_multiradial</code> 経由、公理ゼロ）・<strong>rep_of_input : Theorem311Premises + MultiradialInput ⟹ Nonempty (Theorem311Rep …)</strong>（I.base + 4 D-α 土台を choice-free に合成）・<strong>iut_localized : Nonempty (MultiradialInput V s) ⟹ Cor312 s</strong>（局在の本丸）・MultiradialInputData（pilot demo witness）。<code>cor312_of_input</code>/<code>iut_localized</code> は <strong>公理に依存しない</strong>、<code>rep_of_input</code>/<code>multiradialInput_exists</code> は [propext, Quot.sound]。<strong>還元連鎖 Premises → Input → Rep → Cor312 が閉じ、「IUT の正否 ⟺（機械検証済みの還元の下で）MultiradialInput の inhabit」が形式体系内の言明として確定した——本プロジェクトの二分法定理（<code>verdict</code>）の最終形</strong>。正直な限定: <code>padded</code>/<code>not_strict</code> は任意の <code>MultiradialRep</code> で自動充足される（＝<code>MultiradialInput</code> の inhabit は <code>MultiradialRep</code> の inhabit と同値で、追加制約ではなく正直な機械検証スタンプ）。demo witness は pilot 模型を用い、<strong>実数論データ上の inhabit（＝多輻的アルゴリズムの構成＝D-β、恒久的入力）は主張しない</strong>（<code>cor312_independent</code> が骨格からの決定不能性を証明済み）。cor312_of_input/iut_localized は公理ゼロ、他は [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M213F: pro-表現対象（SGA1 後半）— colimEval の pro-Yoneda 単射性と支配下全単射（柱A A-3α・並行部品・tier L / Fable）（IUT/ProRepresentable.lean）</h3>
   <div class="box">

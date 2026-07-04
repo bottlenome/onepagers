@@ -36,8 +36,8 @@
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 38,
-      "status": "入口 🔶 / D-α 実装 Dα-1〜5 完了（mono-theta 環境・対数殻・不定性・log-Kummer・フル仕様 Theorem311Rep M210F）: 定理3.11 statement 構造が露出し系3.12 還元 cor312_of_311 が骨格完成。残: Dα-6/7 GaussPilot311/MultiradialInput・Dα-8 capstone / 本丸 D-β",
+      "progress_pct": 42,
+      "status": "入口 🔶 / D-α 実装 Dα-1〜7（4土台+Theorem311Rep+MultiradialInput）: IUT の正否が MultiradialInput の inhabit 問題に局在（Premises→Input→Rep→Cor312 還元連鎖）。残: Dα-8 インターフェース capstone / 本丸 D-β 多輻的アルゴリズム構成",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },
