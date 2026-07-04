@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 255,
-  "verified_theorem_total": 1891,
-  "choice_free_count": 213,
+  "module_count": 256,
+  "verified_theorem_total": 1894,
+  "choice_free_count": 214,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3149,6 +3149,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RecUnramified.lean"
+    },
+    {
+      "id": "ThetaValueEval",
+      "label": "ThetaValueEval",
+      "milestone": "M209F",
+      "title": "テータ値評価の l⋇ ラベリング（柱E・並行部品）",
+      "pillar": "E",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueEval.lean"
     }
   ],
   "edges": [
@@ -3383,6 +3395,10 @@
     {
       "source": "EtaleTheta",
       "target": "TateQuotient"
+    },
+    {
+      "source": "Evaluation",
+      "target": "ThetaValueEval"
     },
     {
       "source": "FactorTheorem",
@@ -3685,6 +3701,10 @@
       "target": "Profinite"
     },
     {
+      "source": "FundamentalGroup",
+      "target": "ThetaValueEval"
+    },
+    {
       "source": "FuneqLift",
       "target": "ThetaFuneqBridge"
     },
@@ -3791,6 +3811,10 @@
     {
       "source": "HodgeTheater",
       "target": "MuLIdentification"
+    },
+    {
+      "source": "HodgeTheater",
+      "target": "ThetaValueEval"
     },
     {
       "source": "IntRealBridge",
@@ -4635,6 +4659,10 @@
     {
       "source": "TowerTorsion",
       "target": "TorsionResidue"
+    },
+    {
+      "source": "TriSquare",
+      "target": "ThetaValueEval"
     },
     {
       "source": "UnitDecomposition",

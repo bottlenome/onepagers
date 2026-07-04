@@ -1900,6 +1900,9 @@ import IUT
 #print axioms IUT.tateSurrogate_exists
 #print axioms IUT.recUnram_covers
 #print axioms IUT.recUnramified_exists
+#print axioms IUT.thetaValExp_unique
+#print axioms IUT.thetaValExp_orbit_mod
+#print axioms IUT.thetaValueEval_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

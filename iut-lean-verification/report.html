@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M207 の形式化（追加検証）</h2>
+  <h2>M1〜M209 の形式化（追加検証）</h2>
+
+  <h3>M209F: テータ値評価の l⋇ ラベリング — 値指数 j² と ±/orbitRep well-defined（柱E・並行部品）（IUT/ThetaValueEval.lean）</h3>
+  <div class="box">
+    <p>M4 のテータ値 q^{j²} を ±/l⋇ ラベリング（M162F）へ接続する値側の切片を第101弾で形式化（tier M / opus、スライス A + 値↔ラベル well-defined 橋）。<strong>thetaValExp j := j·j</strong>（テータ値の q-指数）・<code>thetaValExp_rec</code>（j² の漸化 +2j+1、M9-8 <code>sq_succ</code>）・<strong>thetaValExp_unique</strong>（F(0)=0 ∧ F(j+1)=F(j)+2j+1 ⟹ F=j²、q^{j²} 強制、M9-7 <code>theta_exponent_unique</code>）・<code>thetaValExp_pm_mod</code>（(l−j)² ≡ j² mod l、M4-7）・<strong>本丸 thetaValExp_orbit_mod: orbitRep l j = orbitRep l j' ⟹ 値指数が mod l で一致</strong>（±1-軌道ラベル上での値の well-defined、M2-6 <code>orbitRep_eq_iff</code> + M4-7 <code>theta_value_pm_symmetry</code>）・<code>thetaValExp_tri</code>（j² の tri 換算、M143F <code>tri_adjacent_sq</code>）・ThetaValueEvalData。値系の定理は <strong>[propext, Quot.sound]</strong>、<code>thetaValueEval_exists</code> は Evaluation/HodgeTheater 連鎖から <strong>Classical.choice を型継承</strong>（本モジュールでの新規使用ゼロ、<strong>意図的 Classical 台帳 48→49</strong>）。<strong>テータ値 q^{j²} が ±/orbitRep ラベル上で mod l well-defined に確定し、M162F の l⋇ ラベリングと値側で接続された</strong>。正直な限定: 値指数 j² とその ±/orbitRep well-defined + tri 換算のみ。完全なラベル単射（{1..l⋇} ↦ 相異なる値 mod l、Euclid 補題 = l 素数を要し mathlib なしで不可）・完全な評価同型（エタールテータ値構成）・ガロア同変な p-進テータ値・tempered π₁ 実現は E-1 residual。値系 [propext, Quot.sound]／exists は [propext, Classical.choice, Quot.sound]。</p>
+  </div>
 
   <h3>M207F: 分岐 rec の不分岐・Frobenius 側 — M197F 単数側の補完（柱B B-2 不分岐側・並行部品）（IUT/RecUnramified.lean）</h3>
   <div class="box">
