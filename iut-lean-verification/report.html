@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M187 の形式化（追加検証）</h2>
+  <h2>M1〜M188 の形式化（追加検証）</h2>
+
+  <h3>M188F: Tate 曲線のテンパード基本群の具体提示 — A-3 幾何的入力サロゲートの第一歩（柱A A-3β-1・並行部品）（IUT/TateCoverGroup.lean）</h3>
+  <div class="box">
+    <p><a href="https://github.com/bottlenome/onepagers/issues/35">#35 の A-3 詳細化ラウンド</a>で確定したサロゲート戦略（スキーム論的 étale 圏の第一原理建設ではなく、具体提示した π₁ からの被覆圏として実現）の**第一実装ステップ**。Tate 曲線 X = E_q ∖ {O} のテンパード基本群を、既存資産の再利用のみで三層に束ねる（何も再構築しない）。<strong>デッキ群 tateDeckGrp := intGrp（ℤ）</strong>——テータ被覆 Ÿ→X のデッキ群で、<code>tateDeckGrp_tempered: ¬ BoundedExponent</code>（有限エタール被覆では実現不能 = テンパードが真に必要という M9 の本質）。新汎用補題 <strong>boundedExponent_no_int_embedding</strong>（ℤ を忠実に含む群は非有界指数）。<strong>被覆群 tateCoverGrp := tateModel.Π</strong>（M9 の <code>TemperedArithmetic</code> witness を再利用し、完全列 1→Δ→Π→G_K→1 とテータ埋め込み ℤ↪Δ を継承）、デッキ射影 <code>tateDeckProj</code>（θ の retraction は rfl）、<code>tateCoverGrp_exact</code>/<code>_pr_surjective</code>/<code>_tempered</code>。<strong>有限商系 tateFiniteSystem := zmodSystem・副有限完備化 tateProfinite := zhat</strong>（M13 を verbatim 再利用）、<strong>tateCompletion : Π → zhat</strong>（<code>limit_universal</code> で一意性 <code>tateCompletion_unique</code>）、<strong>tateCompletion_deck_injective</strong>（<code>toZhat_injective</code> 経由でデッキ群 ℤ は単射に入る = テンパード π₁ の副有限完備化がデッキ方向で忠実）、<code>tateFinite_collapses_theta</code>（各有限レベル ℤ/n がテータ簿記を潰す = テンパードの必要性）、<code>TateCoverGroupData</code>。全 13 宣言 <strong>[propext, Quot.sound]</strong>（choice-free、GaloisTower/ProObject の Classical 機構は zhat 直接利用により不要）。<strong>A3β-2/3（被覆圏の実体化・G1–G6 の有限性付き移送）の型土台——具体的な群 + その有限商系 + 副有限極限——が確定</strong>。正直な限定: これは**群の提示**であり、被覆圏（A3β-2）でもスキーム論的 étale 性でもない。π₁ は幾何的入力（<code>tateModel</code> 構造データ）で計算された不変量ではない。G_K は玩具 <code>tateModel.Gal</code>=ℤ（可換）で、実 G_K は非可換・実 Δ^temp は ℤ を真に含む（デッキ群 ℤ の拡大骨格のみ捕捉）。完備化はデッキ（幾何）方向のみ、位相なし（M13 同様の代数的逆極限）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M187F: エタールテータ関数等式の Heisenberg リフト — 中心捻れの閉形式と μ_l ラベル同定（柱E E-1・並行部品）（IUT/ThetaHeisenbergLift.lean）</h3>
   <div class="box">

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 236,
-  "verified_theorem_total": 1836,
-  "choice_free_count": 196,
+  "module_count": 237,
+  "verified_theorem_total": 1841,
+  "choice_free_count": 197,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2911,6 +2911,20 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaHeisenbergLift.lean"
+    },
+    {
+      "id": "TateCoverGroup",
+      "label": "TateCoverGroup",
+      "milestone": "M188F",
+      "title": "Tate 曲線のテンパード基本群の具体提示",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateCoverGroup.lean"
     }
   ],
   "edges": [
@@ -3773,6 +3787,10 @@
     {
       "source": "Profinite",
       "target": "GaloisCategory"
+    },
+    {
+      "source": "Profinite",
+      "target": "TateCoverGroup"
     },
     {
       "source": "Profinite",

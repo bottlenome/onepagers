@@ -240,3 +240,4 @@ import IUT.MuLIdentification
 import IUT.GeomRlimComplete
 import IUT.AbstractEssSurjSum
 import IUT.ThetaHeisenbergLift
+import IUT.TateCoverGroup

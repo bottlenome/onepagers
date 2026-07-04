@@ -1845,6 +1845,11 @@ import IUT
 #print axioms IUT.thetaNegMod_section_twist
 #print axioms IUT.funeq_heisenberg_mul
 #print axioms IUT.thetaHeisenbergLift_exists
+#print axioms IUT.boundedExponent_no_int_embedding
+#print axioms IUT.tateCoverGrp_tempered
+#print axioms IUT.tateCompletion_unique
+#print axioms IUT.tateCompletion_deck_injective
+#print axioms IUT.tateCoverGroup_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
