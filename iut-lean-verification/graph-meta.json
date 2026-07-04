@@ -12,8 +12,8 @@
     "A": {
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
-      "progress_pct": 96,
-      "status": "SGA1主定理ブロック ✅ / A-1 完結・A-2 推移的+有限和+ガロア支配&Connected⟺推移的(M189F)・本質全射 capstone(M194F)・A-3β-1/2 Tate被覆群+有限連続被覆圏(M188F/M191F)。残: A-3β-3/4 GaloisCatData化&Aut=π₁ 復元 (#35)",
+      "progress_pct": 97,
+      "status": "SGA1主定理ブロック ✅ / A-1完結・A-2完結群・A-3β-1/2/3 Tate被覆群→有限連続被覆圏→GaloisCatData化(G1–G6全充足, M195F)。残: A-3β-4 Aut(F)=π₁ 復元・SGA1後半 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
     },

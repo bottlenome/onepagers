@@ -1874,6 +1874,10 @@ import IUT
 #print axioms IUT.monoThetaEnv
 #print axioms IUT.monoThetaEnv_exists
 #print axioms IUT.convergenceProgram_exists
+#print axioms IUT.imageCover
+#print axioms IUT.tateGaloisData
+#print axioms IUT.tateGaloisData_faithful
+#print axioms IUT.tateCoverGalois_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

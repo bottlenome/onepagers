@@ -55,6 +55,7 @@ namespace IUT
 
 /-! ## M197F-1: ω(a) の標準代表は a と合同 -/
 
+set_option linter.unusedVariables false in
 /-- **定理 (M197F-1): ω(a) の標準代表は a と合同** — res1(ω(a)) ≡ a
     (mod p)。Teichmüller 代表のレベル 1 値は a（M118F-1 `teich_val_one`）
     であり、`res1`/`zres` はその emod（M94-1）だから、a − a%p は p の
@@ -147,6 +148,7 @@ structure RecRamifiedSurjData (p : Nat) (hp : IsPrime p) (hodd : 3 ≤ p) where
     (eisGal p hp a ha).map (eisLambda p)
       ≠ (eisGal p hp b hb).map (eisLambda p)
 
+set_option linter.unusedVariables false in
 /-- **M197F-5b: witness** — Teichmüller 代表を実現子とし、M197F-1〜4 +
     M87F-4 `eisGal_faithful` で純レコードを充填（選択公理不使用）。 -/
 def recRamifiedSurjData (p : Nat) (hp : IsPrime p) (hodd : 3 ≤ p) :

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 245,
-  "verified_theorem_total": 1865,
-  "choice_free_count": 204,
+  "module_count": 246,
+  "verified_theorem_total": 1869,
+  "choice_free_count": 205,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3025,6 +3025,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConvergenceCapstone.lean"
+    },
+    {
+      "id": "TateCoverGalois",
+      "label": "TateCoverGalois",
+      "milestone": "M195F",
+      "title": "Tate 被覆圏の GaloisCatData 化",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateCoverGalois.lean"
     }
   ],
   "edges": [
@@ -4331,6 +4343,10 @@
     {
       "source": "SumDecomposition",
       "target": "AbstractEssSurjSum"
+    },
+    {
+      "source": "TateCoverCat",
+      "target": "TateCoverGalois"
     },
     {
       "source": "TateCoverGroup",

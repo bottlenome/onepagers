@@ -249,3 +249,4 @@ import IUT.EssSurjCapstone
 import IUT.TateCoverCat
 import IUT.MonoThetaEnv
 import IUT.ConvergenceCapstone
+import IUT.TateCoverGalois
