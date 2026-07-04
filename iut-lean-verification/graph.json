@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 268,
-  "verified_theorem_total": 1926,
-  "choice_free_count": 223,
+  "module_count": 272,
+  "verified_theorem_total": 1930,
+  "choice_free_count": 226,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3305,6 +3305,54 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ProRepresentable.lean"
+    },
+    {
+      "id": "PillarDInterface",
+      "label": "PillarDInterface",
+      "milestone": "M220F",
+      "title": "柱D インターフェース側 100%",
+      "pillar": "D",
+      "decl_count": 3,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PillarDInterface.lean"
+    },
+    {
+      "id": "FormalGroupCapstone",
+      "label": "FormalGroupCapstone",
+      "milestone": "M224F",
+      "title": "柱C Lubin–Tate プログラムの総括 capstone（柱C・並行部品）",
+      "pillar": "C",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupCapstone.lean"
+    },
+    {
+      "id": "ThetaValueConstruct",
+      "label": "ThetaValueConstruct",
+      "milestone": "M223F",
+      "title": "テータ値 q^{j²} の構成と評価写像",
+      "pillar": "E",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueConstruct.lean"
+    },
+    {
+      "id": "LambdaTowerRamif",
+      "label": "LambdaTowerRamif",
+      "milestone": "M222F",
+      "title": "塔の分岐指数と π の付値（柱B B-1・並行部品）",
+      "pillar": "B",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerRamif.lean"
     }
   ],
   "edges": [
@@ -3603,6 +3651,10 @@
     {
       "source": "FlUnits",
       "target": "FlStar"
+    },
+    {
+      "source": "FormalEndRing",
+      "target": "FormalGroupCapstone"
     },
     {
       "source": "FormalGroup3Congr",
@@ -3905,6 +3957,10 @@
       "target": "CosetGalois"
     },
     {
+      "source": "GaussPilot311",
+      "target": "PillarDInterface"
+    },
+    {
       "source": "GaussPilotRep",
       "target": "GaussPilotWeighted"
     },
@@ -4002,6 +4058,10 @@
     },
     {
       "source": "LTIterate",
+      "target": "FormalGroupCapstone"
+    },
+    {
+      "source": "LTIterate",
       "target": "FormalGroupInverse"
     },
     {
@@ -4045,6 +4105,10 @@
       "target": "RamifiedReciprocity"
     },
     {
+      "source": "LambdaTowerExactVal",
+      "target": "LambdaTowerRamif"
+    },
+    {
       "source": "LambdaTowerGen",
       "target": "LambdaTowerTrans"
     },
@@ -4079,6 +4143,10 @@
     {
       "source": "LaurentMonomial",
       "target": "ThetaFunctional"
+    },
+    {
+      "source": "LaurentMonomial",
+      "target": "ThetaValueConstruct"
     },
     {
       "source": "LaurentRing",
@@ -4225,6 +4293,10 @@
       "target": "MultiradialInput"
     },
     {
+      "source": "MultiradialInput",
+      "target": "PillarDInterface"
+    },
+    {
       "source": "NatPrimeParts",
       "target": "FlUnits"
     },
@@ -4255,6 +4327,10 @@
     {
       "source": "PadicSeries2",
       "target": "PadicGeometric"
+    },
+    {
+      "source": "PillarDFoundation",
+      "target": "PillarDInterface"
     },
     {
       "source": "PointValues",
@@ -4847,6 +4923,10 @@
     {
       "source": "ThetaLabelInjective",
       "target": "ThetaEvalCapstone"
+    },
+    {
+      "source": "ThetaLabelInjective",
+      "target": "ThetaValueConstruct"
     },
     {
       "source": "ThetaOperatorHom",

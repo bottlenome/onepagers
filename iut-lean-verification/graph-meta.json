@@ -20,32 +20,32 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 86,
-      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: B-1 厳密付値/[c]-倍・B-2 完全全射・Λₙ(n≥2) (#36)",
+      "progress_pct": 87,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移+分岐 v(π) 下界 discharge（π_n∈(λ_n) 無条件・基点 e=p−1 exact M222F）・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: B-1 exact 付値 v(π_{n+1})=p·v(π_n)/[c]-倍・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 86,
-      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（残差→極限対象→自己完結→rlim 位相的完備化 M179–M185）・除算代数・実冪法則。残: log-volume 橋の一部 (#37)",
+      "progress_pct": 87,
+      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（残差→極限対象→自己完結→rlim 位相的完備化 M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（LT 存在/一意+End(F)≅ℤ_p+反復同定/可換 M224F）。残: log-volume 橋の一部・点群/O-加群 (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 42,
-      "status": "入口 🔶 / D-α 実装 Dα-1〜7（4土台+Theorem311Rep+MultiradialInput）: IUT の正否が MultiradialInput の inhabit 問題に局在（Premises→Input→Rep→Cor312 還元連鎖）。残: Dα-8 インターフェース capstone / 本丸 D-β 多輻的アルゴリズム構成",
+      "progress_pct": 48,
+      "status": "インターフェース側 capstone ✅ 🔶 / D-α 完結 Dα-1〜8（4土台+Theorem311Rep+MultiradialInput+充足模型を単一レコード PillarDInterfaceData に総括 M220F）: IUT の正否が MultiradialInput の inhabit 問題に局在（Premises→Input→Rep→Cor312 還元連鎖）し、D インターフェース側の組み立てが単一 Nonempty 命題で certify。残: 本丸 D-β 多輻的アルゴリズム構成（永続的幾何入力・実算術データ上の inhabit）",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },
     "E": {
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
-      "progress_pct": 94,
-      "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・解析↔群側関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)。残: 環写像対象・ガロア同変テータ値・tempered π₁ (#39)",
+      "progress_pct": 95,
+      "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・解析↔群側関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)・テータ値 q^{j²} の Laurent 単項式実体化（基点/漸化式/反射/評価単射 M223F）。残: q-展開収束・ガロア同変 p-進テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
     },

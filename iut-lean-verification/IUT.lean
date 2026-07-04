@@ -272,3 +272,7 @@ import IUT.GaloisEquivalence
 import IUT.ThetaLabelInjective
 import IUT.LambdaTowerExactVal
 import IUT.ProRepresentable
+import IUT.PillarDInterface
+import IUT.FormalGroupCapstone
+import IUT.ThetaValueConstruct
+import IUT.LambdaTowerRamif

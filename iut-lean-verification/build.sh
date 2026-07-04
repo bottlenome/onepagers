@@ -1935,6 +1935,10 @@ import IUT
 #print axioms IUT.GaloisTower.colimEval_natural
 #print axioms IUT.GaloisTower.towerComparison_faithful
 #print axioms IUT.galoisEquivalence_exists
+#print axioms IUT.pillarDInterface_exists
+#print axioms IUT.formalGroupProgram_exists
+#print axioms IUT.thetaValueConstruct_exists
+#print axioms IUT.lambdaTowerRamif_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
