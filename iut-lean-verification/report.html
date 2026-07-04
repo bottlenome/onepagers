@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M210 の形式化（追加検証）</h2>
+  <h2>M1〜M214 の形式化（追加検証）</h2>
+
+  <h3>M214F: 柱D D-α 型土台の総括 capstone（柱D・並行部品）（IUT/PillarDFoundation.lean）</h3>
+  <div class="box">
+    <p>D-α の 4 つの型土台（Dα-1 mono-theta 環境 M196F・Dα-2 対数殻 M201F・Dα-3 不定性 M202F・Dα-4 log-Kummer M205F）が揃ったことを<strong>単一レコード PillarDFoundationData に束ねて certification</strong>（新規証明ゼロ、tier S / sonnet）。フィールド: <code>env : MonoThetaEnv</code>・<code>shell : LogShellData</code>・<code>ind : IndeterminaciesData</code>・<code>kummer : LogKummerData</code>。<code>pillarDFoundationData</code>（env を引数に取り、他 3 つは param-free witness <code>logShellData</code>/<code>indeterminaciesData</code>/<code>logKummerData</code> で充填）・<code>pillarDFoundation_exists</code>（<code>monoThetaEnv_exists</code> から Prop-to-Prop の <code>obtain</code> で choice なしに合成）。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>。正直な限定: 4 つの型土台の共存のみを certification し、Dα-5 の <code>Theorem311Rep</code>（base + 還元の完全仕様）は別（M210F）。4 成分の独立パラメタ間の cross-consistency（例: <code>ind.V</code> と <code>kummer.V</code> の一致）は主張しない——各フィールドは自身の <code>…_exists</code> からの独立 witness。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M210F: フル仕様 Theorem311Rep — D-α の要（キーストーン）（柱D D-α-5・並行部品）（IUT/Multiradial311.lean）</h3>
   <div class="box">

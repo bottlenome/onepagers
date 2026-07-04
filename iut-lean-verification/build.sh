@@ -1911,6 +1911,7 @@ import IUT
 #print axioms IUT.formalEndRing_exists
 #print axioms IUT.cor312_of_311
 #print axioms IUT.theorem311Rep_exists
+#print axioms IUT.pillarDFoundation_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
