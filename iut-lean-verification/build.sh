@@ -1775,6 +1775,15 @@ import IUT
 #print axioms IUT.nat_geom_decay_modulus
 #print axioms IUT.geomDecayNatData
 #print axioms IUT.geomDecayNat_exists
+#print axioms IUT.mul_idx_gap
+#print axioms IUT.rmul_mid_gap
+#print axioms IUT.rmul_le_seq
+#print axioms IUT.rmul_le_mul_right
+#print axioms IUT.rmul_le_mul_left
+#print axioms IUT.realPow_nonneg
+#print axioms IUT.realPow_le
+#print axioms IUT.realMulOrderData
+#print axioms IUT.realMulOrder_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

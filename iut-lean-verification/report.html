@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M179 の形式化（追加検証）</h2>
+  <h2>M1〜M180 の形式化（追加検証）</h2>
+
+  <h3>M180: 実数乗法の順序単調性 — rLe の右乗法単調性（柱C・tier L / Fable）（IUT/RealMulOrder.lean）</h3>
+  <div class="box">
+    <p>幾何級数の収束論（柱C）のブロッカーの解消（第101弾・tier L の rate-bound 証明を Fable スポットセッションで完成）。rmul x z と rmul y z は添字加速定数 K₁ = rBound x + rBound z と K₂ = rBound y + rBound z が異なる（<strong>bound-chain 問題</strong>）ため点ごと直接比較は破綻するが、mul_seq_congr の 4 点比較を片側不等式に読み替えた望遠鏡 x_{s₁}z_{s₁} → x_j z_j → y_j z_j → y_{s₂}z_{s₂}（∀j）で ε-消去に持ち込む。<strong>rmul_le_mul_right: x ≤ y ∧ 0 ≤ z ⟹ x·z ≤ y·z（rLe）</strong>——中央ギャップは z_j が僅かに負になり得る（rLe realZero z は z_j ≥ −2u_j までしか言わない）ため、非負シフト z_j + 2u_j への右単調性 + rBound による大きさ押さえで j-項に濃縮するのが核・左版 rmul_le_mul_left・<strong>realPow_le: 0 ≤ a ≤ b ⟹ a^k ≤ b^k</strong>（冪の項別比較、k の帰納で rmul_le_mul_right を二度）・realPow_nonneg・RealMulOrderData。M159F は非負<strong>整数</strong>定数倍に限定していたが、本モジュールで一般の非負<strong>実数</strong> z に拡張。<strong>公理ゼロ</strong>（全宣言 [propext, Quot.sound]）。<strong>収束ステップ(b) 完了</strong> — これで |r|^k ≤ (N/(N+1))^k の実数単調性が使える。正直な限定: 狭義順序 rLt 版の乗法単調性・両側同時（x ≤ x' ∧ z ≤ z' ⟹ xz ≤ x'z'）版は次層。</p>
+  </div>
 
   <h3>M179: 幾何減衰の算術核 — Bernoulli 型評価と減衰モジュラス（柱C）（IUT/GeomDecayNat.lean）</h3>
   <div class="box">
