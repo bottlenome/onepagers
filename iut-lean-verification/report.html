@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M185 の形式化（追加検証）</h2>
+  <h2>M1〜M186 の形式化（追加検証）</h2>
+
+  <h3>M186F: 抽象本質的全射性の有限和拡張 — 非推移的 Aut(A)-集合の実現（柱A A-2・並行部品）（IUT/AbstractEssSurjSum.lean）</h3>
+  <div class="box">
+    <p>M161F は抽象 Galois 圏 <code>QuotientData</code> の下で<strong>推移的</strong> Aut(A)-集合 X ≅ Hom(A, Xo) を選択公理抜きで実現したが、SGA1 本質的全射性が対象とする<strong>非推移的（有限和）対象</strong>への拡張は残っていた。本モジュールが第101弾でこれを完結（Fable スポットセッション、Route 1: C の余積を使う）。M26（SumDecomposition）が供給する <code>SumData</code>（<code>QuotientData</code> を拡張し fsum_inl_inj/fsum_inr_inj・fsum_cases・fsum_disjoint = F が有限和を保つ 4 公理 + hom_sum_realizes: Hom(A,X⊕Y) ≅ Hom(A,X)⊔Hom(A,Y)）を土台に、成分ごとの M161F 実現を SpanIso の和合同で束ねる。<strong>SpanIso.sum: SpanIso X₁ Y₁ → SpanIso X₂ Y₂ → SpanIso (sumAction X₁ X₂)(sumAction Y₁ Y₂)</strong>（同変全単射の和、spanPullback 頂点の componentwise 構成）・<strong>SumData.hom_sum_spanIso: 連結 A で sumAction (Hom(A,X))(Hom(A,Y)) ≅ Hom(A, X⊕Y)</strong>（比較関手の余積保存）・<strong>SumData.hom_initial_spanIso</strong>（空作用 ≅ Hom(A, 始対象)）・<strong>本丸 SumData.abstract_ess_surj_finite: A ガロア・a₀ ∈ F(A)・基点付き推移成分のリスト L に対し Xo = ⊕ᵢ Xoᵢ（D.Sm 反復）が存在して sumListAction(L の空間) ≅ Hom(A, Xo)</strong>（リスト帰納 + SpanIso.sum + hom_sum_spanIso）・系 <strong>abstract_ess_surj_orbits</strong>（G-集合の点リストからの軌道和実現）・AbstractEssSurjSumData。<code>#print axioms</code> は <strong>[Quot.sound] のみ</strong>（propext すら不使用、Classical.choice ゼロ、新規 Classical 増ゼロ）。正直な限定: 有限非推移 X は<strong>提示された有限和</strong>（成分の sumListAction）として受け取る — 抽象的に「有限個の軌道を持つ」という素の仮定から軌道リストへ分解するには代表選択と軌道所属判定が要り choice-free では不可能（M186F-7 は代表リスト所与の軌道和を扱うが、X 自身 ≅ ⊔ orbit(xᵢ) の網羅性・素性は次層）。bare <code>QuotientData</code> でなく <code>SumData</code>（M26、G5 の和部分）を要す（モデル充足は M26-5 で証明済）。ガロア対象の十分性・pro-表現対象は A-2 の未閉部として M161F 同様残る。全宣言 [Quot.sound]。</p>
+  </div>
 
   <h3>M185F: 幾何級数の rlim 完備化 — 対角極限 = (1⊖r)⁻¹（柱C・位相的完備化・tier L / Fable）（IUT/GeomRlimComplete.lean）</h3>
   <div class="box">

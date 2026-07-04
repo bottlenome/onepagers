@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 234,
-  "verified_theorem_total": 1826,
-  "choice_free_count": 194,
+  "module_count": 235,
+  "verified_theorem_total": 1831,
+  "choice_free_count": 195,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2885,9 +2885,25 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomRlimComplete.lean"
+    },
+    {
+      "id": "AbstractEssSurjSum",
+      "label": "AbstractEssSurjSum",
+      "milestone": "M186F",
+      "title": "抽象本質的全射性の有限和拡張",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbstractEssSurjSum.lean"
     }
   ],
   "edges": [
+    {
+      "source": "AbstractEssSurj",
+      "target": "AbstractEssSurjSum"
+    },
     {
       "source": "AbstractGalois",
       "target": "SGA1Completion"
@@ -4123,6 +4139,10 @@
     {
       "source": "SplitFrobenioid",
       "target": "SplitFibered"
+    },
+    {
+      "source": "SumDecomposition",
+      "target": "AbstractEssSurjSum"
     },
     {
       "source": "TateQuotient",

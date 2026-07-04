@@ -1835,6 +1835,11 @@ import IUT
 #print axioms IUT.geom_rlim_complete
 #print axioms IUT.geomRlimData
 #print axioms IUT.geomRlim_exists
+#print axioms IUT.SpanIso.sum
+#print axioms IUT.SumData.hom_sum_spanIso
+#print axioms IUT.SumData.abstract_ess_surj_finite
+#print axioms IUT.SumData.abstract_ess_surj_orbits
+#print axioms IUT.abstractEssSurjSum_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
