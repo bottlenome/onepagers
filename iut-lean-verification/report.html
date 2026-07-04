@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M216 の形式化（追加検証）</h2>
+  <h2>M1〜M218 の形式化（追加検証）</h2>
+
+  <h3>M218F: 分岐 rec の合同全射性 — M197F+M207F の直積被覆統合（柱B B-2 全射側・並行部品）（IUT/RecSurjective.lean）</h3>
+  <div class="box">
+    <p>M197F（単数側）と M207F（不分岐/π 側）を<strong>直積被覆に統合</strong>（tier M / opus）。核心: 単一の K^× 元 x = (k, ω(a)) が <code>recLevelOne</code> で<strong>不分岐目標 Frobenius^k（第1成分）と分岐目標 σ_a（第2成分）を同時に実現</strong>——{Frobenius^k : k∈ℤ} × {σ_a : p∤a} の直積への被覆。<strong>recJoint_covers: ∀ k, ∀ (p∤a), ∃ x, 不分岐部 = toZhat(k) ∧ 分岐部 = σ_a</strong>（同時被覆の本丸）・<strong>recJoint_level_covers</strong>（各有限レベル ℤ/n × {σ_a} の同時被覆）・RecSurjectiveData（realize/unram/ram/level/faithful）。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（M197F/M207F/M94 から継承、<code>Classical.choice</code> なし）。<strong>分岐 rec が K^× = p^ℤ × ℤ_p^× の直積 {Frobenius^k} × {σ_a} の上へ（有限レベル経由で）合同全射であることが確定した</strong>。正直な限定: 閉じたのは直積への同時被覆（有限レベル経由）のみ。ẑ 閉包への位相的全射（toZhat 像 = ℤ は稠密だが onto ではない、<code>toZhat_injective</code> の裏面）・抽象 Aut(O) 全体への全射 {σ_a} = Aut(O)・Λₙ(n≥2) 塔作用は次層（issue #36）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M216F: ガウスパイロットのフル仕様充足模型（柱D D-α-6・並行部品）（IUT/GaussPilot311.lean）</h3>
   <div class="box">

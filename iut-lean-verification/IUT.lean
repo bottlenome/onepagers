@@ -266,6 +266,7 @@ import IUT.Multiradial311
 import IUT.PillarDFoundation
 import IUT.MultiradialInput
 import IUT.GaussPilot311
+import IUT.RecSurjective
 import IUT.ThetaLabelInjective
 import IUT.LambdaTowerExactVal
 import IUT.ProRepresentable

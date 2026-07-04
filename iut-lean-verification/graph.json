@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 265,
-  "verified_theorem_total": 1920,
-  "choice_free_count": 221,
+  "module_count": 266,
+  "verified_theorem_total": 1922,
+  "choice_free_count": 222,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3235,6 +3235,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussPilot311.lean"
     },
     {
+      "id": "RecSurjective",
+      "label": "RecSurjective",
+      "milestone": "M218F",
+      "title": "分岐 rec の合同全射性（柱B B-2 全射側・並行部品）",
+      "pillar": "B",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RecSurjective.lean"
+    },
+    {
       "id": "ThetaLabelInjective",
       "label": "ThetaLabelInjective",
       "milestone": "M212F",
@@ -4595,6 +4607,14 @@
     {
       "source": "RecRamified",
       "target": "RecGluing"
+    },
+    {
+      "source": "RecRamifiedSurj",
+      "target": "RecSurjective"
+    },
+    {
+      "source": "RecUnramified",
+      "target": "RecSurjective"
     },
     {
       "source": "RegularPowers",

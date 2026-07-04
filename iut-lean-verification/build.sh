@@ -1929,6 +1929,8 @@ import IUT
 #print axioms IUT.gaussPilot311
 #print axioms IUT.cor312_of_gaussPilot311
 #print axioms IUT.gaussPilot311_exists
+#print axioms IUT.recJoint_covers
+#print axioms IUT.recSurjective_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
