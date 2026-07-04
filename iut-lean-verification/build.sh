@@ -1898,6 +1898,8 @@ import IUT
 #print axioms IUT.thetaChain_closure
 #print axioms IUT.thetaChain_exists
 #print axioms IUT.tateSurrogate_exists
+#print axioms IUT.recUnram_covers
+#print axioms IUT.recUnramified_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

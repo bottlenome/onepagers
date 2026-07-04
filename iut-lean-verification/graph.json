@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 254,
-  "verified_theorem_total": 1889,
-  "choice_free_count": 212,
+  "module_count": 255,
+  "verified_theorem_total": 1891,
+  "choice_free_count": 213,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3137,6 +3137,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateSurrogateCapstone.lean"
+    },
+    {
+      "id": "RecUnramified",
+      "label": "RecUnramified",
+      "milestone": "M207F",
+      "title": "分岐 rec の不分岐・Frobenius 側（柱B B-2 不分岐側・並行部品）",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RecUnramified.lean"
     }
   ],
   "edges": [
@@ -4359,6 +4371,10 @@
     {
       "source": "RecGluing",
       "target": "RecRamifiedSurj"
+    },
+    {
+      "source": "RecGluing",
+      "target": "RecUnramified"
     },
     {
       "source": "RecRamified",

@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M206 の形式化（追加検証）</h2>
+  <h2>M1〜M207 の形式化（追加検証）</h2>
+
+  <h3>M207F: 分岐 rec の不分岐・Frobenius 側 — M197F 単数側の補完（柱B B-2 不分岐側・並行部品）（IUT/RecUnramified.lean）</h3>
+  <div class="box">
+    <p>M197F（単数側: 各 σ_a を実 ℤ_p^× 単数 ω(a) が実現、不分岐部は自明）の<strong>厳密な補完</strong>を第101弾で形式化（tier M / opus）。K^× = ⟨π⟩ × O^× の<strong>付値 ⟨π⟩ = p^ℤ / 不分岐-Frobenius 側</strong>を閉じる。機械化した核心: K^× 元 x = (k, 1)（付値 k・単数自明）を <code>recLevelOne</code> が <strong>不分岐部 = toZhat(k) = Frobenius^k</strong>（k≠0 で非自明——M197F が <code>zhat.one</code> に潰した側）・<strong>分岐部 = σ_1 = id</strong>（自明——M197F が非自明にした側）へ写す。したがって M197F と M207F が K^× = p^ℤ × ℤ_p^× 上で<strong>独立な直積として貼り合う</strong>。<code>recInertia_one_trivial</code>（単数 1 の分岐部 = 恒等）・<strong>recUnram_covers: ∀ k, ∃ x, 不分岐部 = toZhat(k) ∧ 分岐部 = id</strong>・<strong>recUnram_level_covers</strong>（各有限レベル ℤ/n を代表で被覆）・RecUnramifiedData。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（M94/M13 の Quot 機構から継承、<code>Classical.choice</code> なし）。<strong>分岐 rec の不分岐/付値側が Frobenius^k で被覆され、M197F の単数側と直積で貼り合うことが確定</strong>。正直な限定: 閉じたのは付値/不分岐側の被覆（各 k を Frobenius^k で・各有限レベルを代表で）のみ。ẑ 全体への完全全射（像 ℤ は稠密だが onto ではない＝M13-8 単射の裏面）・分岐 rec の抽象 Aut(O) 全体への全射・Λₙ(n≥2) 塔作用は次層（issue #36）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M206F: A-3 étale 入力サロゲート（Tate 曲線）プログラム総括 capstone（柱A・並行部品）（IUT/TateSurrogateCapstone.lean）</h3>
   <div class="box">
