@@ -1824,6 +1824,12 @@ import IUT
 #print axioms IUT.QuotientData.abstract_ess_surj_orbit
 #print axioms IUT.abstractEssSurjWitness
 #print axioms IUT.abstractEssSurj_exists
+#print axioms IUT.mu_pm_orbit_iff
+#print axioms IUT.centerToMu_neg_inv
+#print axioms IUT.mu_theta_labels
+#print axioms IUT.theta_pm_mu_label
+#print axioms IUT.muLIdentificationData
+#print axioms IUT.muLIdentification_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

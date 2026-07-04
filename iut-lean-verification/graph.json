@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 232,
-  "verified_theorem_total": 1815,
-  "choice_free_count": 192,
+  "module_count": 233,
+  "verified_theorem_total": 1821,
+  "choice_free_count": 193,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2859,6 +2859,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbstractEssSurj.lean"
+    },
+    {
+      "id": "MuLIdentification",
+      "label": "MuLIdentification",
+      "milestone": "M162F",
+      "title": "μ_l 同一視・l⋇ ラベリング（柱E E-1・並行部品）",
+      "pillar": "E",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuLIdentification.lean"
     }
   ],
   "edges": [
@@ -2945,6 +2959,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuLSubgroup"
+    },
+    {
+      "source": "CyclotomicSync",
+      "target": "MuLIdentification"
     },
     {
       "source": "CyclotomicSync",
@@ -3429,6 +3447,10 @@
     {
       "source": "HodgeTheater",
       "target": "FlUnits"
+    },
+    {
+      "source": "HodgeTheater",
+      "target": "MuLIdentification"
     },
     {
       "source": "IntRealBridge",
