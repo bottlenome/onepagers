@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M196 の形式化（追加検証）</h2>
+  <h2>M1〜M199 の形式化（追加検証）</h2>
+
+  <h3>M199F: 柱C 幾何級数収束プログラムの総括 capstone（柱C・並行部品）（IUT/ConvergenceCapstone.lean）</h3>
+  <div class="box">
+    <p>第101弾の幾何級数<strong>収束完備化層</strong>（M182 残差収束 → M183 極限対象 → M184 自己完結 → M185F rlim 位相的完備化）に除算代数（M162）を加え、<strong>単一レコード ConvergenceProgramData（10 フィールド）に束ねて一括 certification</strong>（新規証明ゼロ、tier S / sonnet、M178 幾何級数プログラム capstone の収束層への継続）。フィールド: <code>residual_converges</code>（M182 <code>geom_inverse_converges</code>）・<code>limit_sub_closed</code>/<code>limit_sub_abs</code>（M183 <code>geom_sub_limit</code>/<code>rabs_geom_sub_limit</code>）・<code>converges_to_limit</code>（M183-4）・<code>limit_object</code>（M183-5 <code>geom_limit_object</code>）・<code>self_contained</code>（M184 <code>geom_converges_self_contained</code>）・<code>rlim_complete</code>（M185F <code>geom_rlim_complete</code>）・<code>inv_unique</code>/<code>inv_congr</code>/<code>inv_mul</code>（M162 <code>rinv_unique</code>/<code>rinv_congr</code>/<code>rmul_inv_mul</code>）。<code>#print axioms convergenceProgram_exists</code> は <strong>[propext, Quot.sound]</strong>（choice-free）。<strong>幾何級数収束プログラム全体（残差 → 極限対象 → 自己完結 → 位相的完備化）+ 構成的除算が単一レコードで一括検証された</strong>。正直な限定: <code>converges_to_limit</code> は原形の 2 仮定版（|L| 上界 B・apartness を仮定）で束ね、仮定なし版は <code>self_contained</code> で別途捕捉（合成は新規証明を要すため回避）。除算は逆元<strong>関係</strong> x·y≈1 のみ（全域逆元関数ではない、M162 の限定を継承）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M196F: mono-theta 環境の単一インターフェース — D-α プログラムの第一歩（柱D D-α-1・並行部品）（IUT/MonoThetaEnv.lean）</h3>
   <div class="box">

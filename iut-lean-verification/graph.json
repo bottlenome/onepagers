@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 244,
-  "verified_theorem_total": 1864,
-  "choice_free_count": 203,
+  "module_count": 245,
+  "verified_theorem_total": 1865,
+  "choice_free_count": 204,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3013,6 +3013,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaEnv.lean"
+    },
+    {
+      "id": "ConvergenceCapstone",
+      "label": "ConvergenceCapstone",
+      "milestone": "M199F",
+      "title": "柱C 幾何級数収束プログラムの総括 capstone",
+      "pillar": "C",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConvergenceCapstone.lean"
     }
   ],
   "edges": [
@@ -3613,6 +3625,10 @@
       "target": "GeomConvergeSC"
     },
     {
+      "source": "GeomRlimComplete",
+      "target": "ConvergenceCapstone"
+    },
+    {
       "source": "GeomSeries",
       "target": "GeomSeriesRec"
     },
@@ -3623,6 +3639,10 @@
     {
       "source": "GeomSeriesRec",
       "target": "LambdaInvApprox"
+    },
+    {
+      "source": "GeometricSeriesProgram",
+      "target": "ConvergenceCapstone"
     },
     {
       "source": "HodgeTheater",
@@ -4003,6 +4023,10 @@
     {
       "source": "RealComplete",
       "target": "RealInv"
+    },
+    {
+      "source": "RealDivision",
+      "target": "ConvergenceCapstone"
     },
     {
       "source": "RealDivision",

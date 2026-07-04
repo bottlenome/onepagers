@@ -1873,6 +1873,7 @@ import IUT
 #print axioms IUT.tateCoverCat_exists
 #print axioms IUT.monoThetaEnv
 #print axioms IUT.monoThetaEnv_exists
+#print axioms IUT.convergenceProgram_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
