@@ -1735,6 +1735,10 @@ import IUT
 #print axioms IUT.rabs_pow
 #print axioms IUT.realAbsPowData
 #print axioms IUT.realAbsPow_exists
+#print axioms IUT.geom_rec_left
+#print axioms IUT.geom_residual
+#print axioms IUT.geomSeriesRecData
+#print axioms IUT.geomSeriesRec_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

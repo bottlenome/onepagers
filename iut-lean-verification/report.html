@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M169 の形式化（追加検証）</h2>
+  <h2>M1〜M170 の形式化（追加検証）</h2>
+
+  <h3>M170: 幾何級数（環）の漸化式・残差恒等式（柱C）（IUT/GeomSeriesRec.lean）</h3>
+  <div class="box">
+    <p>M163（任意可換環での幾何級数の閉形式 (1 − r)·s_k = 1 − r^k）の続き、M168 が実数版で与えた漸化式・残差を<strong>環の厳密等式版</strong>として補完（第101弾）。<strong>geom_rec_left: s_{k+1} = 1 + r·s_k</strong>（左漸化式、k の帰納 + 左分配 + mul_comm、両辺を 1 + (r·s_k + r^{k+1}) に寄せる）・<strong>geom_residual: (1 − r)·s_k + r^k = 1</strong>（閉形式 M163 の移項形、add_assoc + neg_add + add_zero）・GeomSeriesRecData。<strong>公理ゼロ</strong>。M163 の閉形式と併せ、環の幾何級数が満たす標準三恒等式（部分和の一段展開・左漸化式・(1−r) 倍の望遠鏡）が出揃い、付値環（ℤ_p・eisRing・塔）での級数計算の代数的下地。実数版（M168）と対になり環・実数の双方で同じ API が使える。正直な限定: 収束は環では意味を持たない（位相・順序が要る）、実数の収束は M168 同様次層。全 4 宣言 [propext, Quot.sound] 以下（本体2つは公理ゼロ）。</p>
+  </div>
 
   <h3>M169: 絶対値の冪・単位・冪等法則（柱C）（IUT/RealAbsPow.lean）</h3>
   <div class="box">
