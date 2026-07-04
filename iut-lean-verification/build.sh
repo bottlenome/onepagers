@@ -1865,6 +1865,8 @@ import IUT
 #print axioms IUT.towerGen_val_exact
 #print axioms IUT.towerGen_not_val_two
 #print axioms IUT.lambdaTowerGen_exists
+#print axioms IUT.essSurjCapstoneData
+#print axioms IUT.essSurjCapstone_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

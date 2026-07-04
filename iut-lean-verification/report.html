@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M193 の形式化（追加検証）</h2>
+  <h2>M1〜M194 の形式化（追加検証）</h2>
+
+  <h3>M194F: 柱A 本質的全射性・ガロア支配プログラムの総括 capstone（柱A・並行部品）（IUT/EssSurjCapstone.lean）</h3>
+  <div class="box">
+    <p>第101弾の柱A 本質的全射性チェーン（M161F 推移的実現 → M186F 有限和実現 → M189F ガロア支配 & Connected 特徴づけ → M160F ガロア閉包）を<strong>単一レコード EssSurjCapstoneData に束ねて一括 certification</strong>（新規証明ゼロ、tier S / sonnet）。全フィールドが既存定理の witness: base/galois/dom/dom_surj（M160F の cosetGSet・closureHom_surjective、標準基点 [1] = Quot.mk _ G.one で choice 抽出なし）・<code>realizeTransitive</code>（M161F-4）・<code>realizeFiniteSum</code>（M186F-6）・<code>connectedIff</code>（M189F-6 abstract_connected_iff）・<code>dominates</code>（M189F-7 connected_dominated_by_galois_abstract）・<code>powProjSurj</code>/<code>diagPoint</code>（M189F-3 のファイバー冪・SGA1 対角点）。鍵となる接続事実（scratch で <code>rfl</code> 検証、削除済）: <code>(gsetSumData G).toGaloisCatData = gsetGaloisData G</code> が iota 簡約で成立し、<code>SumData</code>/<code>QuotientData</code> にパラメトリックな M161F/M186F と <code>gsetGaloisData</code> 特定の M189F/M160F が <code>D := gsetSumData G</code> で新規証明なしに合成できる。<code>#print axioms</code> は <strong>[propext, Classical.choice, Quot.sound]</strong>（<code>gsetGaloisData</code> の G6 フィールド型経由の継承、M189F/M160F 自身の限定と同じ再継承であり本モジュールでの新規使用ゼロ）。<strong>意図的 Classical 台帳 42 → 44</strong>（capstone の 2 宣言が G6 継承）。正直な限定: 束ねたのは 7 定理 + dom_surj。M186F-7 軌道和系・M160F-4/5・GaloisTower 層は焦点維持のため意図的に除外（同 witness から自明に従う）。抽象部の witness（powProj/diagPoint 等）は [propext, Quot.sound]、モデル特定の witness は [propext, Classical.choice, Quot.sound]。</p>
+  </div>
 
   <h3>M193F: Λₙ 塔の生成元 λₙ と付値 — 全レベルでの一意化子性（柱B B-1 Slice A・並行部品）（IUT/LambdaTowerGen.lean）</h3>
   <div class="box">

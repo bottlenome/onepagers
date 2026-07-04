@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 241,
-  "verified_theorem_total": 1856,
+  "module_count": 242,
+  "verified_theorem_total": 1858,
   "choice_free_count": 201,
   "nodes": [
     {
@@ -2975,6 +2975,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerGen.lean"
+    },
+    {
+      "id": "EssSurjCapstone",
+      "label": "EssSurjCapstone",
+      "milestone": "M161F",
+      "title": "推移的 Aut(A",
+      "pillar": "A",
+      "decl_count": 2,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EssSurjCapstone.lean"
     }
   ],
   "edges": [
@@ -2983,8 +2995,16 @@
       "target": "AbstractEssSurjSum"
     },
     {
+      "source": "AbstractEssSurjSum",
+      "target": "EssSurjCapstone"
+    },
+    {
       "source": "AbstractGalois",
       "target": "SGA1Completion"
+    },
+    {
+      "source": "AbstractGaloisDomination",
+      "target": "EssSurjCapstone"
     },
     {
       "source": "Anabelian",
