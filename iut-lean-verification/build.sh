@@ -1757,6 +1757,9 @@ import IUT
 #print axioms IUT.rLe_qToReal
 #print axioms IUT.realAbsTriangleData
 #print axioms IUT.realAbsTriangle_exists
+#print axioms IUT.rabs_geomSum_le
+#print axioms IUT.realGeomAbsData
+#print axioms IUT.realGeomAbs_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

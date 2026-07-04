@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M174 の形式化（追加検証）</h2>
+  <h2>M1〜M175 の形式化（追加検証）</h2>
+
+  <h3>M175: 幾何部分和の絶対値評価 — |Σ rⁱ| ≤ Σ |r|ⁱ（柱C）（IUT/RealGeomAbs.lean）</h3>
+  <div class="box">
+    <p>M174（三角不等式）・M169（|r^k| = |r|^k）・M173（順序ブリッジ）の合流（第101弾）。実数幾何部分和の絶対値の比較評価 <strong>rabs_geomSum_le: |s_k(r)| ≤ s_k(|r|)</strong>——「和の絶対値は絶対値の和以下」を幾何級数に適用したもの——を rLe として閉じる。k の帰納で <strong>|s_k ⊕ r^k| ≤ |s_k| ⊕ |r^k|</strong>（三角不等式 M174）<strong>≤ s_k(|r|) ⊕ |r^k|</strong>（IH + 加法単調性 rLe_add）<strong>≈ s_k(|r|) ⊕ |r|^k</strong>（|r^k| = |r|^k、M169）= s_{k+1}(|r|)・RealGeomAbsData。|r| &lt; 1 のとき右辺 s_k(|r|) は（次層で）(1 − |r|)⁻¹ に収束し有界なので、これは s_k(r) の<strong>絶対一様有界性（絶対収束）の核心の不等式</strong>で、三角不等式の帰納的適用（有限和版三角不等式の幾何級数インスタンス）でもある。正直な限定: 実際の収束・一様有界性（s_k(|r|) の上界の存在と極限）は順序完備性・rate-bound の次層。全 3 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M174: 三角不等式と埋め込みの順序保存（柱C）（IUT/RealAbsTriangle.lean）</h3>
   <div class="box">
