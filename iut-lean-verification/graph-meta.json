@@ -20,8 +20,8 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 83,
-      "status": "剛性 ✅ / λ 全伝播・付値階段・多項式 Weierstrass・分離性局在 + eisRing (λ,π)-adic 分離(M160)。残: Λₙ(n≥2)塔生成元・分岐 rec 全射性・μ_{p−1}巡回性 (#36)",
+      "progress_pct": 85,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: B-1 厳密付値/[c]-倍・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },

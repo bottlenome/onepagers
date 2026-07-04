@@ -1906,6 +1906,9 @@ import IUT
 #print axioms IUT.logKummer_along_logPath
 #print axioms IUT.logKummer_ind3_gated
 #print axioms IUT.logKummer_exists
+#print axioms IUT.formalEndRing
+#print axioms IUT.oToEnd_surjective
+#print axioms IUT.formalEndRing_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

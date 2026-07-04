@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 257,
-  "verified_theorem_total": 1897,
-  "choice_free_count": 215,
+  "module_count": 258,
+  "verified_theorem_total": 1900,
+  "choice_free_count": 216,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3173,6 +3173,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogKummer.lean"
+    },
+    {
+      "id": "FormalEndRing",
+      "label": "FormalEndRing",
+      "milestone": "M208F",
+      "title": "End(F) の環パッケージング",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalEndRing.lean"
     }
   ],
   "edges": [
@@ -3523,6 +3535,10 @@
     {
       "source": "FormalGroupEnd",
       "target": "FormalGroupEndRing"
+    },
+    {
+      "source": "FormalGroupEndRing",
+      "target": "FormalEndRing"
     },
     {
       "source": "FormalGroupEq",

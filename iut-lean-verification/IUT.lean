@@ -261,3 +261,4 @@ import IUT.TateSurrogateCapstone
 import IUT.RecUnramified
 import IUT.ThetaValueEval
 import IUT.LogKummer
+import IUT.FormalEndRing
