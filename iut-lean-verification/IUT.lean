@@ -222,3 +222,4 @@ import IUT.GeomSeriesRec
 import IUT.RealGeomCongr
 import IUT.LambdaGeom
 import IUT.RealAbsLe
+import IUT.RealAbsTriangle

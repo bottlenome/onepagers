@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 218,
-  "verified_theorem_total": 1744,
-  "choice_free_count": 178,
+  "module_count": 219,
+  "verified_theorem_total": 1748,
+  "choice_free_count": 179,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2691,6 +2691,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealAbsLe.lean"
+    },
+    {
+      "id": "RealAbsTriangle",
+      "label": "RealAbsTriangle",
+      "milestone": "M174",
+      "title": "三角不等式と埋め込みの順序保存（柱C）",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealAbsTriangle.lean"
     }
   ],
   "edges": [
@@ -3533,6 +3545,10 @@
     {
       "source": "RealAbs",
       "target": "RealPosMul"
+    },
+    {
+      "source": "RealAbsLe",
+      "target": "RealAbsTriangle"
     },
     {
       "source": "RealComplete",

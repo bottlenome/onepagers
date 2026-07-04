@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M173 の形式化（追加検証）</h2>
+  <h2>M1〜M174 の形式化（追加検証）</h2>
+
+  <h3>M174: 三角不等式と埋め込みの順序保存（柱C）（IUT/RealAbsTriangle.lean）</h3>
+  <div class="box">
+    <p>M173（順序ブリッジ rLe_of_seq_le と絶対値の片側支配）の直上（第101弾）。実数の<strong>三角不等式 rabs_triangle: |x + y| ≤ |x| + |y|</strong> を rLe として閉じる（M127F rabs_add_le の点ごと不等式を M173 rLe_of_seq_le で持ち上げ）とともに、有理数埋め込み qToReal が順序を保つこと <strong>rLe_qToReal: qLe a b ⟹ rLe a↑ b↑</strong>（定数列なので各項が仮定そのもの）を示す・RealAbsTriangleData。三角不等式は絶対収束・級数評価・距離の劣加法性の要で、M173 の片側支配（x ≤ |x| 等）と併せ絶対値の順序論の中核が揃う。埋め込みの順序保存は「ℚ の順序が ℝ の順序に忠実に移る」= 具体的な数値評価を実数の rLe に翻訳する橋。正直な限定: 逆三角不等式（||x| − |y|| ≤ |x − y|）・狭義 rLt 版・有限和の三角不等式は次層。全 4 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M173: 絶対値の順序基本則 — 「絶対値が支配する」（柱C）（IUT/RealAbsLe.lean）</h3>
   <div class="box">
