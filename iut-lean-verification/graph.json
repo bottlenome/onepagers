@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 229,
-  "verified_theorem_total": 1798,
-  "choice_free_count": 189,
+  "module_count": 230,
+  "verified_theorem_total": 1804,
+  "choice_free_count": 190,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2823,6 +2823,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomConvergeSC.lean"
+    },
+    {
+      "id": "GaloisClosureLift",
+      "label": "GaloisClosureLift",
+      "milestone": "M160F",
+      "title": "ガロア閉包のモデル側リフト（柱A A-1・並行部品）",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisClosureLift.lean"
     }
   ],
   "edges": [
@@ -2897,6 +2909,10 @@
     {
       "source": "CosetGalois",
       "target": "FactorialTower"
+    },
+    {
+      "source": "CosetGalois",
+      "target": "GaloisClosureLift"
     },
     {
       "source": "CyclicUnits",
@@ -3637,6 +3653,10 @@
     {
       "source": "ProObject",
       "target": "FactorialTower"
+    },
+    {
+      "source": "ProObject",
+      "target": "GaloisClosureLift"
     },
     {
       "source": "ProObject",

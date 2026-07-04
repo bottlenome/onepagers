@@ -1807,6 +1807,12 @@ import IUT
 #print axioms IUT.geom_converges_self_contained
 #print axioms IUT.geomConvergeSCData
 #print axioms IUT.geomConvergeSC_exists
+#print axioms IUT.stabHom_injective
+#print axioms IUT.closureHom_surjective
+#print axioms IUT.connected_dominated_by_galois
+#print axioms IUT.orbit_dominated_by_galois
+#print axioms IUT.closureTower_dominates
+#print axioms IUT.galoisClosureLift_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
