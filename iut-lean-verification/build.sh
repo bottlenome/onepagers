@@ -1862,6 +1862,9 @@ import IUT
 #print axioms IUT.thetaFuneqBridge_exists
 #print axioms IUT.muP1CyclicData
 #print axioms IUT.muP1Cyclic_exists
+#print axioms IUT.towerGen_val_exact
+#print axioms IUT.towerGen_not_val_two
+#print axioms IUT.lambdaTowerGen_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

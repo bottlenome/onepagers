@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 240,
-  "verified_theorem_total": 1853,
-  "choice_free_count": 200,
+  "module_count": 241,
+  "verified_theorem_total": 1856,
+  "choice_free_count": 201,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2963,6 +2963,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuP1Cyclic.lean"
+    },
+    {
+      "id": "LambdaTowerGen",
+      "label": "LambdaTowerGen",
+      "milestone": "M193F",
+      "title": "Λₙ 塔の生成元 λₙ と位数・付値（柱B B-1・並行部品）",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerGen.lean"
     }
   ],
   "edges": [
@@ -3617,6 +3629,10 @@
     {
       "source": "LambdaValuation",
       "target": "GeomSeries"
+    },
+    {
+      "source": "LambdaValuation",
+      "target": "LambdaTowerGen"
     },
     {
       "source": "LambdaValuation",

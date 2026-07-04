@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M192 の形式化（追加検証）</h2>
+  <h2>M1〜M193 の形式化（追加検証）</h2>
+
+  <h3>M193F: Λₙ 塔の生成元 λₙ と付値 — 全レベルでの一意化子性（柱B B-1 Slice A・並行部品）（IUT/LambdaTowerGen.lean）</h3>
+  <div class="box">
+    <p>issue #36 の B-1（Λₙ(n≥2) 塔の生成元）の Slice A（生成元 + 各レベルの厳密付値）を第101弾で形式化（tier M / opus）。塔の生成元 <strong>λₙ := (towerLevel p n).lam</strong> を明示同定し、その λ-adic 付値が<strong>全レベル（n≥2 を含む）でちょうど 1</strong>——すなわち極大イデアルの一意化子（uniformizer）——であることを証明。M151F の冪版付値補題（<code>lam_pow_self_val</code>・<code>lam_pow_strict</code>・<code>lam_pow_val_exact</code>）を橋渡し補題 <code>rpow_one</code>（a^1 = a）で λₙ 自身へ特殊化し、<code>tower_lam_regular</code>（M144）・<code>tower_lam_not_unit</code>（M111）を再利用。<strong>towerGen</strong>（生成元）・<code>towerGen_regular</code>（正則元）・<code>towerGen_not_unit</code>（非単元）・<code>towerGen_val_ge_one</code>・<code>towerGen_not_val_two</code>・<strong>本丸 towerGen_val_exact: IsValAtLeast … (towerGen p n) k ↔ k ≤ 1</strong>（付値がちょうど 1）・<code>LambdaTowerGenData</code>。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（M151F 連鎖からの継承はあるが新規 <code>Classical.choice</code> はゼロ）。<strong>塔の各レベル（高位 n≥2 を含む）で λₙ が一意化子として確定</strong>し、B-1 の生成元・付値層が閉じた。正直な限定: 閉じたのは生成元の同定とその付値/位数（ちょうど 1・一意化子）のみ。一般の [c]-倍作用（形式群加法 F(λₙ,·) 経由）と n≥2 生成元の完全な構造論（最小多項式・剰余体次数・塔ガロア軌道）は次層（#36 B-1 残余）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M192F: μ_{p−1} ≅ (ℤ/p)^× の巡回性同定・総括 capstone（柱B B-3・並行部品）（IUT/MuP1Cyclic.lean）</h3>
   <div class="box">
