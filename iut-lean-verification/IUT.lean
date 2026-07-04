@@ -256,3 +256,4 @@ import IUT.LogShell
 import IUT.TateFiberFunctor
 import IUT.Indeterminacies
 import IUT.LambdaTowerTrans
+import IUT.ThetaChainCapstone

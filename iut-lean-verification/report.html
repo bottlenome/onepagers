@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M203 の形式化（追加検証）</h2>
+  <h2>M1〜M204 の形式化（追加検証）</h2>
+
+  <h3>M204F: 柱E テータ E-1 連鎖の総括 capstone（柱E・並行部品）（IUT/ThetaChainCapstone.lean）</h3>
+  <div class="box">
+    <p>第101弾の柱E テータ E-1 連鎖（μ_l 同一視 M162F → Heisenberg リフト M187F → 関数等式接合 M190F → 作用素準同型 M198F）を<strong>単一レコード ThetaChainData に束ねて一括 certification</strong>（新規証明ゼロ、tier S / sonnet）。フィールド: <code>muL : MuLIdentificationData</code>・<code>lift : ThetaHeisenbergLiftData</code>・<code>bridge : ThetaFuneqBridgeData</code>・<code>op : ThetaOperatorHomData</code>——4 レコードが統一パラメタ (R p l L hp hL hodd hdvd) で欠落なく合成。<code>thetaChain_zeta_coherent</code>（muL.ζ = lift.ζ = bridge.ζ = ζ、連鎖全体が単一生成元を共有、全て rfl）・<strong>thetaChain_closure</strong>（同一ラベル j で M162F の ±両立 witness・μ_l 反転・M187F の捻れ→ラベル同定・商群反転等式・M198F の作用素準同型 J/ι_l 同変を一括）・<code>thetaChain_exists</code>（<code>mu_l_zp_exists</code> 経由）。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free）。<strong>柱E E-1 テータ連鎖が単一の choice-free レコードで一括検証された</strong>。正直な限定: 束ねたのは理論骨格のみ。各元モジュールの残余（ガロア同変な p-進テータ値評価・tempered π₁ 商としての実現・作用素の完全な環準同型——M198F の値障害定理が示す通り作用素準同型は反復指数モノイド上にのみ存在）は E-1 residual として継承。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M203F: Λₙ 塔の遷移と付値の層間整合（柱B B-1 Slice B・並行部品）（IUT/LambdaTowerTrans.lean）</h3>
   <div class="box">

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 252,
-  "verified_theorem_total": 1886,
-  "choice_free_count": 211,
+  "module_count": 253,
+  "verified_theorem_total": 1888,
+  "choice_free_count": 212,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3113,6 +3113,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerTrans.lean"
+    },
+    {
+      "id": "ThetaChainCapstone",
+      "label": "ThetaChainCapstone",
+      "milestone": "M204F",
+      "title": "柱E テータ E-1 連鎖の総括 capstone",
+      "pillar": "E",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaChainCapstone.lean"
     }
   ],
   "edges": [
@@ -3902,6 +3914,10 @@
     },
     {
       "source": "MuLIdentification",
+      "target": "ThetaChainCapstone"
+    },
+    {
+      "source": "MuLIdentification",
       "target": "ThetaHeisenbergLift"
     },
     {
@@ -4498,6 +4514,10 @@
     },
     {
       "source": "ThetaFuneqBridge",
+      "target": "ThetaChainCapstone"
+    },
+    {
+      "source": "ThetaFuneqBridge",
       "target": "ThetaOperatorHom"
     },
     {
@@ -4518,7 +4538,15 @@
     },
     {
       "source": "ThetaHeisenbergLift",
+      "target": "ThetaChainCapstone"
+    },
+    {
+      "source": "ThetaHeisenbergLift",
       "target": "ThetaFuneqBridge"
+    },
+    {
+      "source": "ThetaOperatorHom",
+      "target": "ThetaChainCapstone"
     },
     {
       "source": "ThetaPM",
