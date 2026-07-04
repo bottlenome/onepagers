@@ -242,3 +242,4 @@ import IUT.AbstractEssSurjSum
 import IUT.ThetaHeisenbergLift
 import IUT.TateCoverGroup
 import IUT.AbstractGaloisDomination
+import IUT.ThetaFuneqBridge

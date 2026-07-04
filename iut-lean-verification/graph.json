@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 238,
-  "verified_theorem_total": 1846,
-  "choice_free_count": 198,
+  "module_count": 239,
+  "verified_theorem_total": 1851,
+  "choice_free_count": 199,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2937,6 +2937,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbstractGaloisDomination.lean"
+    },
+    {
+      "id": "ThetaFuneqBridge",
+      "label": "ThetaFuneqBridge",
+      "milestone": "M190F",
+      "title": "解析的テータ関数等式と群側捻れの接合",
+      "pillar": "E",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaFuneqBridge.lean"
     }
   ],
   "edges": [
@@ -3443,6 +3457,10 @@
     {
       "source": "FundamentalGroup",
       "target": "Profinite"
+    },
+    {
+      "source": "FuneqLift",
+      "target": "ThetaFuneqBridge"
     },
     {
       "source": "FuneqLift",
@@ -4223,6 +4241,10 @@
     {
       "source": "ThetaGroupMod",
       "target": "ThetaPM"
+    },
+    {
+      "source": "ThetaHeisenbergLift",
+      "target": "ThetaFuneqBridge"
     },
     {
       "source": "ThetaPM",

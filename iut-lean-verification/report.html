@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M189 の形式化（追加検証）</h2>
+  <h2>M1〜M190 の形式化（追加検証）</h2>
+
+  <h3>M190F: 解析的テータ関数等式と群側捻れの接合 — J(T^jΘ)=T^{l−j}Θ とラベル反転の同定（柱E E-1・並行部品）（IUT/ThetaFuneqBridge.lean）</h3>
+  <div class="box">
+    <p>M187F の群側中心捻れ <code>funeqTwist</code> と、M89/M98 の<strong>解析的（級数レベル）</strong>テータ関数等式を接合し、M137F の辞書レベル対応を<strong>証明済み恒等式へ格上げ</strong>（第101弾・Fable スポットセッション、Slice A+B+C 全結）。recon の鍵となった発見: J(Θ) = −Θ（M98 <code>theta_refl_coeff</code>）と T^j(Θ) = (−1)^jΘ（M90 <code>tCoeff_eq</code>）から、奇 l に対し真に新しい恒等式 <strong>J(T^jΘ) = T^{l−j}(Θ)</strong>——ラベル反転 j ↔ l−j の解析的実現——が従い、これは M187F の <code>thetaNegMod_section_twist</code> が群側で証明する反転そのもの。さらに <code>funeqTwist l j</code> は<strong>定義的に</strong> tri j − tri(l−j)（2 つの解析的ガウス q-次数の差）なので、捻れの同定は rfl + M187F 閉形式で済む。<strong>theta_refl_iter</strong>: M98 の反転が全 Heisenberg 反復へ伝播（J(T^jΘ) = −T^jΘ）。<strong>本丸 theta_refl_iter_label: J(T^jΘ) = T^{l−j}(Θ)</strong>（係数レベル）+ <strong>theta_refl_iter_series</strong>（級数 Quot レベルの同一恒等式）。<strong>theta_gauss_pm</strong>: 反転したガウス相方が −1 を担う（M137F <code>dict_pm</code> の解析的対応）。<strong>funeq_gauss_degree_twist</strong>: 両ラベルでガウス値 1 ∧ 捻れ = ガウス次数差（rfl）∧ 閉形式 j+l(j−L−1)。<strong>funeq_analytic_group_bridge: 同一の j で「解析的反転 ∧ 群側反転（thetaNegMod_section_twist）∧ 捻れ = ガウス次数差 ∧ centerToMu(funeqTwist) = ζ^j」の四面束ね</strong>・ThetaFuneqBridgeData。全 10 宣言 <strong>[propext, Quot.sound]</strong>（Classical.choice ゼロ、継承ゼロ）。<strong>解析側の関数等式（級数の反転対称性）と群側の中心捻れが、同一のテータラベル j 上で三層一致することが確定</strong>。正直な限定: 橋は同一ラベル j で解析的反転・群側反転・捻れ同定の三層を束ねるが、級数環 R[u^±][[q]] → thetaGrp の T ↦ Φ(1)-乗算という<strong>作用素レベルの準同型</strong>は未形式化（捻れは解析側で q-次数の差、群側で中心元として現れ、同定は共有 tri 簿記経由で環写像の適用ではない）。ガロア同変な p-進テータ値評価・tempered π₁ 実現は E-1 の残余。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M189F: ガロア対象による支配（抽象公理版）— ファイバー冪の SGA1 構成と抽象連結性の特徴づけ（柱A A-2/A-3α・並行部品）（IUT/AbstractGaloisDomination.lean）</h3>
   <div class="box">

@@ -1855,6 +1855,11 @@ import IUT
 #print axioms IUT.abstract_connected_iff
 #print axioms IUT.connected_dominated_by_galois_abstract
 #print axioms IUT.abstractGaloisDomination_exists
+#print axioms IUT.theta_refl_iter_label
+#print axioms IUT.theta_refl_iter_series
+#print axioms IUT.funeq_gauss_degree_twist
+#print axioms IUT.funeq_analytic_group_bridge
+#print axioms IUT.thetaFuneqBridge_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
