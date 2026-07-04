@@ -1909,6 +1909,8 @@ import IUT
 #print axioms IUT.formalEndRing
 #print axioms IUT.oToEnd_surjective
 #print axioms IUT.formalEndRing_exists
+#print axioms IUT.cor312_of_311
+#print axioms IUT.theorem311Rep_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

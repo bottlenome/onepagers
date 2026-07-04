@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M209 の形式化（追加検証）</h2>
+  <h2>M1〜M210 の形式化（追加検証）</h2>
+
+  <h3>M210F: フル仕様 Theorem311Rep — D-α の要（キーストーン）（柱D D-α-5・並行部品）（IUT/Multiradial311.lean）</h3>
+  <div class="box">
+    <p><a href="https://github.com/bottlenome/onepagers/issues/38">#38 の D-1 詳細化ラウンド</a>の D-α プログラムの<strong>要（キーストーン）</strong>。定理3.11 の statement 構造を、体積の影 <code>base</code> の上に露出する<strong>フル仕様表現 Theorem311Rep</strong> を構成（親が確定した型スケッチを実装）。フィールド: <strong>base : MultiradialRep V s</strong>（体積の影＝還元標的、M5）・<strong>env : MonoThetaEnv</strong>（(i)(b) mono-theta 環境、M196F）・<strong>shell : LogShellData</strong>（(i)(a) 対数殻、M201F）・<strong>ind : IndeterminaciesData</strong>（(Ind1)(Ind2)(Ind3)、M202F）・<strong>kummer : LogKummerData</strong>（(ii) log-Kummer、M205F）。<strong>本丸 cor312_of_311: Theorem311Rep ⟹ Cor312 s := cor312_of_multiradial T.base</strong>（系3.12 への還元は <code>base</code> のみを経由して降りる——キーストーン）・<code>szpiro_of_311</code>（ABC/Szpiro 側も <code>base</code> 経由で再輸出）・<code>theorem311Rep_exists</code>（具体 witness <code>base311Rep</code> + <code>monoThetaEnv_exists</code> から choice なしに合成、V=<code>m202fVol</code>・s=<code>base311Skel</code> 固定で R,p,l,L 多相）。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free、本モジュールは新規公理ゼロ）。<strong>D-α の 4 つの型土台（M196F/M201F/M202F/M205F）が単一のフル仕様レコードに束ねられ、定理3.11 の (i)(a)(b)(c)・(Ind1–3)・(ii) が statement 構造としてフィールドに露出し、系3.12 への還元が骨格として完成した</strong>。正直な限定: env/shell/ind/kummer フィールドは並置された statement 構造層であり、<strong>まだ特定の曲線のデータの実際の成分であることは証明されていない</strong>（その同定 + <code>MultiradialInput</code> の解析的実現は D-β = 恒久的入力）。還元は <code>base</code> のみを使用し、<code>base311Rep</code> は M5 のデモ模型（<code>m202fVol</code>: Region=ℤ, vol=id）上で、遠アーベル構成ではない。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M208F: End(F) の環パッケージング — ℤ_p ≅ End(F) 環同型（柱B B-4・並行部品）（IUT/FormalEndRing.lean）</h3>
   <div class="box">
