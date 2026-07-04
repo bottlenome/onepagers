@@ -257,3 +257,4 @@ import IUT.TateFiberFunctor
 import IUT.Indeterminacies
 import IUT.LambdaTowerTrans
 import IUT.ThetaChainCapstone
+import IUT.TateSurrogateCapstone

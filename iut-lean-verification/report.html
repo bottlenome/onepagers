@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M204 の形式化（追加検証）</h2>
+  <h2>M1〜M206 の形式化（追加検証）</h2>
+
+  <h3>M206F: A-3 étale 入力サロゲート（Tate 曲線）プログラム総括 capstone（柱A・並行部品）（IUT/TateSurrogateCapstone.lean）</h3>
+  <div class="box">
+    <p>完結した A-3β プログラム（M188F 被覆群 → M191F 有限連続被覆圏 → M195F GaloisCatData 化 G1–G6 → M200F Aut(F)=π₁ 復元）を<strong>単一レコード TateSurrogateData に束ねて一括 certification</strong>（新規証明ゼロ、tier S / sonnet）。フィールド: <code>group</code>（TateCoverGroupData）・<code>cat</code>（TateCoverCatData）・<code>galois</code>（TateCoverGaloisData）・<code>fiber</code>（TateFiberFunctorData）・<code>fiber_faithful</code>（<code>cover_fiber_faithful</code>）・<code>recon_left</code>/<code>recon_right</code>（<code>tate_from_to</code>/<code>tate_to_from</code> = π₁ 回復の両方向）・<code>tateSurrogate_exists</code>。<strong>Tate 曲線サロゲートによる SGA1 中核（被覆圏＝Galois 圏 かつ ファイバー関手が π₁ を復元）が単一レコードで確定</strong>。<code>#print axioms</code> は <strong>[propext, Classical.choice, Quot.sound]</strong>（<code>galois</code> フィールドが M195F の G6 <code>reflect_iso</code> を継承、正確に 1 件、本モジュールでの新規使用ゼロ）。正直な限定: 玩具 デッキ ℤ・G_K=ℤ、π₁ は幾何的入力、<code>galois</code> の G6 Classical 継承、回復 π₁ は ẑ（デッキ部分）で完全なテンパード π₁ ではない、SGA1 後半の pro-表現可能な圏同値は未形式化。</p>
+  </div>
 
   <h3>M204F: 柱E テータ E-1 連鎖の総括 capstone（柱E・並行部品）（IUT/ThetaChainCapstone.lean）</h3>
   <div class="box">

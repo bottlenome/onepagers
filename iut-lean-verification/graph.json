@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 253,
-  "verified_theorem_total": 1888,
+  "module_count": 254,
+  "verified_theorem_total": 1889,
   "choice_free_count": 212,
   "nodes": [
     {
@@ -3125,6 +3125,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaChainCapstone.lean"
+    },
+    {
+      "id": "TateSurrogateCapstone",
+      "label": "TateSurrogateCapstone",
+      "milestone": "M188F",
+      "title": "被覆群",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateSurrogateCapstone.lean"
     }
   ],
   "edges": [
@@ -4487,6 +4499,10 @@
     {
       "source": "TateCoverGroup",
       "target": "TateCoverCat"
+    },
+    {
+      "source": "TateFiberFunctor",
+      "target": "TateSurrogateCapstone"
     },
     {
       "source": "TateQuotient",
