@@ -1890,6 +1890,9 @@ import IUT
 #print axioms IUT.tate_from_to
 #print axioms IUT.tate_to_from
 #print axioms IUT.tateFiberFunctor_exists
+#print axioms IUT.upper_compat_not_symm
+#print axioms IUT.ind311_refines
+#print axioms IUT.indeterminacies_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

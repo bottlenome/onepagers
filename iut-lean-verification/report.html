@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M201 の形式化（追加検証）</h2>
+  <h2>M1〜M202 の形式化（追加検証）</h2>
+
+  <h3>M202F: (Ind1)(Ind2)(Ind3) の構造化 — 新概念 Ind3 上半両立性（柱D D-α-3・並行部品）（IUT/Indeterminacies.lean）</h3>
+  <div class="box">
+    <p><a href="https://github.com/bottlenome/onepagers/issues/38">#38 の D-1 詳細化ラウンド</a>の D-α プログラムの (Ind1)(Ind2)(Ind3) 構造化を第101弾で形式化（tier M / opus）。<strong>Ind1 := deloopInd</strong>（M53F-9、BG poly-isomorphism G-トーソル = 「MultiradialRep.Ind の正体」）・<strong>Ind2 := splitInd</strong>（M55F、単数成分 U-トーソル）を再輸出し、<strong>Ind3 := UpperCompat（本プロジェクト初出の新概念）</strong>——<strong>片側 ⊆ のみの上半両立性</strong>（structure に <code>lo hi : V.Region</code> と <code>compat : V.le lo hi</code> を持ち、対称性 <code>hi ≤ lo</code> を要求しない）を新設。<strong>upper_compat_not_symm: ∃ V c, ¬ V.le c.hi c.lo</strong>（⊆ は成立するが ⊇ は失敗——片側性が本物であることを証明、<code>strict_evaluation_obstruction</code>/<code>padding_necessary</code> の片側膨張の必然性に対応）。<strong>ind311 := Ind1 × Ind2 × UpperCompat</strong>（積不定性）・<code>ind311_forget</code>（同定 h に沿う transport で <code>MultiradialRep.Ind</code> へ）・<strong>ind311_refines: ∃ V s M, M.Ind = ind311 …</strong>（Int 模型での実現可能性、<code>multiradial_consistent</code> 流）・IndeterminaciesData。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free）。<strong>Dα-5 のフル仕様 Theorem311Rep の ind_eq フィールドの型土台が確定</strong>。正直な限定: Ind3 は最小の le-関係のみで、完全な log-Kummer / Θ×μ_LGP-link 連携（Kummer 同型構成）は Dα-4。<code>ind311_forget</code> は仮定した同定 h に沿う transport であり、真の <code>M.Ind = ind311</code>（ind_eq）は Dα-5 の仕事（ここでは <code>ind311_refines</code> が「平坦 Ind フィールドが積を担い得る」ことのみ示す）。<code>MultiradialRep</code> の解析的構成は D-β。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M200F: Tate 被覆圏のファイバー関手による π₁ 復元 — Aut(F)≅ẑ、A-3β 完結（柱A A-3β-4・並行部品）（IUT/TateFiberFunctor.lean）</h3>
   <div class="box">
