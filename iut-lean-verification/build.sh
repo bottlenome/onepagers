@@ -1878,6 +1878,9 @@ import IUT
 #print axioms IUT.tateGaloisData
 #print axioms IUT.tateGaloisData_faithful
 #print axioms IUT.tateCoverGalois_exists
+#print axioms IUT.recInertia_teich_eq
+#print axioms IUT.recRamSurj_covers
+#print axioms IUT.recRamifiedSurj_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
