@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 260,
-  "verified_theorem_total": 1903,
-  "choice_free_count": 217,
+  "module_count": 261,
+  "verified_theorem_total": 1906,
+  "choice_free_count": 218,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3209,6 +3209,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PillarDFoundation.lean"
+    },
+    {
+      "id": "ThetaLabelInjective",
+      "label": "ThetaLabelInjective",
+      "milestone": "M212F",
+      "title": "テータ値ラベルの単射性（柱E・並行部品）",
+      "pillar": "E",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLabelInjective.lean"
     }
   ],
   "edges": [
@@ -3463,6 +3475,10 @@
     {
       "source": "Fermat",
       "target": "Teichmuller"
+    },
+    {
+      "source": "Fermat",
+      "target": "ThetaLabelInjective"
     },
     {
       "source": "FiberedFrobenioid",
@@ -4719,6 +4735,10 @@
     {
       "source": "ThetaSeries",
       "target": "ThetaFunctional"
+    },
+    {
+      "source": "ThetaValueEval",
+      "target": "ThetaLabelInjective"
     },
     {
       "source": "Topology",

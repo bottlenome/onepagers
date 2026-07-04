@@ -1912,6 +1912,9 @@ import IUT
 #print axioms IUT.cor312_of_311
 #print axioms IUT.theorem311Rep_exists
 #print axioms IUT.pillarDFoundation_exists
+#print axioms IUT.theta_cong_dvd
+#print axioms IUT.theta_label_injective
+#print axioms IUT.thetaLabelInjective_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

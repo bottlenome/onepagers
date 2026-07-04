@@ -167,6 +167,3 @@ theorem thetaLabelInjective_exists (l L : Nat) (hodd : l = 2 * L + 1)
   ⟨thetaLabelInjectiveData l L hodd hp⟩
 
 end IUT
-
-#print axioms IUT.theta_label_injective
-#print axioms IUT.thetaLabelInjective_exists
