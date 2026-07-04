@@ -1791,6 +1791,9 @@ import IUT
 #print axioms IUT.realPow_rabs_decay
 #print axioms IUT.realGeomDecayData
 #print axioms IUT.realGeomDecay_exists
+#print axioms IUT.geom_inverse_converges
+#print axioms IUT.geomConvergeData
+#print axioms IUT.geomConverge_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

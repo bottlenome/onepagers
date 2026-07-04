@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M181 の形式化（追加検証）</h2>
+  <h2>M1〜M182 の形式化（追加検証）</h2>
+
+  <h3>M182: 幾何級数の収束 — (1⊖r)·s_k → 1 の明示速度（柱C・収束の本丸）（IUT/GeomConverge.lean）</h3>
+  <div class="box">
+    <p>第101弾の幾何級数プログラムの<strong>到達点</strong>（収束の本丸）。M177（逆元近似の誤差 (1⊖r)·s_k ⊖ 1 ≈ ⊖r^k、|誤差| = |r|^k）と M181（|r|^k の減衰 |r|^k ≤ 1/(m+1)）を rLe で連鎖し、<strong>geom_inverse_converges: |r| ≤ N/(N+1) ∧ 1 ≤ N ∧ N·m ≤ k ⟹ |(1⊖r)·s_k ⊖ 1| ≤ 1/(m+1)</strong>（すなわち <strong>(1⊖r)·s_k → 1</strong> = s_k → (1⊖r)⁻¹ が明示速度で成立）・GeomConvergeData。<strong>公理ゼロ</strong>。M162（逆元の一意性）と併せると s_k は「1⊖r の唯一の逆元 (1⊖r)⁻¹」に、残差 |(1⊖r)·s_k − 1| ≤ 1/(m+1)（k ≥ N·m）という明示速度で収束する。環側（M176: 誤差 ∈ (λ^{km})）と実数側（本定理: |誤差| ≤ 1/(m+1)）で、幾何級数による 1−r の逆元近似が両面から定量的に閉じた。本丸の 2 段は M179（Bernoulli）・M180（乗法単調性）という tier L の rate-bound 部品（Fable スポット）に支えられる。<strong>M31（局所類体論の単数 filtration）から実数解析（M165〜M181）までの一連の橋が、この収束定理で束ねられた</strong>。正直な限定: 本定理は「残差 → 0（明示速度）」= 構成的・実効的な収束の表明。極限 L を対角極限 rlim（M128 完備性）で構成し realEq (rmul (1⊖r) L) 1 を閉じる位相的完備化版（s_k の IsCauchyReals 性を要す）は次層で、実効版が収束の数学的内容の核。全 3 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M181: 実数幾何級数の減衰 — |r|^k → 0 の明示モジュラス（柱C・tier L / Fable）（IUT/RealGeomDecay.lean）</h3>
   <div class="box">

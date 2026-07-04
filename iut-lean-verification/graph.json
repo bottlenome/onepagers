@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 226,
-  "verified_theorem_total": 1782,
-  "choice_free_count": 186,
+  "module_count": 227,
+  "verified_theorem_total": 1785,
+  "choice_free_count": 187,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2787,6 +2787,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomDecay.lean"
+    },
+    {
+      "id": "GeomConverge",
+      "label": "GeomConverge",
+      "milestone": "M182",
+      "title": "幾何級数の収束",
+      "pillar": "C",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomConverge.lean"
     }
   ],
   "edges": [
@@ -3701,6 +3713,14 @@
     {
       "source": "RealGeomAbs",
       "target": "GeometricSeriesProgram"
+    },
+    {
+      "source": "RealGeomDecay",
+      "target": "GeomConverge"
+    },
+    {
+      "source": "RealGeomInv",
+      "target": "GeomConverge"
     },
     {
       "source": "RealGeomInv",
