@@ -20,8 +20,8 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 87,
-      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移+分岐 v(π) 下界 discharge（π_n∈(λ_n) 無条件・基点 e=p−1 exact M222F）・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: B-1 exact 付値 v(π_{n+1})=p·v(π_n)/[c]-倍・B-2 完全全射・Λₙ(n≥2) (#36)",
+      "progress_pct": 88,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移+分岐 v(π) 下界 discharge（π_n∈(λ_n) 無条件 M222F）+ exact 付値 v(ι(λ_n))=p（支配項分離で上界+下界=等号、v(π)≥p 仮定下 M226F）・基点 e=p−1 exact・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: B-1 仮定 v(π_{n+1})≥p の無条件化（ef=[L:K] 簿記）/[c]-倍・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },

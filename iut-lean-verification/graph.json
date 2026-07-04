@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 273,
-  "verified_theorem_total": 1932,
-  "choice_free_count": 226,
+  "module_count": 274,
+  "verified_theorem_total": 1934,
+  "choice_free_count": 227,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3365,6 +3365,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisFullness.lean"
+    },
+    {
+      "id": "LambdaTowerExactRamif",
+      "label": "LambdaTowerExactRamif",
+      "milestone": "M226F",
+      "title": "塔遷移像 ι(λₙ) の exact 付値（柱B B-1・下界を超える上界／等号）",
+      "pillar": "B",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerExactRamif.lean"
     }
   ],
   "edges": [
@@ -4126,7 +4138,15 @@
     },
     {
       "source": "LambdaTowerGen",
+      "target": "LambdaTowerExactRamif"
+    },
+    {
+      "source": "LambdaTowerGen",
       "target": "LambdaTowerTrans"
+    },
+    {
+      "source": "LambdaTowerRamif",
+      "target": "LambdaTowerExactRamif"
     },
     {
       "source": "LambdaTowerTrans",
