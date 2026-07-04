@@ -217,3 +217,4 @@ import IUT.RealGeom
 import IUT.RealPow
 import IUT.RealPowMul
 import IUT.RealGeomRec
+import IUT.RealAbsPow

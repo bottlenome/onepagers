@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 213,
-  "verified_theorem_total": 1721,
-  "choice_free_count": 173,
+  "module_count": 214,
+  "verified_theorem_total": 1726,
+  "choice_free_count": 174,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2631,6 +2631,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomRec.lean"
+    },
+    {
+      "id": "RealAbsPow",
+      "label": "RealAbsPow",
+      "milestone": "M169",
+      "title": "絶対値の冪・単位・冪等法則（柱C）",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealAbsPow.lean"
     }
   ],
   "edges": [
@@ -3452,6 +3464,10 @@
     },
     {
       "source": "RealAbs",
+      "target": "RealAbsPow"
+    },
+    {
+      "source": "RealAbs",
       "target": "RealPosMul"
     },
     {
@@ -3537,6 +3553,10 @@
     {
       "source": "RealPosMul",
       "target": "RealInv"
+    },
+    {
+      "source": "RealPow",
+      "target": "RealAbsPow"
     },
     {
       "source": "RealPow",

@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M168 の形式化（追加検証）</h2>
+  <h2>M1〜M169 の形式化（追加検証）</h2>
+
+  <h3>M169: 絶対値の冪・単位・冪等法則（柱C）（IUT/RealAbsPow.lean）</h3>
+  <div class="box">
+    <p>M127F（rabs の乗法性 rabs_mul）と M166/M167（実数の冪 realPow）の合流（第101弾）。絶対値 rabs が<strong>冪に対して乗法的</strong>であることを realEq 下で: <strong>rabs_one</strong>（|1| ≈ 1、定数列 1 の各項 qAbs 1 = 1）・<strong>rabs_idem</strong>（||x|| ≈ |x|、各項 qAbs_idem）・<strong>rabs_pow: |r^k| ≈ |r|^k</strong>（k の帰納 + rabs_mul + IH の左 congruence）・RealAbsPowData。<strong>|r^k| = |r|^k は「|r| &lt; 1 なら |r^k| → 0」という収束論（幾何級数 M165/M168 の残差評価）の中核の代数的下地</strong> — rabs が realPow と可換であること（絶対値と冪の交換）。M167 で realPow が可換モノイド準同型的法則を満たすことを示したが、本層はその絶対値版。正直な限定: |r^k| → 0（|r| &lt; 1 での実際の収束）は次層（rate-bound + 順序を要す）。全 5 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M168: 実数幾何級数の漸化式・残差恒等式（柱E→C 橋）（IUT/RealGeomRec.lean）</h3>
   <div class="box">

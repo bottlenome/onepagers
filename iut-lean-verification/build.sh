@@ -1730,6 +1730,11 @@ import IUT
 #print axioms IUT.real_geom_residual
 #print axioms IUT.realGeomRecData
 #print axioms IUT.realGeomRec_exists
+#print axioms IUT.rabs_one
+#print axioms IUT.rabs_idem
+#print axioms IUT.rabs_pow
+#print axioms IUT.realAbsPowData
+#print axioms IUT.realAbsPow_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
