@@ -1881,6 +1881,9 @@ import IUT
 #print axioms IUT.recInertia_teich_eq
 #print axioms IUT.recRamSurj_covers
 #print axioms IUT.recRamifiedSurj_exists
+#print axioms IUT.theta_operator_hom
+#print axioms IUT.theta_op_value_obstruction
+#print axioms IUT.thetaOperatorHom_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

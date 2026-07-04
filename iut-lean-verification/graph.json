@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 247,
-  "verified_theorem_total": 1872,
-  "choice_free_count": 206,
+  "module_count": 248,
+  "verified_theorem_total": 1875,
+  "choice_free_count": 207,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3049,6 +3049,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RecRamifiedSurj.lean"
+    },
+    {
+      "id": "ThetaOperatorHom",
+      "label": "ThetaOperatorHom",
+      "milestone": "M198F",
+      "title": "テータ級数の作用素準同型 T↦Φ(1)-乗算",
+      "pillar": "E",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaOperatorHom.lean"
     }
   ],
   "edges": [
@@ -4391,6 +4405,10 @@
     {
       "source": "ThetaFuneqBridge",
       "target": "MonoThetaEnv"
+    },
+    {
+      "source": "ThetaFuneqBridge",
+      "target": "ThetaOperatorHom"
     },
     {
       "source": "ThetaGauss",
