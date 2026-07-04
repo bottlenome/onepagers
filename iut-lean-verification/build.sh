@@ -1939,6 +1939,8 @@ import IUT
 #print axioms IUT.formalGroupProgram_exists
 #print axioms IUT.thetaValueConstruct_exists
 #print axioms IUT.lambdaTowerRamif_exists
+#print axioms IUT.galoisFullness_exists
+#print axioms IUT.galoisEquivalenceFull_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
