@@ -36,8 +36,8 @@
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 48,
-      "status": "インターフェース側 capstone ✅ 🔶 / D-α 完結 Dα-1〜8（4土台+Theorem311Rep+MultiradialInput+充足模型を単一レコード PillarDInterfaceData に総括 M220F）: IUT の正否が MultiradialInput の inhabit 問題に局在（Premises→Input→Rep→Cor312 還元連鎖）し、D インターフェース側の組み立てが単一 Nonempty 命題で certify。残: 本丸 D-β 多輻的アルゴリズム構成（永続的幾何入力・実算術データ上の inhabit）",
+      "progress_pct": 52,
+      "status": "インターフェース側 capstone ✅ + D-β 着手 🔶 / D-α 完結 Dα-1〜8（M220F 総括）に加え D-β 詳細化ラウンド（7 段分解）→ Dβ-1 逆局在（居住 ⟺ 系3.12 の同値 iut_localized_iff M227F）・Dβ-2 実数 threading（gaussPilotRepW を base に実数値入力 M228F）着手。IUT の正否が MultiradialInput の inhabit 問題に等価局在。残: 本丸 crux ThetaLinkTransport の実データ証明（Dβ-3〜7 忠実模型化+鏡像定理・Dβ-ω 恒久的範囲外＝多輻的アルゴリズム）",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },

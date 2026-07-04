@@ -116,8 +116,10 @@ structure InputConverseData where
     （−1 ≥ −1、等号で成立）を示し、逆局在で入力レコードへ持ち上げる。 -/
 def inputConverseData : InputConverseData where
   s := base311Skel
-  h := by unfold Cor312 base311Skel; omega
-  input := inputOfRep (multiradialRepOfCor312 (by unfold Cor312 base311Skel; omega))
+  h := by show (-(1 : Int)) ≥ -(1 : Int); omega
+  input := inputOfRep
+    (multiradialRepOfCor312 (s := base311Skel)
+      (by show (-(1 : Int)) ≥ -(1 : Int); omega))
 
 /-- **定理 (M227F-4c): 逆局在の非空虚性（見出し）** — `base311Skel`
     という具体骨格上で、`Cor312` の証拠から入力レコードへの逆局在が
@@ -136,3 +138,4 @@ D-β-1 完了: デモ充足模型 `m202fVol` 上で、局在の逆矢印
 -/
 
 end IUT
+

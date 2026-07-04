@@ -1943,6 +1943,10 @@ import IUT
 #print axioms IUT.galoisEquivalenceFull_exists
 #print axioms IUT.lambdaTowerExactRamif_exists
 #print axioms IUT.towerGen_transition_val_exact_of_pi
+#print axioms IUT.iut_localized_iff
+#print axioms IUT.inputConverse_exists
+#print axioms IUT.realMultiradialInput_exists
+#print axioms IUT.iut_localized_real
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
