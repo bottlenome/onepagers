@@ -44,7 +44,7 @@
     "E": {
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
-      "progress_pct": 93,
+      "progress_pct": 94,
       "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・解析↔群側関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)。残: 環写像対象・ガロア同変テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"

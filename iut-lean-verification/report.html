@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M218 の形式化（追加検証）</h2>
+  <h2>M1〜M219 の形式化（追加検証）</h2>
+
+  <h3>M219F: テータ値評価・l⋇ ラベリングの総括 capstone（柱E・並行部品）（IUT/ThetaEvalCapstone.lean）</h3>
+  <div class="box">
+    <p>テータ値評価チェーン（M209F 値指数 j²・±/orbitRep well-defined → M212F ラベル単射 → M162F μ_l(O) 同一視/l⋇ ラベリング）を<strong>単一レコード ThetaEvalData に束ねて一括 certification</strong>（新規証明ゼロ、tier S / sonnet）。3 つのパラメタ族（値・単射側の l、μ_l 側の p、<code>hdvd : l ∣ p−1</code> で連結）が署名統一を要さず合成。フィールド: <code>valueEval : ThetaValueEvalData</code>・<code>labelInjective : ThetaLabelInjectiveData</code>・<code>muLabel : MuLIdentificationData</code>。<code>thetaEvalData</code>（μ_l 生成元 ζ を明示引数）・<code>thetaEval_exists</code>（3 つの <code>…_exists</code> から <code>obtain</code> で合成、Prop→Prop で新規 choice なし）。<code>#print axioms</code> は <strong>[propext, Classical.choice, Quot.sound]</strong>（M209F/M212F の M32 euclid/Evaluation 連鎖から型継承、本モジュールでの新規使用ゼロ、台帳 +1）。<strong>値指数 j² → ± well-defined → 単射 → μ_l 同一視/l⋇ ラベリングの離散核が単一レコードで確定した</strong>。正直な限定: 離散核（指数簿記の合同・ラベル対応）のみを束ねる。完全な評価同型（エタールテータ値の構成本体）・ガロア同変な p-進テータ値・tempered π₁ 実現は E-1 residual（3 元モジュール同様）。全宣言 [propext, Classical.choice, Quot.sound]。</p>
+  </div>
 
   <h3>M218F: 分岐 rec の合同全射性 — M197F+M207F の直積被覆統合（柱B B-2 全射側・並行部品）（IUT/RecSurjective.lean）</h3>
   <div class="box">
