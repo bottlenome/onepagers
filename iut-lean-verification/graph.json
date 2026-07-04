@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 249,
-  "verified_theorem_total": 1878,
-  "choice_free_count": 208,
+  "module_count": 250,
+  "verified_theorem_total": 1881,
+  "choice_free_count": 209,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3075,6 +3075,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogShell.lean"
+    },
+    {
+      "id": "TateFiberFunctor",
+      "label": "TateFiberFunctor",
+      "milestone": "M200F",
+      "title": "Tate 被覆圏のファイバー関手による π₁ 復元",
+      "pillar": "A",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateFiberFunctor.lean"
     }
   ],
   "edges": [
@@ -3623,12 +3635,20 @@
       "target": "AbstractGalois"
     },
     {
+      "source": "GaloisAxioms",
+      "target": "TateFiberFunctor"
+    },
+    {
       "source": "GaloisCategory",
       "target": "CategoryTheory"
     },
     {
       "source": "GaloisCategory",
       "target": "SGA1"
+    },
+    {
+      "source": "GaloisCategory",
+      "target": "TateFiberFunctor"
     },
     {
       "source": "GaloisClosureLift",
@@ -4397,6 +4417,10 @@
     {
       "source": "TateCoverCat",
       "target": "TateCoverGalois"
+    },
+    {
+      "source": "TateCoverGalois",
+      "target": "TateFiberFunctor"
     },
     {
       "source": "TateCoverGroup",

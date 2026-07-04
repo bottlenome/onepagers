@@ -1887,6 +1887,9 @@ import IUT
 #print axioms IUT.gaussLogShell_vol_wssq
 #print axioms IUT.gaussLogShell_vol_lower
 #print axioms IUT.logShell_exists
+#print axioms IUT.tate_from_to
+#print axioms IUT.tate_to_from
+#print axioms IUT.tateFiberFunctor_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
