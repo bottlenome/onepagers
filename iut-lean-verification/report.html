@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M177 の形式化（追加検証）</h2>
+  <h2>M1〜M178 の形式化（追加検証）</h2>
+
+  <h3>M178: 幾何級数プログラムの総括 capstone（柱C）（IUT/GeometricSeriesProgram.lean）</h3>
+  <div class="box">
+    <p>第101弾で建設した幾何級数〜逆元近似の一連（M163〜M177）を、<strong>単一のレコード GeometricSeriesProgramData に束ねて一括 certification</strong>（第101弾）。witness は全て既存定理名のみ——<strong>新規証明ゼロ</strong>（capstone 束ね）。収録する 12 の柱石: 環の閉形式 (1−r)·s_k = 1−r^k（M163）・環の左漸化式（M170）・環の残差（M170）・実数の閉形式（M165）・実数の左漸化式（M168）・実数冪の指数法則 r^{m+n} ≈ r^m·r^n（M166）・絶対値の冪 |r^k| ≈ |r|^k（M169）・三角不等式 |x+y| ≤ |x|+|y|（M174）・絶対値評価 |Σrⁱ| ≤ Σ|r|ⁱ（M175）・環の逆元近似 (1−r)·s_k−1 ∈ (λ^{km})（M176）・実数の誤差 (1⊖r)·s_k⊖1 ≈ ⊖r^k（M177）・誤差の絶対値 |(1⊖r)·s_k⊖1| ≈ |r|^k（M177）。<code>#print axioms geometricSeriesProgramData</code> が全鎖の choice-free 性を一度に確認。<strong>幾何級数の代数（閉形式・漸化式・残差）が環と実数の双方で成立し、冪法則・絶対値・三角不等式・順序と結合して 1−r の逆元近似（環では誤差 ∈ (λ^{km})、実数では |誤差| = |r|^k）まで一気通貫で choice なしに閉じる</strong>ことを単一レコードで証拠化。局所類体論の主単数（M31/M172）と実数解析（M165〜M175）を橋渡しする土台の総括。正直な限定: 収束そのもの（k → ∞ の極限 = 実際の逆元 (1−r)⁻¹）は順序完備性・rate-bound の次層。全 2 宣言 [propext, Quot.sound] 以下。</p>
+  </div>
 
   <h3>M177: 実数幾何級数の逆元近似誤差 — |(1⊖r)·s_k ⊖ 1| ≈ |r|^k（柱C）（IUT/RealGeomInv.lean）</h3>
   <div class="box">

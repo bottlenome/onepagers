@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 222,
-  "verified_theorem_total": 1760,
-  "choice_free_count": 182,
+  "module_count": 223,
+  "verified_theorem_total": 1762,
+  "choice_free_count": 183,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2739,6 +2739,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomInv.lean"
+    },
+    {
+      "id": "GeometricSeriesProgram",
+      "label": "GeometricSeriesProgram",
+      "milestone": "M178",
+      "title": "幾何級数プログラムの総括 capstone（柱C）",
+      "pillar": "C",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeometricSeriesProgram.lean"
     }
   ],
   "edges": [
@@ -3311,6 +3323,10 @@
       "target": "LambdaInvApprox"
     },
     {
+      "source": "LambdaInvApprox",
+      "target": "GeometricSeriesProgram"
+    },
+    {
       "source": "LambdaModule",
       "target": "LambdaSemilinear"
     },
@@ -3633,6 +3649,14 @@
     {
       "source": "RealGeom",
       "target": "RealPow"
+    },
+    {
+      "source": "RealGeomAbs",
+      "target": "GeometricSeriesProgram"
+    },
+    {
+      "source": "RealGeomInv",
+      "target": "GeometricSeriesProgram"
     },
     {
       "source": "RealGeomRec",

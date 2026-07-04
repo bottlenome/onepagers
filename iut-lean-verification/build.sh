@@ -1769,6 +1769,8 @@ import IUT
 #print axioms IUT.rabs_geom_inv_error
 #print axioms IUT.realGeomInvData
 #print axioms IUT.realGeomInv_exists
+#print axioms IUT.geometricSeriesProgramData
+#print axioms IUT.geometricSeriesProgram_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

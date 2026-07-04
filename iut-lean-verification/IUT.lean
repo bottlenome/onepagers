@@ -226,3 +226,4 @@ import IUT.RealAbsTriangle
 import IUT.RealGeomAbs
 import IUT.LambdaInvApprox
 import IUT.RealGeomInv
+import IUT.GeometricSeriesProgram
