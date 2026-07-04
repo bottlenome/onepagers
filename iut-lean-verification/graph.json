@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 228,
-  "verified_theorem_total": 1792,
-  "choice_free_count": 188,
+  "module_count": 229,
+  "verified_theorem_total": 1798,
+  "choice_free_count": 189,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2811,6 +2811,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomLimit.lean"
+    },
+    {
+      "id": "GeomConvergeSC",
+      "label": "GeomConvergeSC",
+      "milestone": "M184",
+      "title": "自己完結な幾何級数収束",
+      "pillar": "C",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomConvergeSC.lean"
     }
   ],
   "edges": [
@@ -3351,6 +3363,10 @@
       "target": "RealGeomDecay"
     },
     {
+      "source": "GeomLimit",
+      "target": "GeomConvergeSC"
+    },
+    {
       "source": "GeomSeries",
       "target": "GeomSeriesRec"
     },
@@ -3680,6 +3696,10 @@
     },
     {
       "source": "RealAbsLe",
+      "target": "GeomConvergeSC"
+    },
+    {
+      "source": "RealAbsLe",
       "target": "RealAbsTriangle"
     },
     {
@@ -3797,6 +3817,10 @@
     {
       "source": "RealMulOrder",
       "target": "RealGeomDecay"
+    },
+    {
+      "source": "RealObstruction",
+      "target": "GeomConvergeSC"
     },
     {
       "source": "RealOrder",

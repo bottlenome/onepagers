@@ -1801,6 +1801,12 @@ import IUT
 #print axioms IUT.geom_limit_object
 #print axioms IUT.geomLimitData
 #print axioms IUT.geomLimit_exists
+#print axioms IUT.oneMinus_lower
+#print axioms IUT.oneMinus_isPos
+#print axioms IUT.Lbound
+#print axioms IUT.geom_converges_self_contained
+#print axioms IUT.geomConvergeSCData
+#print axioms IUT.geomConvergeSC_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M183 の形式化（追加検証）</h2>
+  <h2>M1〜M184 の形式化（追加検証）</h2>
+
+  <h3>M184: 自己完結な幾何級数収束 — |r|≤N/(N+1) のみからの収束（柱C・収束プログラム完結・tier L / Fable）（IUT/GeomConvergeSC.lean）</h3>
+  <div class="box">
+    <p>M183 が仮定していた 2 条件（1⊖r の apartness、|L| の有理上界 B）を、<strong>有理上界 |r| ≤ N/(N+1) 一つのみから導出</strong>し、幾何級数収束を完全自己完結形に到達させる（第101弾・Fable スポットセッション）。<strong>oneMinus_lower: 1⊖r ≥ 1/(N+1)</strong>（r ≤ |r| ≤ N/(N+1) を点ごとに、rLe_self_rabs + witness 計算）・<strong>oneMinus_isPos: IsPos|1⊖r|</strong>（witness 添字 4N+3 で 2/(4N+4) + 2u_{4N+3} = 1/(N+1) がちょうど相殺、M153F 逆元存在に接続する apartness）・<strong>Lbound: |L| ≤ N+1</strong>（|1⊖r|·|L| = 1 と |1⊖r| ≥ 1/(N+1) から (1/(N+1))·|L| ≤ 1、M180 rmul_le_mul_right + M159F 定数倍で N+1 に）・<strong>本丸 geom_converges_self_contained: |r| ≤ N/(N+1) ∧ 1 ≤ N ⟹ ∃L, (1⊖r)·L ≈ 1 ∧ ∀m, k ≥ N·((N+1)(m+1)+m) ⟹ |s_k − L| ≤ 1/(m+1)</strong>（L は M183 geom_limit_object で構成、明示 ∃-witness、choice なし）・GeomConvergeSCData。<strong>公理ゼロ</strong>。<strong>幾何級数の収束が「公比の有理上界 |r| ≤ N/(N+1) 一つ」のみに依存する完全自己完結な定理として確定</strong> — 収束サブプログラム（M179〜M184）が完結した。正直な限定: 対角極限 rlim（M128 完備性）/IsCauchyReals による構成のみ範囲外（本構成的自己完結版が収束の完全な数学的内容）。全 9 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M183: 幾何級数の極限対象 — s_k → (1⊖r)⁻¹ の構成的収束（柱C・極限構成・tier L / Fable）（IUT/GeomLimit.lean）</h3>
   <div class="box">

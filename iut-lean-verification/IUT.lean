@@ -232,3 +232,4 @@ import IUT.RealMulOrder
 import IUT.RealGeomDecay
 import IUT.GeomConverge
 import IUT.GeomLimit
+import IUT.GeomConvergeSC
