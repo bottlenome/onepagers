@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M170 の形式化（追加検証）</h2>
+  <h2>M1〜M171 の形式化（追加検証）</h2>
+
+  <h3>M171: 実数幾何級数の構造法則 — 比の congruence・望遠鏡増分（柱C）（IUT/RealGeomCongr.lean）</h3>
+  <div class="box">
+    <p>M165/M168（実数幾何級数 realGeomSum の閉形式・漸化式）の続き（第101弾）。部分和 realGeomSum が満たす二つの構造的性質を realEq 下で: <strong>realGeomSum_congr</strong>（比の congruence r ≈ r' ⟹ s_k(r) ≈ s_k(r')、M166 realPow_congr の級数版 = Σ が RReal/≈ 上の写像として井戸定義）・<strong>realGeomSum_incr</strong>（望遠鏡増分 s_{k+1} ⊖ s_k ≈ r^k = 隣接部分和の差が追加された末尾項、「Σ は差分の逆」）・RealGeomCongrData。実数の級数操作の基本補題。正直な限定: 収束・順序は含まない（次層）。全 4 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M170: 幾何級数（環）の漸化式・残差恒等式（柱C）（IUT/GeomSeriesRec.lean）</h3>
   <div class="box">

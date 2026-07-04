@@ -1739,6 +1739,10 @@ import IUT
 #print axioms IUT.geom_residual
 #print axioms IUT.geomSeriesRecData
 #print axioms IUT.geomSeriesRec_exists
+#print axioms IUT.realGeomSum_congr
+#print axioms IUT.realGeomSum_incr
+#print axioms IUT.realGeomCongrData
+#print axioms IUT.realGeomCongr_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

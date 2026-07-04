@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 215,
-  "verified_theorem_total": 1730,
-  "choice_free_count": 175,
+  "module_count": 216,
+  "verified_theorem_total": 1734,
+  "choice_free_count": 176,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2655,6 +2655,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomSeriesRec.lean"
+    },
+    {
+      "id": "RealGeomCongr",
+      "label": "RealGeomCongr",
+      "milestone": "M171",
+      "title": "実数幾何級数の構造法則",
+      "pillar": "C",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomCongr.lean"
     }
   ],
   "edges": [
@@ -3500,6 +3512,10 @@
     },
     {
       "source": "RealGeom",
+      "target": "RealGeomCongr"
+    },
+    {
+      "source": "RealGeom",
       "target": "RealGeomRec"
     },
     {
@@ -3573,6 +3589,10 @@
     {
       "source": "RealPow",
       "target": "RealAbsPow"
+    },
+    {
+      "source": "RealPow",
+      "target": "RealGeomCongr"
     },
     {
       "source": "RealPow",
