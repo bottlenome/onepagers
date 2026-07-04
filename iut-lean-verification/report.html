@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M171 の形式化（追加検証）</h2>
+  <h2>M1〜M172 の形式化（追加検証）</h2>
+
+  <h3>M172: 幾何級数と λ-adic 膜 — 部分和 ≡ 1 mod (λ^m)（柱B）（IUT/LambdaGeom.lean）</h3>
+  <div class="box">
+    <p>M163/M170（環の幾何級数 crGeomSum とその漸化式）と M164（膜 (λ^m) のイデアル構造）の合流（第101弾）。<strong>公比 r が膜 (λ^m) に入るとき、幾何部分和は 1 と (λ^m) を法として合同</strong>であることを閉じる: <strong>isValAtLeast_ratio_mul</strong>（r ∈ (λ^m) ⟹ r·s_k ∈ (λ^m)、M164 環倍閉性 + 可換）・<strong>isValAtLeast_geomSum_sub_one: s_{k+1} − 1 ∈ (λ^m)</strong>（M170 左漸化式 s_{k+1} = 1 + r·s_k より s_{k+1} − 1 = r·s_k）・LambdaGeomData。<strong>公理ゼロ</strong>。r が (λ^m) に入る（深さ m 以上で 0 に近い）とき 1 + r + … + r^k は 1 と (λ^m) を法として一致 — <strong>局所体論の主単数 1 + m·O の骨格</strong>（部分和が主単数フィルトレーションに乗る）で、M31（単数 filtration）と M170（幾何級数）を橋渡しし、付値環での「1 − r で割る」（幾何級数による逆元近似）の第一歩。正直な限定: 実際の逆元 (1 − r)⁻¹ の存在（∑r^i の収束・完備性）は位相・完備化を要し次層。全 4 宣言 [propext, Quot.sound] 以下（本体2つは公理ゼロ）。</p>
+  </div>
 
   <h3>M171: 実数幾何級数の構造法則 — 比の congruence・望遠鏡増分（柱C）（IUT/RealGeomCongr.lean）</h3>
   <div class="box">

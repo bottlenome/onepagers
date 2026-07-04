@@ -1743,6 +1743,10 @@ import IUT
 #print axioms IUT.realGeomSum_incr
 #print axioms IUT.realGeomCongrData
 #print axioms IUT.realGeomCongr_exists
+#print axioms IUT.isValAtLeast_ratio_mul
+#print axioms IUT.isValAtLeast_geomSum_sub_one
+#print axioms IUT.lambdaGeomData
+#print axioms IUT.lambdaGeom_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

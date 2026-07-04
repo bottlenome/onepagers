@@ -220,3 +220,4 @@ import IUT.RealGeomRec
 import IUT.RealAbsPow
 import IUT.GeomSeriesRec
 import IUT.RealGeomCongr
+import IUT.LambdaGeom

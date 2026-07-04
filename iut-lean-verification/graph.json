@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 216,
-  "verified_theorem_total": 1734,
-  "choice_free_count": 176,
+  "module_count": 217,
+  "verified_theorem_total": 1738,
+  "choice_free_count": 177,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2667,6 +2667,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomCongr.lean"
+    },
+    {
+      "id": "LambdaGeom",
+      "label": "LambdaGeom",
+      "milestone": "M172",
+      "title": "幾何級数と λ-adic 膜",
+      "pillar": "B",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaGeom.lean"
     }
   ],
   "edges": [
@@ -3199,6 +3211,10 @@
       "target": "GeomSeriesRec"
     },
     {
+      "source": "GeomSeriesRec",
+      "target": "LambdaGeom"
+    },
+    {
       "source": "HodgeTheater",
       "target": "FlUnits"
     },
@@ -3221,6 +3237,10 @@
     {
       "source": "LTIterate",
       "target": "TorsionPoints"
+    },
+    {
+      "source": "LambdaIdeal",
+      "target": "LambdaGeom"
     },
     {
       "source": "LambdaModule",
