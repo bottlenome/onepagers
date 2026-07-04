@@ -1884,6 +1884,9 @@ import IUT
 #print axioms IUT.theta_operator_hom
 #print axioms IUT.theta_op_value_obstruction
 #print axioms IUT.thetaOperatorHom_exists
+#print axioms IUT.gaussLogShell_vol_wssq
+#print axioms IUT.gaussLogShell_vol_lower
+#print axioms IUT.logShell_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

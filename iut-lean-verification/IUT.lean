@@ -252,3 +252,4 @@ import IUT.ConvergenceCapstone
 import IUT.TateCoverGalois
 import IUT.RecRamifiedSurj
 import IUT.ThetaOperatorHom
+import IUT.LogShell

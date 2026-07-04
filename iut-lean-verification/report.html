@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M199 の形式化（追加検証）</h2>
+  <h2>M1〜M201 の形式化（追加検証）</h2>
+
+  <h3>M201F: 対数殻テンソルパケット — (i)(a) mono-analytic container（柱D D-α-2・並行部品）（IUT/LogShell.lean）</h3>
+  <div class="box">
+    <p><a href="https://github.com/bottlenome/onepagers/issues/38">#38 の D-1 詳細化ラウンド</a>の D-α プログラムの (i)(a) 対数殻テンソルパケットを第101弾で型化（tier M / opus）。<strong>LogShell 構造</strong>（<code>procLevel</code>・<code>shell</code>・<code>content</code>・<code>content_in_shell : le content shell</code> = 定理3.11 (i)(a) の mono-analytic container 型）を実数体積理論 <code>RealVolumeTheory</code>（M139）の上で型化し、Gaussian 因子 gaussDiv の log-volume 言明を殻の語彙へ再輸出（体積式は再証明せず M133/M135F/M158F を直接再利用）。<code>logShell_of_rep</code>（任意の <code>RealMultiradialRep</code> から殻データを抽出、<code>image_in_shell</code> を殻所属として実現）・<code>gaussLogShell</code>（<code>gaussPilotRepW</code> からの具体殻）・<strong>gaussLogShell_vol_wssq: 殻体積 = Σ w(k)·k²</strong>（M135F <code>rlogVol_gauss_w</code> の再輸出、Θ-包体積 = 重み付き平方和）・<strong>gaussLogShell_vol_lower: l³ ≤ 3·vol(shell)</strong>（procession 正規化された下界、<code>rlogVol_gauss_w_bound</code> 再利用）・<code>logShell_proc_closed</code>（2·procTotal L = (L+1)(L+2)、<code>two_mul_procTotal</code> 再輸出）・LogShellData。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free、M139/M158F の Classical 継承もこの層では現れない）。<strong>Dα-5 のフル仕様 Theorem311Rep の shellData フィールドの型土台が確定</strong>し、D-α の (i)(a) 対数殻が乗る器が整った。正直な限定: <code>LogShell</code> は単一代表 <code>content</code> を担う具体スライスで、完全な (i)(b)(c) テンソルパケット（分裂モノイド Ψ⊥_LGP・数体直和 ∏_{j∈Fl⋇} I^Q）ではない（添字付き image 族は <code>MultiradialRep</code> に留まる）。Ind（Dα-3）・log-Kummer（Dα-4）・Kummer 同型は次層。<code>gaussLogShell</code> はパイロット模型（Region=ℝ, vol=id）上で、遠アーベル <code>MultiradialRep</code> 構成（=D-β）ではない。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M198F: テータ級数の作用素準同型 T↦Φ(1) — 半群則と値レベル定義不能の障害（柱E E-1・並行部品・tier L / Fable）（IUT/ThetaOperatorHom.lean）</h3>
   <div class="box">
