@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M190 の形式化（追加検証）</h2>
+  <h2>M1〜M192 の形式化（追加検証）</h2>
+
+  <h3>M192F: μ_{p−1} ≅ (ℤ/p)^× の巡回性同定・総括 capstone（柱B B-3・並行部品）（IUT/MuP1Cyclic.lean）</h3>
+  <div class="box">
+    <p>issue #36 の B-3（μ_{p−1} ≅ (ℤ/p)^× の巡回性同定）は、recon の結果すでに既存 3 層で数学的に完結していることが判明した: <strong>M101 MuUnits</strong>（群同型 μ_{p−1} ≅ (ℤ/p)^× の相互逆準同型対 <code>MuUnitsIsoData</code>）・<strong>M103 PrimitiveRoot</strong>（<code>primitive_root_exists</code>: 位数ちょうど p−1 の単元 g の存在）・<strong>M104 CyclicUnits</strong>（<code>generator_covers</code>・<code>zmodUnits_cyclic</code>・<code>mu_cyclic</code>・<code>mu_powers_distinct</code>）。本モジュール M192F は新規数学を要さず、この 3 層を<strong>マッチした生成元対 g ↔ ω̄(g) = teichBar(g) の背後に束ねる総括 capstone</strong>（新規証明ゼロ、tier S / sonnet で実装）。<strong>MuP1CyclicData</strong>（原始根単元 gU・<code>zmodOrd = p−1</code>・Teichmüller 像 gMu・IsMuRoot・μ 側と単元側の covers/distinct・<code>MuUnitsIsoData</code> を全フィールドに束ねる）・<code>muP1CyclicData</code>（原始根 g を引数、<code>primitive_root_exists</code> は <code>Nonempty</code> 証明内で Exists→Prop 抽出、choice-free）・<code>muP1Cyclic_exists</code>。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free、継承ゼロ）。<strong>B-3 は「(p−1)-乗根の群 = 剰余体の巡回単数群」として完全に閉じており、M192F がその統合 API を与える</strong>。正直な限定: 数学的残件はゼロ。表現上の限界のみ——巡回性/位数は p−1 個の冪 {gMu^0,…,gMu^{p−2}} の列挙 + 相異で表現（本プロジェクトは mathlib 非依存ゆえ Fintype/Finset 基数 |μ_{p−1}| = p−1 の API を持たない）、同型は相互逆準同型対（圏論的 <code>Iso</code> 型ではない）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M190F: 解析的テータ関数等式と群側捻れの接合 — J(T^jΘ)=T^{l−j}Θ とラベル反転の同定（柱E E-1・並行部品）（IUT/ThetaFuneqBridge.lean）</h3>
   <div class="box">

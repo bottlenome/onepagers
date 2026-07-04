@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 239,
-  "verified_theorem_total": 1851,
-  "choice_free_count": 199,
+  "module_count": 240,
+  "verified_theorem_total": 1853,
+  "choice_free_count": 200,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2951,6 +2951,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaFuneqBridge.lean"
+    },
+    {
+      "id": "MuP1Cyclic",
+      "label": "MuP1Cyclic",
+      "milestone": "M192F",
+      "title": "μ_{p−1} ≅ (ℤ/p)^× の巡回性同定",
+      "pillar": "B",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MuP1Cyclic.lean"
     }
   ],
   "edges": [
@@ -3041,6 +3053,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuLSubgroup"
+    },
+    {
+      "source": "CyclicUnits",
+      "target": "MuP1Cyclic"
     },
     {
       "source": "CyclotomicSync",

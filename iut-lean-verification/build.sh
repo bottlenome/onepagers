@@ -1860,6 +1860,8 @@ import IUT
 #print axioms IUT.funeq_gauss_degree_twist
 #print axioms IUT.funeq_analytic_group_bridge
 #print axioms IUT.thetaFuneqBridge_exists
+#print axioms IUT.muP1CyclicData
+#print axioms IUT.muP1Cyclic_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
