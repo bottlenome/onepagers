@@ -1867,6 +1867,10 @@ import IUT
 #print axioms IUT.lambdaTowerGen_exists
 #print axioms IUT.essSurjCapstoneData
 #print axioms IUT.essSurjCapstone_exists
+#print axioms IUT.sumCover
+#print axioms IUT.cover_fiber_faithful
+#print axioms IUT.cover_deck_profinite_compat
+#print axioms IUT.tateCoverCat_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

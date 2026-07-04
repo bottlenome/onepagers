@@ -246,3 +246,4 @@ import IUT.ThetaFuneqBridge
 import IUT.MuP1Cyclic
 import IUT.LambdaTowerGen
 import IUT.EssSurjCapstone
+import IUT.TateCoverCat
