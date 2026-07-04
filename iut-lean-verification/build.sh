@@ -1813,6 +1813,11 @@ import IUT
 #print axioms IUT.orbit_dominated_by_galois
 #print axioms IUT.closureTower_dominates
 #print axioms IUT.galoisClosureLift_exists
+#print axioms IUT.eis_coord_depth
+#print axioms IUT.eis_separated
+#print axioms IUT.eis_step_faithful
+#print axioms IUT.eisSeparationData
+#print axioms IUT.eisSeparation_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

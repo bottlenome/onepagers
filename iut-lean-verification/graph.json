@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 230,
-  "verified_theorem_total": 1804,
-  "choice_free_count": 190,
+  "module_count": 231,
+  "verified_theorem_total": 1809,
+  "choice_free_count": 191,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2835,6 +2835,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisClosureLift.lean"
+    },
+    {
+      "id": "EisSeparation",
+      "label": "EisSeparation",
+      "milestone": "M160",
+      "title": "eisRing の (λ,π)-adic 分離性（柱B）",
+      "pillar": "B",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisSeparation.lean"
     }
   ],
   "edges": [
@@ -2961,6 +2973,10 @@
     {
       "source": "EisEndoRigidity",
       "target": "Premises311"
+    },
+    {
+      "source": "EisFaithful",
+      "target": "EisSeparation"
     },
     {
       "source": "EisFaithful",
@@ -3221,6 +3237,10 @@
     {
       "source": "FormalGroupOModule",
       "target": "LambdaModule"
+    },
+    {
+      "source": "FormalGroupPoints",
+      "target": "EisSeparation"
     },
     {
       "source": "FormalGroupPoints",
@@ -4117,6 +4137,10 @@
     {
       "source": "TowerNonzero",
       "target": "EisFaithful"
+    },
+    {
+      "source": "TowerSeparation",
+      "target": "EisSeparation"
     },
     {
       "source": "TowerTorsion",

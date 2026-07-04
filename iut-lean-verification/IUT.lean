@@ -234,3 +234,4 @@ import IUT.GeomConverge
 import IUT.GeomLimit
 import IUT.GeomConvergeSC
 import IUT.GaloisClosureLift
+import IUT.EisSeparation

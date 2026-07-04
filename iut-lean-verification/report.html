@@ -160,6 +160,11 @@
 <section>
   <h2>M1〜M184 の形式化（追加検証）</h2>
 
+  <h3>M160: eisRing の (λ,π)-adic 分離性（柱B 本線・tier L / Fable）（IUT/EisSeparation.lean）</h3>
+  <div class="box">
+    <p>issue #48 §4 Phase I の柱B本線項目（第101弾・tier L の座標簿記を Fable スポットで完成）。塔レベル 1 の Eisenstein 環 eisRing の (λ,π)-adic 分離性を証明し、M155 の sep_poly_faithful インターフェースを O₂ = eisRing p で instance 化して、塔レベル 1 の座標一般忠実性を閉じる。技術的核 <strong>eis_coord_depth: IsIn2Pow ((p−1)·d) x ⟹ 各座標 eisCoordStab が ℤ_p で深度 d の (p)-冪に入る</strong>（深度成長の弱形。d の外側帰納 + λ予算 j ≤ p−1 の内側帰納で、π 倍 = 座標を π 倍・λ 域内 = 添字を下へシフト（M93F eisCoeff_lambda_mul）・λ 巻き戻り c₀(λx) = −π·c_{p−2}(x) で π を 1 つ稼ぐ、切断レベル差は val_negPiPow_mul 経由の negPi_mul_trunc_stable で吸収）。<strong>eis_separated: IsSeparated2 (eisRing p) (eisLambda p) (eisPi p)</strong>（核 + zp_separated（M155-5）で各座標 = 0 + eisCoeff_faithful（M122-5）で x = 0）。<strong>eis_step_faithful: sep_poly_faithful（M155-4b）を O₂ = eisRing p で instance 化</strong>。新規基盤: ℤ_p 値安定化 Weierstrass 座標 eisCoordStab（M122 eisCoeffStab の Quot.lift、井戸定義性は M93F eisCoeff_sound の全レベル）。<strong>公理ゼロ</strong>。正直な限定: 深度簿記は粗い弱形（深度 d に (p−1)·d 歩、分離には十分で最適 ⌊k/(p−1)⌋ は未追求）、(eisPi, eisLambda) と towerLevel p 1 の構造定数同定は次層。全宣言 [propext, Quot.sound]。</p>
+  </div>
+
   <h3>M160F: ガロア閉包のモデル側リフト（柱A A-1・並行部品）（IUT/GaloisClosureLift.lean）</h3>
   <div class="box">
     <p>M148F（core(H) によるモデル側閉包）・M154F（G/core(H) の抽象 IsGalois 充足）は<strong>剰余類対象 G/H に限った</strong>閉包だったが、本モジュール（第101弾・サブエージェント並行部品）はこれを<strong>任意の連結対象</strong>（モデルの語彙: 基点付き推移的 G-作用）へリフトする。軌道-安定化の分類射 [g] ↦ g·e₀ を <strong>関数化</strong>（stabHom — M16-4 orbit_stabilizer が ∃ 形でしか与えなかったものを choice なしで def 化、これが合成を可能にする鍵）し、単射・（推移的なら）全射を証明。M148F の core 支配と合成して <strong>connected_dominated_by_galois: 任意の基点付き推移的 G-作用 E は抽象 IsGalois 対象 G/core(Stab e₀) にファイバー全射で支配される</strong>・orbit_dominated_by_galois（M16-3 軌道分解と併せ任意 G-集合の全連結成分）・<strong>closureTower: 任意の（非可換）群上の初の GaloisTower</strong>（M24-5 は自明群、M157F は可換 ℤ のみだった）・closureTower_dominates（M24 の GaloisTower/π₁ インターフェースに供給）・GaloisClosureLiftData。正直な限定: 抽象 Connected（M21）を一般 E から導出する部分（一般 E の切断は代表元選択を要し、剰余類対象は Quot で回避するが一般 E は不可）・genuinely 成長する非可換塔・抽象公理系そのもの内部での閉包は次層（A-1 の真の残余）。IsGalois 系は gsetGaloisData の G6 由来の Classical.choice を型継承（本モジュールの証明での使用はゼロ、M154F/M157F と同型の状況）。</p>
