@@ -12,24 +12,24 @@
     "A": {
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
-      "progress_pct": 93,
-      "status": "SGA1主定理ブロック ✅ / A-1 三段完結（閉包→抽象IsGalois→階乗塔）・A-2 商公理済・残: pro-対象本質全射 + A-3 幾何入力 (#35)",
+      "progress_pct": 95,
+      "status": "SGA1主定理ブロック ✅ / A-1 完結・A-2 推移的+有限和+ガロア支配&Connected⟺推移的(M189F)・A-3β-1 Tate被覆群提示(M188F)。残: pro-対象本質・A-3β 被覆圏〜幾何入力 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
     },
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 81,
-      "status": "剛性 ✅ / λ 全伝播・付値階段・多項式 Weierstrass 完結・分離性局在 + ℤ_p instance (#36)",
+      "progress_pct": 83,
+      "status": "剛性 ✅ / λ 全伝播・付値階段・多項式 Weierstrass・分離性局在 + eisRing (λ,π)-adic 分離(M160)。残: Λₙ(n≥2)塔生成元・分岐 rec 全射性・μ_{p−1}巡回性 (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 78,
-      "status": "構成的順序体 capstone ✅ — 46 法則一括 certification（choice-free）(#37)",
+      "progress_pct": 86,
+      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（残差→極限対象→自己完結→rlim 位相的完備化 M179–M185）・除算代数・実冪法則。残: log-volume 橋の一部 (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
@@ -44,8 +44,8 @@
     "E": {
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
-      "progress_pct": 87,
-      "status": "E1–E8 ✅ / Heisenberg 辞書・平方↔三角換算・重み付き体積まで完成 (#39)",
+      "progress_pct": 90,
+      "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング(M162F)・Heisenberg リフト(M187F)・解析↔群側関数等式接合(M190F)。残: 作用素準同型・ガロア同変テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
     },
