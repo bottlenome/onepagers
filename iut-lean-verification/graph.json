@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 235,
-  "verified_theorem_total": 1831,
-  "choice_free_count": 195,
+  "module_count": 236,
+  "verified_theorem_total": 1836,
+  "choice_free_count": 196,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2897,6 +2897,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbstractEssSurjSum.lean"
+    },
+    {
+      "id": "ThetaHeisenbergLift",
+      "label": "ThetaHeisenbergLift",
+      "milestone": "M187F",
+      "title": "エタールテータ関数等式の Heisenberg リフト",
+      "pillar": "E",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaHeisenbergLift.lean"
     }
   ],
   "edges": [
@@ -3615,6 +3629,10 @@
     {
       "source": "MonoThetaWitness",
       "target": "ThetaGroupMod"
+    },
+    {
+      "source": "MuLIdentification",
+      "target": "ThetaHeisenbergLift"
     },
     {
       "source": "MuLSubgroup",

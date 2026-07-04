@@ -307,12 +307,3 @@ theorem thetaHeisenbergLift_exists (p l L : Nat) (hp : IsPrime p)
 
 end IUT
 
-#print axioms IUT.thetaNeg_label_twist
-#print axioms IUT.funeqTwist_closed
-#print axioms IUT.funeqTwist_mu
-#print axioms IUT.thetaNegMod_section_twist
-#print axioms IUT.thetaNegMod_mul_twist
-#print axioms IUT.funeq_heisenberg_mul
-#print axioms IUT.funeqTwist_mul_mu
-#print axioms IUT.funeq_lift_pm_compat
-#print axioms IUT.thetaHeisenbergLift_exists

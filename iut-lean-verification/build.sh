@@ -1840,6 +1840,11 @@ import IUT
 #print axioms IUT.SumData.abstract_ess_surj_finite
 #print axioms IUT.SumData.abstract_ess_surj_orbits
 #print axioms IUT.abstractEssSurjSum_exists
+#print axioms IUT.funeqTwist_closed
+#print axioms IUT.funeqTwist_mu
+#print axioms IUT.thetaNegMod_section_twist
+#print axioms IUT.funeq_heisenberg_mul
+#print axioms IUT.thetaHeisenbergLift_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

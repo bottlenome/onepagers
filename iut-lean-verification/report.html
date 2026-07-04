@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M186 の形式化（追加検証）</h2>
+  <h2>M1〜M187 の形式化（追加検証）</h2>
+
+  <h3>M187F: エタールテータ関数等式の Heisenberg リフト — 中心捻れの閉形式と μ_l ラベル同定（柱E E-1・並行部品）（IUT/ThetaHeisenbergLift.lean）</h3>
+  <div class="box">
+    <p>M162F（μ_l 同一視）の直上で、エタールテータの<strong>関数等式（反転対称性）が持つ中心捻れを明示化</strong>し、Heisenberg（テータ群）積と両立する形で μ_l ラベルへ接続（第101弾・Fable スポットセッション、Slice A+C ハイブリッド）。M116F の <code>thetaNeg_label_center</code> は捻れを <code>∃z</code> でしか与えていなかったが、新設 <strong>funeqTwist l j := tri j − tri(l−j)</strong> の閉形式 <strong>funeqTwist_closed: funeqTwist l j = j + l·(j−L−1)</strong>（鍵は 2(tri j − tri(l−j)) = (2j−l)(l+1) と l = 2L+1 からの整数分解、∴ 捻れ ≡ ラベル j 自身 mod l）を証明。<strong>本丸1 funeqTwist_mu: centerToMu p l ζ (funeqTwist l j) = ζ^j</strong>（捻れの μ_l 像がちょうどテータラベル ζ^j——M162F の μ_l 同一視との閉ループ）。<strong>本丸2 thetaNegMod_section_twist: (thetaNegMod l).map (thetaSectionMod l j) = (thetaGrpMod l).mul (thetaSectionMod l (l−j)) ((thetaRed l).map (0,0,funeqTwist l j))</strong>——M116F の存在形を<strong>商テータ群 thetaGrpMod l における実際の等式</strong>へ強化（Quot.sound 経由）。さらに thetaNegMod_mul_twist（商積版 ι_l(Φ_l(i)·Φ_l(j)) = Φ_l(l−(i+j))·red(twist)）・funeq_heisenberg_mul（thetaGrp.mul (Φi)(Φj) の反転、捻れの μ_l 像 = ζ^i·ζ^j）・funeqTwist_mul_mu（捻れが μ_l で乗法的に合成）・funeq_lift_pm_compat（M162F theta_pm_mu_label の ∃z を明示捻れ + μ_l ラベルで実現、mu_theta_pm_compat の ζ^j·ζ^{l−j}=1 と接合）・ThetaHeisenbergLiftData。<code>#print axioms</code> は全 9 主定理 <strong>[propext, Quot.sound] のみ</strong>（choice-free）。<strong>関数等式の中心捻れが「明示閉形式・μ_l ラベル ζ^j・商群での等式・Heisenberg 積との両立」の 4 面で確定</strong>し、M162F の ±/l⋇ ラベリングと乗法構造が結合した。正直な限定: 離散 Heisenberg 骨格 + ℤ_p 内部 μ_l のみ。解析的な級数レベル関数等式（M89/M98 T(Θ) = −Θ = J(Θ)）と本群側捻れの直接接合は M137F の辞書レベルに留まる。ガロア同変な p-進テータ値評価・tempered π₁ 実現は未形式化。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M186F: 抽象本質的全射性の有限和拡張 — 非推移的 Aut(A)-集合の実現（柱A A-2・並行部品）（IUT/AbstractEssSurjSum.lean）</h3>
   <div class="box">
