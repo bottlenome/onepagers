@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M184 の形式化（追加検証）</h2>
+  <h2>M1〜M185 の形式化（追加検証）</h2>
+
+  <h3>M185F: 幾何級数の rlim 完備化 — 対角極限 = (1⊖r)⁻¹（柱C・位相的完備化・tier L / Fable）（IUT/GeomRlimComplete.lean）</h3>
+  <div class="box">
+    <p>M184 が幾何級数収束プログラムに唯一残していた正直な限定「対角極限 rlim（M128 完備性）/IsCauchyReals による構成」を第101弾で閉じ、収束サブプログラムを<strong>位相的完備化まで完結</strong>（Fable スポットセッション）。加速部分列 <strong>geomRlimSeq r N m = realGeomSum r (N·((N+1)(m+1)+m))</strong>（M184 モジュラスで添字加速し、項 m がレート 1/(m+1) で L に収束するよう設計）が <strong>geom_seq_isCauchy: IsCauchyReals (geomRlimSeq r N)</strong> を満たすことを証明。核心は IsCauchyReals の <code>2u_j</code> 予算をちょうど使い切る閉じ方 — L 経由の閉形式差分（当初想定）ではなく、<strong>rLe レベルで先に三角不等式</strong> |Ym ⊖ Yn| ≤ |Ym ⊖ L| + |L ⊖ Yn| ≤ (1/(m+1) + 1/(n+1))↑ を取り（rLe_trans 内部の ε-消去が全スラックを無償で吸収）、単一の点ごと抽出補題 <strong>rabs_sub_pointwise</strong>（ε-消去 c=3 を新鮮な添字 t 上で、realAdd の 2t+1 添字倍加を吸収）で 1 本の rLe を witness 形へ変換して <code>2u_j</code> をちょうど一度だけ消費 → <code>u_m + u_n + 2u_j</code> に精密着地。<strong>本丸 geom_rlim_complete: |r| ≤ N/(N+1) ∧ 1 ≤ N ⟹ ∃L, (1⊖r)·L ≈ 1 ∧ realEq (rlim (geomRlimSeq r N) (geom_seq_isCauchy …)) L</strong>（幾何部分和の<strong>対角極限 = 代数的逆元 (1⊖r)⁻¹</strong>、M128 rlim_unique で同定）・GeomRlimData。<strong>公理ゼロ</strong>（全宣言 [propext, Quot.sound]、L は ∃ 内部で取得し witness 抽出せず choice なし）。実効版 M182・極限対象 M183・自己完結版 M184 に続く<strong>構成的完備化 rlim による対角極限の同定</strong>で、幾何級数収束論が全層（残差評価 → 極限対象 → 自己完結 → 位相的完備化）で閉じた。正直な限定: 完備化は加速部分列 geomRlimSeq に適用（生の s_k は固定モジュラス形 IsCauchyReals を満たさないため Bishop 標準の明示再添字を経由）、極限は上界パラメータ N に依存（cross-N の一致は rlim_unique から従うが本層は per-N 同定）。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M162F: μ_l 同一視・l⋇ ラベリング（柱E E-1・並行部品）（IUT/MuLIdentification.lean）</h3>
   <div class="box">

@@ -1830,6 +1830,11 @@ import IUT
 #print axioms IUT.theta_pm_mu_label
 #print axioms IUT.muLIdentificationData
 #print axioms IUT.muLIdentification_exists
+#print axioms IUT.rabs_sub_pointwise
+#print axioms IUT.geom_seq_isCauchy
+#print axioms IUT.geom_rlim_complete
+#print axioms IUT.geomRlimData
+#print axioms IUT.geomRlim_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
