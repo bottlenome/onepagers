@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M194 の形式化（追加検証）</h2>
+  <h2>M1〜M196 の形式化（追加検証）</h2>
+
+  <h3>M196F: mono-theta 環境の単一インターフェース — D-α プログラムの第一歩（柱D D-α-1・並行部品）（IUT/MonoThetaEnv.lean）</h3>
+  <div class="box">
+    <p><a href="https://github.com/bottlenome/onepagers/issues/38">#38 の D-1 詳細化ラウンド</a>で確定した D-α プログラム（`MultiradialRep` を定理3.11 の statement 構造までフル仕様化する段階分解）の<strong>第一実装ステップ</strong>。mono-theta 環境の群論的・算術的骨格を <strong>1 レコード MonoThetaEnv に束ねる</strong>（M97 <code>Theorem311Premises</code>/M134 で 2 回成功した capstone イディオムの写経、新規証明ほぼゼロ、tier S / sonnet）。6 フィールド: <code>monoTheta</code>（M92 <code>MonoThetaWitness</code>）・<code>thetaMod</code>（M98F <code>ThetaGroupModData l</code>）・<code>pm</code>（M116F <code>ThetaPMData l</code> の ±-構造 ι）・<code>sync</code>（M124F <code>CyclotomicSyncData</code> シクロトミック同期 centerToMu）・<code>lift</code>（M187F <code>ThetaHeisenbergLiftData</code>）・<code>bridge</code>（M190F <code>ThetaFuneqBridgeData</code>）。パラメタ化は M187F/M190F の <code>…_exists</code> 署名に整合（<code>R p l L</code>、<code>hp/hL/hodd/hdvd</code>、μ_l 生成元 ζ は <code>monoThetaEnv</code> 自身の明示引数、<code>monoThetaEnv_exists</code> は <code>mu_l_zp_exists</code> から ζ を <code>Nonempty</code> 証明内で choice なしに抽出）。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free、<code>thetaGrpMod</code> 商は <code>Quot.sound</code> のみで <code>Classical.choice</code> 継承なし）。<strong>Dα-5 のフル仕様 Theorem311Rep の splitMono フィールドの型土台が確定</strong>し、D-α の後続段（log-shell・Ind・Kummer）が乗る mono-theta インターフェースが整った。正直な限定: mono-theta 環境の群論的骨格（Heisenberg 群・l-捻子商・±-構造・シクロトミック同期・funeq リフト）の束ねのみ。log-shell（Dα-2）・Ind（Dα-3）・Kummer 同型（Dα-4）は次層、<code>MultiradialRep</code> の構成（柱D 本来の capstone = 定理3.11）は D-β として範囲外。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M191F: Tate 曲線の有限連続被覆圏の実体化（柱A A-3β-2・並行部品）（IUT/TateCoverCat.lean）</h3>
   <div class="box">

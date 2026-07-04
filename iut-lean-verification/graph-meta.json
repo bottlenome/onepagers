@@ -36,8 +36,8 @@
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 26,
-      "status": "入口 🔶 / 実数値体積理論・パイロット模型（単位/重み付き）・障害/膨張の実数版まで。本丸 MultiradialRep 未形式化 (#38)",
+      "progress_pct": 28,
+      "status": "入口 🔶 / 実数値体積理論・パイロット模型・障害の実数版 + D-α 詳細化ラウンド完了(#38)・mono-theta 環境インターフェース(M196F, D-α-1)。残: D-α 段階実装(log-shell/Ind/Kummer/Rep)・本丸 D-β MultiradialInput",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },

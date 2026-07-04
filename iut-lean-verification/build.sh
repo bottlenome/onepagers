@@ -1871,6 +1871,8 @@ import IUT
 #print axioms IUT.cover_fiber_faithful
 #print axioms IUT.cover_deck_profinite_compat
 #print axioms IUT.tateCoverCat_exists
+#print axioms IUT.monoThetaEnv
+#print axioms IUT.monoThetaEnv_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
