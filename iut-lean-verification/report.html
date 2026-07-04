@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M172 の形式化（追加検証）</h2>
+  <h2>M1〜M173 の形式化（追加検証）</h2>
+
+  <h3>M173: 絶対値の順序基本則 — 「絶対値が支配する」（柱C）（IUT/RealAbsLe.lean）</h3>
+  <div class="box">
+    <p>M127F（rabs の点ごと witness 法則）と M130（非厳密順序 rLe）の合流（第101弾）。要となる再利用可能な補題 <strong>rLe_of_seq_le</strong>（点ごとの ℚ 不等式 ∀n, x_n ≤ y_n から rLe x y を作る汎用ブリッジ、rLe の 2u_n スラックを qFrac_nonneg + qAdd_zero で一括処理）を新設し、それで <strong>rabs_nonneg</strong>（0 ≤ |x|）・<strong>rLe_self_rabs</strong>（x ≤ |x|）・<strong>rLe_neg_rabs</strong>（−x ≤ |x|、qLe_self_abs + qAbs_neg）・RealAbsLeData を閉じる。<strong>「絶対値が支配する」（x も −x も |x| 以下、|x| は非負）順序の最も基本的な三点</strong>で、三角不等式・級数の絶対収束（|Σ| ≤ Σ|·|）の順序側の土台、M169（|r^k| = |r|^k）の順序版の入口。rLe_of_seq_le は「点ごとに ≤ が言えれば rLe」という橋で今後の順序補題を大幅に簡略化する再利用部品。正直な限定: 三角不等式そのものの rLe 形・狭義 rLt との連携・順序と乗法の相互作用は次層。全 6 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M172: 幾何級数と λ-adic 膜 — 部分和 ≡ 1 mod (λ^m)（柱B）（IUT/LambdaGeom.lean）</h3>
   <div class="box">

@@ -1747,6 +1747,12 @@ import IUT
 #print axioms IUT.isValAtLeast_geomSum_sub_one
 #print axioms IUT.lambdaGeomData
 #print axioms IUT.lambdaGeom_exists
+#print axioms IUT.rLe_of_seq_le
+#print axioms IUT.rabs_nonneg
+#print axioms IUT.rLe_self_rabs
+#print axioms IUT.rLe_neg_rabs
+#print axioms IUT.realAbsLeData
+#print axioms IUT.realAbsLe_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

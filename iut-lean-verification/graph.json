@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 217,
-  "verified_theorem_total": 1738,
-  "choice_free_count": 177,
+  "module_count": 218,
+  "verified_theorem_total": 1744,
+  "choice_free_count": 178,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2679,6 +2679,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaGeom.lean"
+    },
+    {
+      "id": "RealAbsLe",
+      "label": "RealAbsLe",
+      "milestone": "M173",
+      "title": "絶対値の順序基本則",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealAbsLe.lean"
     }
   ],
   "edges": [
@@ -3512,6 +3524,10 @@
     },
     {
       "source": "RealAbs",
+      "target": "RealAbsLe"
+    },
+    {
+      "source": "RealAbs",
       "target": "RealAbsPow"
     },
     {
@@ -3560,6 +3576,10 @@
     },
     {
       "source": "RealLe",
+      "target": "RealAbsLe"
+    },
+    {
+      "source": "RealLe",
       "target": "RealOrderComplete"
     },
     {
@@ -3577,6 +3597,10 @@
     {
       "source": "RealMul",
       "target": "RealOrder"
+    },
+    {
+      "source": "RealOrder",
+      "target": "RealAbsLe"
     },
     {
       "source": "RealOrder",
