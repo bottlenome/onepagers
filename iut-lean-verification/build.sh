@@ -1932,6 +1932,9 @@ import IUT
 #print axioms IUT.recJoint_covers
 #print axioms IUT.recSurjective_exists
 #print axioms IUT.thetaEval_exists
+#print axioms IUT.GaloisTower.colimEval_natural
+#print axioms IUT.GaloisTower.towerComparison_faithful
+#print axioms IUT.galoisEquivalence_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

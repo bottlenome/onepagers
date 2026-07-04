@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 267,
-  "verified_theorem_total": 1923,
+  "module_count": 268,
+  "verified_theorem_total": 1926,
   "choice_free_count": 223,
   "nodes": [
     {
@@ -3259,6 +3259,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaEvalCapstone.lean"
     },
     {
+      "id": "GaloisEquivalence",
+      "label": "GaloisEquivalence",
+      "milestone": "M217F",
+      "title": "Galois 圏同値への到達（SGA1 主定理完成）（柱A A-3α 最終・並行部品）",
+      "pillar": "A",
+      "decl_count": 26,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisEquivalence.lean"
+    },
+    {
       "id": "ThetaLabelInjective",
       "label": "ThetaLabelInjective",
       "milestone": "M212F",
@@ -3303,6 +3315,10 @@
     {
       "source": "AbstractEssSurjSum",
       "target": "EssSurjCapstone"
+    },
+    {
+      "source": "AbstractEssSurjSum",
+      "target": "GaloisEquivalence"
     },
     {
       "source": "AbstractGalois",
@@ -4327,6 +4343,10 @@
     {
       "source": "ProObject",
       "target": "LimitCompact"
+    },
+    {
+      "source": "ProRepresentable",
+      "target": "GaloisEquivalence"
     },
     {
       "source": "Profinite",

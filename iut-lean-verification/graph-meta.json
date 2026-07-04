@@ -13,7 +13,7 @@
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
       "progress_pct": 99,
-      "status": "SGA1主定理ブロック ✅ / A-1完結・A-2完結群・A-3β 完結・A-3α pro-表現可能性（支配⟹各連結対象で colimEval 全単射 M213F）。残: 全対象同時 cofinal な単一 pro-表現対象・圏同値 C≃π₁Tower-Set (#35)",
+      "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）。残: 充満性・単一 cofinal 塔・2-out-of-3 完全同値 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
     },
