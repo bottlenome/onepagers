@@ -1893,6 +1893,8 @@ import IUT
 #print axioms IUT.upper_compat_not_symm
 #print axioms IUT.ind311_refines
 #print axioms IUT.indeterminacies_exists
+#print axioms IUT.towerGen_transition_val
+#print axioms IUT.lambdaTowerTrans_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

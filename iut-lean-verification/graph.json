@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 251,
-  "verified_theorem_total": 1884,
-  "choice_free_count": 210,
+  "module_count": 252,
+  "verified_theorem_total": 1886,
+  "choice_free_count": 211,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3101,6 +3101,18 @@
         "[IUTchIII]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Indeterminacies.lean"
+    },
+    {
+      "id": "LambdaTowerTrans",
+      "label": "LambdaTowerTrans",
+      "milestone": "M203F",
+      "title": "Λₙ 塔の遷移と付値の層間整合（柱B B-1 Slice B・並行部品）",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerTrans.lean"
     }
   ],
   "edges": [
@@ -3267,6 +3279,10 @@
     {
       "source": "EisFaithful",
       "target": "Premises311Real"
+    },
+    {
+      "source": "EisTowerRings",
+      "target": "LambdaTowerTrans"
     },
     {
       "source": "EisTowerRings",
@@ -3791,6 +3807,10 @@
     {
       "source": "LambdaSemilinear",
       "target": "RamifiedReciprocity"
+    },
+    {
+      "source": "LambdaTowerGen",
+      "target": "LambdaTowerTrans"
     },
     {
       "source": "LambdaValuation",

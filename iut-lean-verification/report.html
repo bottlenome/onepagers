@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M202 の形式化（追加検証）</h2>
+  <h2>M1〜M203 の形式化（追加検証）</h2>
+
+  <h3>M203F: Λₙ 塔の遷移と付値の層間整合（柱B B-1 Slice B・並行部品）（IUT/LambdaTowerTrans.lean）</h3>
+  <div class="box">
+    <p>M193F（生成元 λₙ・付値ちょうど 1）の続きとして、issue #36 B-1 の Slice B（塔の遷移射による λ の層間整合）を第101弾で形式化（tier M / opus）。汎用補題 <strong>ringF_val_ge_one: f_π(λ) = π·λ + λ^p ∈ (λ)</strong>（witness π+λ^{p−1}）・<strong>towerGen_transition: towerHom(λ_n) = f_π(λ_{n+1})</strong>（<code>tower_shape</code> の symm）・<strong>本丸 towerGen_transition_val: 遷移像 towerHom(λ_n) が上位レベルの極大イデアル (λ_{n+1}) に入る（val ≥ 1、順序保存・局所準同型性）</strong>・<code>towerGen_torsion</code>・LambdaTowerTransData。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（M193F/M151F/M109 から継承、新規 Classical ゼロ）。<strong>塔の各遷移で λ が上位一意化子の生成イデアルへ整合的に写り、λ-adic 付値フィルトレーションが層間で単調保存されることが確定</strong>。正直な限定: 閉じたのは遷移の記述（像 = f_π(λ_{n+1})）と順序保存（像 ∈ (λ_{n+1})、val ≥ 1）のみ。ι(λ_n) の厳密付値（=p か・分岐指数 e）は次層。一般 [c]-倍作用（形式群加法）・n≥2 完全構造論は残る。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M202F: (Ind1)(Ind2)(Ind3) の構造化 — 新概念 Ind3 上半両立性（柱D D-α-3・並行部品）（IUT/Indeterminacies.lean）</h3>
   <div class="box">
