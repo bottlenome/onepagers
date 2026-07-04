@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 221,
-  "verified_theorem_total": 1755,
-  "choice_free_count": 181,
+  "module_count": 222,
+  "verified_theorem_total": 1760,
+  "choice_free_count": 182,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2727,6 +2727,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaInvApprox.lean"
+    },
+    {
+      "id": "RealGeomInv",
+      "label": "RealGeomInv",
+      "milestone": "M177",
+      "title": "実数幾何級数の逆元近似誤差",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealGeomInv.lean"
     }
   ],
   "edges": [
@@ -3587,6 +3599,10 @@
       "target": "RealGeomAbs"
     },
     {
+      "source": "RealAbsPow",
+      "target": "RealGeomInv"
+    },
+    {
       "source": "RealAbsTriangle",
       "target": "RealGeomAbs"
     },
@@ -3617,6 +3633,10 @@
     {
       "source": "RealGeom",
       "target": "RealPow"
+    },
+    {
+      "source": "RealGeomRec",
+      "target": "RealGeomInv"
     },
     {
       "source": "RealInv",

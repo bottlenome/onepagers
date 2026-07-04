@@ -1764,6 +1764,11 @@ import IUT
 #print axioms IUT.isValAtLeast_inv_approx
 #print axioms IUT.lambdaInvApproxData
 #print axioms IUT.lambdaInvApprox_exists
+#print axioms IUT.real_neg_of_add_eq_zero
+#print axioms IUT.real_geom_inv_error
+#print axioms IUT.rabs_geom_inv_error
+#print axioms IUT.realGeomInvData
+#print axioms IUT.realGeomInv_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

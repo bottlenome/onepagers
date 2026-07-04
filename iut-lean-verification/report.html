@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M176 の形式化（追加検証）</h2>
+  <h2>M1〜M177 の形式化（追加検証）</h2>
+
+  <h3>M177: 実数幾何級数の逆元近似誤差 — |(1⊖r)·s_k ⊖ 1| ≈ |r|^k（柱C）（IUT/RealGeomInv.lean）</h3>
+  <div class="box">
+    <p>M176（環版の逆元近似 (1−r)·s_k − 1 ∈ (λ^{km})）の<strong>実数版</strong>（第101弾）。M168（実数残差 (1⊖r)·s_k ⊕ r^k ≈ 1）・M169（|r^k| ≈ |r|^k）の合流。汎用の反元特徴付け <strong>real_neg_of_add_eq_zero</strong>（x ⊕ y ≈ 0 ⟹ x ≈ ⊖y）を新設し、<strong>real_geom_inv_error: (1⊖r)·s_k ⊖ 1 ≈ ⊖r^k</strong>（M168 残差の移項）と <strong>rabs_geom_inv_error: |(1⊖r)·s_k ⊖ 1| ≈ |r|^k</strong>（|⊖r^k| = |r^k| = |r|^k、M169）・RealGeomInvData。<strong>実数で逆元近似の誤差の大きさが正確に |r|^k である</strong>（M176 の付値環版が誤差 (λ^{km}) に沈むのに対応する実数版）。|r| &lt; 1 なら |r|^k → 0（次層）なので s_k が (1⊖r)⁻¹ に収束する<strong>誤差の閉じた形</strong>（残差 = −r^k、|残差| = |r|^k）が確定し、M175（|Σ| ≤ Σ|·|）と併せ幾何級数の実数的収束論の直前段。正直な限定: 収束そのもの（|r|^k → 0 と極限 (1⊖r)⁻¹ の同定）は rate-bound・順序完備性の次層。全 5 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M176: 幾何級数による逆元近似 — (1−r)·s_k ≡ 1 mod (λ^{km})（柱B）（IUT/LambdaInvApprox.lean）</h3>
   <div class="box">
