@@ -1818,6 +1818,12 @@ import IUT
 #print axioms IUT.eis_step_faithful
 #print axioms IUT.eisSeparationData
 #print axioms IUT.eisSeparation_exists
+#print axioms IUT.SpanIso
+#print axioms IUT.SpanIso.trans
+#print axioms IUT.QuotientData.abstract_ess_surj_transitive
+#print axioms IUT.QuotientData.abstract_ess_surj_orbit
+#print axioms IUT.abstractEssSurjWitness
+#print axioms IUT.abstractEssSurj_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 231,
-  "verified_theorem_total": 1809,
-  "choice_free_count": 191,
+  "module_count": 232,
+  "verified_theorem_total": 1815,
+  "choice_free_count": 192,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2847,6 +2847,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisSeparation.lean"
+    },
+    {
+      "id": "AbstractEssSurj",
+      "label": "AbstractEssSurj",
+      "milestone": "M161F",
+      "title": "抽象本質的全射性への一歩（柱A A-2・並行部品）",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbstractEssSurj.lean"
     }
   ],
   "edges": [
@@ -4013,6 +4025,10 @@
     {
       "source": "SGA1Completion",
       "target": "SGA1Object"
+    },
+    {
+      "source": "SGA1Object",
+      "target": "AbstractEssSurj"
     },
     {
       "source": "SGA1Object",
