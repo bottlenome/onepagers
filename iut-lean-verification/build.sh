@@ -1771,6 +1771,10 @@ import IUT
 #print axioms IUT.realGeomInv_exists
 #print axioms IUT.geometricSeriesProgramData
 #print axioms IUT.geometricSeriesProgram_exists
+#print axioms IUT.nat_geom_decay
+#print axioms IUT.nat_geom_decay_modulus
+#print axioms IUT.geomDecayNatData
+#print axioms IUT.geomDecayNat_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

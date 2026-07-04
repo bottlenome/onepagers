@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M178 の形式化（追加検証）</h2>
+  <h2>M1〜M179 の形式化（追加検証）</h2>
+
+  <h3>M179: 幾何減衰の算術核 — Bernoulli 型評価と減衰モジュラス（柱C）（IUT/GeomDecayNat.lean）</h3>
+  <div class="box">
+    <p>幾何級数の<strong>収束</strong>（|r| &lt; 1 ⟹ s_k → (1⊖r)⁻¹）の心臓部は「|r|^k → 0」であり、それを支える純算術の核は Bernoulli 型不等式 (N+1)^k ≥ N^k·(1 + k/N)（第101弾）。多項式補題 poly_step（N·(N+k+1) ≤ (N+k)·(N+1)）・<strong>nat_geom_decay: N^k·(N+k) ≤ N·(N+1)^k</strong>（Bernoulli 核の整数版、k の帰納で IH に (N+1) を掛け多項式補題と積の単調性で着地）・<strong>nat_geom_decay_modulus: N ≥ 1 ∧ N·m ≤ k ⟹ N^k·(m+1) ≤ (N+1)^k</strong>（= (N/(N+1))^k ≤ 1/(m+1)、幾何減衰の明示速度）・GeomDecayNatData。<strong>公理ゼロ</strong>。公比の絶対値が N/(N+1)（N ≥ 1）以下なら、その k 乗は k ≥ N·m で確実に 1/(m+1) 以下に落ちる — <strong>Archimedes 性の幾何級数版</strong>で、M175（|Σ| ≤ Σ|r|ⁱ）・M177（誤差 = |r|^k）の絶対収束評価を実際の<strong>収束</strong>（誤差 → 0）へ変換する算術エンジン。正直な限定: 本モジュールは Nat 上の算術核のみ。実数収束 s_k → (1⊖r)⁻¹ への組み上げには (a) IsPos(1 ⊖ |r|) から有理上界 N/(N+1) を抽出、(b) |r|^k ≤ (N/(N+1))^k の実数単調性、(c) 本モジュラスで |r|^k → 0（realEq 収束）、(d) s_k の IsCauchyReals 性と rlim（M128 完備性）での極限構成、の 4 段が必要で次層（#48 に設計を集約）。全 4 宣言 [propext, Quot.sound] 以下（本体3つは公理ゼロ）。</p>
+  </div>
 
   <h3>M178: 幾何級数プログラムの総括 capstone（柱C）（IUT/GeometricSeriesProgram.lean）</h3>
   <div class="box">
