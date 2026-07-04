@@ -231,3 +231,4 @@ import IUT.GeomDecayNat
 import IUT.RealMulOrder
 import IUT.RealGeomDecay
 import IUT.GeomConverge
+import IUT.GeomLimit

@@ -1794,6 +1794,13 @@ import IUT
 #print axioms IUT.geom_inverse_converges
 #print axioms IUT.geomConvergeData
 #print axioms IUT.geomConverge_exists
+#print axioms IUT.geom_sub_limit
+#print axioms IUT.rabs_geom_sub_limit
+#print axioms IUT.qFrac_mul_le
+#print axioms IUT.geom_converges_to_limit
+#print axioms IUT.geom_limit_object
+#print axioms IUT.geomLimitData
+#print axioms IUT.geomLimit_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

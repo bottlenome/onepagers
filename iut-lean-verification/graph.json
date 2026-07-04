@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 227,
-  "verified_theorem_total": 1785,
-  "choice_free_count": 187,
+  "module_count": 228,
+  "verified_theorem_total": 1792,
+  "choice_free_count": 188,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -2799,6 +2799,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomConverge.lean"
+    },
+    {
+      "id": "GeomLimit",
+      "label": "GeomLimit",
+      "milestone": "M183",
+      "title": "幾何級数の極限対象",
+      "pillar": "C",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GeomLimit.lean"
     }
   ],
   "edges": [
@@ -2813,6 +2825,10 @@
     {
       "source": "Anabelian",
       "target": "Reconstruction"
+    },
+    {
+      "source": "ApartInv",
+      "target": "GeomLimit"
     },
     {
       "source": "ApartInv",
@@ -3327,6 +3343,10 @@
       "target": "VolumeReal"
     },
     {
+      "source": "GeomConverge",
+      "target": "GeomLimit"
+    },
+    {
       "source": "GeomDecayNat",
       "target": "RealGeomDecay"
     },
@@ -3825,6 +3845,10 @@
     {
       "source": "RealPow",
       "target": "RealPowMul"
+    },
+    {
+      "source": "RealRingLaws",
+      "target": "GeomLimit"
     },
     {
       "source": "RealRingLaws",

@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M182 の形式化（追加検証）</h2>
+  <h2>M1〜M183 の形式化（追加検証）</h2>
+
+  <h3>M183: 幾何級数の極限対象 — s_k → (1⊖r)⁻¹ の構成的収束（柱C・極限構成・tier L / Fable）（IUT/GeomLimit.lean）</h3>
+  <div class="box">
+    <p>M182（実効的収束）の<strong>極限対象を構成する版</strong>（第101弾・Fable スポットセッション）。逆元 L への収束を構成的に閉じる: <strong>geom_sub_limit: s_k − L = ⊖(L·r^k)</strong>（M177 残差 (1⊖r)·s_k⊖1 ≈ ⊖r^k を L 倍し、L·(1⊖r) ≈ 1 で簡約）・<strong>rabs_geom_sub_limit: |s_k − L| = |L|·|r|^k</strong>（rabs_mul + rabs_pow）・<strong>geom_converges_to_limit: |r| ≤ N/(N+1) ∧ |L| ≤ B ∧ k ≥ N·(B(m+1)+m) ⟹ |s_k − L| ≤ 1/(m+1)</strong>（明示モジュラス、|L|·|r|^k の積を減衰の m′ = B(m+1)+m で畳む qFrac_mul_le 経由）・<strong>geom_limit_object: IsPos|1⊖r| ⟹ ∃L, (1⊖r)·L ≈ 1 ∧ ∀k, s_k − L = ⊖(L·r^k)</strong>（極限対象の存在、M153F apart_inv_exists で L を構成、∃→∃ で choice なし）・GeomLimitData。<strong>公理ゼロ</strong>。<strong>幾何部分和の極限対象 L = (1⊖r)⁻¹ が構成され、s_k がその L に明示速度 |s_k − L| ≤ 1/(m+1) で収束することが確定</strong>。M182（残差収束）を「極限対象への収束」へ格上げ。正直な限定: L とその有理上界 B は仮定（存在は M153F が供給、B を |r| ≤ N/(N+1) から明示導出するのは次層）、rlim/IsCauchyReals による対角極限版は範囲外（本構成的版が収束の数学的内容）。全 8 宣言 [propext, Quot.sound] のみ。</p>
+  </div>
 
   <h3>M182: 幾何級数の収束 — (1⊖r)·s_k → 1 の明示速度（柱C・収束の本丸）（IUT/GeomConverge.lean）</h3>
   <div class="box">
