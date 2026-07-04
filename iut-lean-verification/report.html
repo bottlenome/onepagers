@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M188 の形式化（追加検証）</h2>
+  <h2>M1〜M189 の形式化（追加検証）</h2>
+
+  <h3>M189F: ガロア対象による支配（抽象公理版）— ファイバー冪の SGA1 構成と抽象連結性の特徴づけ（柱A A-2/A-3α・並行部品）（IUT/AbstractGaloisDomination.lean）</h3>
+  <div class="box">
+    <p>A-2/A-3α の残余「<strong>ガロア対象の十分性</strong>」（任意の連結対象はガロア対象に支配される——pro-表現可能性のゲート補題）に対し、(i) SGA1 のガロア閉包構成の<strong>抽象公理側の土台</strong>（任意の <code>GaloisCatData</code> で choice 不要）と (ii) 支配定理そのものの<strong>抽象語彙での完結</strong>（全モデル実例 <code>gsetGaloisData G</code> について）を与える（第101弾・Fable スポットセッション）。<strong>powObj / powProj</strong>: 公理 G1（終対象・ファイバー積）だけから n 重ファイバー冪 A^n = A ×_T ⋯ ×_T A と n 本の射影を Nat 再帰で構成。<strong>powPt_ext / powPt_exists</strong>: F はファイバー冪を保つ（F(A^n) の点は射影値で一意決定 + 任意の値列に対し点が存在、G4 の反復で F(A^n) ≅ F(A)^n）。<strong>powProj_fiber_surj / sga1Point_exists</strong>: 各射影 A^n → A は F-全射（支配射候補）であり、ファイバーの有限枚挙が与えられれば射影値がファイバー全体を走る SGA1 対角型の点が存在——<strong>ここまで任意の抽象ガロア圏で公理ゼロ</strong>。モデル側では正則作用をテスト対象とする <strong>gset_mono_fiber_injective</strong>（抽象モノ ⟹ ファイバー単射、choice 不要）を経て <strong>abstract_connected_iff: (gsetGaloisData G).Connected A ↔ Nonempty A.carrier ∧ A.Transitive</strong>（M21 の抽象 Connected とモデルの推移性の完全な特徴づけ——<strong>M160F の正直申告(1)「抽象 Connected の導出は範囲外」を解消</strong>）、<strong>connected_dominated_by_galois_abstract: 抽象 Connected A ⟹ ∃ ガロア B と F-全射な支配射 B → A</strong>（ゲート補題を完全に <code>GaloisCatData</code> 語彙で、M160F-3 経由で全モデル実例が充足）・AbstractGaloisDominationData。抽象部（powObj〜sga1Point）は<strong>公理ゼロ</strong>、モデル側 7 宣言は <code>gsetGaloisData</code> の G6 フィールド（M21-8）経由で <strong>Classical.choice を型継承</strong>（本証明での新規使用ゼロ、M160F と同じ事情、ヘッダで正直申告）。<strong>意図的 Classical 台帳 39 → 42</strong>（G6 型継承の 3 件）。正直な限定: 任意の <code>GaloisCatData</code> に対する純公理的な支配導出（SGA1 の最終段「対角点を通る連結成分をとり、それがガロアであることを示す」）は、現行 <code>GaloisCatData</code> に無い連結成分/有限和分解の公理を要し、追加は共有 <code>AbstractGalois.lean</code> に触れるため並行部品では範囲外。閉じたのはゲート補題の抽象語彙化 + 全モデル充足 + choice-free な抽象前半（ファイバー冪 + 対角点）+ Connected⟺推移的の橋。抽象部は [propext, Quot.sound]、モデル側は [Classical.choice, Quot.sound]（G6 型継承）。</p>
+  </div>
 
   <h3>M188F: Tate 曲線のテンパード基本群の具体提示 — A-3 幾何的入力サロゲートの第一歩（柱A A-3β-1・並行部品）（IUT/TateCoverGroup.lean）</h3>
   <div class="box">

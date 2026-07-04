@@ -1850,6 +1850,11 @@ import IUT
 #print axioms IUT.tateCompletion_unique
 #print axioms IUT.tateCompletion_deck_injective
 #print axioms IUT.tateCoverGroup_exists
+#print axioms IUT.GaloisCatData.powProj_fiber_surj
+#print axioms IUT.GaloisCatData.sga1Point_exists
+#print axioms IUT.abstract_connected_iff
+#print axioms IUT.connected_dominated_by_galois_abstract
+#print axioms IUT.abstractGaloisDomination_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
