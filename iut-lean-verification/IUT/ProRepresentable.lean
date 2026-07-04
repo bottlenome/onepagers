@@ -170,10 +170,12 @@ theorem towerEval_germ (X : D.C.Obj) (p q : LevelHom T X)
 /-- **定理（M213F-4b）: colimEval は単射**（pro-米田の忠実半分）—
     任意の抽象ガロア圏・任意のガロア塔・任意の対象 X で、公理のみ
     から成立する。 -/
-theorem colimEval_injective (X : D.C.Obj) (p q : T.colimHom X) :
-    T.colimEval X p = T.colimEval X q → p = q := by
-  refine Quot.ind (fun a => Quot.ind (fun b => ?_) q) p
-  intro h
+theorem colimEval_injective (X : D.C.Obj) :
+    ∀ p q : T.colimHom X, T.colimEval X p = T.colimEval X q → p = q := by
+  refine Quot.ind ?_
+  intro a
+  refine Quot.ind ?_
+  intro b h
   exact Quot.sound (T.towerEval_germ X a b h)
 
 /-! ## M213F-5: 共終性述語と全射性 -/
@@ -333,3 +335,4 @@ theorem proRepresentable_exists_trivial :
     (fun _ _ => ⟨PUnit.unit, rfl⟩)⟩
 
 end IUT
+

@@ -1918,6 +1918,10 @@ import IUT
 #print axioms IUT.towerGen_transition_pow_term_val_exact
 #print axioms IUT.ringF_val_ge_two_iff_lin
 #print axioms IUT.lambdaTowerExactVal_exists
+#print axioms IUT.GaloisTower.colimEval_injective
+#print axioms IUT.proRepresentation_of_domination
+#print axioms IUT.connected_proRepresented
+#print axioms IUT.proRepresentable_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
