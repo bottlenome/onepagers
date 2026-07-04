@@ -260,3 +260,4 @@ import IUT.ThetaChainCapstone
 import IUT.TateSurrogateCapstone
 import IUT.RecUnramified
 import IUT.ThetaValueEval
+import IUT.LogKummer
