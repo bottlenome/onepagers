@@ -1926,6 +1926,9 @@ import IUT
 #print axioms IUT.iut_localized
 #print axioms IUT.rep_of_input
 #print axioms IUT.multiradialInput_exists
+#print axioms IUT.gaussPilot311
+#print axioms IUT.cor312_of_gaussPilot311
+#print axioms IUT.gaussPilot311_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

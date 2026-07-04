@@ -158,7 +158,12 @@
 </section>
 
 <section>
-  <h2>M1〜M215 の形式化（追加検証）</h2>
+  <h2>M1〜M216 の形式化（追加検証）</h2>
+
+  <h3>M216F: ガウスパイロットのフル仕様充足模型（柱D D-α-6・並行部品）（IUT/GaussPilot311.lean）</h3>
+  <div class="box">
+    <p>Dα-5 の <code>Theorem311Rep</code>（M210F）を、そのデモ witness（Θ-包体積 = 1 のプレースホルダ）より<strong>具体的なガウスパイロット模型</strong>で inhabit する（tier M / opus）。<strong>gaussBase311Rep: Θ-包体積 = wssq w l = Σ_{k≤l} w(k)·k²</strong>（真の gaussDiv 次数を Int で据える）・<strong>gaussPilot311 : Theorem311Rep（base = gaussBase311Rep・shell = logShellData = 実数値 gaussLogShell・env/ind/kummer は各土台）</strong>・<code>cor312_of_gaussPilot311</code>/<code>gaussPilot311_cor312</code>（<code>cor312_of_311</code> 経由で系3.12 へ還元）・<strong>gaussPilot311_base_vol_wssq</strong>（base の Θ-包体積 = wssq、rfl）・<code>gaussPilot311_shell_vol_wssq</code>（shell 体積 = Σw(k)k²、M201F 再輸出）・GaussPilot311Data。<code>#print axioms</code> は <strong>[propext, Quot.sound]</strong>（choice-free、env は <code>monoThetaEnv_exists</code> から choice なし）。<strong>フル仕様 Theorem311Rep が具体的な Θ 値データ（Σw(k)·k²）で inhabit され、非自明な充足模型が確定した</strong>。正直な限定: <code>Theorem311Rep.base</code> は Int 値のため真の実数値 <code>gaussPilotRepW</code>（M158F）を直接は通せず、base は Int 再構成（Θ-包体積 = wssq を Int で）、shell は本物の実数値 gauss 殻。完全な実数 base スレッドは次層。依然として volume-value のデモ模型（Region=ℤ/ℝ, vol=id）で、遠アーベル <code>MultiradialRep</code> 構成（D-β）ではない。全宣言 [propext, Quot.sound]。</p>
+  </div>
 
   <h3>M215F: MultiradialInput — IUT の正否の単一レコードへの局在（柱D D-α-7・並行部品）（IUT/MultiradialInput.lean）</h3>
   <div class="box">
