@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 261,
-  "verified_theorem_total": 1906,
-  "choice_free_count": 218,
+  "module_count": 262,
+  "verified_theorem_total": 1909,
+  "choice_free_count": 219,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3221,6 +3221,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLabelInjective.lean"
+    },
+    {
+      "id": "LambdaTowerExactVal",
+      "label": "LambdaTowerExactVal",
+      "milestone": "M211F",
+      "title": "塔遷移 ι(λ_n) の厳密付値（柱B B-1・並行部品）",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerExactVal.lean"
     }
   ],
   "edges": [
@@ -3925,6 +3937,10 @@
       "target": "LambdaInvApprox"
     },
     {
+      "source": "LambdaIdeal",
+      "target": "LambdaTowerExactVal"
+    },
+    {
       "source": "LambdaInvApprox",
       "target": "GeometricSeriesProgram"
     },
@@ -3953,6 +3969,10 @@
       "target": "LambdaTowerTrans"
     },
     {
+      "source": "LambdaTowerTrans",
+      "target": "LambdaTowerExactVal"
+    },
+    {
       "source": "LambdaValuation",
       "target": "GeomSeries"
     },
@@ -3967,6 +3987,10 @@
     {
       "source": "LambdaValuationMul",
       "target": "LambdaIdeal"
+    },
+    {
+      "source": "LambdaValuationMul",
+      "target": "LambdaTowerExactVal"
     },
     {
       "source": "LaurentCoeff",

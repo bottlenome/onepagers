@@ -1915,6 +1915,9 @@ import IUT
 #print axioms IUT.theta_cong_dvd
 #print axioms IUT.theta_label_injective
 #print axioms IUT.thetaLabelInjective_exists
+#print axioms IUT.towerGen_transition_pow_term_val_exact
+#print axioms IUT.ringF_val_ge_two_iff_lin
+#print axioms IUT.lambdaTowerExactVal_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
