@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 335,
-  "verified_theorem_total": 2050,
-  "choice_free_count": 272,
+  "module_count": 337,
+  "verified_theorem_total": 2054,
+  "choice_free_count": 274,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4117,6 +4117,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisPi1Iso.lean"
+    },
+    {
+      "id": "GaloisFundamental",
+      "label": "GaloisFundamental",
+      "milestone": "M285F",
+      "title": "Galois の基本定理の全単射",
+      "pillar": "A",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisFundamental.lean"
+    },
+    {
+      "id": "PrimitiveElement",
+      "label": "PrimitiveElement",
+      "milestone": "M288F",
+      "title": "原始元定理: 有限分離拡大は単純 L = K(α,β",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimitiveElement.lean"
     }
   ],
   "edges": [
@@ -4491,6 +4515,10 @@
     {
       "source": "Finiteness",
       "target": "CyclicUnits"
+    },
+    {
+      "source": "Finiteness",
+      "target": "GaloisFundamental"
     },
     {
       "source": "Finiteness",
@@ -4871,6 +4899,10 @@
     {
       "source": "GaloisClosureModel",
       "target": "QuotientGroup"
+    },
+    {
+      "source": "GaloisCorrespondence",
+      "target": "GaloisFundamental"
     },
     {
       "source": "GaloisEquivalence",
@@ -5971,6 +6003,10 @@
     {
       "source": "ScholzeStix",
       "target": "Verdict"
+    },
+    {
+      "source": "SeparableEmbeddings",
+      "target": "PrimitiveElement"
     },
     {
       "source": "SeparablePoly",

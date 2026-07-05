@@ -2059,6 +2059,10 @@ import IUT
 #print axioms IUT.normSplit_normal_exists
 #print axioms IUT.galPi1_iso
 #print axioms IUT.galPi1_monodromy_full_exists
+#print axioms IUT.galFund_fixing_fixed_eq
+#print axioms IUT.galFund_main
+#print axioms IUT.primEl_two_gen
+#print axioms IUT.primEl_theorem
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
