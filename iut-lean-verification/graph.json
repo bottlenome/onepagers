@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 305,
-  "verified_theorem_total": 1994,
+  "module_count": 306,
+  "verified_theorem_total": 1996,
   "choice_free_count": 247,
   "nodes": [
     {
@@ -3757,6 +3757,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerResidueKernelConverse.lean"
+    },
+    {
+      "id": "NormalPairBoundary",
+      "label": "NormalPairBoundary",
+      "milestone": "M255F",
+      "title": "hquot/hfib の境界",
+      "pillar": "A",
+      "decl_count": 15,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NormalPairBoundary.lean"
     }
   ],
   "edges": [
@@ -3867,6 +3879,10 @@
     {
       "source": "CosetGalois",
       "target": "IntermediateNormalCover"
+    },
+    {
+      "source": "CosetGalois",
+      "target": "NormalPairBoundary"
     },
     {
       "source": "CyclicUnits",
@@ -4391,6 +4407,10 @@
     {
       "source": "GSetCoequalizer",
       "target": "IntermediateNormalCover"
+    },
+    {
+      "source": "GSetCoequalizer",
+      "target": "NormalPairBoundary"
     },
     {
       "source": "GSetQuotient",

@@ -13,7 +13,7 @@
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
       "progress_pct": 99,
-      "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）+ 充満性（M221F）+ 2-out-of-3 同値束（M225F）+ ②無条件化（正則自己準同型スライス M229F）+ ③一般連結 X: 軌道生成を一般 X で無条件化（Galois 源/hendo 不要）・deck 不変性自動導出で残る外部入力を商普遍性 hquot 一点に純化・hquot 仮定下で一般 X 充満（M234F）+ hquot を G-Set モデルで discharge（ファイバー推移性=正規/ガロア被覆から hquot 構成・一点対象 deck=全 G の非自明ケースで任意群 G で充満性を無条件化 M245F）+ 中間正規被覆 G/core(H)→G/H の hfib で真に中間の被覆で hquot discharge・G/H 上充満性（M250F）。残: 非正規被覆 G/H→G/K（deck 軌道⊊ファイバー）での hquot・任意中間正規被覆 G/H₀→G/H・単一 cofinal 塔 (#35)",
+      "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）+ 充満性（M221F）+ 2-out-of-3 同値束（M225F）+ ②無条件化（正則自己準同型スライス M229F）+ ③一般連結 X: 軌道生成を一般 X で無条件化（Galois 源/hendo 不要）・deck 不変性自動導出で残る外部入力を商普遍性 hquot 一点に純化・hquot 仮定下で一般 X 充満（M234F）+ hquot を G-Set モデルで discharge（ファイバー推移性=正規/ガロア被覆から hquot 構成・一点対象 deck=全 G の非自明ケースで任意群 G で充満性を無条件化 M245F）+ 中間正規被覆 G/core(H)→G/H で hquot discharge（M250F）+ hquot 境界を両方向 iff で完全特徴付け hfib⟺H₀⊴H（正規性が hquot の必要十分条件 M255F）。残: H₀⊴H だが H₀⋬G の Galois 対象充満性（G/H₀ が非 Galois）・単一 cofinal 塔 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
     },

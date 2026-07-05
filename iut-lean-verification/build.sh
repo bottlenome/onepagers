@@ -2003,6 +2003,8 @@ import IUT
 #print axioms IUT.lt_point_scalar_assoc
 #print axioms IUT.eisResidueFieldIso_exists
 #print axioms IUT.eisRes_ker_eq_lambda
+#print axioms IUT.normalPair_hfib_iff_normalizesSub
+#print axioms IUT.normalPair_hquot
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
