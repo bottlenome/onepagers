@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 340,
-  "verified_theorem_total": 2060,
-  "choice_free_count": 277,
+  "module_count": 341,
+  "verified_theorem_total": 2062,
+  "choice_free_count": 278,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4177,6 +4177,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimeSpectrum.lean"
+    },
+    {
+      "id": "RingLocalization",
+      "label": "RingLocalization",
+      "milestone": "M290F",
+      "title": "柱 A 先行建設: 一般可換環の 乗法系による**本物の局所化** R_S = (R×S",
+      "pillar": "A",
+      "decl_count": 52,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RingLocalization.lean"
     }
   ],
   "edges": [
@@ -4811,6 +4823,10 @@
     {
       "source": "FormalGroupUnique",
       "target": "FormalGroupComm"
+    },
+    {
+      "source": "FractionField",
+      "target": "RingLocalization"
     },
     {
       "source": "Freshman",

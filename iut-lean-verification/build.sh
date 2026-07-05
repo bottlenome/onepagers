@@ -2069,6 +2069,8 @@ import IUT
 #print axioms IUT.zarConn_iff_idem
 #print axioms IUT.primeSpec_D_mul
 #print axioms IUT.primeSpec_field_point
+#print axioms IUT.ringLoc_universal
+#print axioms IUT.ringLocRf_f_unit
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

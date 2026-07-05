@@ -344,3 +344,4 @@ import IUT.PrimitiveElement
 import IUT.SpecFunctorial
 import IUT.ZariskiConnected
 import IUT.PrimeSpectrum
+import IUT.RingLocalization
