@@ -2047,6 +2047,8 @@ import IUT
 #print axioms IUT.idemSpec_exists
 #print axioms IUT.galCorr_galois_connection
 #print axioms IUT.galCorr_exists
+#print axioms IUT.sepEmb_card_eq_degree
+#print axioms IUT.sepEmb_card_eq_sepDegree
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -333,3 +333,4 @@ import IUT.GrothendieckGalois
 import IUT.AlgebraTensor
 import IUT.IdempotentSpectrum
 import IUT.GaloisCorrespondence
+import IUT.SeparableEmbeddings

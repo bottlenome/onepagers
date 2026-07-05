@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 329,
-  "verified_theorem_total": 2038,
-  "choice_free_count": 266,
+  "module_count": 330,
+  "verified_theorem_total": 2040,
+  "choice_free_count": 267,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4045,6 +4045,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisCorrespondence.lean"
+    },
+    {
+      "id": "SeparableEmbeddings",
+      "label": "SeparableEmbeddings",
+      "milestone": "M282F",
+      "title": "分離次数 = K-埋め込みの個数 = [L:K]: 柱A 実分離拡大とファイバー基数の本物の先行建設",
+      "pillar": "A",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SeparableEmbeddings.lean"
     }
   ],
   "edges": [
@@ -4327,6 +4339,10 @@
     {
       "source": "Evaluation",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "EvaluationHom",
+      "target": "SeparableEmbeddings"
     },
     {
       "source": "FactorTheorem",
@@ -5165,6 +5181,10 @@
       "target": "TorsionTrivial"
     },
     {
+      "source": "MinimalPolynomial",
+      "target": "SeparableEmbeddings"
+    },
+    {
       "source": "Mochizuki",
       "target": "Verdict"
     },
@@ -5789,6 +5809,10 @@
       "target": "Rationals"
     },
     {
+      "source": "RootAdjunction",
+      "target": "SeparableEmbeddings"
+    },
+    {
       "source": "RootsOfUnity",
       "target": "UnitDecomposition"
     },
@@ -5843,6 +5867,10 @@
     {
       "source": "ScholzeStix",
       "target": "Verdict"
+    },
+    {
+      "source": "SeparablePoly",
+      "target": "SeparableEmbeddings"
     },
     {
       "source": "SimpleExtension",
