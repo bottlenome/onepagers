@@ -294,3 +294,4 @@ import IUT.ArithPilot
 import IUT.LambdaTowerRamifCapstone
 import IUT.LambdaTowerPiValGeom
 import IUT.LogVolEffMono
+import IUT.ThetaValueProdLaws

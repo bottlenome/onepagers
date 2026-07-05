@@ -1972,6 +1972,8 @@ import IUT
 #print axioms IUT.lambdaTowerPiValGeom_exists
 #print axioms IUT.rlogVol_effmono
 #print axioms IUT.logVolEffMono_exists
+#print axioms IUT.thetaValueProdLaw_exists
+#print axioms IUT.thetaValProd_append
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 290,
-  "verified_theorem_total": 1963,
+  "module_count": 291,
+  "verified_theorem_total": 1965,
   "choice_free_count": 238,
   "nodes": [
     {
@@ -3573,6 +3573,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolEffMono.lean"
+    },
+    {
+      "id": "ThetaValueProdLaws",
+      "label": "ThetaValueProdLaws",
+      "milestone": "M242F",
+      "title": "テータ値の有限多ラベル積の追加代数則",
+      "pillar": "E",
+      "decl_count": 16,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueProdLaws.lean"
     }
   ],
   "edges": [
@@ -4243,6 +4255,10 @@
     {
       "source": "GaussianVolume",
       "target": "Premises311"
+    },
+    {
+      "source": "GaussianVolume",
+      "target": "ThetaValueProdLaws"
     },
     {
       "source": "GaussianVolume",
@@ -5291,6 +5307,10 @@
     {
       "source": "ThetaValueEval",
       "target": "ThetaLabelInjective"
+    },
+    {
+      "source": "ThetaValueSubgroup",
+      "target": "ThetaValueProdLaws"
     },
     {
       "source": "Topology",
