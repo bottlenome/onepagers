@@ -2016,6 +2016,16 @@ import IUT
 #print axioms IUT.nnqToQ_mono
 #print axioms IUT.towerResidueFieldIsoTower_exists
 #print axioms IUT.tower_res_ker_eq_gen
+#print axioms IUT.iutField_exists
+#print axioms IUT.ratIUTField
+#print axioms IUT.firstIsomorphism_exists
+#print axioms IUT.quotientGroupN_exists
+#print axioms IUT.profiniteTopology_exists
+#print axioms IUT.subgroup_isOpen_iff_contains_kernel
+#print axioms IUT.polyDivField_exists
+#print axioms IUT.field_division_exists_unique
+#print axioms IUT.fracField_exists
+#print axioms IUT.Qp_is_field
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

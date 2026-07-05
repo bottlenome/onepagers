@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 312,
-  "verified_theorem_total": 2007,
-  "choice_free_count": 250,
+  "module_count": 317,
+  "verified_theorem_total": 2017,
+  "choice_free_count": 254,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3841,6 +3841,66 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerResidueKernelTower.lean"
+    },
+    {
+      "id": "Field",
+      "label": "Field",
+      "milestone": "M264F",
+      "title": "体（Field）",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Field.lean"
+    },
+    {
+      "id": "QuotientGroup",
+      "label": "QuotientGroup",
+      "milestone": "M267F",
+      "title": "商群と準同型定理（第一同型定理）",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/QuotientGroup.lean"
+    },
+    {
+      "id": "ProfiniteTopology",
+      "label": "ProfiniteTopology",
+      "milestone": "M265F",
+      "title": "副有限位相の完成: 開部分群の 特徴付け・連続作用の同値・Hausdorff 分離・ẑ の実例",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ProfiniteTopology.lean"
+    },
+    {
+      "id": "PolyFieldDivision",
+      "label": "PolyFieldDivision",
+      "milestone": "M268F",
+      "title": "体上の多項式: 本物の除法定理・ 剰余の一意性・体の整域性",
+      "pillar": "A",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyFieldDivision.lean"
+    },
+    {
+      "id": "FractionField",
+      "label": "FractionField",
+      "milestone": "M266F",
+      "title": "柱 A/B/C 先行建設: 整域の本物の 分数体 Frac(D",
+      "pillar": "A",
+      "decl_count": 58,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FractionField.lean"
     }
   ],
   "edges": [
@@ -3919,6 +3979,10 @@
     {
       "source": "Binomial2",
       "target": "Freshman"
+    },
+    {
+      "source": "Binomial2",
+      "target": "PolyFieldDivision"
     },
     {
       "source": "Boolean",
@@ -4521,6 +4585,10 @@
       "target": "CosetGalois"
     },
     {
+      "source": "GaloisClosureModel",
+      "target": "QuotientGroup"
+    },
+    {
       "source": "GaloisEquivalence",
       "target": "GaloisFullness"
     },
@@ -4833,6 +4901,10 @@
       "target": "LocalCFT"
     },
     {
+      "source": "LimitCompact",
+      "target": "ProfiniteTopology"
+    },
+    {
       "source": "LocalCFT",
       "target": "FrobenioidModel"
     },
@@ -4891,6 +4963,10 @@
     {
       "source": "LubinTateZp",
       "target": "PadicDivision"
+    },
+    {
+      "source": "LubinTateZp",
+      "target": "PolyFieldDivision"
     },
     {
       "source": "LubinTateZp",
@@ -5049,6 +5125,10 @@
       "target": "FormalGroupPointsComp"
     },
     {
+      "source": "PolyDivision",
+      "target": "PolyFieldDivision"
+    },
+    {
       "source": "PolyIsomorphism",
       "target": "FiberedFrobenioid"
     },
@@ -5146,6 +5226,10 @@
     },
     {
       "source": "Profinite",
+      "target": "QuotientGroup"
+    },
+    {
+      "source": "Profinite",
       "target": "TateCoverGroup"
     },
     {
@@ -5175,6 +5259,10 @@
     {
       "source": "RatFloor",
       "target": "RealMul"
+    },
+    {
+      "source": "Rationals",
+      "target": "Field"
     },
     {
       "source": "Rationals",
@@ -5495,6 +5583,14 @@
     {
       "source": "SGA1",
       "target": "GaloisClosureModel"
+    },
+    {
+      "source": "SGA1",
+      "target": "ProfiniteTopology"
+    },
+    {
+      "source": "SGA1",
+      "target": "QuotientGroup"
     },
     {
       "source": "SGA1Completion",
@@ -5823,6 +5919,10 @@
     {
       "source": "ZpDomain",
       "target": "EisDomain"
+    },
+    {
+      "source": "ZpDomain",
+      "target": "FractionField"
     },
     {
       "source": "ZpDomain",

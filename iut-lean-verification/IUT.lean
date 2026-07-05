@@ -316,3 +316,8 @@ import IUT.ThetaValueProdRangeSplit
 import IUT.IndActionFull
 import IUT.NNQOrder
 import IUT.LambdaTowerResidueKernelTower
+import IUT.Field
+import IUT.QuotientGroup
+import IUT.ProfiniteTopology
+import IUT.PolyFieldDivision
+import IUT.FractionField
