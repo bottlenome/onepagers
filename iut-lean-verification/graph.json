@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 337,
-  "verified_theorem_total": 2054,
-  "choice_free_count": 274,
+  "module_count": 339,
+  "verified_theorem_total": 2058,
+  "choice_free_count": 276,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4141,6 +4141,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimitiveElement.lean"
+    },
+    {
+      "id": "SpecFunctorial",
+      "label": "SpecFunctorial",
+      "milestone": "M291F",
+      "title": "Spec の反変関手性: 素スペクトルの引き戻し",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SpecFunctorial.lean"
+    },
+    {
+      "id": "ZariskiConnected",
+      "label": "ZariskiConnected",
+      "milestone": "M292F",
+      "title": "Zariski 連結性 ⟺ 冪等元",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZariskiConnected.lean"
     }
   ],
   "edges": [
@@ -5029,6 +5053,10 @@
       "target": "ConnectedEtale"
     },
     {
+      "source": "IdempotentSpectrum",
+      "target": "ZariskiConnected"
+    },
+    {
       "source": "IndAction",
       "target": "IndActionLabel"
     },
@@ -5515,6 +5543,10 @@
     {
       "source": "PowerSeries3",
       "target": "FormalGroup3Congr"
+    },
+    {
+      "source": "PowerSeries3",
+      "target": "SpecFunctorial"
     },
     {
       "source": "Premises311",

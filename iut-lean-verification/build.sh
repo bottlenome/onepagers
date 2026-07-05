@@ -2063,6 +2063,10 @@ import IUT
 #print axioms IUT.galFund_main
 #print axioms IUT.primEl_two_gen
 #print axioms IUT.primEl_theorem
+#print axioms IUT.specFun_map_comp
+#print axioms IUT.specFun_exists
+#print axioms IUT.zarConn_idem_clopen
+#print axioms IUT.zarConn_iff_idem
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

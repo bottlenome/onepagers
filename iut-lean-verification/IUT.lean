@@ -341,3 +341,5 @@ import IUT.NormalSplitting
 import IUT.GaloisPi1Iso
 import IUT.GaloisFundamental
 import IUT.PrimitiveElement
+import IUT.SpecFunctorial
+import IUT.ZariskiConnected
