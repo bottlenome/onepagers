@@ -326,3 +326,4 @@ import IUT.SeparablePoly
 import IUT.FiniteEtaleAlgebra
 import IUT.MinimalPolynomial
 import IUT.SimpleExtension
+import IUT.FiberFunctor

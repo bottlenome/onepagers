@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 322,
-  "verified_theorem_total": 2025,
-  "choice_free_count": 259,
+  "module_count": 323,
+  "verified_theorem_total": 2026,
+  "choice_free_count": 260,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3961,6 +3961,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SimpleExtension.lean"
+    },
+    {
+      "id": "FiberFunctor",
+      "label": "FiberFunctor",
+      "milestone": "M276F",
+      "title": "有限エタール圏 FÉt(K) 上のファイバー関手",
+      "pillar": "A",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FiberFunctor.lean"
     }
   ],
   "edges": [
@@ -4279,6 +4291,10 @@
     {
       "source": "Field",
       "target": "FiniteEtaleAlgebra"
+    },
+    {
+      "source": "FiniteEtaleAlgebra",
+      "target": "FiberFunctor"
     },
     {
       "source": "Finiteness",
