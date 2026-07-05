@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 348,
-  "verified_theorem_total": 2076,
-  "choice_free_count": 285,
+  "module_count": 349,
+  "verified_theorem_total": 2078,
+  "choice_free_count": 286,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4273,6 +4273,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AffineEquivFull.lean"
+    },
+    {
+      "id": "IntegralExtension",
+      "label": "IntegralExtension",
+      "milestone": "M300F",
+      "title": "整元・整閉包（数体の整数環の土台）",
+      "pillar": "A",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IntegralExtension.lean"
     }
   ],
   "edges": [
@@ -4607,6 +4619,10 @@
     {
       "source": "Field",
       "target": "FiniteEtaleAlgebra"
+    },
+    {
+      "source": "Field",
+      "target": "IntegralExtension"
     },
     {
       "source": "Field",
@@ -6107,6 +6123,10 @@
     {
       "source": "Ring",
       "target": "GeomDecayNat"
+    },
+    {
+      "source": "Ring",
+      "target": "IntegralExtension"
     },
     {
       "source": "Ring",

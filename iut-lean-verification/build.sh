@@ -2085,6 +2085,8 @@ import IUT
 #print axioms IUT.nilRad_exists
 #print axioms IUT.affEq_fully_faithful
 #print axioms IUT.affEq_hom_iso
+#print axioms IUT.intExt_scalar_integral
+#print axioms IUT.intExt_field_integrallyClosed
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
