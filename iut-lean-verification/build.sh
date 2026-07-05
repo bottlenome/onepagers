@@ -2081,6 +2081,8 @@ import IUT
 #print axioms IUT.locStalk_stalk_is_local
 #print axioms IUT.resField_quot_isField
 #print axioms IUT.resField_of_maximal
+#print axioms IUT.nilRad_quot_reduced
+#print axioms IUT.nilRad_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 346,
-  "verified_theorem_total": 2072,
-  "choice_free_count": 283,
+  "module_count": 347,
+  "verified_theorem_total": 2074,
+  "choice_free_count": 284,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4249,6 +4249,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ResidueField.lean"
+    },
+    {
+      "id": "NilradicalReduced",
+      "label": "NilradicalReduced",
+      "milestone": "M298F",
+      "title": "冪零根基・被約環・被約化 R_red = R/nil(R)",
+      "pillar": "A",
+      "decl_count": 40,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NilradicalReduced.lean"
     }
   ],
   "edges": [
@@ -5410,6 +5422,10 @@
     },
     {
       "source": "LubinTateZp",
+      "target": "NilradicalReduced"
+    },
+    {
+      "source": "LubinTateZp",
       "target": "PadicDivision"
     },
     {
@@ -5550,6 +5566,10 @@
     },
     {
       "source": "PSFunctor",
+      "target": "NilradicalReduced"
+    },
+    {
+      "source": "PSFunctor",
       "target": "RootAdjunction"
     },
     {
@@ -5671,6 +5691,10 @@
     {
       "source": "PrimeSpectrum",
       "target": "LocalRingStalk"
+    },
+    {
+      "source": "PrimeSpectrum",
+      "target": "NilradicalReduced"
     },
     {
       "source": "PrimeSpectrum",
