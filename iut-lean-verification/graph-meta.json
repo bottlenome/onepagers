@@ -20,24 +20,24 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 89,
-      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移+分岐 v(π) 下界 discharge（π_n∈(λ_n) 無条件 M222F）+ **exact 付値 v(ι(λ_n))=p を無条件化**（遷移射の付値倍化 tower_pi_doubling で v(π_{n+1})≥p を無条件 discharge、M226F 仮定除去 M235F）・基点 e=p−1 exact・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: v(π_{n+1}) の正確値=p·v(π_n)（ef=[L:K] 簿記・上界）・B-2 完全全射・Λₙ(n≥2) (#36)",
+      "progress_pct": 90,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化（倍化 tower_pi_doubling で v(π_{n+1})≥p を無条件 discharge M235F）+幾何的下界 v(π_{n+1})≥2^{n+1}(p−1)(M239F)+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec 単数側+不分岐側・B-4 End(F)≅ℤ_p。残: v(π_{n+1}) の正確値=p·v(π_n)（ef=[L:K] 簿記・上界）・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 89,
-      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）・log-volume 橋 比較射 nnqToQ の加法性/準同型性（M131F 申告(3)回収 M236F）。残: nnqToQ 乗法保存・因子効果性順序の単調性簿記・点群型クラスインスタンス・O-加群 (#37)",
+      "progress_pct": 90,
+      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）・log-volume 橋: 比較射 nnqToQ 加法性(M236F)+効果性順序単調性 rlogVol_effmono（degZ_mono×埋め込み単調性合成、M131F 申告(2)回収 M240F）。残: nnqToQ 乗法保存・点群型クラスインスタンス・O-加群 (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 58,
-      "status": "インターフェース側 capstone ✅ + D-β 進行 🔶 / D-α 完結（M220F）+ D-β 詳細化（7 段）→ Dβ-1 逆局在（M227F）・Dβ-2 実数 threading（M228F）・Dβ-3 算術体積理論 frobVol（M230F）・Dβ-4 前表現 arithPreRep（logq 可変化で Cor312⟺w1·n≤wssq の実データ不等式に同値・非空洞化・q_realized のみ外部仮説 hq に縮約 M238F）・局在総括 capstone（M233F）。IUT の正否が MultiradialInput の inhabit に等価局在し、忠実模型上で crux が単一因子包含に縮約。残: crux 実データ証明（Dβ-5 不定性作用 IndAction/Dβ-6 ThetaLinkTransport/Dβ-7 鏡像定理・Dβ-ω 恒久的範囲外＝多輻的アルゴリズム）",
+      "progress_pct": 60,
+      "status": "インターフェース側 capstone ✅ + D-β 進行 🔶 / D-α 完結（M220F）+ D-β 詳細化（7 段）→ Dβ-1 逆局在（M227F）・Dβ-2 実数 threading（M228F）・Dβ-3 算術体積理論 frobVol（M230F）・Dβ-4 前表現 arithPreRep（logq 可変化で Cor312⟺w1·n≤wssq の実データ不等式に同値・非空洞化 M238F）・Dβ-5 不定性の作用 IndAction（(Ind2)単数が QDiv に実作用・image 非定数の軌道・degZ 不変＝多輻性の芽 M241F）・局在総括 capstone（M233F）。IUT の正否が MultiradialInput の inhabit に等価局在し、忠実模型上で crux が単一因子包含に縮約・不定性が実作用。残: crux 実データ証明（Dβ-6 ThetaLinkTransport/Dβ-7 鏡像定理・Ind1/Ind3 同時作用・Dβ-ω 恒久的範囲外＝多輻的アルゴリズム）",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },

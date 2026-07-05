@@ -1974,6 +1974,8 @@ import IUT
 #print axioms IUT.logVolEffMono_exists
 #print axioms IUT.thetaValueProdLaw_exists
 #print axioms IUT.thetaValProd_append
+#print axioms IUT.indAction_wellDefined
+#print axioms IUT.unitIndAction_orbit
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
