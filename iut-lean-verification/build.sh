@@ -1967,6 +1967,7 @@ import IUT
 #print axioms IUT.constTower_orbitGenerated_connected
 #print axioms IUT.arithPilot_wellDefined
 #print axioms IUT.arithSkeleton_cor312_iff
+#print axioms IUT.lambdaTowerRamifCapstone_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

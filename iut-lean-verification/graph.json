@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 287,
-  "verified_theorem_total": 1958,
-  "choice_free_count": 235,
+  "module_count": 288,
+  "verified_theorem_total": 1959,
+  "choice_free_count": 236,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3537,6 +3537,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArithPilot.lean"
+    },
+    {
+      "id": "LambdaTowerRamifCapstone",
+      "label": "LambdaTowerRamifCapstone",
+      "milestone": "M243F",
+      "title": "λ-塔分岐 exact 付値の総括 capstone（柱B B-1・束ね capstone）",
+      "pillar": "B",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerRamifCapstone.lean"
     }
   ],
   "edges": [
@@ -4347,6 +4359,10 @@
     {
       "source": "LambdaTowerGen",
       "target": "LambdaTowerTrans"
+    },
+    {
+      "source": "LambdaTowerPiValBound",
+      "target": "LambdaTowerRamifCapstone"
     },
     {
       "source": "LambdaTowerRamif",
