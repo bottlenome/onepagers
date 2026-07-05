@@ -2087,6 +2087,8 @@ import IUT
 #print axioms IUT.affEq_hom_iso
 #print axioms IUT.intExt_scalar_integral
 #print axioms IUT.intExt_field_integrallyClosed
+#print axioms IUT.fracId_principal_is_invertible
+#print axioms IUT.fracId_mul_monoid
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

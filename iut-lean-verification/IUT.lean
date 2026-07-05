@@ -353,3 +353,4 @@ import IUT.ResidueField
 import IUT.NilradicalReduced
 import IUT.AffineEquivFull
 import IUT.IntegralExtension
+import IUT.FractionalIdeal

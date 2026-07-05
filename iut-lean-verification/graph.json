@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 349,
-  "verified_theorem_total": 2078,
-  "choice_free_count": 286,
+  "module_count": 350,
+  "verified_theorem_total": 2080,
+  "choice_free_count": 287,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4285,6 +4285,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IntegralExtension.lean"
+    },
+    {
+      "id": "FractionalIdeal",
+      "label": "FractionalIdeal",
+      "milestone": "M302F",
+      "title": "柱 A 先行建設: 整域の分数イデアルと その積・可逆性 — イデアル類群／Dedekind への土台",
+      "pillar": "A",
+      "decl_count": 37,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FractionalIdeal.lean"
     }
   ],
   "edges": [
@@ -4923,6 +4935,10 @@
     {
       "source": "FormalGroupUnique",
       "target": "FormalGroupComm"
+    },
+    {
+      "source": "FractionField",
+      "target": "FractionalIdeal"
     },
     {
       "source": "FractionField",
@@ -5715,6 +5731,10 @@
     {
       "source": "Premises311Real",
       "target": "RealVolumeTheory"
+    },
+    {
+      "source": "PrimeSpectrum",
+      "target": "FractionalIdeal"
     },
     {
       "source": "PrimeSpectrum",
