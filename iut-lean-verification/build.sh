@@ -2005,6 +2005,8 @@ import IUT
 #print axioms IUT.eisRes_ker_eq_lambda
 #print axioms IUT.normalPair_hfib_iff_normalizesSub
 #print axioms IUT.normalPair_hquot
+#print axioms IUT.indActionLabel_wellDefined
+#print axioms IUT.degZ_swap
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

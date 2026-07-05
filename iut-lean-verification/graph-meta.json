@@ -36,8 +36,8 @@
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 66,
-      "status": "インターフェース側 capstone ✅ + D-β 形式化可能部分 完了 🔶 / D-α 完結（M220F）+ D-β 詳細化 7 段 Dβ-1〜7 全実装: 逆局在(M227F)・実数 threading(M228F)・frobVol(M230F)・前表現 arithPreRep（logq 可変で非空洞化 M238F）・不定性の作用 IndAction（(Ind2)単数実作用＝多輻性の芽 M241F）・crux 単一 Prop 化 ThetaLinkTransport(M244F)・**Dβ-7 鏡像定理 transportDeg_iff_cor312（crux が次数レベルで係争不等式 w1·n≤wssq に完全両側同値・点毎⊋次数の隔たり＝Dβ-ω が非空を機械検証・算術模型版独立性 M249F）**。crux は過不足なく係争不等式に同値と確定＝局在の最終鋭化。残: Dβ-ω 恒久的範囲外（＝多輻的アルゴリズム＝論争の当の係争点、log-Kummer 輸送・[AbsTopIII] 環復元・tempered π₁）・Ind1/Ind3 同時作用",
+      "progress_pct": 67,
+      "status": "インターフェース側 capstone ✅ + D-β 形式化可能部分 完了 🔶 / D-α 完結（M220F）+ D-β 詳細化 7 段 Dβ-1〜7 全実装: 逆局在(M227F)・実数 threading(M228F)・frobVol(M230F)・前表現 arithPreRep（logq 可変で非空洞化 M238F）・不定性の作用 IndAction（(Ind2)単数実作用＝多輻性の芽 M241F・(Ind1)等重み置換 degZ 厳密保存+(Ind3)膨張+(Ind1)×(Ind2)同時作用 M254F）・crux 単一 Prop 化 ThetaLinkTransport(M244F)・**Dβ-7 鏡像定理 transportDeg_iff_cor312（crux が次数レベルで係争不等式 w1·n≤wssq に完全両側同値・点毎⊋次数の隔たり＝Dβ-ω が非空を機械検証・算術模型版独立性 M249F）**。crux は過不足なく係争不等式に同値と確定＝局在の最終鋭化。残: Dβ-ω 恒久的範囲外（＝多輻的アルゴリズム＝論争の当の係争点、log-Kummer 輸送・[AbsTopIII] 環復元・tempered π₁）・Ind1/Ind3 同時作用",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },
