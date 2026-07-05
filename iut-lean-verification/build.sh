@@ -2026,6 +2026,8 @@ import IUT
 #print axioms IUT.field_division_exists_unique
 #print axioms IUT.fracField_exists
 #print axioms IUT.Qp_is_field
+#print axioms IUT.galoisGroup_exists
+#print axioms IUT.fieldAutGroup_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

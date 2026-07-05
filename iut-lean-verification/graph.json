@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 317,
-  "verified_theorem_total": 2017,
-  "choice_free_count": 254,
+  "module_count": 318,
+  "verified_theorem_total": 2019,
+  "choice_free_count": 255,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3901,6 +3901,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FractionField.lean"
+    },
+    {
+      "id": "FieldAutGroup",
+      "label": "FieldAutGroup",
+      "milestone": "M271F",
+      "title": "体の自己同型群 Aut(K) と Galois 群 Gal(L/K)",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FieldAutGroup.lean"
     }
   ],
   "edges": [
@@ -4203,6 +4215,10 @@
     {
       "source": "FiberedFrobenioid",
       "target": "SplitFibered"
+    },
+    {
+      "source": "Field",
+      "target": "FieldAutGroup"
     },
     {
       "source": "Finiteness",
@@ -5235,6 +5251,10 @@
     {
       "source": "Profinite",
       "target": "Topology"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "FieldAutGroup"
     },
     {
       "source": "RamifiedBase",

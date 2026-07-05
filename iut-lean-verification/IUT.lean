@@ -321,3 +321,4 @@ import IUT.QuotientGroup
 import IUT.ProfiniteTopology
 import IUT.PolyFieldDivision
 import IUT.FractionField
+import IUT.FieldAutGroup
