@@ -2010,6 +2010,8 @@ import IUT
 #print axioms IUT.pillarAFullnessProgram_exists
 #print axioms IUT.thetaValueProdRangeSplit_exists
 #print axioms IUT.thetaValProd_labelUpto_split
+#print axioms IUT.fullIndActionFull_wellDefined
+#print axioms IUT.full_indeterminacies_act
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
