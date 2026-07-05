@@ -1976,6 +1976,15 @@ import IUT
 #print axioms IUT.thetaValProd_append
 #print axioms IUT.indAction_wellDefined
 #print axioms IUT.unitIndAction_orbit
+#print axioms IUT.thetaValueAlgebra_exists
+#print axioms IUT.input_of_transport
+#print axioms IUT.cor312_of_transport
+#print axioms IUT.formalGroupPointOAction_exists
+#print axioms IUT.lt_point_scalar_mul
+#print axioms IUT.towerResidueSurj_exists
+#print axioms IUT.tower_res_surjective
+#print axioms IUT.connectedFullness_regTerminal_full
+#print axioms IUT.gsetHquot_of_fiberTransitive
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

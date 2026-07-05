@@ -296,3 +296,8 @@ import IUT.LambdaTowerPiValGeom
 import IUT.LogVolEffMono
 import IUT.ThetaValueProdLaws
 import IUT.IndAction
+import IUT.ThetaValueAlgebra
+import IUT.ThetaLinkTransport
+import IUT.FormalGroupPointOAction
+import IUT.LambdaTowerResidueSurj
+import IUT.GSetCoequalizer

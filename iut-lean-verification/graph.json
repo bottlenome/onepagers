@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 292,
-  "verified_theorem_total": 1967,
-  "choice_free_count": 238,
+  "module_count": 297,
+  "verified_theorem_total": 1976,
+  "choice_free_count": 240,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3597,6 +3597,68 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IndAction.lean"
+    },
+    {
+      "id": "ThetaValueAlgebra",
+      "label": "ThetaValueAlgebra",
+      "milestone": "M248F",
+      "title": "テータ値の代数構造チェーンの総括",
+      "pillar": "E",
+      "decl_count": 3,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueAlgebra.lean"
+    },
+    {
+      "id": "ThetaLinkTransport",
+      "label": "ThetaLinkTransport",
+      "milestone": "M244F",
+      "title": "Dβ-6: crux の単一 Prop 化 ThetaLinkTransport",
+      "pillar": "D",
+      "decl_count": 5,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[AbsTopIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkTransport.lean"
+    },
+    {
+      "id": "FormalGroupPointOAction",
+      "label": "FormalGroupPointOAction",
+      "milestone": "M247F",
+      "title": "形式群の点集合への O-作用の乗法側（柱C・O-加群構造の残件を 1 スライス）",
+      "pillar": "C",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointOAction.lean"
+    },
+    {
+      "id": "LambdaTowerResidueSurj",
+      "label": "LambdaTowerResidueSurj",
+      "milestone": "M246F",
+      "title": "塔の剰余射の全射性",
+      "pillar": "B",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerResidueSurj.lean"
+    },
+    {
+      "id": "GSetCoequalizer",
+      "label": "GSetCoequalizer",
+      "milestone": "M245F",
+      "title": "G-Set コエコライザによる hquot のモデル discharge（柱A A-3α ③）",
+      "pillar": "A",
+      "decl_count": 4,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GSetCoequalizer.lean"
     }
   ],
   "edges": [
@@ -4050,6 +4112,10 @@
     },
     {
       "source": "FormalGroupOModule",
+      "target": "FormalGroupPointOAction"
+    },
+    {
+      "source": "FormalGroupOModule",
       "target": "FormalGroupPoints"
     },
     {
@@ -4082,6 +4148,10 @@
     },
     {
       "source": "FormalGroupPointsComp",
+      "target": "FormalGroupPointOAction"
+    },
+    {
+      "source": "FormalGroupPointsComp",
       "target": "FormalGroupPoints2"
     },
     {
@@ -4091,6 +4161,10 @@
     {
       "source": "FormalGroupPointsLaw",
       "target": "FormalGroupPointLaws"
+    },
+    {
+      "source": "FormalGroupPointsLaw",
+      "target": "FormalGroupPointOAction"
     },
     {
       "source": "FormalGroupPointsLaw",
@@ -4245,6 +4319,10 @@
       "target": "GaloisFullnessConnected"
     },
     {
+      "source": "GaloisFullnessConnected",
+      "target": "GSetCoequalizer"
+    },
+    {
       "source": "GaussPilot311",
       "target": "PillarDInterface"
     },
@@ -4327,6 +4405,10 @@
     {
       "source": "HodgeTheater",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "IndAction",
+      "target": "ThetaLinkTransport"
     },
     {
       "source": "Indeterminacies",
@@ -4639,6 +4721,10 @@
     {
       "source": "MultiradialInput",
       "target": "PillarDInterface"
+    },
+    {
+      "source": "MultiradialInput",
+      "target": "ThetaLinkTransport"
     },
     {
       "source": "NatPrimeParts",
@@ -5098,6 +5184,10 @@
     },
     {
       "source": "ResidueTower",
+      "target": "LambdaTowerResidueSurj"
+    },
+    {
+      "source": "ResidueTower",
       "target": "TorsionResidue"
     },
     {
@@ -5131,6 +5221,10 @@
     {
       "source": "SGA1",
       "target": "GaloisClosureModel"
+    },
+    {
+      "source": "SGA1Completion",
+      "target": "GSetCoequalizer"
     },
     {
       "source": "SGA1Completion",
@@ -5310,6 +5404,10 @@
     },
     {
       "source": "ThetaRingObject",
+      "target": "ThetaValueAlgebra"
+    },
+    {
+      "source": "ThetaRingObject",
       "target": "ThetaValueSubgroup"
     },
     {
@@ -5321,12 +5419,24 @@
       "target": "ThetaRingObject"
     },
     {
+      "source": "ThetaValueConstruct",
+      "target": "ThetaValueAlgebra"
+    },
+    {
       "source": "ThetaValueEval",
       "target": "ThetaEvalCapstone"
     },
     {
       "source": "ThetaValueEval",
       "target": "ThetaLabelInjective"
+    },
+    {
+      "source": "ThetaValueProdLaws",
+      "target": "ThetaValueAlgebra"
+    },
+    {
+      "source": "ThetaValueSubgroup",
+      "target": "ThetaValueAlgebra"
     },
     {
       "source": "ThetaValueSubgroup",
