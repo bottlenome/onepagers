@@ -2071,6 +2071,8 @@ import IUT
 #print axioms IUT.primeSpec_field_point
 #print axioms IUT.ringLoc_universal
 #print axioms IUT.ringLocRf_f_unit
+#print axioms IUT.structSheaf_restrict_comp
+#print axioms IUT.structSheaf_global_eq_ring
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

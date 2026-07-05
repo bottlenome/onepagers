@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 341,
-  "verified_theorem_total": 2062,
-  "choice_free_count": 278,
+  "module_count": 342,
+  "verified_theorem_total": 2064,
+  "choice_free_count": 279,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4189,6 +4189,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RingLocalization.lean"
+    },
+    {
+      "id": "StructureSheafBasic",
+      "label": "StructureSheafBasic",
+      "milestone": "M293F",
+      "title": "柱 A スキーム論 先行建設: アフィンスキームの構造層 O_Spec の基本開集合 D(f",
+      "pillar": "A",
+      "decl_count": 86,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/StructureSheafBasic.lean"
     }
   ],
   "edges": [
@@ -5999,6 +6011,10 @@
     {
       "source": "Ring",
       "target": "Rationals"
+    },
+    {
+      "source": "Ring",
+      "target": "StructureSheafBasic"
     },
     {
       "source": "RootAdjunction",

@@ -345,3 +345,4 @@ import IUT.SpecFunctorial
 import IUT.ZariskiConnected
 import IUT.PrimeSpectrum
 import IUT.RingLocalization
+import IUT.StructureSheafBasic
