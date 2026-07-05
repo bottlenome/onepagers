@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 328,
-  "verified_theorem_total": 2036,
-  "choice_free_count": 265,
+  "module_count": 329,
+  "verified_theorem_total": 2038,
+  "choice_free_count": 266,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4033,6 +4033,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IdempotentSpectrum.lean"
+    },
+    {
+      "id": "GaloisCorrespondence",
+      "label": "GaloisCorrespondence",
+      "milestone": "M283F",
+      "title": "Galois 対応の本物の 1 段",
+      "pillar": "A",
+      "decl_count": 26,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisCorrespondence.lean"
     }
   ],
   "edges": [
@@ -4355,6 +4367,10 @@
     {
       "source": "Field",
       "target": "FiniteEtaleAlgebra"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "GaloisCorrespondence"
     },
     {
       "source": "FieldAutGroup",

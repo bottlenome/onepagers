@@ -2045,6 +2045,8 @@ import IUT
 #print axioms IUT.algTensor_exists
 #print axioms IUT.idemSpec_split_components
 #print axioms IUT.idemSpec_exists
+#print axioms IUT.galCorr_galois_connection
+#print axioms IUT.galCorr_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
