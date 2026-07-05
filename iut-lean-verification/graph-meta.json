@@ -26,8 +26,8 @@
       "label": "柱B 局所類体論",
       "color": "#34d399",
       "progress_pct": 94,
-      "complete_pct": 12,
-      "complete_note": "実 IUT 完全証明率 ~12%。ℤ_p・ℤ_p^×・Teichmüller・μ_{p−1}≅(ℤ/p)^× は実。だが LCFT 本体（本物の p 進局所体・実 Galois 群・Galois コホモロジー=0・実相互律・実円分剛性）は模型/骨格/ゼロ。eisRing は形式冪級数商の模型環。詳細 #48。",
+      "complete_pct": 13,
+      "complete_note": "実 IUT 完全証明率 ~13%（第114弾横展開で 12→13: 付値位相・完備化・Hensel の核を本物建設）。ℤ_p・ℤ_p^×・Teichmüller・μ_{p−1}≅(ℤ/p)^× は実。第114弾 M306F で M301F 付値環 O_v の位相層（Cauchy 列・零列・完備化 setoid の加法群合同・K↪K̂ 単射・Hensel の Newton 線形相殺＝無公理）を本物化。だが LCFT 本体（本物の p 進局所体の環化・実 Galois コホモロジー=0・実相互律・実円分剛性）は模型/骨格/ゼロ。eisRing は形式冪級数商の模型環。詳細 #48。",
       "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射 M246F）+剰余核下界(M251F)+**塔全体の剰余体同型 O_n/(λ_n)≅ℤ/p 全 n（核=(λ_n) 全 n・一段割り算で n 帰納・f 側全レベル完成 M260F）**+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec・B-4 End(F)≅ℤ_p。残: 分岐指数 e 完全値 v(π_{n+1})=p·v(π_n)（ef の e 側・上界）・商環 O_n/(λ_n) 明示構成・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"

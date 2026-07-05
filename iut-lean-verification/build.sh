@@ -2095,6 +2095,10 @@ import IUT
 #print axioms IUT.valRing_is_local
 #print axioms IUT.dedek_prime_residue_field
 #print axioms IUT.dedek_exists
+#print axioms IUT.locComp_hensel_step
+#print axioms IUT.locComp_exists
+#print axioms IUT.ellCurve_neg_on_curve
+#print axioms IUT.ellCurve_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

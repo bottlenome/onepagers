@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 353,
-  "verified_theorem_total": 2086,
-  "choice_free_count": 290,
+  "module_count": 355,
+  "verified_theorem_total": 2090,
+  "choice_free_count": 292,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4333,6 +4333,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DedekindDomain.lean"
+    },
+    {
+      "id": "LocalFieldCompletion",
+      "label": "LocalFieldCompletion",
+      "milestone": "M306F",
+      "title": "離散付値による完備化と Hensel の補題",
+      "pillar": "B",
+      "decl_count": 34,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalFieldCompletion.lean"
+    },
+    {
+      "id": "EllipticCurve",
+      "label": "EllipticCurve",
+      "milestone": "M304F",
+      "title": "楕円曲線（短 Weierstrass 形）",
+      "pillar": "A",
+      "decl_count": 52,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EllipticCurve.lean"
     }
   ],
   "edges": [
@@ -4659,6 +4683,10 @@
     {
       "source": "FiberedFrobenioid",
       "target": "SplitFibered"
+    },
+    {
+      "source": "Field",
+      "target": "EllipticCurve"
     },
     {
       "source": "Field",
@@ -6575,6 +6603,10 @@
     {
       "source": "UnitFiltration",
       "target": "Fermat"
+    },
+    {
+      "source": "ValuationRing",
+      "target": "LocalFieldCompletion"
     },
     {
       "source": "VolumeModel",
