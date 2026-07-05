@@ -20,16 +20,16 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 93,
-      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射 M246F）+剰余核下界 (λ_n)⊆ker ρ_n(M251F)+逆包含 ker ρ₀⊆(λ₀) 基底解消＝核=(λ₀) 完全等式・O₀/(λ₀)≅ℤ/p 骨格(M256F)+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec・B-4 End(F)≅ℤ_p。残: n≥1 の逆包含・分岐指数 e 完全値 v(π_{n+1})=p·v(π_n)（上界）・B-2 完全全射・Λₙ(n≥2) (#36)",
+      "progress_pct": 94,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射 M246F）+剰余核下界(M251F)+**塔全体の剰余体同型 O_n/(λ_n)≅ℤ/p 全 n（核=(λ_n) 全 n・一段割り算で n 帰納・f 側全レベル完成 M260F）**+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec・B-4 End(F)≅ℤ_p。残: 分岐指数 e 完全値 v(π_{n+1})=p·v(π_n)（ef の e 側・上界）・商環 O_n/(λ_n) 明示構成・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 93,
-      "status": "構成的順序体 capstone ✅ + 幾何級数収束（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）+ 点集合 O-作用 総括 capstone: 乗法 [a][b]=[ab](M247F)+可換派生則(M252F)+結合律 [a][b][c]x=[(abc)]x・単位/零則を単一レコードに束ね（M257F）・log-volume 橋 nnqToQ 加法性(M236F)+効果性順序単調性(M240F)。残: F-準同型分配律（M100F tier-L）・nnqToQ 乗法保存・O-加群型クラスインスタンス (#37)",
+      "progress_pct": 94,
+      "status": "構成的順序体 capstone ✅ + 幾何級数収束（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）+ 点集合 O-作用 総括 capstone（乗法 M247F+可換派生則 M252F+結合律 M257F）・log-volume 橋 nnqToQ 加法性(M236F)+効果性順序単調性(M240F)+ℚ≥0 順序 nnqLe と比較射順序両立 nnqToQ_mono（順序モノイド準同型に完成 M262F）。残: F-準同型分配律（M100F tier-L）・nnqToQ 乗法保存・順序線形性・O-加群型クラスインスタンス (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },

@@ -2012,6 +2012,10 @@ import IUT
 #print axioms IUT.thetaValProd_labelUpto_split
 #print axioms IUT.fullIndActionFull_wellDefined
 #print axioms IUT.full_indeterminacies_act
+#print axioms IUT.nnqOrder_exists
+#print axioms IUT.nnqToQ_mono
+#print axioms IUT.towerResidueFieldIsoTower_exists
+#print axioms IUT.tower_res_ker_eq_gen
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

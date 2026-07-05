@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 310,
-  "verified_theorem_total": 2003,
-  "choice_free_count": 248,
+  "module_count": 312,
+  "verified_theorem_total": 2007,
+  "choice_free_count": 250,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3817,6 +3817,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IndActionFull.lean"
+    },
+    {
+      "id": "NNQOrder",
+      "label": "NNQOrder",
+      "milestone": "M262F",
+      "title": "非負有理数 ℚ≥0 上の順序 nnqLe と比較射の順序両立（柱C・log-volume 橋の残件を 1 スライス）",
+      "pillar": "C",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NNQOrder.lean"
+    },
+    {
+      "id": "LambdaTowerResidueKernelTower",
+      "label": "LambdaTowerResidueKernelTower",
+      "milestone": "M260F",
+      "title": "塔剰余射の核 = 極大イデアル(λₙ) を塔全体（全 n）へ持ち上げ",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerResidueKernelTower.lean"
     }
   ],
   "edges": [
@@ -4722,6 +4746,10 @@
     },
     {
       "source": "LambdaTowerGen",
+      "target": "LambdaTowerResidueKernelTower"
+    },
+    {
+      "source": "LambdaTowerGen",
       "target": "LambdaTowerTrans"
     },
     {
@@ -4743,6 +4771,14 @@
     {
       "source": "LambdaTowerResidueKernel",
       "target": "LambdaTowerResidueKernelConverse"
+    },
+    {
+      "source": "LambdaTowerResidueKernel",
+      "target": "LambdaTowerResidueKernelTower"
+    },
+    {
+      "source": "LambdaTowerResidueKernelConverse",
+      "target": "LambdaTowerResidueKernelTower"
     },
     {
       "source": "LambdaTowerResidueSurj",
@@ -4831,6 +4867,10 @@
     {
       "source": "LogVolBridge",
       "target": "LogVolEffMono"
+    },
+    {
+      "source": "LogVolBridge",
+      "target": "NNQOrder"
     },
     {
       "source": "LogVolBridge",
