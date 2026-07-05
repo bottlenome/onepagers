@@ -2037,6 +2037,10 @@ import IUT
 #print axioms IUT.fiberFunctor_exists
 #print axioms IUT.evalHom_isRingHom
 #print axioms IUT.evalHom_exists
+#print axioms IUT.rootAdj_is_root
+#print axioms IUT.rootAdj_field_exists
+#print axioms IUT.piEt_exists
+#print axioms IUT.grothendieckGalois_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

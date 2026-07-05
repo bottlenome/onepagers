@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 324,
-  "verified_theorem_total": 2028,
-  "choice_free_count": 261,
+  "module_count": 326,
+  "verified_theorem_total": 2032,
+  "choice_free_count": 263,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3985,6 +3985,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EvaluationHom.lean"
+    },
+    {
+      "id": "RootAdjunction",
+      "label": "RootAdjunction",
+      "milestone": "M275F",
+      "title": "根の添加 K[X]/(f",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RootAdjunction.lean"
+    },
+    {
+      "id": "GrothendieckGalois",
+      "label": "GrothendieckGalois",
+      "milestone": "M277F",
+      "title": "Grothendieck ガロア理論の骨組み π₁^ét := Aut(F)",
+      "pillar": "A",
+      "decl_count": 41,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GrothendieckGalois.lean"
     }
   ],
   "edges": [
@@ -4091,6 +4115,10 @@
     {
       "source": "Composition",
       "target": "LubinTateUnique"
+    },
+    {
+      "source": "Composition",
+      "target": "RootAdjunction"
     },
     {
       "source": "CosetGalois",
@@ -4305,8 +4333,16 @@
       "target": "FiniteEtaleAlgebra"
     },
     {
+      "source": "FieldAutGroup",
+      "target": "GrothendieckGalois"
+    },
+    {
       "source": "FiniteEtaleAlgebra",
       "target": "FiberFunctor"
+    },
+    {
+      "source": "FiniteEtaleAlgebra",
+      "target": "GrothendieckGalois"
     },
     {
       "source": "Finiteness",
@@ -5201,6 +5237,10 @@
       "target": "LambdaTowerPiValBound"
     },
     {
+      "source": "PSFunctor",
+      "target": "RootAdjunction"
+    },
+    {
       "source": "PadicDivision",
       "target": "Binomial2"
     },
@@ -5759,6 +5799,10 @@
     {
       "source": "SimpleExtension",
       "target": "EvaluationHom"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "RootAdjunction"
     },
     {
       "source": "Skeleton",

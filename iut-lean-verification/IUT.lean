@@ -328,3 +328,5 @@ import IUT.MinimalPolynomial
 import IUT.SimpleExtension
 import IUT.FiberFunctor
 import IUT.EvaluationHom
+import IUT.RootAdjunction
+import IUT.GrothendieckGalois
