@@ -356,3 +356,4 @@ import IUT.IntegralExtension
 import IUT.FractionalIdeal
 import IUT.RingOfIntegers
 import IUT.ValuationRing
+import IUT.DedekindDomain

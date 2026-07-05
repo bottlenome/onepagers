@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 352,
-  "verified_theorem_total": 2084,
-  "choice_free_count": 289,
+  "module_count": 353,
+  "verified_theorem_total": 2086,
+  "choice_free_count": 290,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4321,6 +4321,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ValuationRing.lean"
+    },
+    {
+      "id": "DedekindDomain",
+      "label": "DedekindDomain",
+      "milestone": "M305F",
+      "title": "柱 A 先行建設: Dedekind 整域と イデアル論 — O_K の理論の本物の最下層",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DedekindDomain.lean"
     }
   ],
   "edges": [
@@ -4975,6 +4987,10 @@
     {
       "source": "FractionField",
       "target": "RingLocalization"
+    },
+    {
+      "source": "FractionalIdeal",
+      "target": "DedekindDomain"
     },
     {
       "source": "Freshman",
@@ -6159,6 +6175,10 @@
     {
       "source": "RegularReal",
       "target": "RatFloor"
+    },
+    {
+      "source": "ResidueField",
+      "target": "DedekindDomain"
     },
     {
       "source": "ResidueTower",

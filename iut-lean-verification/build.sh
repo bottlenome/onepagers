@@ -2093,6 +2093,8 @@ import IUT
 #print axioms IUT.ringInt_exists
 #print axioms IUT.valRing_isSubring
 #print axioms IUT.valRing_is_local
+#print axioms IUT.dedek_prime_residue_field
+#print axioms IUT.dedek_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
