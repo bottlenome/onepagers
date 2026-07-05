@@ -2041,6 +2041,8 @@ import IUT
 #print axioms IUT.rootAdj_field_exists
 #print axioms IUT.piEt_exists
 #print axioms IUT.grothendieckGalois_exists
+#print axioms IUT.algTensor_idem_complete
+#print axioms IUT.algTensor_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

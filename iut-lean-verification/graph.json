@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 326,
-  "verified_theorem_total": 2032,
-  "choice_free_count": 263,
+  "module_count": 327,
+  "verified_theorem_total": 2034,
+  "choice_free_count": 264,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4009,6 +4009,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GrothendieckGalois.lean"
+    },
+    {
+      "id": "AlgebraTensor",
+      "label": "AlgebraTensor",
+      "milestone": "M278F",
+      "title": "分裂 K-代数のテンソル積 K^m ⊗_K K^n ≅ K^{mn}",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AlgebraTensor.lean"
     }
   ],
   "edges": [
@@ -4335,6 +4347,10 @@
     {
       "source": "FieldAutGroup",
       "target": "GrothendieckGalois"
+    },
+    {
+      "source": "FiniteEtaleAlgebra",
+      "target": "AlgebraTensor"
     },
     {
       "source": "FiniteEtaleAlgebra",
