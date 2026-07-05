@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 276,
-  "verified_theorem_total": 1938,
-  "choice_free_count": 227,
+  "module_count": 277,
+  "verified_theorem_total": 1941,
+  "choice_free_count": 228,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3403,6 +3403,18 @@
         "[AbsTopIII]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RealMultiradialInput.lean"
+    },
+    {
+      "id": "GaloisEquivalenceBundle",
+      "label": "GaloisEquivalenceBundle",
+      "milestone": "M225F",
+      "title": "真の圏同値データの束ね（擬逆関手・unit・counit）（柱A A-3α/β）",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisEquivalenceBundle.lean"
     }
   ],
   "edges": [
@@ -4009,6 +4021,10 @@
     {
       "source": "GaloisEquivalence",
       "target": "GaloisFullness"
+    },
+    {
+      "source": "GaloisFullness",
+      "target": "GaloisEquivalenceBundle"
     },
     {
       "source": "GaussPilot311",

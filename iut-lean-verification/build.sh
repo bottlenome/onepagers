@@ -1947,6 +1947,9 @@ import IUT
 #print axioms IUT.inputConverse_exists
 #print axioms IUT.realMultiradialInput_exists
 #print axioms IUT.iut_localized_real
+#print axioms IUT.catEquivOfQuasiInverse
+#print axioms IUT.catEquiv_reconstructed
+#print axioms IUT.towerComparison_catEquiv_of_quasiInverse
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

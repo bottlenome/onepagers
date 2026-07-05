@@ -258,13 +258,13 @@ def catEquivOfQuasiInverse {F : Functor C D} (data : QuasiInverseData F) :
   counit := data.counitIso
   unit_natural := fun {X X'} f => by
     apply data.ff.faithful
-    have e1 : F.onHom (data.unitIso X').hom
-        = (data.counitIso (F.onObj X')).inv := data.ff.homInv_right _
-    have e2 : F.onHom (data.unitIso X).hom
-        = (data.counitIso (F.onObj X)).inv := data.ff.homInv_right _
-    have e3 : F.onHom ((quasiInverseFunctor data).onHom (F.onHom f))
-        = data.conjHom (F.onHom f) := data.ff.homInv_right _
-    rw [F.map_comp, F.map_comp, e1, e2, e3]
+    show F.onHom
+        (C.comp f (data.ff.homInv (data.counitIso (F.onObj X')).inv))
+      = F.onHom
+          (C.comp (data.ff.homInv (data.counitIso (F.onObj X)).inv)
+            (data.ff.homInv (data.conjHom (F.onHom f))))
+    rw [F.map_comp, F.map_comp, data.ff.homInv_right, data.ff.homInv_right,
+      data.ff.homInv_right]
     show D.comp (F.onHom f) (data.counitIso (F.onObj X')).inv
       = D.comp (data.counitIso (F.onObj X)).inv
           (D.comp (D.comp (data.counitIso (F.onObj X)).hom (F.onHom f))
@@ -276,9 +276,10 @@ def catEquivOfQuasiInverse {F : Functor C D} (data : QuasiInverseData F) :
           (data.counitIso (F.onObj X)).hom (F.onHom f),
         (data.counitIso (F.onObj X)).inv_hom, D.id_comp]
   counit_natural := fun {Y Y'} g => by
-    have e : F.onHom ((quasiInverseFunctor data).onHom g)
-        = data.conjHom g := data.ff.homInv_right _
-    rw [e]
+    show D.comp (data.counitIso Y).hom g
+      = D.comp (F.onHom (data.ff.homInv (data.conjHom g)))
+          (data.counitIso Y').hom
+    rw [data.ff.homInv_right]
     show D.comp (data.counitIso Y).hom g
       = D.comp
           (D.comp (D.comp (data.counitIso Y).hom g) (data.counitIso Y').inv)
