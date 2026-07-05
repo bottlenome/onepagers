@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 347,
-  "verified_theorem_total": 2074,
-  "choice_free_count": 284,
+  "module_count": 348,
+  "verified_theorem_total": 2076,
+  "choice_free_count": 285,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4261,6 +4261,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NilradicalReduced.lean"
+    },
+    {
+      "id": "AffineEquivFull",
+      "label": "AffineEquivFull",
+      "milestone": "M299F",
+      "title": "柱 A mono-anabelian 復元の本物の先行建設: アフィンスキームの圏 ≃ 可換環の圏ᵒᵖ の**充満忠実**＝射の復元の完成",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AffineEquivFull.lean"
     }
   ],
   "edges": [
@@ -5131,6 +5143,10 @@
     {
       "source": "GeometricSeriesProgram",
       "target": "ConvergenceCapstone"
+    },
+    {
+      "source": "GlobalSectionsRecover",
+      "target": "AffineEquivFull"
     },
     {
       "source": "GrothendieckGalois",

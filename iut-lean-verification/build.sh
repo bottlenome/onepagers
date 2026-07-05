@@ -2083,6 +2083,8 @@ import IUT
 #print axioms IUT.resField_of_maximal
 #print axioms IUT.nilRad_quot_reduced
 #print axioms IUT.nilRad_exists
+#print axioms IUT.affEq_fully_faithful
+#print axioms IUT.affEq_hom_iso
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
