@@ -2101,6 +2101,8 @@ import IUT
 #print axioms IUT.ellCurve_exists
 #print axioms IUT.etThReal_theta_vanish
 #print axioms IUT.etThReal_exists
+#print axioms IUT.picDiv_principal_isHom
+#print axioms IUT.picDiv_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

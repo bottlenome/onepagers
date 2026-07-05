@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 356,
-  "verified_theorem_total": 2092,
-  "choice_free_count": 293,
+  "module_count": 357,
+  "verified_theorem_total": 2094,
+  "choice_free_count": 294,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4369,6 +4369,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EtaleThetaReal.lean"
+    },
+    {
+      "id": "PicardDivisor",
+      "label": "PicardDivisor",
+      "milestone": "M307F",
+      "title": "柱C 先行建設: 因子群 Div・単項因子・ Picard 群 Pic=Div/単項・次数写像 — 算術 Frobenioid の中核",
+      "pillar": "C",
+      "decl_count": 43,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PicardDivisor.lean"
     }
   ],
   "edges": [
@@ -5911,6 +5923,10 @@
     {
       "source": "QuotientGroup",
       "target": "GaloisPi1Iso"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "PicardDivisor"
     },
     {
       "source": "RamifiedBase",
