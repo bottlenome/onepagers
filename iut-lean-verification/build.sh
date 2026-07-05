@@ -1965,6 +1965,8 @@ import IUT
 #print axioms IUT.towerGen_transition_val_exact_uncond
 #print axioms IUT.constTower_full_connected
 #print axioms IUT.constTower_orbitGenerated_connected
+#print axioms IUT.arithPilot_wellDefined
+#print axioms IUT.arithSkeleton_cor312_iff
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

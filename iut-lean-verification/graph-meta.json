@@ -36,8 +36,8 @@
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 55,
-      "status": "インターフェース側 capstone ✅ + D-β 進行 🔶 / D-α 完結（M220F）+ D-β 詳細化（7 段）→ Dβ-1 逆局在 iut_localized_iff（M227F）・Dβ-2 実数 threading（M228F）・Dβ-3 算術体積理論 frobVol（QDiv 因子を領域・vol=degZ の VolumeTheory・degZ_mono M230F）・D-β 局在総括 capstone（M233F）。IUT の正否が MultiradialInput の inhabit 問題に等価局在し忠実模型化の土台確定。残: crux ThetaLinkTransport の実データ証明（Dβ-4 arithSkeleton/Dβ-5 不定性作用/Dβ-6-7 鏡像定理・Dβ-ω 恒久的範囲外＝多輻的アルゴリズム）",
+      "progress_pct": 58,
+      "status": "インターフェース側 capstone ✅ + D-β 進行 🔶 / D-α 完結（M220F）+ D-β 詳細化（7 段）→ Dβ-1 逆局在（M227F）・Dβ-2 実数 threading（M228F）・Dβ-3 算術体積理論 frobVol（M230F）・Dβ-4 前表現 arithPreRep（logq 可変化で Cor312⟺w1·n≤wssq の実データ不等式に同値・非空洞化・q_realized のみ外部仮説 hq に縮約 M238F）・局在総括 capstone（M233F）。IUT の正否が MultiradialInput の inhabit に等価局在し、忠実模型上で crux が単一因子包含に縮約。残: crux 実データ証明（Dβ-5 不定性作用 IndAction/Dβ-6 ThetaLinkTransport/Dβ-7 鏡像定理・Dβ-ω 恒久的範囲外＝多輻的アルゴリズム）",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 286,
-  "verified_theorem_total": 1956,
-  "choice_free_count": 234,
+  "module_count": 287,
+  "verified_theorem_total": 1958,
+  "choice_free_count": 235,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3525,6 +3525,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisFullnessConnected.lean"
+    },
+    {
+      "id": "ArithPilot",
+      "label": "ArithPilot",
+      "milestone": "M238F",
+      "title": "Dβ-4: 像と q-領域の実データ化 = 前表現 arithPreRep",
+      "pillar": "D",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArithPilot.lean"
     }
   ],
   "edges": [
@@ -4063,6 +4075,10 @@
     {
       "source": "FrobenioidModel",
       "target": "PolyIsomorphism"
+    },
+    {
+      "source": "FrobenioidVolume",
+      "target": "ArithPilot"
     },
     {
       "source": "Frobenius2",
@@ -5291,6 +5307,10 @@
     {
       "source": "VolumeReal",
       "target": "TriSquare"
+    },
+    {
+      "source": "WeightedGauss",
+      "target": "ArithPilot"
     },
     {
       "source": "WeightedGauss",
