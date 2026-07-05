@@ -1950,6 +1950,13 @@ import IUT
 #print axioms IUT.catEquivOfQuasiInverse
 #print axioms IUT.catEquiv_reconstructed
 #print axioms IUT.towerComparison_catEquiv_of_quasiInverse
+#print axioms IUT.pillarDBetaLocalization_exists
+#print axioms IUT.formalGroupPointLaws_exists
+#print axioms IUT.thetaRingObject_exists
+#print axioms IUT.thetaValMonomial_mul
+#print axioms IUT.frobVol_wellDefined
+#print axioms IUT.degZ_mono
+#print axioms IUT.towerComparison_catEquiv_regular_nonempty
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

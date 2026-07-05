@@ -281,3 +281,8 @@ import IUT.LambdaTowerExactRamif
 import IUT.InputConverse
 import IUT.RealMultiradialInput
 import IUT.GaloisEquivalenceBundle
+import IUT.PillarDBetaLocalization
+import IUT.FormalGroupPointLaws
+import IUT.ThetaRingObject
+import IUT.FrobenioidVolume
+import IUT.GaloisEquivalenceUncond

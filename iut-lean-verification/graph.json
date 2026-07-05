@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 277,
-  "verified_theorem_total": 1941,
-  "choice_free_count": 228,
+  "module_count": 282,
+  "verified_theorem_total": 1948,
+  "choice_free_count": 231,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3415,6 +3415,68 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisEquivalenceBundle.lean"
+    },
+    {
+      "id": "PillarDBetaLocalization",
+      "label": "PillarDBetaLocalization",
+      "milestone": "M233F",
+      "title": "柱D D-β 局在総括 capstone",
+      "pillar": "D",
+      "decl_count": 3,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[AbsTopIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PillarDBetaLocalization.lean"
+    },
+    {
+      "id": "FormalGroupPointLaws",
+      "label": "FormalGroupPointLaws",
+      "milestone": "M231F",
+      "title": "柱C 形式群の点集合 F(pℤ_p) の群法則総括 capstone（柱C・並行部品）",
+      "pillar": "C",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupPointLaws.lean"
+    },
+    {
+      "id": "ThetaRingObject",
+      "label": "ThetaRingObject",
+      "milestone": "M232F",
+      "title": "テータ値の環写像対象",
+      "pillar": "E",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaRingObject.lean"
+    },
+    {
+      "id": "FrobenioidVolume",
+      "label": "FrobenioidVolume",
+      "milestone": "M230F",
+      "title": "Dβ-3: 算術体積理論 frobVol",
+      "pillar": "D",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobenioidVolume.lean"
+    },
+    {
+      "id": "GaloisEquivalenceUncond",
+      "label": "GaloisEquivalenceUncond",
+      "milestone": "M229F",
+      "title": "条件付き主定理の無条件化（choice 能動使用）（柱A A-3β 無条件スライス）",
+      "pillar": "A",
+      "decl_count": 2,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisEquivalenceUncond.lean"
     }
   ],
   "edges": [
@@ -3887,12 +3949,20 @@
       "target": "FormalGroupPointsMul2"
     },
     {
+      "source": "FormalGroupPointsAssoc",
+      "target": "FormalGroupPointLaws"
+    },
+    {
       "source": "FormalGroupPointsComp",
       "target": "FormalGroupPoints2"
     },
     {
       "source": "FormalGroupPointsComp",
       "target": "TorsionPoints"
+    },
+    {
+      "source": "FormalGroupPointsLaw",
+      "target": "FormalGroupPointLaws"
     },
     {
       "source": "FormalGroupPointsLaw",
@@ -3937,6 +4007,10 @@
     {
       "source": "FrobenioidCat",
       "target": "PolyIsomorphism"
+    },
+    {
+      "source": "FrobenioidModel",
+      "target": "FrobenioidVolume"
     },
     {
       "source": "FrobenioidModel",
@@ -4021,6 +4095,10 @@
     {
       "source": "GaloisEquivalence",
       "target": "GaloisFullness"
+    },
+    {
+      "source": "GaloisEquivalenceBundle",
+      "target": "GaloisEquivalenceUncond"
     },
     {
       "source": "GaloisFullness",
@@ -4117,6 +4195,10 @@
     {
       "source": "Indeterminacies",
       "target": "PillarDFoundation"
+    },
+    {
+      "source": "InputConverse",
+      "target": "PillarDBetaLocalization"
     },
     {
       "source": "IntRealBridge",
@@ -4352,6 +4434,10 @@
     },
     {
       "source": "Multiradial",
+      "target": "FrobenioidVolume"
+    },
+    {
+      "source": "Multiradial",
       "target": "Indeterminacies"
     },
     {
@@ -4417,6 +4503,10 @@
     {
       "source": "PillarDFoundation",
       "target": "PillarDInterface"
+    },
+    {
+      "source": "PillarDInterface",
+      "target": "PillarDBetaLocalization"
     },
     {
       "source": "PointValues",
@@ -4697,6 +4787,10 @@
     {
       "source": "RealMulOrder",
       "target": "RealGeomDecay"
+    },
+    {
+      "source": "RealMultiradialInput",
+      "target": "PillarDBetaLocalization"
     },
     {
       "source": "RealObstruction",
@@ -5041,6 +5135,10 @@
     {
       "source": "ThetaSeries",
       "target": "ThetaFunctional"
+    },
+    {
+      "source": "ThetaValueConstruct",
+      "target": "ThetaRingObject"
     },
     {
       "source": "ThetaValueEval",
