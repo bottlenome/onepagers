@@ -2091,6 +2091,8 @@ import IUT
 #print axioms IUT.fracId_mul_monoid
 #print axioms IUT.ringInt_Q_eq_Z_forward
 #print axioms IUT.ringInt_exists
+#print axioms IUT.valRing_isSubring
+#print axioms IUT.valRing_is_local
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
