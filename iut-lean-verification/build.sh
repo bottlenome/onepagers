@@ -1968,6 +1968,10 @@ import IUT
 #print axioms IUT.arithPilot_wellDefined
 #print axioms IUT.arithSkeleton_cor312_iff
 #print axioms IUT.lambdaTowerRamifCapstone_exists
+#print axioms IUT.tower_pi_val_geom
+#print axioms IUT.lambdaTowerPiValGeom_exists
+#print axioms IUT.rlogVol_effmono
+#print axioms IUT.logVolEffMono_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

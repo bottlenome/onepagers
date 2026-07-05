@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 288,
-  "verified_theorem_total": 1959,
-  "choice_free_count": 236,
+  "module_count": 290,
+  "verified_theorem_total": 1963,
+  "choice_free_count": 238,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3549,6 +3549,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerRamifCapstone.lean"
+    },
+    {
+      "id": "LambdaTowerPiValGeom",
+      "label": "LambdaTowerPiValGeom",
+      "milestone": "M239F",
+      "title": "塔の π の付値の幾何的下界 v(π_{n+1}) ≥ 2^{n+1}(p−1)",
+      "pillar": "B",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerPiValGeom.lean"
+    },
+    {
+      "id": "LogVolEffMono",
+      "label": "LogVolEffMono",
+      "milestone": "M240F",
+      "title": "効果性順序から実数値 log-volume の単調性へ（柱C・log-volume 橋の残件）",
+      "pillar": "C",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolEffMono.lean"
     }
   ],
   "edges": [
@@ -3695,6 +3719,10 @@
     {
       "source": "EisDomain",
       "target": "LambdaModule"
+    },
+    {
+      "source": "EisDomain",
+      "target": "LambdaTowerPiValGeom"
     },
     {
       "source": "EisDomain",
@@ -4093,6 +4121,10 @@
       "target": "ArithPilot"
     },
     {
+      "source": "FrobenioidVolume",
+      "target": "LogVolEffMono"
+    },
+    {
       "source": "Frobenius2",
       "target": "FormalGroupErr"
     },
@@ -4362,6 +4394,10 @@
     },
     {
       "source": "LambdaTowerPiValBound",
+      "target": "LambdaTowerPiValGeom"
+    },
+    {
+      "source": "LambdaTowerPiValBound",
       "target": "LambdaTowerRamifCapstone"
     },
     {
@@ -4447,6 +4483,10 @@
     {
       "source": "LogThetaLattice",
       "target": "LogKummer"
+    },
+    {
+      "source": "LogVolBridge",
+      "target": "LogVolEffMono"
     },
     {
       "source": "LogVolBridge",

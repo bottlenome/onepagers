@@ -292,3 +292,5 @@ import IUT.LambdaTowerPiValBound
 import IUT.GaloisFullnessConnected
 import IUT.ArithPilot
 import IUT.LambdaTowerRamifCapstone
+import IUT.LambdaTowerPiValGeom
+import IUT.LogVolEffMono
