@@ -1985,6 +1985,18 @@ import IUT
 #print axioms IUT.tower_res_surjective
 #print axioms IUT.connectedFullness_regTerminal_full
 #print axioms IUT.gsetHquot_of_fiberTransitive
+#print axioms IUT.thetaValueProdSwapAt_exists
+#print axioms IUT.thetaValProd_swap_at
+#print axioms IUT.connectedFullness_coreCover_full
+#print axioms IUT.intermediateNormalCover_hfib
+#print axioms IUT.formalGroupPointODerived_exists
+#print axioms IUT.lt_point_scalar_comm
+#print axioms IUT.towerRamifResidueKernel_exists
+#print axioms IUT.tower_res_kills_val_ge_one
+#print axioms IUT.transportDeg_iff_cor312
+#print axioms IUT.transport_strictly_stronger
+#print axioms IUT.arith_mirror_independent
+#print axioms IUT.transportMirror
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

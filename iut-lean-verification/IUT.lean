@@ -301,3 +301,8 @@ import IUT.ThetaLinkTransport
 import IUT.FormalGroupPointOAction
 import IUT.LambdaTowerResidueSurj
 import IUT.GSetCoequalizer
+import IUT.ThetaValueProdSwapAt
+import IUT.IntermediateNormalCover
+import IUT.FormalGroupPointODerived
+import IUT.LambdaTowerResidueKernel
+import IUT.TransportMirror

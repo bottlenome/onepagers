@@ -13,31 +13,31 @@
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
       "progress_pct": 99,
-      "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）+ 充満性（M221F）+ 2-out-of-3 同値束（M225F）+ ②無条件化（正則自己準同型スライス M229F）+ ③一般連結 X: 軌道生成を一般 X で無条件化（Galois 源/hendo 不要）・deck 不変性自動導出で残る外部入力を商普遍性 hquot 一点に純化・hquot 仮定下で一般 X 充満（M234F）+ hquot を G-Set モデルで discharge（ファイバー推移性=正規/ガロア被覆から hquot 構成・一点対象 deck=全 G の非自明ケースで任意群 G で充満性を無条件化 M245F）。残: 非正規被覆 G/H→G/K（deck 軌道⊊ファイバー）での hquot・中間正規被覆 witness・単一 cofinal 塔 (#35)",
+      "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）+ 充満性（M221F）+ 2-out-of-3 同値束（M225F）+ ②無条件化（正則自己準同型スライス M229F）+ ③一般連結 X: 軌道生成を一般 X で無条件化（Galois 源/hendo 不要）・deck 不変性自動導出で残る外部入力を商普遍性 hquot 一点に純化・hquot 仮定下で一般 X 充満（M234F）+ hquot を G-Set モデルで discharge（ファイバー推移性=正規/ガロア被覆から hquot 構成・一点対象 deck=全 G の非自明ケースで任意群 G で充満性を無条件化 M245F）+ 中間正規被覆 G/core(H)→G/H の hfib で真に中間の被覆で hquot discharge・G/H 上充満性（M250F）。残: 非正規被覆 G/H→G/K（deck 軌道⊊ファイバー）での hquot・任意中間正規被覆 G/H₀→G/H・単一 cofinal 塔 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
     },
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 91,
-      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射・ef=[L:K] の f 側 M246F）+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec 単数側+不分岐側・B-4 End(F)≅ℤ_p。残: 分岐指数 e の完全値=v(π_{n+1})=p·v(π_n)（ef の e 側・上界）・B-2 完全全射・Λₙ(n≥2) (#36)",
+      "progress_pct": 92,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射 M246F）+剰余核下界 (λ_n)⊆ker ρ_n（e 側 f 側を同一塔レベルで接続 M251F）+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec・B-4 End(F)≅ℤ_p。残: 逆包含 ker ρ_n⊆(λ_n)＝O_n/(λ_n)≅ℤ/p・分岐指数 e 完全値 v(π_{n+1})=p·v(π_n)（上界）・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 91,
-      "status": "構成的順序体 capstone ✅ + 幾何級数収束（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）+ 点集合 O-作用乗法側 [a][b]=[ab]（M231F 加法側を補完 M247F）・log-volume 橋 nnqToQ 加法性(M236F)+効果性順序単調性(M240F)。残: nnqToQ 乗法保存・O-加群型クラスインスタンス (#37)",
+      "progress_pct": 92,
+      "status": "構成的順序体 capstone ✅ + 幾何級数収束（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）+ 点集合 O-作用: 乗法側 [a][b]=[ab]（M247F）+可換派生則 [a][b]=[b][a]・F([a]x,[b]x) 可換・F([a]x,[−a]x)=0（M252F）・log-volume 橋 nnqToQ 加法性(M236F)+効果性順序単調性(M240F)。残: F-準同型分配律・nnqToQ 乗法保存・O-加群型クラスインスタンス (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
     "D": {
       "label": "柱D 定理3.11",
       "color": "#f87171",
-      "progress_pct": 62,
-      "status": "インターフェース側 capstone ✅ + D-β 進行 🔶 / D-α 完結（M220F）+ D-β 詳細化（7 段）→ Dβ-1 逆局在(M227F)・Dβ-2 実数 threading(M228F)・Dβ-3 frobVol(M230F)・Dβ-4 前表現 arithPreRep（logq 可変で Cor312⟺w1·n≤wssq 非空洞化 M238F）・Dβ-5 不定性の作用 IndAction（(Ind2)単数が QDiv 実作用・image 非定数＝多輻性の芽 M241F）・Dβ-6 crux 単一 Prop 化 ThetaLinkTransport（input_of_transport で MultiradialInput 居住・cor312_of_transport M244F）・局在総括(M233F)。crux が単一 Prop に縮約されそこから Cor312 まで降りる連鎖が確定。残: Dβ-7 鏡像定理 transport_iff_cor312・Ind1/Ind3 同時作用・Dβ-ω 恒久的範囲外＝多輻的アルゴリズム",
+      "progress_pct": 66,
+      "status": "インターフェース側 capstone ✅ + D-β 形式化可能部分 完了 🔶 / D-α 完結（M220F）+ D-β 詳細化 7 段 Dβ-1〜7 全実装: 逆局在(M227F)・実数 threading(M228F)・frobVol(M230F)・前表現 arithPreRep（logq 可変で非空洞化 M238F）・不定性の作用 IndAction（(Ind2)単数実作用＝多輻性の芽 M241F）・crux 単一 Prop 化 ThetaLinkTransport(M244F)・**Dβ-7 鏡像定理 transportDeg_iff_cor312（crux が次数レベルで係争不等式 w1·n≤wssq に完全両側同値・点毎⊋次数の隔たり＝Dβ-ω が非空を機械検証・算術模型版独立性 M249F）**。crux は過不足なく係争不等式に同値と確定＝局在の最終鋭化。残: Dβ-ω 恒久的範囲外（＝多輻的アルゴリズム＝論争の当の係争点、log-Kummer 輸送・[AbsTopIII] 環復元・tempered π₁）・Ind1/Ind3 同時作用",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
     },
