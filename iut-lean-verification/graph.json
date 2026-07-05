@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 282,
-  "verified_theorem_total": 1948,
-  "choice_free_count": 231,
+  "module_count": 285,
+  "verified_theorem_total": 1954,
+  "choice_free_count": 234,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3477,6 +3477,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisEquivalenceUncond.lean"
+    },
+    {
+      "id": "ThetaValueSubgroup",
+      "label": "ThetaValueSubgroup",
+      "milestone": "M237F",
+      "title": "テータ値のなす部分群と多ラベル積",
+      "pillar": "E",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueSubgroup.lean"
+    },
+    {
+      "id": "NNQtoQHom",
+      "label": "NNQtoQHom",
+      "milestone": "M236F",
+      "title": "比較射 nnqToQ の準同型性（柱C・log-volume 橋の残件を 1 スライス）",
+      "pillar": "C",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NNQtoQHom.lean"
+    },
+    {
+      "id": "LambdaTowerPiValBound",
+      "label": "LambdaTowerPiValBound",
+      "milestone": "M235F",
+      "title": "塔の π の付値下界の無条件化と ι(λₙ) の exact 付値の無条件化",
+      "pillar": "B",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerPiValBound.lean"
     }
   ],
   "edges": [
@@ -4237,6 +4273,10 @@
       "target": "LambdaTowerExactVal"
     },
     {
+      "source": "LambdaIdeal",
+      "target": "LambdaTowerPiValBound"
+    },
+    {
       "source": "LambdaInvApprox",
       "target": "GeometricSeriesProgram"
     },
@@ -4259,6 +4299,10 @@
     {
       "source": "LambdaSemilinear",
       "target": "RamifiedReciprocity"
+    },
+    {
+      "source": "LambdaTowerExactRamif",
+      "target": "LambdaTowerPiValBound"
     },
     {
       "source": "LambdaTowerExactVal",
@@ -4355,6 +4399,10 @@
     {
       "source": "LogThetaLattice",
       "target": "LogKummer"
+    },
+    {
+      "source": "LogVolBridge",
+      "target": "NNQtoQHom"
     },
     {
       "source": "LogVolBridge",
@@ -4479,6 +4527,10 @@
     {
       "source": "PSFunctor",
       "target": "FrobeniusCharP"
+    },
+    {
+      "source": "PSFunctor",
+      "target": "LambdaTowerPiValBound"
     },
     {
       "source": "PadicDivision",
@@ -5131,6 +5183,10 @@
     {
       "source": "ThetaReflection",
       "target": "FuneqLift"
+    },
+    {
+      "source": "ThetaRingObject",
+      "target": "ThetaValueSubgroup"
     },
     {
       "source": "ThetaSeries",

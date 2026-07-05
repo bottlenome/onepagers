@@ -20,16 +20,16 @@
     "B": {
       "label": "柱B 局所類体論",
       "color": "#34d399",
-      "progress_pct": 88,
-      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移+分岐 v(π) 下界 discharge（π_n∈(λ_n) 無条件 M222F）+ exact 付値 v(ι(λ_n))=p（支配項分離で上界+下界=等号、v(π)≥p 仮定下 M226F）・基点 e=p−1 exact・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: B-1 仮定 v(π_{n+1})≥p の無条件化（ef=[L:K] 簿記）/[c]-倍・B-2 完全全射・Λₙ(n≥2) (#36)",
+      "progress_pct": 89,
+      "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^× クローズ・B-1 塔生成元/遷移+分岐 v(π) 下界 discharge（π_n∈(λ_n) 無条件 M222F）+ **exact 付値 v(ι(λ_n))=p を無条件化**（遷移射の付値倍化 tower_pi_doubling で v(π_{n+1})≥p を無条件 discharge、M226F 仮定除去 M235F）・基点 e=p−1 exact・B-2 分岐 rec 単数側+不分岐側・B-4 End(F) 環同型 ℤ_p≅End(F)。残: v(π_{n+1}) の正確値=p·v(π_n)（ef=[L:K] 簿記・上界）・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
     },
     "C": {
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
-      "progress_pct": 88,
-      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群の点集合 F(pℤ_p) の群法則 capstone（単位/可換/逆元/加群則/結合 M231F）。残: log-volume 橋の一部・点群の型クラスインスタンス橋渡し・O-加群 (#37)",
+      "progress_pct": 89,
+      "status": "構成的順序体 capstone ✅ + 幾何級数収束プログラム完結（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）・log-volume 橋 比較射 nnqToQ の加法性/準同型性（M131F 申告(3)回収 M236F）。残: nnqToQ 乗法保存・因子効果性順序の単調性簿記・点群型クラスインスタンス・O-加群 (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
     },
@@ -44,8 +44,8 @@
     "E": {
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
-      "progress_pct": 96,
-      "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・解析↔群側関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)・テータ値 q^{j²} の Laurent 単項式実体化（M223F）・テータ値の環写像対象（指数モノイド準同型 uMonHom・合成則 q^{j²}·q^{j'²}=u^{j²+j'²}・単元性 M232F）。残: q-展開収束・ガロア同変 p-進テータ値・tempered π₁ (#39)",
+      "progress_pct": 97,
+      "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)・テータ値 q^{j²} の Laurent 単項式実体化（M223F）・環写像対象（uMonHom・合成則 M232F）・テータ値の単元部分群/多ラベル積 thetaValProd の指数和合成/反射コセット（M237F）。残: q-展開収束・ガロア同変 p-進テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
     },

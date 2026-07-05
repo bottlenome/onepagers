@@ -286,3 +286,6 @@ import IUT.FormalGroupPointLaws
 import IUT.ThetaRingObject
 import IUT.FrobenioidVolume
 import IUT.GaloisEquivalenceUncond
+import IUT.ThetaValueSubgroup
+import IUT.NNQtoQHom
+import IUT.LambdaTowerPiValBound

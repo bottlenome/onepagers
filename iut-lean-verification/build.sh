@@ -1957,6 +1957,12 @@ import IUT
 #print axioms IUT.frobVol_wellDefined
 #print axioms IUT.degZ_mono
 #print axioms IUT.towerComparison_catEquiv_regular_nonempty
+#print axioms IUT.thetaValueSubgroup_exists
+#print axioms IUT.thetaValProd_eq_uMonHom
+#print axioms IUT.nnqToQHom_exists
+#print axioms IUT.nnqToQ_add
+#print axioms IUT.lambdaTowerPiValBound_exists
+#print axioms IUT.towerGen_transition_val_exact_uncond
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
