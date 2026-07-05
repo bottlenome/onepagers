@@ -348,3 +348,5 @@ import IUT.RingLocalization
 import IUT.StructureSheafBasic
 import IUT.FunctorOfPoints
 import IUT.GlobalSectionsRecover
+import IUT.LocalRingStalk
+import IUT.ResidueField

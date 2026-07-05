@@ -2077,6 +2077,10 @@ import IUT
 #print axioms IUT.fpts_kpoint_is_hom
 #print axioms IUT.globSec_recover_ring
 #print axioms IUT.globSec_recover_hom
+#print axioms IUT.locStalk_isLocal
+#print axioms IUT.locStalk_stalk_is_local
+#print axioms IUT.resField_quot_isField
+#print axioms IUT.resField_of_maximal
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

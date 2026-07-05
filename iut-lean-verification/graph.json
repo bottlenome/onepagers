@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 344,
-  "verified_theorem_total": 2068,
-  "choice_free_count": 281,
+  "module_count": 346,
+  "verified_theorem_total": 2072,
+  "choice_free_count": 283,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4225,6 +4225,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GlobalSectionsRecover.lean"
+    },
+    {
+      "id": "LocalRingStalk",
+      "label": "LocalRingStalk",
+      "milestone": "M296F",
+      "title": "柱 A 先行建設: アフィンスキーム Spec R の点 P（素イデアル",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalRingStalk.lean"
+    },
+    {
+      "id": "ResidueField",
+      "label": "ResidueField",
+      "milestone": "M295F",
+      "title": "極大イデアルと剰余体 R/m",
+      "pillar": "A",
+      "decl_count": 33,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ResidueField.lean"
     }
   ],
   "edges": [
@@ -5394,6 +5418,10 @@
     },
     {
       "source": "LubinTateZp",
+      "target": "ResidueField"
+    },
+    {
+      "source": "LubinTateZp",
       "target": "TorsionTrivial"
     },
     {
@@ -5605,6 +5633,10 @@
       "target": "Composition"
     },
     {
+      "source": "PowerSeries",
+      "target": "ResidueField"
+    },
+    {
       "source": "PowerSeries2",
       "target": "FormalGroupSub"
     },
@@ -5635,6 +5667,14 @@
     {
       "source": "PrimeSpectrum",
       "target": "FunctorOfPoints"
+    },
+    {
+      "source": "PrimeSpectrum",
+      "target": "LocalRingStalk"
+    },
+    {
+      "source": "PrimeSpectrum",
+      "target": "ResidueField"
     },
     {
       "source": "PrimitiveRoot",
@@ -6043,6 +6083,10 @@
     {
       "source": "Ring",
       "target": "StructureSheafBasic"
+    },
+    {
+      "source": "RingLocalization",
+      "target": "LocalRingStalk"
     },
     {
       "source": "RootAdjunction",
