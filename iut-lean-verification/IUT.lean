@@ -327,3 +327,4 @@ import IUT.FiniteEtaleAlgebra
 import IUT.MinimalPolynomial
 import IUT.SimpleExtension
 import IUT.FiberFunctor
+import IUT.EvaluationHom

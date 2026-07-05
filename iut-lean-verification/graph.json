@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 323,
-  "verified_theorem_total": 2026,
-  "choice_free_count": 260,
+  "module_count": 324,
+  "verified_theorem_total": 2028,
+  "choice_free_count": 261,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3973,6 +3973,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FiberFunctor.lean"
+    },
+    {
+      "id": "EvaluationHom",
+      "label": "EvaluationHom",
+      "milestone": "M274F",
+      "title": "評価準同型 ev_α : K[X] → E: 柱A 実代数拡大の本物の先行建設",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EvaluationHom.lean"
     }
   ],
   "edges": [
@@ -4415,6 +4427,10 @@
     {
       "source": "FormalGroupExists",
       "target": "EisensteinRing"
+    },
+    {
+      "source": "FormalGroupExists",
+      "target": "EvaluationHom"
     },
     {
       "source": "FormalGroupExists",
@@ -5174,6 +5190,10 @@
     },
     {
       "source": "PSFunctor",
+      "target": "EvaluationHom"
+    },
+    {
+      "source": "PSFunctor",
       "target": "FrobeniusCharP"
     },
     {
@@ -5735,6 +5755,10 @@
     {
       "source": "ScholzeStix",
       "target": "Verdict"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "EvaluationHom"
     },
     {
       "source": "Skeleton",

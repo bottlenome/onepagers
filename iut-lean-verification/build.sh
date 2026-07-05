@@ -2035,6 +2035,8 @@ import IUT
 #print axioms IUT.simpleExt_field
 #print axioms IUT.simpleExt_exists
 #print axioms IUT.fiberFunctor_exists
+#print axioms IUT.evalHom_isRingHom
+#print axioms IUT.evalHom_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
