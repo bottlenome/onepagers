@@ -2099,6 +2099,8 @@ import IUT
 #print axioms IUT.locComp_exists
 #print axioms IUT.ellCurve_neg_on_curve
 #print axioms IUT.ellCurve_exists
+#print axioms IUT.etThReal_theta_vanish
+#print axioms IUT.etThReal_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

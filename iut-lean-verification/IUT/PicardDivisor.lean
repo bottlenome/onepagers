@@ -33,8 +33,8 @@
 
   ## 検証する中核（全て sorry なし・新規 Classical.choice なし）
 
-  * M307F-0 `isum` / `isum_congr` / `isum_add` / `isum_ext_zero` / `isum_stable` /
-    `isum_smul`               — ℤ 値有限和のインフラ（加法性・台安定性・斉次性）
+  * M307F-0 `picDivSum` / `picDivSum_congr` / `picDivSum_add` / `picDivSum_ext_zero` / `picDivSum_stable` /
+    `picDivSum_smul`               — ℤ 値有限和のインフラ（加法性・台安定性・斉次性）
   * M307F-1 `RawDiv` / `rawZero` / `rawAdd` / `rawNeg`
                               — 因子の代表（素点→ℤ の有限台関数、台上界 bound をデータに）
   * M307F-2 `rawEq`（係数等価）＋ 同値律 — bound 非依存の因子等価
@@ -94,62 +94,62 @@ namespace IUT
 /-! ## M307F-0: ℤ 値有限和のインフラ -/
 
 /-- **M307F-0a: 有限和** Σ_{k<n} f k（ℤ 値、core のみ）。 -/
-def isum (f : Nat → Int) : Nat → Int
+def picDivSum (f : Nat → Int) : Nat → Int
   | 0 => 0
-  | n + 1 => isum f n + f n
+  | n + 1 => picDivSum f n + f n
 
 /-- **M307F-0b: 合同性** — 各項が等しければ和も等しい。 -/
-theorem isum_congr {f g : Nat → Int} (h : ∀ k, f k = g k) :
-    ∀ n, isum f n = isum g n := by
+theorem picDivSum_congr {f g : Nat → Int} (h : ∀ k, f k = g k) :
+    ∀ n, picDivSum f n = picDivSum g n := by
   intro n
   induction n with
   | zero => rfl
   | succ p ih =>
-    show isum f p + f p = isum g p + g p
+    show picDivSum f p + f p = picDivSum g p + g p
     rw [ih, h p]
 
 /-- **M307F-0c: 加法性** Σ(f+g) = Σf + Σg。 -/
-theorem isum_add (f g : Nat → Int) :
-    ∀ n, isum (fun k => f k + g k) n = isum f n + isum g n := by
+theorem picDivSum_add (f g : Nat → Int) :
+    ∀ n, picDivSum (fun k => f k + g k) n = picDivSum f n + picDivSum g n := by
   intro n
   induction n with
   | zero =>
     show (0 : Int) = 0 + 0
     omega
   | succ p ih =>
-    show isum (fun k => f k + g k) p + (f p + g p)
-        = (isum f p + f p) + (isum g p + g p)
+    show picDivSum (fun k => f k + g k) p + (f p + g p)
+        = (picDivSum f p + f p) + (picDivSum g p + g p)
     rw [ih]
     omega
 
 /-- **M307F-0d: 台の外への延長** — m 以上で消える f は m+j まで和が m と同じ。 -/
-theorem isum_ext_zero (f : Nat → Int) (m : Nat) (hf : ∀ k, m ≤ k → f k = 0) :
-    ∀ j, isum f (m + j) = isum f m := by
+theorem picDivSum_ext_zero (f : Nat → Int) (m : Nat) (hf : ∀ k, m ≤ k → f k = 0) :
+    ∀ j, picDivSum f (m + j) = picDivSum f m := by
   intro j
   induction j with
   | zero => rfl
   | succ p ih =>
-    show isum f (m + p) + f (m + p) = isum f m
+    show picDivSum f (m + p) + f (m + p) = picDivSum f m
     rw [ih, hf (m + p) (Nat.le_add_right m p)]
     omega
 
 /-- **M307F-0e: 台安定性** — m 以上で消える f は m ≤ n なら和が bound に依らない。 -/
-theorem isum_stable (f : Nat → Int) (m n : Nat) (hf : ∀ k, m ≤ k → f k = 0)
-    (hmn : m ≤ n) : isum f n = isum f m := by
+theorem picDivSum_stable (f : Nat → Int) (m n : Nat) (hf : ∀ k, m ≤ k → f k = 0)
+    (hmn : m ≤ n) : picDivSum f n = picDivSum f m := by
   obtain ⟨j, hj⟩ := Nat.le.dest hmn
   rw [← hj]
-  exact isum_ext_zero f m hf j
+  exact picDivSum_ext_zero f m hf j
 
 /-- **M307F-0f: 斉次性** Σ(c·f) = c·Σf。 -/
-theorem isum_smul (c : Int) (f : Nat → Int) :
-    ∀ n, isum (fun k => c * f k) n = c * isum f n := by
+theorem picDivSum_smul (c : Int) (f : Nat → Int) :
+    ∀ n, picDivSum (fun k => c * f k) n = c * picDivSum f n := by
   intro n
   induction n with
   | zero =>
     show (0 : Int) = c * 0
     rw [Int.mul_zero]
   | succ p ih =>
-    show isum (fun k => c * f k) p + c * f p = c * (isum f p + f p)
+    show picDivSum (fun k => c * f k) p + c * f p = c * (picDivSum f p + f p)
     rw [ih, Int.mul_add]
 
 /-! ## M307F-1: 因子の代表 RawDiv（素点→ℤ の有限台関数） -/
@@ -276,34 +276,34 @@ theorem picDivAbelianNormal (N : Subgroup picDivGrp) :
 /-! ## M307F-5: 次数準同型 deg : Div → ℤ -/
 
 /-- **M307F-5: 次数準同型** deg(Σ nₖ[Pₖ]) = Σ nₖ。有限和が well-defined
-    （係数等価な代表は bound が違っても同じ和、`isum_stable` 経由）で、
-    deg(x+y)=deg x+deg y（`isum_add`）。本物の Hom into `intGrp`。 -/
+    （係数等価な代表は bound が違っても同じ和、`picDivSum_stable` 経由）で、
+    deg(x+y)=deg x+deg y（`picDivSum_add`）。本物の Hom into `intGrp`。 -/
 def picDivDegree : Hom picDivGrp intGrp where
-  map := Quot.lift (fun a => isum a.coeff a.bound)
+  map := Quot.lift (fun a => picDivSum a.coeff a.bound)
     (fun a a' ha => by
-      show isum a.coeff a.bound = isum a'.coeff a'.bound
-      have h1 : isum a.coeff a.bound
-              = isum a.coeff (Nat.max a.bound a'.bound) :=
-        (isum_stable a.coeff a.bound (Nat.max a.bound a'.bound) a.vanish
+      show picDivSum a.coeff a.bound = picDivSum a'.coeff a'.bound
+      have h1 : picDivSum a.coeff a.bound
+              = picDivSum a.coeff (Nat.max a.bound a'.bound) :=
+        (picDivSum_stable a.coeff a.bound (Nat.max a.bound a'.bound) a.vanish
           (Nat.le_max_left a.bound a'.bound)).symm
-      have h2 : isum a'.coeff a'.bound
-              = isum a'.coeff (Nat.max a.bound a'.bound) :=
-        (isum_stable a'.coeff a'.bound (Nat.max a.bound a'.bound) a'.vanish
+      have h2 : picDivSum a'.coeff a'.bound
+              = picDivSum a'.coeff (Nat.max a.bound a'.bound) :=
+        (picDivSum_stable a'.coeff a'.bound (Nat.max a.bound a'.bound) a'.vanish
           (Nat.le_max_right a.bound a'.bound)).symm
-      have h3 : isum a.coeff (Nat.max a.bound a'.bound)
-              = isum a'.coeff (Nat.max a.bound a'.bound) :=
-        isum_congr ha (Nat.max a.bound a'.bound)
+      have h3 : picDivSum a.coeff (Nat.max a.bound a'.bound)
+              = picDivSum a'.coeff (Nat.max a.bound a'.bound) :=
+        picDivSum_congr ha (Nat.max a.bound a'.bound)
       rw [h1, h2, h3])
   map_mul := by
     intro x y
     induction x using Quot.ind; rename_i a
     induction y using Quot.ind; rename_i b
-    show isum (fun k => a.coeff k + b.coeff k) (Nat.max a.bound b.bound)
-        = isum a.coeff a.bound + isum b.coeff b.bound
-    rw [isum_add,
-      isum_stable a.coeff a.bound (Nat.max a.bound b.bound) a.vanish
+    show picDivSum (fun k => a.coeff k + b.coeff k) (Nat.max a.bound b.bound)
+        = picDivSum a.coeff a.bound + picDivSum b.coeff b.bound
+    rw [picDivSum_add,
+      picDivSum_stable a.coeff a.bound (Nat.max a.bound b.bound) a.vanish
         (Nat.le_max_left a.bound b.bound),
-      isum_stable b.coeff b.bound (Nat.max a.bound b.bound) b.vanish
+      picDivSum_stable b.coeff b.bound (Nat.max a.bound b.bound) b.vanish
         (Nat.le_max_right a.bound b.bound)]
 
 /-! ## M307F-6: 付値データと単項因子準同型 div : K^× → Div -/
@@ -385,9 +385,9 @@ def picDivFrob (n : Nat) : Hom picDivGrp picDivGrp where
 theorem picDiv_frob_degree (n : Nat) (x : picDivGrp.carrier) :
     picDivDegree.map ((picDivFrob n).map x) = (n : Int) * picDivDegree.map x := by
   induction x using Quot.ind; rename_i a
-  show isum (fun k => (n : Int) * a.coeff k) a.bound
-      = (n : Int) * isum a.coeff a.bound
-  rw [isum_smul]
+  show picDivSum (fun k => (n : Int) * a.coeff k) a.bound
+      = (n : Int) * picDivSum a.coeff a.bound
+  rw [picDivSum_smul]
 
 /-! ## M307F-9: 有効因子モノイド（nₖ ≥ 0）— Frobenioid の因子面骨組み -/
 

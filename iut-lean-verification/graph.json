@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 355,
-  "verified_theorem_total": 2090,
-  "choice_free_count": 292,
+  "module_count": 356,
+  "verified_theorem_total": 2092,
+  "choice_free_count": 293,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4357,6 +4357,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EllipticCurve.lean"
+    },
+    {
+      "id": "EtaleThetaReal",
+      "label": "EtaleThetaReal",
+      "milestone": "M308F",
+      "title": "エタールテータの本物の部分ケース: テータ因子の原点通過 / 柱E・テータ",
+      "pillar": "E",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EtaleThetaReal.lean"
     }
   ],
   "edges": [
@@ -5778,6 +5790,10 @@
     },
     {
       "source": "PowerSeries",
+      "target": "EtaleThetaReal"
+    },
+    {
+      "source": "PowerSeries",
       "target": "ResidueField"
     },
     {
@@ -6491,6 +6507,10 @@
     {
       "source": "ThetaPM",
       "target": "MonoThetaEnv"
+    },
+    {
+      "source": "ThetaReflection",
+      "target": "EtaleThetaReal"
     },
     {
       "source": "ThetaReflection",

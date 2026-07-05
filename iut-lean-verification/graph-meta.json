@@ -56,8 +56,8 @@
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
       "progress_pct": 97,
-      "complete_pct": 10,
-      "complete_note": "実 IUT 完全証明率 ~10%。形式テータ級数・cyclotomic rigidity の離散論理骨格は実構造。だが本物のエタールテータ関数 [EtTh]・三剛性の実証明・ガロア同変 p 進テータ値・tempered π₁ 商はゼロ/模型。テータ値は Laurent 単項式 q^{j²} の代数模型。詳細 #48。",
+      "complete_pct": 11,
+      "complete_note": "実 IUT 完全証明率 ~11%（第114弾横展開で 10→11: テータ因子の原点通過 Θ(q,1)=0 を本物建設）。形式テータ級数・cyclotomic rigidity の離散論理骨格は実構造。第114弾 M308F で実テータ級数 theta R(M88) 上に u=1 augmentation ε を有界台有限和で本物構成し Θ(q,1)=0（テータ因子が Tate 曲線の原点を通る）を反転対称の対消去で本物証明（未着手だったテータ零点/因子に前進）。だが本物のエタールテータ関数 [EtTh]・三剛性の実証明・ガロア同変 p 進テータ値・tempered π₁ 商はゼロ/模型。テータ値は Laurent 単項式 q^{j²} の代数模型。詳細 #48。",
       "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)・テータ値 q^{j²} の Laurent 単項式実体化（M223F）・環写像対象（uMonHom・合成則 M232F）・テータ値の単元部分群/多ラベル積 thetaValProd の指数和合成/反射コセット（M237F）。残: q-展開収束・ガロア同変 p-進テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
