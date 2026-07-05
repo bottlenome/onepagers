@@ -1,10 +1,13 @@
 {
   "_comment": "手動オーバーレイ。graph.json はジェネレータ(tools/gen_graph.py)で自動生成。本ファイルは柱メタ・文献PDFマップ・capstone/hub注釈・一部の精緻化サマリを保持し、index.html がクライアント側でマージする。",
+  "_metrics_note": "進捗は二軸。progress_pct=骨格被覆率（自ら定義した骨格・模型プログラムの消化率）、complete_pct=実 IUT 完全証明率（本物の数体・楕円曲線・エタールテータ・遠アーベル復元の上での Cor 3.12 への到達率）。両者は分母が違う。sorry ゼロ・choice-free は本物だが、多くの定理の主語は模型/代理/骨格対象（例 m202fVol=Region:Int,vol:id、遠アーベル入力は Tate surrogate、Scheme 構造 0 ファイル）。全体の実 IUT 完全証明率はおおむね 5% 前後（支配項の A/D が 3–4%）。詳細は issue #48 の棚卸しコメント。",
   "pillars": {
     "core": {
       "label": "論争骨格",
       "color": "#94a3b8",
       "progress_pct": 100,
+      "complete_pct": 100,
+      "complete_note": "実 IUT の証明ではなく論争構造（二分法・独立性）の形式化として完結。別軸。",
       "status": "二分法 ✅ (sorry なし)",
       "blurb": "系3.12 の statement・二分法・Szpiro/ABC 帰結の骨格",
       "plain": "結論＝系3.12 の主張と「正しい／間違い」の判定、そしてABC予想への道すじ"
@@ -13,6 +16,8 @@
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
       "progress_pct": 99,
+      "complete_pct": 3,
+      "complete_note": "実 IUT 完全証明率 ~3%。骨格 99% は抽象ガロア圏公理系/G-Set モデル/Tate 玩具 surrogate の消化率。実 IUT の支配項（スキーム論・実 π₁^ét・実 G_K・mono-anabelian 復元・tempered π₁）は環/体構造すら未定義でほぼ 0%。詳細 #48 コメント。",
       "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）+ 充満性（M221F）+ 2-out-of-3 同値束（M225F）+ ②無条件化（正則自己準同型スライス M229F）+ ③一般連結 X: 軌道生成を一般 X で無条件化（Galois 源/hendo 不要）・deck 不変性自動導出で残る外部入力を商普遍性 hquot 一点に純化・hquot 仮定下で一般 X 充満（M234F）+ hquot を G-Set モデルで discharge（ファイバー推移性=正規/ガロア被覆から hquot 構成・一点対象 deck=全 G の非自明ケースで任意群 G で充満性を無条件化 M245F）+ 中間正規被覆 G/core(H)→G/H で hquot discharge（M250F）+ hquot 境界を両方向 iff で完全特徴付け hfib⟺H₀⊴H（正規性が hquot の必要十分条件 M255F）。残: H₀⊴H だが H₀⋬G の Galois 対象充満性（G/H₀ が非 Galois）・単一 cofinal 塔 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
@@ -21,6 +26,8 @@
       "label": "柱B 局所類体論",
       "color": "#34d399",
       "progress_pct": 94,
+      "complete_pct": 12,
+      "complete_note": "実 IUT 完全証明率 ~12%。ℤ_p・ℤ_p^×・Teichmüller・μ_{p−1}≅(ℤ/p)^× は実。だが LCFT 本体（本物の p 進局所体・実 Galois 群・Galois コホモロジー=0・実相互律・実円分剛性）は模型/骨格/ゼロ。eisRing は形式冪級数商の模型環。詳細 #48。",
       "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射 M246F）+剰余核下界(M251F)+**塔全体の剰余体同型 O_n/(λ_n)≅ℤ/p 全 n（核=(λ_n) 全 n・一段割り算で n 帰納・f 側全レベル完成 M260F）**+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec・B-4 End(F)≅ℤ_p。残: 分岐指数 e 完全値 v(π_{n+1})=p·v(π_n)（ef の e 側・上界）・商環 O_n/(λ_n) 明示構成・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
@@ -29,6 +36,8 @@
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
       "progress_pct": 94,
+      "complete_pct": 14,
+      "complete_note": "実 IUT 完全証明率 ~14%（5 柱で最も本物に近い）。ℤ_p・ℚ_p 上 Lubin–Tate（存在/一意/End≅ℤ_p）・構成的 ℝ は genuine。だが本物の Frobenioid [FrdI/II]（ファイバー/realification/link）・測度論的 log-volume（対数殻・Haar 測度）・一般局所体 K は骨格/代理。詳細 #48。",
       "status": "構成的順序体 capstone ✅ + 幾何級数収束（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）+ 点集合 O-作用 総括 capstone（乗法 M247F+可換派生則 M252F+結合律 M257F）・log-volume 橋 nnqToQ 加法性(M236F)+効果性順序単調性(M240F)+ℚ≥0 順序 nnqLe と比較射順序両立 nnqToQ_mono（順序モノイド準同型に完成 M262F）。残: F-準同型分配律（M100F tier-L）・nnqToQ 乗法保存・順序線形性・O-加群型クラスインスタンス (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
@@ -37,6 +46,8 @@
       "label": "柱D 定理3.11",
       "color": "#f87171",
       "progress_pct": 68,
+      "complete_pct": 4,
+      "complete_note": "実 IUT 完全証明率 ~4%（IUT の本丸）。本物は言明形式化+条件付き還元(3.11⟹3.12⟹Szpiro)+二分法+局在のみ。多輻的アルゴリズム本体(Dβ-ω)=論争の当の係争点で数学界未解決・実 theta/log-link・log-Kummer・実 mono-theta 環境・実体積理論は未着手/代理。詳細 #48。",
       "status": "インターフェース側 capstone ✅ + D-β 形式化可能部分 完了 🔶 / D-α 完結（M220F）+ D-β 詳細化 7 段 Dβ-1〜7 全実装: 逆局在(M227F)・実数 threading(M228F)・frobVol(M230F)・前表現 arithPreRep（logq 可変で非空洞化 M238F）・不定性の作用 IndAction（(Ind2)単数実作用＝多輻性の芽 M241F・(Ind1)等重み置換 degZ 厳密保存+(Ind3)膨張+(Ind1)×(Ind2)同時作用 M254F・(Ind1)×(Ind2)×(Ind3) 完全同時作用 Bool³ 軌道で degZ 混合挙動 M259F）・crux 単一 Prop 化 ThetaLinkTransport(M244F)・**Dβ-7 鏡像定理 transportDeg_iff_cor312（crux が次数レベルで係争不等式 w1·n≤wssq に完全両側同値・点毎⊋次数の隔たり＝Dβ-ω が非空を機械検証・算術模型版独立性 M249F）**。crux は過不足なく係争不等式に同値と確定＝局在の最終鋭化。残: Dβ-ω 恒久的範囲外（＝多輻的アルゴリズム＝論争の当の係争点、log-Kummer 輸送・[AbsTopIII] 環復元・tempered π₁）・Ind1/Ind3 同時作用",
       "blurb": "多輻的アルゴリズムの構成本体。体積理論の器は ℝ 化済（M139）。IUTの全根拠が集約",
       "plain": "IUTの全根拠が集まる「本丸」。ここが核心で、いちばん未完成"
@@ -45,6 +56,8 @@
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
       "progress_pct": 97,
+      "complete_pct": 10,
+      "complete_note": "実 IUT 完全証明率 ~10%。形式テータ級数・cyclotomic rigidity の離散論理骨格は実構造。だが本物のエタールテータ関数 [EtTh]・三剛性の実証明・ガロア同変 p 進テータ値・tempered π₁ 商はゼロ/模型。テータ値は Laurent 単項式 q^{j²} の代数模型。詳細 #48。",
       "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)・テータ値 q^{j²} の Laurent 単項式実体化（M223F）・環写像対象（uMonHom・合成則 M232F）・テータ値の単元部分群/多ラベル積 thetaValProd の指数和合成/反射コセット（M237F）。残: q-展開収束・ガロア同変 p-進テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
