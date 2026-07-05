@@ -338,3 +338,4 @@ import IUT.TowerLaw
 import IUT.ConnectedEtale
 import IUT.ProfinitePi1
 import IUT.NormalSplitting
+import IUT.GaloisPi1Iso

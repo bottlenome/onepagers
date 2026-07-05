@@ -2057,6 +2057,8 @@ import IUT
 #print axioms IUT.profPi1_is_profinite
 #print axioms IUT.normSplit_splits
 #print axioms IUT.normSplit_normal_exists
+#print axioms IUT.galPi1_iso
+#print axioms IUT.galPi1_monodromy_full_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

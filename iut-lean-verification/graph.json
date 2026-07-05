@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 334,
-  "verified_theorem_total": 2048,
-  "choice_free_count": 271,
+  "module_count": 335,
+  "verified_theorem_total": 2050,
+  "choice_free_count": 272,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4105,6 +4105,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NormalSplitting.lean"
+    },
+    {
+      "id": "GaloisPi1Iso",
+      "label": "GaloisPi1Iso",
+      "milestone": "M286F",
+      "title": "Gal(L/K) → π₁ = Aut(F) の同型（忠実・全モノドロミー）",
+      "pillar": "A",
+      "decl_count": 33,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisPi1Iso.lean"
     }
   ],
   "edges": [
@@ -4215,6 +4227,10 @@
     {
       "source": "Composition",
       "target": "RootAdjunction"
+    },
+    {
+      "source": "ConnectedEtale",
+      "target": "GaloisPi1Iso"
     },
     {
       "source": "CosetGalois",
@@ -4958,6 +4974,10 @@
     },
     {
       "source": "GrothendieckGalois",
+      "target": "GaloisPi1Iso"
+    },
+    {
+      "source": "GrothendieckGalois",
       "target": "ProfinitePi1"
     },
     {
@@ -5543,6 +5563,10 @@
     {
       "source": "QuotientGroup",
       "target": "FieldAutGroup"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "GaloisPi1Iso"
     },
     {
       "source": "RamifiedBase",
