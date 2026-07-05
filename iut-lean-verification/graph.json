@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 333,
-  "verified_theorem_total": 2046,
-  "choice_free_count": 270,
+  "module_count": 334,
+  "verified_theorem_total": 2048,
+  "choice_free_count": 271,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4093,6 +4093,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ProfinitePi1.lean"
+    },
+    {
+      "id": "NormalSplitting",
+      "label": "NormalSplitting",
+      "milestone": "M284F",
+      "title": "分裂体・正規拡大: 柱A 実分裂体／正規拡大の 本物の先行建設",
+      "pillar": "A",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NormalSplitting.lean"
     }
   ],
   "edges": [
@@ -4383,6 +4395,10 @@
     {
       "source": "FactorTheorem",
       "target": "LambdaClassify"
+    },
+    {
+      "source": "FactorTheorem",
+      "target": "NormalSplitting"
     },
     {
       "source": "FactorTheorem",
@@ -5863,6 +5879,10 @@
     {
       "source": "Ring",
       "target": "Rationals"
+    },
+    {
+      "source": "RootAdjunction",
+      "target": "NormalSplitting"
     },
     {
       "source": "RootAdjunction",
