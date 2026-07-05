@@ -2049,6 +2049,8 @@ import IUT
 #print axioms IUT.galCorr_exists
 #print axioms IUT.sepEmb_card_eq_degree
 #print axioms IUT.sepEmb_card_eq_sepDegree
+#print axioms IUT.towerLaw_degree_mul
+#print axioms IUT.towerLaw_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

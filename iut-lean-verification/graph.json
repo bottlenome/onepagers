@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 330,
-  "verified_theorem_total": 2040,
-  "choice_free_count": 267,
+  "module_count": 331,
+  "verified_theorem_total": 2042,
+  "choice_free_count": 268,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4057,6 +4057,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SeparableEmbeddings.lean"
+    },
+    {
+      "id": "TowerLaw",
+      "label": "TowerLaw",
+      "milestone": "M281F",
+      "title": "体拡大の次数の塔法則 [M:K] = [M:L]·[L:K]",
+      "pillar": "A",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TowerLaw.lean"
     }
   ],
   "edges": [
@@ -4391,6 +4403,10 @@
     {
       "source": "FieldAutGroup",
       "target": "GrothendieckGalois"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "TowerLaw"
     },
     {
       "source": "FiniteEtaleAlgebra",
