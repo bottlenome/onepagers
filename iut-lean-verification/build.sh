@@ -1999,6 +1999,10 @@ import IUT
 #print axioms IUT.transportMirror
 #print axioms IUT.thetaValueProdBlockSwap_exists
 #print axioms IUT.thetaValProd_block_swap
+#print axioms IUT.formalGroupOModulePoint_exists
+#print axioms IUT.lt_point_scalar_assoc
+#print axioms IUT.eisResidueFieldIso_exists
+#print axioms IUT.eisRes_ker_eq_lambda
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

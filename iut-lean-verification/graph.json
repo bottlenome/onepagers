@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 303,
-  "verified_theorem_total": 1990,
-  "choice_free_count": 245,
+  "module_count": 305,
+  "verified_theorem_total": 1994,
+  "choice_free_count": 247,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3733,6 +3733,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueProdBlockSwap.lean"
+    },
+    {
+      "id": "FormalGroupOModulePoint",
+      "label": "FormalGroupOModulePoint",
+      "milestone": "M257F",
+      "title": "点集合上の O-加群構造の総括 capstone（柱C・O-加群構造の残件を 1 スライス）",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FormalGroupOModulePoint.lean"
+    },
+    {
+      "id": "LambdaTowerResidueKernelConverse",
+      "label": "LambdaTowerResidueKernelConverse",
+      "milestone": "M256F",
+      "title": "塔剰余射の核の逆包含",
+      "pillar": "B",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerResidueKernelConverse.lean"
     }
   ],
   "edges": [
@@ -3891,6 +3915,10 @@
     {
       "source": "EisDomain",
       "target": "LambdaTowerPiValGeom"
+    },
+    {
+      "source": "EisDomain",
+      "target": "LambdaTowerResidueKernelConverse"
     },
     {
       "source": "EisDomain",
@@ -4201,8 +4229,16 @@
       "target": "LambdaModule"
     },
     {
+      "source": "FormalGroupPointLaws",
+      "target": "FormalGroupOModulePoint"
+    },
+    {
       "source": "FormalGroupPointOAction",
       "target": "FormalGroupPointODerived"
+    },
+    {
+      "source": "FormalGroupPointODerived",
+      "target": "FormalGroupOModulePoint"
     },
     {
       "source": "FormalGroupPoints",
@@ -4613,6 +4649,10 @@
       "target": "LambdaTowerExactRamif"
     },
     {
+      "source": "LambdaTowerResidueKernel",
+      "target": "LambdaTowerResidueKernelConverse"
+    },
+    {
       "source": "LambdaTowerResidueSurj",
       "target": "LambdaTowerResidueKernel"
     },
@@ -4839,6 +4879,10 @@
     {
       "source": "PadicDivision",
       "target": "Binomial2"
+    },
+    {
+      "source": "PadicDivision",
+      "target": "LambdaTowerResidueKernelConverse"
     },
     {
       "source": "PadicDivision",
