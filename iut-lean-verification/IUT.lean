@@ -335,3 +335,4 @@ import IUT.IdempotentSpectrum
 import IUT.GaloisCorrespondence
 import IUT.SeparableEmbeddings
 import IUT.TowerLaw
+import IUT.ConnectedEtale

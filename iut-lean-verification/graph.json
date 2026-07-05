@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 331,
-  "verified_theorem_total": 2042,
-  "choice_free_count": 268,
+  "module_count": 332,
+  "verified_theorem_total": 2044,
+  "choice_free_count": 269,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4069,6 +4069,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TowerLaw.lean"
+    },
+    {
+      "id": "ConnectedEtale",
+      "label": "ConnectedEtale",
+      "milestone": "M279F",
+      "title": "連結（非分裂）有限エタール対象と π₁/Gal の",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConnectedEtale.lean"
     }
   ],
   "edges": [
@@ -4395,6 +4407,10 @@
     {
       "source": "Field",
       "target": "FiniteEtaleAlgebra"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "ConnectedEtale"
     },
     {
       "source": "FieldAutGroup",
@@ -4923,6 +4939,10 @@
     {
       "source": "HodgeTheater",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "IdempotentSpectrum",
+      "target": "ConnectedEtale"
     },
     {
       "source": "IndAction",
@@ -5834,6 +5854,10 @@
     },
     {
       "source": "SGA1",
+      "target": "ConnectedEtale"
+    },
+    {
+      "source": "SGA1",
       "target": "GaloisAxioms"
     },
     {
@@ -5887,6 +5911,10 @@
     {
       "source": "SeparablePoly",
       "target": "SeparableEmbeddings"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "ConnectedEtale"
     },
     {
       "source": "SimpleExtension",

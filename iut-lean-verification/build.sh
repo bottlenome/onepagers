@@ -2051,6 +2051,8 @@ import IUT
 #print axioms IUT.sepEmb_card_eq_sepDegree
 #print axioms IUT.towerLaw_degree_mul
 #print axioms IUT.towerLaw_exists
+#print axioms IUT.connEt_exists
+#print axioms IUT.connEt_nontrivial_action_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
