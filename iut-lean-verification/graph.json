@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 307,
-  "verified_theorem_total": 1998,
-  "choice_free_count": 247,
+  "module_count": 309,
+  "verified_theorem_total": 2001,
+  "choice_free_count": 248,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3781,6 +3781,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IndActionLabel.lean"
+    },
+    {
+      "id": "PillarAFullnessProgram",
+      "label": "PillarAFullnessProgram",
+      "milestone": "M261F",
+      "title": "柱A ③ 充満性プログラムの総括 capstone（柱A A-3α ③・束ね capstone）",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PillarAFullnessProgram.lean"
+    },
+    {
+      "id": "ThetaValueProdRangeSplit",
+      "label": "ThetaValueProdRangeSplit",
+      "milestone": "M263F",
+      "title": "テータ値多ラベル積の連続ラベル範囲の",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueProdRangeSplit.lean"
     }
   ],
   "edges": [
@@ -4425,6 +4449,10 @@
       "target": "NormalPairBoundary"
     },
     {
+      "source": "GSetCoequalizer",
+      "target": "PillarAFullnessProgram"
+    },
+    {
       "source": "GSetQuotient",
       "target": "CosetGalois"
     },
@@ -4475,6 +4503,10 @@
     {
       "source": "GaloisFullnessConnected",
       "target": "GSetCoequalizer"
+    },
+    {
+      "source": "GaloisFullnessConnected",
+      "target": "PillarAFullnessProgram"
     },
     {
       "source": "GaussPilot311",
@@ -4595,6 +4627,10 @@
     {
       "source": "IntRealBridge",
       "target": "RealObstruction"
+    },
+    {
+      "source": "IntermediateNormalCover",
+      "target": "PillarAFullnessProgram"
     },
     {
       "source": "LTErrorDivisible",
@@ -4907,6 +4943,10 @@
     {
       "source": "NatPrimeParts",
       "target": "PrimitiveRoot"
+    },
+    {
+      "source": "NormalPairBoundary",
+      "target": "PillarAFullnessProgram"
     },
     {
       "source": "PSFunctor",
@@ -5615,6 +5655,10 @@
     {
       "source": "ThetaValueProdLaws",
       "target": "ThetaValueAlgebra"
+    },
+    {
+      "source": "ThetaValueProdLaws",
+      "target": "ThetaValueProdRangeSplit"
     },
     {
       "source": "ThetaValueProdLaws",

@@ -2007,6 +2007,9 @@ import IUT
 #print axioms IUT.normalPair_hquot
 #print axioms IUT.indActionLabel_wellDefined
 #print axioms IUT.degZ_swap
+#print axioms IUT.pillarAFullnessProgram_exists
+#print axioms IUT.thetaValueProdRangeSplit_exists
+#print axioms IUT.thetaValProd_labelUpto_split
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
