@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 350,
-  "verified_theorem_total": 2080,
-  "choice_free_count": 287,
+  "module_count": 351,
+  "verified_theorem_total": 2082,
+  "choice_free_count": 288,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4297,6 +4297,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FractionalIdeal.lean"
+    },
+    {
+      "id": "RingOfIntegers",
+      "label": "RingOfIntegers",
+      "milestone": "M303F",
+      "title": "数体の整数環 O_K（ℤ の K における整閉包）",
+      "pillar": "A",
+      "decl_count": 37,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RingOfIntegers.lean"
     }
   ],
   "edges": [
@@ -4639,6 +4651,10 @@
     {
       "source": "Field",
       "target": "PrimeSpectrum"
+    },
+    {
+      "source": "Field",
+      "target": "RingOfIntegers"
     },
     {
       "source": "FieldAutGroup",

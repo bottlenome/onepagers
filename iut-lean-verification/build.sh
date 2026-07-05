@@ -2089,6 +2089,8 @@ import IUT
 #print axioms IUT.intExt_field_integrallyClosed
 #print axioms IUT.fracId_principal_is_invertible
 #print axioms IUT.fracId_mul_monoid
+#print axioms IUT.ringInt_Q_eq_Z_forward
+#print axioms IUT.ringInt_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
