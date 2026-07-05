@@ -289,3 +289,4 @@ import IUT.GaloisEquivalenceUncond
 import IUT.ThetaValueSubgroup
 import IUT.NNQtoQHom
 import IUT.LambdaTowerPiValBound
+import IUT.GaloisFullnessConnected

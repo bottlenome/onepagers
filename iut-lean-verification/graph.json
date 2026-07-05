@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 285,
-  "verified_theorem_total": 1954,
+  "module_count": 286,
+  "verified_theorem_total": 1956,
   "choice_free_count": 234,
   "nodes": [
     {
@@ -3513,6 +3513,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LambdaTowerPiValBound.lean"
+    },
+    {
+      "id": "GaloisFullnessConnected",
+      "label": "GaloisFullnessConnected",
+      "milestone": "M234F",
+      "title": "一般連結対象 X 上の充満性への降下（柱A A-3α ③）",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisFullnessConnected.lean"
     }
   ],
   "edges": [
@@ -4139,6 +4151,10 @@
     {
       "source": "GaloisFullness",
       "target": "GaloisEquivalenceBundle"
+    },
+    {
+      "source": "GaloisFullness",
+      "target": "GaloisFullnessConnected"
     },
     {
       "source": "GaussPilot311",

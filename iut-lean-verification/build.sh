@@ -1963,6 +1963,8 @@ import IUT
 #print axioms IUT.nnqToQ_add
 #print axioms IUT.lambdaTowerPiValBound_exists
 #print axioms IUT.towerGen_transition_val_exact_uncond
+#print axioms IUT.constTower_full_connected
+#print axioms IUT.constTower_orbitGenerated_connected
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
