@@ -322,3 +322,7 @@ import IUT.ProfiniteTopology
 import IUT.PolyFieldDivision
 import IUT.FractionField
 import IUT.FieldAutGroup
+import IUT.SeparablePoly
+import IUT.FiniteEtaleAlgebra
+import IUT.MinimalPolynomial
+import IUT.SimpleExtension

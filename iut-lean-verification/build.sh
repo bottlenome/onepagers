@@ -2028,6 +2028,12 @@ import IUT
 #print axioms IUT.Qp_is_field
 #print axioms IUT.galoisGroup_exists
 #print axioms IUT.fieldAutGroup_exists
+#print axioms IUT.separable_exists
+#print axioms IUT.finiteEtale_exists
+#print axioms IUT.finiteEtale_exists_rat
+#print axioms IUT.minPoly_exists
+#print axioms IUT.simpleExt_field
+#print axioms IUT.simpleExt_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

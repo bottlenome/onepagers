@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 318,
-  "verified_theorem_total": 2019,
-  "choice_free_count": 255,
+  "module_count": 322,
+  "verified_theorem_total": 2025,
+  "choice_free_count": 259,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -3913,6 +3913,54 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FieldAutGroup.lean"
+    },
+    {
+      "id": "SeparablePoly",
+      "label": "SeparablePoly",
+      "milestone": "M270F",
+      "title": "形式微分と分離多項式: 実エタール性/分離拡大の本物の先行建設",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SeparablePoly.lean"
+    },
+    {
+      "id": "FiniteEtaleAlgebra",
+      "label": "FiniteEtaleAlgebra",
+      "milestone": "M272F",
+      "title": "有限エタール K-代数の圏 FÉt(K) の対象と射",
+      "pillar": "A",
+      "decl_count": 38,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FiniteEtaleAlgebra.lean"
+    },
+    {
+      "id": "MinimalPolynomial",
+      "label": "MinimalPolynomial",
+      "milestone": "M273F",
+      "title": "代数的元と最小多項式",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MinimalPolynomial.lean"
+    },
+    {
+      "id": "SimpleExtension",
+      "label": "SimpleExtension",
+      "milestone": "M269F",
+      "title": "単純体拡大 K[X]/(f",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SimpleExtension.lean"
     }
   ],
   "edges": [
@@ -3999,6 +4047,10 @@
     {
       "source": "Boolean",
       "target": "Verdict"
+    },
+    {
+      "source": "CategoryTheory",
+      "target": "FiniteEtaleAlgebra"
     },
     {
       "source": "CategoryTheory",
@@ -4122,6 +4174,10 @@
     },
     {
       "source": "EisTowerRings",
+      "target": "SimpleExtension"
+    },
+    {
+      "source": "EisTowerRings",
       "target": "TowerTorsion"
     },
     {
@@ -4219,6 +4275,10 @@
     {
       "source": "Field",
       "target": "FieldAutGroup"
+    },
+    {
+      "source": "Field",
+      "target": "FiniteEtaleAlgebra"
     },
     {
       "source": "Finiteness",
@@ -5143,6 +5203,18 @@
     {
       "source": "PolyDivision",
       "target": "PolyFieldDivision"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "MinimalPolynomial"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "SeparablePoly"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "SimpleExtension"
     },
     {
       "source": "PolyIsomorphism",
