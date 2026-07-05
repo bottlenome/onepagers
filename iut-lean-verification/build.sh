@@ -2073,6 +2073,10 @@ import IUT
 #print axioms IUT.ringLocRf_f_unit
 #print axioms IUT.structSheaf_restrict_comp
 #print axioms IUT.structSheaf_global_eq_ring
+#print axioms IUT.fpts_ker_prime
+#print axioms IUT.fpts_kpoint_is_hom
+#print axioms IUT.globSec_recover_ring
+#print axioms IUT.globSec_recover_hom
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
