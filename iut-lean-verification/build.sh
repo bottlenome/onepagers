@@ -2053,6 +2053,8 @@ import IUT
 #print axioms IUT.towerLaw_exists
 #print axioms IUT.connEt_exists
 #print axioms IUT.connEt_nontrivial_action_exists
+#print axioms IUT.profPi1_exists
+#print axioms IUT.profPi1_is_profinite
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

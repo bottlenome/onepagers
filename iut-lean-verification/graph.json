@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 332,
-  "verified_theorem_total": 2044,
-  "choice_free_count": 269,
+  "module_count": 333,
+  "verified_theorem_total": 2046,
+  "choice_free_count": 270,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4081,6 +4081,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConnectedEtale.lean"
+    },
+    {
+      "id": "ProfinitePi1",
+      "label": "ProfinitePi1",
+      "milestone": "M287F",
+      "title": "pro-有限 π₁^ét = 有限ガロア群の逆極限 lim Gal(Lᵢ/K",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ProfinitePi1.lean"
     }
   ],
   "edges": [
@@ -4929,6 +4941,10 @@
       "target": "ConvergenceCapstone"
     },
     {
+      "source": "GrothendieckGalois",
+      "target": "ProfinitePi1"
+    },
+    {
       "source": "HodgeTheater",
       "target": "FlUnits"
     },
@@ -5503,6 +5519,10 @@
     {
       "source": "Profinite",
       "target": "Topology"
+    },
+    {
+      "source": "ProfiniteTopology",
+      "target": "ProfinitePi1"
     },
     {
       "source": "QuotientGroup",
