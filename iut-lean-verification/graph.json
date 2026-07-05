@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 339,
-  "verified_theorem_total": 2058,
-  "choice_free_count": 276,
+  "module_count": 340,
+  "verified_theorem_total": 2060,
+  "choice_free_count": 277,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4165,6 +4165,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZariskiConnected.lean"
+    },
+    {
+      "id": "PrimeSpectrum",
+      "label": "PrimeSpectrum",
+      "milestone": "M289F",
+      "title": "素スペクトル Spec R と Zariski 位相",
+      "pillar": "A",
+      "decl_count": 37,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimeSpectrum.lean"
     }
   ],
   "edges": [
@@ -4499,6 +4511,10 @@
     {
       "source": "Field",
       "target": "FiniteEtaleAlgebra"
+    },
+    {
+      "source": "Field",
+      "target": "PrimeSpectrum"
     },
     {
       "source": "FieldAutGroup",

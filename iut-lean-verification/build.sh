@@ -2067,6 +2067,8 @@ import IUT
 #print axioms IUT.specFun_exists
 #print axioms IUT.zarConn_idem_clopen
 #print axioms IUT.zarConn_iff_idem
+#print axioms IUT.primeSpec_D_mul
+#print axioms IUT.primeSpec_field_point
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
