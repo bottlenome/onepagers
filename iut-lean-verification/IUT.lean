@@ -331,3 +331,4 @@ import IUT.EvaluationHom
 import IUT.RootAdjunction
 import IUT.GrothendieckGalois
 import IUT.AlgebraTensor
+import IUT.IdempotentSpectrum
