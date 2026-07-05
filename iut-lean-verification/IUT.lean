@@ -306,3 +306,4 @@ import IUT.IntermediateNormalCover
 import IUT.FormalGroupPointODerived
 import IUT.LambdaTowerResidueKernel
 import IUT.TransportMirror
+import IUT.ThetaValueProdBlockSwap

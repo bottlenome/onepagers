@@ -1997,6 +1997,8 @@ import IUT
 #print axioms IUT.transport_strictly_stronger
 #print axioms IUT.arith_mirror_independent
 #print axioms IUT.transportMirror
+#print axioms IUT.thetaValueProdBlockSwap_exists
+#print axioms IUT.thetaValProd_block_swap
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
