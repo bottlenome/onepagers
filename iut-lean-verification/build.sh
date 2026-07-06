@@ -2125,6 +2125,12 @@ import IUT
 #print axioms IUT.thLtor_exists
 #print axioms IUT.thPilot_total_closed
 #print axioms IUT.thPilot_cubic_bound
+#print axioms IUT.kummer_cocycle
+#print axioms IUT.kummer_quotient_group
+#print axioms IUT.mThRig_constMult_rigid
+#print axioms IUT.mThRig_exists
+#print axioms IUT.logShell_smul_mem
+#print axioms IUT.logShellReal_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

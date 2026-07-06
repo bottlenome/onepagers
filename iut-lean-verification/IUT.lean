@@ -372,3 +372,6 @@ import IUT.AlgClosureColimit
 import IUT.FieldCompletion
 import IUT.ThetaValueLtor
 import IUT.ThetaPilotRealVolume
+import IUT.KummerTheory
+import IUT.MonoThetaRigidity
+import IUT.LogShellReal

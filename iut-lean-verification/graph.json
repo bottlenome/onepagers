@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 368,
-  "verified_theorem_total": 2116,
-  "choice_free_count": 305,
+  "module_count": 371,
+  "verified_theorem_total": 2122,
+  "choice_free_count": 308,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4513,6 +4513,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaPilotRealVolume.lean"
+    },
+    {
+      "id": "KummerTheory",
+      "label": "KummerTheory",
+      "milestone": "M320F",
+      "title": "Kummer 理論 K^×/(K^×)ⁿ と Kummer 写像",
+      "pillar": "B",
+      "decl_count": 34,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerTheory.lean"
+    },
+    {
+      "id": "MonoThetaRigidity",
+      "label": "MonoThetaRigidity",
+      "milestone": "M323F",
+      "title": "mono-theta 環境の定数倍剛性: テータ値の比 Θ(q,u_i",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaRigidity.lean"
+    },
+    {
+      "id": "LogShellReal",
+      "label": "LogShellReal",
+      "milestone": "M321F",
+      "title": "本物の対数殻: ℤ_p 上の O_v-加群 log-shell",
+      "pillar": "C",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogShellReal.lean"
     }
   ],
   "edges": [
@@ -4887,6 +4923,10 @@
     {
       "source": "FieldAutGroup",
       "target": "GrothendieckGalois"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "KummerTheory"
     },
     {
       "source": "FieldAutGroup",
@@ -6645,6 +6685,10 @@
       "target": "MonoThetaWitness"
     },
     {
+      "source": "TateTorsion",
+      "target": "KummerTheory"
+    },
+    {
       "source": "Teichmuller",
       "target": "RootsOfUnity"
     },
@@ -6762,6 +6806,10 @@
     },
     {
       "source": "ThetaValueLtor",
+      "target": "MonoThetaRigidity"
+    },
+    {
+      "source": "ThetaValueLtor",
       "target": "ThetaPilotRealVolume"
     },
     {
@@ -6847,6 +6895,10 @@
     {
       "source": "UnitFiltration",
       "target": "Fermat"
+    },
+    {
+      "source": "UnitFiltration",
+      "target": "LogShellReal"
     },
     {
       "source": "ValuationRing",
