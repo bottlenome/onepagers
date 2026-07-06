@@ -391,3 +391,6 @@ import IUT.CyclotomeRecovery
 import IUT.NormGroup
 import IUT.ThetaCyclotomicRigidity
 import IUT.HaarMeasureZp
+import IUT.MeasureLogVolume
+import IUT.Hilbert90
+import IUT.IndeterminacyFull

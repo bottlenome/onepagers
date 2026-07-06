@@ -2163,6 +2163,12 @@ import IUT
 #print axioms IUT.thCyc_three_rigidities
 #print axioms IUT.haar_additive
 #print axioms IUT.haar_ball_closed
+#print axioms IUT.mlv_additive
+#print axioms IUT.mlv_from_measure
+#print axioms IUT.hil90_theorem
+#print axioms IUT.hil90_H1_trivial
+#print axioms IUT.indF_simultaneous_real
+#print axioms IUT.indF_crux_is_hypothesis
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
