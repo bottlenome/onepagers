@@ -364,3 +364,5 @@ import IUT.PicardDivisor
 import IUT.EllipticJInvariant
 import IUT.ThetaJacobi
 import IUT.LogVolume
+import IUT.TateCurve
+import IUT.LocalFieldRing

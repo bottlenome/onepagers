@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 360,
-  "verified_theorem_total": 2100,
-  "choice_free_count": 297,
+  "module_count": 362,
+  "verified_theorem_total": 2104,
+  "choice_free_count": 299,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4417,6 +4417,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolume.lean"
+    },
+    {
+      "id": "TateCurve",
+      "label": "TateCurve",
+      "milestone": "M309F",
+      "title": "Tate 曲線 E_q = K^×/q^ℤ（IUT の中心対象）",
+      "pillar": "A",
+      "decl_count": 32,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateCurve.lean"
+    },
+    {
+      "id": "LocalFieldRing",
+      "label": "LocalFieldRing",
+      "milestone": "M311F",
+      "title": "完備化 K̂ の環化・体核（局所類体論＝柱 B の本物の先行建設）",
+      "pillar": "B",
+      "decl_count": 41,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalFieldRing.lean"
     }
   ],
   "edges": [
@@ -5577,6 +5601,10 @@
       "target": "PrincipalUnits"
     },
     {
+      "source": "LocalFieldCompletion",
+      "target": "LocalFieldRing"
+    },
+    {
       "source": "LogKummer",
       "target": "Multiradial311"
     },
@@ -5983,6 +6011,10 @@
     {
       "source": "QuotientGroup",
       "target": "PicardDivisor"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "TateCurve"
     },
     {
       "source": "RamifiedBase",
@@ -6707,6 +6739,10 @@
     {
       "source": "ValuationRing",
       "target": "LocalFieldCompletion"
+    },
+    {
+      "source": "ValuationRing",
+      "target": "TateCurve"
     },
     {
       "source": "VolumeModel",

@@ -2109,6 +2109,10 @@ import IUT
 #print axioms IUT.thJac_exists
 #print axioms IUT.logVol_degree_isHom
 #print axioms IUT.logVol_effective_nonneg
+#print axioms IUT.tate_point_period
+#print axioms IUT.tateCurve_exists
+#print axioms IUT.locRing_completion_isCRing
+#print axioms IUT.locRing_embed_isHom
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
