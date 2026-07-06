@@ -2173,6 +2173,14 @@ import IUT
 #print axioms IUT.weil_nondegenerate
 #print axioms IUT.galTh_equivariant
 #print axioms IUT.galTh_norm_qpower
+#print axioms IUT.cruxR_is_hypothesis
+#print axioms IUT.cruxR_mirror
+#print axioms IUT.tmt_act_transitive
+#print axioms IUT.tmt_norm_qpower
+#print axioms IUT.wge_equivariant
+#print axioms IUT.kex_iso_injective
+#print axioms IUT.arch_scaling
+#print axioms IUT.arch_logvol_scaling
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

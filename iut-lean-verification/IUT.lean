@@ -396,3 +396,8 @@ import IUT.Hilbert90
 import IUT.IndeterminacyFull
 import IUT.WeilPairing
 import IUT.GaloisTheta
+import IUT.CruxInequalityReal
+import IUT.ThetaMuTorsor
+import IUT.WeilGaloisEquiv
+import IUT.KummerExact
+import IUT.ArchHaarVolume
