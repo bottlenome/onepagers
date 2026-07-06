@@ -2147,6 +2147,12 @@ import IUT
 #print axioms IUT.absF_absTopIII
 #print axioms IUT.locRec_isHom
 #print axioms IUT.locRec_prime_frob
+#print axioms IUT.frobC_is_category
+#print axioms IUT.frobC_degree_mult
+#print axioms IUT.indR_ind1_invariant
+#print axioms IUT.indR_multiradial_seed
+#print axioms IUT.discRig_period_exponent_isZ
+#print axioms IUT.discRig_rigidity
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

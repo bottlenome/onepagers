@@ -383,3 +383,6 @@ import IUT.ThetaLinkReal
 import IUT.GaloisCohomologyH1
 import IUT.AbsTopFieldRecover
 import IUT.LocalReciprocity
+import IUT.FrobenioidCategory
+import IUT.IndeterminacyRealAction
+import IUT.DiscreteRigidity
