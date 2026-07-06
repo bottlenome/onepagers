@@ -2161,6 +2161,8 @@ import IUT
 #print axioms IUT.normG_artin_kernel_link
 #print axioms IUT.thCyc_rigIso_faithful
 #print axioms IUT.thCyc_three_rigidities
+#print axioms IUT.haar_additive
+#print axioms IUT.haar_ball_closed
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

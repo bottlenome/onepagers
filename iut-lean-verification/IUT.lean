@@ -390,3 +390,4 @@ import IUT.LogLinkReal
 import IUT.CyclotomeRecovery
 import IUT.NormGroup
 import IUT.ThetaCyclotomicRigidity
+import IUT.HaarMeasureZp

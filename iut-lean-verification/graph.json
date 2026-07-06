@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 386,
-  "verified_theorem_total": 2152,
+  "module_count": 387,
+  "verified_theorem_total": 2154,
   "choice_free_count": 321,
   "nodes": [
     {
@@ -4735,6 +4735,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCyclotomicRigidity.lean"
+    },
+    {
+      "id": "HaarMeasureZp",
+      "label": "HaarMeasureZp",
+      "milestone": "M336F",
+      "title": "HaarMeasureZp",
+      "pillar": "C",
+      "decl_count": 29,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HaarMeasureZp.lean"
     }
   ],
   "edges": [
@@ -5988,6 +6000,10 @@
     },
     {
       "source": "LogShellReal",
+      "target": "HaarMeasureZp"
+    },
+    {
+      "source": "LogShellReal",
       "target": "LogLinkReal"
     },
     {
@@ -6597,6 +6613,10 @@
     {
       "source": "RealMaxLaws",
       "target": "RealFieldCapstone"
+    },
+    {
+      "source": "RealMul",
+      "target": "HaarMeasureZp"
     },
     {
       "source": "RealMul",
