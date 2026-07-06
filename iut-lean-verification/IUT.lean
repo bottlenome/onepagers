@@ -401,3 +401,7 @@ import IUT.ThetaMuTorsor
 import IUT.WeilGaloisEquiv
 import IUT.KummerExact
 import IUT.ArchHaarVolume
+import IUT.SzpiroReduction
+import IUT.ProductFormula
+import IUT.KummerCharReal
+import IUT.ThetaKummerClass

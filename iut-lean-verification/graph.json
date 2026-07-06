@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 397,
-  "verified_theorem_total": 2172,
-  "choice_free_count": 328,
+  "module_count": 401,
+  "verified_theorem_total": 2180,
+  "choice_free_count": 330,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4867,6 +4867,54 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArchHaarVolume.lean"
+    },
+    {
+      "id": "SzpiroReduction",
+      "label": "SzpiroReduction",
+      "milestone": "M352F",
+      "title": "SzpiroReduction",
+      "pillar": "D",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/SzpiroReduction.lean"
+    },
+    {
+      "id": "ProductFormula",
+      "label": "ProductFormula",
+      "milestone": "M351F",
+      "title": "ProductFormula",
+      "pillar": "C",
+      "decl_count": 27,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ProductFormula.lean"
+    },
+    {
+      "id": "KummerCharReal",
+      "label": "KummerCharReal",
+      "milestone": "M349F",
+      "title": "KummerCharReal",
+      "pillar": "A",
+      "decl_count": 34,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerCharReal.lean"
+    },
+    {
+      "id": "ThetaKummerClass",
+      "label": "ThetaKummerClass",
+      "milestone": "M353F",
+      "title": "ThetaKummerClass",
+      "pillar": "E",
+      "decl_count": 29,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaKummerClass.lean"
     }
   ],
   "edges": [
@@ -4933,6 +4981,10 @@
     {
       "source": "ApartInv",
       "target": "RealGeom"
+    },
+    {
+      "source": "ArchHaarVolume",
+      "target": "ProductFormula"
     },
     {
       "source": "ArithPilot",
@@ -5013,6 +5065,10 @@
     {
       "source": "CosetGalois",
       "target": "NormalPairBoundary"
+    },
+    {
+      "source": "CruxInequalityReal",
+      "target": "SzpiroReduction"
     },
     {
       "source": "CyclicUnits",
@@ -5731,6 +5787,10 @@
       "target": "Hilbert90"
     },
     {
+      "source": "GaloisCohomologyH1",
+      "target": "ThetaKummerClass"
+    },
+    {
       "source": "GaloisCorrespondence",
       "target": "AlgClosureColimit"
     },
@@ -5761,6 +5821,14 @@
     {
       "source": "GaloisFullnessConnected",
       "target": "PillarAFullnessProgram"
+    },
+    {
+      "source": "GaloisTheta",
+      "target": "KummerCharReal"
+    },
+    {
+      "source": "GaloisTheta",
+      "target": "ThetaKummerClass"
     },
     {
       "source": "GaloisTheta",
@@ -5953,6 +6021,14 @@
     {
       "source": "IntermediateNormalCover",
       "target": "PillarAFullnessProgram"
+    },
+    {
+      "source": "KummerExact",
+      "target": "ThetaKummerClass"
+    },
+    {
+      "source": "KummerTheory",
+      "target": "KummerCharReal"
     },
     {
       "source": "KummerTheory",
@@ -6212,11 +6288,19 @@
     },
     {
       "source": "LogVolume",
+      "target": "ProductFormula"
+    },
+    {
+      "source": "LogVolume",
       "target": "ThetaPilotRealVolume"
     },
     {
       "source": "LogVolumeArch",
       "target": "ArchHaarVolume"
+    },
+    {
+      "source": "LogVolumeArch",
+      "target": "ProductFormula"
     },
     {
       "source": "LubinTateExists",

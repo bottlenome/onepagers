@@ -2181,6 +2181,14 @@ import IUT
 #print axioms IUT.kex_iso_injective
 #print axioms IUT.arch_scaling
 #print axioms IUT.arch_logvol_scaling
+#print axioms IUT.szp_cor312_implies_szpiro
+#print axioms IUT.szp_full_chain
+#print axioms IUT.pf_product_formula
+#print axioms IUT.pf_degree_hom
+#print axioms IUT.kcr_cocycle
+#print axioms IUT.kcr_supplies_galTh
+#print axioms IUT.tkc_is_cocycle
+#print axioms IUT.tkc_class_well_defined
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
