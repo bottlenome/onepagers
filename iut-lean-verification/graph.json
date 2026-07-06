@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 357,
-  "verified_theorem_total": 2094,
-  "choice_free_count": 294,
+  "module_count": 358,
+  "verified_theorem_total": 2096,
+  "choice_free_count": 295,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4381,6 +4381,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PicardDivisor.lean"
+    },
+    {
+      "id": "EllipticJInvariant",
+      "label": "EllipticJInvariant",
+      "milestone": "M310F",
+      "title": "楕円曲線の j-不変量と同型分類の核",
+      "pillar": "A",
+      "decl_count": 33,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EllipticJInvariant.lean"
     }
   ],
   "edges": [
@@ -4655,6 +4667,10 @@
     {
       "source": "EisensteinUpper",
       "target": "TorsionResidue"
+    },
+    {
+      "source": "EllipticCurve",
+      "target": "EllipticJInvariant"
     },
     {
       "source": "EtaleTheta",

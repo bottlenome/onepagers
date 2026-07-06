@@ -361,3 +361,4 @@ import IUT.LocalFieldCompletion
 import IUT.EllipticCurve
 import IUT.EtaleThetaReal
 import IUT.PicardDivisor
+import IUT.EllipticJInvariant

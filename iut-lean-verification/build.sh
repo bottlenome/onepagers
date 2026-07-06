@@ -2103,6 +2103,8 @@ import IUT
 #print axioms IUT.etThReal_exists
 #print axioms IUT.picDiv_principal_isHom
 #print axioms IUT.picDiv_exists
+#print axioms IUT.ellJ_iso_invariant
+#print axioms IUT.ellJ_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
