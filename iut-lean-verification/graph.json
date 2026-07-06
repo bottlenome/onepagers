@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 401,
-  "verified_theorem_total": 2180,
-  "choice_free_count": 330,
+  "module_count": 402,
+  "verified_theorem_total": 2182,
+  "choice_free_count": 331,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4915,6 +4915,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaKummerClass.lean"
+    },
+    {
+      "id": "CupProduct",
+      "label": "CupProduct",
+      "milestone": "M350F",
+      "title": "CupProduct",
+      "pillar": "B",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CupProduct.lean"
     }
   ],
   "edges": [
@@ -5784,6 +5796,10 @@
     },
     {
       "source": "GaloisCohomologyH1",
+      "target": "CupProduct"
+    },
+    {
+      "source": "GaloisCohomologyH1",
       "target": "Hilbert90"
     },
     {
@@ -6633,6 +6649,10 @@
     {
       "source": "PrincipalUnitGroup",
       "target": "ZpUnitDecomp"
+    },
+    {
+      "source": "PrincipalUnits",
+      "target": "CupProduct"
     },
     {
       "source": "PrincipalUnits",

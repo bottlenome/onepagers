@@ -405,3 +405,4 @@ import IUT.SzpiroReduction
 import IUT.ProductFormula
 import IUT.KummerCharReal
 import IUT.ThetaKummerClass
+import IUT.CupProduct

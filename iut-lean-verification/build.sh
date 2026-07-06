@@ -2189,6 +2189,8 @@ import IUT
 #print axioms IUT.kcr_supplies_galTh
 #print axioms IUT.tkc_is_cocycle
 #print axioms IUT.tkc_class_well_defined
+#print axioms IUT.cup_cocycle
+#print axioms IUT.cup_coboundary
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
