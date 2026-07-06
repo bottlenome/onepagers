@@ -376,3 +376,8 @@ import IUT.KummerTheory
 import IUT.MonoThetaRigidity
 import IUT.LogShellReal
 import IUT.CyclotomicRigidity
+import IUT.AbsTopMultAdd
+import IUT.GaussPilotRealVolume
+import IUT.LogKummerReal
+import IUT.ThetaLinkReal
+import IUT.GaloisCohomologyH1

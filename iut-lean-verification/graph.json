@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 372,
-  "verified_theorem_total": 2124,
-  "choice_free_count": 309,
+  "module_count": 377,
+  "verified_theorem_total": 2134,
+  "choice_free_count": 314,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4561,6 +4561,68 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicRigidity.lean"
+    },
+    {
+      "id": "AbsTopMultAdd",
+      "label": "AbsTopMultAdd",
+      "milestone": "M325F",
+      "title": "柱A: mono-anabelian 本丸 AbsTopIII の核。 体の**乗法構造 K^× ＋離散付値 v から加法構造を復元する**本物の 1 ステップ",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbsTopMultAdd.lean"
+    },
+    {
+      "id": "GaussPilotRealVolume",
+      "label": "GaussPilotRealVolume",
+      "milestone": "M324F",
+      "title": "柱D 本丸の横展開: **ガウスパイロット log-volume の実対象化＝定理3.11 の体積 RHS を m202fVol toy から実 deg_ℝ（Arakelov 局所次数",
+      "pillar": "D",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussPilotRealVolume.lean"
+    },
+    {
+      "id": "LogKummerReal",
+      "label": "LogKummerReal",
+      "milestone": "M327F",
+      "title": "本物の log-Kummer 対応: Frobenius-like 加法 log ⇄ étale-like 乗法単数群",
+      "pillar": "C",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogKummerReal.lean"
+    },
+    {
+      "id": "ThetaLinkReal",
+      "label": "ThetaLinkReal",
+      "milestone": "M328F",
+      "title": "柱E テータの横展開: **theta-link を実テータ値で本物化 ── テータ値 Θ(q,u_j",
+      "pillar": "E",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[AbsTopIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkReal.lean"
+    },
+    {
+      "id": "GaloisCohomologyH1",
+      "label": "GaloisCohomologyH1",
+      "milestone": "M326F",
+      "title": "群コホモロジー H¹(G_K, M) の完全構造",
+      "pillar": "B",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisCohomologyH1.lean"
     }
   ],
   "edges": [
@@ -4707,6 +4769,14 @@
     {
       "source": "CyclicUnits",
       "target": "MuP1Cyclic"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "AbsTopMultAdd"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "GaloisCohomologyH1"
     },
     {
       "source": "CyclotomicSync",
@@ -5765,6 +5835,10 @@
       "target": "LogKummer"
     },
     {
+      "source": "LogThetaLattice",
+      "target": "ThetaLinkReal"
+    },
+    {
       "source": "LogVolBridge",
       "target": "LogVolEffMono"
     },
@@ -6159,6 +6233,10 @@
     {
       "source": "QuotientGroup",
       "target": "FieldAutGroup"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "GaloisCohomologyH1"
     },
     {
       "source": "QuotientGroup",
@@ -6709,6 +6787,10 @@
       "target": "KummerTheory"
     },
     {
+      "source": "TateTorsion",
+      "target": "LogKummerReal"
+    },
+    {
       "source": "Teichmuller",
       "target": "RootsOfUnity"
     },
@@ -6787,6 +6869,14 @@
     {
       "source": "ThetaPM",
       "target": "MonoThetaEnv"
+    },
+    {
+      "source": "ThetaPilotRealVolume",
+      "target": "GaussPilotRealVolume"
+    },
+    {
+      "source": "ThetaPilotRealVolume",
+      "target": "ThetaLinkReal"
     },
     {
       "source": "ThetaReflection",
@@ -6897,6 +6987,10 @@
       "target": "TorsionResidue"
     },
     {
+      "source": "TransportMirror",
+      "target": "GaussPilotRealVolume"
+    },
+    {
       "source": "TriSquare",
       "target": "ThetaValueEval"
     },
@@ -6918,7 +7012,15 @@
     },
     {
       "source": "UnitFiltration",
+      "target": "LogKummerReal"
+    },
+    {
+      "source": "UnitFiltration",
       "target": "LogShellReal"
+    },
+    {
+      "source": "ValuationRing",
+      "target": "AbsTopMultAdd"
     },
     {
       "source": "ValuationRing",

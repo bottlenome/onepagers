@@ -2133,6 +2133,16 @@ import IUT
 #print axioms IUT.logShellReal_exists
 #print axioms IUT.cycRig_char_isHom
 #print axioms IUT.cycRig_rigidity
+#print axioms IUT.absTop_add_from_one_add
+#print axioms IUT.absTop_add_from_mult
+#print axioms IUT.gPilot_theorem311_conditional
+#print axioms IUT.gPilot_crux_is_hypothesis
+#print axioms IUT.logKum_frob_etale
+#print axioms IUT.logKum_commute
+#print axioms IUT.thLink_map_eq_qparam
+#print axioms IUT.thLink_crux_stage
+#print axioms IUT.galH1_quotient_isGroup
+#print axioms IUT.galH1_trivial_action
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
