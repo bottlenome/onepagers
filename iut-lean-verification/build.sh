@@ -2201,6 +2201,12 @@ import IUT
 #print axioms IUT.abc_full_chain
 #print axioms IUT.cgc_graded_comm
 #print axioms IUT.cgc_supplies_hypothesis
+#print axioms IUT.fab_degrees_agree
+#print axioms IUT.fab_deg_additive
+#print axioms IUT.brau_is_abelian
+#print axioms IUT.brau_split_iff
+#print axioms IUT.mrc_compare_iso
+#print axioms IUT.mrc_multiradial_seed
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

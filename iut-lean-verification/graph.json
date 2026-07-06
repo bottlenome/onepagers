@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 407,
-  "verified_theorem_total": 2192,
-  "choice_free_count": 334,
+  "module_count": 410,
+  "verified_theorem_total": 2198,
+  "choice_free_count": 336,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4987,6 +4987,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CupGradedComm.lean"
+    },
+    {
+      "id": "FrobArakelovBridge",
+      "label": "FrobArakelovBridge",
+      "milestone": "M361F",
+      "title": "FrobArakelovBridge",
+      "pillar": "C",
+      "decl_count": 9,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobArakelovBridge.lean"
+    },
+    {
+      "id": "LocalBrauer",
+      "label": "LocalBrauer",
+      "milestone": "M360F",
+      "title": "LocalBrauer",
+      "pillar": "B",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalBrauer.lean"
+    },
+    {
+      "id": "MultiradialCompare",
+      "label": "MultiradialCompare",
+      "milestone": "M362F",
+      "title": "MultiradialCompare",
+      "pillar": "D",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialCompare.lean"
     }
   ],
   "edges": [
@@ -5053,6 +5089,10 @@
     {
       "source": "ApartInv",
       "target": "RealGeom"
+    },
+    {
+      "source": "ArakelovDivisor",
+      "target": "FrobArakelovBridge"
     },
     {
       "source": "ArchHaarVolume",
@@ -5145,6 +5185,10 @@
     {
       "source": "CupProduct",
       "target": "CupGradedComm"
+    },
+    {
+      "source": "CupProduct",
+      "target": "LocalBrauer"
     },
     {
       "source": "CyclicUnits",
@@ -5747,6 +5791,10 @@
       "target": "PolyIsomorphism"
     },
     {
+      "source": "FrobenioidCategory",
+      "target": "FrobArakelovBridge"
+    },
+    {
       "source": "FrobenioidModel",
       "target": "FrobenioidVolume"
     },
@@ -6021,6 +6069,10 @@
     {
       "source": "Hilbert90",
       "target": "KummerExact"
+    },
+    {
+      "source": "Hilbert90",
+      "target": "LocalBrauer"
     },
     {
       "source": "HodgeTheater",
@@ -6315,6 +6367,14 @@
       "target": "LogLinkReal"
     },
     {
+      "source": "LogKummerReal",
+      "target": "MultiradialCompare"
+    },
+    {
+      "source": "LogLinkReal",
+      "target": "MultiradialCompare"
+    },
+    {
       "source": "LogShell",
       "target": "Multiradial311"
     },
@@ -6329,6 +6389,10 @@
     {
       "source": "LogShellReal",
       "target": "LogLinkReal"
+    },
+    {
+      "source": "LogShellReal",
+      "target": "MultiradialCompare"
     },
     {
       "source": "LogThetaLattice",

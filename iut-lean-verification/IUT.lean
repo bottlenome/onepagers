@@ -411,3 +411,6 @@ import IUT.WeilKummerDuality
 import IUT.ArakelovDivisor
 import IUT.ABCConsequence
 import IUT.CupGradedComm
+import IUT.FrobArakelovBridge
+import IUT.LocalBrauer
+import IUT.MultiradialCompare
