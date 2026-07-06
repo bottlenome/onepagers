@@ -410,3 +410,4 @@ import IUT.ThetaKummerRigidity
 import IUT.WeilKummerDuality
 import IUT.ArakelovDivisor
 import IUT.ABCConsequence
+import IUT.CupGradedComm

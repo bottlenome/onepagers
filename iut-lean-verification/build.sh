@@ -2199,6 +2199,8 @@ import IUT
 #print axioms IUT.ard_principal_degree_zero
 #print axioms IUT.abc_fermat_exponent_bounded
 #print axioms IUT.abc_full_chain
+#print axioms IUT.cgc_graded_comm
+#print axioms IUT.cgc_supplies_hypothesis
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

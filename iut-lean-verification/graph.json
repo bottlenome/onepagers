@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 406,
-  "verified_theorem_total": 2190,
+  "module_count": 407,
+  "verified_theorem_total": 2192,
   "choice_free_count": 334,
   "nodes": [
     {
@@ -4975,6 +4975,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ABCConsequence.lean"
+    },
+    {
+      "id": "CupGradedComm",
+      "label": "CupGradedComm",
+      "milestone": "M355F",
+      "title": "CupGradedComm",
+      "pillar": "B",
+      "decl_count": 11,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CupGradedComm.lean"
     }
   ],
   "edges": [
@@ -5129,6 +5141,10 @@
     {
       "source": "CruxInequalityReal",
       "target": "SzpiroReduction"
+    },
+    {
+      "source": "CupProduct",
+      "target": "CupGradedComm"
     },
     {
       "source": "CyclicUnits",
