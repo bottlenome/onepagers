@@ -2191,6 +2191,14 @@ import IUT
 #print axioms IUT.tkc_class_well_defined
 #print axioms IUT.cup_cocycle
 #print axioms IUT.cup_coboundary
+#print axioms IUT.tkr_class_rigid
+#print axioms IUT.tkr_no_cyclotomic_indeterminacy
+#print axioms IUT.wkd_dual_injective
+#print axioms IUT.wkd_kummer_compat
+#print axioms IUT.ard_deg_hom
+#print axioms IUT.ard_principal_degree_zero
+#print axioms IUT.abc_fermat_exponent_bounded
+#print axioms IUT.abc_full_chain
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

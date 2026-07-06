@@ -406,3 +406,7 @@ import IUT.ProductFormula
 import IUT.KummerCharReal
 import IUT.ThetaKummerClass
 import IUT.CupProduct
+import IUT.ThetaKummerRigidity
+import IUT.WeilKummerDuality
+import IUT.ArakelovDivisor
+import IUT.ABCConsequence
