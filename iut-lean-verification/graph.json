@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 377,
-  "verified_theorem_total": 2134,
-  "choice_free_count": 314,
+  "module_count": 379,
+  "verified_theorem_total": 2138,
+  "choice_free_count": 316,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4623,9 +4623,37 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisCohomologyH1.lean"
+    },
+    {
+      "id": "AbsTopFieldRecover",
+      "label": "AbsTopFieldRecover",
+      "milestone": "M329F",
+      "title": "柱A: mono-anabelian AbsTopIII 体復元の**完成**。 M325F が「乗法群 K^× ＋離散付値 v から加法 x+y=x·(1+x⁻¹y",
+      "pillar": "A",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbsTopFieldRecover.lean"
+    },
+    {
+      "id": "LocalReciprocity",
+      "label": "LocalReciprocity",
+      "milestone": "M330F",
+      "title": "局所相互律 Artin 写像 rec : K^× → Gal(K^ab/K",
+      "pillar": "B",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalReciprocity.lean"
     }
   ],
   "edges": [
+    {
+      "source": "AbsTopMultAdd",
+      "target": "AbsTopFieldRecover"
+    },
     {
       "source": "AbstractEssSurj",
       "target": "AbstractEssSurjSum"
@@ -5361,6 +5389,10 @@
     {
       "source": "FrobeniusGen",
       "target": "Frobenius2"
+    },
+    {
+      "source": "FullReciprocity",
+      "target": "LocalReciprocity"
     },
     {
       "source": "FullReciprocity",

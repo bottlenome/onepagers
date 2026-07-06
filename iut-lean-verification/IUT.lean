@@ -381,3 +381,5 @@ import IUT.GaussPilotRealVolume
 import IUT.LogKummerReal
 import IUT.ThetaLinkReal
 import IUT.GaloisCohomologyH1
+import IUT.AbsTopFieldRecover
+import IUT.LocalReciprocity

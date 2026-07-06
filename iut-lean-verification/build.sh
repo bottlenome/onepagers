@@ -2143,6 +2143,10 @@ import IUT
 #print axioms IUT.thLink_crux_stage
 #print axioms IUT.galH1_quotient_isGroup
 #print axioms IUT.galH1_trivial_action
+#print axioms IUT.absF_add_eq
+#print axioms IUT.absF_absTopIII
+#print axioms IUT.locRec_isHom
+#print axioms IUT.locRec_prime_frob
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
