@@ -2207,6 +2207,10 @@ import IUT
 #print axioms IUT.brau_split_iff
 #print axioms IUT.mrc_compare_iso
 #print axioms IUT.mrc_multiradial_seed
+#print axioms IUT.mte_capstone
+#print axioms IUT.mte_coherent
+#print axioms IUT.atm_absTopII
+#print axioms IUT.atm_units_is_group
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

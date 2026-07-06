@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 410,
-  "verified_theorem_total": 2198,
-  "choice_free_count": 336,
+  "module_count": 412,
+  "verified_theorem_total": 2202,
+  "choice_free_count": 337,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5023,9 +5023,37 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialCompare.lean"
+    },
+    {
+      "id": "MonoThetaEnvironment",
+      "label": "MonoThetaEnvironment",
+      "milestone": "M363F",
+      "title": "MonoThetaEnvironment",
+      "pillar": "E",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaEnvironment.lean"
+    },
+    {
+      "id": "AbsTopMultMonoid",
+      "label": "AbsTopMultMonoid",
+      "milestone": "M359F",
+      "title": "AbsTopMultMonoid",
+      "pillar": "A",
+      "decl_count": 45,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbsTopMultMonoid.lean"
     }
   ],
   "edges": [
+    {
+      "source": "AbsTopFieldRecover",
+      "target": "AbsTopMultMonoid"
+    },
     {
       "source": "AbsTopFieldRecover",
       "target": "CyclotomeRecovery"
@@ -7501,6 +7529,10 @@
     {
       "source": "ThetaKummerClass",
       "target": "ThetaKummerRigidity"
+    },
+    {
+      "source": "ThetaKummerRigidity",
+      "target": "MonoThetaEnvironment"
     },
     {
       "source": "ThetaLabelInjective",
