@@ -368,3 +368,6 @@ import IUT.TateCurve
 import IUT.LocalFieldRing
 import IUT.LogVolumeArch
 import IUT.TateTorsion
+import IUT.AlgClosureColimit
+import IUT.FieldCompletion
+import IUT.ThetaValueLtor

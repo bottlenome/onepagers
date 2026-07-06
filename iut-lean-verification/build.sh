@@ -2117,6 +2117,12 @@ import IUT
 #print axioms IUT.logArch_global_complete
 #print axioms IUT.tateTor_mu_in_torsion
 #print axioms IUT.tateTor_exists
+#print axioms IUT.algClo_exists
+#print axioms IUT.algClo_absGalois_isProfinite
+#print axioms IUT.fldComp_completion_isField
+#print axioms IUT.fldComp_mul_inv_cancel_gen
+#print axioms IUT.thLtor_torsion_lpow
+#print axioms IUT.thLtor_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

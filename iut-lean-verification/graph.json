@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 364,
-  "verified_theorem_total": 2108,
-  "choice_free_count": 301,
+  "module_count": 367,
+  "verified_theorem_total": 2114,
+  "choice_free_count": 304,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4465,6 +4465,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateTorsion.lean"
+    },
+    {
+      "id": "AlgClosureColimit",
+      "label": "AlgClosureColimit",
+      "milestone": "M315F",
+      "title": "柱A: 分離閉包 K^sep = 有限分離拡大の 余極限 colim Lₙ と絶対ガロア群 G_K = Gal(K^sep/K",
+      "pillar": "A",
+      "decl_count": 43,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AlgClosureColimit.lean"
+    },
+    {
+      "id": "FieldCompletion",
+      "label": "FieldCompletion",
+      "milestone": "M316F",
+      "title": "完備化 K̂ が体（IUTField）",
+      "pillar": "B",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FieldCompletion.lean"
+    },
+    {
+      "id": "ThetaValueLtor",
+      "label": "ThetaValueLtor",
+      "milestone": "M318F",
+      "title": "テータ値の l-捻れ点評価: Θ(q, u_j",
+      "pillar": "E",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueLtor.lean"
     }
   ],
   "edges": [
@@ -5266,6 +5302,10 @@
     },
     {
       "source": "GaloisCorrespondence",
+      "target": "AlgClosureColimit"
+    },
+    {
+      "source": "GaloisCorrespondence",
       "target": "GaloisFundamental"
     },
     {
@@ -5627,6 +5667,10 @@
     {
       "source": "LocalFieldCompletion",
       "target": "LocalFieldRing"
+    },
+    {
+      "source": "LocalFieldRing",
+      "target": "FieldCompletion"
     },
     {
       "source": "LogKummer",
@@ -6023,6 +6067,10 @@
     {
       "source": "Profinite",
       "target": "Topology"
+    },
+    {
+      "source": "ProfinitePi1",
+      "target": "AlgClosureColimit"
     },
     {
       "source": "ProfiniteTopology",
@@ -6711,6 +6759,10 @@
     {
       "source": "ThetaValueSubgroup",
       "target": "ThetaValueAlgebra"
+    },
+    {
+      "source": "ThetaValueSubgroup",
+      "target": "ThetaValueLtor"
     },
     {
       "source": "ThetaValueSubgroup",
