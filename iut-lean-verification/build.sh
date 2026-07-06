@@ -2211,6 +2211,16 @@ import IUT
 #print axioms IUT.mte_coherent
 #print axioms IUT.atm_absTopII
 #print axioms IUT.atm_units_is_group
+#print axioms IUT.qpf_product_formula
+#print axioms IUT.qpf_reduce_to_Q
+#print axioms IUT.lli_commute_general
+#print axioms IUT.lli_ind3_shift
+#print axioms IUT.tgo_galois_orbit_permuted
+#print axioms IUT.tgo_orbit_finite
+#print axioms IUT.bri_inv_hom
+#print axioms IUT.bri_supplies_hypothesis
+#print axioms IUT.tmp_extension_exact
+#print axioms IUT.tmp_discrete_vs_profinite
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

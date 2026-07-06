@@ -416,3 +416,8 @@ import IUT.LocalBrauer
 import IUT.MultiradialCompare
 import IUT.MonoThetaEnvironment
 import IUT.AbsTopMultMonoid
+import IUT.QuadraticProductFormula
+import IUT.LogLinkIndeterminacy
+import IUT.ThetaGaloisOrbit
+import IUT.BrauerInvariant
+import IUT.TemperedPi1
