@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 382,
-  "verified_theorem_total": 2144,
-  "choice_free_count": 318,
+  "module_count": 386,
+  "verified_theorem_total": 2152,
+  "choice_free_count": 321,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4685,9 +4685,63 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DiscreteRigidity.lean"
+    },
+    {
+      "id": "LogLinkReal",
+      "label": "LogLinkReal",
+      "milestone": "M337F",
+      "title": "LogLinkReal",
+      "pillar": "D",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogLinkReal.lean"
+    },
+    {
+      "id": "CyclotomeRecovery",
+      "label": "CyclotomeRecovery",
+      "milestone": "M334F",
+      "title": "CyclotomeRecovery",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecovery.lean"
+    },
+    {
+      "id": "NormGroup",
+      "label": "NormGroup",
+      "milestone": "M335F",
+      "title": "NormGroup",
+      "pillar": "B",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NormGroup.lean"
+    },
+    {
+      "id": "ThetaCyclotomicRigidity",
+      "label": "ThetaCyclotomicRigidity",
+      "milestone": "M338F",
+      "title": "ThetaCyclotomicRigidity",
+      "pillar": "E",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCyclotomicRigidity.lean"
     }
   ],
   "edges": [
+    {
+      "source": "AbsTopFieldRecover",
+      "target": "CyclotomeRecovery"
+    },
     {
       "source": "AbsTopMultAdd",
       "target": "AbsTopFieldRecover"
@@ -4846,6 +4900,10 @@
     },
     {
       "source": "CyclotomicRigidity",
+      "target": "CyclotomeRecovery"
+    },
+    {
+      "source": "CyclotomicRigidity",
       "target": "GaloisCohomologyH1"
     },
     {
@@ -4869,8 +4927,16 @@
       "target": "ThetaCenterMod"
     },
     {
+      "source": "CyclotomicSync",
+      "target": "ThetaCyclotomicRigidity"
+    },
+    {
       "source": "Diophantine",
       "target": "Multiradial"
+    },
+    {
+      "source": "DiscreteRigidity",
+      "target": "ThetaCyclotomicRigidity"
     },
     {
       "source": "EisDomain",
@@ -4995,6 +5061,10 @@
     {
       "source": "EtaleTheta",
       "target": "TateQuotient"
+    },
+    {
+      "source": "EtaleTheta",
+      "target": "ThetaCyclotomicRigidity"
     },
     {
       "source": "EtaleThetaReal",
@@ -5893,6 +5963,10 @@
       "target": "FieldCompletion"
     },
     {
+      "source": "LocalReciprocity",
+      "target": "NormGroup"
+    },
+    {
       "source": "LogKummer",
       "target": "Multiradial311"
     },
@@ -5901,16 +5975,28 @@
       "target": "PillarDFoundation"
     },
     {
+      "source": "LogKummerReal",
+      "target": "LogLinkReal"
+    },
+    {
       "source": "LogShell",
       "target": "Multiradial311"
     },
     {
       "source": "LogShell",
       "target": "PillarDFoundation"
+    },
+    {
+      "source": "LogShellReal",
+      "target": "LogLinkReal"
     },
     {
       "source": "LogThetaLattice",
       "target": "LogKummer"
+    },
+    {
+      "source": "LogThetaLattice",
+      "target": "LogLinkReal"
     },
     {
       "source": "LogThetaLattice",
@@ -5987,6 +6073,10 @@
     {
       "source": "MonoThetaEnv",
       "target": "PillarDFoundation"
+    },
+    {
+      "source": "MonoThetaRigidity",
+      "target": "ThetaCyclotomicRigidity"
     },
     {
       "source": "MonoThetaWitness",
@@ -6254,6 +6344,10 @@
     },
     {
       "source": "PrimitiveRoot",
+      "target": "CyclotomeRecovery"
+    },
+    {
+      "source": "PrimitiveRoot",
       "target": "TorsionResidue"
     },
     {
@@ -6323,6 +6417,10 @@
     {
       "source": "QuotientGroup",
       "target": "GaloisPi1Iso"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "NormGroup"
     },
     {
       "source": "QuotientGroup",
@@ -6914,6 +7012,10 @@
     },
     {
       "source": "ThetaGroupMod",
+      "target": "ThetaCyclotomicRigidity"
+    },
+    {
+      "source": "ThetaGroupMod",
       "target": "ThetaPM"
     },
     {
@@ -6963,6 +7065,10 @@
     {
       "source": "ThetaPilotRealVolume",
       "target": "IndeterminacyRealAction"
+    },
+    {
+      "source": "ThetaPilotRealVolume",
+      "target": "LogLinkReal"
     },
     {
       "source": "ThetaPilotRealVolume",
@@ -7143,6 +7249,10 @@
     {
       "source": "WeightedGauss",
       "target": "GaussPilotWeighted"
+    },
+    {
+      "source": "ZmodOrder",
+      "target": "CyclotomeRecovery"
     },
     {
       "source": "ZmodOrder",

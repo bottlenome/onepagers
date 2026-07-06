@@ -386,3 +386,7 @@ import IUT.LocalReciprocity
 import IUT.FrobenioidCategory
 import IUT.IndeterminacyRealAction
 import IUT.DiscreteRigidity
+import IUT.LogLinkReal
+import IUT.CyclotomeRecovery
+import IUT.NormGroup
+import IUT.ThetaCyclotomicRigidity

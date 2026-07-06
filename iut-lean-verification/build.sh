@@ -2153,6 +2153,14 @@ import IUT
 #print axioms IUT.indR_multiradial_seed
 #print axioms IUT.discRig_period_exponent_isZ
 #print axioms IUT.discRig_rigidity
+#print axioms IUT.logLink_hom
+#print axioms IUT.logLink_exists
+#print axioms IUT.cycRec_mu_from_chi
+#print axioms IUT.cycRec_absTopIII_cyclotome
+#print axioms IUT.normG_isHom
+#print axioms IUT.normG_artin_kernel_link
+#print axioms IUT.thCyc_rigIso_faithful
+#print axioms IUT.thCyc_three_rigidities
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
