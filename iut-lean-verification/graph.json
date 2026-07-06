@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 371,
-  "verified_theorem_total": 2122,
-  "choice_free_count": 308,
+  "module_count": 372,
+  "verified_theorem_total": 2124,
+  "choice_free_count": 309,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4549,6 +4549,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogShellReal.lean"
+    },
+    {
+      "id": "CyclotomicRigidity",
+      "label": "CyclotomicRigidity",
+      "milestone": "M322F",
+      "title": "柱A: 円分剛性 = mono-anabelian の中心。 円分指標 χ_n : G_K → (ℤ/n",
+      "pillar": "A",
+      "decl_count": 35,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicRigidity.lean"
     }
   ],
   "edges": [
@@ -4579,6 +4591,10 @@
     {
       "source": "AbstractGaloisDomination",
       "target": "ProRepresentable"
+    },
+    {
+      "source": "AlgClosureColimit",
+      "target": "CyclotomicRigidity"
     },
     {
       "source": "Anabelian",
@@ -4691,6 +4707,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuP1Cyclic"
+    },
+    {
+      "source": "CyclotomicSync",
+      "target": "CyclotomicRigidity"
     },
     {
       "source": "CyclotomicSync",

@@ -2131,6 +2131,8 @@ import IUT
 #print axioms IUT.mThRig_exists
 #print axioms IUT.logShell_smul_mem
 #print axioms IUT.logShellReal_exists
+#print axioms IUT.cycRig_char_isHom
+#print axioms IUT.cycRig_rigidity
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
