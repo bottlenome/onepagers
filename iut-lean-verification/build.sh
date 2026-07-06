@@ -2123,6 +2123,8 @@ import IUT
 #print axioms IUT.fldComp_mul_inv_cancel_gen
 #print axioms IUT.thLtor_torsion_lpow
 #print axioms IUT.thLtor_exists
+#print axioms IUT.thPilot_total_closed
+#print axioms IUT.thPilot_cubic_bound
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
