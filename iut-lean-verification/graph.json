@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 358,
-  "verified_theorem_total": 2096,
-  "choice_free_count": 295,
+  "module_count": 360,
+  "verified_theorem_total": 2100,
+  "choice_free_count": 297,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4393,6 +4393,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EllipticJInvariant.lean"
+    },
+    {
+      "id": "ThetaJacobi",
+      "label": "ThetaJacobi",
+      "milestone": "M313F",
+      "title": "テータの二次擬周期性: (qu",
+      "pillar": "E",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaJacobi.lean"
+    },
+    {
+      "id": "LogVolume",
+      "label": "LogVolume",
+      "milestone": "M312F",
+      "title": "柱C 先行建設: **実数値 log-volume ＝ Arakelov 次数** — 因子の次数を本物の ℝ 上の順序準同型へ拡張する中核",
+      "pillar": "C",
+      "decl_count": 31,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolume.lean"
     }
   ],
   "edges": [
@@ -4679,6 +4703,10 @@
     {
       "source": "EtaleTheta",
       "target": "TateQuotient"
+    },
+    {
+      "source": "EtaleThetaReal",
+      "target": "ThetaJacobi"
     },
     {
       "source": "Evaluation",
@@ -5277,6 +5305,10 @@
       "target": "ConvergenceCapstone"
     },
     {
+      "source": "GeomRlimComplete",
+      "target": "LogVolume"
+    },
+    {
       "source": "GeomSeries",
       "target": "GeomSeriesRec"
     },
@@ -5355,6 +5387,10 @@
     {
       "source": "InputConverse",
       "target": "PillarDBetaLocalization"
+    },
+    {
+      "source": "IntRealBridge",
+      "target": "LogVolume"
     },
     {
       "source": "IntRealBridge",
@@ -5761,6 +5797,10 @@
       "target": "PadicGeometric"
     },
     {
+      "source": "PicardDivisor",
+      "target": "LogVolume"
+    },
+    {
       "source": "PillarDFoundation",
       "target": "PillarDInterface"
     },
@@ -6118,6 +6158,10 @@
     },
     {
       "source": "RealMulOrder",
+      "target": "LogVolume"
+    },
+    {
+      "source": "RealMulOrder",
       "target": "RealGeomDecay"
     },
     {
@@ -6183,6 +6227,10 @@
     {
       "source": "RealRingLaws",
       "target": "GeomLimit"
+    },
+    {
+      "source": "RealRingLaws",
+      "target": "LogVolume"
     },
     {
       "source": "RealRingLaws",

@@ -362,3 +362,5 @@ import IUT.EllipticCurve
 import IUT.EtaleThetaReal
 import IUT.PicardDivisor
 import IUT.EllipticJInvariant
+import IUT.ThetaJacobi
+import IUT.LogVolume

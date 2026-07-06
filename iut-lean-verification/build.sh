@@ -2105,6 +2105,10 @@ import IUT
 #print axioms IUT.picDiv_exists
 #print axioms IUT.ellJ_iso_invariant
 #print axioms IUT.ellJ_exists
+#print axioms IUT.thJac_quasi_period2
+#print axioms IUT.thJac_exists
+#print axioms IUT.logVol_degree_isHom
+#print axioms IUT.logVol_effective_nonneg
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

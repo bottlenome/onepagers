@@ -36,8 +36,8 @@
       "label": "柱C Lubin–Tate・形式群・Frobenioid",
       "color": "#fbbf24",
       "progress_pct": 94,
-      "complete_pct": 15,
-      "complete_note": "実 IUT 完全証明率 ~15%（第114弾横展開で 14→15: 因子群 Div・Picard 群を本物群化）。ℤ_p・ℚ_p 上 Lubin–Tate（存在/一意/End≅ℤ_p）・構成的 ℝ は genuine。第114弾 M307F で柱C の因子部分を QDiv モノイド（M51F・逆元なし）から本物の Div 群（自由アーベル群）・div 準同型 K^×→Div・Pic 群=cokernel（M267F quotientGroupN）・deg 準同型へ群化（算術 Frobenioid の因子面）。だが本物の Frobenioid [FrdI/II]（ファイバー/realification/link）・測度論的 log-volume（対数殻・Haar 測度）・一般局所体 K は骨格/代理。詳細 #48。",
+      "complete_pct": 16,
+      "complete_note": "実 IUT 完全証明率 ~16%（第114弾 14→15 因子群 Div・Picard 群を本物群化・第115弾 15→16 実数値 Arakelov 次数 deg_ℝ:Div→ℝ）。第115弾 M312F で log-volume を QDiv モノイド＋ℕ重みから M307F 因子群 Div＋実重みの実数値 Arakelov 次数 deg_ℝ（加法準同型・有効因子非負・Frobenius 斉次・整数次数ブリッジ）へ本物昇格。ℤ_p・ℚ_p 上 Lubin–Tate（存在/一意/End≅ℤ_p）・構成的 ℝ は genuine。第114弾 M307F で柱C の因子部分を QDiv モノイド（M51F・逆元なし）から本物の Div 群（自由アーベル群）・div 準同型 K^×→Div・Pic 群=cokernel（M267F quotientGroupN）・deg 準同型へ群化（算術 Frobenioid の因子面）。だが本物の Frobenioid [FrdI/II]（ファイバー/realification/link）・測度論的 log-volume（対数殻・Haar 測度）・一般局所体 K は骨格/代理。詳細 #48。",
       "status": "構成的順序体 capstone ✅ + 幾何級数収束（M179–M185）・除算代数・実冪法則・Lubin–Tate コア capstone（M224F）・形式群点群法則 capstone（M231F）+ 点集合 O-作用 総括 capstone（乗法 M247F+可換派生則 M252F+結合律 M257F）・log-volume 橋 nnqToQ 加法性(M236F)+効果性順序単調性(M240F)+ℚ≥0 順序 nnqLe と比較射順序両立 nnqToQ_mono（順序モノイド準同型に完成 M262F）。残: F-準同型分配律（M100F tier-L）・nnqToQ 乗法保存・順序線形性・O-加群型クラスインスタンス (#37)",
       "blurb": "形式群法則・点群・Frobenioid 次数層・ℚ 自前構成・自前 ℝ（構成的順序体: 環法則・完備性・apart 逆元・max）・実数値 log-volume 橋",
       "plain": "足し算のしかたを作り替える「形式群」の理論"
@@ -56,8 +56,8 @@
       "label": "柱E 幾何層 (theta/volume)",
       "color": "#c084fc",
       "progress_pct": 97,
-      "complete_pct": 11,
-      "complete_note": "実 IUT 完全証明率 ~11%（第114弾横展開で 10→11: テータ因子の原点通過 Θ(q,1)=0 を本物建設）。形式テータ級数・cyclotomic rigidity の離散論理骨格は実構造。第114弾 M308F で実テータ級数 theta R(M88) 上に u=1 augmentation ε を有界台有限和で本物構成し Θ(q,1)=0（テータ因子が Tate 曲線の原点を通る）を反転対称の対消去で本物証明（未着手だったテータ零点/因子に前進）。だが本物のエタールテータ関数 [EtTh]・三剛性の実証明・ガロア同変 p 進テータ値・tempered π₁ 商はゼロ/模型。テータ値は Laurent 単項式 q^{j²} の代数模型。詳細 #48。",
+      "complete_pct": 12,
+      "complete_note": "実 IUT 完全証明率 ~12%（第114弾 10→11 テータ因子の原点通過 Θ(q,1)=0・第115弾 11→12 テータの二次擬周期性 T²(Θ)=Θ）。第115弾 M313F で M89 の一次関数等式に加え二次擬周期性 T²(Θ)=Θ（(qu)(q²u)·Θ(q,q²u)=Θ(q,u)）を独立に本物の Laurent 係数計算で建設（因子の q^ℤ·(±1) 軌道の二歩目）。形式テータ級数・cyclotomic rigidity の離散論理骨格は実構造。第114弾 M308F で実テータ級数 theta R(M88) 上に u=1 augmentation ε を有界台有限和で本物構成し Θ(q,1)=0（テータ因子が Tate 曲線の原点を通る）を反転対称の対消去で本物証明（未着手だったテータ零点/因子に前進）。だが本物のエタールテータ関数 [EtTh]・三剛性の実証明・ガロア同変 p 進テータ値・tempered π₁ 商はゼロ/模型。テータ値は Laurent 単項式 q^{j²} の代数模型。詳細 #48。",
       "status": "E1–E8 ✅ / μ_l 同一視・l⋇ラベリング・Heisenberg リフト・関数等式接合・作用素準同型 T↦Φ(1)+値障害定理(M198F)・テータ値 q^{j²} の Laurent 単項式実体化（M223F）・環写像対象（uMonHom・合成則 M232F）・テータ値の単元部分群/多ラベル積 thetaValProd の指数和合成/反射コセット（M237F）。残: q-展開収束・ガロア同変 p-進テータ値・tempered π₁ (#39)",
       "blurb": "Laurent環・テータ級数・関数等式・Tate点群・ガウス体積（ℝ 化済）・±構造の群論核。残: μ_l同一視ほか",
       "plain": "テータ関数と「体積」の計算"
