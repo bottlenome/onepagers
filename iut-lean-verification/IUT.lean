@@ -394,3 +394,5 @@ import IUT.HaarMeasureZp
 import IUT.MeasureLogVolume
 import IUT.Hilbert90
 import IUT.IndeterminacyFull
+import IUT.WeilPairing
+import IUT.GaloisTheta

@@ -2169,6 +2169,10 @@ import IUT
 #print axioms IUT.hil90_H1_trivial
 #print axioms IUT.indF_simultaneous_real
 #print axioms IUT.indF_crux_is_hypothesis
+#print axioms IUT.weil_bilinear_left
+#print axioms IUT.weil_nondegenerate
+#print axioms IUT.galTh_equivariant
+#print axioms IUT.galTh_norm_qpower
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

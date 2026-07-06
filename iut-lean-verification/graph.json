@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 390,
-  "verified_theorem_total": 2160,
-  "choice_free_count": 323,
+  "module_count": 392,
+  "verified_theorem_total": 2164,
+  "choice_free_count": 324,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4783,6 +4783,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IndeterminacyFull.lean"
+    },
+    {
+      "id": "WeilPairing",
+      "label": "WeilPairing",
+      "milestone": "M339F",
+      "title": "WeilPairing",
+      "pillar": "A",
+      "decl_count": 31,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/WeilPairing.lean"
+    },
+    {
+      "id": "GaloisTheta",
+      "label": "GaloisTheta",
+      "milestone": "M343F",
+      "title": "GaloisTheta",
+      "pillar": "E",
+      "decl_count": 30,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaloisTheta.lean"
     }
   ],
   "edges": [
@@ -4953,6 +4977,14 @@
     {
       "source": "CyclotomicRigidity",
       "target": "GaloisCohomologyH1"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "GaloisTheta"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "WeilPairing"
     },
     {
       "source": "CyclotomicSync",
@@ -6435,6 +6467,10 @@
       "target": "PrincipalUnitGroup"
     },
     {
+      "source": "PrincipalUnits",
+      "target": "WeilPairing"
+    },
+    {
       "source": "ProObject",
       "target": "FactorialTower"
     },
@@ -7055,6 +7091,10 @@
       "target": "LogKummerReal"
     },
     {
+      "source": "TateTorsion",
+      "target": "WeilPairing"
+    },
+    {
       "source": "Teichmuller",
       "target": "RootsOfUnity"
     },
@@ -7189,6 +7229,10 @@
     {
       "source": "ThetaValueEval",
       "target": "ThetaLabelInjective"
+    },
+    {
+      "source": "ThetaValueLtor",
+      "target": "GaloisTheta"
     },
     {
       "source": "ThetaValueLtor",
