@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 362,
-  "verified_theorem_total": 2104,
-  "choice_free_count": 299,
+  "module_count": 364,
+  "verified_theorem_total": 2108,
+  "choice_free_count": 301,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -4441,6 +4441,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LocalFieldRing.lean"
+    },
+    {
+      "id": "LogVolumeArch",
+      "label": "LogVolumeArch",
+      "milestone": "M317F",
+      "title": "柱C 先行建設: **アルキメデス log-volume log‖x‖** — M312F が「範囲外」とした無限素点の寄与を本物へ昇格させ、 大域 log-volume の完全形（有限＋無限素点",
+      "pillar": "C",
+      "decl_count": 24,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolumeArch.lean"
+    },
+    {
+      "id": "TateTorsion",
+      "label": "TateTorsion",
+      "milestone": "M314F",
+      "title": "Tate 曲線の n-捻れ部分群 E_q[n]（IUT の l-捻れ）",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateTorsion.lean"
     }
   ],
   "edges": [
@@ -5641,6 +5665,10 @@
       "target": "VolumeReal"
     },
     {
+      "source": "LogVolume",
+      "target": "LogVolumeArch"
+    },
+    {
       "source": "LubinTateExists",
       "target": "PowerSeries2"
     },
@@ -6047,6 +6075,10 @@
     {
       "source": "Rationals",
       "target": "RegularReal"
+    },
+    {
+      "source": "RealAbs",
+      "target": "LogVolumeArch"
     },
     {
       "source": "RealAbs",
@@ -6531,6 +6563,10 @@
     {
       "source": "TateCoverGroup",
       "target": "TateCoverCat"
+    },
+    {
+      "source": "TateCurve",
+      "target": "TateTorsion"
     },
     {
       "source": "TateFiberFunctor",

@@ -366,3 +366,5 @@ import IUT.ThetaJacobi
 import IUT.LogVolume
 import IUT.TateCurve
 import IUT.LocalFieldRing
+import IUT.LogVolumeArch
+import IUT.TateTorsion

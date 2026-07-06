@@ -2113,6 +2113,10 @@ import IUT
 #print axioms IUT.tateCurve_exists
 #print axioms IUT.locRing_completion_isCRing
 #print axioms IUT.locRing_embed_isHom
+#print axioms IUT.logArch_vol_isHom
+#print axioms IUT.logArch_global_complete
+#print axioms IUT.tateTor_mu_in_torsion
+#print axioms IUT.tateTor_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
