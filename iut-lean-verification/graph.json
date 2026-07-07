@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 426,
-  "verified_theorem_total": 2230,
+  "module_count": 427,
+  "verified_theorem_total": 2232,
   "choice_free_count": 346,
   "nodes": [
     {
@@ -5219,6 +5219,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TameSymbol.lean"
+    },
+    {
+      "id": "TemperedTower",
+      "label": "TemperedTower",
+      "milestone": "M374F",
+      "title": "TemperedTower",
+      "pillar": "A",
+      "decl_count": 29,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedTower.lean"
     }
   ],
   "edges": [
@@ -6579,6 +6593,10 @@
       "target": "PrincipalUnits"
     },
     {
+      "source": "LocalCFT",
+      "target": "TemperedTower"
+    },
+    {
       "source": "LocalFieldCompletion",
       "target": "LocalFieldRing"
     },
@@ -7737,6 +7755,10 @@
     {
       "source": "ThetaCenterMod",
       "target": "Premises311Real"
+    },
+    {
+      "source": "ThetaCovering",
+      "target": "TemperedTower"
     },
     {
       "source": "ThetaCyclotomicRigidity",

@@ -2239,6 +2239,8 @@ import IUT
 #print axioms IUT.lkm_kummer_class_transported
 #print axioms IUT.tsy_tame_antisymmetric
 #print axioms IUT.tsy_concrete_invariant
+#print axioms IUT.ttw_tower_compat
+#print axioms IUT.ttw_discrete_complete_injective
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

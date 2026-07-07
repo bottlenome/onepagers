@@ -430,3 +430,4 @@ import IUT.ThetaPilotOrbitBridge
 import IUT.CyclotomicDiscriminant
 import IUT.LogKummerMonoTheta
 import IUT.TameSymbol
+import IUT.TemperedTower
