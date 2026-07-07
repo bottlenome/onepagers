@@ -2343,6 +2343,8 @@ import IUT
 #print axioms IUT.tpe_exists
 #print axioms IUT.arc_sum_eq_num
 #print axioms IUT.arc_exists
+#print axioms IUT.tccb_commutator_class
+#print axioms IUT.tccb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

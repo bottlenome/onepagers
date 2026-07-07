@@ -482,3 +482,4 @@ import IUT.PilotBoundMultiradialFull
 import IUT.ArakelovClassDegree
 import IUT.TemperedPi1Etale
 import IUT.ArtinConductor
+import IUT.ThetaClassCommutatorBridge

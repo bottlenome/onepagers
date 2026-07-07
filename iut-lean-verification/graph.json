@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 478,
-  "verified_theorem_total": 2334,
-  "choice_free_count": 391,
+  "module_count": 479,
+  "verified_theorem_total": 2336,
+  "choice_free_count": 392,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5867,6 +5867,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArtinConductor.lean"
+    },
+    {
+      "id": "ThetaClassCommutatorBridge",
+      "label": "ThetaClassCommutatorBridge",
+      "milestone": "M433F",
+      "title": "ThetaClassCommutatorBridge",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaClassCommutatorBridge.lean"
     }
   ],
   "edges": [
@@ -8671,6 +8683,10 @@
       "target": "Premises311Real"
     },
     {
+      "source": "ThetaCommutatorValueBridge",
+      "target": "ThetaClassCommutatorBridge"
+    },
+    {
       "source": "ThetaCovering",
       "target": "TemperedTower"
     },
@@ -8749,6 +8765,10 @@
     {
       "source": "ThetaKummerClass",
       "target": "LogKummerMonoTheta"
+    },
+    {
+      "source": "ThetaKummerClass",
+      "target": "ThetaClassCommutatorBridge"
     },
     {
       "source": "ThetaKummerClass",
