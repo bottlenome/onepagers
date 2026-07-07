@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 428,
-  "verified_theorem_total": 2234,
+  "module_count": 429,
+  "verified_theorem_total": 2236,
   "choice_free_count": 346,
   "nodes": [
     {
@@ -5245,6 +5245,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicDifferent.lean"
+    },
+    {
+      "id": "TemperedCommutator",
+      "label": "TemperedCommutator",
+      "milestone": "M379F",
+      "title": "TemperedCommutator",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": false,
+      "has_honest_scope": false,
+      "refs": [
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedCommutator.lean"
     }
   ],
   "edges": [
@@ -7767,6 +7781,10 @@
     {
       "source": "TemperedPi1",
       "target": "ThetaCovering"
+    },
+    {
+      "source": "TemperedTower",
+      "target": "TemperedCommutator"
     },
     {
       "source": "ThetaCenterMod",

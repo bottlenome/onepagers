@@ -432,3 +432,4 @@ import IUT.LogKummerMonoTheta
 import IUT.TameSymbol
 import IUT.TemperedTower
 import IUT.CyclotomicDifferent
+import IUT.TemperedCommutator

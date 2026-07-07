@@ -2243,6 +2243,8 @@ import IUT
 #print axioms IUT.ttw_discrete_complete_injective
 #print axioms IUT.cdf_cond_disc_formula
 #print axioms IUT.cdf_tamely_ramified
+#print axioms IUT.tcm_deck_commutator_trivial
+#print axioms IUT.tcm_action_commutes
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
