@@ -2221,6 +2221,8 @@ import IUT
 #print axioms IUT.bri_supplies_hypothesis
 #print axioms IUT.tmp_extension_exact
 #print axioms IUT.tmp_discrete_vs_profinite
+#print axioms IUT.mrp_well_defined
+#print axioms IUT.mrp_multiradial
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
