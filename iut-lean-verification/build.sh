@@ -2249,6 +2249,8 @@ import IUT
 #print axioms IUT.trb_exists
 #print axioms IUT.mind_comp_invariant
 #print axioms IUT.mind_exists
+#print axioms IUT.ltm_exists
+#print axioms IUT.ltmFuncEq
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

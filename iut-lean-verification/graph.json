@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 431,
-  "verified_theorem_total": 2240,
-  "choice_free_count": 348,
+  "module_count": 432,
+  "verified_theorem_total": 2242,
+  "choice_free_count": 349,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5283,6 +5283,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialIndet.lean"
+    },
+    {
+      "id": "LubinTate",
+      "label": "LubinTate",
+      "milestone": "M380F",
+      "title": "Lubin–Tate 形式群法則: 閉形式実インスタンス",
+      "pillar": "B",
+      "decl_count": 26,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTate.lean"
     }
   ],
   "edges": [
