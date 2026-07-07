@@ -459,3 +459,5 @@ import IUT.ThetaGroupRigidity
 import IUT.ThetaOrbitProductBridge
 import IUT.ThetaLinkMultiradial
 import IUT.CyclotomeGaloisModule
+import IUT.ReciprocityNondegenerate
+import IUT.IdealClassGroup

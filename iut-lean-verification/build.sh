@@ -2297,6 +2297,10 @@ import IUT
 #print axioms IUT.tlm_exists
 #print axioms IUT.cgm_inner_galois_commute
 #print axioms IUT.cgm_exists
+#print axioms IUT.rnd_left_nondegenerate
+#print axioms IUT.rnd_exists
+#print axioms IUT.icg_class_trivial_iff_principal
+#print axioms IUT.icg_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
