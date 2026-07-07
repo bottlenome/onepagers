@@ -2335,6 +2335,8 @@ import IUT
 #print axioms IUT.dff_exists
 #print axioms IUT.pbm_crux_within_two_sided
 #print axioms IUT.pbm_exists
+#print axioms IUT.acd_pic0_iff_deg_zero
+#print axioms IUT.acd_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

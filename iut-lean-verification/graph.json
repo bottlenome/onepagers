@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 475,
-  "verified_theorem_total": 2326,
-  "choice_free_count": 388,
+  "module_count": 476,
+  "verified_theorem_total": 2328,
+  "choice_free_count": 389,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5828,6 +5828,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PilotBoundMultiradialFull.lean"
+    },
+    {
+      "id": "ArakelovClassDegree",
+      "label": "ArakelovClassDegree",
+      "milestone": "M426F",
+      "title": "柱C: Arakelov 類次数 / 次数0 類群 Pic^0",
+      "pillar": "C",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovClassDegree.lean"
     }
   ],
   "edges": [
@@ -5910,6 +5922,10 @@
     {
       "source": "ApartInv",
       "target": "RealGeom"
+    },
+    {
+      "source": "ArakelovDivisor",
+      "target": "ArakelovClassDegree"
     },
     {
       "source": "ArakelovDivisor",
@@ -6998,6 +7014,10 @@
     {
       "source": "HodgeTheater",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "IdealClassGroup",
+      "target": "ArakelovClassDegree"
     },
     {
       "source": "IdealClassGroup",
