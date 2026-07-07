@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 468,
-  "verified_theorem_total": 2312,
-  "choice_free_count": 381,
+  "module_count": 470,
+  "verified_theorem_total": 2316,
+  "choice_free_count": 383,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5742,6 +5742,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaKummerBridge.lean"
+    },
+    {
+      "id": "RamifiedNormFiltration",
+      "label": "RamifiedNormFiltration",
+      "milestone": "M420F",
+      "title": "RamifiedNormFiltration",
+      "pillar": "B",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RamifiedNormFiltration.lean"
+    },
+    {
+      "id": "ClassNumberFiniteness",
+      "label": "ClassNumberFiniteness",
+      "milestone": "M421F",
+      "title": "柱C: 類数有限性 h_K < ∞ の REDUCTION 骨格",
+      "pillar": "C",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ClassNumberFiniteness.lean"
     }
   ],
   "edges": [
@@ -6284,6 +6308,10 @@
     {
       "source": "FiniteEtaleAlgebra",
       "target": "IdempotentSpectrum"
+    },
+    {
+      "source": "Finiteness",
+      "target": "ClassNumberFiniteness"
     },
     {
       "source": "Finiteness",
@@ -6878,6 +6906,10 @@
       "target": "MeasureLogVolume"
     },
     {
+      "source": "HigherUnitFiltration",
+      "target": "RamifiedNormFiltration"
+    },
+    {
       "source": "Hilbert90",
       "target": "KummerExact"
     },
@@ -6896,6 +6928,10 @@
     {
       "source": "HodgeTheater",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "IdealClassGroup",
+      "target": "ClassNumberFiniteness"
     },
     {
       "source": "IdempotentSpectrum",

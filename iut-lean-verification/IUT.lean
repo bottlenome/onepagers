@@ -472,3 +472,5 @@ import IUT.FrobenioidLinkDegree
 import IUT.LogVolumePilotBound
 import IUT.HigherUnitFiltration
 import IUT.MonoThetaKummerBridge
+import IUT.RamifiedNormFiltration
+import IUT.ClassNumberFiniteness

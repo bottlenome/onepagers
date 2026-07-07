@@ -2321,6 +2321,10 @@ import IUT
 #print axioms IUT.huf_exists
 #print axioms IUT.mtk_class_transport
 #print axioms IUT.mtk_exists
+#print axioms IUT.rnf_norm_shift
+#print axioms IUT.rnf_exists
+#print axioms IUT.cnf_reduction
+#print axioms IUT.cnf_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
