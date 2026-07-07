@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 462,
-  "verified_theorem_total": 2302,
-  "choice_free_count": 375,
+  "module_count": 464,
+  "verified_theorem_total": 2306,
+  "choice_free_count": 377,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5666,9 +5666,39 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HilbertSymbolReciprocity.lean"
+    },
+    {
+      "id": "ThetaPilotGaussBridge",
+      "label": "ThetaPilotGaussBridge",
+      "milestone": "M418F",
+      "title": "ThetaPilotGaussBridge",
+      "pillar": "E",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaPilotGaussBridge.lean"
+    },
+    {
+      "id": "AbsTopFullRecovery",
+      "label": "AbsTopFullRecovery",
+      "milestone": "M414F",
+      "title": "AbsTopFullRecovery",
+      "pillar": "A",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbsTopFullRecovery.lean"
     }
   ],
   "edges": [
+    {
+      "source": "AbsTopFieldFromCyclotome",
+      "target": "AbsTopFullRecovery"
+    },
     {
       "source": "AbsTopFieldRecover",
       "target": "AbsTopMultMonoid"
@@ -5680,6 +5710,10 @@
     {
       "source": "AbsTopMultAdd",
       "target": "AbsTopFieldRecover"
+    },
+    {
+      "source": "AbsTopMultMonoid",
+      "target": "AbsTopFullRecovery"
     },
     {
       "source": "AbstractEssSurj",
@@ -6688,6 +6722,10 @@
     {
       "source": "GaussPilotRealVolume",
       "target": "IndeterminacyFull"
+    },
+    {
+      "source": "GaussPilotRealVolume",
+      "target": "ThetaPilotGaussBridge"
     },
     {
       "source": "GaussPilotRep",
@@ -8504,6 +8542,10 @@
     {
       "source": "ThetaOrbitProductBridge",
       "target": "ThetaOrbitVolumeBridge"
+    },
+    {
+      "source": "ThetaOrbitVolumeBridge",
+      "target": "ThetaPilotGaussBridge"
     },
     {
       "source": "ThetaPM",
