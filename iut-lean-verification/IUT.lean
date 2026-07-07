@@ -451,3 +451,4 @@ import IUT.ThetaGroupReconstruction
 import IUT.RingOfIntegersDiscriminant
 import IUT.LogThetaLatticeShell
 import IUT.BrauerInvariantFull
+import IUT.ThetaValueOrbitBridge

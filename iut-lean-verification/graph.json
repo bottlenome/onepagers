@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 447,
-  "verified_theorem_total": 2272,
-  "choice_free_count": 361,
+  "module_count": 448,
+  "verified_theorem_total": 2274,
+  "choice_free_count": 362,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5478,6 +5478,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/BrauerInvariantFull.lean"
+    },
+    {
+      "id": "ThetaValueOrbitBridge",
+      "label": "ThetaValueOrbitBridge",
+      "milestone": "M403F",
+      "title": "ThetaValueOrbitBridge",
+      "pillar": "E",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueOrbitBridge.lean"
     }
   ],
   "edges": [
@@ -8218,6 +8230,10 @@
       "target": "ThetaPilotOrbitBridge"
     },
     {
+      "source": "ThetaOrbitProduct",
+      "target": "ThetaValueOrbitBridge"
+    },
+    {
       "source": "ThetaPM",
       "target": "CyclotomicSync"
     },
@@ -8332,6 +8348,10 @@
     {
       "source": "ThetaValueSubgroup",
       "target": "ThetaValueProdLaws"
+    },
+    {
+      "source": "ThetaValueTripleBridge",
+      "target": "ThetaValueOrbitBridge"
     },
     {
       "source": "Topology",

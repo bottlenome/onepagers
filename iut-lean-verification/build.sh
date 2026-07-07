@@ -2281,6 +2281,8 @@ import IUT
 #print axioms IUT.ltls_exists
 #print axioms IUT.brf_inv_injective_subgroup
 #print axioms IUT.brf_exists
+#print axioms IUT.tvob_orbit_exponent
+#print axioms IUT.tvob_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
