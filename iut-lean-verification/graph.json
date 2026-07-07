@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 470,
-  "verified_theorem_total": 2316,
-  "choice_free_count": 383,
+  "module_count": 472,
+  "verified_theorem_total": 2320,
+  "choice_free_count": 385,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5766,12 +5766,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ClassNumberFiniteness.lean"
+    },
+    {
+      "id": "KummerReconstructedField",
+      "label": "KummerReconstructedField",
+      "milestone": "M419F",
+      "title": "KummerReconstructedField",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerReconstructedField.lean"
+    },
+    {
+      "id": "PilotVolumeUpperContainment",
+      "label": "PilotVolumeUpperContainment",
+      "milestone": "M422F",
+      "title": "定理3.11 / パイロット体積の対数殻上方包含",
+      "pillar": "D",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PilotVolumeUpperContainment.lean"
     }
   ],
   "edges": [
     {
       "source": "AbsTopFieldFromCyclotome",
       "target": "AbsTopFullRecovery"
+    },
+    {
+      "source": "AbsTopFieldFromCyclotome",
+      "target": "KummerReconstructedField"
     },
     {
       "source": "AbsTopFieldRecover",
@@ -7006,6 +7036,10 @@
       "target": "PillarAFullnessProgram"
     },
     {
+      "source": "KummerCharReal",
+      "target": "KummerReconstructedField"
+    },
+    {
       "source": "KummerExact",
       "target": "ThetaKummerClass"
     },
@@ -7298,6 +7332,10 @@
       "target": "LogLinkShellCompat"
     },
     {
+      "source": "LogShellContainment",
+      "target": "PilotVolumeUpperContainment"
+    },
+    {
       "source": "LogShellReal",
       "target": "HaarMeasureZp"
     },
@@ -7372,6 +7410,10 @@
     {
       "source": "LogVolumeArch",
       "target": "ProductFormula"
+    },
+    {
+      "source": "LogVolumePilotBound",
+      "target": "PilotVolumeUpperContainment"
     },
     {
       "source": "LubinTate",

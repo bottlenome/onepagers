@@ -2325,6 +2325,10 @@ import IUT
 #print axioms IUT.rnf_exists
 #print axioms IUT.cnf_reduction
 #print axioms IUT.cnf_exists
+#print axioms IUT.krf_kappa_map_mul
+#print axioms IUT.krf_exists
+#print axioms IUT.pvu_upper_containment
+#print axioms IUT.pvu_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
