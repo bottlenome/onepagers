@@ -2307,6 +2307,8 @@ import IUT
 #print axioms IUT.atfc_exists
 #print axioms IUT.pcm_multiradial_crux_iff
 #print axioms IUT.pcm_exists
+#print axioms IUT.fr_degree_transform
+#print axioms IUT.fr_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
