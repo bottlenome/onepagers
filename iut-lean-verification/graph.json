@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 482,
-  "verified_theorem_total": 2344,
-  "choice_free_count": 395,
+  "module_count": 487,
+  "verified_theorem_total": 2353,
+  "choice_free_count": 400,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5918,6 +5918,69 @@
         "[SemiAnbd]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArithTemperedPi1.lean"
+    },
+    {
+      "id": "ConductorDiscriminant",
+      "label": "ConductorDiscriminant",
+      "milestone": "M435F",
+      "title": "ConductorDiscriminant",
+      "pillar": "B",
+      "decl_count": 30,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConductorDiscriminant.lean"
+    },
+    {
+      "id": "ArakelovArithDegree",
+      "label": "ArakelovArithDegree",
+      "milestone": "M436F",
+      "title": "柱C: Arakelov 算術次数・算術交点数 pairing",
+      "pillar": "C",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovArithDegree.lean"
+    },
+    {
+      "id": "ThetaCommTemperedBridge",
+      "label": "ThetaCommTemperedBridge",
+      "milestone": "M438F",
+      "title": "ThetaCommTemperedBridge",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCommTemperedBridge.lean"
+    },
+    {
+      "id": "MultiradialLogLinkTransport",
+      "label": "MultiradialLogLinkTransport",
+      "milestone": "M437F",
+      "title": "定理3.11 / 多輻 log-volume 輸送の log-link 版： 縦 log-link 体積輸送と横 theta-link ×2l 輸送を合成し、両側実有界が合成の下で coherent に保たれる",
+      "pillar": "D",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialLogLinkTransport.lean"
+    },
+    {
+      "id": "ThetaLinkTemperedPi1",
+      "label": "ThetaLinkTemperedPi1",
+      "milestone": "M434F",
+      "title": "ThetaLinkTemperedPi1",
+      "pillar": "A",
+      "decl_count": 42,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkTemperedPi1.lean"
     }
   ],
   "edges": [
@@ -6003,6 +6066,10 @@
     },
     {
       "source": "ArakelovClassDegree",
+      "target": "ArakelovArithDegree"
+    },
+    {
+      "source": "ArakelovClassDegree",
       "target": "ArakelovPicExact"
     },
     {
@@ -6022,6 +6089,14 @@
       "target": "IndAction"
     },
     {
+      "source": "ArithTemperedPi1",
+      "target": "ThetaCommTemperedBridge"
+    },
+    {
+      "source": "ArithTemperedPi1",
+      "target": "ThetaLinkTemperedPi1"
+    },
+    {
       "source": "Arithmetic",
       "target": "Evaluation"
     },
@@ -6036,6 +6111,10 @@
     {
       "source": "Arithmetic",
       "target": "Skeleton"
+    },
+    {
+      "source": "ArtinConductor",
+      "target": "ConductorDiscriminant"
     },
     {
       "source": "Binomial2",
@@ -6228,6 +6307,10 @@
     {
       "source": "DifferentDiscriminant",
       "target": "RingOfIntegersDiscriminant"
+    },
+    {
+      "source": "DifferentFromFiltration",
+      "target": "ConductorDiscriminant"
     },
     {
       "source": "Diophantine",
@@ -7462,6 +7545,10 @@
       "target": "MultiradialCompare"
     },
     {
+      "source": "LogLinkReal",
+      "target": "MultiradialLogLinkTransport"
+    },
+    {
       "source": "LogLinkShellCompat",
       "target": "LogThetaLatticeShell"
     },
@@ -7528,6 +7615,10 @@
     {
       "source": "LogVolBridge",
       "target": "VolumeReal"
+    },
+    {
+      "source": "LogVolMultiradialTransport",
+      "target": "MultiradialLogLinkTransport"
     },
     {
       "source": "LogVolume",
@@ -8351,6 +8442,10 @@
     },
     {
       "source": "RealRingLaws",
+      "target": "ArakelovArithDegree"
+    },
+    {
+      "source": "RealRingLaws",
       "target": "GeomLimit"
     },
     {
@@ -8732,6 +8827,10 @@
     {
       "source": "ThetaCenterMod",
       "target": "Premises311Real"
+    },
+    {
+      "source": "ThetaClassCommutatorBridge",
+      "target": "ThetaCommTemperedBridge"
     },
     {
       "source": "ThetaCommutatorValueBridge",

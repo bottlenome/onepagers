@@ -490,3 +490,4 @@ import IUT.ConductorDiscriminant
 import IUT.ArakelovArithDegree
 import IUT.ThetaCommTemperedBridge
 import IUT.MultiradialLogLinkTransport
+import IUT.ThetaLinkTemperedPi1

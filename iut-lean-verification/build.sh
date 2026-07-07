@@ -2360,6 +2360,8 @@ import IUT
 #print axioms IUT.tctb_exists
 #print axioms IUT.mllt_loglink_transport
 #print axioms IUT.mllt_exists
+#print axioms IUT.tlt_link_compat
+#print axioms IUT.tlt_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
