@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 474,
-  "verified_theorem_total": 2324,
-  "choice_free_count": 387,
+  "module_count": 475,
+  "verified_theorem_total": 2326,
+  "choice_free_count": 388,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5816,6 +5816,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DifferentFromFiltration.lean"
+    },
+    {
+      "id": "PilotBoundMultiradialFull",
+      "label": "PilotBoundMultiradialFull",
+      "milestone": "M427F",
+      "title": "定理3.11 / 多輻境界の総合：crux を両側実有界域の内側へ",
+      "pillar": "D",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PilotBoundMultiradialFull.lean"
     }
   ],
   "edges": [
@@ -7722,6 +7734,14 @@
     {
       "source": "PilotComparisonMultiradial",
       "target": "LogVolumePilotBound"
+    },
+    {
+      "source": "PilotComparisonMultiradial",
+      "target": "PilotBoundMultiradialFull"
+    },
+    {
+      "source": "PilotVolumeUpperContainment",
+      "target": "PilotBoundMultiradialFull"
     },
     {
       "source": "PointValues",

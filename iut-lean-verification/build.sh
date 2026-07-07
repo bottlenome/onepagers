@@ -2333,6 +2333,8 @@ import IUT
 #print axioms IUT.tcvb_exists
 #print axioms IUT.dff_sum_eq
 #print axioms IUT.dff_exists
+#print axioms IUT.pbm_crux_within_two_sided
+#print axioms IUT.pbm_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
