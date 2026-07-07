@@ -2261,6 +2261,8 @@ import IUT
 #print axioms IUT.lsc_graded_iso
 #print axioms IUT.mtt_triple_holds
 #print axioms IUT.mtt_zeta_sq_mul
+#print axioms IUT.llsc_graded_iso
+#print axioms IUT.llsc_vol_upper_compat
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

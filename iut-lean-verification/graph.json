@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 437,
-  "verified_theorem_total": 2252,
-  "choice_free_count": 353,
+  "module_count": 438,
+  "verified_theorem_total": 2254,
+  "choice_free_count": 354,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5358,6 +5358,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaTripleBridge.lean"
+    },
+    {
+      "id": "LogLinkShellCompat",
+      "label": "LogLinkShellCompat",
+      "milestone": "M392F",
+      "title": "縦 log-link ⇄ 対数殻フィルトレーション包含格子の両立",
+      "pillar": "D",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogLinkShellCompat.lean"
     }
   ],
   "edges": [
@@ -6787,6 +6799,10 @@
     },
     {
       "source": "LogLinkReal",
+      "target": "LogLinkShellCompat"
+    },
+    {
+      "source": "LogLinkReal",
       "target": "MultiradialCompare"
     },
     {
@@ -6796,6 +6812,10 @@
     {
       "source": "LogShell",
       "target": "PillarDFoundation"
+    },
+    {
+      "source": "LogShellContainment",
+      "target": "LogLinkShellCompat"
     },
     {
       "source": "LogShellReal",

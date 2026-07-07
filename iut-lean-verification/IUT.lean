@@ -441,3 +441,4 @@ import IUT.TemperedThetaCommutator
 import IUT.LubinTateReciprocity
 import IUT.LogShellContainment
 import IUT.MonoThetaTripleBridge
+import IUT.LogLinkShellCompat
