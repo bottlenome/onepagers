@@ -2319,6 +2319,8 @@ import IUT
 #print axioms IUT.lpb_exists
 #print axioms IUT.huf_norm_map_level
 #print axioms IUT.huf_exists
+#print axioms IUT.mtk_class_transport
+#print axioms IUT.mtk_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 467,
-  "verified_theorem_total": 2310,
-  "choice_free_count": 380,
+  "module_count": 468,
+  "verified_theorem_total": 2312,
+  "choice_free_count": 381,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5730,6 +5730,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HigherUnitFiltration.lean"
+    },
+    {
+      "id": "MonoThetaKummerBridge",
+      "label": "MonoThetaKummerBridge",
+      "milestone": "M423F",
+      "title": "MonoThetaKummerBridge",
+      "pillar": "E",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaKummerBridge.lean"
     }
   ],
   "edges": [
@@ -7186,6 +7198,10 @@
       "target": "PillarDFoundation"
     },
     {
+      "source": "LogKummerMonoTheta",
+      "target": "MonoThetaKummerBridge"
+    },
+    {
       "source": "LogKummerReal",
       "target": "LogKummerMonoTheta"
     },
@@ -8552,6 +8568,10 @@
     {
       "source": "ThetaKummerRigidity",
       "target": "MonoThetaEnvironment"
+    },
+    {
+      "source": "ThetaKummerTripleBridge",
+      "target": "MonoThetaKummerBridge"
     },
     {
       "source": "ThetaKummerTripleBridge",
