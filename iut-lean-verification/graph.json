@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 502,
-  "verified_theorem_total": 2383,
-  "choice_free_count": 413,
+  "module_count": 507,
+  "verified_theorem_total": 2393,
+  "choice_free_count": 418,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6143,6 +6143,69 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerNontrivialChar.lean"
     },
     {
+      "id": "HasseArfUnconditional",
+      "label": "HasseArfUnconditional",
+      "milestone": "M456F",
+      "title": "HasseArfUnconditional",
+      "pillar": "B",
+      "decl_count": 32,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HasseArfUnconditional.lean"
+    },
+    {
+      "id": "GreenCurvature2D",
+      "label": "GreenCurvature2D",
+      "milestone": "M455F",
+      "title": "柱C: Green curvature の 2 次元 Laplacian への昇格",
+      "pillar": "C",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GreenCurvature2D.lean"
+    },
+    {
+      "id": "LogLinkFullContinuous",
+      "label": "LogLinkFullContinuous",
+      "milestone": "M457F",
+      "title": "定理3.11 / log-link 版多輻 log-volume 輸送の (Ind1",
+      "pillar": "D",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogLinkFullContinuous.lean"
+    },
+    {
+      "id": "FrobenioidLogThetaLattice",
+      "label": "FrobenioidLogThetaLattice",
+      "milestone": "M454F",
+      "title": "FrobenioidLogThetaLattice",
+      "pillar": "A",
+      "decl_count": 52,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobenioidLogThetaLattice.lean"
+    },
+    {
+      "id": "KummerGeneralChar",
+      "label": "KummerGeneralChar",
+      "milestone": "M458F",
+      "title": "KummerGeneralChar",
+      "pillar": "E",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerGeneralChar.lean"
+    },
+    {
       "id": "MultiradialLogLinkTransport",
       "label": "MultiradialLogLinkTransport",
       "milestone": "M437F",
@@ -6278,6 +6341,14 @@
     {
       "source": "ArakelovIntersectionPairing",
       "target": "ArakelovGreenArch"
+    },
+    {
+      "source": "ArakelovIntersectionPairing",
+      "target": "GreenCurvature2D"
+    },
+    {
+      "source": "ArbitraryJumpWild",
+      "target": "HasseArfUnconditional"
     },
     {
       "source": "ArchHaarVolume",
@@ -7100,6 +7171,10 @@
       "target": "FrobenioidLinkDegree"
     },
     {
+      "source": "FrobenioidThetaLink",
+      "target": "FrobenioidLogThetaLattice"
+    },
+    {
       "source": "FrobenioidVolume",
       "target": "ArithPilot"
     },
@@ -7364,6 +7439,10 @@
       "target": "AffineEquivFull"
     },
     {
+      "source": "GreenCurvature",
+      "target": "GreenCurvature2D"
+    },
+    {
       "source": "GrothendieckGalois",
       "target": "GaloisPi1Iso"
     },
@@ -7473,6 +7552,10 @@
     },
     {
       "source": "IntRealBridge",
+      "target": "GreenCurvature2D"
+    },
+    {
+      "source": "IntRealBridge",
       "target": "LogVolume"
     },
     {
@@ -7498,6 +7581,10 @@
     {
       "source": "KummerExact",
       "target": "ThetaKummerClass"
+    },
+    {
+      "source": "KummerNontrivialChar",
+      "target": "KummerGeneralChar"
     },
     {
       "source": "KummerTheory",
@@ -7744,6 +7831,10 @@
       "target": "MultiradialCompare"
     },
     {
+      "source": "LogLinkContinuousIndet",
+      "target": "LogLinkFullContinuous"
+    },
+    {
       "source": "LogLinkFullIndetGroup",
       "target": "LogLinkContinuousIndet"
     },
@@ -7762,6 +7853,10 @@
     {
       "source": "LogLinkReal",
       "target": "FrobenioidLinkDegree"
+    },
+    {
+      "source": "LogLinkReal",
+      "target": "FrobenioidLogThetaLattice"
     },
     {
       "source": "LogLinkReal",
@@ -7818,6 +7913,10 @@
     {
       "source": "LogShellReal",
       "target": "MultiradialCompare"
+    },
+    {
+      "source": "LogThetaLattice",
+      "target": "FrobenioidLogThetaLattice"
     },
     {
       "source": "LogThetaLattice",
@@ -8661,6 +8760,10 @@
     },
     {
       "source": "RealOrder",
+      "target": "GreenCurvature2D"
+    },
+    {
+      "source": "RealOrder",
       "target": "RealAbsLe"
     },
     {
@@ -8806,6 +8909,10 @@
     {
       "source": "RegularPowers",
       "target": "LambdaValuation"
+    },
+    {
+      "source": "RegularReal",
+      "target": "GreenCurvature2D"
     },
     {
       "source": "RegularReal",
@@ -9550,6 +9657,10 @@
     {
       "source": "ZmodOrder",
       "target": "CyclotomeRecovery"
+    },
+    {
+      "source": "ZmodOrder",
+      "target": "KummerGeneralChar"
     },
     {
       "source": "ZmodOrder",

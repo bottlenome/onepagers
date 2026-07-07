@@ -504,5 +504,10 @@ import IUT.GreenCurvature
 import IUT.ArbitraryJumpWild
 import IUT.FrobenioidThetaLink
 import IUT.KummerNontrivialChar
+import IUT.HasseArfUnconditional
+import IUT.GreenCurvature2D
+import IUT.LogLinkFullContinuous
+import IUT.FrobenioidLogThetaLattice
+import IUT.KummerGeneralChar
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1

@@ -2392,6 +2392,16 @@ import IUT
 #print axioms IUT.ftl_exists
 #print axioms IUT.knc_galois_equivariant_nontrivial
 #print axioms IUT.knc_exists
+#print axioms IUT.hau_upper_break_integer
+#print axioms IUT.hau_exists
+#print axioms IUT.g2d_poisson
+#print axioms IUT.g2d_exists
+#print axioms IUT.lfc_two_sided_full_continuous
+#print axioms IUT.lfc_exists
+#print axioms IUT.flt_log_theta_square
+#print axioms IUT.flt_exists
+#print axioms IUT.kgc_galois_equivariant_general
+#print axioms IUT.kgc_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
