@@ -2382,6 +2382,16 @@ import IUT
 #print axioms IUT.kcw_exists
 #print axioms IUT.tlp_link_not_ring_hom
 #print axioms IUT.tlp_exists
+#print axioms IUT.lci_two_sided_continuous
+#print axioms IUT.lci_exists
+#print axioms IUT.grc_poisson
+#print axioms IUT.grc_exists
+#print axioms IUT.ajw_hasse_arf_all_jumps
+#print axioms IUT.ajw_exists
+#print axioms IUT.ftl_not_ring_functor
+#print axioms IUT.ftl_exists
+#print axioms IUT.knc_galois_equivariant_nontrivial
+#print axioms IUT.knc_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

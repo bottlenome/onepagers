@@ -499,5 +499,10 @@ import IUT.LogLinkFullIndetGroup
 import IUT.MultiJumpWildDiscriminant
 import IUT.KummerCharWiring
 import IUT.ThetaLinkPolyIso
+import IUT.LogLinkContinuousIndet
+import IUT.GreenCurvature
+import IUT.ArbitraryJumpWild
+import IUT.FrobenioidThetaLink
+import IUT.KummerNontrivialChar
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1
