@@ -2341,6 +2341,8 @@ import IUT
 #print axioms IUT.tpe_commutator_cyclotome
 #print axioms IUT.tpe_act_commutator_twist
 #print axioms IUT.tpe_exists
+#print axioms IUT.arc_sum_eq_num
+#print axioms IUT.arc_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

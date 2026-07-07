@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 477,
-  "verified_theorem_total": 2332,
-  "choice_free_count": 390,
+  "module_count": 478,
+  "verified_theorem_total": 2334,
+  "choice_free_count": 391,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5855,6 +5855,18 @@
         "[SemiAnbd]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedPi1Etale.lean"
+    },
+    {
+      "id": "ArtinConductor",
+      "label": "ArtinConductor",
+      "milestone": "M430F",
+      "title": "ArtinConductor",
+      "pillar": "B",
+      "decl_count": 30,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArtinConductor.lean"
     }
   ],
   "edges": [
@@ -6025,6 +6037,10 @@
     {
       "source": "Composition",
       "target": "RootAdjunction"
+    },
+    {
+      "source": "ConductorDiscriminantAbelian",
+      "target": "ArtinConductor"
     },
     {
       "source": "ConnectedEtale",
