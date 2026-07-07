@@ -2357,6 +2357,7 @@ import IUT
 #print axioms IUT.cdd_exists
 #print axioms IUT.aad_deg_intersection
 #print axioms IUT.aad_exists
+#print axioms IUT.tctb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
