@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 466,
-  "verified_theorem_total": 2308,
-  "choice_free_count": 379,
+  "module_count": 467,
+  "verified_theorem_total": 2310,
+  "choice_free_count": 380,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5718,6 +5718,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogVolumePilotBound.lean"
+    },
+    {
+      "id": "HigherUnitFiltration",
+      "label": "HigherUnitFiltration",
+      "milestone": "M415F",
+      "title": "HigherUnitFiltration",
+      "pillar": "B",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HigherUnitFiltration.lean"
     }
   ],
   "edges": [
@@ -7510,6 +7522,14 @@
       "target": "PrimitiveRoot"
     },
     {
+      "source": "NormCorrespondence",
+      "target": "HigherUnitFiltration"
+    },
+    {
+      "source": "NormGroup",
+      "target": "HigherUnitFiltration"
+    },
+    {
       "source": "NormGroup",
       "target": "LubinTateNormGroup"
     },
@@ -8776,6 +8796,10 @@
     {
       "source": "UnitFiltration",
       "target": "Fermat"
+    },
+    {
+      "source": "UnitFiltration",
+      "target": "HigherUnitFiltration"
     },
     {
       "source": "UnitFiltration",
