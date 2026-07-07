@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 432,
-  "verified_theorem_total": 2242,
+  "module_count": 433,
+  "verified_theorem_total": 2244,
   "choice_free_count": 349,
   "nodes": [
     {
@@ -5295,6 +5295,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTate.lean"
+    },
+    {
+      "id": "CyclotomicPrimePower",
+      "label": "CyclotomicPrimePower",
+      "milestone": "M386F",
+      "title": "CyclotomicPrimePower",
+      "pillar": "C",
+      "decl_count": 42,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicPrimePower.lean"
     }
   ],
   "edges": [
@@ -5489,6 +5501,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuP1Cyclic"
+    },
+    {
+      "source": "CyclotomicDifferent",
+      "target": "CyclotomicPrimePower"
     },
     {
       "source": "CyclotomicDiscriminant",
