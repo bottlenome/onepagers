@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 427,
-  "verified_theorem_total": 2232,
+  "module_count": 428,
+  "verified_theorem_total": 2234,
   "choice_free_count": 346,
   "nodes": [
     {
@@ -5233,6 +5233,18 @@
         "[SemiAnbd]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedTower.lean"
+    },
+    {
+      "id": "CyclotomicDifferent",
+      "label": "CyclotomicDifferent",
+      "milestone": "M381F",
+      "title": "CyclotomicDifferent",
+      "pillar": "C",
+      "decl_count": 34,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicDifferent.lean"
     }
   ],
   "edges": [
@@ -5427,6 +5439,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuP1Cyclic"
+    },
+    {
+      "source": "CyclotomicDiscriminant",
+      "target": "CyclotomicDifferent"
     },
     {
       "source": "CyclotomicRigidity",

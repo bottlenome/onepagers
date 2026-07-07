@@ -431,3 +431,4 @@ import IUT.CyclotomicDiscriminant
 import IUT.LogKummerMonoTheta
 import IUT.TameSymbol
 import IUT.TemperedTower
+import IUT.CyclotomicDifferent

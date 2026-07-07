@@ -2241,6 +2241,8 @@ import IUT
 #print axioms IUT.tsy_concrete_invariant
 #print axioms IUT.ttw_tower_compat
 #print axioms IUT.ttw_discrete_complete_injective
+#print axioms IUT.cdf_cond_disc_formula
+#print axioms IUT.cdf_tamely_ramified
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
