@@ -2345,6 +2345,8 @@ import IUT
 #print axioms IUT.arc_exists
 #print axioms IUT.tccb_commutator_class
 #print axioms IUT.tccb_exists
+#print axioms IUT.lvt_two_sided_transported
+#print axioms IUT.lvt_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
