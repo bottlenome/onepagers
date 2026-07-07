@@ -2309,6 +2309,8 @@ import IUT
 #print axioms IUT.pcm_exists
 #print axioms IUT.fr_degree_transform
 #print axioms IUT.fr_exists
+#print axioms IUT.hsr_symbol_vanishes_iff_norm
+#print axioms IUT.hsr_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 461,
-  "verified_theorem_total": 2300,
-  "choice_free_count": 374,
+  "module_count": 462,
+  "verified_theorem_total": 2302,
+  "choice_free_count": 375,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5654,6 +5654,18 @@
         "[FrdI]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FrobenioidRealification.lean"
+    },
+    {
+      "id": "HilbertSymbolReciprocity",
+      "label": "HilbertSymbolReciprocity",
+      "milestone": "M410F",
+      "title": "従順 Hilbert 記号の相互律性質: 実部分ケース",
+      "pillar": "B",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HilbertSymbolReciprocity.lean"
     }
   ],
   "edges": [
@@ -8063,7 +8075,15 @@
     },
     {
       "source": "ReciprocityBrauerCompat",
+      "target": "HilbertSymbolReciprocity"
+    },
+    {
+      "source": "ReciprocityBrauerCompat",
       "target": "ReciprocityNondegenerate"
+    },
+    {
+      "source": "ReciprocityNondegenerate",
+      "target": "HilbertSymbolReciprocity"
     },
     {
       "source": "RegularPowers",
@@ -8272,6 +8292,10 @@
     {
       "source": "TameSymbol",
       "target": "BrauerInvariantFull"
+    },
+    {
+      "source": "TameSymbol",
+      "target": "HilbertSymbolReciprocity"
     },
     {
       "source": "TateCoverCat",
