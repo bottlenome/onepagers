@@ -480,3 +480,4 @@ import IUT.ThetaCommutatorValueBridge
 import IUT.DifferentFromFiltration
 import IUT.PilotBoundMultiradialFull
 import IUT.ArakelovClassDegree
+import IUT.TemperedPi1Etale

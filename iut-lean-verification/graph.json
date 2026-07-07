@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 476,
-  "verified_theorem_total": 2328,
-  "choice_free_count": 389,
+  "module_count": 477,
+  "verified_theorem_total": 2332,
+  "choice_free_count": 390,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5840,6 +5840,21 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovClassDegree.lean"
+    },
+    {
+      "id": "TemperedPi1Etale",
+      "label": "TemperedPi1Etale",
+      "milestone": "M424F",
+      "title": "TemperedPi1Etale",
+      "pillar": "A",
+      "decl_count": 52,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]",
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedPi1Etale.lean"
     }
   ],
   "edges": [
@@ -8621,11 +8636,19 @@
     },
     {
       "source": "TemperedThetaOuterAction",
+      "target": "TemperedPi1Etale"
+    },
+    {
+      "source": "TemperedThetaOuterAction",
       "target": "ThetaGroupReconstruction"
     },
     {
       "source": "TemperedTower",
       "target": "TemperedCommutator"
+    },
+    {
+      "source": "TemperedTower",
+      "target": "TemperedPi1Etale"
     },
     {
       "source": "ThetaCenterMod",

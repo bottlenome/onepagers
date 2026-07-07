@@ -2337,6 +2337,10 @@ import IUT
 #print axioms IUT.pbm_exists
 #print axioms IUT.acd_pic0_iff_deg_zero
 #print axioms IUT.acd_exists
+#print axioms IUT.tpe_extension_exact
+#print axioms IUT.tpe_commutator_cyclotome
+#print axioms IUT.tpe_act_commutator_twist
+#print axioms IUT.tpe_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
