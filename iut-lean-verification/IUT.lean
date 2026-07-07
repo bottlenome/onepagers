@@ -489,5 +489,10 @@ import IUT.ArithTemperedPi1
 import IUT.ConductorDiscriminant
 import IUT.ArakelovArithDegree
 import IUT.ThetaCommTemperedBridge
+import IUT.LogLinkIndetNonzero
+import IUT.ThetaLinkTwoTheater
+import IUT.ArakelovIntersectionPairing
+import IUT.WildConductorDiscriminant
+import IUT.CyclotomeIdentification
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1

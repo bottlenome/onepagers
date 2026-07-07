@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 487,
-  "verified_theorem_total": 2353,
-  "choice_free_count": 400,
+  "module_count": 492,
+  "verified_theorem_total": 2363,
+  "choice_free_count": 404,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5956,6 +5956,68 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCommTemperedBridge.lean"
     },
     {
+      "id": "LogLinkIndetNonzero",
+      "label": "LogLinkIndetNonzero",
+      "milestone": "M442F",
+      "title": "定理3.11 / log-link 版多輻 log-volume 輸送の μ≠0 昇格： log(l",
+      "pillar": "D",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogLinkIndetNonzero.lean"
+    },
+    {
+      "id": "ThetaLinkTwoTheater",
+      "label": "ThetaLinkTwoTheater",
+      "milestone": "M439F",
+      "title": "ThetaLinkTwoTheater",
+      "pillar": "A",
+      "decl_count": 43,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkTwoTheater.lean"
+    },
+    {
+      "id": "ArakelovIntersectionPairing",
+      "label": "ArakelovIntersectionPairing",
+      "milestone": "M440F",
+      "title": "柱C: 真の Arakelov 交点数 pairing",
+      "pillar": "C",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovIntersectionPairing.lean"
+    },
+    {
+      "id": "WildConductorDiscriminant",
+      "label": "WildConductorDiscriminant",
+      "milestone": "M441F",
+      "title": "WildConductorDiscriminant",
+      "pillar": "B",
+      "decl_count": 56,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/WildConductorDiscriminant.lean"
+    },
+    {
+      "id": "CyclotomeIdentification",
+      "label": "CyclotomeIdentification",
+      "milestone": "M443F",
+      "title": "CyclotomeIdentification",
+      "pillar": "E",
+      "decl_count": 23,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeIdentification.lean"
+    },
+    {
       "id": "MultiradialLogLinkTransport",
       "label": "MultiradialLogLinkTransport",
       "milestone": "M437F",
@@ -6065,6 +6127,10 @@
       "target": "RealGeom"
     },
     {
+      "source": "ArakelovArithDegree",
+      "target": "ArakelovIntersectionPairing"
+    },
+    {
       "source": "ArakelovClassDegree",
       "target": "ArakelovArithDegree"
     },
@@ -6171,6 +6237,10 @@
     {
       "source": "Composition",
       "target": "RootAdjunction"
+    },
+    {
+      "source": "ConductorDiscriminant",
+      "target": "WildConductorDiscriminant"
     },
     {
       "source": "ConductorDiscriminantAbelian",
@@ -7250,6 +7320,10 @@
     },
     {
       "source": "IntRealBridge",
+      "target": "ArakelovIntersectionPairing"
+    },
+    {
+      "source": "IntRealBridge",
       "target": "LogVolume"
     },
     {
@@ -7598,6 +7672,10 @@
     },
     {
       "source": "LogThetaLatticeShell",
+      "target": "LogLinkIndetNonzero"
+    },
+    {
+      "source": "LogThetaLatticeShell",
       "target": "MultiradialLatticeCompare"
     },
     {
@@ -7823,6 +7901,10 @@
     {
       "source": "MultiradialLatticeCompare",
       "target": "ThetaLinkMultiradial"
+    },
+    {
+      "source": "MultiradialLogLinkTransport",
+      "target": "LogLinkIndetNonzero"
     },
     {
       "source": "MultiradialRep",
@@ -8326,6 +8408,10 @@
     },
     {
       "source": "RealLe",
+      "target": "ArakelovIntersectionPairing"
+    },
+    {
+      "source": "RealLe",
       "target": "LogVolBridge"
     },
     {
@@ -8467,6 +8553,10 @@
     {
       "source": "RealRingLaws",
       "target": "RealGeom"
+    },
+    {
+      "source": "RealVolumeTheory",
+      "target": "ArakelovIntersectionPairing"
     },
     {
       "source": "RealVolumeTheory",
@@ -8830,7 +8920,15 @@
     },
     {
       "source": "ThetaClassCommutatorBridge",
+      "target": "CyclotomeIdentification"
+    },
+    {
+      "source": "ThetaClassCommutatorBridge",
       "target": "ThetaCommTemperedBridge"
+    },
+    {
+      "source": "ThetaCommTemperedBridge",
+      "target": "CyclotomeIdentification"
     },
     {
       "source": "ThetaCommutatorValueBridge",
@@ -8963,6 +9061,10 @@
     {
       "source": "ThetaLinkReal",
       "target": "ThetaLinkMultiradial"
+    },
+    {
+      "source": "ThetaLinkTemperedPi1",
+      "target": "ThetaLinkTwoTheater"
     },
     {
       "source": "ThetaLinkTransport",

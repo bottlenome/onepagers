@@ -2362,6 +2362,16 @@ import IUT
 #print axioms IUT.mllt_exists
 #print axioms IUT.tlt_link_compat
 #print axioms IUT.tlt_exists
+#print axioms IUT.lin_two_sided_with_indet
+#print axioms IUT.lin_exists
+#print axioms IUT.tlt2_not_endo
+#print axioms IUT.tlt2_exists
+#print axioms IUT.aip_not_diagonal
+#print axioms IUT.aip_exists
+#print axioms IUT.wcd_conductor_discriminant_wild
+#print axioms IUT.wcd_exists
+#print axioms IUT.cid_commutator_agree_via_iso
+#print axioms IUT.cid_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
