@@ -2223,6 +2223,12 @@ import IUT
 #print axioms IUT.tmp_discrete_vs_profinite
 #print axioms IUT.mrp_well_defined
 #print axioms IUT.mrp_multiradial
+#print axioms IUT.tcv_covering_exact
+#print axioms IUT.tcv_tempered_kills_profinite
+#print axioms IUT.hsym_bilinear_left
+#print axioms IUT.hsym_antisymmetric
+#print axioms IUT.dsc_ramified_two
+#print axioms IUT.dsc_split_degree_sum
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

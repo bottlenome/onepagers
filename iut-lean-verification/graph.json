@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 418,
-  "verified_theorem_total": 2214,
-  "choice_free_count": 341,
+  "module_count": 421,
+  "verified_theorem_total": 2220,
+  "choice_free_count": 342,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5121,6 +5121,44 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialRep.lean"
+    },
+    {
+      "id": "ThetaCovering",
+      "label": "ThetaCovering",
+      "milestone": "M369F",
+      "title": "ThetaCovering",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCovering.lean"
+    },
+    {
+      "id": "HilbertSymbol",
+      "label": "HilbertSymbol",
+      "milestone": "M370F",
+      "title": "HilbertSymbol",
+      "pillar": "B",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HilbertSymbol.lean"
+    },
+    {
+      "id": "DifferentDiscriminant",
+      "label": "DifferentDiscriminant",
+      "milestone": "M371F",
+      "title": "DifferentDiscriminant",
+      "pillar": "C",
+      "decl_count": 30,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DifferentDiscriminant.lean"
     }
   ],
   "edges": [
@@ -5233,6 +5271,10 @@
       "target": "Verdict"
     },
     {
+      "source": "BrauerInvariant",
+      "target": "HilbertSymbol"
+    },
+    {
       "source": "CategoryTheory",
       "target": "FiniteEtaleAlgebra"
     },
@@ -5283,6 +5325,10 @@
     {
       "source": "CruxInequalityReal",
       "target": "SzpiroReduction"
+    },
+    {
+      "source": "CupGradedComm",
+      "target": "HilbertSymbol"
     },
     {
       "source": "CupProduct",
@@ -6445,6 +6491,10 @@
       "target": "BrauerInvariant"
     },
     {
+      "source": "LocalBrauer",
+      "target": "HilbertSymbol"
+    },
+    {
       "source": "LocalCFT",
       "target": "FrobenioidModel"
     },
@@ -6977,6 +7027,10 @@
       "target": "ProfinitePi1"
     },
     {
+      "source": "QuadraticProductFormula",
+      "target": "DifferentDiscriminant"
+    },
+    {
       "source": "QuotientGroup",
       "target": "BrauerInvariant"
     },
@@ -7003,6 +7057,10 @@
     {
       "source": "QuotientGroup",
       "target": "TateCurve"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "ThetaCovering"
     },
     {
       "source": "RamifiedBase",
@@ -7579,6 +7637,10 @@
     {
       "source": "Teichmuller",
       "target": "RootsOfUnity"
+    },
+    {
+      "source": "TemperedPi1",
+      "target": "ThetaCovering"
     },
     {
       "source": "ThetaCenterMod",

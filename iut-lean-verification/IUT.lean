@@ -422,3 +422,6 @@ import IUT.ThetaGaloisOrbit
 import IUT.BrauerInvariant
 import IUT.TemperedPi1
 import IUT.MultiradialRep
+import IUT.ThetaCovering
+import IUT.HilbertSymbol
+import IUT.DifferentDiscriminant
