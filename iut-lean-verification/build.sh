@@ -2289,6 +2289,8 @@ import IUT
 #print axioms IUT.mlc_exists
 #print axioms IUT.dlb_disc_gt_one
 #print axioms IUT.dlb_exists
+#print axioms IUT.tgrig_rigidity
+#print axioms IUT.tgrig_cyclotome_rigid
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

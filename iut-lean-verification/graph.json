@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 451,
-  "verified_theorem_total": 2280,
-  "choice_free_count": 364,
+  "module_count": 452,
+  "verified_theorem_total": 2282,
+  "choice_free_count": 365,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5526,6 +5526,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DiscriminantLowerBound.lean"
+    },
+    {
+      "id": "ThetaGroupRigidity",
+      "label": "ThetaGroupRigidity",
+      "milestone": "M399F",
+      "title": "ThetaGroupRigidity",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaGroupRigidity.lean"
     }
   ],
   "edges": [
@@ -8228,6 +8242,10 @@
     {
       "source": "ThetaGroupMod",
       "target": "ThetaPM"
+    },
+    {
+      "source": "ThetaGroupReconstruction",
+      "target": "ThetaGroupRigidity"
     },
     {
       "source": "ThetaHeisenbergLift",

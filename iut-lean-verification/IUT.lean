@@ -455,3 +455,4 @@ import IUT.ThetaValueOrbitBridge
 import IUT.ReciprocityBrauerCompat
 import IUT.MultiradialLatticeCompare
 import IUT.DiscriminantLowerBound
+import IUT.ThetaGroupRigidity
