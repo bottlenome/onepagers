@@ -2245,6 +2245,10 @@ import IUT
 #print axioms IUT.cdf_tamely_ramified
 #print axioms IUT.tcm_deck_commutator_trivial
 #print axioms IUT.tcm_action_commutes
+#print axioms IUT.trb_env_meet
+#print axioms IUT.trb_exists
+#print axioms IUT.mind_comp_invariant
+#print axioms IUT.mind_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

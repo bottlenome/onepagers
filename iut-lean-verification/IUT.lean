@@ -433,3 +433,5 @@ import IUT.TameSymbol
 import IUT.TemperedTower
 import IUT.CyclotomicDifferent
 import IUT.TemperedCommutator
+import IUT.ThetaRigidityBridge
+import IUT.MultiradialIndet
