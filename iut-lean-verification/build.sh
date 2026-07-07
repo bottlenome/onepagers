@@ -2291,6 +2291,8 @@ import IUT
 #print axioms IUT.dlb_exists
 #print axioms IUT.tgrig_rigidity
 #print axioms IUT.tgrig_cyclotome_rigid
+#print axioms IUT.topb_orbit_sum
+#print axioms IUT.topb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

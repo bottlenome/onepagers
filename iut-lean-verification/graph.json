@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 452,
-  "verified_theorem_total": 2282,
-  "choice_free_count": 365,
+  "module_count": 453,
+  "verified_theorem_total": 2284,
+  "choice_free_count": 366,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5540,6 +5540,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaGroupRigidity.lean"
+    },
+    {
+      "id": "ThetaOrbitProductBridge",
+      "label": "ThetaOrbitProductBridge",
+      "milestone": "M408F",
+      "title": "ThetaOrbitProductBridge",
+      "pillar": "E",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaOrbitProductBridge.lean"
     }
   ],
   "edges": [
@@ -8398,6 +8410,10 @@
     {
       "source": "ThetaValueLtor",
       "target": "ThetaPilotRealVolume"
+    },
+    {
+      "source": "ThetaValueOrbitBridge",
+      "target": "ThetaOrbitProductBridge"
     },
     {
       "source": "ThetaValueProdLaws",
