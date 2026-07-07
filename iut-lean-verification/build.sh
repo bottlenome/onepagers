@@ -2402,6 +2402,16 @@ import IUT
 #print axioms IUT.flt_exists
 #print axioms IUT.kgc_galois_equivariant_general
 #print axioms IUT.kgc_exists
+#print axioms IUT.haa_upper_break_integer_abelian
+#print axioms IUT.haa_exists
+#print axioms IUT.gan_poisson_anisotropic
+#print axioms IUT.gan_exists
+#print axioms IUT.ihi_average_two_sided
+#print axioms IUT.ihi_exists
+#print axioms IUT.zib_inverse_correct
+#print axioms IUT.zib_exists
+#print axioms IUT.ilt_path_independent
+#print axioms IUT.ilt_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

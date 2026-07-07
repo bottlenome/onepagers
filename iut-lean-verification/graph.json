@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 507,
-  "verified_theorem_total": 2393,
-  "choice_free_count": 418,
+  "module_count": 512,
+  "verified_theorem_total": 2403,
+  "choice_free_count": 423,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6206,6 +6206,69 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerGeneralChar.lean"
     },
     {
+      "id": "HasseArfAbelian",
+      "label": "HasseArfAbelian",
+      "milestone": "M461F",
+      "title": "HasseArfAbelian",
+      "pillar": "B",
+      "decl_count": 40,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/HasseArfAbelian.lean"
+    },
+    {
+      "id": "GreenAnisotropic",
+      "label": "GreenAnisotropic",
+      "milestone": "M460F",
+      "title": "柱C: Green curvature の非等方 Laplacian＋軸外点源への昇格",
+      "pillar": "C",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GreenAnisotropic.lean"
+    },
+    {
+      "id": "IndetHaarIntegral",
+      "label": "IndetHaarIntegral",
+      "milestone": "M462F",
+      "title": "定理3.11 / log-link 版多輻 log-volume 輸送の不定性群上の Haar 積分： M457F の連続不定性群 lfcContGroup（ℝ³",
+      "pillar": "D",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/IndetHaarIntegral.lean"
+    },
+    {
+      "id": "ZmodInverseBezout",
+      "label": "ZmodInverseBezout",
+      "milestone": "M463F",
+      "title": "ZmodInverseBezout",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ZmodInverseBezout.lean"
+    },
+    {
+      "id": "InfiniteLogThetaLattice",
+      "label": "InfiniteLogThetaLattice",
+      "milestone": "M459F",
+      "title": "InfiniteLogThetaLattice",
+      "pillar": "A",
+      "decl_count": 44,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[FrdI]",
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/InfiniteLogThetaLattice.lean"
+    },
+    {
       "id": "MultiradialLogLinkTransport",
       "label": "MultiradialLogLinkTransport",
       "milestone": "M437F",
@@ -6771,6 +6834,10 @@
       "target": "ThetaLabelInjective"
     },
     {
+      "source": "Fermat",
+      "target": "ZmodInverseBezout"
+    },
+    {
       "source": "FiberedFrobenioid",
       "target": "ArchimedeanPlace"
     },
@@ -7159,6 +7226,10 @@
       "target": "FrobenioidThetaLink"
     },
     {
+      "source": "FrobenioidLogThetaLattice",
+      "target": "InfiniteLogThetaLattice"
+    },
+    {
       "source": "FrobenioidModel",
       "target": "FrobenioidVolume"
     },
@@ -7440,7 +7511,15 @@
     },
     {
       "source": "GreenCurvature",
+      "target": "GreenAnisotropic"
+    },
+    {
+      "source": "GreenCurvature",
       "target": "GreenCurvature2D"
+    },
+    {
+      "source": "GreenCurvature2D",
+      "target": "GreenAnisotropic"
     },
     {
       "source": "GrothendieckGalois",
@@ -7453,6 +7532,10 @@
     {
       "source": "HaarMeasureZp",
       "target": "MeasureLogVolume"
+    },
+    {
+      "source": "HasseArfUnconditional",
+      "target": "HasseArfAbelian"
     },
     {
       "source": "HigherUnitFiltration",
@@ -7548,6 +7631,10 @@
     },
     {
       "source": "IntRealBridge",
+      "target": "GreenAnisotropic"
+    },
+    {
+      "source": "IntRealBridge",
       "target": "GreenCurvature"
     },
     {
@@ -7581,6 +7668,10 @@
     {
       "source": "KummerExact",
       "target": "ThetaKummerClass"
+    },
+    {
+      "source": "KummerGeneralChar",
+      "target": "ZmodInverseBezout"
     },
     {
       "source": "KummerNontrivialChar",
@@ -7833,6 +7924,10 @@
     {
       "source": "LogLinkContinuousIndet",
       "target": "LogLinkFullContinuous"
+    },
+    {
+      "source": "LogLinkFullContinuous",
+      "target": "IndetHaarIntegral"
     },
     {
       "source": "LogLinkFullIndetGroup",
@@ -8608,6 +8703,10 @@
     },
     {
       "source": "RealAbsTriangle",
+      "target": "IndetHaarIntegral"
+    },
+    {
+      "source": "RealAbsTriangle",
       "target": "RealGeomAbs"
     },
     {
@@ -8720,6 +8819,10 @@
     },
     {
       "source": "RealMul",
+      "target": "GreenAnisotropic"
+    },
+    {
+      "source": "RealMul",
       "target": "HaarMeasureZp"
     },
     {
@@ -8733,6 +8836,10 @@
     {
       "source": "RealMulOrder",
       "target": "ArchHaarVolume"
+    },
+    {
+      "source": "RealMulOrder",
+      "target": "IndetHaarIntegral"
     },
     {
       "source": "RealMulOrder",
@@ -8753,6 +8860,10 @@
     {
       "source": "RealObstruction",
       "target": "RealMultiradialInput"
+    },
+    {
+      "source": "RealOrder",
+      "target": "GreenAnisotropic"
     },
     {
       "source": "RealOrder",
@@ -8821,6 +8932,10 @@
     {
       "source": "RealRingLaws",
       "target": "GeomLimit"
+    },
+    {
+      "source": "RealRingLaws",
+      "target": "GreenAnisotropic"
     },
     {
       "source": "RealRingLaws",

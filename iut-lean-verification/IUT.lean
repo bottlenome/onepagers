@@ -509,5 +509,10 @@ import IUT.GreenCurvature2D
 import IUT.LogLinkFullContinuous
 import IUT.FrobenioidLogThetaLattice
 import IUT.KummerGeneralChar
+import IUT.HasseArfAbelian
+import IUT.GreenAnisotropic
+import IUT.IndetHaarIntegral
+import IUT.ZmodInverseBezout
+import IUT.InfiniteLogThetaLattice
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1
