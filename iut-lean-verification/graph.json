@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 472,
-  "verified_theorem_total": 2320,
-  "choice_free_count": 385,
+  "module_count": 474,
+  "verified_theorem_total": 2324,
+  "choice_free_count": 387,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5792,6 +5792,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PilotVolumeUpperContainment.lean"
+    },
+    {
+      "id": "ThetaCommutatorValueBridge",
+      "label": "ThetaCommutatorValueBridge",
+      "milestone": "M428F",
+      "title": "ThetaCommutatorValueBridge",
+      "pillar": "E",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaCommutatorValueBridge.lean"
+    },
+    {
+      "id": "DifferentFromFiltration",
+      "label": "DifferentFromFiltration",
+      "milestone": "M425F",
+      "title": "DifferentFromFiltration",
+      "pillar": "B",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DifferentFromFiltration.lean"
     }
   ],
   "edges": [
@@ -6026,6 +6050,10 @@
     {
       "source": "CyclotomicDifferent",
       "target": "CyclotomicPrimePower"
+    },
+    {
+      "source": "CyclotomicDifferent",
+      "target": "DifferentFromFiltration"
     },
     {
       "source": "CyclotomicDiscriminant",
@@ -8544,6 +8572,10 @@
       "target": "TemperedThetaOuterAction"
     },
     {
+      "source": "TemperedThetaCommutator",
+      "target": "ThetaCommutatorValueBridge"
+    },
+    {
       "source": "TemperedThetaOuterAction",
       "target": "CyclotomeGaloisModule"
     },
@@ -8794,6 +8826,10 @@
     {
       "source": "ThetaValueLtor",
       "target": "MonoThetaRigidity"
+    },
+    {
+      "source": "ThetaValueLtor",
+      "target": "ThetaCommutatorValueBridge"
     },
     {
       "source": "ThetaValueLtor",

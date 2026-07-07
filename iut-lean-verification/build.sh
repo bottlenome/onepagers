@@ -2329,6 +2329,10 @@ import IUT
 #print axioms IUT.krf_exists
 #print axioms IUT.pvu_upper_containment
 #print axioms IUT.pvu_exists
+#print axioms IUT.tcvb_exp_from_commutator
+#print axioms IUT.tcvb_exists
+#print axioms IUT.dff_sum_eq
+#print axioms IUT.dff_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
