@@ -457,3 +457,5 @@ import IUT.MultiradialLatticeCompare
 import IUT.DiscriminantLowerBound
 import IUT.ThetaGroupRigidity
 import IUT.ThetaOrbitProductBridge
+import IUT.ThetaLinkMultiradial
+import IUT.CyclotomeGaloisModule

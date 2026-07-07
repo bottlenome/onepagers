@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 453,
-  "verified_theorem_total": 2284,
-  "choice_free_count": 366,
+  "module_count": 455,
+  "verified_theorem_total": 2288,
+  "choice_free_count": 368,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5552,6 +5552,32 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaOrbitProductBridge.lean"
+    },
+    {
+      "id": "ThetaLinkMultiradial",
+      "label": "ThetaLinkMultiradial",
+      "milestone": "M407F",
+      "title": "横 theta-link × 多輻表現の整合",
+      "pillar": "D",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkMultiradial.lean"
+    },
+    {
+      "id": "CyclotomeGaloisModule",
+      "label": "CyclotomeGaloisModule",
+      "milestone": "M404F",
+      "title": "CyclotomeGaloisModule",
+      "pillar": "A",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeGaloisModule.lean"
     }
   ],
   "edges": [
@@ -7272,6 +7298,10 @@
       "target": "ThetaLinkTransport"
     },
     {
+      "source": "MultiradialLatticeCompare",
+      "target": "ThetaLinkMultiradial"
+    },
+    {
       "source": "MultiradialRep",
       "target": "LogKummerMonoTheta"
     },
@@ -7282,6 +7312,10 @@
     {
       "source": "MultiradialRep",
       "target": "MultiradialLatticeCompare"
+    },
+    {
+      "source": "MultiradialRep",
+      "target": "ThetaLinkMultiradial"
     },
     {
       "source": "NatPrimeParts",
@@ -8193,6 +8227,10 @@
     },
     {
       "source": "TemperedThetaOuterAction",
+      "target": "CyclotomeGaloisModule"
+    },
+    {
+      "source": "TemperedThetaOuterAction",
       "target": "ThetaGroupReconstruction"
     },
     {
@@ -8260,6 +8298,10 @@
       "target": "ThetaGroupRigidity"
     },
     {
+      "source": "ThetaGroupRigidity",
+      "target": "CyclotomeGaloisModule"
+    },
+    {
       "source": "ThetaHeisenbergLift",
       "target": "MonoThetaEnv"
     },
@@ -8302,6 +8344,10 @@
     {
       "source": "ThetaLinkReal",
       "target": "LogThetaLatticeShell"
+    },
+    {
+      "source": "ThetaLinkReal",
+      "target": "ThetaLinkMultiradial"
     },
     {
       "source": "ThetaLinkTransport",

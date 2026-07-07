@@ -2293,6 +2293,10 @@ import IUT
 #print axioms IUT.tgrig_cyclotome_rigid
 #print axioms IUT.topb_orbit_sum
 #print axioms IUT.topb_exists
+#print axioms IUT.tlm_thetaLink_rep_square
+#print axioms IUT.tlm_exists
+#print axioms IUT.cgm_inner_galois_commute
+#print axioms IUT.cgm_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
