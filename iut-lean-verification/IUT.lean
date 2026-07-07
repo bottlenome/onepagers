@@ -444,3 +444,4 @@ import IUT.MonoThetaTripleBridge
 import IUT.LogLinkShellCompat
 import IUT.ThetaKummerTripleBridge
 import IUT.LubinTateNormGroup
+import IUT.ConductorDiscriminantAbelian

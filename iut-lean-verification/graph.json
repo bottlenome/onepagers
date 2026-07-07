@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 440,
-  "verified_theorem_total": 2258,
+  "module_count": 441,
+  "verified_theorem_total": 2260,
   "choice_free_count": 356,
   "nodes": [
     {
@@ -5394,6 +5394,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTateNormGroup.lean"
+    },
+    {
+      "id": "ConductorDiscriminantAbelian",
+      "label": "ConductorDiscriminantAbelian",
+      "milestone": "M391F",
+      "title": "ConductorDiscriminantAbelian",
+      "pillar": "C",
+      "decl_count": 32,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConductorDiscriminantAbelian.lean"
     }
   ],
   "edges": [
@@ -5588,6 +5600,10 @@
     {
       "source": "CyclicUnits",
       "target": "MuP1Cyclic"
+    },
+    {
+      "source": "CyclotomicDifferent",
+      "target": "ConductorDiscriminantAbelian"
     },
     {
       "source": "CyclotomicDifferent",

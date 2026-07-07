@@ -2267,6 +2267,8 @@ import IUT
 #print axioms IUT.tktb_exists
 #print axioms IUT.ltng_kernel_eq_norm
 #print axioms IUT.ltng_exists
+#print axioms IUT.cda_cond_disc_formula
+#print axioms IUT.cda_specialize_M381F
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
