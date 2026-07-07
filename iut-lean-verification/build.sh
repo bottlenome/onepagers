@@ -2303,6 +2303,8 @@ import IUT
 #print axioms IUT.icg_exists
 #print axioms IUT.tovb_orbit_volume
 #print axioms IUT.tovb_exists
+#print axioms IUT.atfc_absTopIII_from_cyclotome
+#print axioms IUT.atfc_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
