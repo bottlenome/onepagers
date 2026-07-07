@@ -447,3 +447,7 @@ import IUT.LubinTateNormGroup
 import IUT.ConductorDiscriminantAbelian
 import IUT.TemperedThetaOuterAction
 import IUT.ThetaValueTripleBridge
+import IUT.ThetaGroupReconstruction
+import IUT.RingOfIntegersDiscriminant
+import IUT.LogThetaLatticeShell
+import IUT.BrauerInvariantFull

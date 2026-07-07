@@ -2273,6 +2273,14 @@ import IUT
 #print axioms IUT.ttoa_exists
 #print axioms IUT.tvtb_class_value
 #print axioms IUT.tvtb_exists
+#print axioms IUT.tgr_central_iff
+#print axioms IUT.tgr_exists
+#print axioms IUT.rid_disc_eq_norm_different
+#print axioms IUT.rid_specialize_cpp
+#print axioms IUT.ltls_square_commutes
+#print axioms IUT.ltls_exists
+#print axioms IUT.brf_inv_injective_subgroup
+#print axioms IUT.brf_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
