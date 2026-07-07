@@ -2315,6 +2315,8 @@ import IUT
 #print axioms IUT.tpgb_exists
 #print axioms IUT.atfull_absTopI_II_III
 #print axioms IUT.atfull_exists
+#print axioms IUT.fld_exists
+#print axioms IUT.lpb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
