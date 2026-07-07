@@ -484,3 +484,4 @@ import IUT.TemperedPi1Etale
 import IUT.ArtinConductor
 import IUT.ThetaClassCommutatorBridge
 import IUT.LogVolMultiradialTransport
+import IUT.ArakelovPicExact

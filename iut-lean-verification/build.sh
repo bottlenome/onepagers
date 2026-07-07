@@ -2347,6 +2347,8 @@ import IUT
 #print axioms IUT.tccb_exists
 #print axioms IUT.lvt_two_sided_transported
 #print axioms IUT.lvt_exists
+#print axioms IUT.ape_exact_at_pic
+#print axioms IUT.ape_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
