@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 441,
-  "verified_theorem_total": 2260,
-  "choice_free_count": 356,
+  "module_count": 442,
+  "verified_theorem_total": 2262,
+  "choice_free_count": 357,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5406,6 +5406,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ConductorDiscriminantAbelian.lean"
+    },
+    {
+      "id": "TemperedThetaOuterAction",
+      "label": "TemperedThetaOuterAction",
+      "milestone": "M389F",
+      "title": "TemperedThetaOuterAction",
+      "pillar": "A",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedThetaOuterAction.lean"
     }
   ],
   "edges": [
@@ -6372,6 +6384,10 @@
     {
       "source": "GaloisTheta",
       "target": "KummerCharReal"
+    },
+    {
+      "source": "GaloisTheta",
+      "target": "TemperedThetaOuterAction"
     },
     {
       "source": "GaloisTheta",
@@ -7984,6 +8000,10 @@
     {
       "source": "TemperedPi1",
       "target": "ThetaCovering"
+    },
+    {
+      "source": "TemperedThetaCommutator",
+      "target": "TemperedThetaOuterAction"
     },
     {
       "source": "TemperedTower",
