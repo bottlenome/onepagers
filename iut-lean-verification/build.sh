@@ -2229,6 +2229,8 @@ import IUT
 #print axioms IUT.hsym_antisymmetric
 #print axioms IUT.dsc_ramified_two
 #print axioms IUT.dsc_split_degree_sum
+#print axioms IUT.top_product_galois_fixed
+#print axioms IUT.top_cyc_prod_pow
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

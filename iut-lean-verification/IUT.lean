@@ -425,3 +425,4 @@ import IUT.MultiradialRep
 import IUT.ThetaCovering
 import IUT.HilbertSymbol
 import IUT.DifferentDiscriminant
+import IUT.ThetaOrbitProduct

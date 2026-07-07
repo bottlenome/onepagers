@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 421,
-  "verified_theorem_total": 2220,
-  "choice_free_count": 342,
+  "module_count": 422,
+  "verified_theorem_total": 2222,
+  "choice_free_count": 343,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5159,6 +5159,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DifferentDiscriminant.lean"
+    },
+    {
+      "id": "ThetaOrbitProduct",
+      "label": "ThetaOrbitProduct",
+      "milestone": "M373F",
+      "title": "ThetaOrbitProduct",
+      "pillar": "E",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaOrbitProduct.lean"
     }
   ],
   "edges": [
@@ -6153,6 +6165,10 @@
     {
       "source": "GaussianVolume",
       "target": "Premises311"
+    },
+    {
+      "source": "GaussianVolume",
+      "target": "ThetaOrbitProduct"
     },
     {
       "source": "GaussianVolume",
@@ -7673,6 +7689,10 @@
     {
       "source": "ThetaFuneqBridge",
       "target": "ThetaOperatorHom"
+    },
+    {
+      "source": "ThetaGaloisOrbit",
+      "target": "ThetaOrbitProduct"
     },
     {
       "source": "ThetaGauss",
