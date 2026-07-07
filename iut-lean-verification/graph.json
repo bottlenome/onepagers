@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 492,
-  "verified_theorem_total": 2363,
-  "choice_free_count": 404,
+  "module_count": 497,
+  "verified_theorem_total": 2373,
+  "choice_free_count": 409,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6018,6 +6018,68 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeIdentification.lean"
     },
     {
+      "id": "ArakelovGreenArch",
+      "label": "ArakelovGreenArch",
+      "milestone": "M445F",
+      "title": "柱C: アルキメデス Green 関数寄与の昇格",
+      "pillar": "C",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovGreenArch.lean"
+    },
+    {
+      "id": "LogLinkFullIndetGroup",
+      "label": "LogLinkFullIndetGroup",
+      "milestone": "M447F",
+      "title": "定理3.11 / log-link 版多輻 log-volume 輸送の (Ind1",
+      "pillar": "D",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogLinkFullIndetGroup.lean"
+    },
+    {
+      "id": "MultiJumpWildDiscriminant",
+      "label": "MultiJumpWildDiscriminant",
+      "milestone": "M446F",
+      "title": "MultiJumpWildDiscriminant",
+      "pillar": "B",
+      "decl_count": 40,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiJumpWildDiscriminant.lean"
+    },
+    {
+      "id": "KummerCharWiring",
+      "label": "KummerCharWiring",
+      "milestone": "M448F",
+      "title": "KummerCharWiring",
+      "pillar": "E",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/KummerCharWiring.lean"
+    },
+    {
+      "id": "ThetaLinkPolyIso",
+      "label": "ThetaLinkPolyIso",
+      "milestone": "M444F",
+      "title": "ThetaLinkPolyIso",
+      "pillar": "A",
+      "decl_count": 48,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchIII]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkPolyIso.lean"
+    },
+    {
       "id": "MultiradialLogLinkTransport",
       "label": "MultiradialLogLinkTransport",
       "milestone": "M437F",
@@ -6145,6 +6207,10 @@
     {
       "source": "ArakelovDivisor",
       "target": "FrobArakelovBridge"
+    },
+    {
+      "source": "ArakelovIntersectionPairing",
+      "target": "ArakelovGreenArch"
     },
     {
       "source": "ArchHaarVolume",
@@ -6303,6 +6369,10 @@
       "target": "AbsTopFieldFromCyclotome"
     },
     {
+      "source": "CyclotomeIdentification",
+      "target": "KummerCharWiring"
+    },
+    {
       "source": "CyclotomeRecovery",
       "target": "AbsTopFieldFromCyclotome"
     },
@@ -6345,6 +6415,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "GaloisTheta"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "KummerCharWiring"
     },
     {
       "source": "CyclotomicRigidity",
@@ -7591,6 +7665,10 @@
       "target": "MultiradialCompare"
     },
     {
+      "source": "LogLinkIndetNonzero",
+      "target": "LogLinkFullIndetGroup"
+    },
+    {
       "source": "LogLinkIndeterminacy",
       "target": "LogThetaLatticeShell"
     },
@@ -8279,6 +8357,10 @@
       "target": "LaurentCoeff"
     },
     {
+      "source": "RamifiedNormFiltration",
+      "target": "MultiJumpWildDiscriminant"
+    },
+    {
       "source": "RamifiedReciprocity",
       "target": "EisTowerRings"
     },
@@ -8384,6 +8466,10 @@
     },
     {
       "source": "RealGeomDecay",
+      "target": "ArakelovGreenArch"
+    },
+    {
+      "source": "RealGeomDecay",
       "target": "GeomConverge"
     },
     {
@@ -8405,6 +8491,10 @@
     {
       "source": "RealInv",
       "target": "RealRingLaws"
+    },
+    {
+      "source": "RealLe",
+      "target": "ArakelovGreenArch"
     },
     {
       "source": "RealLe",
@@ -8665,6 +8755,10 @@
     {
       "source": "Ring",
       "target": "StructureSheafBasic"
+    },
+    {
+      "source": "Ring",
+      "target": "ThetaLinkPolyIso"
     },
     {
       "source": "RingLocalization",
@@ -9012,6 +9106,10 @@
     },
     {
       "source": "ThetaKummerClass",
+      "target": "KummerCharWiring"
+    },
+    {
+      "source": "ThetaKummerClass",
       "target": "LogKummerMonoTheta"
     },
     {
@@ -9069,6 +9167,10 @@
     {
       "source": "ThetaLinkTransport",
       "target": "TransportMirror"
+    },
+    {
+      "source": "ThetaLinkTwoTheater",
+      "target": "ThetaLinkPolyIso"
     },
     {
       "source": "ThetaMuTorsor",
@@ -9341,6 +9443,10 @@
     {
       "source": "WeilPairing",
       "target": "WeilGaloisEquiv"
+    },
+    {
+      "source": "WildConductorDiscriminant",
+      "target": "MultiJumpWildDiscriminant"
     },
     {
       "source": "ZmodOrder",

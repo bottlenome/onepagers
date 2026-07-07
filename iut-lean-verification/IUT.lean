@@ -494,5 +494,10 @@ import IUT.ThetaLinkTwoTheater
 import IUT.ArakelovIntersectionPairing
 import IUT.WildConductorDiscriminant
 import IUT.CyclotomeIdentification
+import IUT.ArakelovGreenArch
+import IUT.LogLinkFullIndetGroup
+import IUT.MultiJumpWildDiscriminant
+import IUT.KummerCharWiring
+import IUT.ThetaLinkPolyIso
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1

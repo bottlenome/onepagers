@@ -2372,6 +2372,16 @@ import IUT
 #print axioms IUT.wcd_exists
 #print axioms IUT.cid_commutator_agree_via_iso
 #print axioms IUT.cid_exists
+#print axioms IUT.agr_green_not_pointwise
+#print axioms IUT.agr_exists
+#print axioms IUT.lfi_two_sided_group_invariant
+#print axioms IUT.lfi_exists
+#print axioms IUT.mjw_conductor_discriminant_multi
+#print axioms IUT.mjw_exists
+#print axioms IUT.kcw_galois_equivariant_concrete
+#print axioms IUT.kcw_exists
+#print axioms IUT.tlp_link_not_ring_hom
+#print axioms IUT.tlp_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
