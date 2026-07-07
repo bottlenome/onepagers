@@ -2283,6 +2283,10 @@ import IUT
 #print axioms IUT.brf_exists
 #print axioms IUT.tvob_orbit_exponent
 #print axioms IUT.tvob_exists
+#print axioms IUT.rbc_inv_eq_char_rec
+#print axioms IUT.rbc_exists
+#print axioms IUT.mlc_compare_around_square
+#print axioms IUT.mlc_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

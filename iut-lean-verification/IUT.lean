@@ -452,3 +452,5 @@ import IUT.RingOfIntegersDiscriminant
 import IUT.LogThetaLatticeShell
 import IUT.BrauerInvariantFull
 import IUT.ThetaValueOrbitBridge
+import IUT.ReciprocityBrauerCompat
+import IUT.MultiradialLatticeCompare

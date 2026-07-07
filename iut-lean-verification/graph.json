@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 448,
-  "verified_theorem_total": 2274,
-  "choice_free_count": 362,
+  "module_count": 450,
+  "verified_theorem_total": 2278,
+  "choice_free_count": 364,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5490,6 +5490,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueOrbitBridge.lean"
+    },
+    {
+      "id": "ReciprocityBrauerCompat",
+      "label": "ReciprocityBrauerCompat",
+      "milestone": "M400F",
+      "title": "相互写像 ↔ Brauer 不変量の整合: 実部分ケース",
+      "pillar": "B",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ReciprocityBrauerCompat.lean"
+    },
+    {
+      "id": "MultiradialLatticeCompare",
+      "label": "MultiradialLatticeCompare",
+      "milestone": "M402F",
+      "title": "多輻比較 ⇄ log-theta-lattice 整合",
+      "pillar": "D",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialLatticeCompare.lean"
     }
   ],
   "edges": [
@@ -5612,6 +5636,10 @@
     {
       "source": "BrauerInvariant",
       "target": "TameSymbol"
+    },
+    {
+      "source": "BrauerInvariantFull",
+      "target": "ReciprocityBrauerCompat"
     },
     {
       "source": "CategoryTheory",
@@ -6994,6 +7022,10 @@
       "target": "ThetaLinkReal"
     },
     {
+      "source": "LogThetaLatticeShell",
+      "target": "MultiradialLatticeCompare"
+    },
+    {
       "source": "LogVolBridge",
       "target": "LogVolEffMono"
     },
@@ -7040,6 +7072,10 @@
     {
       "source": "LubinTateExists",
       "target": "PowerSeries2"
+    },
+    {
+      "source": "LubinTateNormGroup",
+      "target": "ReciprocityBrauerCompat"
     },
     {
       "source": "LubinTateReciprocity",
@@ -7182,6 +7218,10 @@
       "target": "LogLinkIndeterminacy"
     },
     {
+      "source": "MultiradialCompare",
+      "target": "MultiradialLatticeCompare"
+    },
+    {
       "source": "MultiradialInput",
       "target": "InputConverse"
     },
@@ -7200,6 +7240,10 @@
     {
       "source": "MultiradialRep",
       "target": "MultiradialIndet"
+    },
+    {
+      "source": "MultiradialRep",
+      "target": "MultiradialLatticeCompare"
     },
     {
       "source": "NatPrimeParts",
