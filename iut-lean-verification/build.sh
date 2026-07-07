@@ -2237,6 +2237,8 @@ import IUT
 #print axioms IUT.cyd_p_totally_ramified
 #print axioms IUT.lkm_rep_preserved
 #print axioms IUT.lkm_kummer_class_transported
+#print axioms IUT.tsy_tame_antisymmetric
+#print axioms IUT.tsy_concrete_invariant
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

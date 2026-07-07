@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 425,
-  "verified_theorem_total": 2228,
-  "choice_free_count": 345,
+  "module_count": 426,
+  "verified_theorem_total": 2230,
+  "choice_free_count": 346,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5207,6 +5207,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogKummerMonoTheta.lean"
+    },
+    {
+      "id": "TameSymbol",
+      "label": "TameSymbol",
+      "milestone": "M375F",
+      "title": "TameSymbol",
+      "pillar": "B",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TameSymbol.lean"
     }
   ],
   "edges": [
@@ -5321,6 +5333,10 @@
     {
       "source": "BrauerInvariant",
       "target": "HilbertSymbol"
+    },
+    {
+      "source": "BrauerInvariant",
+      "target": "TameSymbol"
     },
     {
       "source": "CategoryTheory",
