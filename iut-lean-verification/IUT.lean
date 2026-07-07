@@ -437,3 +437,7 @@ import IUT.ThetaRigidityBridge
 import IUT.MultiradialIndet
 import IUT.LubinTate
 import IUT.CyclotomicPrimePower
+import IUT.TemperedThetaCommutator
+import IUT.LubinTateReciprocity
+import IUT.LogShellContainment
+import IUT.MonoThetaTripleBridge

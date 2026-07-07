@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 433,
-  "verified_theorem_total": 2244,
-  "choice_free_count": 349,
+  "module_count": 437,
+  "verified_theorem_total": 2252,
+  "choice_free_count": 353,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5307,6 +5307,57 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicPrimePower.lean"
+    },
+    {
+      "id": "TemperedThetaCommutator",
+      "label": "TemperedThetaCommutator",
+      "milestone": "M384F",
+      "title": "TemperedThetaCommutator",
+      "pillar": "A",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]",
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedThetaCommutator.lean"
+    },
+    {
+      "id": "LubinTateReciprocity",
+      "label": "LubinTateReciprocity",
+      "milestone": "M385F",
+      "title": "Lubin–Tate 明示的相互律: 実部分ケース",
+      "pillar": "B",
+      "decl_count": 26,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTateReciprocity.lean"
+    },
+    {
+      "id": "LogShellContainment",
+      "label": "LogShellContainment",
+      "milestone": "M387F",
+      "title": "本物の対数殻フィルトレーション包含格子",
+      "pillar": "D",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogShellContainment.lean"
+    },
+    {
+      "id": "MonoThetaTripleBridge",
+      "label": "MonoThetaTripleBridge",
+      "milestone": "M388F",
+      "title": "MonoThetaTripleBridge",
+      "pillar": "E",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MonoThetaTripleBridge.lean"
     }
   ],
   "edges": [
@@ -6692,6 +6743,10 @@
     },
     {
       "source": "LocalReciprocity",
+      "target": "LubinTateReciprocity"
+    },
+    {
+      "source": "LocalReciprocity",
       "target": "NormGroup"
     },
     {
@@ -6709,6 +6764,10 @@
     {
       "source": "LogKummerReal",
       "target": "LogLinkReal"
+    },
+    {
+      "source": "LogKummerReal",
+      "target": "LogShellContainment"
     },
     {
       "source": "LogKummerReal",
@@ -6745,6 +6804,10 @@
     {
       "source": "LogShellReal",
       "target": "LogLinkReal"
+    },
+    {
+      "source": "LogShellReal",
+      "target": "LogShellContainment"
     },
     {
       "source": "LogShellReal",
@@ -6801,6 +6864,10 @@
     {
       "source": "LogVolumeArch",
       "target": "ProductFormula"
+    },
+    {
+      "source": "LubinTate",
+      "target": "LubinTateReciprocity"
     },
     {
       "source": "LubinTateExists",
@@ -7839,6 +7906,10 @@
       "target": "RootsOfUnity"
     },
     {
+      "source": "TemperedCommutator",
+      "target": "TemperedThetaCommutator"
+    },
+    {
       "source": "TemperedPi1",
       "target": "ThetaCovering"
     },
@@ -7905,6 +7976,10 @@
     {
       "source": "ThetaHeisenbergLift",
       "target": "MonoThetaEnv"
+    },
+    {
+      "source": "ThetaHeisenbergLift",
+      "target": "TemperedThetaCommutator"
     },
     {
       "source": "ThetaHeisenbergLift",
@@ -7993,6 +8068,10 @@
     {
       "source": "ThetaReflection",
       "target": "FuneqLift"
+    },
+    {
+      "source": "ThetaRigidityBridge",
+      "target": "MonoThetaTripleBridge"
     },
     {
       "source": "ThetaRingObject",

@@ -2253,6 +2253,14 @@ import IUT
 #print axioms IUT.ltmFuncEq
 #print axioms IUT.cpp_different_eq_wild_formula
 #print axioms IUT.cpp_wildly_ramified
+#print axioms IUT.ttc_commutator_mu
+#print axioms IUT.ttc_thetaGrp_not_tcmAbelian
+#print axioms IUT.ltr_rec_inverse
+#print axioms IUT.ltr_exists
+#print axioms IUT.lsc_log_upper
+#print axioms IUT.lsc_graded_iso
+#print axioms IUT.mtt_triple_holds
+#print axioms IUT.mtt_zeta_sq_mul
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
