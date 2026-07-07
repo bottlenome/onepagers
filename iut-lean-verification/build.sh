@@ -2231,6 +2231,12 @@ import IUT
 #print axioms IUT.dsc_split_degree_sum
 #print axioms IUT.top_product_galois_fixed
 #print axioms IUT.top_cyc_prod_pow
+#print axioms IUT.tpb_orbit_exp_eq_pilot_core
+#print axioms IUT.tpb_pilot_volume_of_orbit
+#print axioms IUT.cyd_ramified_iff
+#print axioms IUT.cyd_p_totally_ramified
+#print axioms IUT.lkm_rep_preserved
+#print axioms IUT.lkm_kummer_class_transported
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

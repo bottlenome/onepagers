@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 422,
-  "verified_theorem_total": 2222,
-  "choice_free_count": 343,
+  "module_count": 425,
+  "verified_theorem_total": 2228,
+  "choice_free_count": 345,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5171,6 +5171,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaOrbitProduct.lean"
+    },
+    {
+      "id": "ThetaPilotOrbitBridge",
+      "label": "ThetaPilotOrbitBridge",
+      "milestone": "M378F",
+      "title": "ThetaPilotOrbitBridge",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaPilotOrbitBridge.lean"
+    },
+    {
+      "id": "CyclotomicDiscriminant",
+      "label": "CyclotomicDiscriminant",
+      "milestone": "M376F",
+      "title": "CyclotomicDiscriminant",
+      "pillar": "C",
+      "decl_count": 30,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicDiscriminant.lean"
+    },
+    {
+      "id": "LogKummerMonoTheta",
+      "label": "LogKummerMonoTheta",
+      "milestone": "M377F",
+      "title": "LogKummerMonoTheta",
+      "pillar": "D",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogKummerMonoTheta.lean"
     }
   ],
   "edges": [
@@ -5369,6 +5405,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "CyclotomeRecovery"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "CyclotomicDiscriminant"
     },
     {
       "source": "CyclotomicRigidity",
@@ -6548,6 +6588,10 @@
     },
     {
       "source": "LogKummerReal",
+      "target": "LogKummerMonoTheta"
+    },
+    {
+      "source": "LogKummerReal",
       "target": "LogLinkReal"
     },
     {
@@ -6557,6 +6601,10 @@
     {
       "source": "LogLinkIndeterminacy",
       "target": "MultiradialRep"
+    },
+    {
+      "source": "LogLinkReal",
+      "target": "LogKummerMonoTheta"
     },
     {
       "source": "LogLinkReal",
@@ -6687,6 +6735,10 @@
       "target": "PillarDFoundation"
     },
     {
+      "source": "MonoThetaEnvironment",
+      "target": "LogKummerMonoTheta"
+    },
+    {
       "source": "MonoThetaRigidity",
       "target": "ThetaCyclotomicRigidity"
     },
@@ -6777,6 +6829,14 @@
     {
       "source": "MultiradialInput",
       "target": "ThetaLinkTransport"
+    },
+    {
+      "source": "MultiradialRep",
+      "target": "LogKummerMonoTheta"
+    },
+    {
+      "source": "NatPrimeParts",
+      "target": "CyclotomicDiscriminant"
     },
     {
       "source": "NatPrimeParts",
@@ -7724,6 +7784,10 @@
     },
     {
       "source": "ThetaKummerClass",
+      "target": "LogKummerMonoTheta"
+    },
+    {
+      "source": "ThetaKummerClass",
       "target": "ThetaKummerRigidity"
     },
     {
@@ -7749,6 +7813,10 @@
     {
       "source": "ThetaOperatorHom",
       "target": "ThetaChainCapstone"
+    },
+    {
+      "source": "ThetaOrbitProduct",
+      "target": "ThetaPilotOrbitBridge"
     },
     {
       "source": "ThetaPM",
@@ -7781,6 +7849,10 @@
     {
       "source": "ThetaPilotRealVolume",
       "target": "ThetaLinkReal"
+    },
+    {
+      "source": "ThetaPilotRealVolume",
+      "target": "ThetaPilotOrbitBridge"
     },
     {
       "source": "ThetaReflection",
