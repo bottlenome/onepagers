@@ -2287,6 +2287,8 @@ import IUT
 #print axioms IUT.rbc_exists
 #print axioms IUT.mlc_compare_around_square
 #print axioms IUT.mlc_exists
+#print axioms IUT.dlb_disc_gt_one
+#print axioms IUT.dlb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

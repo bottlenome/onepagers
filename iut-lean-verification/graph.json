@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 450,
-  "verified_theorem_total": 2278,
+  "module_count": 451,
+  "verified_theorem_total": 2280,
   "choice_free_count": 364,
   "nodes": [
     {
@@ -5514,6 +5514,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/MultiradialLatticeCompare.lean"
+    },
+    {
+      "id": "DiscriminantLowerBound",
+      "label": "DiscriminantLowerBound",
+      "milestone": "M401F",
+      "title": "DiscriminantLowerBound",
+      "pillar": "C",
+      "decl_count": 27,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/DiscriminantLowerBound.lean"
     }
   ],
   "edges": [
@@ -7940,6 +7952,10 @@
     {
       "source": "RingLocalization",
       "target": "LocalRingStalk"
+    },
+    {
+      "source": "RingOfIntegersDiscriminant",
+      "target": "DiscriminantLowerBound"
     },
     {
       "source": "RootAdjunction",
