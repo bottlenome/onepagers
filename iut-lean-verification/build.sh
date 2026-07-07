@@ -2353,6 +2353,10 @@ import IUT
 #print axioms IUT.atp_outer_galois
 #print axioms IUT.atp_act_theta_commutator
 #print axioms IUT.atp_exists
+#print axioms IUT.cdd_conductor_discriminant
+#print axioms IUT.cdd_exists
+#print axioms IUT.aad_deg_intersection
+#print axioms IUT.aad_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

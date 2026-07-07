@@ -486,3 +486,5 @@ import IUT.ThetaClassCommutatorBridge
 import IUT.LogVolMultiradialTransport
 import IUT.ArakelovPicExact
 import IUT.ArithTemperedPi1
+import IUT.ConductorDiscriminant
+import IUT.ArakelovArithDegree
