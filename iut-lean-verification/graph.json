@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 481,
-  "verified_theorem_total": 2340,
-  "choice_free_count": 394,
+  "module_count": 482,
+  "verified_theorem_total": 2344,
+  "choice_free_count": 395,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5903,6 +5903,21 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovPicExact.lean"
+    },
+    {
+      "id": "ArithTemperedPi1",
+      "label": "ArithTemperedPi1",
+      "milestone": "M429F",
+      "title": "ArithTemperedPi1",
+      "pillar": "A",
+      "decl_count": 71,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchI]",
+        "[SemiAnbd]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArithTemperedPi1.lean"
     }
   ],
   "edges": [
@@ -8681,6 +8696,10 @@
     {
       "source": "TemperedPi1",
       "target": "ThetaCovering"
+    },
+    {
+      "source": "TemperedPi1Etale",
+      "target": "ArithTemperedPi1"
     },
     {
       "source": "TemperedThetaCommutator",

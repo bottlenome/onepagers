@@ -2349,6 +2349,10 @@ import IUT
 #print axioms IUT.lvt_exists
 #print axioms IUT.ape_exact_at_pic
 #print axioms IUT.ape_exists
+#print axioms IUT.atp_tower_exact
+#print axioms IUT.atp_outer_galois
+#print axioms IUT.atp_act_theta_commutator
+#print axioms IUT.atp_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
