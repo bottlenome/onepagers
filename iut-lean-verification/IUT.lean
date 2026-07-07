@@ -442,3 +442,5 @@ import IUT.LubinTateReciprocity
 import IUT.LogShellContainment
 import IUT.MonoThetaTripleBridge
 import IUT.LogLinkShellCompat
+import IUT.ThetaKummerTripleBridge
+import IUT.LubinTateNormGroup

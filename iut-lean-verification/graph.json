@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 438,
-  "verified_theorem_total": 2254,
-  "choice_free_count": 354,
+  "module_count": 440,
+  "verified_theorem_total": 2258,
+  "choice_free_count": 356,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5370,6 +5370,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LogLinkShellCompat.lean"
+    },
+    {
+      "id": "ThetaKummerTripleBridge",
+      "label": "ThetaKummerTripleBridge",
+      "milestone": "M393F",
+      "title": "ThetaKummerTripleBridge",
+      "pillar": "E",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaKummerTripleBridge.lean"
+    },
+    {
+      "id": "LubinTateNormGroup",
+      "label": "LubinTateNormGroup",
+      "milestone": "M390F",
+      "title": "Lubin–Tate 相互写像の核 = ノルム群: 実部分ケース",
+      "pillar": "B",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/LubinTateNormGroup.lean"
     }
   ],
   "edges": [
@@ -6894,6 +6918,10 @@
       "target": "PowerSeries2"
     },
     {
+      "source": "LubinTateReciprocity",
+      "target": "LubinTateNormGroup"
+    },
+    {
       "source": "LubinTateUnique",
       "target": "LubinTateZp"
     },
@@ -6948,6 +6976,10 @@
     {
       "source": "MonoThetaRigidity",
       "target": "ThetaCyclotomicRigidity"
+    },
+    {
+      "source": "MonoThetaTripleBridge",
+      "target": "ThetaKummerTripleBridge"
     },
     {
       "source": "MonoThetaWitness",
@@ -7056,6 +7088,10 @@
     {
       "source": "NatPrimeParts",
       "target": "PrimitiveRoot"
+    },
+    {
+      "source": "NormGroup",
+      "target": "LubinTateNormGroup"
     },
     {
       "source": "NormalPairBoundary",

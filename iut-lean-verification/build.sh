@@ -2263,6 +2263,10 @@ import IUT
 #print axioms IUT.mtt_zeta_sq_mul
 #print axioms IUT.llsc_graded_iso
 #print axioms IUT.llsc_vol_upper_compat
+#print axioms IUT.tktb_class_governed
+#print axioms IUT.tktb_exists
+#print axioms IUT.ltng_kernel_eq_norm
+#print axioms IUT.ltng_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
