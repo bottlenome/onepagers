@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 459,
-  "verified_theorem_total": 2296,
-  "choice_free_count": 372,
+  "module_count": 460,
+  "verified_theorem_total": 2298,
+  "choice_free_count": 373,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5628,6 +5628,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/AbsTopFieldFromCyclotome.lean"
+    },
+    {
+      "id": "PilotComparisonMultiradial",
+      "label": "PilotComparisonMultiradial",
+      "milestone": "M412F",
+      "title": "定理3.11 / パイロット比較の多輻表現化",
+      "pillar": "D",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PilotComparisonMultiradial.lean"
     }
   ],
   "edges": [
@@ -5802,6 +5814,10 @@
     {
       "source": "CosetGalois",
       "target": "NormalPairBoundary"
+    },
+    {
+      "source": "CruxInequalityReal",
+      "target": "PilotComparisonMultiradial"
     },
     {
       "source": "CruxInequalityReal",
@@ -8406,6 +8422,10 @@
     {
       "source": "ThetaLabelInjective",
       "target": "ThetaValueConstruct"
+    },
+    {
+      "source": "ThetaLinkMultiradial",
+      "target": "PilotComparisonMultiradial"
     },
     {
       "source": "ThetaLinkReal",

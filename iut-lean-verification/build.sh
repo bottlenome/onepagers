@@ -2305,6 +2305,8 @@ import IUT
 #print axioms IUT.tovb_exists
 #print axioms IUT.atfc_absTopIII_from_cyclotome
 #print axioms IUT.atfc_exists
+#print axioms IUT.pcm_multiradial_crux_iff
+#print axioms IUT.pcm_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
