@@ -2271,6 +2271,8 @@ import IUT
 #print axioms IUT.cda_specialize_M381F
 #print axioms IUT.ttoa_commutator_twist
 #print axioms IUT.ttoa_exists
+#print axioms IUT.tvtb_class_value
+#print axioms IUT.tvtb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

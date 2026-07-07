@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 442,
-  "verified_theorem_total": 2262,
-  "choice_free_count": 357,
+  "module_count": 443,
+  "verified_theorem_total": 2264,
+  "choice_free_count": 358,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -5418,6 +5418,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TemperedThetaOuterAction.lean"
+    },
+    {
+      "id": "ThetaValueTripleBridge",
+      "label": "ThetaValueTripleBridge",
+      "milestone": "M398F",
+      "title": "ThetaValueTripleBridge",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueTripleBridge.lean"
     }
   ],
   "edges": [
@@ -8092,6 +8104,10 @@
     {
       "source": "ThetaKummerRigidity",
       "target": "MonoThetaEnvironment"
+    },
+    {
+      "source": "ThetaKummerTripleBridge",
+      "target": "ThetaValueTripleBridge"
     },
     {
       "source": "ThetaLabelInjective",

@@ -446,3 +446,4 @@ import IUT.ThetaKummerTripleBridge
 import IUT.LubinTateNormGroup
 import IUT.ConductorDiscriminantAbelian
 import IUT.TemperedThetaOuterAction
+import IUT.ThetaValueTripleBridge
