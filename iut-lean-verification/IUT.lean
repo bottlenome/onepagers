@@ -514,5 +514,10 @@ import IUT.GreenAnisotropic
 import IUT.IndetHaarIntegral
 import IUT.ZmodInverseBezout
 import IUT.InfiniteLogThetaLattice
+import IUT.CoprimalityDecision
+import IUT.HasseArfFiniteAbelian
+import IUT.LatticeCoherenceIndet
+import IUT.GreenVariableCoeff
+import IUT.IndetHaarLimit
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1

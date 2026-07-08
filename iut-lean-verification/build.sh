@@ -2412,6 +2412,16 @@ import IUT
 #print axioms IUT.zib_exists
 #print axioms IUT.ilt_path_independent
 #print axioms IUT.ilt_exists
+#print axioms IUT.cpd_coprime_correct
+#print axioms IUT.cpd_exists
+#print axioms IUT.hfa_upper_break_integer
+#print axioms IUT.hfa_exists
+#print axioms IUT.lci2_path_coherent_mod_indet
+#print axioms IUT.lci2_exists
+#print axioms IUT.gvc_mixed_nonzero
+#print axioms IUT.gvc_exists
+#print axioms IUT.ihl_limit_two_sided
+#print axioms IUT.ihl_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
