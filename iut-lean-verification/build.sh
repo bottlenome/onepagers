@@ -2422,6 +2422,16 @@ import IUT
 #print axioms IUT.gvc_exists
 #print axioms IUT.ihl_limit_two_sided
 #print axioms IUT.ihl_exists
+#print axioms IUT.ach_artin_additive
+#print axioms IUT.ach_exists
+#print axioms IUT.gvs_solves_poisson
+#print axioms IUT.gvs_exists
+#print axioms IUT.lcc_path_coherent_mod_cont_indet
+#print axioms IUT.lcc_exists
+#print axioms IUT.nuc_unit_iff_coprime
+#print axioms IUT.nuc_exists
+#print axioms IUT.hnc_monotone_cauchy
+#print axioms IUT.hnc_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

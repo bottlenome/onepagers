@@ -519,5 +519,10 @@ import IUT.HasseArfFiniteAbelian
 import IUT.LatticeCoherenceIndet
 import IUT.GreenVariableCoeff
 import IUT.IndetHaarLimit
+import IUT.ArtinConductorHigherDim
+import IUT.GreenVariableSolve
+import IUT.LatticeCoherenceContinuous
+import IUT.NonUnitConstructive
+import IUT.HaarNonconstantConverge
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1
