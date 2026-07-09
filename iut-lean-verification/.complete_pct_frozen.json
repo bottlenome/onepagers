@@ -1,0 +1,9 @@
+{
+  "_about": "未監査の柱の complete_pct 上限(anti-inflation freeze)。target_ledger.json の status がまだ null の柱は、監査で埋まるまで graph-meta.json の complete_pct をこの値より上げられない(フックがブロック)。数字を上げる正規の経路は『独立監査が target_ledger.json の status を埋める→スクリプトが自動計算』であって、このファイルの手編集ではない。値は第140-147弾の水増しを撤回した第139弾水準(=既にこれ自体も未監査の自己申告なので、全監査後はさらに下がる可能性が高い)。",
+  "A": 62,
+  "B": 38,
+  "C": 39,
+  "D": 29,
+  "E": 35,
+  "core": 100
+}
