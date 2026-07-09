@@ -26,8 +26,8 @@
       "label": "柱B 局所類体論",
       "color": "#34d399",
       "progress_pct": 94,
-      "complete_pct": 10,
-      "complete_note": "実 IUT 完全証明率 10%（独立監査確定）。本物は実ℤ_p上の実主単数群1+pℤ_pと実単数フィルトレーションU^(d)のみ(B1=0.5)。相互写像は積群模型、Artin導手はBool→Nat、Hasse–Arf群はList Nat、Kummerは抽象体上——コード全体を通じて実Galois群(実体拡大L/KのAutまたは逆極限)が一つも存在しない。B2-B6=0。",
+      "complete_pct": 18,
+      "complete_note": "実 IUT 完全証明率 10%（独立監査確定）。本物は実ℤ_p上の実主単数群1+pℤ_pと実単数フィルトレーションU^(d)のみ(B1=0.5)。相互写像は積群模型、Artin導手はBool→Nat、Hasse–Arf群はList Nat、Kummerは抽象体上——コード全体を通じて実Galois群(実体拡大L/KのAutまたは逆極限)が一つも存在しない。B2-B6=0。 ／B5 積公式 ∏_v|x|_v=1(実 |·|_∞・実 |·|_p=p^{-v_p}・実素因数分解 pfc_prod_factors・実有限台積 fspProd の上で一般 x∈ℚˣ)を実証(B5ProductFormulaQ)＝独立再監査で B5 0→0.5(K=ℚ・積公式側のみ、大域相互写像/イデール類群は未で 1 不可)。B 10→18。",
       "status": "剛性 ✅ / eisRing 分離・B-3 μ_{p−1}≅(ℤ/p)^×・B-1 塔分岐: π_n∈(λ_n) 無条件(M222F)+exact 付値 v(ι(λ_n))=p 無条件化(M235F)+幾何的下界(M239F)+剰余体次数 f=1（ρ_n 全射 M246F）+剰余核下界(M251F)+**塔全体の剰余体同型 O_n/(λ_n)≅ℤ/p 全 n（核=(λ_n) 全 n・一段割り算で n 帰納・f 側全レベル完成 M260F）**+総括 capstone(M243F)・基点 e=p−1 exact・B-2 分岐 rec・B-4 End(F)≅ℤ_p。残: 分岐指数 e 完全値 v(π_{n+1})=p·v(π_n)（ef の e 側・上界）・商環 O_n/(λ_n) 明示構成・B-2 完全全射・Λₙ(n≥2) (#36)",
       "blurb": "LCFT・単数群・Teichmüller・Eisenstein 捻れ・End(F)環・剰余塔・λ 全伝播。残: λ-adic 付値ほか",
       "plain": "素数1つの周りの「小さな数の世界」の数論"
@@ -204,5 +204,5 @@
       "summary": "LT 形式群法則の結合則 F(F(X,Y),Z)=F(X,F(Y,Z))（M71）"
     }
   },
-  "_last_round": "2026-07-09 §2(b) 本物建設ラウンド: 実数体 ℚ(√D)（Gal 位数ちょうど2・ℚ(i) の |Gal|=2 限定を解消）・実ノルム N:ℚ(i)^×→ℚ^×・実アルキメデス絶対値 |·|_∞・実 p 進付値 v_p・実円分体 ℚ(ζ_3)+実 μ_3 の 5 モジュールを追加（全 compile 済・axiom [propext,Quot.sound] のみ・sorry/新規 choice なし）。**complete_pct 0 前進**（A34/B10/C41/D18/E42 据え置き）——5 名の独立敵対的監査が全柱・全項目の status を据え置き判定（本物だが台帳満点条件未達: 有限 Galois≠逆極限 G_K・付値≠完備化・絶対値≠Arakelov・μ_3 は l=3 単独で一般 μ_l 未達）。第140–147弾の模型水増しと対照的な『本物の作業・正直な横這い』。詳細 audit/wave-sec2b-quadfield-2026-07-09.md。"
+  "_last_round": "2026-07-09 §2(b) B5 積公式ラウンド: ℚ 上の積公式 |x|_∞·∏_p|x|_p=1 を一般 x∈ℚˣ で実証(B5ProductFormulaQ)。5 スライス(実 FTA 積形 PrimeFactorization・実 p 進絶対値 PadicAbsValueQ・実有限台積 FiniteSupportPrimeProduct・実アルキメデス橋 ArchValueInteger・cleared-form 組み立て)。全 axiom [propext,Quot.sound] のみ。**独立 B 再監査で B5 0→0.5**(以前 0 の理由『積公式の定理そのものが存在しない=材料のみ』を実定理が解消。主語は全て実対象・非空虚・一般 x で成立・axioms propext/Quot.sound のみ。大域 CFT 本体未達で 0.5 上限)。B 10→18、全体 ≈29→31%。撤回後**初の実 complete_pct 前進**(自己申告でなく独立監査確定)。詳細 audit/B5-product-formula-plan.md。"
 }
