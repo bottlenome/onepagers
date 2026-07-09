@@ -65,7 +65,7 @@ namespace IUT
     多項式整除 `pdbDvd`（有界余因子）を主語にした忠実な既約性。toy 主語不使用。 -/
 def pibIrreducible (R : CRing) (f : PS R) : Prop :=
   (∃ nf, 1 ≤ nf ∧ IsPolyBounded R f (nf + 1) ∧ f nf ≠ R.zero) ∧
-  ∀ d, pdbDvd R d f → (pdvIsUnit R d ∨ pdbAssoc R d f)
+  ∀ d, IsPoly R d → pdbDvd R d f → (pdvIsUnit R d ∨ pdbAssoc R d f)
 
 /-! ## M273F-2: 本丸の橋（既約 ⟹ gcd は単元・有界整除版） -/
 
@@ -77,9 +77,9 @@ def pibIrreducible (R : CRing) (f : PS R) : Prop :=
     `pdb_dvd_trans`（M272F-3）で合成して `pdbDvd R f a`（f∣a）を得る。これは
     hnd（f∤a）に矛盾するので、この枝は起こらず gg は単元。 -/
 theorem pib_gcd_unit_of_not_dvd (R : CRing) (f a gg : PS R)
-    (hirr : pibIrreducible R f) (hgf : pdbDvd R gg f)
+    (hirr : pibIrreducible R f) (hggP : IsPoly R gg) (hgf : pdbDvd R gg f)
     (hga : pdbDvd R gg a) (hnd : ¬ pdbDvd R f a) : pdvIsUnit R gg := by
-  cases hirr.2 gg hgf with
+  cases hirr.2 gg hggP hgf with
   | inl hu => exact hu
   | inr hassoc =>
     have hfgg : pdbDvd R f gg := hassoc.2

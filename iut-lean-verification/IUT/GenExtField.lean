@@ -148,8 +148,9 @@ theorem gef_bezout (f : PS ratRing) (nf : Nat)
   obtain ⟨s, t, gg, mg, hcomb, hggb, hggl, hgf, hga, hsP, htP⟩ :=
     pgbBezoutQ f a.val (nf + 1) ma hb hma_b hma_ne
   -- (iv) 既約性の橋: gg は単元、gg = psC c（c ≠ 0）
+  have hggP : IsPoly ratRing gg := ⟨mg + 1, hggb⟩
   have hunit : pdvIsUnit ratRing gg :=
-    pib_gcd_unit_of_not_dvd ratRing f a.val gg hirr hgf hga hnd'
+    pib_gcd_unit_of_not_dvd ratRing f a.val gg hirr hggP hgf hga hnd'
   obtain ⟨c, hc, hunitEq⟩ := pib_unit_eq_psC ratRing gg hunit
   -- (v) 単元正規化: u = c⁻¹·s, v = c⁻¹·t（IsPoly 保存つき inline 再現）
   have hpsC : IsPoly ratRing (psC ratRing (qInv c)) :=
