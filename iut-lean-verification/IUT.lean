@@ -563,3 +563,13 @@ import IUT.GenExtField
 import IUT.CbrtTwoIrreducible
 import IUT.Cq3Irreducible
 import IUT.GenFieldInstances
+import IUT.PolyLeadFindQ
+import IUT.PolyDivModFn
+import IUT.PolyMonomialBasis
+import IUT.PolyEuclidFn
+import IUT.GenExtFieldNF
+import IUT.GenExtFieldInv
+import IUT.GenExtBasisAlpha
+import IUT.GenExtTower
+import IUT.CyclotomicPolyData
+import IUT.PolyRootCount

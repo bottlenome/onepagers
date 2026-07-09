@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 559,
-  "verified_theorem_total": 2480,
-  "choice_free_count": 470,
+  "module_count": 569,
+  "verified_theorem_total": 2503,
+  "choice_free_count": 480,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6862,6 +6862,126 @@
       "has_honest_scope": false,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenFieldInstances.lean"
+    },
+    {
+      "id": "PolyLeadFindQ",
+      "label": "PolyLeadFindQ",
+      "milestone": null,
+      "title": "PolyLeadFindQ",
+      "pillar": "A",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyLeadFindQ.lean"
+    },
+    {
+      "id": "PolyDivModFn",
+      "label": "PolyDivModFn",
+      "milestone": null,
+      "title": "PolyDivModFn",
+      "pillar": "A",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyDivModFn.lean"
+    },
+    {
+      "id": "PolyMonomialBasis",
+      "label": "PolyMonomialBasis",
+      "milestone": null,
+      "title": "PolyMonomialBasis",
+      "pillar": "A",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyMonomialBasis.lean"
+    },
+    {
+      "id": "PolyEuclidFn",
+      "label": "PolyEuclidFn",
+      "milestone": null,
+      "title": "PolyEuclidFn",
+      "pillar": "A",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyEuclidFn.lean"
+    },
+    {
+      "id": "GenExtFieldNF",
+      "label": "GenExtFieldNF",
+      "milestone": null,
+      "title": "GenExtFieldNF",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenExtFieldNF.lean"
+    },
+    {
+      "id": "GenExtFieldInv",
+      "label": "GenExtFieldInv",
+      "milestone": null,
+      "title": "GenExtFieldInv",
+      "pillar": "A",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenExtFieldInv.lean"
+    },
+    {
+      "id": "GenExtBasisAlpha",
+      "label": "GenExtBasisAlpha",
+      "milestone": null,
+      "title": "GenExtBasisAlpha",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenExtBasisAlpha.lean"
+    },
+    {
+      "id": "GenExtTower",
+      "label": "GenExtTower",
+      "milestone": null,
+      "title": "GenExtTower",
+      "pillar": "A",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenExtTower.lean"
+    },
+    {
+      "id": "CyclotomicPolyData",
+      "label": "CyclotomicPolyData",
+      "milestone": null,
+      "title": "CyclotomicPolyData",
+      "pillar": "A",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicPolyData.lean"
+    },
+    {
+      "id": "PolyRootCount",
+      "label": "PolyRootCount",
+      "milestone": null,
+      "title": "PolyRootCount",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyRootCount.lean"
     }
   ],
   "edges": [
@@ -7147,6 +7267,10 @@
     },
     {
       "source": "Composition",
+      "target": "CyclotomicPolyData"
+    },
+    {
+      "source": "Composition",
       "target": "LubinTateUnique"
     },
     {
@@ -7196,6 +7320,10 @@
     {
       "source": "Cq3Base",
       "target": "Cq3Field"
+    },
+    {
+      "source": "Cq3Base",
+      "target": "CyclotomicPolyData"
     },
     {
       "source": "Cq3Base",
@@ -7507,6 +7635,10 @@
     },
     {
       "source": "EvaluationHom",
+      "target": "PolyRootCount"
+    },
+    {
+      "source": "EvaluationHom",
       "target": "SeparableEmbeddings"
     },
     {
@@ -7579,11 +7711,19 @@
     },
     {
       "source": "Field",
+      "target": "GenExtFieldInv"
+    },
+    {
+      "source": "Field",
       "target": "IntegralExtension"
     },
     {
       "source": "Field",
       "target": "PolyBezoutQ"
+    },
+    {
+      "source": "Field",
+      "target": "PolyDivModFn"
     },
     {
       "source": "Field",
@@ -7767,6 +7907,10 @@
     },
     {
       "source": "FormalGroupExists",
+      "target": "CyclotomicPolyData"
+    },
+    {
+      "source": "FormalGroupExists",
       "target": "EisensteinRing"
     },
     {
@@ -7923,6 +8067,10 @@
     },
     {
       "source": "Freshman",
+      "target": "CyclotomicPolyData"
+    },
+    {
+      "source": "Freshman",
       "target": "PSFunctor"
     },
     {
@@ -7996,6 +8144,10 @@
     {
       "source": "FrobeniusCharP",
       "target": "LTErrorDivisible"
+    },
+    {
+      "source": "FrobeniusCharP",
+      "target": "PolyMonomialBasis"
     },
     {
       "source": "FrobeniusGen",
@@ -8214,8 +8366,24 @@
       "target": "VolumeReal"
     },
     {
+      "source": "GenExtBasisAlpha",
+      "target": "GenExtTower"
+    },
+    {
       "source": "GenExtField",
       "target": "GenFieldInstances"
+    },
+    {
+      "source": "GenExtFieldInv",
+      "target": "GenExtTower"
+    },
+    {
+      "source": "GenExtFieldNF",
+      "target": "GenExtBasisAlpha"
+    },
+    {
+      "source": "GenExtFieldNF",
+      "target": "GenExtFieldInv"
     },
     {
       "source": "GeomConverge",
@@ -8935,6 +9103,10 @@
     },
     {
       "source": "LubinTateZp",
+      "target": "CyclotomicPolyData"
+    },
+    {
+      "source": "LubinTateZp",
       "target": "GaussianRationalField"
     },
     {
@@ -9242,6 +9414,10 @@
       "target": "GenExtField"
     },
     {
+      "source": "PolyBezoutBounded",
+      "target": "PolyEuclidFn"
+    },
+    {
       "source": "PolyBezoutQ",
       "target": "CbrtTwoBase"
     },
@@ -9251,11 +9427,23 @@
     },
     {
       "source": "PolyBezoutQ",
+      "target": "GenExtFieldInv"
+    },
+    {
+      "source": "PolyBezoutQ",
       "target": "PolyBezoutBounded"
     },
     {
       "source": "PolyBezoutQ",
       "target": "PolyDivisibility"
+    },
+    {
+      "source": "PolyDivModFn",
+      "target": "GenExtFieldNF"
+    },
+    {
+      "source": "PolyDivModFn",
+      "target": "PolyEuclidFn"
     },
     {
       "source": "PolyDivisibility",
@@ -9271,11 +9459,19 @@
     },
     {
       "source": "PolyDvdBounded",
+      "target": "GenExtFieldInv"
+    },
+    {
+      "source": "PolyDvdBounded",
       "target": "PolyBezoutBounded"
     },
     {
       "source": "PolyDvdBounded",
       "target": "PolyIrreducibleBounded"
+    },
+    {
+      "source": "PolyEuclidFn",
+      "target": "GenExtFieldInv"
     },
     {
       "source": "PolyFieldDivision",
@@ -9292,6 +9488,14 @@
     {
       "source": "PolyFieldDivision",
       "target": "MinimalPolynomial"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "PolyDivModFn"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "PolyRootCount"
     },
     {
       "source": "PolyFieldDivision",
@@ -9314,6 +9518,10 @@
       "target": "GenExtField"
     },
     {
+      "source": "PolyIrreducibleBounded",
+      "target": "GenExtFieldInv"
+    },
+    {
       "source": "PolyIsomorphism",
       "target": "FiberedFrobenioid"
     },
@@ -9330,6 +9538,10 @@
       "target": "SplitFrobenioid"
     },
     {
+      "source": "PolyLeadFindQ",
+      "target": "PolyEuclidFn"
+    },
+    {
       "source": "PolyLeadOracleQ",
       "target": "CbrtTwoIrreducible"
     },
@@ -9344,6 +9556,14 @@
     {
       "source": "PolyLeadOracleQ",
       "target": "PolyBezoutBounded"
+    },
+    {
+      "source": "PolyMonomialBasis",
+      "target": "CyclotomicPolyData"
+    },
+    {
+      "source": "PolyMonomialBasis",
+      "target": "GenExtBasisAlpha"
     },
     {
       "source": "PolyPSUtil",
@@ -9368,6 +9588,10 @@
     {
       "source": "PolyPSUtil",
       "target": "PolyLeadOracleQ"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "PolyMonomialBasis"
     },
     {
       "source": "PolyWeierstrass",
@@ -9616,6 +9840,14 @@
     {
       "source": "RatZeroDecide",
       "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "GenExtFieldNF"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "PolyLeadFindQ"
     },
     {
       "source": "RatZeroDecide",
@@ -10255,11 +10487,27 @@
     },
     {
       "source": "SimpleExtension",
+      "target": "GenExtFieldNF"
+    },
+    {
+      "source": "SimpleExtension",
       "target": "PolyBezoutQ"
     },
     {
       "source": "SimpleExtension",
+      "target": "PolyEuclidFn"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "PolyLeadFindQ"
+    },
+    {
+      "source": "SimpleExtension",
       "target": "PolyPSUtil"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "PolyRootCount"
     },
     {
       "source": "SimpleExtension",
@@ -10764,6 +11012,10 @@
     {
       "source": "TorsionTrivial",
       "target": "EisensteinRing"
+    },
+    {
+      "source": "TowerLaw",
+      "target": "GenExtBasisAlpha"
     },
     {
       "source": "TowerNonzero",

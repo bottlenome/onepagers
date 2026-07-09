@@ -2489,6 +2489,29 @@ import IUT
 #print axioms IUT.cti_irreducible
 #print axioms IUT.cqi_irreducible
 #print axioms IUT.gfi_exists
+#print axioms IUT.qIsZero_iff
+#print axioms IUT.ploFind_some
+#print axioms IUT.pfdDivMod_spec
+#print axioms IUT.pfdRed_of_bounded
+#print axioms IUT.pmbLinComb_coeff
+#print axioms IUT.pmbLinComb_zero_iff
+#print axioms IUT.pefBezout_spec
+#print axioms IUT.gefNFRing
+#print axioms IUT.gnf_zero_ne_one
+#print axioms IUT.gefNF_mul_inv_cancel
+#print axioms IUT.gefNFIUTField
+#print axioms IUT.gefNF268
+#print axioms IUT.gefAlpha_pow_eq_mon
+#print axioms IUT.gefPow_indep
+#print axioms IUT.gefPow_spans
+#print axioms IUT.gefPowBasis
+#print axioms IUT.gef_degree_eq
+#print axioms IUT.gefFieldExtension
+#print axioms IUT.gefRegBasis
+#print axioms IUT.gefTowerDegree
+#print axioms IUT.cpd_factor
+#print axioms IUT.cpdPhi3_eq
+#print axioms IUT.prc_roots_le_degree
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
