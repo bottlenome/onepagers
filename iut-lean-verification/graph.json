@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 536,
-  "verified_theorem_total": 2458,
-  "choice_free_count": 447,
+  "module_count": 545,
+  "verified_theorem_total": 2465,
+  "choice_free_count": 456,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6586,6 +6586,114 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyBezoutQ.lean"
+    },
+    {
+      "id": "RatZeroDecide",
+      "label": "RatZeroDecide",
+      "milestone": null,
+      "title": "RatZeroDecide",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/RatZeroDecide.lean"
+    },
+    {
+      "id": "PolyPSUtil",
+      "label": "PolyPSUtil",
+      "milestone": null,
+      "title": "PolyPSUtil",
+      "pillar": "A",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyPSUtil.lean"
+    },
+    {
+      "id": "CbrtTwoBase",
+      "label": "CbrtTwoBase",
+      "milestone": null,
+      "title": "CbrtTwoBase",
+      "pillar": "A",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtTwoBase.lean"
+    },
+    {
+      "id": "CbrtLinearFactor",
+      "label": "CbrtLinearFactor",
+      "milestone": null,
+      "title": "CbrtLinearFactor",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtLinearFactor.lean"
+    },
+    {
+      "id": "CbrtBezB",
+      "label": "CbrtBezB",
+      "milestone": null,
+      "title": "CbrtBezB",
+      "pillar": "A",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtBezB.lean"
+    },
+    {
+      "id": "CbrtCofactor",
+      "label": "CbrtCofactor",
+      "milestone": null,
+      "title": "CbrtCofactor",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtCofactor.lean"
+    },
+    {
+      "id": "CbrtBezoutChain",
+      "label": "CbrtBezoutChain",
+      "milestone": null,
+      "title": "CbrtBezoutChain",
+      "pillar": "A",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtBezoutChain.lean"
+    },
+    {
+      "id": "CbrtTwoField",
+      "label": "CbrtTwoField",
+      "milestone": null,
+      "title": "CbrtTwoField",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtTwoField.lean"
+    },
+    {
+      "id": "CbrtTwoAlpha",
+      "label": "CbrtTwoAlpha",
+      "milestone": null,
+      "title": "CbrtTwoAlpha",
+      "pillar": "A",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtTwoAlpha.lean"
     }
   ],
   "edges": [
@@ -6759,6 +6867,10 @@
     },
     {
       "source": "Binomial2",
+      "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "Binomial2",
       "target": "Freshman"
     },
     {
@@ -6800,6 +6912,42 @@
     {
       "source": "CategoryTheory",
       "target": "GaloisAxioms"
+    },
+    {
+      "source": "CbrtBezB",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CbrtBezoutChain",
+      "target": "CbrtTwoField"
+    },
+    {
+      "source": "CbrtCofactor",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CbrtLinearFactor",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "CbrtCofactor"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "CbrtTwoAlpha"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "CbrtTwoField"
     },
     {
       "source": "Compactness",
@@ -6852,6 +7000,14 @@
     {
       "source": "CruxInequalityReal",
       "target": "SzpiroReduction"
+    },
+    {
+      "source": "CubeRootTwoIrrational",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CubicPolyQ",
+      "target": "CbrtTwoBase"
     },
     {
       "source": "CupGradedComm",
@@ -7119,6 +7275,10 @@
     },
     {
       "source": "EvaluationHom",
+      "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "EvaluationHom",
       "target": "SeparableEmbeddings"
     },
     {
@@ -7164,6 +7324,18 @@
     {
       "source": "Field",
       "target": "ArchAbsValueQ"
+    },
+    {
+      "source": "Field",
+      "target": "CbrtBezB"
+    },
+    {
+      "source": "Field",
+      "target": "CbrtCofactor"
+    },
+    {
+      "source": "Field",
+      "target": "CbrtLinearFactor"
     },
     {
       "source": "Field",
@@ -7524,6 +7696,10 @@
     {
       "source": "Freshman",
       "target": "PSFunctor"
+    },
+    {
+      "source": "Freshman",
+      "target": "PolyPSUtil"
     },
     {
       "source": "Frobenioid",
@@ -8083,6 +8259,14 @@
     },
     {
       "source": "LTErrorDivisible",
+      "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "LTErrorDivisible",
+      "target": "CbrtTwoAlpha"
+    },
+    {
+      "source": "LTErrorDivisible",
       "target": "LubinTateExists"
     },
     {
@@ -8511,6 +8695,14 @@
     },
     {
       "source": "LubinTateZp",
+      "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "LubinTateZp",
+      "target": "CbrtTwoAlpha"
+    },
+    {
+      "source": "LubinTateZp",
       "target": "GaussianRationalField"
     },
     {
@@ -8814,8 +9006,20 @@
       "target": "FormalGroupPointsComp"
     },
     {
+      "source": "PolyBezoutQ",
+      "target": "CbrtTwoBase"
+    },
+    {
       "source": "PolyDivision",
       "target": "PolyFieldDivision"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "CbrtCofactor"
     },
     {
       "source": "PolyFieldDivision",
@@ -8844,6 +9048,18 @@
     {
       "source": "PolyIsomorphism",
       "target": "SplitFrobenioid"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "CbrtBezB"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "CbrtLinearFactor"
     },
     {
       "source": "PolyWeierstrass",
@@ -9082,6 +9298,14 @@
       "target": "RealMul"
     },
     {
+      "source": "RatZeroDecide",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "CbrtCofactor"
+    },
+    {
       "source": "Rationals",
       "target": "CubeRootTwoIrrational"
     },
@@ -9100,6 +9324,10 @@
     {
       "source": "Rationals",
       "target": "PadicValuationQ"
+    },
+    {
+      "source": "Rationals",
+      "target": "RatZeroDecide"
     },
     {
       "source": "Rationals",
@@ -9579,6 +9807,10 @@
     },
     {
       "source": "RootAdjunction",
+      "target": "CbrtTwoAlpha"
+    },
+    {
+      "source": "RootAdjunction",
       "target": "NormalSplitting"
     },
     {
@@ -9655,6 +9887,22 @@
     },
     {
       "source": "SimpleExtension",
+      "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "CbrtCofactor"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "CbrtTwoAlpha"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "CbrtTwoField"
+    },
+    {
+      "source": "SimpleExtension",
       "target": "ConnectedEtale"
     },
     {
@@ -9668,6 +9916,10 @@
     {
       "source": "SimpleExtension",
       "target": "PolyBezoutQ"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "PolyPSUtil"
     },
     {
       "source": "SimpleExtension",

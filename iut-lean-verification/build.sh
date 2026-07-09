@@ -2467,6 +2467,13 @@ import IUT
 #print axioms IUT.cbpF3_monic
 #print axioms IUT.pbzBezout
 #print axioms IUT.pbzBezout_one_of_unit
+#print axioms IUT.rzd_zero_or_ne
+#print axioms IUT.cbc_bezout
+#print axioms IUT.ctf_has_inverses
+#print axioms IUT.ctf_exists
+#print axioms IUT.cta_alpha_cubed
+#print axioms IUT.cta_alpha_not_rational
+#print axioms IUT.cta_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
