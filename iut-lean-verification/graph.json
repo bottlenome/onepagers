@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 569,
-  "verified_theorem_total": 2503,
-  "choice_free_count": 480,
+  "module_count": 573,
+  "verified_theorem_total": 2514,
+  "choice_free_count": 484,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6982,6 +6982,54 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyRootCount.lean"
+    },
+    {
+      "id": "PadicUltrametricQ",
+      "label": "PadicUltrametricQ",
+      "milestone": null,
+      "title": "PadicUltrametricQ",
+      "pillar": "A",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicUltrametricQ.lean"
+    },
+    {
+      "id": "Phi9Shift",
+      "label": "Phi9Shift",
+      "milestone": null,
+      "title": "Phi9Shift",
+      "pillar": "A",
+      "decl_count": 30,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Phi9Shift.lean"
+    },
+    {
+      "id": "CyclotomicField3",
+      "label": "CyclotomicField3",
+      "milestone": null,
+      "title": "CyclotomicField3",
+      "pillar": "A",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicField3.lean"
+    },
+    {
+      "id": "CyclotomicGal3",
+      "label": "CyclotomicGal3",
+      "milestone": null,
+      "title": "CyclotomicGal3",
+      "pillar": "A",
+      "decl_count": 63,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicGal3.lean"
     }
   ],
   "edges": [
@@ -7339,6 +7387,10 @@
     },
     {
       "source": "Cq3Irreducible",
+      "target": "CyclotomicField3"
+    },
+    {
+      "source": "Cq3Irreducible",
       "target": "GenFieldInstances"
     },
     {
@@ -7360,6 +7412,10 @@
     {
       "source": "CubicPolyQ",
       "target": "CbrtTwoBase"
+    },
+    {
+      "source": "CubicPolyQ",
+      "target": "Phi9Shift"
     },
     {
       "source": "CupGradedComm",
@@ -7412,6 +7468,14 @@
     {
       "source": "CyclotomicDiscriminant",
       "target": "CyclotomicDifferent"
+    },
+    {
+      "source": "CyclotomicField3",
+      "target": "CyclotomicGal3"
+    },
+    {
+      "source": "CyclotomicPolyData",
+      "target": "Phi9Shift"
     },
     {
       "source": "CyclotomicPrimePower",
@@ -7635,6 +7699,10 @@
     },
     {
       "source": "EvaluationHom",
+      "target": "Phi9Shift"
+    },
+    {
+      "source": "EvaluationHom",
       "target": "PolyRootCount"
     },
     {
@@ -7656,6 +7724,10 @@
     {
       "source": "Fermat",
       "target": "NatPrimeParts"
+    },
+    {
+      "source": "Fermat",
+      "target": "Phi9Shift"
     },
     {
       "source": "Fermat",
@@ -7740,6 +7812,10 @@
     {
       "source": "FieldAutGroup",
       "target": "ConnectedEtale"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "CyclotomicField3"
     },
     {
       "source": "FieldAutGroup",
@@ -8384,6 +8460,10 @@
     {
       "source": "GenExtFieldNF",
       "target": "GenExtFieldInv"
+    },
+    {
+      "source": "GenExtTower",
+      "target": "CyclotomicField3"
     },
     {
       "source": "GeomConverge",
@@ -9342,6 +9422,10 @@
       "target": "B5ProductFormulaQ"
     },
     {
+      "source": "PadicAbsValueQ",
+      "target": "PadicUltrametricQ"
+    },
+    {
       "source": "PadicDivision",
       "target": "Binomial2"
     },
@@ -9491,6 +9575,10 @@
     },
     {
       "source": "PolyFieldDivision",
+      "target": "Phi9Shift"
+    },
+    {
+      "source": "PolyFieldDivision",
       "target": "PolyDivModFn"
     },
     {
@@ -9592,6 +9680,10 @@
     {
       "source": "PolyPSUtil",
       "target": "PolyMonomialBasis"
+    },
+    {
+      "source": "PolyRootCount",
+      "target": "CyclotomicGal3"
     },
     {
       "source": "PolyWeierstrass",
@@ -9840,6 +9932,10 @@
     {
       "source": "RatZeroDecide",
       "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "CyclotomicGal3"
     },
     {
       "source": "RatZeroDecide",

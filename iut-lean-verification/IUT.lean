@@ -573,3 +573,7 @@ import IUT.GenExtBasisAlpha
 import IUT.GenExtTower
 import IUT.CyclotomicPolyData
 import IUT.PolyRootCount
+import IUT.PadicUltrametricQ
+import IUT.Phi9Shift
+import IUT.CyclotomicField3
+import IUT.CyclotomicGal3

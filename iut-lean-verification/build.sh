@@ -2512,6 +2512,17 @@ import IUT
 #print axioms IUT.cpd_factor
 #print axioms IUT.cpdPhi3_eq
 #print axioms IUT.prc_roots_le_degree
+#print axioms IUT.pum_val_add_ge_min
+#print axioms IUT.pum_val_add_eq
+#print axioms IUT.p9e_shift_eq
+#print axioms IUT.p9e_shift_lead
+#print axioms IUT.cnfPhi3Field
+#print axioms IUT.cnfExt3
+#print axioms IUT.gefNFConst_inj
+#print axioms IUT.cg3_galois_order_two
+#print axioms IUT.cg3ConjFun_mul
+#print axioms IUT.cg3_root_dichotomy
+#print axioms IUT.cg3_aut_ext
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
