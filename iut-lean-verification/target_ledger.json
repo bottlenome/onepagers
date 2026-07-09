@@ -2,66 +2,241 @@
   "_about": "実 IUT 完全証明率(complete_pct)の固定分母。実 Cor 3.12 に必要な実対象の部品リスト。各項目の status(実装度 0..1)は実装者が付けず、独立監査(AUDIT_RUBRIC.md)が実 Lean 定義から評定して埋める。complete_pct(柱) = Σ(weight*status)/Σ(weight)。分母(項目・weight)はここに固定し後から増やさない(増やす場合は台帳改訂として明示)。",
   "_status_scale": "0=実対象なし(未着手 or 模型のみ), 0.5=実対象の忠実な部分ケースあり(狭い but 本物), 1=実対象の上で当該部品が完成",
   "_crux_note": "D7(多輻不等式 crux Dβ-ω)は分母に含むが、数学的論争が決着するまで status は 0 のまま(Iff.rfl 外部保持)。ゆえに complete_pct は構造的に 100% に到達しない。",
-  "_current_numerator": "未監査。第140-147弾までの自己申告値(A62/B38/C39/D29/E35)は撤回済み。この台帳に対する独立全監査で置換する。",
+  "_current_numerator": "2026-07-08 独立監査(各柱1名・opus・敵対的・実Lean定義のみ・自己申告非共有)で status を確定。C1のみ status=1(実ℤ_p上のLubin-Tate形式群)。他は0/0.5。第140-147弾の自己申告値は撤回済み。",
   "pillars": {
     "A": {
       "name": "遠アーベル (anabelian / 実 π₁^ét)",
       "items": [
-        {"id": "A1", "title": "実数体 K = ℚ[x]/(f) を実際の商環として構成", "weight": 8, "status": null},
-        {"id": "A2", "title": "実 p 進局所体 K_v(完備化)を実際の対象として構成", "weight": 8, "status": null},
-        {"id": "A3", "title": "実絶対 Galois 群 G_K = 有限 Galois 群の逆極限(実プロファイナイト群)", "weight": 12, "status": null},
-        {"id": "A4", "title": "実 π₁^ét(双曲的曲線/Spec の実プロファイナイト基本群)", "weight": 14, "status": null},
-        {"id": "A5", "title": "実 tempered π₁^temp", "weight": 10, "status": null},
-        {"id": "A6", "title": "mono-anabelian 復元(π₁ から体/環を復元・実)", "weight": 14, "status": null},
-        {"id": "A7", "title": "実円分剛性 cyclotomic rigidity(実 G_K 加群上)", "weight": 12, "status": null},
-        {"id": "A8", "title": "楕円曲線/Tate 曲線の実被覆・cuspidalization", "weight": 12, "status": null},
-        {"id": "A9", "title": "Belyi 化 / 遠アーベル幾何入力(実)", "weight": 10, "status": null}
+        {
+          "id": "A1",
+          "title": "実数体 K = ℚ[x]/(f) を実際の商環として構成",
+          "weight": 8,
+          "status": 0.5
+        },
+        {
+          "id": "A2",
+          "title": "実 p 進局所体 K_v(完備化)を実際の対象として構成",
+          "weight": 8,
+          "status": 0.5
+        },
+        {
+          "id": "A3",
+          "title": "実絶対 Galois 群 G_K = 有限 Galois 群の逆極限(実プロファイナイト群)",
+          "weight": 12,
+          "status": 0.5
+        },
+        {
+          "id": "A4",
+          "title": "実 π₁^ét(双曲的曲線/Spec の実プロファイナイト基本群)",
+          "weight": 14,
+          "status": 0.5
+        },
+        {
+          "id": "A5",
+          "title": "実 tempered π₁^temp",
+          "weight": 10,
+          "status": 0
+        },
+        {
+          "id": "A6",
+          "title": "mono-anabelian 復元(π₁ から体/環を復元・実)",
+          "weight": 14,
+          "status": 0.5
+        },
+        {
+          "id": "A7",
+          "title": "実円分剛性 cyclotomic rigidity(実 G_K 加群上)",
+          "weight": 12,
+          "status": 0
+        },
+        {
+          "id": "A8",
+          "title": "楕円曲線/Tate 曲線の実被覆・cuspidalization",
+          "weight": 12,
+          "status": 0.5
+        },
+        {
+          "id": "A9",
+          "title": "Belyi 化 / 遠アーベル幾何入力(実)",
+          "weight": 10,
+          "status": 0
+        }
       ]
     },
     "B": {
       "name": "分岐 LCFT (局所類体論・分岐)",
       "items": [
-        {"id": "B1", "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)", "weight": 20, "status": null},
-        {"id": "B2", "title": "実局所類体論(相互写像・実)", "weight": 20, "status": null},
-        {"id": "B3", "title": "実 Artin 導手/different(実表現・実分岐群上)", "weight": 20, "status": null},
-        {"id": "B4", "title": "実 Hasse–Arf(実 Galois 群上)", "weight": 15, "status": null},
-        {"id": "B5", "title": "大域類体論/積公式(実)", "weight": 15, "status": null},
-        {"id": "B6", "title": "Kummer 理論(実 Galois コホモロジー上)", "weight": 10, "status": null}
+        {
+          "id": "B1",
+          "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)",
+          "weight": 20,
+          "status": 0.5
+        },
+        {
+          "id": "B2",
+          "title": "実局所類体論(相互写像・実)",
+          "weight": 20,
+          "status": 0
+        },
+        {
+          "id": "B3",
+          "title": "実 Artin 導手/different(実表現・実分岐群上)",
+          "weight": 20,
+          "status": 0
+        },
+        {
+          "id": "B4",
+          "title": "実 Hasse–Arf(実 Galois 群上)",
+          "weight": 15,
+          "status": 0
+        },
+        {
+          "id": "B5",
+          "title": "大域類体論/積公式(実)",
+          "weight": 15,
+          "status": 0
+        },
+        {
+          "id": "B6",
+          "title": "Kummer 理論(実 Galois コホモロジー上)",
+          "weight": 10,
+          "status": 0
+        }
       ]
     },
     "C": {
       "name": "形式群 / Frobenioid / Arakelov",
       "items": [
-        {"id": "C1", "title": "実形式群", "weight": 12, "status": null},
-        {"id": "C2", "title": "実 Frobenioid(実対象・実射の圏)", "weight": 22, "status": null},
-        {"id": "C3", "title": "実 Arakelov(実計量付き直線束・実算術次数)", "weight": 20, "status": null},
-        {"id": "C4", "title": "測度論的 log-volume(実測度・実積分)", "weight": 22, "status": null},
-        {"id": "C5", "title": "実 theta 関数 / étale theta", "weight": 14, "status": null},
-        {"id": "C6", "title": "実 Kummer-Frobenioid 両立", "weight": 10, "status": null}
+        {
+          "id": "C1",
+          "title": "実形式群",
+          "weight": 12,
+          "status": 1
+        },
+        {
+          "id": "C2",
+          "title": "実 Frobenioid(実対象・実射の圏)",
+          "weight": 22,
+          "status": 0.5
+        },
+        {
+          "id": "C3",
+          "title": "実 Arakelov(実計量付き直線束・実算術次数)",
+          "weight": 20,
+          "status": 0
+        },
+        {
+          "id": "C4",
+          "title": "測度論的 log-volume(実測度・実積分)",
+          "weight": 22,
+          "status": 0.5
+        },
+        {
+          "id": "C5",
+          "title": "実 theta 関数 / étale theta",
+          "weight": 14,
+          "status": 0.5
+        },
+        {
+          "id": "C6",
+          "title": "実 Kummer-Frobenioid 両立",
+          "weight": 10,
+          "status": 0
+        }
       ]
     },
     "D": {
       "name": "定理3.11 / 多輻 (multiradial)",
       "items": [
-        {"id": "D1", "title": "実 log-shell", "weight": 12, "status": null},
-        {"id": "D2", "title": "実 log-link", "weight": 12, "status": null},
-        {"id": "D3", "title": "実 theta-link", "weight": 12, "status": null},
-        {"id": "D4", "title": "実ホッジ劇場 / 実 log-theta-lattice", "weight": 16, "status": null},
-        {"id": "D5", "title": "実多輻表現", "weight": 14, "status": null},
-        {"id": "D6", "title": "実不定性 (Ind1/Ind2/Ind3)(実対象上)", "weight": 12, "status": null},
-        {"id": "D7", "title": "多輻不等式 crux Dβ-ω(望月論証の写経・係争点。決着まで status=0)", "weight": 14, "status": 0},
-        {"id": "D8", "title": "Cor 3.12 → Szpiro → ABC 還元(実)", "weight": 8, "status": null}
+        {
+          "id": "D1",
+          "title": "実 log-shell",
+          "weight": 12,
+          "status": 0.5
+        },
+        {
+          "id": "D2",
+          "title": "実 log-link",
+          "weight": 12,
+          "status": 0.5
+        },
+        {
+          "id": "D3",
+          "title": "実 theta-link",
+          "weight": 12,
+          "status": 0.5
+        },
+        {
+          "id": "D4",
+          "title": "実ホッジ劇場 / 実 log-theta-lattice",
+          "weight": 16,
+          "status": 0
+        },
+        {
+          "id": "D5",
+          "title": "実多輻表現",
+          "weight": 14,
+          "status": 0
+        },
+        {
+          "id": "D6",
+          "title": "実不定性 (Ind1/Ind2/Ind3)(実対象上)",
+          "weight": 12,
+          "status": 0
+        },
+        {
+          "id": "D7",
+          "title": "多輻不等式 crux Dβ-ω(望月論証の写経・係争点。決着まで status=0)",
+          "weight": 14,
+          "status": 0
+        },
+        {
+          "id": "D8",
+          "title": "Cor 3.12 → Szpiro → ABC 還元(実)",
+          "weight": 8,
+          "status": 0
+        }
       ]
     },
     "E": {
       "name": "テータ (theta)",
       "items": [
-        {"id": "E1", "title": "実 étale theta 関数", "weight": 18, "status": null},
-        {"id": "E2", "title": "実 theta 値 / mono-theta environment", "weight": 18, "status": null},
-        {"id": "E3", "title": "三剛性(離散/定数倍/円分・実)", "weight": 20, "status": null},
-        {"id": "E4", "title": "実 theta の Kummer 理論", "weight": 16, "status": null},
-        {"id": "E5", "title": "Gaussian / theta pilot object(実)", "weight": 18, "status": null},
-        {"id": "E6", "title": "実 μ_l ⊂ 実体(1の l 乗根の実構成)", "weight": 10, "status": null}
+        {
+          "id": "E1",
+          "title": "実 étale theta 関数",
+          "weight": 18,
+          "status": 0.5
+        },
+        {
+          "id": "E2",
+          "title": "実 theta 値 / mono-theta environment",
+          "weight": 18,
+          "status": 0.5
+        },
+        {
+          "id": "E3",
+          "title": "三剛性(離散/定数倍/円分・実)",
+          "weight": 20,
+          "status": 0.5
+        },
+        {
+          "id": "E4",
+          "title": "実 theta の Kummer 理論",
+          "weight": 16,
+          "status": 0
+        },
+        {
+          "id": "E5",
+          "title": "Gaussian / theta pilot object(実)",
+          "weight": 18,
+          "status": 0.5
+        },
+        {
+          "id": "E6",
+          "title": "実 μ_l ⊂ 実体(1の l 乗根の実構成)",
+          "weight": 10,
+          "status": 0.5
+        }
       ]
     }
   }
