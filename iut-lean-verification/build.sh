@@ -2435,6 +2435,21 @@ import IUT
 #print axioms IUT.gaussQField
 #print axioms IUT.gqi_galois_nontrivial
 #print axioms IUT.gqi_exists
+#print axioms IUT.qdf_galois_order_two
+#print axioms IUT.qdf_galoisGroup_order_two
+#print axioms IUT.qdf_exists
+#print axioms IUT.qnm_mul
+#print axioms IUT.qnm_norm_one_inv_closed
+#print axioms IUT.qnm_exists
+#print axioms IUT.arp_abs_zero_iff
+#print axioms IUT.arp_abs_triangle
+#print axioms IUT.arp_exists
+#print axioms IUT.pvq_val_mul
+#print axioms IUT.pvq_val_p
+#print axioms IUT.pvq_exists
+#print axioms IUT.cq3_zeta_cube_one
+#print axioms IUT.cq3_mu3_closed
+#print axioms IUT.cq3_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

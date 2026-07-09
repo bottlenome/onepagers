@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 523,
-  "verified_theorem_total": 2426,
-  "choice_free_count": 434,
+  "module_count": 528,
+  "verified_theorem_total": 2441,
+  "choice_free_count": 439,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6430,6 +6430,66 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussianRationalField.lean"
+    },
+    {
+      "id": "QuadraticField",
+      "label": "QuadraticField",
+      "milestone": "M2xxG",
+      "title": "二次体 ℚ(√D) と Galois 群の位数ちょうど 2",
+      "pillar": "A",
+      "decl_count": 45,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/QuadraticField.lean"
+    },
+    {
+      "id": "QuadraticNorm",
+      "label": "QuadraticNorm",
+      "milestone": null,
+      "title": "QuadraticNorm",
+      "pillar": "B",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/QuadraticNorm.lean"
+    },
+    {
+      "id": "ArchAbsValueQ",
+      "label": "ArchAbsValueQ",
+      "milestone": null,
+      "title": "ArchAbsValueQ",
+      "pillar": "C",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArchAbsValueQ.lean"
+    },
+    {
+      "id": "PadicValuationQ",
+      "label": "PadicValuationQ",
+      "milestone": null,
+      "title": "PadicValuationQ",
+      "pillar": "D",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicValuationQ.lean"
+    },
+    {
+      "id": "CyclotomicFieldQ3",
+      "label": "CyclotomicFieldQ3",
+      "milestone": null,
+      "title": "CyclotomicFieldQ3",
+      "pillar": "E",
+      "decl_count": 37,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicFieldQ3.lean"
     }
   ],
   "edges": [
@@ -6996,6 +7056,10 @@
     {
       "source": "FiberedFrobenioid",
       "target": "SplitFibered"
+    },
+    {
+      "source": "Field",
+      "target": "ArchAbsValueQ"
     },
     {
       "source": "Field",
@@ -7600,6 +7664,18 @@
     {
       "source": "GaussianDivisor",
       "target": "WeightedGauss"
+    },
+    {
+      "source": "GaussianRationalField",
+      "target": "CyclotomicFieldQ3"
+    },
+    {
+      "source": "GaussianRationalField",
+      "target": "QuadraticField"
+    },
+    {
+      "source": "GaussianRationalField",
+      "target": "QuadraticNorm"
     },
     {
       "source": "GaussianVolume",
@@ -8507,6 +8583,10 @@
     },
     {
       "source": "NatPrimeParts",
+      "target": "PadicValuationQ"
+    },
+    {
+      "source": "NatPrimeParts",
       "target": "PrimitiveRoot"
     },
     {
@@ -8872,6 +8952,10 @@
     {
       "source": "Rationals",
       "target": "Field"
+    },
+    {
+      "source": "Rationals",
+      "target": "PadicValuationQ"
     },
     {
       "source": "Rationals",

@@ -527,3 +527,8 @@ import IUT.HaarNonconstantConverge
 import IUT.MultiradialLogLinkTransport
 import IUT.ThetaLinkTemperedPi1
 import IUT.GaussianRationalField
+import IUT.QuadraticField
+import IUT.QuadraticNorm
+import IUT.ArchAbsValueQ
+import IUT.PadicValuationQ
+import IUT.CyclotomicFieldQ3
