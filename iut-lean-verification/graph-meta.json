@@ -16,8 +16,8 @@
       "label": "柱A 基本群・Galois圏",
       "color": "#60a5fa",
       "progress_pct": 99,
-      "complete_pct": 34,
-      "complete_note": "実 IUT 完全証明率 34%（独立監査確定・target_ledger.json 由来）。実対象の代数足場（実ℚ・実FieldAut・実逆極限ẑ・実K[x]/(f)商環・実Tate曲線K^×/q^ℤ・乗法+付値からの実加法復元）は本物だが、決定的欠落: 非自明有限体拡大が1つも構成されておらず全Galois塔がtrivialExtension詰め＝実G_K・実π₁^étは未実現、実p進局所体K_vも皆無、tempered π₁はẑ×ℤ代理、円分剛性は抽象GK+ℤ/n模型、Belyiは皆無。A1-A4/A6/A8=0.5(機構は実だが実例が自明/退化)、A5/A7/A9=0。",
+      "complete_pct": 36,
+      "complete_note": "実 IUT 完全証明率 34%（独立監査確定・target_ledger.json 由来）。実対象の代数足場（実ℚ・実FieldAut・実逆極限ẑ・実K[x]/(f)商環・実Tate曲線K^×/q^ℤ・乗法+付値からの実加法復元）は本物だが、決定的欠落: 非自明有限体拡大が1つも構成されておらず全Galois塔がtrivialExtension詰め＝実G_K・実π₁^étは未実現、実p進局所体K_vも皆無、tempered π₁はẑ×ℤ代理、円分剛性は抽象GK+ℤ/n模型、Belyiは皆無。A1-A4/A6/A8=0.5(機構は実だが実例が自明/退化)、A5/A7/A9=0。 ／ℚ(∛2): 実 ℚ[x]/(x³−2) を真の quotCRing 商環＋本物に証明した SimpleExtData.bezout(次数3ユークリッド鎖・∛2∉ℚ)で体化(ctfField/ctf_has_inverses)、α³=2・α∉ℚ(cta)。deferred honest 仮説 bezout の初充填。独立 A 再監査で A1 0.5→0.7(直積模型を質的に超える・単一f/∃形逆元で1未満)。A 34→36。",
       "status": "SGA1主定理ブロック ✅ / A-1/A-2/A-3β 完結・A-3α pro-表現+比較関手 C→π₁Tower-Set（忠実・自然・per-object 全単射 M213F/M217F）+ 充満性（M221F）+ 2-out-of-3 同値束（M225F）+ ②無条件化（正則自己準同型スライス M229F）+ ③一般連結 X: 軌道生成を一般 X で無条件化（Galois 源/hendo 不要）・deck 不変性自動導出で残る外部入力を商普遍性 hquot 一点に純化・hquot 仮定下で一般 X 充満（M234F）+ hquot を G-Set モデルで discharge（ファイバー推移性=正規/ガロア被覆から hquot 構成・一点対象 deck=全 G の非自明ケースで任意群 G で充満性を無条件化 M245F）+ 中間正規被覆 G/core(H)→G/H で hquot discharge（M250F）+ hquot 境界を両方向 iff で完全特徴付け hfib⟺H₀⊴H（正規性が hquot の必要十分条件 M255F）。残: H₀⊴H だが H₀⋬G の Galois 対象充満性（G/H₀ が非 Galois）・単一 cofinal 塔 (#35)",
       "blurb": "副有限群・Galois圏・SGA1・π₁・ガロア閉包（モデル側）・商公理。残: 抽象側持ち上げ・幾何的入力",
       "plain": "図形を「群」という代数で捉えるための土台"
@@ -204,5 +204,5 @@
       "summary": "LT 形式群法則の結合則 F(F(X,Y),Z)=F(X,F(Y,Z))（M71）"
     }
   },
-  "_last_round": "2026-07-09 A1 実数体 ℚ[x]/(f) 本命ラウンド（第1弾・足場）: 既存の本物 API（polyCRing ratRing/quotCRing/quotField_of_bezout は ratRing で使用可）を実 ℚ で具体化して一般次数の実数体 ℚ[x]/(x³−2)=ℚ(∛2) を建てる方向。本弾は足場を本物で建設: ∛2∉ℚ の実無限降下(CubeRootTwoIrrational)・実 ℚ[X] 上の x³−2(CubicPolyQ)・K[X] 拡張ユークリッド Bezout エンジン+ℚ アダプタ pbzRatField(PolyBezoutQ)・設計 DAG・機構棚卸し。全 axiom [propext,Quot.sound] のみ。**complete_pct 0 前進（A34/B18/C41/D18/E42 据え置き）**——実 ℚ[x]/(x³−2) 体はまだ実例化しておらず(hlead_oracle の ℚ 充足＋既約性⟹gcd=単元＋hBez 包み＋quotField_of_bezout が次弾)、A1 昇格は未。承認済み足場(c)であって昇格でないため正直に横這い。次弾で組み立て→独立監査が A1 を判定。"
+  "_last_round": "2026-07-09 A1 実数体 ℚ[x]/(f) 本命ラウンド(完遂): 実 ℚ[x]/(x³−2)=ℚ(∛2) を**真の商環＋実体**として建設。12 モジュール(Wave0 基礎/零判定/PS 補題→Wave1 評価/BezB/余因子→Wave2 **cbc_bezout=SimpleExtData.bezout の初充填**(次数3固定ユークリッド鎖・8葉・∛2∉ℚ で完全割り葉を矛盾)→Wave3 SimpleExtData.build で体化+α³=2/α∉ℚ)。全 axiom [propext,Quot.sound] のみ・sorry/新規 choice なし。**独立 A 再監査で A1 0.5→0.7**(carrier が文字どおり quotCRing 商環・bezout 本物証明・非空虚 α=∛2・直積模型0.5を質的に超える。単一f/∃形逆元/基底なしで満点1不可)。A 34→36、全体 ≈31%。§2(a) 昇格(直積模型→真の商環数体)・自己申告でなく独立監査確定。記録 audit/reaudit-A-cbrt2-2026-07-09.md。"
 }
