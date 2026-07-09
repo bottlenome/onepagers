@@ -2432,6 +2432,9 @@ import IUT
 #print axioms IUT.nuc_exists
 #print axioms IUT.hnc_monotone_cauchy
 #print axioms IUT.hnc_exists
+#print axioms IUT.gaussQField
+#print axioms IUT.gqi_galois_nontrivial
+#print axioms IUT.gqi_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 522,
-  "verified_theorem_total": 2423,
-  "choice_free_count": 433,
+  "module_count": 523,
+  "verified_theorem_total": 2426,
+  "choice_free_count": 434,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6418,6 +6418,18 @@
         "[IUTchIII]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaLinkTemperedPi1.lean"
+    },
+    {
+      "id": "GaussianRationalField",
+      "label": "GaussianRationalField",
+      "milestone": "M2xxF",
+      "title": "ガウス有理数体 ℚ(i) と非自明 Galois 群",
+      "pillar": "A",
+      "decl_count": 32,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussianRationalField.lean"
     }
   ],
   "edges": [
@@ -7020,6 +7032,10 @@
     {
       "source": "FieldAutGroup",
       "target": "GaloisCorrespondence"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "GaussianRationalField"
     },
     {
       "source": "FieldAutGroup",
@@ -8300,6 +8316,10 @@
     {
       "source": "LubinTateUnique",
       "target": "LubinTateZp"
+    },
+    {
+      "source": "LubinTateZp",
+      "target": "GaussianRationalField"
     },
     {
       "source": "LubinTateZp",
