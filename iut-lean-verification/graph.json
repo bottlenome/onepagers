@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 532,
-  "verified_theorem_total": 2452,
-  "choice_free_count": 443,
+  "module_count": 533,
+  "verified_theorem_total": 2454,
+  "choice_free_count": 444,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6538,6 +6538,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArchValueInteger.lean"
+    },
+    {
+      "id": "B5ProductFormulaQ",
+      "label": "B5ProductFormulaQ",
+      "milestone": null,
+      "title": "B5ProductFormulaQ",
+      "pillar": "B",
+      "decl_count": 26,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/B5ProductFormulaQ.lean"
     }
   ],
   "edges": [
@@ -6668,6 +6680,10 @@
     {
       "source": "ArchHaarVolume",
       "target": "ProductFormula"
+    },
+    {
+      "source": "ArchValueInteger",
+      "target": "B5ProductFormulaQ"
     },
     {
       "source": "ArithPilot",
@@ -7180,6 +7196,10 @@
     {
       "source": "FiniteEtaleAlgebra",
       "target": "IdempotentSpectrum"
+    },
+    {
+      "source": "FiniteSupportPrimeProduct",
+      "target": "B5ProductFormulaQ"
     },
     {
       "source": "Finiteness",
@@ -8678,6 +8698,10 @@
       "target": "RootAdjunction"
     },
     {
+      "source": "PadicAbsValueQ",
+      "target": "B5ProductFormulaQ"
+    },
+    {
       "source": "PadicDivision",
       "target": "Binomial2"
     },
@@ -8828,6 +8852,10 @@
     {
       "source": "Premises311Real",
       "target": "RealVolumeTheory"
+    },
+    {
+      "source": "PrimeFactorization",
+      "target": "B5ProductFormulaQ"
     },
     {
       "source": "PrimeSpectrum",

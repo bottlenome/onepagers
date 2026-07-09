@@ -536,3 +536,4 @@ import IUT.PrimeFactorization
 import IUT.PadicAbsValueQ
 import IUT.FiniteSupportPrimeProduct
 import IUT.ArchValueInteger
+import IUT.B5ProductFormulaQ

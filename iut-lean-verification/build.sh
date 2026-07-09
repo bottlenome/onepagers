@@ -2461,6 +2461,8 @@ import IUT
 #print axioms IUT.avi_abs_num_den
 #print axioms IUT.avi_ratio_mul_swap
 #print axioms IUT.avi_abs_mul_recip
+#print axioms IUT.b5_product_formula
+#print axioms IUT.b5_prod_pow_count
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
