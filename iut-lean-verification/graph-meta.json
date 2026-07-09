@@ -204,5 +204,5 @@
       "summary": "LT 形式群法則の結合則 F(F(X,Y),Z)=F(X,F(Y,Z))（M71）"
     }
   },
-  "_last_round": "2026-07-09 §2(b) B5 積公式ラウンド: ℚ 上の積公式 |x|_∞·∏_p|x|_p=1 を一般 x∈ℚˣ で実証(B5ProductFormulaQ)。5 スライス(実 FTA 積形 PrimeFactorization・実 p 進絶対値 PadicAbsValueQ・実有限台積 FiniteSupportPrimeProduct・実アルキメデス橋 ArchValueInteger・cleared-form 組み立て)。全 axiom [propext,Quot.sound] のみ。**独立 B 再監査で B5 0→0.5**(以前 0 の理由『積公式の定理そのものが存在しない=材料のみ』を実定理が解消。主語は全て実対象・非空虚・一般 x で成立・axioms propext/Quot.sound のみ。大域 CFT 本体未達で 0.5 上限)。B 10→18、全体 ≈29→31%。撤回後**初の実 complete_pct 前進**(自己申告でなく独立監査確定)。詳細 audit/B5-product-formula-plan.md。"
+  "_last_round": "2026-07-09 A1 実数体 ℚ[x]/(f) 本命ラウンド（第1弾・足場）: 既存の本物 API（polyCRing ratRing/quotCRing/quotField_of_bezout は ratRing で使用可）を実 ℚ で具体化して一般次数の実数体 ℚ[x]/(x³−2)=ℚ(∛2) を建てる方向。本弾は足場を本物で建設: ∛2∉ℚ の実無限降下(CubeRootTwoIrrational)・実 ℚ[X] 上の x³−2(CubicPolyQ)・K[X] 拡張ユークリッド Bezout エンジン+ℚ アダプタ pbzRatField(PolyBezoutQ)・設計 DAG・機構棚卸し。全 axiom [propext,Quot.sound] のみ。**complete_pct 0 前進（A34/B18/C41/D18/E42 据え置き）**——実 ℚ[x]/(x³−2) 体はまだ実例化しておらず(hlead_oracle の ℚ 充足＋既約性⟹gcd=単元＋hBez 包み＋quotField_of_bezout が次弾)、A1 昇格は未。承認済み足場(c)であって昇格でないため正直に横這い。次弾で組み立て→独立監査が A1 を判定。"
 }
