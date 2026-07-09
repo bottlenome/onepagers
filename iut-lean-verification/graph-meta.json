@@ -203,5 +203,6 @@
     "FormalGroupAssoc": {
       "summary": "LT 形式群法則の結合則 F(F(X,Y),Z)=F(X,F(Y,Z))（M71）"
     }
-  }
+  },
+  "_last_round": "2026-07-09 §2(b) 本物建設ラウンド: 実数体 ℚ(√D)（Gal 位数ちょうど2・ℚ(i) の |Gal|=2 限定を解消）・実ノルム N:ℚ(i)^×→ℚ^×・実アルキメデス絶対値 |·|_∞・実 p 進付値 v_p・実円分体 ℚ(ζ_3)+実 μ_3 の 5 モジュールを追加（全 compile 済・axiom [propext,Quot.sound] のみ・sorry/新規 choice なし）。**complete_pct 0 前進**（A34/B10/C41/D18/E42 据え置き）——5 名の独立敵対的監査が全柱・全項目の status を据え置き判定（本物だが台帳満点条件未達: 有限 Galois≠逆極限 G_K・付値≠完備化・絶対値≠Arakelov・μ_3 は l=3 単独で一般 μ_l 未達）。第140–147弾の模型水増しと対照的な『本物の作業・正直な横這い』。詳細 audit/wave-sec2b-quadfield-2026-07-09.md。"
 }
