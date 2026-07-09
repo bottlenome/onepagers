@@ -2450,6 +2450,17 @@ import IUT
 #print axioms IUT.cq3_zeta_cube_one
 #print axioms IUT.cq3_mu3_closed
 #print axioms IUT.cq3_exists
+#print axioms IUT.pfc_prod_factors
+#print axioms IUT.pfc_vp_count
+#print axioms IUT.pfc_prod_primepow
+#print axioms IUT.pav_mul
+#print axioms IUT.pav_trivial
+#print axioms IUT.pav_exists
+#print axioms IUT.fsp_prod_extend
+#print axioms IUT.fsp_prod_mul_pointwise
+#print axioms IUT.avi_abs_num_den
+#print axioms IUT.avi_ratio_mul_swap
+#print axioms IUT.avi_abs_mul_recip
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

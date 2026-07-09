@@ -532,3 +532,7 @@ import IUT.QuadraticNorm
 import IUT.ArchAbsValueQ
 import IUT.PadicValuationQ
 import IUT.CyclotomicFieldQ3
+import IUT.PrimeFactorization
+import IUT.PadicAbsValueQ
+import IUT.FiniteSupportPrimeProduct
+import IUT.ArchValueInteger

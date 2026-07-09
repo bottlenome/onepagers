@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 528,
-  "verified_theorem_total": 2441,
-  "choice_free_count": 439,
+  "module_count": 532,
+  "verified_theorem_total": 2452,
+  "choice_free_count": 443,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6490,6 +6490,54 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicFieldQ3.lean"
+    },
+    {
+      "id": "PrimeFactorization",
+      "label": "PrimeFactorization",
+      "milestone": null,
+      "title": "PrimeFactorization",
+      "pillar": "B",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PrimeFactorization.lean"
+    },
+    {
+      "id": "PadicAbsValueQ",
+      "label": "PadicAbsValueQ",
+      "milestone": null,
+      "title": "PadicAbsValueQ",
+      "pillar": "B",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PadicAbsValueQ.lean"
+    },
+    {
+      "id": "FiniteSupportPrimeProduct",
+      "label": "FiniteSupportPrimeProduct",
+      "milestone": null,
+      "title": "FiniteSupportPrimeProduct",
+      "pillar": "B",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/FiniteSupportPrimeProduct.lean"
+    },
+    {
+      "id": "ArchValueInteger",
+      "label": "ArchValueInteger",
+      "milestone": null,
+      "title": "ArchValueInteger",
+      "pillar": "B",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArchValueInteger.lean"
     }
   ],
   "edges": [
@@ -6612,6 +6660,10 @@
     {
       "source": "ArbitraryJumpWild",
       "target": "HasseArfUnconditional"
+    },
+    {
+      "source": "ArchAbsValueQ",
+      "target": "ArchValueInteger"
     },
     {
       "source": "ArchHaarVolume",
@@ -8650,6 +8702,14 @@
       "target": "PadicGeometric"
     },
     {
+      "source": "PadicValuationQ",
+      "target": "PadicAbsValueQ"
+    },
+    {
+      "source": "PadicValuationQ",
+      "target": "PrimeFactorization"
+    },
+    {
       "source": "PicardDivisor",
       "target": "IdealClassGroup"
     },
@@ -8952,6 +9012,10 @@
     {
       "source": "Rationals",
       "target": "Field"
+    },
+    {
+      "source": "Rationals",
+      "target": "FiniteSupportPrimeProduct"
     },
     {
       "source": "Rationals",
