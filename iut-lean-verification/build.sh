@@ -2483,6 +2483,12 @@ import IUT
 #print axioms IUT.cqz_zeta_relation
 #print axioms IUT.cqz_zeta_not_rational
 #print axioms IUT.cqz_exists
+#print axioms IUT.pgbBezoutB
+#print axioms IUT.pdb_dvd_deg_le
+#print axioms IUT.gef_field_exists
+#print axioms IUT.cti_irreducible
+#print axioms IUT.cqi_irreducible
+#print axioms IUT.gfi_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

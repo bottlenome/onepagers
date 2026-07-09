@@ -556,3 +556,10 @@ import IUT.Cq3Base
 import IUT.Cq3BezoutChain
 import IUT.Cq3Field
 import IUT.Cq3Alpha
+import IUT.PolyDvdBounded
+import IUT.PolyBezoutBounded
+import IUT.PolyIrreducibleBounded
+import IUT.GenExtField
+import IUT.CbrtTwoIrreducible
+import IUT.Cq3Irreducible
+import IUT.GenFieldInstances

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 552,
-  "verified_theorem_total": 2474,
-  "choice_free_count": 463,
+  "module_count": 559,
+  "verified_theorem_total": 2480,
+  "choice_free_count": 470,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6778,6 +6778,90 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Cq3Alpha.lean"
+    },
+    {
+      "id": "PolyDvdBounded",
+      "label": "PolyDvdBounded",
+      "milestone": "M272F",
+      "title": "有界余因子の多項式整除 `pdbDvd` ＝真の多項式整除: 一般 f の ℚ[X]/(f",
+      "pillar": "A",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyDvdBounded.lean"
+    },
+    {
+      "id": "PolyBezoutBounded",
+      "label": "PolyBezoutBounded",
+      "milestone": null,
+      "title": "PolyBezoutBounded",
+      "pillar": "A",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyBezoutBounded.lean"
+    },
+    {
+      "id": "PolyIrreducibleBounded",
+      "label": "PolyIrreducibleBounded",
+      "milestone": "M273F",
+      "title": "**有界整除 `pdbDvd` 上の既約性の 忠実な定式化**と「既約 ⟹ gcd 単元」の橋: 一般 f の ℚ[X]/(f",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyIrreducibleBounded.lean"
+    },
+    {
+      "id": "GenExtField",
+      "label": "GenExtField",
+      "milestone": null,
+      "title": "GenExtField",
+      "pillar": "A",
+      "decl_count": 5,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenExtField.lean"
+    },
+    {
+      "id": "CbrtTwoIrreducible",
+      "label": "CbrtTwoIrreducible",
+      "milestone": null,
+      "title": "CbrtTwoIrreducible",
+      "pillar": "A",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtTwoIrreducible.lean"
+    },
+    {
+      "id": "Cq3Irreducible",
+      "label": "Cq3Irreducible",
+      "milestone": null,
+      "title": "Cq3Irreducible",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Cq3Irreducible.lean"
+    },
+    {
+      "id": "GenFieldInstances",
+      "label": "GenFieldInstances",
+      "milestone": null,
+      "title": "GenFieldInstances",
+      "pillar": "A",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GenFieldInstances.lean"
     }
   ],
   "edges": [
@@ -7019,6 +7103,10 @@
     },
     {
       "source": "CbrtLinearFactor",
+      "target": "CbrtTwoIrreducible"
+    },
+    {
+      "source": "CbrtLinearFactor",
       "target": "Cq3BezoutChain"
     },
     {
@@ -7044,6 +7132,14 @@
     {
       "source": "CbrtTwoBase",
       "target": "Cq3Base"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "GenFieldInstances"
+    },
+    {
+      "source": "CbrtTwoIrreducible",
+      "target": "GenFieldInstances"
     },
     {
       "source": "Compactness",
@@ -7102,8 +7198,20 @@
       "target": "Cq3Field"
     },
     {
+      "source": "Cq3Base",
+      "target": "GenFieldInstances"
+    },
+    {
       "source": "Cq3BezoutChain",
       "target": "Cq3Field"
+    },
+    {
+      "source": "Cq3BezoutChain",
+      "target": "Cq3Irreducible"
+    },
+    {
+      "source": "Cq3Irreducible",
+      "target": "GenFieldInstances"
     },
     {
       "source": "CruxInequalityReal",
@@ -7116,6 +7224,10 @@
     {
       "source": "CubeRootTwoIrrational",
       "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CubeRootTwoIrrational",
+      "target": "CbrtTwoIrreducible"
     },
     {
       "source": "CubicPolyQ",
@@ -8100,6 +8212,10 @@
     {
       "source": "GaussianVolume",
       "target": "VolumeReal"
+    },
+    {
+      "source": "GenExtField",
+      "target": "GenFieldInstances"
     },
     {
       "source": "GeomConverge",
@@ -9122,12 +9238,28 @@
       "target": "FormalGroupPointsComp"
     },
     {
+      "source": "PolyBezoutBounded",
+      "target": "GenExtField"
+    },
+    {
       "source": "PolyBezoutQ",
       "target": "CbrtTwoBase"
     },
     {
       "source": "PolyBezoutQ",
+      "target": "GenExtField"
+    },
+    {
+      "source": "PolyBezoutQ",
+      "target": "PolyBezoutBounded"
+    },
+    {
+      "source": "PolyBezoutQ",
       "target": "PolyDivisibility"
+    },
+    {
+      "source": "PolyDivisibility",
+      "target": "PolyDvdBounded"
     },
     {
       "source": "PolyDivisibility",
@@ -9136,6 +9268,14 @@
     {
       "source": "PolyDivision",
       "target": "PolyFieldDivision"
+    },
+    {
+      "source": "PolyDvdBounded",
+      "target": "PolyBezoutBounded"
+    },
+    {
+      "source": "PolyDvdBounded",
+      "target": "PolyIrreducibleBounded"
     },
     {
       "source": "PolyFieldDivision",
@@ -9162,6 +9302,18 @@
       "target": "SimpleExtension"
     },
     {
+      "source": "PolyIrreducibleBounded",
+      "target": "CbrtTwoIrreducible"
+    },
+    {
+      "source": "PolyIrreducibleBounded",
+      "target": "Cq3Irreducible"
+    },
+    {
+      "source": "PolyIrreducibleBounded",
+      "target": "GenExtField"
+    },
+    {
       "source": "PolyIsomorphism",
       "target": "FiberedFrobenioid"
     },
@@ -9178,6 +9330,22 @@
       "target": "SplitFrobenioid"
     },
     {
+      "source": "PolyLeadOracleQ",
+      "target": "CbrtTwoIrreducible"
+    },
+    {
+      "source": "PolyLeadOracleQ",
+      "target": "Cq3Irreducible"
+    },
+    {
+      "source": "PolyLeadOracleQ",
+      "target": "GenExtField"
+    },
+    {
+      "source": "PolyLeadOracleQ",
+      "target": "PolyBezoutBounded"
+    },
+    {
       "source": "PolyPSUtil",
       "target": "CbrtBezB"
     },
@@ -9192,6 +9360,10 @@
     {
       "source": "PolyPSUtil",
       "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "GenExtField"
     },
     {
       "source": "PolyPSUtil",
@@ -10076,6 +10248,10 @@
     {
       "source": "SimpleExtension",
       "target": "EvaluationHom"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "GenExtField"
     },
     {
       "source": "SimpleExtension",
