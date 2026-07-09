@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 545,
-  "verified_theorem_total": 2465,
-  "choice_free_count": 456,
+  "module_count": 552,
+  "verified_theorem_total": 2474,
+  "choice_free_count": 463,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6694,6 +6694,90 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CbrtTwoAlpha.lean"
+    },
+    {
+      "id": "PolyDivisibility",
+      "label": "PolyDivisibility",
+      "milestone": "M271F",
+      "title": "体係数多項式環 K[X] 上の整除・次数・ 単元に関する汎用実補題: 一般 f の ℚ[X]/(f",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyDivisibility.lean"
+    },
+    {
+      "id": "PolyIrreducible",
+      "label": "PolyIrreducible",
+      "milestone": "M271F",
+      "title": "体係数多項式環 K[X] 上の**既約性の 忠実な定式化**と「既約 ⟹ gcd は単元」の論理核: 柱A 実 Galois 理論／ 一般 f の ℚ[X]/(f",
+      "pillar": "A",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyIrreducible.lean"
+    },
+    {
+      "id": "PolyLeadOracleQ",
+      "label": "PolyLeadOracleQ",
+      "milestone": null,
+      "title": "PolyLeadOracleQ",
+      "pillar": "A",
+      "decl_count": 1,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyLeadOracleQ.lean"
+    },
+    {
+      "id": "Cq3Base",
+      "label": "Cq3Base",
+      "milestone": null,
+      "title": "Cq3Base",
+      "pillar": "A",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Cq3Base.lean"
+    },
+    {
+      "id": "Cq3BezoutChain",
+      "label": "Cq3BezoutChain",
+      "milestone": null,
+      "title": "Cq3BezoutChain",
+      "pillar": "A",
+      "decl_count": 6,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Cq3BezoutChain.lean"
+    },
+    {
+      "id": "Cq3Field",
+      "label": "Cq3Field",
+      "milestone": null,
+      "title": "Cq3Field",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Cq3Field.lean"
+    },
+    {
+      "id": "Cq3Alpha",
+      "label": "Cq3Alpha",
+      "milestone": null,
+      "title": "Cq3Alpha",
+      "pillar": "A",
+      "decl_count": 4,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Cq3Alpha.lean"
     }
   ],
   "edges": [
@@ -6918,6 +7002,10 @@
       "target": "CbrtBezoutChain"
     },
     {
+      "source": "CbrtBezB",
+      "target": "Cq3BezoutChain"
+    },
+    {
       "source": "CbrtBezoutChain",
       "target": "CbrtTwoField"
     },
@@ -6928,6 +7016,10 @@
     {
       "source": "CbrtLinearFactor",
       "target": "CbrtBezoutChain"
+    },
+    {
+      "source": "CbrtLinearFactor",
+      "target": "Cq3BezoutChain"
     },
     {
       "source": "CbrtTwoBase",
@@ -6948,6 +7040,10 @@
     {
       "source": "CbrtTwoBase",
       "target": "CbrtTwoField"
+    },
+    {
+      "source": "CbrtTwoBase",
+      "target": "Cq3Base"
     },
     {
       "source": "Compactness",
@@ -6992,6 +7088,22 @@
     {
       "source": "CosetGalois",
       "target": "NormalPairBoundary"
+    },
+    {
+      "source": "Cq3Base",
+      "target": "Cq3Alpha"
+    },
+    {
+      "source": "Cq3Base",
+      "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "Cq3Base",
+      "target": "Cq3Field"
+    },
+    {
+      "source": "Cq3BezoutChain",
+      "target": "Cq3Field"
     },
     {
       "source": "CruxInequalityReal",
@@ -7276,6 +7388,10 @@
     {
       "source": "EvaluationHom",
       "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "EvaluationHom",
+      "target": "Cq3BezoutChain"
     },
     {
       "source": "EvaluationHom",
@@ -9010,6 +9126,14 @@
       "target": "CbrtTwoBase"
     },
     {
+      "source": "PolyBezoutQ",
+      "target": "PolyDivisibility"
+    },
+    {
+      "source": "PolyDivisibility",
+      "target": "PolyIrreducible"
+    },
+    {
       "source": "PolyDivision",
       "target": "PolyFieldDivision"
     },
@@ -9020,6 +9144,10 @@
     {
       "source": "PolyFieldDivision",
       "target": "CbrtCofactor"
+    },
+    {
+      "source": "PolyFieldDivision",
+      "target": "Cq3BezoutChain"
     },
     {
       "source": "PolyFieldDivision",
@@ -9060,6 +9188,14 @@
     {
       "source": "PolyPSUtil",
       "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "PolyPSUtil",
+      "target": "PolyLeadOracleQ"
     },
     {
       "source": "PolyWeierstrass",
@@ -9304,6 +9440,18 @@
     {
       "source": "RatZeroDecide",
       "target": "CbrtCofactor"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "PolyLeadOracleQ"
+    },
+    {
+      "source": "Rationals",
+      "target": "Cq3Base"
     },
     {
       "source": "Rationals",
@@ -9811,6 +9959,10 @@
     },
     {
       "source": "RootAdjunction",
+      "target": "Cq3Alpha"
+    },
+    {
+      "source": "RootAdjunction",
       "target": "NormalSplitting"
     },
     {
@@ -9904,6 +10056,18 @@
     {
       "source": "SimpleExtension",
       "target": "ConnectedEtale"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "Cq3Alpha"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "Cq3Field"
     },
     {
       "source": "SimpleExtension",

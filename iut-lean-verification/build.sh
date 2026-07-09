@@ -2474,6 +2474,15 @@ import IUT
 #print axioms IUT.cta_alpha_cubed
 #print axioms IUT.cta_alpha_not_rational
 #print axioms IUT.cta_exists
+#print axioms IUT.plo_lead_oracle_Q
+#print axioms IUT.pir_gcd_unit_of_not_dvd
+#print axioms IUT.cq0_no_rat_root
+#print axioms IUT.cq1_bezout
+#print axioms IUT.cq2_has_inverses
+#print axioms IUT.cq2_exists
+#print axioms IUT.cqz_zeta_relation
+#print axioms IUT.cqz_zeta_not_rational
+#print axioms IUT.cqz_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

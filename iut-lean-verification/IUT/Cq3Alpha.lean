@@ -9,12 +9,12 @@
   実二次数体 ℚ(ζ₃) の ζ₃ の実在言明（CTA `CbrtTwoAlpha` の次数2版）。
   M275F `RootAdjunction`（根 ρ = [X]・f(ρ) = 0・ρ∉K 像）を実 ℚ・実 Φ₃ で
   実例化し、**ζ := ζ₃ = [X] ∈ ℚ[X]/(x²+x+1)** に対し
-   * `cq3_zeta_relation` — **ζ² + ζ + 1 = 0**（f(ζ) = 0 の rsum 3 項展開を
+   * `cqz_zeta_relation` — **ζ² + ζ + 1 = 0**（f(ζ) = 0 の rsum 3 項展開を
      ζ²+ζ+1 = 0 の形へ整理。Φ₃ の係数は全て +1 なので map_one/一次結合のみで
      閉じる本物の等式）。
-   * `cq3_zeta_not_rational` — **ζ ∉ ℚ 像**（deg 2 ≥ 2 での
+   * `cqz_zeta_not_rational` — **ζ ∉ ℚ 像**（deg 2 ≥ 2 での
      `rootAdj_root_not_in_base` の実例化）。
-   * `cq3_exists` — ζ₃ が L に実在し ℚ に無い（capstone）。
+   * `cqz_exists` — ζ₃ が L に実在し ℚ に無い（capstone）。
 
   **complete_pct 影響**: 本層単体では **complete_pct 未設定（0 前進）**。
   A1 の complete_pct はイデアル極大性（Bezout）と体化が本物で揃った時に動かす。
@@ -43,7 +43,7 @@ namespace IUT
 
 /-- **CQ3-1: 根 ζ = ζ₃**（= [X] ∈ L = ℚ[X]/(x²+x+1)）— M275F `rootAdj_root` の
     実 ℚ・実 Φ₃ 実例化。 -/
-def cq3Zeta : (simpleExtRing cq0Field cq0PS 2 cq0_bound).carrier :=
+def cqzZeta : (simpleExtRing cq0Field cq0PS 2 cq0_bound).carrier :=
   rootAdj_root cq0Field cq0PS 2 cq0_bound
 
 /-! ## CQ3-2: ζ² + ζ + 1 = 0 -/
@@ -53,11 +53,11 @@ def cq3Zeta : (simpleExtRing cq0Field cq0PS 2 cq0_bound).carrier :=
     （f(ζ) = 0）。f の評価 `rootAdjEval` = Σ_{k≤2} emb(Φ₃ k)·ζ^k を係数
     （0→1, 1→1, 2→1）で展開すると emb(1)·1 + emb(1)·ζ + emb(1)·ζ² = 0。
     環準同型 emb で emb(1) = 1（map_one）を使い ζ² + ζ + 1 = 0 へ整える。 -/
-theorem cq3_zeta_relation :
+theorem cqz_zeta_relation :
     (simpleExtRing cq0Field cq0PS 2 cq0_bound).add
       ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
-        ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta)
-        cq3Zeta)
+        ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta)
+        cqzZeta)
       ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one)
       = (simpleExtRing cq0Field cq0PS 2 cq0_bound).zero := by
   -- emb(1) = 1（基礎体埋め込みの map_one）
@@ -69,7 +69,7 @@ theorem cq3_zeta_relation :
   have hg0 :
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
         ((simpleExtC cq0Field cq0PS 2 cq0_bound).map (cq0PS 0))
-        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 0)
+        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 0)
       = (simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one := by
     rw [cq0PS_coeff0]
     exact CRing.mul_one (simpleExtRing cq0Field cq0PS 2 cq0_bound)
@@ -77,53 +77,53 @@ theorem cq3_zeta_relation :
   have hg1 :
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
         ((simpleExtC cq0Field cq0PS 2 cq0_bound).map (cq0PS 1))
-        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 1)
-      = cq3Zeta := by
+        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 1)
+      = cqzZeta := by
     rw [cq0PS_coeff1, hmap1,
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).one_mul
-        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 1)]
+        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 1)]
     show (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
-        (simpleExtRing cq0Field cq0PS 2 cq0_bound).one cq3Zeta = cq3Zeta
-    exact (simpleExtRing cq0Field cq0PS 2 cq0_bound).one_mul cq3Zeta
+        (simpleExtRing cq0Field cq0PS 2 cq0_bound).one cqzZeta = cqzZeta
+    exact (simpleExtRing cq0Field cq0PS 2 cq0_bound).one_mul cqzZeta
   have hg2 :
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
         ((simpleExtC cq0Field cq0PS 2 cq0_bound).map (cq0PS 2))
-        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 2)
-      = (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta := by
+        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 2)
+      = (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta := by
     rw [cq0PS_coeff2, hmap1,
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).one_mul
-        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 2)]
+        (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 2)]
     show (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
         ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
-          (simpleExtRing cq0Field cq0PS 2 cq0_bound).one cq3Zeta) cq3Zeta
-      = (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta
-    rw [(simpleExtRing cq0Field cq0PS 2 cq0_bound).one_mul cq3Zeta]
+          (simpleExtRing cq0Field cq0PS 2 cq0_bound).one cqzZeta) cqzZeta
+      = (simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta
+    rw [(simpleExtRing cq0Field cq0PS 2 cq0_bound).one_mul cqzZeta]
   -- f(ζ) の rsum 3 項展開 → emb(1) + ζ + ζ²
   have hexp :
       rootAdjEval cq0Field cq0PS 2 cq0_bound
         = (simpleExtRing cq0Field cq0PS 2 cq0_bound).add
             ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
               ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one)
-              cq3Zeta)
-            ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta) := by
+              cqzZeta)
+            ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta) := by
     show (simpleExtRing cq0Field cq0PS 2 cq0_bound).add
         ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
           ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
             (simpleExtRing cq0Field cq0PS 2 cq0_bound).zero
             ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
               ((simpleExtC cq0Field cq0PS 2 cq0_bound).map (cq0PS 0))
-              (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 0)))
+              (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 0)))
           ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
             ((simpleExtC cq0Field cq0PS 2 cq0_bound).map (cq0PS 1))
-            (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 1)))
+            (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 1)))
         ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul
           ((simpleExtC cq0Field cq0PS 2 cq0_bound).map (cq0PS 2))
-          (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cq3Zeta 2))
+          (rpow (simpleExtRing cq0Field cq0PS 2 cq0_bound) cqzZeta 2))
       = (simpleExtRing cq0Field cq0PS 2 cq0_bound).add
           ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
             ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one)
-            cq3Zeta)
-          ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta)
+            cqzZeta)
+          ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta)
     rw [hg0, hg1, hg2,
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).zero_add
         ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one)]
@@ -132,21 +132,21 @@ theorem cq3_zeta_relation :
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).add
         ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
           ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one)
-          cq3Zeta)
-        ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta)
+          cqzZeta)
+        ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta)
       = (simpleExtRing cq0Field cq0PS 2 cq0_bound).zero := by
     rw [← hexp]
     exact rootAdj_is_root cq0Field cq0PS 2 cq0_bound
   -- 交換律・結合律で ζ² + ζ + 1 = 0 の順に並べ替え
   rw [(simpleExtRing cq0Field cq0PS 2 cq0_bound).add_assoc
-      ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta)
-      cq3Zeta ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one),
-    (simpleExtRing cq0Field cq0PS 2 cq0_bound).add_comm cq3Zeta
+      ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta)
+      cqzZeta ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one),
+    (simpleExtRing cq0Field cq0PS 2 cq0_bound).add_comm cqzZeta
       ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one),
     (simpleExtRing cq0Field cq0PS 2 cq0_bound).add_comm
-      ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cq3Zeta cq3Zeta)
+      ((simpleExtRing cq0Field cq0PS 2 cq0_bound).mul cqzZeta cqzZeta)
       ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
-        ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one) cq3Zeta)]
+        ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one) cqzZeta)]
   exact hkey
 
 /-! ## CQ3-3: ζ ∉ ℚ 像 -/
@@ -155,8 +155,8 @@ theorem cq3_zeta_relation :
     一致しない（真の拡大の非自明性）。deg Φ₃ = 2 ≥ 2 での M275F
     `rootAdj_root_not_in_base` の実例化（先頭係数 `cq0_lead`・基礎体非自明
     `cq0_base_nontrivial`）。 -/
-theorem cq3_zeta_not_rational :
-    ∀ c : QRat, cq3Zeta ≠ (simpleExtC cq0Field cq0PS 2 cq0_bound).map c :=
+theorem cqz_zeta_not_rational :
+    ∀ c : QRat, cqzZeta ≠ (simpleExtC cq0Field cq0PS 2 cq0_bound).map c :=
   rootAdj_root_not_in_base cq0Field cq0PS 2 cq0_bound cq0_lead
     (by omega) cq0_base_nontrivial
 
@@ -165,7 +165,7 @@ theorem cq3_zeta_not_rational :
 /-- **定理 (CQ3-4): ζ₃ の実在** — 実二次数体 L = ℚ[X]/(x²+x+1) に、
     ζ² + ζ + emb(1) = 0 を満たし かつ ℚ のどの元の像とも異なる元 ζ が存在する
     （原始 3 乗根 ζ₃ が本物に実在し ℚ には無い）。 -/
-theorem cq3_exists :
+theorem cqz_exists :
     ∃ ζ : (simpleExtRing cq0Field cq0PS 2 cq0_bound).carrier,
       (simpleExtRing cq0Field cq0PS 2 cq0_bound).add
         ((simpleExtRing cq0Field cq0PS 2 cq0_bound).add
@@ -173,6 +173,6 @@ theorem cq3_exists :
         ((simpleExtC cq0Field cq0PS 2 cq0_bound).map ratRing.one)
         = (simpleExtRing cq0Field cq0PS 2 cq0_bound).zero ∧
       (∀ c : QRat, ζ ≠ (simpleExtC cq0Field cq0PS 2 cq0_bound).map c) :=
-  ⟨cq3Zeta, cq3_zeta_relation, cq3_zeta_not_rational⟩
+  ⟨cqzZeta, cqz_zeta_relation, cqz_zeta_not_rational⟩
 
 end IUT

@@ -52,18 +52,11 @@
   全て選択公理不使用（新規 Classical.choice を証明本体に導入しない）。
   禁止タクティク不使用。サブエージェント新規部品（共有ファイル不更新）。
 -/
-import IUT.PolyBezoutQ
+import IUT.PolyDivisibility
 
 namespace IUT
 
-/-! ## M271F-1: 多項式の単元・同伴 -/
-
-/-- **M271F-1a: 単元** — 多項式 p が単元 := 非零定数 psC c（c ≠ 0）。
-    体係数多項式環 K[X] の単元はちょうど非零定数（次数 0）である。 -/
-def pdvIsUnit (R : CRing) (p : PS R) : Prop := ∃ c : R.carrier, c ≠ R.zero ∧ p = psC R c
-
-/-- **M271F-1b: 同伴** — d と f が同伴 := 相互に割り切れる（d ∣ f ∧ f ∣ d）。 -/
-def pdvAssoc (R : CRing) (d f : PS R) : Prop := pbzDvd R d f ∧ pbzDvd R f d
+/-! ## M271F-1: 多項式の単元・同伴（`pdvIsUnit`/`pdvAssoc` は `PolyDivisibility` から） -/
 
 /-! ## M271F-2: 割り切れの推移律（本物・仮説引数なし） -/
 

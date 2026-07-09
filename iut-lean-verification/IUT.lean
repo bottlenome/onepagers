@@ -549,3 +549,10 @@ import IUT.CbrtCofactor
 import IUT.CbrtBezoutChain
 import IUT.CbrtTwoField
 import IUT.CbrtTwoAlpha
+import IUT.PolyDivisibility
+import IUT.PolyIrreducible
+import IUT.PolyLeadOracleQ
+import IUT.Cq3Base
+import IUT.Cq3BezoutChain
+import IUT.Cq3Field
+import IUT.Cq3Alpha
