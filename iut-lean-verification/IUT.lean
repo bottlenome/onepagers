@@ -537,3 +537,6 @@ import IUT.PadicAbsValueQ
 import IUT.FiniteSupportPrimeProduct
 import IUT.ArchValueInteger
 import IUT.B5ProductFormulaQ
+import IUT.CubeRootTwoIrrational
+import IUT.CubicPolyQ
+import IUT.PolyBezoutQ

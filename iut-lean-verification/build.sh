@@ -2463,6 +2463,10 @@ import IUT
 #print axioms IUT.avi_abs_mul_recip
 #print axioms IUT.b5_product_formula
 #print axioms IUT.b5_prod_pow_count
+#print axioms IUT.crt_no_rat_cube
+#print axioms IUT.cbpF3_monic
+#print axioms IUT.pbzBezout
+#print axioms IUT.pbzBezout_one_of_unit
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

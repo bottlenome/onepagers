@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 533,
-  "verified_theorem_total": 2454,
-  "choice_free_count": 444,
+  "module_count": 536,
+  "verified_theorem_total": 2458,
+  "choice_free_count": 447,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -6550,6 +6550,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/B5ProductFormulaQ.lean"
+    },
+    {
+      "id": "CubeRootTwoIrrational",
+      "label": "CubeRootTwoIrrational",
+      "milestone": null,
+      "title": "CubeRootTwoIrrational",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CubeRootTwoIrrational.lean"
+    },
+    {
+      "id": "CubicPolyQ",
+      "label": "CubicPolyQ",
+      "milestone": null,
+      "title": "CubicPolyQ",
+      "pillar": "A",
+      "decl_count": 25,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CubicPolyQ.lean"
+    },
+    {
+      "id": "PolyBezoutQ",
+      "label": "PolyBezoutQ",
+      "milestone": "M270F",
+      "title": "実 ℚ[X] 上の拡張ユークリッド互除法・ Bezout 恒等式の構成エンジン",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/PolyBezoutQ.lean"
     }
   ],
   "edges": [
@@ -7147,6 +7183,10 @@
     },
     {
       "source": "Field",
+      "target": "PolyBezoutQ"
+    },
+    {
+      "source": "Field",
       "target": "PrimeSpectrum"
     },
     {
@@ -7544,6 +7584,10 @@
     {
       "source": "Frobenius2",
       "target": "FormalGroupErr"
+    },
+    {
+      "source": "FrobeniusCharP",
+      "target": "CubicPolyQ"
     },
     {
       "source": "FrobeniusCharP",
@@ -9039,6 +9083,14 @@
     },
     {
       "source": "Rationals",
+      "target": "CubeRootTwoIrrational"
+    },
+    {
+      "source": "Rationals",
+      "target": "CubicPolyQ"
+    },
+    {
+      "source": "Rationals",
       "target": "Field"
     },
     {
@@ -9607,7 +9659,15 @@
     },
     {
       "source": "SimpleExtension",
+      "target": "CubicPolyQ"
+    },
+    {
+      "source": "SimpleExtension",
       "target": "EvaluationHom"
+    },
+    {
+      "source": "SimpleExtension",
+      "target": "PolyBezoutQ"
     },
     {
       "source": "SimpleExtension",
