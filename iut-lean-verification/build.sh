@@ -2560,6 +2560,9 @@ import IUT
 #print axioms IUT.ctmFind_spec
 #print axioms IUT.cae_decompose
 #print axioms IUT.cae_aut_ext
+#print axioms IUT.csaSub_mul
+#print axioms IUT.csaAut
+#print axioms IUT.csaAut_mem
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

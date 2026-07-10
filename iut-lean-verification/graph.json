@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 588,
-  "verified_theorem_total": 2551,
-  "choice_free_count": 499,
+  "module_count": 589,
+  "verified_theorem_total": 2554,
+  "choice_free_count": 500,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7210,6 +7210,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicAutExt.lean"
+    },
+    {
+      "id": "CyclotomicSubAut",
+      "label": "CyclotomicSubAut",
+      "milestone": null,
+      "title": "CyclotomicSubAut",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicSubAut.lean"
     }
   ],
   "edges": [
@@ -7642,6 +7654,10 @@
       "target": "AbsTopFieldFromCyclotome"
     },
     {
+      "source": "CyclotomicAutExt",
+      "target": "CyclotomicSubAut"
+    },
+    {
       "source": "CyclotomicDifferent",
       "target": "ConductorDiscriminantAbelian"
     },
@@ -7700,6 +7716,10 @@
     {
       "source": "CyclotomicMu9Roots",
       "target": "CyclotomicRes39"
+    },
+    {
+      "source": "CyclotomicMuTower",
+      "target": "CyclotomicSubAut"
     },
     {
       "source": "CyclotomicPolyData",
@@ -8032,6 +8052,10 @@
     {
       "source": "Field",
       "target": "CbrtLinearFactor"
+    },
+    {
+      "source": "Field",
+      "target": "CyclotomicSubAut"
     },
     {
       "source": "Field",
@@ -9056,6 +9080,10 @@
     {
       "source": "LTErrorDivisible",
       "target": "CbrtTwoAlpha"
+    },
+    {
+      "source": "LTErrorDivisible",
+      "target": "CyclotomicSubAut"
     },
     {
       "source": "LTErrorDivisible",

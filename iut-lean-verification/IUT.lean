@@ -592,3 +592,4 @@ import IUT.EisensteinTowerInput
 import IUT.CyclotomicEmbedTower
 import IUT.CyclotomicMuTower
 import IUT.CyclotomicAutExt
+import IUT.CyclotomicSubAut
