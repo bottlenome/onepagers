@@ -598,3 +598,4 @@ import IUT.CyclotomicTowerLimit
 import IUT.Zmod3PowUnits
 import IUT.Zmod3PowUnitsSystem
 import IUT.CyclotomicCharIso
+import IUT.CyclotomicLimitIso

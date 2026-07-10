@@ -2575,6 +2575,8 @@ import IUT
 #print axioms IUT.zps_proj_surjective
 #print axioms IUT.cciIsoData
 #print axioms IUT.cci_charG_mul
+#print axioms IUT.cliIsoData
+#print axioms IUT.cli_char_restr
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
