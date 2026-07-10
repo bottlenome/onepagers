@@ -2584,6 +2584,10 @@ import IUT
 #print axioms IUT.cgarAct
 #print axioms IUT.cgar_nontrivial
 #print axioms IUT.cgarRigidityData
+#print axioms IUT.cra_endo_pow
+#print axioms IUT.cra_gal_realize
+#print axioms IUT.cra_indeterminacy
+#print axioms IUT.craRigidityData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 598,
-  "verified_theorem_total": 2575,
-  "choice_free_count": 509,
+  "module_count": 599,
+  "verified_theorem_total": 2579,
+  "choice_free_count": 510,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7330,6 +7330,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicGKActionReal.lean"
+    },
+    {
+      "id": "CyclotomicRigidityAut",
+      "label": "CyclotomicRigidityAut",
+      "milestone": null,
+      "title": "CyclotomicRigidityAut",
+      "pillar": "A",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicRigidityAut.lean"
     }
   ],
   "edges": [
@@ -7790,6 +7804,10 @@
       "target": "CyclotomicProjSurj"
     },
     {
+      "source": "CyclotomicCharIso",
+      "target": "CyclotomicRigidityAut"
+    },
+    {
       "source": "CyclotomicDifferent",
       "target": "ConductorDiscriminantAbelian"
     },
@@ -7830,6 +7848,10 @@
       "target": "CyclotomicGal3"
     },
     {
+      "source": "CyclotomicGKActionReal",
+      "target": "CyclotomicRigidityAut"
+    },
+    {
       "source": "CyclotomicGal3",
       "target": "CyclotomicRes39"
     },
@@ -7858,12 +7880,20 @@
       "target": "CyclotomicGKActionReal"
     },
     {
+      "source": "CyclotomicMuGroupReal",
+      "target": "CyclotomicRigidityAut"
+    },
+    {
       "source": "CyclotomicMuTower",
       "target": "CyclotomicCharIso"
     },
     {
       "source": "CyclotomicMuTower",
       "target": "CyclotomicMuGroupReal"
+    },
+    {
+      "source": "CyclotomicMuTower",
+      "target": "CyclotomicRigidityAut"
     },
     {
       "source": "CyclotomicMuTower",
@@ -11848,6 +11878,10 @@
     {
       "source": "Zmod3PowUnits",
       "target": "CyclotomicMuGroupReal"
+    },
+    {
+      "source": "Zmod3PowUnits",
+      "target": "CyclotomicRigidityAut"
     },
     {
       "source": "Zmod3PowUnits",
