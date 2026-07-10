@@ -2563,6 +2563,9 @@ import IUT
 #print axioms IUT.csaSub_mul
 #print axioms IUT.csaAut
 #print axioms IUT.csaAut_mem
+#print axioms IUT.ctr_compat
+#print axioms IUT.ctrResHom
+#print axioms IUT.ctr_surjective
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

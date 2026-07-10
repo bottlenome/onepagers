@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 589,
-  "verified_theorem_total": 2554,
-  "choice_free_count": 500,
+  "module_count": 590,
+  "verified_theorem_total": 2557,
+  "choice_free_count": 501,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7222,6 +7222,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicSubAut.lean"
+    },
+    {
+      "id": "CyclotomicResTower",
+      "label": "CyclotomicResTower",
+      "milestone": null,
+      "title": "CyclotomicResTower",
+      "pillar": "A",
+      "decl_count": 40,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicResTower.lean"
     }
   ],
   "edges": [
@@ -7655,6 +7667,10 @@
     },
     {
       "source": "CyclotomicAutExt",
+      "target": "CyclotomicResTower"
+    },
+    {
+      "source": "CyclotomicAutExt",
       "target": "CyclotomicSubAut"
     },
     {
@@ -7772,6 +7788,10 @@
     {
       "source": "CyclotomicStretch",
       "target": "EisensteinTowerInput"
+    },
+    {
+      "source": "CyclotomicSubAut",
+      "target": "CyclotomicResTower"
     },
     {
       "source": "CyclotomicSync",
@@ -8540,6 +8560,10 @@
     {
       "source": "FundamentalGroup",
       "target": "CyclotomicRes39"
+    },
+    {
+      "source": "FundamentalGroup",
+      "target": "CyclotomicResTower"
     },
     {
       "source": "FundamentalGroup",
