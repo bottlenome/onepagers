@@ -2626,6 +2626,11 @@ import IUT
 #print axioms IUT.tme_char_compat
 #print axioms IUT.tme_endo_ext
 #print axioms IUT.tmeEndoData
+#print axioms IUT.tmi_endo_gal_commute
+#print axioms IUT.tmi_from_units_iso
+#print axioms IUT.tmi_aut_classify
+#print axioms IUT.tmi_units_inj
+#print axioms IUT.tmiIndeterminacyData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
