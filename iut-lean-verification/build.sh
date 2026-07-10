@@ -2598,6 +2598,8 @@ import IUT
 #print axioms IUT.z3v_extract
 #print axioms IUT.z3vMaximal
 #print axioms IUT.z3v_res_iso
+#print axioms IUT.z3c_converges
+#print axioms IUT.z3c_val_compat
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
