@@ -2579,6 +2579,8 @@ import IUT
 #print axioms IUT.cli_char_restr
 #print axioms IUT.cps_proj_surjective
 #print axioms IUT.cps_nontrivial
+#print axioms IUT.cmrMu
+#print axioms IUT.cmr_pow_val
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

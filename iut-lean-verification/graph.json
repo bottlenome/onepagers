@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 596,
-  "verified_theorem_total": 2570,
-  "choice_free_count": 507,
+  "module_count": 597,
+  "verified_theorem_total": 2572,
+  "choice_free_count": 508,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7306,6 +7306,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicProjSurj.lean"
+    },
+    {
+      "id": "CyclotomicMuGroupReal",
+      "label": "CyclotomicMuGroupReal",
+      "milestone": null,
+      "title": "CyclotomicMuGroupReal",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicMuGroupReal.lean"
     }
   ],
   "edges": [
@@ -7827,6 +7839,10 @@
     },
     {
       "source": "CyclotomicMuTower",
+      "target": "CyclotomicMuGroupReal"
+    },
+    {
+      "source": "CyclotomicMuTower",
       "target": "CyclotomicSubAut"
     },
     {
@@ -7851,6 +7867,10 @@
     },
     {
       "source": "CyclotomicResTower",
+      "target": "CyclotomicMuGroupReal"
+    },
+    {
+      "source": "CyclotomicResTower",
       "target": "CyclotomicTowerLimit"
     },
     {
@@ -7864,6 +7884,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "CyclotomicDiscriminant"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "CyclotomicMuGroupReal"
     },
     {
       "source": "CyclotomicRigidity",
@@ -8020,6 +8044,10 @@
     {
       "source": "EisensteinCriterionQ",
       "target": "Phi9Irreducible"
+    },
+    {
+      "source": "EisensteinGalois",
+      "target": "CyclotomicMuGroupReal"
     },
     {
       "source": "EisensteinGalois",
@@ -8652,6 +8680,10 @@
     {
       "source": "FrobeniusCharP",
       "target": "PolyMonomialBasis"
+    },
+    {
+      "source": "FrobeniusGen",
+      "target": "CyclotomicMuGroupReal"
     },
     {
       "source": "FrobeniusGen",
@@ -11667,6 +11699,10 @@
     },
     {
       "source": "TorsionResidue",
+      "target": "CyclotomicMuGroupReal"
+    },
+    {
+      "source": "TorsionResidue",
       "target": "Premises311Real"
     },
     {
@@ -11776,6 +11812,10 @@
     {
       "source": "Zmod3PowUnits",
       "target": "CyclotomicCharIso"
+    },
+    {
+      "source": "Zmod3PowUnits",
+      "target": "CyclotomicMuGroupReal"
     },
     {
       "source": "Zmod3PowUnits",
