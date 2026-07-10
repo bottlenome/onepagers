@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 604,
-  "verified_theorem_total": 2591,
-  "choice_free_count": 515,
+  "module_count": 605,
+  "verified_theorem_total": 2594,
+  "choice_free_count": 516,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7404,6 +7404,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Zp3Complete.lean"
+    },
+    {
+      "id": "Q3LocalField",
+      "label": "Q3LocalField",
+      "milestone": null,
+      "title": "Q3LocalField",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3LocalField.lean"
     }
   ],
   "edges": [
@@ -11212,6 +11224,10 @@
       "target": "LocalRingStalk"
     },
     {
+      "source": "RingLocalization",
+      "target": "Q3LocalField"
+    },
+    {
       "source": "RingOfIntegersDiscriminant",
       "target": "DiscriminantLowerBound"
     },
@@ -12022,6 +12038,10 @@
     {
       "source": "ZmodOrder",
       "target": "PrimitiveRoot"
+    },
+    {
+      "source": "Zp3ValuationRing",
+      "target": "Q3LocalField"
     },
     {
       "source": "Zp3ValuationRing",

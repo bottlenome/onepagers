@@ -2600,6 +2600,9 @@ import IUT
 #print axioms IUT.z3v_res_iso
 #print axioms IUT.z3c_converges
 #print axioms IUT.z3c_val_compat
+#print axioms IUT.q3Ring
+#print axioms IUT.q3f_has_inverses
+#print axioms IUT.q3f_uniformizer
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
