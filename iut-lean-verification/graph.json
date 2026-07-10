@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 574,
-  "verified_theorem_total": 2517,
-  "choice_free_count": 485,
+  "module_count": 575,
+  "verified_theorem_total": 2519,
+  "choice_free_count": 486,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7042,6 +7042,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussValuationQ.lean"
+    },
+    {
+      "id": "EisensteinCriterionQ",
+      "label": "EisensteinCriterionQ",
+      "milestone": null,
+      "title": "EisensteinCriterionQ",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinCriterionQ.lean"
     }
   ],
   "edges": [
@@ -8414,6 +8426,10 @@
       "target": "RealMultiradialInput"
     },
     {
+      "source": "GaussValuationQ",
+      "target": "EisensteinCriterionQ"
+    },
+    {
       "source": "GaussianDivisor",
       "target": "IndActionLabel"
     },
@@ -9619,6 +9635,10 @@
     },
     {
       "source": "PolyIrreducibleBounded",
+      "target": "EisensteinCriterionQ"
+    },
+    {
+      "source": "PolyIrreducibleBounded",
       "target": "GenExtField"
     },
     {
@@ -9652,6 +9672,10 @@
     {
       "source": "PolyLeadOracleQ",
       "target": "Cq3Irreducible"
+    },
+    {
+      "source": "PolyLeadOracleQ",
+      "target": "EisensteinCriterionQ"
     },
     {
       "source": "PolyLeadOracleQ",
