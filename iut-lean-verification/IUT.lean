@@ -610,3 +610,4 @@ import IUT.Zp3ValuationRing
 import IUT.Zp3Complete
 import IUT.Q3LocalField
 import IUT.Q3UnitsGroup
+import IUT.Q3TateCurve

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 606,
-  "verified_theorem_total": 2597,
-  "choice_free_count": 517,
+  "module_count": 607,
+  "verified_theorem_total": 2600,
+  "choice_free_count": 518,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7428,6 +7428,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3UnitsGroup.lean"
+    },
+    {
+      "id": "Q3TateCurve",
+      "label": "Q3TateCurve",
+      "milestone": null,
+      "title": "Q3TateCurve",
+      "pillar": "A",
+      "decl_count": 25,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCurve.lean"
     }
   ],
   "edges": [
@@ -10636,6 +10648,10 @@
       "target": "Q3UnitsGroup"
     },
     {
+      "source": "Q3UnitsGroup",
+      "target": "Q3TateCurve"
+    },
+    {
       "source": "QuadraticProductFormula",
       "target": "DifferentDiscriminant"
     },
@@ -11494,6 +11510,10 @@
     {
       "source": "TateCurve",
       "target": "DiscreteRigidity"
+    },
+    {
+      "source": "TateCurve",
+      "target": "Q3TateCurve"
     },
     {
       "source": "TateCurve",
