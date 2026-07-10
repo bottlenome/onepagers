@@ -2609,6 +2609,9 @@ import IUT
 #print axioms IUT.q3tCurve
 #print axioms IUT.q3t_q_pow_ne_one
 #print axioms IUT.q3t_point_ne_one
+#print axioms IUT.q3tt_w_order
+#print axioms IUT.q3tt_klein_closed
+#print axioms IUT.q3ttData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

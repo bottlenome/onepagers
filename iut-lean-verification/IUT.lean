@@ -611,3 +611,4 @@ import IUT.Zp3Complete
 import IUT.Q3LocalField
 import IUT.Q3UnitsGroup
 import IUT.Q3TateCurve
+import IUT.Q3TateTorsion

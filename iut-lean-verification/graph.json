@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 607,
-  "verified_theorem_total": 2600,
-  "choice_free_count": 518,
+  "module_count": 608,
+  "verified_theorem_total": 2603,
+  "choice_free_count": 519,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7440,6 +7440,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCurve.lean"
+    },
+    {
+      "id": "Q3TateTorsion",
+      "label": "Q3TateTorsion",
+      "milestone": null,
+      "title": "Q3TateTorsion",
+      "pillar": "A",
+      "decl_count": 31,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateTorsion.lean"
     }
   ],
   "edges": [
@@ -10648,6 +10660,10 @@
       "target": "Q3UnitsGroup"
     },
     {
+      "source": "Q3TateCurve",
+      "target": "Q3TateTorsion"
+    },
+    {
       "source": "Q3UnitsGroup",
       "target": "Q3TateCurve"
     },
@@ -11534,6 +11550,10 @@
     {
       "source": "TateTorsion",
       "target": "LogKummerReal"
+    },
+    {
+      "source": "TateTorsion",
+      "target": "Q3TateTorsion"
     },
     {
       "source": "TateTorsion",
