@@ -2631,6 +2631,11 @@ import IUT
 #print axioms IUT.tmi_aut_classify
 #print axioms IUT.tmi_units_inj
 #print axioms IUT.tmiIndeterminacyData
+#print axioms IUT.q3tc_q_pow
+#print axioms IUT.q3tcHom
+#print axioms IUT.q3tc_ker
+#print axioms IUT.q3tcDeckFin
+#print axioms IUT.q3tcCoverTower_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

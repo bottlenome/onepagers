@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 612,
-  "verified_theorem_total": 2622,
-  "choice_free_count": 523,
+  "module_count": 613,
+  "verified_theorem_total": 2627,
+  "choice_free_count": 524,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7504,6 +7504,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleIndeterminacy.lean"
+    },
+    {
+      "id": "Q3TateCoverTower",
+      "label": "Q3TateCoverTower",
+      "milestone": null,
+      "title": "Q3TateCoverTower",
+      "pillar": "A",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCoverTower.lean"
     }
   ],
   "edges": [
@@ -9046,6 +9058,10 @@
     {
       "source": "GaloisCategory",
       "target": "CategoryTheory"
+    },
+    {
+      "source": "GaloisCategory",
+      "target": "Q3TateCoverTower"
     },
     {
       "source": "GaloisCategory",
@@ -10737,6 +10753,10 @@
     },
     {
       "source": "Q3TateCurve",
+      "target": "Q3TateCoverTower"
+    },
+    {
+      "source": "Q3TateCurve",
       "target": "Q3TateDeck"
     },
     {
@@ -11613,6 +11633,10 @@
     },
     {
       "source": "TateCurve",
+      "target": "Q3TateCoverTower"
+    },
+    {
+      "source": "TateCurve",
       "target": "Q3TateCurve"
     },
     {
@@ -11702,6 +11726,10 @@
     {
       "source": "TemperedThetaOuterAction",
       "target": "ThetaGroupReconstruction"
+    },
+    {
+      "source": "TemperedTower",
+      "target": "Q3TateCoverTower"
     },
     {
       "source": "TemperedTower",
