@@ -2552,6 +2552,9 @@ import IUT
 #print axioms IUT.cs39_res_sigma2
 #print axioms IUT.eitPhi_irreducible
 #print axioms IUT.eitFreshman
+#print axioms IUT.cteField
+#print axioms IUT.cteMap_mul
+#print axioms IUT.cteIota
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
