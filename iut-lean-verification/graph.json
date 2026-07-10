@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 608,
-  "verified_theorem_total": 2603,
-  "choice_free_count": 519,
+  "module_count": 609,
+  "verified_theorem_total": 2607,
+  "choice_free_count": 520,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7452,6 +7452,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateTorsion.lean"
+    },
+    {
+      "id": "Q3TateDeck",
+      "label": "Q3TateDeck",
+      "milestone": null,
+      "title": "Q3TateDeck",
+      "pillar": "A",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateDeck.lean"
     }
   ],
   "edges": [
@@ -8162,6 +8174,10 @@
     {
       "source": "Diophantine",
       "target": "Multiradial"
+    },
+    {
+      "source": "DiscreteRigidity",
+      "target": "Q3TateDeck"
     },
     {
       "source": "DiscreteRigidity",
@@ -8974,6 +8990,10 @@
     {
       "source": "GaloisCategory",
       "target": "CategoryTheory"
+    },
+    {
+      "source": "GaloisCategory",
+      "target": "Q3TateDeck"
     },
     {
       "source": "GaloisCategory",
@@ -10661,6 +10681,10 @@
     },
     {
       "source": "Q3TateCurve",
+      "target": "Q3TateDeck"
+    },
+    {
+      "source": "Q3TateCurve",
       "target": "Q3TateTorsion"
     },
     {
@@ -11530,6 +11554,10 @@
     {
       "source": "TateCurve",
       "target": "Q3TateCurve"
+    },
+    {
+      "source": "TateCurve",
+      "target": "Q3TateDeck"
     },
     {
       "source": "TateCurve",
