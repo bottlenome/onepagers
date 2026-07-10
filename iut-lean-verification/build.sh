@@ -2603,6 +2603,9 @@ import IUT
 #print axioms IUT.q3Ring
 #print axioms IUT.q3f_has_inverses
 #print axioms IUT.q3f_uniformizer
+#print axioms IUT.q3u_embed_hom
+#print axioms IUT.q3u_embed_inj
+#print axioms IUT.q3u_image_char
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

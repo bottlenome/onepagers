@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 605,
-  "verified_theorem_total": 2594,
-  "choice_free_count": 516,
+  "module_count": 606,
+  "verified_theorem_total": 2597,
+  "choice_free_count": 517,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7416,6 +7416,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3LocalField.lean"
+    },
+    {
+      "id": "Q3UnitsGroup",
+      "label": "Q3UnitsGroup",
+      "milestone": null,
+      "title": "Q3UnitsGroup",
+      "pillar": "A",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3UnitsGroup.lean"
     }
   ],
   "edges": [
@@ -8862,6 +8874,10 @@
     {
       "source": "FullReciprocity",
       "target": "LocalReciprocity"
+    },
+    {
+      "source": "FullReciprocity",
+      "target": "Q3UnitsGroup"
     },
     {
       "source": "FullReciprocity",
@@ -10614,6 +10630,10 @@
     {
       "source": "ProfiniteTopology",
       "target": "ProfinitePi1"
+    },
+    {
+      "source": "Q3LocalField",
+      "target": "Q3UnitsGroup"
     },
     {
       "source": "QuadraticProductFormula",
