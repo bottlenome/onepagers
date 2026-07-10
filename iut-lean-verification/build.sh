@@ -2621,6 +2621,11 @@ import IUT
 #print axioms IUT.q3tp_exists_unconditional
 #print axioms IUT.q3tpGalAct
 #print axioms IUT.q3tpData
+#print axioms IUT.tme_endo_pow
+#print axioms IUT.tme_ker_pow
+#print axioms IUT.tme_char_compat
+#print axioms IUT.tme_endo_ext
+#print axioms IUT.tmeEndoData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

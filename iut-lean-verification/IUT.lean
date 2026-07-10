@@ -614,3 +614,4 @@ import IUT.Q3TateCurve
 import IUT.Q3TateTorsion
 import IUT.Q3TateDeck
 import IUT.Q3TemperedPi1
+import IUT.TateModuleEndo
