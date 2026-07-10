@@ -579,3 +579,4 @@ import IUT.CyclotomicField3
 import IUT.CyclotomicGal3
 import IUT.GaussValuationQ
 import IUT.EisensteinCriterionQ
+import IUT.Phi9Irreducible

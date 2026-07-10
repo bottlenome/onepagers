@@ -2528,6 +2528,9 @@ import IUT
 #print axioms IUT.egvValQ_add_eq
 #print axioms IUT.eis_irreducible
 #print axioms IUT.eisMinIndex
+#print axioms IUT.p9i_irreducible
+#print axioms IUT.p9iPhi9Field
+#print axioms IUT.p9iExt9
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

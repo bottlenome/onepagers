@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 575,
-  "verified_theorem_total": 2519,
-  "choice_free_count": 486,
+  "module_count": 576,
+  "verified_theorem_total": 2522,
+  "choice_free_count": 487,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7054,6 +7054,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinCriterionQ.lean"
+    },
+    {
+      "id": "Phi9Irreducible",
+      "label": "Phi9Irreducible",
+      "milestone": null,
+      "title": "Phi9Irreducible",
+      "pillar": "A",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Phi9Irreducible.lean"
     }
   ],
   "edges": [
@@ -7644,6 +7656,10 @@
     {
       "source": "EisensteinConjugates",
       "target": "RamifiedEntrance"
+    },
+    {
+      "source": "EisensteinCriterionQ",
+      "target": "Phi9Irreducible"
     },
     {
       "source": "EisensteinGalois",
@@ -8492,6 +8508,10 @@
     {
       "source": "GenExtTower",
       "target": "CyclotomicField3"
+    },
+    {
+      "source": "GenExtTower",
+      "target": "Phi9Irreducible"
     },
     {
       "source": "GeomConverge",
@@ -9488,6 +9508,10 @@
     {
       "source": "PadicValuationQ",
       "target": "PrimeFactorization"
+    },
+    {
+      "source": "Phi9Shift",
+      "target": "Phi9Irreducible"
     },
     {
       "source": "PicardDivisor",
