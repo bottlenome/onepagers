@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 595,
-  "verified_theorem_total": 2568,
-  "choice_free_count": 506,
+  "module_count": 596,
+  "verified_theorem_total": 2570,
+  "choice_free_count": 507,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7294,6 +7294,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicLimitIso.lean"
+    },
+    {
+      "id": "CyclotomicProjSurj",
+      "label": "CyclotomicProjSurj",
+      "milestone": null,
+      "title": "CyclotomicProjSurj",
+      "pillar": "A",
+      "decl_count": 3,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicProjSurj.lean"
     }
   ],
   "edges": [
@@ -7742,6 +7754,10 @@
       "target": "CyclotomicLimitIso"
     },
     {
+      "source": "CyclotomicCharIso",
+      "target": "CyclotomicProjSurj"
+    },
+    {
       "source": "CyclotomicDifferent",
       "target": "ConductorDiscriminantAbelian"
     },
@@ -7792,6 +7808,10 @@
     {
       "source": "CyclotomicGal9",
       "target": "CyclotomicSurj39"
+    },
+    {
+      "source": "CyclotomicLimitIso",
+      "target": "CyclotomicProjSurj"
     },
     {
       "source": "CyclotomicMu9",
@@ -7904,6 +7924,10 @@
     {
       "source": "CyclotomicTowerLimit",
       "target": "CyclotomicLimitIso"
+    },
+    {
+      "source": "CyclotomicTowerLimit",
+      "target": "CyclotomicProjSurj"
     },
     {
       "source": "DifferentDiscriminant",
@@ -11760,6 +11784,10 @@
     {
       "source": "Zmod3PowUnitsSystem",
       "target": "CyclotomicLimitIso"
+    },
+    {
+      "source": "Zmod3PowUnitsSystem",
+      "target": "CyclotomicProjSurj"
     },
     {
       "source": "ZmodInverseBezout",
