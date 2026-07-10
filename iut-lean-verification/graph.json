@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 609,
-  "verified_theorem_total": 2607,
-  "choice_free_count": 520,
+  "module_count": 610,
+  "verified_theorem_total": 2612,
+  "choice_free_count": 521,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7464,6 +7464,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateDeck.lean"
+    },
+    {
+      "id": "Q3TemperedPi1",
+      "label": "Q3TemperedPi1",
+      "milestone": null,
+      "title": "Q3TemperedPi1",
+      "pillar": "A",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedPi1.lean"
     }
   ],
   "edges": [
@@ -8158,6 +8170,10 @@
     {
       "source": "CyclotomicTowerLimit",
       "target": "CyclotomicProjSurj"
+    },
+    {
+      "source": "CyclotomicTowerLimit",
+      "target": "Q3TemperedPi1"
     },
     {
       "source": "CyclotomicTowerLimit",
@@ -10688,6 +10704,10 @@
       "target": "Q3TateTorsion"
     },
     {
+      "source": "Q3TateDeck",
+      "target": "Q3TemperedPi1"
+    },
+    {
       "source": "Q3UnitsGroup",
       "target": "Q3TateCurve"
     },
@@ -11568,6 +11588,10 @@
       "target": "TateSurrogateCapstone"
     },
     {
+      "source": "TateModuleZ3",
+      "target": "Q3TemperedPi1"
+    },
+    {
       "source": "TateQuotient",
       "target": "MonoThetaWitness"
     },
@@ -11594,6 +11618,10 @@
     {
       "source": "TemperedCommutator",
       "target": "TemperedThetaCommutator"
+    },
+    {
+      "source": "TemperedPi1",
+      "target": "Q3TemperedPi1"
     },
     {
       "source": "TemperedPi1",

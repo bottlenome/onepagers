@@ -613,3 +613,4 @@ import IUT.Q3UnitsGroup
 import IUT.Q3TateCurve
 import IUT.Q3TateTorsion
 import IUT.Q3TateDeck
+import IUT.Q3TemperedPi1

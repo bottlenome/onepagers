@@ -2616,6 +2616,11 @@ import IUT
 #print axioms IUT.q3td_deck_free
 #print axioms IUT.q3td_fiber_orbit
 #print axioms IUT.q3tdData
+#print axioms IUT.q3tp_extension_exact
+#print axioms IUT.q3tp_deck_realize_ker
+#print axioms IUT.q3tp_exists_unconditional
+#print axioms IUT.q3tpGalAct
+#print axioms IUT.q3tpData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
