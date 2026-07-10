@@ -577,3 +577,4 @@ import IUT.PadicUltrametricQ
 import IUT.Phi9Shift
 import IUT.CyclotomicField3
 import IUT.CyclotomicGal3
+import IUT.GaussValuationQ

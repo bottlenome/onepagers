@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 573,
-  "verified_theorem_total": 2514,
-  "choice_free_count": 484,
+  "module_count": 574,
+  "verified_theorem_total": 2517,
+  "choice_free_count": 485,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7030,6 +7030,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicGal3.lean"
+    },
+    {
+      "id": "GaussValuationQ",
+      "label": "GaussValuationQ",
+      "milestone": null,
+      "title": "GaussValuationQ",
+      "pillar": "A",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/GaussValuationQ.lean"
     }
   ],
   "edges": [
@@ -9450,6 +9462,10 @@
       "target": "PadicGeometric"
     },
     {
+      "source": "PadicUltrametricQ",
+      "target": "GaussValuationQ"
+    },
+    {
       "source": "PadicValuationQ",
       "target": "PadicAbsValueQ"
     },
@@ -9703,6 +9719,10 @@
     },
     {
       "source": "PowerSeries",
+      "target": "GaussValuationQ"
+    },
+    {
+      "source": "PowerSeries",
       "target": "ResidueField"
     },
     {
@@ -9936,6 +9956,10 @@
     {
       "source": "RatZeroDecide",
       "target": "CyclotomicGal3"
+    },
+    {
+      "source": "RatZeroDecide",
+      "target": "GaussValuationQ"
     },
     {
       "source": "RatZeroDecide",

@@ -2523,6 +2523,9 @@ import IUT
 #print axioms IUT.cg3ConjFun_mul
 #print axioms IUT.cg3_root_dichotomy
 #print axioms IUT.cg3_aut_ext
+#print axioms IUT.egv_min_index_mul
+#print axioms IUT.egvValQ_mul
+#print axioms IUT.egvValQ_add_eq
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
