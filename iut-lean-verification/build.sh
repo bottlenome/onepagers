@@ -2531,6 +2531,12 @@ import IUT
 #print axioms IUT.p9i_irreducible
 #print axioms IUT.p9iPhi9Field
 #print axioms IUT.p9iExt9
+#print axioms IUT.cm9_factor
+#print axioms IUT.cm9_order
+#print axioms IUT.ce39Iota
+#print axioms IUT.ce39Ext
+#print axioms IUT.cm9_root_in_powers
+#print axioms IUT.cm9Find_spec
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

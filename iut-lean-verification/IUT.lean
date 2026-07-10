@@ -580,3 +580,6 @@ import IUT.CyclotomicGal3
 import IUT.GaussValuationQ
 import IUT.EisensteinCriterionQ
 import IUT.Phi9Irreducible
+import IUT.CyclotomicMu9
+import IUT.CyclotomicEmbed39
+import IUT.CyclotomicMu9Roots

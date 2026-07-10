@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 576,
-  "verified_theorem_total": 2522,
-  "choice_free_count": 487,
+  "module_count": 579,
+  "verified_theorem_total": 2528,
+  "choice_free_count": 490,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7066,6 +7066,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Phi9Irreducible.lean"
+    },
+    {
+      "id": "CyclotomicMu9",
+      "label": "CyclotomicMu9",
+      "milestone": null,
+      "title": "設計 audit/A3-cyclotomic-tower-detail-2026-07-09.md §2.2 CM9",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicMu9.lean"
+    },
+    {
+      "id": "CyclotomicEmbed39",
+      "label": "CyclotomicEmbed39",
+      "milestone": null,
+      "title": "CyclotomicEmbed39",
+      "pillar": "A",
+      "decl_count": 39,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicEmbed39.lean"
+    },
+    {
+      "id": "CyclotomicMu9Roots",
+      "label": "CyclotomicMu9Roots",
+      "milestone": null,
+      "title": "CyclotomicMu9Roots",
+      "pillar": "A",
+      "decl_count": 28,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicMu9Roots.lean"
     }
   ],
   "edges": [
@@ -7351,6 +7387,10 @@
     },
     {
       "source": "Composition",
+      "target": "CyclotomicMu9Roots"
+    },
+    {
+      "source": "Composition",
       "target": "CyclotomicPolyData"
     },
     {
@@ -7507,7 +7547,15 @@
     },
     {
       "source": "CyclotomicField3",
+      "target": "CyclotomicEmbed39"
+    },
+    {
+      "source": "CyclotomicField3",
       "target": "CyclotomicGal3"
+    },
+    {
+      "source": "CyclotomicMu9",
+      "target": "CyclotomicMu9Roots"
     },
     {
       "source": "CyclotomicPolyData",
@@ -7736,6 +7784,10 @@
     {
       "source": "EvaluationHom",
       "target": "Cq3BezoutChain"
+    },
+    {
+      "source": "EvaluationHom",
+      "target": "CyclotomicMu9Roots"
     },
     {
       "source": "EvaluationHom",
@@ -8487,11 +8539,19 @@
     },
     {
       "source": "GenExtBasisAlpha",
+      "target": "CyclotomicMu9"
+    },
+    {
+      "source": "GenExtBasisAlpha",
       "target": "GenExtTower"
     },
     {
       "source": "GenExtField",
       "target": "GenFieldInstances"
+    },
+    {
+      "source": "GenExtFieldInv",
+      "target": "CyclotomicMu9"
     },
     {
       "source": "GenExtFieldInv",
@@ -9231,6 +9291,10 @@
     },
     {
       "source": "LubinTateZp",
+      "target": "CyclotomicMu9Roots"
+    },
+    {
+      "source": "LubinTateZp",
       "target": "CyclotomicPolyData"
     },
     {
@@ -9510,6 +9574,14 @@
       "target": "PrimeFactorization"
     },
     {
+      "source": "Phi9Irreducible",
+      "target": "CyclotomicEmbed39"
+    },
+    {
+      "source": "Phi9Irreducible",
+      "target": "CyclotomicMu9"
+    },
+    {
       "source": "Phi9Shift",
       "target": "Phi9Irreducible"
     },
@@ -9687,6 +9759,10 @@
     },
     {
       "source": "PolyLeadFindQ",
+      "target": "CyclotomicMu9Roots"
+    },
+    {
+      "source": "PolyLeadFindQ",
       "target": "PolyEuclidFn"
     },
     {
@@ -9748,6 +9824,14 @@
     {
       "source": "PolyRootCount",
       "target": "CyclotomicGal3"
+    },
+    {
+      "source": "PolyRootCount",
+      "target": "CyclotomicMu9"
+    },
+    {
+      "source": "PolyRootCount",
+      "target": "CyclotomicMu9Roots"
     },
     {
       "source": "PolyWeierstrass",
