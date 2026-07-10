@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 580,
-  "verified_theorem_total": 2531,
-  "choice_free_count": 491,
+  "module_count": 581,
+  "verified_theorem_total": 2535,
+  "choice_free_count": 492,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7114,6 +7114,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicRes39.lean"
+    },
+    {
+      "id": "CyclotomicStretch",
+      "label": "CyclotomicStretch",
+      "milestone": null,
+      "title": "CyclotomicStretch",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicStretch.lean"
     }
   ],
   "edges": [
@@ -7580,6 +7592,10 @@
     {
       "source": "CyclotomicMu9Roots",
       "target": "CyclotomicRes39"
+    },
+    {
+      "source": "CyclotomicPolyData",
+      "target": "CyclotomicStretch"
     },
     {
       "source": "CyclotomicPolyData",
@@ -8584,6 +8600,10 @@
     {
       "source": "GenExtFieldInv",
       "target": "GenExtTower"
+    },
+    {
+      "source": "GenExtFieldNF",
+      "target": "CyclotomicStretch"
     },
     {
       "source": "GenExtFieldNF",

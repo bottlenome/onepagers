@@ -2540,6 +2540,10 @@ import IUT
 #print axioms IUT.cr39Res
 #print axioms IUT.cr39_compat
 #print axioms IUT.cr39ResHom
+#print axioms IUT.ctsStretch_mul
+#print axioms IUT.ctsPhi_two_eq
+#print axioms IUT.cts_pow_sub_one
+#print axioms IUT.cts_cong
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
