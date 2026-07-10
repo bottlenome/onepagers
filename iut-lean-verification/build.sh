@@ -2591,6 +2591,9 @@ import IUT
 #print axioms IUT.tmzLimit
 #print axioms IUT.tmz_act_compat
 #print axioms IUT.tmzTateData
+#print axioms IUT.crr_geo_compatible
+#print axioms IUT.crr_exp_eq
+#print axioms IUT.crrRealCyclotomeData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

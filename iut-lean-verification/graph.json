@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 600,
-  "verified_theorem_total": 2582,
-  "choice_free_count": 511,
+  "module_count": 601,
+  "verified_theorem_total": 2585,
+  "choice_free_count": 512,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7356,6 +7356,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleZ3.lean"
+    },
+    {
+      "id": "CyclotomeRecoveryReal",
+      "label": "CyclotomeRecoveryReal",
+      "milestone": null,
+      "title": "CyclotomeRecoveryReal",
+      "pillar": "A",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryReal.lean"
     }
   ],
   "edges": [
@@ -7781,6 +7793,10 @@
     },
     {
       "source": "CyclotomeIdentification",
+      "target": "CyclotomeRecoveryReal"
+    },
+    {
+      "source": "CyclotomeIdentification",
       "target": "KummerCharWiring"
     },
     {
@@ -7858,6 +7874,10 @@
     {
       "source": "CyclotomicField3",
       "target": "CyclotomicGal3"
+    },
+    {
+      "source": "CyclotomicGKActionReal",
+      "target": "CyclotomeRecoveryReal"
     },
     {
       "source": "CyclotomicGKActionReal",
