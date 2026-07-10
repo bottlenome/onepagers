@@ -586,3 +586,5 @@ import IUT.CyclotomicMu9Roots
 import IUT.CyclotomicRes39
 import IUT.CyclotomicStretch
 import IUT.CyclotomicGal9
+import IUT.EisensteinShiftTransport
+import IUT.CyclotomicSurj39

@@ -2547,6 +2547,9 @@ import IUT
 #print axioms IUT.cg9_galois_order_six
 #print axioms IUT.cg9Subst_mul
 #print axioms IUT.cg9_aut_ext
+#print axioms IUT.est_transport
+#print axioms IUT.cr39_surjective
+#print axioms IUT.cs39_res_sigma2
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
