@@ -2537,6 +2537,9 @@ import IUT
 #print axioms IUT.ce39Ext
 #print axioms IUT.cm9_root_in_powers
 #print axioms IUT.cm9Find_spec
+#print axioms IUT.cr39Res
+#print axioms IUT.cr39_compat
+#print axioms IUT.cr39ResHom
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

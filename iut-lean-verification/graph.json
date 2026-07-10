@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 579,
-  "verified_theorem_total": 2528,
-  "choice_free_count": 490,
+  "module_count": 580,
+  "verified_theorem_total": 2531,
+  "choice_free_count": 491,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7102,6 +7102,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicMu9Roots.lean"
+    },
+    {
+      "id": "CyclotomicRes39",
+      "label": "CyclotomicRes39",
+      "milestone": null,
+      "title": "CyclotomicRes39",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicRes39.lean"
     }
   ],
   "edges": [
@@ -7546,6 +7558,10 @@
       "target": "CyclotomicDifferent"
     },
     {
+      "source": "CyclotomicEmbed39",
+      "target": "CyclotomicRes39"
+    },
+    {
       "source": "CyclotomicField3",
       "target": "CyclotomicEmbed39"
     },
@@ -7554,8 +7570,16 @@
       "target": "CyclotomicGal3"
     },
     {
+      "source": "CyclotomicGal3",
+      "target": "CyclotomicRes39"
+    },
+    {
       "source": "CyclotomicMu9",
       "target": "CyclotomicMu9Roots"
+    },
+    {
+      "source": "CyclotomicMu9Roots",
+      "target": "CyclotomicRes39"
     },
     {
       "source": "CyclotomicPolyData",
@@ -8332,6 +8356,10 @@
     {
       "source": "FullReciprocity",
       "target": "Ring"
+    },
+    {
+      "source": "FundamentalGroup",
+      "target": "CyclotomicRes39"
     },
     {
       "source": "FundamentalGroup",

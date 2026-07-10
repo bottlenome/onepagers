@@ -583,3 +583,4 @@ import IUT.Phi9Irreducible
 import IUT.CyclotomicMu9
 import IUT.CyclotomicEmbed39
 import IUT.CyclotomicMu9Roots
+import IUT.CyclotomicRes39
