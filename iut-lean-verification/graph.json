@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 591,
-  "verified_theorem_total": 2560,
-  "choice_free_count": 502,
+  "module_count": 592,
+  "verified_theorem_total": 2562,
+  "choice_free_count": 503,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7246,6 +7246,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicTowerLimit.lean"
+    },
+    {
+      "id": "Zmod3PowUnits",
+      "label": "Zmod3PowUnits",
+      "milestone": null,
+      "title": "Zmod3PowUnits",
+      "pillar": "A",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Zmod3PowUnits.lean"
     }
   ],
   "edges": [
@@ -8596,6 +8608,10 @@
     {
       "source": "FundamentalGroup",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "FundamentalGroup",
+      "target": "Zmod3PowUnits"
     },
     {
       "source": "FuneqLift",

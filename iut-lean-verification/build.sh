@@ -2569,6 +2569,8 @@ import IUT
 #print axioms IUT.ctlTower
 #print axioms IUT.ctlProfinite
 #print axioms IUT.ctl_is_profinite
+#print axioms IUT.zpuGrp
+#print axioms IUT.zpuInv_spec
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

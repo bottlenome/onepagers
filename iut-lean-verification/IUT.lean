@@ -595,3 +595,4 @@ import IUT.CyclotomicAutExt
 import IUT.CyclotomicSubAut
 import IUT.CyclotomicResTower
 import IUT.CyclotomicTowerLimit
+import IUT.Zmod3PowUnits
