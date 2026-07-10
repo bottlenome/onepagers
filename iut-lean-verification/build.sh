@@ -2581,6 +2581,9 @@ import IUT
 #print axioms IUT.cps_nontrivial
 #print axioms IUT.cmrMu
 #print axioms IUT.cmr_pow_val
+#print axioms IUT.cgarAct
+#print axioms IUT.cgar_nontrivial
+#print axioms IUT.cgarRigidityData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

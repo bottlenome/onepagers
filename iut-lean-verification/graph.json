@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 597,
-  "verified_theorem_total": 2572,
-  "choice_free_count": 508,
+  "module_count": 598,
+  "verified_theorem_total": 2575,
+  "choice_free_count": 509,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7318,6 +7318,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicMuGroupReal.lean"
+    },
+    {
+      "id": "CyclotomicGKActionReal",
+      "label": "CyclotomicGKActionReal",
+      "milestone": null,
+      "title": "CyclotomicGKActionReal",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicGKActionReal.lean"
     }
   ],
   "edges": [
@@ -7750,6 +7762,10 @@
       "target": "AbsTopFieldFromCyclotome"
     },
     {
+      "source": "CyclotomeRecovery",
+      "target": "CyclotomicGKActionReal"
+    },
+    {
       "source": "CyclotomicAutExt",
       "target": "CyclotomicCharIso"
     },
@@ -7760,6 +7776,10 @@
     {
       "source": "CyclotomicAutExt",
       "target": "CyclotomicSubAut"
+    },
+    {
+      "source": "CyclotomicCharIso",
+      "target": "CyclotomicGKActionReal"
     },
     {
       "source": "CyclotomicCharIso",
@@ -7834,6 +7854,10 @@
       "target": "CyclotomicRes39"
     },
     {
+      "source": "CyclotomicMuGroupReal",
+      "target": "CyclotomicGKActionReal"
+    },
+    {
       "source": "CyclotomicMuTower",
       "target": "CyclotomicCharIso"
     },
@@ -7867,6 +7891,10 @@
     },
     {
       "source": "CyclotomicResTower",
+      "target": "CyclotomicGKActionReal"
+    },
+    {
+      "source": "CyclotomicResTower",
       "target": "CyclotomicMuGroupReal"
     },
     {
@@ -7884,6 +7912,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "CyclotomicDiscriminant"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "CyclotomicGKActionReal"
     },
     {
       "source": "CyclotomicRigidity",
