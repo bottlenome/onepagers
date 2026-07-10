@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 581,
-  "verified_theorem_total": 2535,
-  "choice_free_count": 492,
+  "module_count": 582,
+  "verified_theorem_total": 2538,
+  "choice_free_count": 493,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7126,6 +7126,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicStretch.lean"
+    },
+    {
+      "id": "CyclotomicGal9",
+      "label": "CyclotomicGal9",
+      "milestone": null,
+      "title": "CyclotomicGal9",
+      "pillar": "A",
+      "decl_count": 41,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicGal9.lean"
     }
   ],
   "edges": [
@@ -7571,6 +7583,10 @@
     },
     {
       "source": "CyclotomicEmbed39",
+      "target": "CyclotomicGal9"
+    },
+    {
+      "source": "CyclotomicEmbed39",
       "target": "CyclotomicRes39"
     },
     {
@@ -7604,6 +7620,10 @@
     {
       "source": "CyclotomicPrimePower",
       "target": "RingOfIntegersDiscriminant"
+    },
+    {
+      "source": "CyclotomicRes39",
+      "target": "CyclotomicGal9"
     },
     {
       "source": "CyclotomicRigidity",

@@ -585,3 +585,4 @@ import IUT.CyclotomicEmbed39
 import IUT.CyclotomicMu9Roots
 import IUT.CyclotomicRes39
 import IUT.CyclotomicStretch
+import IUT.CyclotomicGal9

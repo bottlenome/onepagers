@@ -2544,6 +2544,9 @@ import IUT
 #print axioms IUT.ctsPhi_two_eq
 #print axioms IUT.cts_pow_sub_one
 #print axioms IUT.cts_cong
+#print axioms IUT.cg9_galois_order_six
+#print axioms IUT.cg9Subst_mul
+#print axioms IUT.cg9_aut_ext
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
