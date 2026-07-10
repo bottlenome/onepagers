@@ -2566,6 +2566,9 @@ import IUT
 #print axioms IUT.ctr_compat
 #print axioms IUT.ctrResHom
 #print axioms IUT.ctr_surjective
+#print axioms IUT.ctlTower
+#print axioms IUT.ctlProfinite
+#print axioms IUT.ctl_is_profinite
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 590,
-  "verified_theorem_total": 2557,
-  "choice_free_count": 501,
+  "module_count": 591,
+  "verified_theorem_total": 2560,
+  "choice_free_count": 502,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7234,6 +7234,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicResTower.lean"
+    },
+    {
+      "id": "CyclotomicTowerLimit",
+      "label": "CyclotomicTowerLimit",
+      "milestone": null,
+      "title": "CyclotomicTowerLimit",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicTowerLimit.lean"
     }
   ],
   "edges": [
@@ -7752,6 +7764,10 @@
     {
       "source": "CyclotomicRes39",
       "target": "CyclotomicGal9"
+    },
+    {
+      "source": "CyclotomicResTower",
+      "target": "CyclotomicTowerLimit"
     },
     {
       "source": "CyclotomicRigidity",
@@ -10276,6 +10292,10 @@
     {
       "source": "ProfinitePi1",
       "target": "AlgClosureColimit"
+    },
+    {
+      "source": "ProfinitePi1",
+      "target": "CyclotomicTowerLimit"
     },
     {
       "source": "ProfiniteTopology",
