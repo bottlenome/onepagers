@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 599,
-  "verified_theorem_total": 2579,
-  "choice_free_count": 510,
+  "module_count": 600,
+  "verified_theorem_total": 2582,
+  "choice_free_count": 511,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7344,6 +7344,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicRigidityAut.lean"
+    },
+    {
+      "id": "TateModuleZ3",
+      "label": "TateModuleZ3",
+      "milestone": null,
+      "title": "TateModuleZ3",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleZ3.lean"
     }
   ],
   "edges": [
@@ -7852,6 +7864,10 @@
       "target": "CyclotomicRigidityAut"
     },
     {
+      "source": "CyclotomicGKActionReal",
+      "target": "TateModuleZ3"
+    },
+    {
       "source": "CyclotomicGal3",
       "target": "CyclotomicRes39"
     },
@@ -7866,6 +7882,10 @@
     {
       "source": "CyclotomicLimitIso",
       "target": "CyclotomicProjSurj"
+    },
+    {
+      "source": "CyclotomicLimitIso",
+      "target": "TateModuleZ3"
     },
     {
       "source": "CyclotomicMu9",
@@ -7900,6 +7920,10 @@
       "target": "CyclotomicSubAut"
     },
     {
+      "source": "CyclotomicMuTower",
+      "target": "TateModuleZ3"
+    },
+    {
       "source": "CyclotomicPolyData",
       "target": "CyclotomicStretch"
     },
@@ -7930,6 +7954,10 @@
     {
       "source": "CyclotomicResTower",
       "target": "CyclotomicTowerLimit"
+    },
+    {
+      "source": "CyclotomicResTower",
+      "target": "TateModuleZ3"
     },
     {
       "source": "CyclotomicRigidity",
@@ -8014,6 +8042,10 @@
     {
       "source": "CyclotomicTowerLimit",
       "target": "CyclotomicProjSurj"
+    },
+    {
+      "source": "CyclotomicTowerLimit",
+      "target": "TateModuleZ3"
     },
     {
       "source": "DifferentDiscriminant",
@@ -11894,6 +11926,10 @@
     {
       "source": "Zmod3PowUnitsSystem",
       "target": "CyclotomicProjSurj"
+    },
+    {
+      "source": "Zmod3PowUnitsSystem",
+      "target": "TateModuleZ3"
     },
     {
       "source": "ZmodInverseBezout",

@@ -2588,6 +2588,9 @@ import IUT
 #print axioms IUT.cra_gal_realize
 #print axioms IUT.cra_indeterminacy
 #print axioms IUT.craRigidityData
+#print axioms IUT.tmzLimit
+#print axioms IUT.tmz_act_compat
+#print axioms IUT.tmzTateData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -603,3 +603,4 @@ import IUT.CyclotomicProjSurj
 import IUT.CyclotomicMuGroupReal
 import IUT.CyclotomicGKActionReal
 import IUT.CyclotomicRigidityAut
+import IUT.TateModuleZ3
