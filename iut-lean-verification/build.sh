@@ -2555,6 +2555,11 @@ import IUT
 #print axioms IUT.cteField
 #print axioms IUT.cteMap_mul
 #print axioms IUT.cteIota
+#print axioms IUT.ctm_order
+#print axioms IUT.ctm_root_in_powers
+#print axioms IUT.ctmFind_spec
+#print axioms IUT.cae_decompose
+#print axioms IUT.cae_aut_ext
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

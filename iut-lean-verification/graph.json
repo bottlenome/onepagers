@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 586,
-  "verified_theorem_total": 2546,
-  "choice_free_count": 497,
+  "module_count": 588,
+  "verified_theorem_total": 2551,
+  "choice_free_count": 499,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7186,6 +7186,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicEmbedTower.lean"
+    },
+    {
+      "id": "CyclotomicMuTower",
+      "label": "CyclotomicMuTower",
+      "milestone": null,
+      "title": "一般段の μ_{3ⁿ} = ⟨ζ_n⟩・ 位数 3ⁿ の巡回群",
+      "pillar": "A",
+      "decl_count": 44,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicMuTower.lean"
+    },
+    {
+      "id": "CyclotomicAutExt",
+      "label": "CyclotomicAutExt",
+      "milestone": null,
+      "title": "CyclotomicAutExt",
+      "pillar": "A",
+      "decl_count": 11,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicAutExt.lean"
     }
   ],
   "edges": [
@@ -7475,6 +7499,10 @@
     },
     {
       "source": "Composition",
+      "target": "CyclotomicMuTower"
+    },
+    {
+      "source": "Composition",
       "target": "CyclotomicPolyData"
     },
     {
@@ -7636,6 +7664,14 @@
     {
       "source": "CyclotomicEmbed39",
       "target": "CyclotomicRes39"
+    },
+    {
+      "source": "CyclotomicEmbedTower",
+      "target": "CyclotomicAutExt"
+    },
+    {
+      "source": "CyclotomicEmbedTower",
+      "target": "CyclotomicMuTower"
     },
     {
       "source": "CyclotomicField3",
@@ -7923,6 +7959,10 @@
     },
     {
       "source": "EvaluationHom",
+      "target": "CyclotomicMuTower"
+    },
+    {
+      "source": "EvaluationHom",
       "target": "Phi9Shift"
     },
     {
@@ -8036,6 +8076,10 @@
     {
       "source": "FieldAutGroup",
       "target": "ConnectedEtale"
+    },
+    {
+      "source": "FieldAutGroup",
+      "target": "CyclotomicAutExt"
     },
     {
       "source": "FieldAutGroup",
@@ -8679,7 +8723,15 @@
     },
     {
       "source": "GenExtBasisAlpha",
+      "target": "CyclotomicAutExt"
+    },
+    {
+      "source": "GenExtBasisAlpha",
       "target": "CyclotomicMu9"
+    },
+    {
+      "source": "GenExtBasisAlpha",
+      "target": "CyclotomicMuTower"
     },
     {
       "source": "GenExtBasisAlpha",
@@ -8692,6 +8744,10 @@
     {
       "source": "GenExtFieldInv",
       "target": "CyclotomicMu9"
+    },
+    {
+      "source": "GenExtFieldInv",
+      "target": "CyclotomicMuTower"
     },
     {
       "source": "GenExtFieldInv",
@@ -9443,6 +9499,10 @@
     },
     {
       "source": "LubinTateZp",
+      "target": "CyclotomicMuTower"
+    },
+    {
+      "source": "LubinTateZp",
       "target": "CyclotomicPolyData"
     },
     {
@@ -9656,6 +9716,10 @@
     {
       "source": "NormalPairBoundary",
       "target": "PillarAFullnessProgram"
+    },
+    {
+      "source": "PSFunctor",
+      "target": "CyclotomicAutExt"
     },
     {
       "source": "PSFunctor",
@@ -9919,6 +9983,10 @@
     },
     {
       "source": "PolyLeadFindQ",
+      "target": "CyclotomicMuTower"
+    },
+    {
+      "source": "PolyLeadFindQ",
       "target": "PolyEuclidFn"
     },
     {
@@ -9988,6 +10056,10 @@
     {
       "source": "PolyRootCount",
       "target": "CyclotomicMu9Roots"
+    },
+    {
+      "source": "PolyRootCount",
+      "target": "CyclotomicMuTower"
     },
     {
       "source": "PolyWeierstrass",
