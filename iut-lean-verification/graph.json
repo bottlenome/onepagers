@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 584,
-  "verified_theorem_total": 2541,
-  "choice_free_count": 495,
+  "module_count": 585,
+  "verified_theorem_total": 2543,
+  "choice_free_count": 496,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7162,6 +7162,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicSurj39.lean"
+    },
+    {
+      "id": "EisensteinTowerInput",
+      "label": "EisensteinTowerInput",
+      "milestone": null,
+      "title": "EisensteinTowerInput",
+      "pillar": "A",
+      "decl_count": 51,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/EisensteinTowerInput.lean"
     }
   ],
   "edges": [
@@ -7686,6 +7698,10 @@
       "target": "WeilPairing"
     },
     {
+      "source": "CyclotomicStretch",
+      "target": "EisensteinTowerInput"
+    },
+    {
       "source": "CyclotomicSync",
       "target": "CyclotomicRigidity"
     },
@@ -7816,6 +7832,10 @@
     {
       "source": "EisensteinRing",
       "target": "EisensteinTorsion"
+    },
+    {
+      "source": "EisensteinShiftTransport",
+      "target": "EisensteinTowerInput"
     },
     {
       "source": "EisensteinTorsion",
@@ -8328,6 +8348,10 @@
     {
       "source": "Freshman",
       "target": "CyclotomicPolyData"
+    },
+    {
+      "source": "Freshman",
+      "target": "EisensteinTowerInput"
     },
     {
       "source": "Freshman",

@@ -2550,6 +2550,8 @@ import IUT
 #print axioms IUT.est_transport
 #print axioms IUT.cr39_surjective
 #print axioms IUT.cs39_res_sigma2
+#print axioms IUT.eitPhi_irreducible
+#print axioms IUT.eitFreshman
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
