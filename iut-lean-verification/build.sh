@@ -2571,6 +2571,10 @@ import IUT
 #print axioms IUT.ctl_is_profinite
 #print axioms IUT.zpuGrp
 #print axioms IUT.zpuInv_spec
+#print axioms IUT.zpsLimit
+#print axioms IUT.zps_proj_surjective
+#print axioms IUT.cciIsoData
+#print axioms IUT.cci_charG_mul
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 592,
-  "verified_theorem_total": 2562,
-  "choice_free_count": 503,
+  "module_count": 594,
+  "verified_theorem_total": 2566,
+  "choice_free_count": 505,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7258,6 +7258,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Zmod3PowUnits.lean"
+    },
+    {
+      "id": "Zmod3PowUnitsSystem",
+      "label": "Zmod3PowUnitsSystem",
+      "milestone": null,
+      "title": "Zmod3PowUnitsSystem",
+      "pillar": "A",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Zmod3PowUnitsSystem.lean"
+    },
+    {
+      "id": "CyclotomicCharIso",
+      "label": "CyclotomicCharIso",
+      "milestone": null,
+      "title": "CyclotomicCharIso",
+      "pillar": "A",
+      "decl_count": 14,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomicCharIso.lean"
     }
   ],
   "edges": [
@@ -7691,6 +7715,10 @@
     },
     {
       "source": "CyclotomicAutExt",
+      "target": "CyclotomicCharIso"
+    },
+    {
+      "source": "CyclotomicAutExt",
       "target": "CyclotomicResTower"
     },
     {
@@ -7759,6 +7787,10 @@
     },
     {
       "source": "CyclotomicMuTower",
+      "target": "CyclotomicCharIso"
+    },
+    {
+      "source": "CyclotomicMuTower",
       "target": "CyclotomicSubAut"
     },
     {
@@ -7776,6 +7808,10 @@
     {
       "source": "CyclotomicRes39",
       "target": "CyclotomicGal9"
+    },
+    {
+      "source": "CyclotomicResTower",
+      "target": "CyclotomicCharIso"
     },
     {
       "source": "CyclotomicResTower",
@@ -7816,6 +7852,10 @@
     {
       "source": "CyclotomicStretch",
       "target": "EisensteinTowerInput"
+    },
+    {
+      "source": "CyclotomicSubAut",
+      "target": "CyclotomicCharIso"
     },
     {
       "source": "CyclotomicSubAut",
@@ -10270,6 +10310,10 @@
       "target": "LimitCompact"
     },
     {
+      "source": "ProObject",
+      "target": "Zmod3PowUnitsSystem"
+    },
+    {
       "source": "ProRepresentable",
       "target": "GaloisEquivalence"
     },
@@ -10304,6 +10348,10 @@
     {
       "source": "Profinite",
       "target": "Topology"
+    },
+    {
+      "source": "Profinite",
+      "target": "Zmod3PowUnitsSystem"
     },
     {
       "source": "ProfinitePi1",
@@ -11680,6 +11728,14 @@
     {
       "source": "WildConductorDiscriminant",
       "target": "MultiJumpWildDiscriminant"
+    },
+    {
+      "source": "Zmod3PowUnits",
+      "target": "CyclotomicCharIso"
+    },
+    {
+      "source": "Zmod3PowUnits",
+      "target": "Zmod3PowUnitsSystem"
     },
     {
       "source": "ZmodInverseBezout",
