@@ -2594,6 +2594,10 @@ import IUT
 #print axioms IUT.crr_geo_compatible
 #print axioms IUT.crr_exp_eq
 #print axioms IUT.crrRealCyclotomeData
+#print axioms IUT.f3Field
+#print axioms IUT.z3v_extract
+#print axioms IUT.z3vMaximal
+#print axioms IUT.z3v_res_iso
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

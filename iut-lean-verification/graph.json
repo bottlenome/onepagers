@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 601,
-  "verified_theorem_total": 2585,
-  "choice_free_count": 512,
+  "module_count": 603,
+  "verified_theorem_total": 2589,
+  "choice_free_count": 514,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7368,6 +7368,30 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryReal.lean"
+    },
+    {
+      "id": "F3Field",
+      "label": "F3Field",
+      "milestone": null,
+      "title": "F3Field",
+      "pillar": "A",
+      "decl_count": 7,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/F3Field.lean"
+    },
+    {
+      "id": "Zp3ValuationRing",
+      "label": "Zp3ValuationRing",
+      "milestone": null,
+      "title": "Zp3ValuationRing",
+      "pillar": "A",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Zp3ValuationRing.lean"
     }
   ],
   "edges": [
@@ -8300,6 +8324,10 @@
       "target": "ZmodInverseBezout"
     },
     {
+      "source": "Fermat",
+      "target": "Zp3ValuationRing"
+    },
+    {
       "source": "FiberedFrobenioid",
       "target": "ArchimedeanPlace"
     },
@@ -8334,6 +8362,10 @@
     {
       "source": "Field",
       "target": "EllipticCurve"
+    },
+    {
+      "source": "Field",
+      "target": "F3Field"
     },
     {
       "source": "Field",
@@ -11116,6 +11148,10 @@
       "target": "DedekindDomain"
     },
     {
+      "source": "ResidueField",
+      "target": "Zp3ValuationRing"
+    },
+    {
       "source": "ResidueTower",
       "target": "LambdaTowerResidueSurj"
     },
@@ -11182,6 +11218,10 @@
     {
       "source": "RootsOfUnity",
       "target": "UnitDecomposition"
+    },
+    {
+      "source": "RootsOfUnity",
+      "target": "Zp3ValuationRing"
     },
     {
       "source": "SGA1",
@@ -11984,6 +12024,10 @@
       "target": "LambdaModule"
     },
     {
+      "source": "ZpDomain",
+      "target": "Zp3ValuationRing"
+    },
+    {
       "source": "ZpUnitDecomp",
       "target": "Premises311Real"
     },
@@ -11994,6 +12038,10 @@
     {
       "source": "ZpUnits",
       "target": "FullReciprocity"
+    },
+    {
+      "source": "ZpUnits",
+      "target": "Zp3ValuationRing"
     },
     {
       "source": "ZpUnits",
