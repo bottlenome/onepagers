@@ -2659,6 +2659,10 @@ import IUT
 #print axioms IUT.crlIso
 #print axioms IUT.crl_iso_leftinv
 #print axioms IUT.crl_iso_equivariant
+#print axioms IUT.crc_canonical
+#print axioms IUT.crc_canonical_unique
+#print axioms IUT.crc_torsor_realize
+#print axioms IUT.crc_scope
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

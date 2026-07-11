@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 617,
-  "verified_theorem_total": 2650,
-  "choice_free_count": 528,
+  "module_count": 618,
+  "verified_theorem_total": 2654,
+  "choice_free_count": 529,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7568,6 +7568,20 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryLimit.lean"
+    },
+    {
+      "id": "CyclotomeRecoveryCanonicity",
+      "label": "CyclotomeRecoveryCanonicity",
+      "milestone": null,
+      "title": "CyclotomeRecoveryCanonicity",
+      "pillar": "A",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryCanonicity.lean"
     }
   ],
   "edges": [
@@ -8006,6 +8020,10 @@
     {
       "source": "CyclotomeRecovery",
       "target": "CyclotomicGKActionReal"
+    },
+    {
+      "source": "CyclotomeRecoveryLimit",
+      "target": "CyclotomeRecoveryCanonicity"
     },
     {
       "source": "CyclotomeRecoveryReal",
@@ -11774,6 +11792,10 @@
     {
       "source": "TateModuleEndo",
       "target": "TateModuleIndeterminacy"
+    },
+    {
+      "source": "TateModuleIndeterminacy",
+      "target": "CyclotomeRecoveryCanonicity"
     },
     {
       "source": "TateModuleZ3",
