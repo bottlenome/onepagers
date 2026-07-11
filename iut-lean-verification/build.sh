@@ -2704,6 +2704,11 @@ import IUT
 #print axioms IUT.q3m3_comm_eq_weil
 #print axioms IUT.q3m3_weil_nondeg
 #print axioms IUT.q3m3_nonabelian
+#print axioms IUT.q3m3r_weil_e3_left
+#print axioms IUT.q3m3r_rigidity
+#print axioms IUT.q3m3r_cyclotome_fixed
+#print axioms IUT.q3m3r_mu3_killed
+#print axioms IUT.q3m3r_aut_mu3_nontrivial
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

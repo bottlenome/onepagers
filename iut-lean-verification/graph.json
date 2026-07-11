@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 626,
-  "verified_theorem_total": 2695,
-  "choice_free_count": 537,
+  "module_count": 627,
+  "verified_theorem_total": 2700,
+  "choice_free_count": 538,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7684,6 +7684,20 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu3ThetaGroup.lean"
+    },
+    {
+      "id": "Q3Mu3Rigidity",
+      "label": "Q3Mu3Rigidity",
+      "milestone": null,
+      "title": "Q3Mu3Rigidity",
+      "pillar": "A",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu3Rigidity.lean"
     }
   ],
   "edges": [
@@ -10964,6 +10978,10 @@
       "target": "Q3UnitsGroup"
     },
     {
+      "source": "Q3MonoThetaRigidity",
+      "target": "Q3Mu3Rigidity"
+    },
+    {
       "source": "Q3Mu3Completeness",
       "target": "Q3Mu3ThetaGroup"
     },
@@ -10972,8 +10990,16 @@
       "target": "Q3TateCurveL2"
     },
     {
+      "source": "Q3Mu3ThetaGroup",
+      "target": "Q3Mu3Rigidity"
+    },
+    {
       "source": "Q3RamifiedQuadratic",
       "target": "Q3Mu3Completeness"
+    },
+    {
+      "source": "Q3RamifiedQuadratic",
+      "target": "Q3Mu3Rigidity"
     },
     {
       "source": "Q3RamifiedQuadratic",
