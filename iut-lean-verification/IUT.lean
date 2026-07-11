@@ -631,3 +631,4 @@ import IUT.Q3Mu3Completeness
 import IUT.Q3TateCurveL2
 import IUT.Q3Mu3ThetaGroup
 import IUT.Q3Mu3Rigidity
+import IUT.Q3Mu3TmzBridge

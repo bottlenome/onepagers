@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 627,
-  "verified_theorem_total": 2700,
-  "choice_free_count": 538,
+  "module_count": 628,
+  "verified_theorem_total": 2705,
+  "choice_free_count": 539,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7698,6 +7698,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu3Rigidity.lean"
+    },
+    {
+      "id": "Q3Mu3TmzBridge",
+      "label": "Q3Mu3TmzBridge",
+      "milestone": null,
+      "title": "Q3Mu3TmzBridge",
+      "pillar": "A",
+      "decl_count": 39,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu3TmzBridge.lean"
     }
   ],
   "edges": [
@@ -8227,6 +8239,10 @@
     },
     {
       "source": "CyclotomicGKActionReal",
+      "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "CyclotomicGKActionReal",
       "target": "TateModuleZ3"
     },
     {
@@ -8360,6 +8376,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "KummerCharWiring"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "Q3Mu3TmzBridge"
     },
     {
       "source": "CyclotomicRigidity",
@@ -9950,6 +9970,10 @@
       "target": "HilbertSymbol"
     },
     {
+      "source": "LocalBrauer",
+      "target": "Q3Mu3TmzBridge"
+    },
+    {
       "source": "LocalCFT",
       "target": "FrobenioidModel"
     },
@@ -10987,7 +11011,15 @@
     },
     {
       "source": "Q3Mu3Completeness",
+      "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "Q3Mu3Completeness",
       "target": "Q3TateCurveL2"
+    },
+    {
+      "source": "Q3Mu3Rigidity",
+      "target": "Q3Mu3TmzBridge"
     },
     {
       "source": "Q3Mu3ThetaGroup",
@@ -11044,6 +11076,10 @@
     {
       "source": "Q3TateCurveL2",
       "target": "Q3Mu3ThetaGroup"
+    },
+    {
+      "source": "Q3TateCurveL2",
+      "target": "Q3Mu3TmzBridge"
     },
     {
       "source": "Q3TateCuspidalization",
@@ -12006,8 +12042,16 @@
       "target": "CyclotomeRecoveryCanonicity"
     },
     {
+      "source": "TateModuleIndeterminacy",
+      "target": "Q3Mu3TmzBridge"
+    },
+    {
       "source": "TateModuleZ3",
       "target": "CyclotomeRecoveryLimit"
+    },
+    {
+      "source": "TateModuleZ3",
+      "target": "Q3Mu3TmzBridge"
     },
     {
       "source": "TateModuleZ3",

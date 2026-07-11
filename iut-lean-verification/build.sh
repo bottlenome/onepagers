@@ -2709,6 +2709,11 @@ import IUT
 #print axioms IUT.q3m3r_cyclotome_fixed
 #print axioms IUT.q3m3r_mu3_killed
 #print axioms IUT.q3m3r_aut_mu3_nontrivial
+#print axioms IUT.q3mbHom
+#print axioms IUT.q3mb_equivariant
+#print axioms IUT.q3mb_transport
+#print axioms IUT.q3mb_kill_mod3
+#print axioms IUT.q3mb_admissible_iff
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
