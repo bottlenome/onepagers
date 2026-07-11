@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 621,
-  "verified_theorem_total": 2673,
-  "choice_free_count": 532,
+  "module_count": 622,
+  "verified_theorem_total": 2678,
+  "choice_free_count": 533,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7618,6 +7618,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedThetaClass.lean"
+    },
+    {
+      "id": "Q3MonoThetaRigidity",
+      "label": "Q3MonoThetaRigidity",
+      "milestone": null,
+      "title": "Q3MonoThetaRigidity",
+      "pillar": "A",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3MonoThetaRigidity.lean"
     }
   ],
   "edges": [
@@ -10948,6 +10962,10 @@
     {
       "source": "Q3TemperedPi1",
       "target": "Q3TemperedThetaClass"
+    },
+    {
+      "source": "Q3ThetaGroup",
+      "target": "Q3MonoThetaRigidity"
     },
     {
       "source": "Q3ThetaGroup",

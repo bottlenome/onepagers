@@ -2682,6 +2682,11 @@ import IUT
 #print axioms IUT.q3nt_deck_theta_real
 #print axioms IUT.q3nt_vq_two
 #print axioms IUT.q3ntClass_exists
+#print axioms IUT.q3mr_weil_klein_left
+#print axioms IUT.q3mr_rigidity
+#print axioms IUT.q3mr_cyclotome_fixed
+#print axioms IUT.q3mr_mu2_killed
+#print axioms IUT.q3mr_klein_fails_on_M
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
