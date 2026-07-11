@@ -623,3 +623,4 @@ import IUT.BelyiCubicReal
 import IUT.CyclotomeRecoveryLimit
 import IUT.CyclotomeRecoveryCanonicity
 import IUT.Q3TateCuspidalization
+import IUT.Q3ThetaGroup

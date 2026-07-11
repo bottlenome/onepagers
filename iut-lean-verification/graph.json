@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 619,
-  "verified_theorem_total": 2660,
-  "choice_free_count": 530,
+  "module_count": 620,
+  "verified_theorem_total": 2667,
+  "choice_free_count": 531,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7594,6 +7594,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCuspidalization.lean"
+    },
+    {
+      "id": "Q3ThetaGroup",
+      "label": "Q3ThetaGroup",
+      "milestone": null,
+      "title": "Q3ThetaGroup",
+      "pillar": "A",
+      "decl_count": 72,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ThetaGroup.lean"
     }
   ],
   "edges": [
@@ -10894,6 +10906,10 @@
       "target": "Q3TateTorsion"
     },
     {
+      "source": "Q3TateCuspidalization",
+      "target": "Q3ThetaGroup"
+    },
+    {
       "source": "Q3TateDeck",
       "target": "Q3TatePi1Comparison"
     },
@@ -11800,6 +11816,10 @@
     {
       "source": "TateCurve",
       "target": "Q3TateDeck"
+    },
+    {
+      "source": "TateCurve",
+      "target": "Q3ThetaGroup"
     },
     {
       "source": "TateCurve",

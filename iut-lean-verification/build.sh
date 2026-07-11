@@ -2669,6 +2669,13 @@ import IUT
 #print axioms IUT.q3cuOpenMap
 #print axioms IUT.q3cu_not_surjective
 #print axioms IUT.q3cuCusp_exists
+#print axioms IUT.q3thGrp
+#print axioms IUT.q3th_mem_iff
+#print axioms IUT.q3th_comm_eq_weil
+#print axioms IUT.q3th_weil_nondeg
+#print axioms IUT.q3th_nonabelian
+#print axioms IUT.q3th_proj_surj_klein
+#print axioms IUT.q3thTheta_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
