@@ -2687,6 +2687,11 @@ import IUT
 #print axioms IUT.q3mr_cyclotome_fixed
 #print axioms IUT.q3mr_mu2_killed
 #print axioms IUT.q3mr_klein_fails_on_M
+#print axioms IUT.q3rqRing
+#print axioms IUT.q3rq_inv_mul
+#print axioms IUT.q3rq_zeta_cube
+#print axioms IUT.q3rqEmbed
+#print axioms IUT.q3rq_ramification
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

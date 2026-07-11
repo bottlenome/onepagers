@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 622,
-  "verified_theorem_total": 2678,
-  "choice_free_count": 533,
+  "module_count": 623,
+  "verified_theorem_total": 2683,
+  "choice_free_count": 534,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7632,6 +7632,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3MonoThetaRigidity.lean"
+    },
+    {
+      "id": "Q3RamifiedQuadratic",
+      "label": "Q3RamifiedQuadratic",
+      "milestone": null,
+      "title": "Q3RamifiedQuadratic",
+      "pillar": "A",
+      "decl_count": 73,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3RamifiedQuadratic.lean"
     }
   ],
   "edges": [
@@ -8877,6 +8889,10 @@
     },
     {
       "source": "FormalGroupExists",
+      "target": "Q3RamifiedQuadratic"
+    },
+    {
+      "source": "FormalGroupExists",
       "target": "ResidueTower"
     },
     {
@@ -9714,6 +9730,10 @@
     {
       "source": "LTIterate",
       "target": "FormalGroupInverse"
+    },
+    {
+      "source": "LTIterate",
+      "target": "Q3RamifiedQuadratic"
     },
     {
       "source": "LTIterate",
@@ -10913,6 +10933,10 @@
     },
     {
       "source": "Q3TateCurve",
+      "target": "Q3RamifiedQuadratic"
+    },
+    {
+      "source": "Q3TateCurve",
       "target": "Q3TateCoverTower"
     },
     {
@@ -10974,6 +10998,10 @@
     {
       "source": "Q3UnitsGroup",
       "target": "Q3TateCurve"
+    },
+    {
+      "source": "QuadraticNorm",
+      "target": "Q3RamifiedQuadratic"
     },
     {
       "source": "QuadraticProductFormula",
@@ -12489,6 +12517,10 @@
     },
     {
       "source": "Zp3ValuationRing",
+      "target": "Q3RamifiedQuadratic"
+    },
+    {
+      "source": "Zp3ValuationRing",
       "target": "Zp3Complete"
     },
     {
@@ -12522,6 +12554,10 @@
     {
       "source": "ZpUnits",
       "target": "FullReciprocity"
+    },
+    {
+      "source": "ZpUnits",
+      "target": "Q3RamifiedQuadratic"
     },
     {
       "source": "ZpUnits",
