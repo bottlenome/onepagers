@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 616,
-  "verified_theorem_total": 2645,
-  "choice_free_count": 527,
+  "module_count": 617,
+  "verified_theorem_total": 2650,
+  "choice_free_count": 528,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7554,6 +7554,20 @@
         "[GenEll]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/BelyiCubicReal.lean"
+    },
+    {
+      "id": "CyclotomeRecoveryLimit",
+      "label": "CyclotomeRecoveryLimit",
+      "milestone": null,
+      "title": "CyclotomeRecoveryLimit",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryLimit.lean"
     }
   ],
   "edges": [
@@ -7994,6 +8008,10 @@
       "target": "CyclotomicGKActionReal"
     },
     {
+      "source": "CyclotomeRecoveryReal",
+      "target": "CyclotomeRecoveryLimit"
+    },
+    {
       "source": "CyclotomicAutExt",
       "target": "CyclotomicCharIso"
     },
@@ -8088,6 +8106,10 @@
     {
       "source": "CyclotomicGal9",
       "target": "CyclotomicSurj39"
+    },
+    {
+      "source": "CyclotomicLimitIso",
+      "target": "CyclotomeRecoveryLimit"
     },
     {
       "source": "CyclotomicLimitIso",
@@ -11752,6 +11774,10 @@
     {
       "source": "TateModuleEndo",
       "target": "TateModuleIndeterminacy"
+    },
+    {
+      "source": "TateModuleZ3",
+      "target": "CyclotomeRecoveryLimit"
     },
     {
       "source": "TateModuleZ3",

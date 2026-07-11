@@ -2654,6 +2654,11 @@ import IUT
 #print axioms IUT.blc_fiber_one
 #print axioms IUT.blc_infty_chart
 #print axioms IUT.blc_belyi_exists
+#print axioms IUT.crlLimit
+#print axioms IUT.crl_char_compat
+#print axioms IUT.crlIso
+#print axioms IUT.crl_iso_leftinv
+#print axioms IUT.crl_iso_equivariant
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
