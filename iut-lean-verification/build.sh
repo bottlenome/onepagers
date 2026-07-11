@@ -2636,6 +2636,12 @@ import IUT
 #print axioms IUT.q3tc_ker
 #print axioms IUT.q3tcDeckFin
 #print axioms IUT.q3tcCoverTower_exists
+#print axioms IUT.q3peLimitAct
+#print axioms IUT.q3pe_limit_act_natural
+#print axioms IUT.q3pe_fin_faithful
+#print axioms IUT.q3pe_limit_faithful
+#print axioms IUT.q3pe_fiber_orbit
+#print axioms IUT.q3pePi1_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

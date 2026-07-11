@@ -617,3 +617,4 @@ import IUT.Q3TemperedPi1
 import IUT.TateModuleEndo
 import IUT.TateModuleIndeterminacy
 import IUT.Q3TateCoverTower
+import IUT.Q3TatePi1Etale
