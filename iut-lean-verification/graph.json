@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 623,
-  "verified_theorem_total": 2683,
-  "choice_free_count": 534,
+  "module_count": 624,
+  "verified_theorem_total": 2686,
+  "choice_free_count": 535,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7644,6 +7644,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3RamifiedQuadratic.lean"
+    },
+    {
+      "id": "Q3Mu3Completeness",
+      "label": "Q3Mu3Completeness",
+      "milestone": null,
+      "title": "Q3Mu3Completeness",
+      "pillar": "A",
+      "decl_count": 37,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu3Completeness.lean"
     }
   ],
   "edges": [
@@ -10924,6 +10936,10 @@
       "target": "Q3UnitsGroup"
     },
     {
+      "source": "Q3RamifiedQuadratic",
+      "target": "Q3Mu3Completeness"
+    },
+    {
       "source": "Q3TateCoverTower",
       "target": "Q3TatePi1Comparison"
     },
@@ -10954,6 +10970,10 @@
     {
       "source": "Q3TateCurve",
       "target": "Q3TateTorsion"
+    },
+    {
+      "source": "Q3TateCuspidalization",
+      "target": "Q3Mu3Completeness"
     },
     {
       "source": "Q3TateCuspidalization",

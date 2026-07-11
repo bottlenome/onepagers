@@ -2692,6 +2692,9 @@ import IUT
 #print axioms IUT.q3rq_zeta_cube
 #print axioms IUT.q3rqEmbed
 #print axioms IUT.q3rq_ramification
+#print axioms IUT.q3mc_z3_cube_root_one
+#print axioms IUT.q3mc_cube_snd
+#print axioms IUT.q3mc_mu3_complete
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

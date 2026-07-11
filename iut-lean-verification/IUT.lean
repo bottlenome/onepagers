@@ -627,3 +627,4 @@ import IUT.Q3ThetaGroup
 import IUT.Q3TemperedThetaClass
 import IUT.Q3MonoThetaRigidity
 import IUT.Q3RamifiedQuadratic
+import IUT.Q3Mu3Completeness
