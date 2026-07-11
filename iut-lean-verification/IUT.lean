@@ -622,3 +622,4 @@ import IUT.Q3TatePi1Comparison
 import IUT.BelyiCubicReal
 import IUT.CyclotomeRecoveryLimit
 import IUT.CyclotomeRecoveryCanonicity
+import IUT.Q3TateCuspidalization

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 618,
-  "verified_theorem_total": 2654,
-  "choice_free_count": 529,
+  "module_count": 619,
+  "verified_theorem_total": 2660,
+  "choice_free_count": 530,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7582,6 +7582,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryCanonicity.lean"
+    },
+    {
+      "id": "Q3TateCuspidalization",
+      "label": "Q3TateCuspidalization",
+      "milestone": null,
+      "title": "Q3TateCuspidalization",
+      "pillar": "A",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCuspidalization.lean"
     }
   ],
   "edges": [
@@ -10898,6 +10910,10 @@
       "target": "Q3TatePi1Comparison"
     },
     {
+      "source": "Q3TateTorsion",
+      "target": "Q3TateCuspidalization"
+    },
+    {
       "source": "Q3UnitsGroup",
       "target": "Q3TateCurve"
     },
@@ -11532,6 +11548,10 @@
     {
       "source": "RootAdjunction",
       "target": "SeparableEmbeddings"
+    },
+    {
+      "source": "RootsOfUnity",
+      "target": "Q3TateCuspidalization"
     },
     {
       "source": "RootsOfUnity",

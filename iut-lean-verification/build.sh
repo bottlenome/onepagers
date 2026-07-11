@@ -2663,6 +2663,12 @@ import IUT
 #print axioms IUT.crc_canonical_unique
 #print axioms IUT.crc_torsor_realize
 #print axioms IUT.crc_scope
+#print axioms IUT.q3cuSq
+#print axioms IUT.q3cu_mu2_complete
+#print axioms IUT.q3cu_ker_eq_klein
+#print axioms IUT.q3cuOpenMap
+#print axioms IUT.q3cu_not_surjective
+#print axioms IUT.q3cuCusp_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
