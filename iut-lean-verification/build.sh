@@ -2699,6 +2699,11 @@ import IUT
 #print axioms IUT.q3tl_period
 #print axioms IUT.q3tl_3pt_tor
 #print axioms IUT.q3tl_zeta3_tor
+#print axioms IUT.q3m3Grp
+#print axioms IUT.q3m3_mem_iff
+#print axioms IUT.q3m3_comm_eq_weil
+#print axioms IUT.q3m3_weil_nondeg
+#print axioms IUT.q3m3_nonabelian
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

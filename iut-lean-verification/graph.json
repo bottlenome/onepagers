@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 625,
-  "verified_theorem_total": 2690,
-  "choice_free_count": 536,
+  "module_count": 626,
+  "verified_theorem_total": 2695,
+  "choice_free_count": 537,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7670,6 +7670,20 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCurveL2.lean"
+    },
+    {
+      "id": "Q3Mu3ThetaGroup",
+      "label": "Q3Mu3ThetaGroup",
+      "milestone": null,
+      "title": "Q3Mu3ThetaGroup",
+      "pillar": "A",
+      "decl_count": 50,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu3ThetaGroup.lean"
     }
   ],
   "edges": [
@@ -10951,11 +10965,19 @@
     },
     {
       "source": "Q3Mu3Completeness",
+      "target": "Q3Mu3ThetaGroup"
+    },
+    {
+      "source": "Q3Mu3Completeness",
       "target": "Q3TateCurveL2"
     },
     {
       "source": "Q3RamifiedQuadratic",
       "target": "Q3Mu3Completeness"
+    },
+    {
+      "source": "Q3RamifiedQuadratic",
+      "target": "Q3Mu3ThetaGroup"
     },
     {
       "source": "Q3RamifiedQuadratic",
@@ -10992,6 +11014,10 @@
     {
       "source": "Q3TateCurve",
       "target": "Q3TateTorsion"
+    },
+    {
+      "source": "Q3TateCurveL2",
+      "target": "Q3Mu3ThetaGroup"
     },
     {
       "source": "Q3TateCuspidalization",
@@ -11032,6 +11058,10 @@
     {
       "source": "Q3ThetaGroup",
       "target": "Q3MonoThetaRigidity"
+    },
+    {
+      "source": "Q3ThetaGroup",
+      "target": "Q3Mu3ThetaGroup"
     },
     {
       "source": "Q3ThetaGroup",
