@@ -2642,6 +2642,12 @@ import IUT
 #print axioms IUT.q3pe_limit_faithful
 #print axioms IUT.q3pe_fiber_orbit
 #print axioms IUT.q3pePi1_exists
+#print axioms IUT.q3pc_universal_cover_equivariant
+#print axioms IUT.q3pc_completion_act
+#print axioms IUT.q3pc_pi1_universal
+#print axioms IUT.q3pcSurrogateAct
+#print axioms IUT.q3pc_surrogate_nontrivial
+#print axioms IUT.q3pcComparison_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

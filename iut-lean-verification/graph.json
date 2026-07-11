@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 614,
-  "verified_theorem_total": 2633,
-  "choice_free_count": 525,
+  "module_count": 615,
+  "verified_theorem_total": 2639,
+  "choice_free_count": 526,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7528,6 +7528,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TatePi1Etale.lean"
+    },
+    {
+      "id": "Q3TatePi1Comparison",
+      "label": "Q3TatePi1Comparison",
+      "milestone": null,
+      "title": "Q3TatePi1Comparison",
+      "pillar": "A",
+      "decl_count": 10,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TatePi1Comparison.lean"
     }
   ],
   "edges": [
@@ -10733,6 +10745,10 @@
     },
     {
       "source": "Profinite",
+      "target": "Q3TatePi1Comparison"
+    },
+    {
+      "source": "Profinite",
       "target": "Q3TatePi1Etale"
     },
     {
@@ -10773,6 +10789,10 @@
     },
     {
       "source": "Q3TateCoverTower",
+      "target": "Q3TatePi1Comparison"
+    },
+    {
+      "source": "Q3TateCoverTower",
       "target": "Q3TatePi1Etale"
     },
     {
@@ -10785,6 +10805,10 @@
     },
     {
       "source": "Q3TateCurve",
+      "target": "Q3TatePi1Comparison"
+    },
+    {
+      "source": "Q3TateCurve",
       "target": "Q3TatePi1Etale"
     },
     {
@@ -10793,11 +10817,19 @@
     },
     {
       "source": "Q3TateDeck",
+      "target": "Q3TatePi1Comparison"
+    },
+    {
+      "source": "Q3TateDeck",
       "target": "Q3TatePi1Etale"
     },
     {
       "source": "Q3TateDeck",
       "target": "Q3TemperedPi1"
+    },
+    {
+      "source": "Q3TatePi1Etale",
+      "target": "Q3TatePi1Comparison"
     },
     {
       "source": "Q3UnitsGroup",
@@ -11657,6 +11689,10 @@
     },
     {
       "source": "TateCoverGroup",
+      "target": "Q3TatePi1Comparison"
+    },
+    {
+      "source": "TateCoverGroup",
       "target": "TateCoverCat"
     },
     {
@@ -11762,6 +11798,10 @@
     {
       "source": "TemperedTower",
       "target": "Q3TateCoverTower"
+    },
+    {
+      "source": "TemperedTower",
+      "target": "Q3TatePi1Comparison"
     },
     {
       "source": "TemperedTower",
