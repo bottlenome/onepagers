@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 615,
-  "verified_theorem_total": 2639,
-  "choice_free_count": 526,
+  "module_count": 616,
+  "verified_theorem_total": 2645,
+  "choice_free_count": 527,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7540,6 +7540,20 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TatePi1Comparison.lean"
+    },
+    {
+      "id": "BelyiCubicReal",
+      "label": "BelyiCubicReal",
+      "milestone": null,
+      "title": "BelyiCubicReal",
+      "pillar": "A",
+      "decl_count": 79,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[GenEll]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/BelyiCubicReal.lean"
     }
   ],
   "edges": [
@@ -8433,6 +8447,10 @@
     },
     {
       "source": "EvaluationHom",
+      "target": "BelyiCubicReal"
+    },
+    {
+      "source": "EvaluationHom",
       "target": "CbrtLinearFactor"
     },
     {
@@ -8510,6 +8528,10 @@
     {
       "source": "Field",
       "target": "ArchAbsValueQ"
+    },
+    {
+      "source": "Field",
+      "target": "BelyiCubicReal"
     },
     {
       "source": "Field",
@@ -10597,6 +10619,10 @@
     },
     {
       "source": "PolyWeierstrass",
+      "target": "BelyiCubicReal"
+    },
+    {
+      "source": "PolyWeierstrass",
       "target": "PolyDivision"
     },
     {
@@ -11534,6 +11560,10 @@
     {
       "source": "SeparableEmbeddings",
       "target": "PrimitiveElement"
+    },
+    {
+      "source": "SeparablePoly",
+      "target": "BelyiCubicReal"
     },
     {
       "source": "SeparablePoly",

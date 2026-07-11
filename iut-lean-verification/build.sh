@@ -2648,6 +2648,12 @@ import IUT
 #print axioms IUT.q3pcSurrogateAct
 #print axioms IUT.q3pc_surrogate_nontrivial
 #print axioms IUT.q3pcComparison_exists
+#print axioms IUT.blc_branch_locus
+#print axioms IUT.blc_branch_locus_rat
+#print axioms IUT.blc_fiber_zero
+#print axioms IUT.blc_fiber_one
+#print axioms IUT.blc_infty_chart
+#print axioms IUT.blc_belyi_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
