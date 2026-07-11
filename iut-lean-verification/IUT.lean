@@ -624,3 +624,4 @@ import IUT.CyclotomeRecoveryLimit
 import IUT.CyclotomeRecoveryCanonicity
 import IUT.Q3TateCuspidalization
 import IUT.Q3ThetaGroup
+import IUT.Q3TemperedThetaClass

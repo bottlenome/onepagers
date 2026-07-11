@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 620,
-  "verified_theorem_total": 2667,
-  "choice_free_count": 531,
+  "module_count": 621,
+  "verified_theorem_total": 2673,
+  "choice_free_count": 532,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7606,6 +7606,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ThetaGroup.lean"
+    },
+    {
+      "id": "Q3TemperedThetaClass",
+      "label": "Q3TemperedThetaClass",
+      "milestone": null,
+      "title": "Q3TemperedThetaClass",
+      "pillar": "A",
+      "decl_count": 51,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedThetaClass.lean"
     }
   ],
   "edges": [
@@ -10922,12 +10934,24 @@
       "target": "Q3TemperedPi1"
     },
     {
+      "source": "Q3TateDeck",
+      "target": "Q3TemperedThetaClass"
+    },
+    {
       "source": "Q3TatePi1Etale",
       "target": "Q3TatePi1Comparison"
     },
     {
       "source": "Q3TateTorsion",
       "target": "Q3TateCuspidalization"
+    },
+    {
+      "source": "Q3TemperedPi1",
+      "target": "Q3TemperedThetaClass"
+    },
+    {
+      "source": "Q3ThetaGroup",
+      "target": "Q3TemperedThetaClass"
     },
     {
       "source": "Q3UnitsGroup",
@@ -11892,6 +11916,10 @@
     {
       "source": "TemperedPi1Etale",
       "target": "ArithTemperedPi1"
+    },
+    {
+      "source": "TemperedPi1Etale",
+      "target": "Q3TemperedThetaClass"
     },
     {
       "source": "TemperedThetaCommutator",

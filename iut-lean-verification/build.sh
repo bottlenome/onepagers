@@ -2676,6 +2676,12 @@ import IUT
 #print axioms IUT.q3th_nonabelian
 #print axioms IUT.q3th_proj_surj_klein
 #print axioms IUT.q3thTheta_exists
+#print axioms IUT.q3ntPhi
+#print axioms IUT.q3ntPsi
+#print axioms IUT.q3nt_symplectic_real
+#print axioms IUT.q3nt_deck_theta_real
+#print axioms IUT.q3nt_vq_two
+#print axioms IUT.q3ntClass_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
