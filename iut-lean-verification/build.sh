@@ -2695,6 +2695,10 @@ import IUT
 #print axioms IUT.q3mc_z3_cube_root_one
 #print axioms IUT.q3mc_cube_snd
 #print axioms IUT.q3mc_mu3_complete
+#print axioms IUT.q3tlCurve
+#print axioms IUT.q3tl_period
+#print axioms IUT.q3tl_3pt_tor
+#print axioms IUT.q3tl_zeta3_tor
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
