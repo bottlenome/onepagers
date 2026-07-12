@@ -2730,6 +2730,11 @@ import IUT
 #print axioms IUT.q9ci_pi9_reg
 #print axioms IUT.q9ci_no_cbrt_zeta
 #print axioms IUT.q9ci_norm_sub
+#print axioms IUT.q9c_norm_one
+#print axioms IUT.q9c_bc_zero
+#print axioms IUT.q9c_m_mu3_complete
+#print axioms IUT.q9c_mu9_complete
+#print axioms IUT.q9c_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

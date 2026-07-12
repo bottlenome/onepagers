@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 631,
-  "verified_theorem_total": 2721,
-  "choice_free_count": 542,
+  "module_count": 632,
+  "verified_theorem_total": 2726,
+  "choice_free_count": 543,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7746,6 +7746,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerCubeIdent.lean"
+    },
+    {
+      "id": "Q3Mu9Completeness",
+      "label": "Q3Mu9Completeness",
+      "milestone": null,
+      "title": "Q3Mu9Completeness",
+      "pillar": "A",
+      "decl_count": 54,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu9Completeness.lean"
     }
   ],
   "edges": [
@@ -11034,8 +11046,16 @@
       "target": "ProfinitePi1"
     },
     {
+      "source": "Q3KummerCubeIdent",
+      "target": "Q3Mu9Completeness"
+    },
+    {
       "source": "Q3KummerCubic",
       "target": "Q3KummerCubeIdent"
+    },
+    {
+      "source": "Q3KummerDescentSpike",
+      "target": "Q3Mu9Completeness"
     },
     {
       "source": "Q3LocalField",
@@ -11060,6 +11080,10 @@
     {
       "source": "Q3Mu3Completeness",
       "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "Q3Mu3Completeness",
+      "target": "Q3Mu9Completeness"
     },
     {
       "source": "Q3Mu3Completeness",

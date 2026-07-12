@@ -635,3 +635,4 @@ import IUT.Q3Mu3TmzBridge
 import IUT.Q3KummerCubic
 import IUT.Q3KummerDescentSpike
 import IUT.Q3KummerCubeIdent
+import IUT.Q3Mu9Completeness
