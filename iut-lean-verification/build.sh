@@ -2723,6 +2723,13 @@ import IUT
 #print axioms IUT.q9cs_descent_even
 #print axioms IUT.q9cs_descent_odd
 #print axioms IUT.q9cs_descent_all
+#print axioms IUT.q9ci_cube_0
+#print axioms IUT.q9ci_cube_1
+#print axioms IUT.q9ci_cube_2
+#print axioms IUT.q9ci_zeta_sub_one_reg
+#print axioms IUT.q9ci_pi9_reg
+#print axioms IUT.q9ci_no_cbrt_zeta
+#print axioms IUT.q9ci_norm_sub
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

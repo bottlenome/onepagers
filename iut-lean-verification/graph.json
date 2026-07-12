@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 630,
-  "verified_theorem_total": 2714,
-  "choice_free_count": 541,
+  "module_count": 631,
+  "verified_theorem_total": 2721,
+  "choice_free_count": 542,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7734,6 +7734,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerDescentSpike.lean"
+    },
+    {
+      "id": "Q3KummerCubeIdent",
+      "label": "Q3KummerCubeIdent",
+      "milestone": null,
+      "title": "Q3KummerCubeIdent",
+      "pillar": "A",
+      "decl_count": 31,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerCubeIdent.lean"
     }
   ],
   "edges": [
@@ -11022,12 +11034,20 @@
       "target": "ProfinitePi1"
     },
     {
+      "source": "Q3KummerCubic",
+      "target": "Q3KummerCubeIdent"
+    },
+    {
       "source": "Q3LocalField",
       "target": "Q3UnitsGroup"
     },
     {
       "source": "Q3MonoThetaRigidity",
       "target": "Q3Mu3Rigidity"
+    },
+    {
+      "source": "Q3Mu3Completeness",
+      "target": "Q3KummerCubeIdent"
     },
     {
       "source": "Q3Mu3Completeness",
