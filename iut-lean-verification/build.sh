@@ -2714,6 +2714,12 @@ import IUT
 #print axioms IUT.q3mb_transport
 #print axioms IUT.q3mb_kill_mod3
 #print axioms IUT.q3mb_admissible_iff
+#print axioms IUT.q3k_mul_assoc
+#print axioms IUT.q3k_sigma_mul
+#print axioms IUT.q3k_norm_eq
+#print axioms IUT.q3k_inv_mul
+#print axioms IUT.q3k_zeta9_pow9
+#print axioms IUT.q3kData
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
