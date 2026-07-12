@@ -34,7 +34,7 @@
   .subtitle { text-align: center; color: var(--ink2); font-size: 0.85rem; margin: 0.4rem 0 1.2rem; }
 
   /* ---- buttons ---- */
-  button { font-family: inherit; cursor: pointer; border: none; border-radius: 10px; color: var(--ink); background: var(--card2); font-size: 1rem; }
+  button { font-family: inherit; cursor: pointer; border: none; border-radius: 10px; color: var(--ink); background: var(--card2); font-size: 1rem; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
   button:active { transform: translateY(1px); }
   .btn-primary { background: var(--accent); color: #fff; font-weight: 700; padding: 0.8rem 1.4rem; }
   .btn-ghost { background: transparent; border: 1px solid var(--line); color: var(--ink2); padding: 0.55rem 1rem; font-size: 0.88rem; }
@@ -96,6 +96,7 @@
   @keyframes flashG { 0% { box-shadow: 0 0 0 3px var(--good) inset; } 100% { box-shadow: none; } }
   @keyframes flashB { 0% { box-shadow: 0 0 0 3px var(--bad) inset; } 100% { box-shadow: none; } }
   .countdown { font-size: 4rem; font-weight: 800; color: var(--accent); }
+  @media (hover: none) { .ans-btn small { display: none; } } /* タッチ端末ではキー表記を隠す */
 
   /* ---- result ---- */
   .verdict { text-align: center; margin: 1.2rem 0; }
@@ -338,6 +339,7 @@ function beep(freq, dur, type = "sine", gain = 0.12) {
   if (!settings.se) return;
   try {
     actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume(); // iOS Safari 対策
     const o = actx.createOscillator(), g = actx.createGain();
     o.type = type; o.frequency.value = freq;
     g.gain.setValueAtTime(gain, actx.currentTime);
