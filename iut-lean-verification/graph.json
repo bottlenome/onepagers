@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 629,
-  "verified_theorem_total": 2711,
-  "choice_free_count": 540,
+  "module_count": 630,
+  "verified_theorem_total": 2714,
+  "choice_free_count": 541,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7722,6 +7722,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerCubic.lean"
+    },
+    {
+      "id": "Q3KummerDescentSpike",
+      "label": "Q3KummerDescentSpike",
+      "milestone": null,
+      "title": "Q3KummerDescentSpike",
+      "pillar": "A",
+      "decl_count": 30,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerDescentSpike.lean"
     }
   ],
   "edges": [
@@ -11019,6 +11031,10 @@
     },
     {
       "source": "Q3Mu3Completeness",
+      "target": "Q3KummerDescentSpike"
+    },
+    {
+      "source": "Q3Mu3Completeness",
       "target": "Q3Mu3ThetaGroup"
     },
     {
@@ -11040,6 +11056,10 @@
     {
       "source": "Q3RamifiedQuadratic",
       "target": "Q3KummerCubic"
+    },
+    {
+      "source": "Q3RamifiedQuadratic",
+      "target": "Q3KummerDescentSpike"
     },
     {
       "source": "Q3RamifiedQuadratic",
@@ -11096,6 +11116,10 @@
     {
       "source": "Q3TateCurveL2",
       "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "Q3TateCuspidalization",
+      "target": "Q3KummerDescentSpike"
     },
     {
       "source": "Q3TateCuspidalization",

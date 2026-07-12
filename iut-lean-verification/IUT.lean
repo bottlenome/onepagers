@@ -633,3 +633,4 @@ import IUT.Q3Mu3ThetaGroup
 import IUT.Q3Mu3Rigidity
 import IUT.Q3Mu3TmzBridge
 import IUT.Q3KummerCubic
+import IUT.Q3KummerDescentSpike

@@ -2720,6 +2720,9 @@ import IUT
 #print axioms IUT.q3k_inv_mul
 #print axioms IUT.q3k_zeta9_pow9
 #print axioms IUT.q3kData
+#print axioms IUT.q9cs_descent_even
+#print axioms IUT.q9cs_descent_odd
+#print axioms IUT.q9cs_descent_all
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
