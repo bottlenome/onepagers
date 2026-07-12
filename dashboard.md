@@ -34,6 +34,7 @@ onepagers/
 | [DDD実践入門](learn-ddd/index.html) | doc | done | ドメイン駆動設計の核心をインタラクティブに学べる実践入門 |
 | [LLMアーキテクチャ比較 2026](llm-architecture/index.html) | doc | wip | 2026年4月時点の主要LLM 18モデルを視覚比較。Attention/MoE/1M長文脈/RLHFを図解 |
 | [Open Chatbot](open-chatbot/index.html) | tool | wip | オープンウェイトLLMをWebLLM(WebGPU)でブラウザ内実行するチャットボット。APIキー不要・モデル選択UI付き |
+| [Nバック・トレーニング](nback-training/index.html) | game | done | ワーキングメモリを鍛える適応型Nバック訓練。位置/音/デュアル/計算の4モード、鬼トレ風音声コーチ・成長グラフ付き |
 
 ## 新規プロジェクト追加手順
 
