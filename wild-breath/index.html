@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WILD BREATH — 野生の冒険</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:100%; height:100%; background:#000; overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans",Meiryo,sans-serif; }
+  #wrap { position:absolute; width:960px; height:540px; left:50%; top:50%;
+    transform-origin:center center; }
+  canvas#game { width:100%; height:100%; display:block; background:#123; image-rendering:pixelated; }
+
+  /* ---- HUD ---- */
+  .hud { position:absolute; color:#fff; text-shadow:0 1px 3px rgba(0,0,0,.8); pointer-events:none; }
+  #hearts { top:10px; left:12px; font-size:20px; letter-spacing:2px; }
+  #matbar { top:38px; left:12px; font-size:14px; opacity:.95; }
+  #matbar span { margin-right:10px; }
+  #objective { top:8px; left:50%; transform:translateX(-50%); font-size:13px;
+    background:rgba(0,0,0,.45); padding:4px 14px; border-radius:9999px; white-space:nowrap; }
+  #weaponbar { top:10px; right:12px; display:flex; gap:6px; }
+  .wslot { width:44px; height:52px; background:rgba(0,0,0,.5); border:2px solid #555;
+    border-radius:8px; text-align:center; font-size:20px; padding-top:4px; position:relative; color:#fff; }
+  .wslot.eq { border-color:#ffd75e; box-shadow:0 0 8px rgba(255,215,94,.6); }
+  .wslot .dur { position:absolute; bottom:3px; left:4px; right:4px; height:4px; background:#333; border-radius:2px; }
+  .wslot .dur i { display:block; height:100%; background:#6c6; border-radius:2px; }
+  .wslot .key { position:absolute; top:-1px; left:2px; font-size:9px; color:#aaa; }
+  #bufficon { top:70px; right:12px; font-size:13px; background:rgba(0,0,0,.45); padding:3px 8px; border-radius:6px; }
+  #msgbox { bottom:64px; left:50%; transform:translateX(-50%); text-align:center; font-size:15px; width:640px; }
+  #msgbox div { background:rgba(0,0,0,.55); display:inline-block; padding:4px 16px; border-radius:8px; margin-top:4px; }
+  #minimap { position:absolute; bottom:12px; right:12px; width:132px; height:132px;
+    border:2px solid rgba(255,255,255,.4); border-radius:8px; background:#000; opacity:.9; }
+  #hint { bottom:10px; left:12px; font-size:11px; color:#cbd5e1; opacity:.8; }
+  #weatherIcon { top:38px; left:50%; transform:translateX(-50%); font-size:13px; }
+
+  /* ---- overlays ---- */
+  .overlay { position:absolute; inset:0; background:rgba(3,10,20,.88); color:#e2e8f0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:20; }
+  .overlay h1 { font-size:44px; letter-spacing:6px; color:#ffd75e; text-shadow:0 0 24px rgba(255,215,94,.5); }
+  .overlay h2 { font-size:26px; margin-bottom:12px; }
+  .overlay p { color:#94a3b8; margin:6px 0; text-align:center; line-height:1.7; font-size:14px; }
+  .overlay button { margin:8px; padding:10px 34px; font-size:16px; border-radius:9999px; border:2px solid #ffd75e;
+    background:transparent; color:#ffd75e; cursor:pointer; }
+  .overlay button:hover { background:#ffd75e; color:#1a2233; }
+  .overlay .ctrl { font-size:12px; color:#7d8aa0; margin-top:18px; line-height:1.9; }
+  #modal { display:none; position:absolute; inset:0; z-index:15; background:rgba(3,10,20,.72);
+    align-items:center; justify-content:center; }
+  #modal .box { background:#16202f; border:2px solid #3b4a63; border-radius:14px; padding:22px 28px;
+    color:#e2e8f0; max-width:640px; text-align:center; }
+  #modal h3 { color:#ffd75e; margin-bottom:10px; }
+  #modal button { margin:5px; padding:7px 16px; border-radius:8px; border:1px solid #5b6b85;
+    background:#22314a; color:#e2e8f0; cursor:pointer; font-size:14px; }
+  #modal button:hover { background:#31456a; }
+  #modal button.big { font-size:16px; border-color:#ffd75e; color:#ffd75e; }
+  #mapcanvas { border:1px solid #3b4a63; border-radius:8px; cursor:crosshair; background:#060a12; }
+  .pot { min-height:34px; font-size:22px; letter-spacing:4px; margin:8px 0; }
+  #titleScreen .logo { font-size:13px; color:#7d8aa0; letter-spacing:4px; margin-bottom:6px; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game" width="960" height="540"></canvas>
+
+  <div class="hud" id="hearts"></div>
+  <div class="hud" id="matbar"></div>
+  <div class="hud" id="objective"></div>
+  <div class="hud" id="weatherIcon"></div>
+  <div class="hud" id="weaponbar"></div>
+  <div class="hud" id="bufficon" style="display:none"></div>
+  <div class="hud" id="msgbox"></div>
+  <div class="hud" id="hint">移動:WASD/矢印 ダッシュ:Shift 攻撃:Space/J 調べる:E 食べる:F 武器:1-5/Q マップ:M</div>
+  <canvas id="minimap" width="132" height="132"></canvas>
+
+  <div id="modal"><div class="box" id="modalBox"></div></div>
+
+  <div class="overlay" id="titleScreen">
+    <div class="logo">— ONEPAGERS presents —</div>
+    <h1>WILD BREATH</h1>
+    <p style="margin-bottom:18px">〜 野生の冒険 〜</p>
+    <p>厄災に覆われた大地。100年の眠りから覚めた君は、<br>
+       祠を巡り、力を蓄え、北の魔王城に巣食う「厄災ガノス」を討て。</p>
+    <div>
+      <button id="btnNew">はじめから</button>
+      <button id="btnCont" style="display:none">つづきから</button>
+    </div>
+    <div class="ctrl">
+      移動: WASD / 矢印キー ｜ ダッシュ: Shift ｜ 攻撃: Space / J ｜ 調べる・開ける: E<br>
+      料理を食べる: F ｜ 武器切替: 1〜5 / Q ｜ マップ&ワープ: M<br>
+      崖・水・深淵は「がんばりゲージ」の続く限り 登はん・水泳・滑空 できる（雨の日の崖は滑る）
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+// =====================================================================
+//  WILD BREATH — BotW風オープンワールド2Dアクション (1ファイル完結)
+// =====================================================================
+const TS = 16, W = 160, H = 160;          // タイル16px / 世界160x160
+const VW = 960, VH = 540;
+const SEED = 20260712;
+const SAVE_KEY = 'wild-breath-save-v1';
+
+const T = { WATER:0, SAND:1, GRASS:2, FOREST:3, MTN:4, SNOW:5, CHASM:6, FLOOR:7, WALL:8, ROAD:9 };
+const TILE_COL = ['#2b6ea8','#d9c98a','#5a9e4f','#3c7a3a','#7a7466','#d8dde2','#0c0f16','#8d8578','#4a4340','#b7a878'];
+
+// ---------- utilities ----------
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+const dist = (ax,ay,bx,by)=>Math.hypot(ax-bx,ay-by);
+function hash2(x,y){ let n = Math.imul(x,374761393) + Math.imul(y,668265263) + SEED;
+  n = Math.imul(n ^ (n>>>13), 1274126177); return ((n ^ (n>>>16))>>>0) / 4294967296; }
+function vnoise(x,y){ const xi=Math.floor(x), yi=Math.floor(y), xf=x-xi, yf=y-yi;
+  const u=xf*xf*(3-2*xf), v=yf*yf*(3-2*yf);
+  return hash2(xi,yi)*(1-u)*(1-v)+hash2(xi+1,yi)*u*(1-v)+hash2(xi,yi+1)*(1-u)*v+hash2(xi+1,yi+1)*u*v; }
+function fbm(x,y){ return vnoise(x*.05,y*.05)*.6 + vnoise(x*.11,y*.11)*.28 + vnoise(x*.23,y*.23)*.12; }
+
+// ---------- audio ----------
+let AC=null, muted=false;
+function sfx(kind){
+  if(muted) return;
+  try{
+    if(!AC) AC = new (window.AudioContext||window.webkitAudioContext)();
+    const t=AC.currentTime;
+    const tones = { atk:[[220,.06]], hit:[[130,.08]], hurt:[[80,.18]], pick:[[660,.05],[880,.07]],
+      cook:[[523,.08],[659,.08],[784,.14]], orb:[[523,.1],[659,.1],[784,.1],[1046,.22]],
+      break:[[300,.05],[150,.14]], warp:[[880,.06],[440,.12]], boss:[[70,.4]] };
+    let dt=0;
+    (tones[kind]||[[440,.08]]).forEach(([f,d])=>{
+      const o=AC.createOscillator(), g=AC.createGain();
+      o.type = kind==='hurt'||kind==='boss' ? 'sawtooth' : 'square';
+      o.frequency.value=f; g.gain.setValueAtTime(.08,t+dt); g.gain.exponentialRampToValueAtTime(.001,t+dt+d);
+      o.connect(g); g.connect(AC.destination); o.start(t+dt); o.stop(t+dt+d); dt+=d*.85;
+    });
+  }catch(e){}
+}
+
+// ---------- data ----------
+const WPN = {
+  branch:{ n:'木の枝',       i:'🌿', d:1,   r:22, dur:12 },
+  club:  { n:'ボコこん棒',   i:'🏏', d:2,   r:22, dur:16 },
+  sword: { n:'旅人の剣',     i:'🗡️', d:3,   r:24, dur:22 },
+  spear: { n:'旅人の槍',     i:'🔱', d:2.5, r:34, dur:24 },
+  royal: { n:'王家の剣',     i:'⚔️', d:5,   r:24, dur:30 },
+  master:{ n:'マスターソード', i:'✨', d:8,   r:26, dur:-1 }, // -1 = 壊れない
+};
+const MAT = { apple:{n:'リンゴ',i:'🍎',heal:1}, mushroom:{n:'キノコ',i:'🍄',heal:1},
+              herb:{n:'ガンバリ草',i:'🌿',heal:.5}, meat:{n:'ケモノ肉',i:'🍖',heal:1.5} };
+const ETYPE = {
+  red:     { hp:3,  dmg:.5, spd:52, col:'#c0392b', r:7,  name:'赤ボコ',   drop:'club'  },
+  blue:    { hp:7,  dmg:1,  spd:58, col:'#2980b9', r:8,  name:'青ボコ',   drop:'sword' },
+  black:   { hp:12, dmg:1.5,spd:64, col:'#232c38', r:9,  name:'黒ボコ',   drop:'spear' },
+  stal:    { hp:2,  dmg:.5, spd:72, col:'#cfd6dd', r:7,  name:'スタルボコ', drop:null   },
+  guardian:{ hp:5,  dmg:1,  spd:42, col:'#8e44ad', r:8,  name:'小型ガーディアン', drop:null, shoot:true },
+  boss:    { hp:60, dmg:2,  spd:78, col:'#5a0d18', r:18, name:'厄災ガノス', drop:null, boss:true },
+};
+const CASTLE = { x:80, y:28 };
+// 祠: trial=試練の敵数(0=力の祠=即オーブ)  first=パラグライダー入手
+const SHRINE_DEF = [
+  { x:84,  y:142, trial:1, first:true, label:'始まりの祠' },
+  { x:40,  y:118, trial:0, label:'静寂の祠' },
+  { x:128, y:108, trial:3, label:'剛力の祠' },
+  { x:32,  y:62,  trial:0, label:'恵みの祠' },
+  { x:118, y:44,  trial:3, label:'覇気の祠' },
+  { x:60,  y:84,  trial:3, label:'試練の祠' },
+];
+const TOWER_DEF = [ { x:78, y:118, label:'平原の塔' }, { x:36, y:92, label:'西方の塔' }, { x:124, y:76, label:'東方の塔' } ];
+const CAMP_DEF = [
+  { x:72,  y:132, e:['red','red'],            loot:{weapon:'sword'} },
+  { x:50,  y:108, e:['red','red','blue'],     loot:{mat:{meat:3}} },
+  { x:108, y:118, e:['blue','blue'],          loot:{weapon:'spear'} },
+  { x:92,  y:96,  e:['black','black'],        loot:{weapon:'royal'} },   // ハイリスク・ハイリターン
+  { x:46,  y:52,  e:['blue','black'],         loot:{mat:{herb:4}} },
+  { x:104, y:56,  e:['blue','blue','blue'],   loot:{weapon:'royal'} },
+  { x:138, y:88,  e:['red','red','red'],      loot:{mat:{apple:4}} },
+  { x:26,  y:126, e:['red','red'],            loot:{mat:{mushroom:4}} },
+];
+const CAMPFIRE_DEF = [ [80,144],[78,120],[42,116],[126,106],[34,64],[116,46],[62,86],[38,94],[122,78] ];
+const PEDESTAL = { x:28, y:44, need:5 };  // マスターソード: ハート5以上
+const START = { x:80, y:146 };
+const START_CHEST = { x:79, y:144, loot:{weapon:'branch'} };
+const DAY_LEN = 300;                      // 1日=300秒(昼210秒/夜90秒)
+
+// ---------- world gen ----------
+const map = new Uint8Array(W*H);
+const ti = (x,y)=>y*W+x;
+function genWorld(){
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const nx=x/W-.5, ny=y/H-.5;
+    const edge = Math.pow(Math.max(Math.abs(nx),Math.abs(ny))*2, 3);
+    const e = fbm(x,y) - edge*.9 + .08;
+    const m = fbm(x+513,y+271);
+    let t;
+    if(e<.30) t=T.WATER; else if(e<.34) t=T.SAND;
+    else if(e>.80) t=T.SNOW; else if(e>.64) t=T.MTN;
+    else t = (m>.60 ? T.FOREST : T.GRASS);
+    map[ti(x,y)]=t;
+  }
+  // 魔王城 + 深淵の環 (滑空でしか渡れない)
+  const {x:cx,y:cy}=CASTLE;
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const r=dist(x,y,cx,cy);
+    if(r<=12) map[ti(x,y)]=T.FLOOR;
+    else if(r<=13.5) map[ti(x,y)] = (x>=78&&x<=82&&y>cy) ? T.FLOOR : T.WALL;
+    else if(r<15) map[ti(x,y)]=T.FLOOR;
+    else if(r<19) map[ti(x,y)]=T.CHASM;
+  }
+  // 各拠点の周囲を平地化
+  const flat=(fx,fy,rad)=>{ for(let y=fy-rad;y<=fy+rad;y++) for(let x=fx-rad;x<=fx+rad;x++){
+    if(x<1||y<1||x>=W-1||y>=H-1) continue;
+    if(dist(x,y,fx,fy)<=rad){ const t=map[ti(x,y)]; if(t!==T.FLOOR&&t!==T.WALL&&t!==T.CHASM) map[ti(x,y)]=T.GRASS; } } };
+  SHRINE_DEF.forEach(s=>flat(s.x,s.y,3));
+  TOWER_DEF.forEach(s=>flat(s.x,s.y,3));
+  CAMP_DEF.forEach(s=>flat(s.x,s.y,4));
+  CAMPFIRE_DEF.forEach(([x,y])=>flat(x,y,2));
+  flat(PEDESTAL.x,PEDESTAL.y,3); // 台座は森の中の広場に
+  for(let y=PEDESTAL.y-6;y<=PEDESTAL.y+6;y++) for(let x=PEDESTAL.x-6;x<=PEDESTAL.x+6;x++){
+    const r=dist(x,y,PEDESTAL.x,PEDESTAL.y);
+    if(r>3&&r<=6&&map[ti(x,y)]!==T.WATER) map[ti(x,y)]=T.FOREST;
+  }
+  flat(START.x,START.y,4);
+  // 城への一本道 (最短導線)
+  for(let y=47;y<=147;y++) for(let x=79;x<=81;x++){
+    const t=map[ti(x,y)];
+    if(t!==T.CHASM&&t!==T.FLOOR&&t!==T.WALL&&t!==T.WATER) map[ti(x,y)]=T.ROAD;
+  }
+}
+
+// 歩行モード判定
+function modeOf(t, hasGlider){
+  switch(t){
+    case T.GRASS: case T.SAND: case T.FOREST: case T.ROAD: case T.FLOOR: return 'walk';
+    case T.WATER: return 'swim';
+    case T.MTN: case T.SNOW: return 'climb';
+    case T.CHASM: return hasGlider ? 'glide' : 'block';
+    default: return 'block';
+  }
+}
+function tileAt(px,py){ const x=clamp(Math.floor(px/TS),0,W-1), y=clamp(Math.floor(py/TS),0,H-1); return map[ti(x,y)]; }
+
+// ---------- game state ----------
+let G=null;
+function newGame(){
+  G = {
+    started:false, over:false, ending:false, modal:null,
+    time: DAY_LEN*.25, day:1, weather:'sun', weatherT:70,
+    p: { x:START.x*TS+8, y:START.y*TS+8, r:6, fx:0, fy:-1,
+         hp:3, maxHp:3, st:100, maxSt:100,
+         inv:[], eq:0, mats:{apple:1,mushroom:0,herb:0,meat:0}, dishes:[],
+         orbs:0, glider:false, master:false,
+         atkT:0, atkCd:0, invulnT:0, buffT:0, mode:'walk',
+         safeX:START.x*TS+8, safeY:START.y*TS+8 },
+    shrines: SHRINE_DEF.map(s=>({...s, done:false, discovered:false })),
+    towers:  TOWER_DEF.map(t=>({...t, done:false, discovered:false })),
+    chests:  [ {...START_CHEST, opened:false},
+               ...CAMP_DEF.map((c,i)=>({x:c.x+1,y:c.y+1,loot:c.loot,opened:false,camp:i})) ],
+    pedestalTaken:false, bossDead:false,
+    checkpoint:{x:START.x*TS+8,y:START.y*TS+8},
+    revealed:new Uint8Array(20*20),
+    enemies:[], projectiles:[], pickups:[], fx:[],
+    trial:null, stalT:0, saveT:0, playT:0, kills:0,
+  };
+  spawnAllCamps();
+  spawnWanderers();
+  spawnForage();
+}
+function spawnEnemy(type, px, py, opt){
+  const d=ETYPE[type];
+  G.enemies.push({ type, x:px, y:py, hx:px, hy:py, hp:d.hp, r:d.r,
+    vx:0, vy:0, wt:0, wx:px, wy:py, atkCd:0, shootCd:2+hash2(px|0,py|0)*2,
+    hurtT:0, phase:0, ...opt });
+}
+function spawnAllCamps(){
+  G.enemies = G.enemies.filter(e=>e.camp===undefined);
+  CAMP_DEF.forEach((c,i)=>{ c.e.forEach((t,j)=>{
+    spawnEnemy(t, (c.x+ (j%3)-1)*TS+8, (c.y+Math.floor(j/3)-1)*TS+8, {camp:i}); }); });
+}
+function spawnWanderers(){
+  G.enemies = G.enemies.filter(e=>!e.wander);
+  for(let y=8;y<H-8;y+=7) for(let x=8;x<W-8;x+=7){
+    if(hash2(x*3,y*3)>=0.055) continue;
+    if(map[ti(x,y)]!==T.GRASS) continue;
+    if(dist(x,y,START.x,START.y)<14 || dist(x,y,CASTLE.x,CASTLE.y)<24) continue;
+    spawnEnemy(hash2(x,y*7)<.7?'red':'blue', x*TS+8, y*TS+8, {wander:true});
+  }
+}
+function spawnForage(){
+  G.pickups = G.pickups.filter(p=>p.type==='heart'||p.weapon);
+  for(let y=4;y<H-4;y+=3) for(let x=4;x<W-4;x+=3){
+    const h=hash2(x*11,y*13); if(h>=0.09) continue;
+    const t=map[ti(x,y)]; let type=null;
+    if(t===T.FOREST) type = h<.045?'apple':'mushroom';
+    else if(t===T.GRASS) type = h<.03?'herb':(h<.05?'apple':null);
+    if(type) G.pickups.push({x:x*TS+8,y:y*TS+8,type});
+  }
+}
+
+// ---------- save / load ----------
+function save(){
+  if(!G||G.over) return;
+  const p=G.p;
+  const data={ time:G.time, day:G.day, playT:G.playT, kills:G.kills, bossDead:G.bossDead,
+    p:{x:p.x,y:p.y,hp:p.hp,maxHp:p.maxHp,maxSt:p.maxSt,inv:p.inv,eq:p.eq,mats:p.mats,
+       dishes:p.dishes,orbs:p.orbs,glider:p.glider,master:p.master},
+    shrines:G.shrines.map(s=>[s.done,s.discovered]),
+    towers:G.towers.map(t=>[t.done,t.discovered]),
+    chests:G.chests.map(c=>c.opened), pedestalTaken:G.pedestalTaken,
+    checkpoint:G.checkpoint, revealed:Array.from(G.revealed) };
+  try{ localStorage.setItem(SAVE_KEY, JSON.stringify(data)); }catch(e){}
+}
+function load(){
+  let data; try{ data=JSON.parse(localStorage.getItem(SAVE_KEY)); }catch(e){ return false; }
+  if(!data) return false;
+  newGame();
+  Object.assign(G, { time:data.time, day:data.day, playT:data.playT||0, kills:data.kills||0, bossDead:!!data.bossDead });
+  Object.assign(G.p, data.p, { st:G.p.maxSt, safeX:data.p.x, safeY:data.p.y });
+  data.shrines.forEach((v,i)=>{ G.shrines[i].done=v[0]; G.shrines[i].discovered=v[1]; });
+  data.towers.forEach((v,i)=>{ G.towers[i].done=v[0]; G.towers[i].discovered=v[1]; });
+  data.chests.forEach((v,i)=>{ if(G.chests[i]) G.chests[i].opened=v; });
+  G.pedestalTaken=!!data.pedestalTaken; G.checkpoint=data.checkpoint;
+  G.revealed=Uint8Array.from(data.revealed||[]);
+  if(G.revealed.length!==400) G.revealed=new Uint8Array(400);
+  return true;
+}
+
+// ---------- messages / HUD ----------
+const $=id=>document.getElementById(id);
+const msgs=[];
+function msg(t){ msgs.push({t,life:4}); if(msgs.length>3) msgs.shift(); renderMsgs(); }
+function renderMsgs(){ $('msgbox').innerHTML = msgs.map(m=>`<div>${m.t}</div>`).join(''); }
+function heartsStr(){
+  const p=G.p; let s='';
+  for(let i=0;i<p.maxHp;i++){ s += p.hp>=i+1?'❤️':(p.hp>=i+.5?'💔':'🖤'); }
+  return s;
+}
+function updateHUD(){
+  const p=G.p;
+  $('hearts').textContent = heartsStr();
+  $('matbar').innerHTML = Object.keys(MAT).map(k=>`<span>${MAT[k].i}${p.mats[k]}</span>`).join('')
+    + `<span>🍲${p.dishes.length}</span><span>💠${p.orbs}</span>` + (p.glider?'<span>🪂</span>':'');
+  $('objective').textContent = objective();
+  $('weatherIcon').textContent = G.weather==='rain' ? '🌧️ 雨 — 崖が滑る' : '';
+  let wb='';
+  for(let i=0;i<5;i++){
+    const w=p.inv[i];
+    if(w){ const def=WPN[w.k];
+      const pct = def.dur<0?100:Math.round(w.dur/def.dur*100);
+      wb+=`<div class="wslot${i===p.eq?' eq':''}"><span class="key">${i+1}</span>${def.i}<div class="dur"><i style="width:${pct}%;background:${pct<30?'#e66':'#6c6'}"></i></div></div>`;
+    } else wb+=`<div class="wslot" style="opacity:.35"><span class="key">${i+1}</span>—</div>`;
+  }
+  $('weaponbar').innerHTML=wb;
+  const b=$('bufficon');
+  if(p.buffT>0){ b.style.display='block'; b.textContent=`💨 移動UP ${Math.ceil(p.buffT)}s`; }
+  else b.style.display='none';
+}
+function objective(){
+  if(G.bossDead) return '🎉 厄災は討たれた — 世界を自由に旅しよう';
+  if(!G.p.glider) return '⛩️ すぐ側の「始まりの祠」で試練を受けよ';
+  const s=G.shrines.filter(x=>x.done).length;
+  let o = s<6 ? `⛩️ 祠を巡り力を蓄えよ (${s}/6)` : '🏰 北の魔王城へ';
+  if(G.p.orbs>=2) o+=' ｜ 💠×2 → 女神の加護';
+  if(!G.pedestalTaken && G.p.maxHp>=PEDESTAL.need) o+=' ｜ ✨北西の森に伝説の剣が眠る…';
+  if(s>=3 && !G.bossDead) o+=' ｜ 🏰 深淵は🪂で滑空して渡れ';
+  return o;
+}
+
+// ---------- inventory ----------
+function giveWeapon(k){
+  const p=G.p, def=WPN[k];
+  if(p.inv.length>=5){ msg(`武器ポーチがいっぱいだ！ (${def.n} を諦めた)`); return false; }
+  p.inv.push({k, dur:def.dur<0?1:def.dur});
+  msg(`${def.i} ${def.n} を手に入れた！`); sfx('pick');
+  return true;
+}
+function giveLoot(loot){
+  if(loot.weapon) giveWeapon(loot.weapon);
+  if(loot.mat) for(const k in loot.mat){ G.p.mats[k]+=loot.mat[k]; msg(`${MAT[k].i} ${MAT[k].n} ×${loot.mat[k]} を手に入れた！`); sfx('pick'); }
+}
+function eat(){
+  const p=G.p;
+  if(p.hp>=p.maxHp && p.dishes.length===0){ msg('お腹はいっぱいだ'); return; }
+  if(p.dishes.length){
+    const d=p.dishes.shift();
+    p.hp=Math.min(p.maxHp,p.hp+d.heal);
+    if(d.buff){ p.buffT=30; msg(`🍲 ${d.name} を食べた！ ❤️+${d.heal} & 移動UP!`); }
+    else msg(`🍲 ${d.name} を食べた！ ❤️+${d.heal}`);
+    sfx('cook');
+  } else {
+    for(const k of ['apple','mushroom','meat','herb']){
+      if(p.mats[k]>0){ p.mats[k]--; p.hp=Math.min(p.maxHp,p.hp+MAT[k].heal*.5);
+        msg(`${MAT[k].i} ${MAT[k].n} を生でかじった (❤️+${MAT[k].heal*.5})… 料理した方が良さそうだ`); sfx('pick'); return; }
+    }
+    msg('食べ物がない… 野山で素材を集めよう');
+  }
+}
+function damagePlayer(d, srcX, srcY){
+  const p=G.p;
+  if(p.invulnT>0||G.over||G.ending) return;
+  p.hp -= d; p.invulnT=.9; sfx('hurt');
+  if(srcX!==undefined){ const dd=Math.max(1,dist(p.x,p.y,srcX,srcY));
+    p.x+=(p.x-srcX)/dd*14; p.y+=(p.y-srcY)/dd*14; }
+  if(p.hp<=0){ p.hp=0; gameOver(); }
+}
+function gameOver(){
+  G.over=true; sfx('boss');
+  openModal(`<h3>GAME OVER</h3><p>力尽きた…だが冒険は終わらない。</p>
+    <button class="big" onclick="respawn()">最後の拠点で復活する</button>`);
+}
+window.respawn=function(){
+  const p=G.p;
+  p.x=G.checkpoint.x; p.y=G.checkpoint.y; p.safeX=p.x; p.safeY=p.y;
+  p.hp=p.maxHp; p.st=p.maxSt; p.invulnT=2; G.over=false; G.trial=null;
+  G.enemies=G.enemies.filter(e=>!e.trial);
+  closeModal(); msg('拠点で目を覚ました');
+};
+
+// ---------- modal ----------
+function openModal(html){ G.modal=true; $('modalBox').innerHTML=html; $('modal').style.display='flex'; }
+function closeModal(){ G.modal=null; $('modal').style.display='none'; }
+window.closeModal=closeModal;
+
+// 料理
+let pot=[];
+window.openCook=function(){
+  pot=[];
+  renderCook();
+};
+function renderCook(){
+  const p=G.p;
+  const btns = Object.keys(MAT).map(k=>
+    `<button onclick="potAdd('${k}')" ${p.mats[k]<=0?'disabled style="opacity:.4"':''}>${MAT[k].i} ${MAT[k].n} ×${p.mats[k]}</button>`).join('');
+  openModal(`<h3>🔥 焚き火で料理</h3>
+    <p>素材を最大5つ鍋に入れよう（🌿入りは移動UP効果付き）</p>
+    <div>${btns}</div>
+    <div class="pot">🍳 ${pot.map(k=>MAT[k].i).join(' ')||'（からっぽ）'}</div>
+    <button class="big" onclick="cookIt()" ${pot.length===0?'disabled style="opacity:.4"':''}>料理する！</button>
+    <button onclick="closeModal()">やめる</button>`);
+}
+window.potAdd=function(k){
+  if(pot.length>=5||G.p.mats[k]<=0) return;
+  G.p.mats[k]--; pot.push(k); renderCook();
+};
+window.cookIt=function(){
+  const p=G.p;
+  if(!pot.length) return;
+  let heal=.5, buff=false, main=pot[0];
+  const cnt={};
+  pot.forEach(k=>{ heal+=MAT[k].heal; cnt[k]=(cnt[k]||0)+1; if(k==='herb') buff=true;
+    if(cnt[k]>(cnt[main]||0)) main=k; });
+  heal=Math.round(heal*2)/2;
+  const names={apple:'焼きリンゴ',mushroom:'キノコの串焼き',herb:'ガンバリ炒め',meat:'ケモノ肉の丸焼き'};
+  const name = pot.length>=4 ? `豪華な${names[main]}` : names[main];
+  if(p.dishes.length>=6){ msg('料理ポーチがいっぱいだ！'); pot.forEach(k=>p.mats[k]++); pot=[]; closeModal(); return; }
+  p.dishes.push({name, heal, buff});
+  sfx('cook'); msg(`🍲 ${name} が完成！ (❤️+${heal}${buff?' & 移動UP':''}) — Fキーで食べられる`);
+  pot=[]; closeModal();
+  G.checkpoint={x:p.x,y:p.y}; save();
+};
+
+// 女神の加護
+function checkGoddess(){
+  if(G.p.orbs<2) return;
+  openModal(`<h3>💠 女神の加護</h3><p>クリスタルオーブ2つを捧げ、力を授かろう</p>
+    <button class="big" onclick="bless('hp')">❤️ ハートの器 +1</button>
+    <button class="big" onclick="bless('st')">💚 がんばりゲージ +25%</button>
+    <button onclick="closeModal()">まだ取っておく</button>`);
+}
+window.bless=function(kind){
+  const p=G.p;
+  if(p.orbs<2) return;
+  p.orbs-=2;
+  if(kind==='hp'){ p.maxHp=Math.min(10,p.maxHp+1); p.hp=p.maxHp; msg('❤️ ハートの器が増えた！'); }
+  else { p.maxSt=Math.min(200,p.maxSt+25); p.st=p.maxSt; msg('💚 がんばりゲージが伸びた！'); }
+  sfx('orb'); closeModal(); save();
+  if(p.orbs>=2) setTimeout(checkGoddess, 400);
+};
+
+// マップ & ワープ
+window.openMap=function(){
+  openModal(`<h3>🗺️ マップ</h3>
+    <canvas id="mapcanvas" width="480" height="480"></canvas>
+    <p style="font-size:12px">起動済みの ⛩️祠 / 🗼塔 をクリックでワープ ｜ 塔を起動すると周辺の地図が開放される</p>
+    <button onclick="closeModal()">閉じる (M)</button>`);
+  const mc=$('mapcanvas'), mx=mc.getContext('2d');
+  const sc=3;
+  mx.fillStyle='#04070d'; mx.fillRect(0,0,480,480);
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    if(!G.revealed[Math.floor(y/8)*20+Math.floor(x/8)]) continue;
+    mx.fillStyle=TILE_COL[map[ti(x,y)]];
+    mx.fillRect(x*sc,y*sc,sc,sc);
+  }
+  mx.font='16px serif'; mx.textAlign='center'; mx.textBaseline='middle';
+  const mark=(x,y,ch)=>mx.fillText(ch,x*sc,y*sc);
+  G.shrines.forEach(s=>{ if(s.discovered) mark(s.x,s.y, s.done?'⛩️':'🔸'); });
+  G.towers.forEach(t=>{ if(t.discovered) mark(t.x,t.y,'🗼'); });
+  if(G.revealed[Math.floor(CASTLE.y/8)*20+Math.floor(CASTLE.x/8)]) mark(CASTLE.x,CASTLE.y,'🏰');
+  mark(G.p.x/TS, G.p.y/TS, '🔻');
+  mc.onclick=(ev)=>{
+    const rc=mc.getBoundingClientRect();
+    const px=(ev.clientX-rc.left)/rc.width*480/sc, py=(ev.clientY-rc.top)/rc.height*480/sc;
+    const targets=[...G.shrines.filter(s=>s.done),...G.towers.filter(t=>t.done)];
+    let best=null,bd=6;
+    targets.forEach(t=>{ const d=dist(px,py,t.x,t.y); if(d<bd){bd=d;best=t;} });
+    if(best){
+      G.p.x=best.x*TS+8; G.p.y=(best.y+2)*TS+8; G.p.safeX=G.p.x; G.p.safeY=G.p.y;
+      G.checkpoint={x:G.p.x,y:G.p.y};
+      sfx('warp'); msg(`🪄 ${best.label} へワープした`); closeModal();
+    }
+  };
+};
+
+// ---------- interactions (E) ----------
+function interact(){
+  const p=G.p, tx=p.x/TS, ty=p.y/TS;
+  // 宝箱
+  for(const c of G.chests){
+    if(!c.opened && dist(tx,ty,c.x,c.y)<2.2){
+      c.opened=true; giveLoot(c.loot); save(); return;
+    }
+  }
+  // 祠
+  for(const s of G.shrines){
+    if(dist(tx,ty,s.x,s.y)<2.8){
+      if(s.done){ msg(`${s.label} — 静かに佇んでいる`); return; }
+      if(G.trial){ msg('今は試練の最中だ！'); return; }
+      if(s.trial===0){ shrineComplete(s); }
+      else {
+        G.trial={shrine:s, left:s.trial};
+        for(let i=0;i<s.trial;i++){
+          const a=Math.PI*2*i/s.trial;
+          spawnEnemy('guardian', (s.x+Math.cos(a)*4)*TS, (s.y+Math.sin(a)*4)*TS, {trial:true});
+        }
+        msg(`⚡ ${s.label} の試練開始！ ガーディアンを${s.trial}体倒せ！`); sfx('boss');
+      }
+      return;
+    }
+  }
+  // 塔
+  for(const t of G.towers){
+    if(dist(tx,ty,t.x,t.y)<2.8){
+      if(t.done){ msg(`${t.label} — 風が心地よい`); return; }
+      t.done=true;
+      const cx=Math.floor(t.x/8), cy=Math.floor(t.y/8);
+      for(let y=cy-5;y<=cy+5;y++) for(let x=cx-5;x<=cx+5;x++)
+        if(x>=0&&y>=0&&x<20&&y<20) G.revealed[y*20+x]=1;
+      G.checkpoint={x:p.x,y:p.y};
+      sfx('orb'); msg(`🗼 ${t.label} を起動！ 周辺の地図が開放された (Mキーで確認/ワープ可)`);
+      save(); return;
+    }
+  }
+  // 焚き火
+  for(const [fx,fy] of CAMPFIRE_DEF){
+    if(dist(tx,ty,fx,fy)<2.2){ openCook(); return; }
+  }
+  // マスターソードの台座
+  if(!G.pedestalTaken && dist(tx,ty,PEDESTAL.x,PEDESTAL.y)<2){
+    if(p.maxHp>=PEDESTAL.need){
+      if(giveWeapon('master')){ G.pedestalTaken=true; p.master=true; sfx('orb');
+        msg('✨ 退魔の剣 マスターソード！ 決して壊れない伝説の剣だ！'); save(); }
+    } else msg(`台座の剣はビクともしない… (❤️の器 ${PEDESTAL.need} 以上の勇気が必要だ)`);
+    return;
+  }
+  msg('何もない… (E: 宝箱/祠/塔/焚き火を調べる)');
+}
+function shrineComplete(s){
+  s.done=true; G.trial=null; G.p.orbs++;
+  G.checkpoint={x:s.x*TS+8,y:(s.y+2)*TS+8};
+  sfx('orb');
+  if(s.first && !G.p.glider){
+    G.p.glider=true;
+    msg('🪂 パラグライダーを手に入れた！ 深淵の上も がんばりの続く限り滑空できる！');
+  }
+  msg(`⛩️ ${s.label} 制覇！ 💠クリスタルオーブ を授かった (${G.p.orbs}個)`);
+  save();
+  if(G.p.orbs>=2) setTimeout(checkGoddess, 600);
+}
+
+// ---------- combat ----------
+function playerAttack(){
+  const p=G.p;
+  if(p.atkCd>0||G.modal||G.over) return;
+  if(p.mode!=='walk'){ msg(p.mode==='glide'?'滑空中は攻撃できない！':'今は攻撃できない！'); return; }
+  const w=p.inv[p.eq], def=w?WPN[w.k]:null;
+  const dmg=def?def.d:1, range=def?def.r:18;
+  p.atkT=.18; p.atkCd=.38; sfx('atk');
+  let hit=false;
+  // 敵へ
+  for(const e of G.enemies){
+    const d=dist(p.x,p.y,e.x,e.y);
+    if(d<range+e.r+4){
+      const dx=(e.x-p.x)/Math.max(1,d), dy=(e.y-p.y)/Math.max(1,d);
+      if(dx*p.fx+dy*p.fy>.25){
+        e.hp-=dmg; e.hurtT=.15; e.vx+=dx*160; e.vy+=dy*160; hit=true; sfx('hit');
+      }
+    }
+  }
+  if(hit&&def&&def.dur>0){
+    w.dur--;
+    if(w.dur<=0){ msg(`💥 ${def.n} は壊れてしまった！`); sfx('break');
+      p.inv.splice(p.eq,1); p.eq=Math.min(p.eq,Math.max(0,p.inv.length-1)); }
+  }
+}
+function killEnemy(e){
+  G.kills++;
+  const d=ETYPE[e.type];
+  if(e.trial && G.trial){
+    G.trial.left--;
+    if(G.trial.left<=0) shrineComplete(G.trial.shrine);
+    else msg(`ガーディアン撃破！ 残り${G.trial.left}体！`);
+    return;
+  }
+  if(e.type==='boss'){ bossDefeated(); return; }
+  const r=hash2(e.x|0,e.y|0);
+  if(r<.5) G.pickups.push({x:e.x,y:e.y,type:'meat'});
+  else if(r<.62) G.pickups.push({x:e.x,y:e.y,type:'heart'});
+  else if(r<.8 && d.drop) G.pickups.push({x:e.x,y:e.y,weapon:d.drop,type:'weapon'});
+}
+function bossDefeated(){
+  G.bossDead=true; G.ending=true; sfx('orb'); save();
+  const mins=Math.floor(G.playT/60);
+  openModal(`<h3>🎉 厄災ガノス 討伐！</h3>
+    <p>大地に光が戻り、100年の厄災は終わりを告げた。<br>君の冒険が世界を救ったのだ。</p>
+    <p style="margin-top:10px">プレイ時間: ${mins}分 ｜ 祠制覇: ${G.shrines.filter(s=>s.done).length}/6 ｜
+       塔起動: ${G.towers.filter(t=>t.done).length}/3 ｜ 討伐数: ${G.kills}<br>
+       ❤️の器: ${G.p.maxHp} ｜ マスターソード: ${G.p.master?'入手':'未入手'}</p>
+    <button class="big" onclick="G.ending=false;closeModal()">世界を旅し続ける</button>
+    <button onclick="localStorage.removeItem('${SAVE_KEY}');location.reload()">最初から</button>`);
+}
+
+// ---------- update ----------
+const keys={};
+function input(dir){ return keys[dir]?1:0; }
+function update(dt){
+  const p=G.p;
+  G.playT+=dt;
+  // --- 時刻・天候 ---
+  G.time+=dt;
+  if(G.time>=DAY_LEN){
+    G.time-=DAY_LEN; G.day++;
+    spawnForage();
+    G.enemies=G.enemies.filter(e=>e.type!=='stal');
+    if(G.day%3===1 && G.day>1){ spawnAllCamps(); spawnWanderers(); msg('🌕 赤き月が昇り、魔物たちが蘇った…'); sfx('boss'); }
+    else msg(`☀️ ${G.day}日目の朝が来た`);
+  }
+  const tod=G.time/DAY_LEN, night=tod>.7;
+  G.weatherT-=dt;
+  if(G.weatherT<=0){
+    if(G.weather==='sun'){ G.weather='rain'; G.weatherT=22+hash2(G.day,G.time|0)*10; msg('🌧️ 雨が降ってきた… 崖登りは危険だ'); }
+    else { G.weather='sun'; G.weatherT=60+hash2(G.time|0,G.day)*80; msg('☀️ 雨が上がった'); }
+  }
+  // --- プレイヤー移動 ---
+  let mx=input('right')-input('left'), my=input('down')-input('up');
+  if(mx&&my){ mx*=.707; my*=.707; }
+  if(mx||my){ p.fx=mx; p.fy=my; const l=Math.hypot(p.fx,p.fy); p.fx/=l; p.fy/=l; }
+  const curTile=tileAt(p.x,p.y);
+  p.mode=modeOf(curTile,p.glider);
+  let spd=88;
+  if(curTile===T.FOREST) spd*=.82;
+  if(p.buffT>0) spd*=1.18;
+  const dashing = keys.dash && p.mode==='walk' && p.st>1 && (mx||my);
+  if(dashing) spd*=1.75;
+  if(p.mode==='swim') spd*=.55;
+  if(p.mode==='climb') spd*=.45;
+  if(p.mode==='glide') spd*=1.25;
+  // 移動 (軸別衝突)
+  const step=(dx,dy)=>{
+    const nx=p.x+dx, ny=p.y+dy;
+    const pts=[[nx-5,ny-5],[nx+5,ny-5],[nx-5,ny+5],[nx+5,ny+5]];
+    for(const [qx,qy] of pts){
+      if(qx<TS||qy<TS||qx>(W-1)*TS||qy>(H-1)*TS) return;
+      if(modeOf(tileAt(qx,qy),p.glider)==='block') return;
+    }
+    p.x=nx; p.y=ny;
+  };
+  step(mx*spd*dt,0); step(0,my*spd*dt);
+  // --- がんばりゲージ ---
+  const rainMul=G.weather==='rain'?2.2:1;
+  let drain=0;
+  if(p.mode==='swim') drain=12;
+  else if(p.mode==='climb') drain=15*rainMul;
+  else if(p.mode==='glide') drain=18;
+  else if(dashing) drain=22;
+  if(drain>0) p.st-=drain*dt;
+  else if(p.mode==='walk') p.st=Math.min(p.maxSt,p.st+34*dt);
+  if(p.mode==='walk'&&!dashing){ p.safeX=p.x; p.safeY=p.y; }
+  if(p.st<=0 && p.mode!=='walk'){
+    // 力尽きて落下/溺れ → 直前の安全地点へ
+    p.x=p.safeX; p.y=p.safeY; p.st=25;
+    damagePlayer(p.mode==='glide'?1:.5);
+    msg(p.mode==='glide'?'💫 深淵に落ちかけた！':(p.mode==='swim'?'💫 溺れかけた！':'💫 崖から滑り落ちた！'));
+  }
+  p.atkT=Math.max(0,p.atkT-dt); p.atkCd=Math.max(0,p.atkCd-dt);
+  p.invulnT=Math.max(0,p.invulnT-dt); p.buffT=Math.max(0,p.buffT-dt);
+  // マップ開放(踏破)
+  const chx=Math.floor(p.x/TS/8), chy=Math.floor(p.y/TS/8);
+  for(let y=chy-1;y<=chy+1;y++) for(let x=chx-1;x<=chx+1;x++)
+    if(x>=0&&y>=0&&x<20&&y<20) G.revealed[y*20+x]=1;
+  // 拠点発見
+  const ptx=p.x/TS, pty=p.y/TS;
+  for(const s of G.shrines) if(!s.discovered && dist(ptx,pty,s.x,s.y)<7){ s.discovered=true; msg(`⛩️ ${s.label} を発見した！`); sfx('pick'); }
+  for(const t of G.towers) if(!t.discovered && dist(ptx,pty,t.x,t.y)<7){ t.discovered=true; msg(`🗼 ${t.label} を発見した！`); sfx('pick'); }
+  // --- 拾い物 ---
+  for(let i=G.pickups.length-1;i>=0;i--){
+    const it=G.pickups[i];
+    if(dist(p.x,p.y,it.x,it.y)<14){
+      if(it.type==='heart'){ if(p.hp>=p.maxHp) continue; p.hp=Math.min(p.maxHp,p.hp+1); msg('❤️ 回復した'); }
+      else if(it.weapon){ if(p.inv.length>=5) continue; giveWeapon(it.weapon); }
+      else { p.mats[it.type]++; }
+      sfx('pick'); G.pickups.splice(i,1);
+    }
+  }
+  // --- 夜のスタル ---
+  if(night && !G.bossDead){
+    G.stalT-=dt;
+    if(G.stalT<=0 && G.enemies.filter(e=>e.type==='stal').length<4){
+      G.stalT=7;
+      const a=hash2(G.time*97|0,G.day)*Math.PI*2;
+      const sx=p.x+Math.cos(a)*260, sy=p.y+Math.sin(a)*260;
+      if(modeOf(tileAt(sx,sy),false)==='walk') spawnEnemy('stal',sx,sy,{});
+    }
+  }
+  // --- 敵 ---
+  for(let i=G.enemies.length-1;i>=0;i--){
+    const e=G.enemies[i], d=ETYPE[e.type];
+    e.hurtT=Math.max(0,e.hurtT-dt); e.atkCd=Math.max(0,e.atkCd-dt);
+    // ノックバック減衰
+    e.x+=e.vx*dt; e.y+=e.vy*dt; e.vx*=Math.pow(.02,dt); e.vy*=Math.pow(.02,dt);
+    if(e.hp<=0){ killEnemy(e); G.enemies.splice(i,1); continue; }
+    const dp=dist(e.x,e.y,p.x,p.y);
+    if(dp>900) continue; // 遠くは休眠
+    const sight = e.trial?9999 : (night?170:130);
+    let tx=null,ty=null;
+    if(e.type==='boss'){
+      if(dp<190||e.phase>0){
+        e.phase=Math.max(e.phase,1);
+        tx=p.x; ty=p.y;
+        e.shootCd-=dt;
+        if(e.hp<ETYPE.boss.hp*.55 && e.shootCd<=0){
+          e.shootCd=3.2;
+          for(let k=0;k<8;k++){ const a=Math.PI*2*k/8+G.time;
+            G.projectiles.push({x:e.x,y:e.y,vx:Math.cos(a)*95,vy:Math.sin(a)*95,life:3.5,r:5}); }
+          sfx('boss');
+        }
+      }
+    } else if(dp<sight || e.trial){
+      tx=p.x; ty=p.y;
+      if(d.shoot){ e.shootCd-=dt;
+        if(e.shootCd<=0 && dp<230){ e.shootCd=2.8;
+          const dd=Math.max(1,dp);
+          G.projectiles.push({x:e.x,y:e.y,vx:(p.x-e.x)/dd*120,vy:(p.y-e.y)/dd*120,life:2.5,r:4}); } }
+    } else {
+      e.wt-=dt;
+      if(e.wt<=0){ e.wt=2+hash2(e.x|0,e.y|0)*2;
+        const a=hash2((e.x*7)|0,(G.time*13)|0)*Math.PI*2;
+        e.wx=e.hx+Math.cos(a)*40; e.wy=e.hy+Math.sin(a)*40; }
+      if(dist(e.x,e.y,e.wx,e.wy)>6){ tx=e.wx; ty=e.wy; }
+    }
+    if(tx!==null){
+      const dd=Math.max(1,dist(e.x,e.y,tx,ty));
+      const evx=(tx-e.x)/dd*d.spd*dt, evy=(ty-e.y)/dd*d.spd*dt;
+      const emove=(dx,dy)=>{ const m=modeOf(tileAt(e.x+dx,e.y+dy),false);
+        if(m==='walk'){ e.x+=dx; e.y+=dy; return true; } return false; };
+      if(!emove(evx,evy)){ if(!emove(evx,0)) emove(0,evy); }
+    }
+    if(dp < e.r+p.r+7 && e.atkCd<=0){
+      e.atkCd = e.type==='boss'?1.0:1.3;
+      damagePlayer(d.dmg,e.x,e.y);
+    }
+  }
+  // --- 弾 ---
+  for(let i=G.projectiles.length-1;i>=0;i--){
+    const pr=G.projectiles[i];
+    pr.x+=pr.vx*dt; pr.y+=pr.vy*dt; pr.life-=dt;
+    if(pr.life<=0){ G.projectiles.splice(i,1); continue; }
+    if(dist(pr.x,pr.y,p.x,p.y)<pr.r+p.r){ damagePlayer(1,pr.x,pr.y); G.projectiles.splice(i,1); }
+  }
+  // --- メッセージ寿命 / autosave ---
+  for(let i=msgs.length-1;i>=0;i--){ msgs[i].life-=dt; if(msgs[i].life<=0){ msgs.splice(i,1); renderMsgs(); } }
+  G.saveT+=dt; if(G.saveT>25){ G.saveT=0; save(); }
+  updateHUD();
+}
+
+// ---------- render ----------
+const cv=$('game'), cx=cv.getContext('2d');
+const mmCv=$('minimap'), mmCx=mmCv.getContext('2d');
+let worldCv=null;
+function bakeWorld(){
+  worldCv=document.createElement('canvas');
+  worldCv.width=W*TS; worldCv.height=H*TS;
+  const w=worldCv.getContext('2d');
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const t=map[ti(x,y)];
+    w.fillStyle=TILE_COL[t];
+    w.fillRect(x*TS,y*TS,TS,TS);
+    const h=hash2(x*5,y*5);
+    if(t===T.GRASS&&h<.3){ w.fillStyle='rgba(255,255,255,.05)'; w.fillRect(x*TS+4,y*TS+4,3,3); }
+    if(t===T.WATER&&h<.25){ w.fillStyle='rgba(255,255,255,.12)'; w.fillRect(x*TS+2,y*TS+7,8,2); }
+    if(t===T.FOREST){ // 木
+      w.fillStyle='#2c5c2a'; w.beginPath();
+      w.moveTo(x*TS+8,y*TS+1); w.lineTo(x*TS+14,y*TS+12); w.lineTo(x*TS+2,y*TS+12); w.fill();
+      w.fillStyle='#5d4023'; w.fillRect(x*TS+7,y*TS+12,2,3);
+    }
+    if(t===T.MTN){ w.fillStyle=h<.5?'#6b6558':'#847d6e';
+      w.beginPath(); w.moveTo(x*TS+8,y*TS+2); w.lineTo(x*TS+15,y*TS+14); w.lineTo(x*TS+1,y*TS+14); w.fill(); }
+    if(t===T.SNOW){ w.fillStyle='#b9c2cc';
+      w.beginPath(); w.moveTo(x*TS+8,y*TS+2); w.lineTo(x*TS+15,y*TS+14); w.lineTo(x*TS+1,y*TS+14); w.fill();
+      w.fillStyle='#f2f6fa'; w.beginPath(); w.moveTo(x*TS+8,y*TS+2); w.lineTo(x*TS+11,y*TS+7); w.lineTo(x*TS+5,y*TS+7); w.fill(); }
+    if(t===T.WALL){ w.fillStyle='#3a332f'; w.fillRect(x*TS,y*TS,TS,3); w.fillRect(x*TS,y*TS+8,TS,2); }
+    if(t===T.CHASM&&h<.3){ w.fillStyle='rgba(120,40,150,.25)'; w.fillRect(x*TS+6,y*TS+6,4,4); }
+    if(t===T.FLOOR&&h<.2){ w.fillStyle='rgba(0,0,0,.08)'; w.fillRect(x*TS,y*TS,TS,TS); }
+  }
+}
+function render(){
+  const p=G.p;
+  const camX=clamp(p.x-VW/2,0,W*TS-VW), camY=clamp(p.y-VH/2,0,H*TS-VH);
+  cx.drawImage(worldCv,camX,camY,VW,VH,0,0,VW,VH);
+  cx.save(); cx.translate(-camX,-camY);
+  cx.font='16px serif'; cx.textAlign='center'; cx.textBaseline='middle';
+  const vis=(x,y)=>x>camX-40&&x<camX+VW+40&&y>camY-40&&y<camY+VH+40;
+  // 拠点
+  for(const [fx,fy] of CAMPFIRE_DEF){
+    const px=fx*TS+8,py=fy*TS+8; if(!vis(px,py)) continue;
+    cx.fillText((G.time*4|0)%2?'🔥':'🔥',px,py-2);
+    cx.fillStyle='rgba(0,0,0,.3)'; cx.beginPath(); cx.ellipse(px,py+6,7,3,0,0,7); cx.fill();
+  }
+  for(const s of G.shrines){
+    const px=s.x*TS+8,py=s.y*TS+8; if(!vis(px,py)) continue;
+    if(!s.done){ cx.fillStyle='rgba(255,150,40,.25)'; cx.beginPath(); cx.arc(px,py,16+Math.sin(G.time*3)*3,0,7); cx.fill(); }
+    cx.font='22px serif'; cx.fillText('⛩️',px,py-4); cx.font='16px serif';
+  }
+  for(const t of G.towers){
+    const px=t.x*TS+8,py=t.y*TS+8; if(!vis(px,py)) continue;
+    cx.fillStyle=t.done?'#3aa0ff':'#666';
+    cx.fillRect(px-5,py-22,10,26);
+    cx.fillStyle=t.done?'#8fd0ff':'#999'; cx.fillRect(px-8,py-26,16,6);
+    if(!t.done){ cx.fillStyle='rgba(255,180,60,.9)'; cx.font='11px sans-serif'; cx.fillText('E',px,py-31); cx.font='16px serif'; }
+  }
+  for(const c of G.chests){
+    const px=c.x*TS+8,py=c.y*TS+8; if(!vis(px,py)) continue;
+    cx.fillText(c.opened?'🟫':'🧰',px,py-2);
+  }
+  if(!G.pedestalTaken){
+    const px=PEDESTAL.x*TS+8,py=PEDESTAL.y*TS+8;
+    if(vis(px,py)){
+      cx.fillStyle='rgba(140,220,255,.3)'; cx.beginPath(); cx.arc(px,py,18+Math.sin(G.time*2)*4,0,7); cx.fill();
+      cx.fillText('🗡️',px,py-6); cx.fillStyle='#8d8578'; cx.fillRect(px-8,py+2,16,5);
+    }
+  }
+  // 拾い物
+  const ICON={apple:'🍎',mushroom:'🍄',herb:'🌿',meat:'🍖',heart:'❤️',weapon:''};
+  for(const it of G.pickups){
+    if(!vis(it.x,it.y)) continue;
+    const bob=Math.sin(G.time*4+it.x)*2;
+    cx.font='13px serif';
+    cx.fillText(it.weapon?WPN[it.weapon].i:ICON[it.type], it.x, it.y+bob);
+  }
+  cx.font='16px serif';
+  // 敵
+  for(const e of G.enemies){
+    if(!vis(e.x,e.y)) continue;
+    const d=ETYPE[e.type];
+    cx.fillStyle='rgba(0,0,0,.3)'; cx.beginPath(); cx.ellipse(e.x,e.y+e.r*.8,e.r*.9,e.r*.35,0,0,7); cx.fill();
+    cx.fillStyle=e.hurtT>0?'#fff':d.col;
+    cx.beginPath(); cx.arc(e.x,e.y,e.r,0,7); cx.fill();
+    if(e.type==='boss'){
+      cx.fillStyle='#ff3b3b'; cx.beginPath(); cx.arc(e.x-6,e.y-4,3,0,7); cx.arc(e.x+6,e.y-4,3,0,7); cx.fill();
+      cx.strokeStyle='#a06'; cx.lineWidth=2;
+      for(let k=0;k<5;k++){ const a=G.time*1.5+k*1.26; cx.beginPath();
+        cx.moveTo(e.x+Math.cos(a)*e.r,e.y+Math.sin(a)*e.r);
+        cx.lineTo(e.x+Math.cos(a)*(e.r+9),e.y+Math.sin(a)*(e.r+9)); cx.stroke(); }
+    } else {
+      cx.fillStyle='#fff'; cx.beginPath(); cx.arc(e.x-2.5,e.y-2,1.8,0,7); cx.arc(e.x+2.5,e.y-2,1.8,0,7); cx.fill();
+    }
+    if(e.hp<d.hp){
+      cx.fillStyle='#000a'; cx.fillRect(e.x-10,e.y-e.r-8,20,3);
+      cx.fillStyle='#e55'; cx.fillRect(e.x-10,e.y-e.r-8,20*e.hp/d.hp,3);
+    }
+  }
+  // 弾
+  cx.fillStyle='#c26bff';
+  for(const pr of G.projectiles){ cx.beginPath(); cx.arc(pr.x,pr.y,pr.r,0,7); cx.fill(); }
+  // プレイヤー
+  if(!(p.invulnT>0 && (G.playT*14|0)%2)){
+    cx.fillStyle='rgba(0,0,0,.3)'; cx.beginPath(); cx.ellipse(p.x,p.y+6,6,2.5,0,0,7); cx.fill();
+    if(p.mode==='glide'){
+      cx.fillStyle='#d43'; cx.beginPath(); cx.ellipse(p.x,p.y-11,12,4,0,0,7); cx.fill();
+      cx.strokeStyle='#a32'; cx.beginPath(); cx.moveTo(p.x-9,p.y-9); cx.lineTo(p.x,p.y-2);
+      cx.lineTo(p.x+9,p.y-9); cx.stroke();
+    }
+    cx.fillStyle = p.mode==='swim' ? '#2f6f8f' : '#2f8f4f';
+    cx.beginPath(); cx.arc(p.x,p.y,6,0,7); cx.fill();
+    cx.fillStyle='#f5c98f'; cx.beginPath(); cx.arc(p.x,p.y-5,4,0,7); cx.fill();
+    cx.fillStyle='#2f8f4f'; cx.beginPath(); cx.moveTo(p.x-4,p.y-7); cx.lineTo(p.x+4,p.y-7); cx.lineTo(p.x,p.y-13); cx.fill();
+    // 剣振り
+    if(p.atkT>0){
+      const w=p.inv[p.eq], range=(w?WPN[w.k].r:18);
+      cx.strokeStyle='rgba(255,255,255,.9)'; cx.lineWidth=3;
+      const base=Math.atan2(p.fy,p.fx), sw=(1-p.atkT/.18)*2-1;
+      cx.beginPath(); cx.arc(p.x,p.y,range,base-0.9,base+0.9); cx.stroke();
+      cx.lineWidth=1; cx.beginPath(); cx.moveTo(p.x,p.y);
+      cx.lineTo(p.x+Math.cos(base+sw*.7)*range,p.y+Math.sin(base+sw*.7)*range); cx.stroke();
+    }
+  }
+  // がんばりゲージ (プレイヤー横に円形表示)
+  if(p.st<p.maxSt-0.5){
+    const gx=p.x+18,gy=p.y-14;
+    cx.strokeStyle='rgba(0,0,0,.5)'; cx.lineWidth=5; cx.beginPath(); cx.arc(gx,gy,9,0,7); cx.stroke();
+    cx.strokeStyle = p.st<25 ? '#ff5b5b' : '#8be86b'; cx.lineWidth=4;
+    cx.beginPath(); cx.arc(gx,gy,9,-Math.PI/2,-Math.PI/2+Math.PI*2*(p.st/p.maxSt)); cx.stroke();
+  }
+  cx.restore();
+  // 天候・夜
+  const tod=G.time/DAY_LEN;
+  let dark=0;
+  if(tod>.7) dark=Math.min(.55,(tod-.7)/.06*.55);
+  if(tod>.96) dark=Math.max(0,.55-(tod-.96)/.04*.55);
+  if(dark>0){ cx.fillStyle=`rgba(8,10,40,${dark})`; cx.fillRect(0,0,VW,VH); }
+  if(G.weather==='rain'){
+    cx.strokeStyle='rgba(170,200,255,.35)'; cx.lineWidth=1;
+    for(let i=0;i<60;i++){
+      const rx=(hash2(i,3)*VW+G.playT*220)%VW, ry=(hash2(i,9)*VH+G.playT*480)%VH;
+      cx.beginPath(); cx.moveTo(rx,ry); cx.lineTo(rx-3,ry+11); cx.stroke();
+    }
+    cx.fillStyle='rgba(30,40,70,.13)'; cx.fillRect(0,0,VW,VH);
+  }
+  renderMinimap();
+}
+let mmWorld=null;
+function renderMinimap(){
+  if(!mmWorld){
+    mmWorld=document.createElement('canvas'); mmWorld.width=W; mmWorld.height=H;
+    const m=mmWorld.getContext('2d');
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++){ m.fillStyle=TILE_COL[map[ti(x,y)]]; m.fillRect(x,y,1,1); }
+  }
+  const p=G.p, R=33; // 66x66タイル表示
+  const sx=clamp(p.x/TS-R,0,W-R*2), sy=clamp(p.y/TS-R,0,H-R*2);
+  mmCx.imageSmoothingEnabled=false;
+  mmCx.drawImage(mmWorld,sx,sy,R*2,R*2,0,0,132,132);
+  const dot=(tx,ty,col,s)=>{ const x=(tx-sx)*2,y=(ty-sy)*2;
+    if(x<0||y<0||x>132||y>132) return;
+    mmCx.fillStyle=col; mmCx.fillRect(x-s/2,y-s/2,s,s); };
+  G.shrines.forEach(s=>{ if(s.discovered) dot(s.x,s.y,s.done?'#ffb74a':'#ff7043',5); });
+  G.towers.forEach(t=>dot(t.x,t.y,t.done?'#4ac3ff':'#9aa5b1',5));
+  dot(CASTLE.x,CASTLE.y,'#c2185b',6);
+  dot(p.x/TS,p.y/TS,'#fff',4);
+}
+
+// ---------- input ----------
+const KEYMAP={ ArrowUp:'up',KeyW:'up',ArrowDown:'down',KeyS:'down',
+  ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',
+  ShiftLeft:'dash',ShiftRight:'dash' };
+addEventListener('keydown',e=>{
+  if(!G||!G.started) return;
+  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code)) e.preventDefault();
+  const k=KEYMAP[e.code]; if(k) keys[k]=true;
+  if(G.modal){ if(e.code==='Escape'||(e.code==='KeyM'&&$('mapcanvas'))) closeModal(); return; }
+  if(G.over) return;
+  if(e.code==='Space'||e.code==='KeyJ') playerAttack();
+  else if(e.code==='KeyE'||e.code==='KeyK') interact();
+  else if(e.code==='KeyF') eat();
+  else if(e.code==='KeyM') openMap();
+  else if(e.code==='KeyQ') { if(G.p.inv.length) G.p.eq=(G.p.eq+1)%G.p.inv.length; }
+  else if(/^Digit[1-5]$/.test(e.code)){ const n=+e.code.slice(5)-1; if(G.p.inv[n]) G.p.eq=n; }
+});
+addEventListener('keyup',e=>{ const k=KEYMAP[e.code]; if(k) keys[k]=false; });
+
+// ---------- boot / loop ----------
+function fitScreen(){
+  const s=Math.min(innerWidth/VW,innerHeight/VH);
+  const w=$('wrap');
+  w.style.transform=`translate(-50%,-50%) scale(${s})`;
+}
+addEventListener('resize',fitScreen); fitScreen();
+
+let last=0;
+function loop(t){
+  requestAnimationFrame(loop);
+  const dt=Math.min(.05,(t-last)/1000); last=t;
+  if(!G||!G.started) return;
+  if(!G.modal&&!G.over) update(dt);
+  render();
+}
+requestAnimationFrame(loop);
+
+function startGame(cont){
+  genWorldOnce(); // マップ生成は敵・素材配置より先
+  if(cont){ if(!load()) newGame(); }
+  else { localStorage.removeItem(SAVE_KEY); newGame(); }
+  if(!G.bossDead && !G.enemies.some(e=>e.type==='boss'))
+    spawnEnemy('boss', CASTLE.x*TS+8, CASTLE.y*TS+8, {});
+  if(G.bossDead) G.enemies=G.enemies.filter(e=>e.type!=='boss');
+  G.started=true;
+  $('titleScreen').style.display='none';
+  updateHUD();
+  if(!cont){
+    msg('目の前の🧰宝箱を開けよう (Eキー)');
+    setTimeout(()=>{ if(G&&G.started&&!G.p.glider) msg('⛩️ 光る祠に近づいてEキー — 最初の試練だ！'); }, 6000);
+  } else msg('冒険を再開した');
+}
+let worldGenned=false;
+function genWorldOnce(){ if(worldGenned) return; genWorld(); bakeWorld(); worldGenned=true; }
+
+$('btnNew').onclick=()=>{ sfx('pick'); startGame(false); };
+$('btnCont').onclick=()=>{ sfx('pick'); startGame(true); };
+if(localStorage.getItem(SAVE_KEY)) $('btnCont').style.display='inline-block';
+</script>
+</body>
+</html>
