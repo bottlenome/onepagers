@@ -2744,6 +2744,10 @@ import IUT
 #print axioms IUT.q9ps_three_eq_pi6_u6
 #print axioms IUT.q9ps_u6_unit
 #print axioms IUT.q9ps_exists
+#print axioms IUT.q9tl_3_tor
+#print axioms IUT.q9tl_zeta9_tor
+#print axioms IUT.q9tl_zeta9_unit
+#print axioms IUT.q9tl_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
