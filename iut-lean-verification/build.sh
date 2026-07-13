@@ -2758,6 +2758,13 @@ import IUT
 #print axioms IUT.q9mr_zeta9_fixed
 #print axioms IUT.q9mr_aut_mu9_new_layer
 #print axioms IUT.q9mr_exists
+#print axioms IUT.q9mbHom
+#print axioms IUT.q9mb_equivariant_sigmaU
+#print axioms IUT.q9mb_transport
+#print axioms IUT.q9mb_kill_mod9
+#print axioms IUT.q9mb_kill_new_layer
+#print axioms IUT.q9mb_admissible_iff
+#print axioms IUT.q9mb_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

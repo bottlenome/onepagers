@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 637,
-  "verified_theorem_total": 2749,
-  "choice_free_count": 548,
+  "module_count": 638,
+  "verified_theorem_total": 2756,
+  "choice_free_count": 549,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7824,6 +7824,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu9Rigidity.lean"
+    },
+    {
+      "id": "Q3Mu9TmzBridge",
+      "label": "Q3Mu9TmzBridge",
+      "milestone": null,
+      "title": "Q3Mu9TmzBridge",
+      "pillar": "A",
+      "decl_count": 55,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu9TmzBridge.lean"
     }
   ],
   "edges": [
@@ -8301,6 +8313,10 @@
     },
     {
       "source": "CyclotomicCharIso",
+      "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "CyclotomicCharIso",
       "target": "TateModuleEndo"
     },
     {
@@ -8354,6 +8370,10 @@
     {
       "source": "CyclotomicGKActionReal",
       "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "CyclotomicGKActionReal",
+      "target": "Q3Mu9TmzBridge"
     },
     {
       "source": "CyclotomicGKActionReal",
@@ -8494,6 +8514,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "CyclotomicRigidity",
+      "target": "Q3Mu9TmzBridge"
     },
     {
       "source": "CyclotomicRigidity",
@@ -10088,6 +10112,10 @@
       "target": "Q3Mu3TmzBridge"
     },
     {
+      "source": "LocalBrauer",
+      "target": "Q3Mu9TmzBridge"
+    },
+    {
       "source": "LocalCFT",
       "target": "FrobenioidModel"
     },
@@ -11149,6 +11177,10 @@
     },
     {
       "source": "Q3KummerYPow",
+      "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "Q3KummerYPow",
       "target": "Q3TateCurveL9"
     },
     {
@@ -11194,6 +11226,14 @@
     {
       "source": "Q3Mu9Completeness",
       "target": "Q3Mu9ThetaGroup"
+    },
+    {
+      "source": "Q3Mu9Completeness",
+      "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "Q3Mu9Rigidity",
+      "target": "Q3Mu9TmzBridge"
     },
     {
       "source": "Q3Mu9ThetaGroup",
@@ -11270,6 +11310,10 @@
     {
       "source": "Q3TateCurveL9",
       "target": "Q3Mu9ThetaGroup"
+    },
+    {
+      "source": "Q3TateCurveL9",
+      "target": "Q3Mu9TmzBridge"
     },
     {
       "source": "Q3TateCuspidalization",
@@ -12229,6 +12273,10 @@
     },
     {
       "source": "TateModuleEndo",
+      "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "TateModuleEndo",
       "target": "TateModuleIndeterminacy"
     },
     {
@@ -12240,12 +12288,20 @@
       "target": "Q3Mu3TmzBridge"
     },
     {
+      "source": "TateModuleIndeterminacy",
+      "target": "Q3Mu9TmzBridge"
+    },
+    {
       "source": "TateModuleZ3",
       "target": "CyclotomeRecoveryLimit"
     },
     {
       "source": "TateModuleZ3",
       "target": "Q3Mu3TmzBridge"
+    },
+    {
+      "source": "TateModuleZ3",
+      "target": "Q3Mu9TmzBridge"
     },
     {
       "source": "TateModuleZ3",
