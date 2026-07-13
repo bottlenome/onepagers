@@ -640,3 +640,4 @@ import IUT.Q3KummerYPow
 import IUT.Q3KummerPiSplit
 import IUT.Q3TateCurveL9
 import IUT.Q3Mu9ThetaGroup
+import IUT.Q3Mu9Rigidity

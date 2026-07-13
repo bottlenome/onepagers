@@ -2753,6 +2753,11 @@ import IUT
 #print axioms IUT.q9mt_weil_nondeg
 #print axioms IUT.q9mt_nonabelian
 #print axioms IUT.q9mt_exists
+#print axioms IUT.q9mr_rigidity
+#print axioms IUT.q9mr_cyclotome_fixed
+#print axioms IUT.q9mr_zeta9_fixed
+#print axioms IUT.q9mr_aut_mu9_new_layer
+#print axioms IUT.q9mr_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
