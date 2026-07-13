@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 633,
-  "verified_theorem_total": 2730,
-  "choice_free_count": 544,
+  "module_count": 634,
+  "verified_theorem_total": 2735,
+  "choice_free_count": 545,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7770,6 +7770,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerYPow.lean"
+    },
+    {
+      "id": "Q3KummerPiSplit",
+      "label": "Q3KummerPiSplit",
+      "milestone": null,
+      "title": "Q3KummerPiSplit",
+      "pillar": "A",
+      "decl_count": 43,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerPiSplit.lean"
     }
   ],
   "edges": [
@@ -11056,6 +11068,10 @@
     {
       "source": "ProfiniteTopology",
       "target": "ProfinitePi1"
+    },
+    {
+      "source": "Q3KummerCubeIdent",
+      "target": "Q3KummerPiSplit"
     },
     {
       "source": "Q3KummerCubeIdent",
