@@ -2735,6 +2735,10 @@ import IUT
 #print axioms IUT.q9c_m_mu3_complete
 #print axioms IUT.q9c_mu9_complete
 #print axioms IUT.q9c_exists
+#print axioms IUT.q9yp_y4
+#print axioms IUT.q9yp_y6
+#print axioms IUT.q9yp_y8
+#print axioms IUT.q9yp_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

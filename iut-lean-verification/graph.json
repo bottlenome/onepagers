@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 632,
-  "verified_theorem_total": 2726,
-  "choice_free_count": 543,
+  "module_count": 633,
+  "verified_theorem_total": 2730,
+  "choice_free_count": 544,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7758,6 +7758,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu9Completeness.lean"
+    },
+    {
+      "id": "Q3KummerYPow",
+      "label": "Q3KummerYPow",
+      "milestone": null,
+      "title": "Q3KummerYPow",
+      "pillar": "A",
+      "decl_count": 29,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerYPow.lean"
     }
   ],
   "edges": [
@@ -11052,6 +11064,10 @@
     {
       "source": "Q3KummerCubic",
       "target": "Q3KummerCubeIdent"
+    },
+    {
+      "source": "Q3KummerCubic",
+      "target": "Q3KummerYPow"
     },
     {
       "source": "Q3KummerDescentSpike",
