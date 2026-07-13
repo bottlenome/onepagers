@@ -639,3 +639,4 @@ import IUT.Q3Mu9Completeness
 import IUT.Q3KummerYPow
 import IUT.Q3KummerPiSplit
 import IUT.Q3TateCurveL9
+import IUT.Q3Mu9ThetaGroup

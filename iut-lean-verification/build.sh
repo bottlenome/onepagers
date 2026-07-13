@@ -2748,6 +2748,11 @@ import IUT
 #print axioms IUT.q9tl_zeta9_tor
 #print axioms IUT.q9tl_zeta9_unit
 #print axioms IUT.q9tl_exists
+#print axioms IUT.q9mt_mem_val0_mu9
+#print axioms IUT.q9mt_weil_g3_gz
+#print axioms IUT.q9mt_weil_nondeg
+#print axioms IUT.q9mt_nonabelian
+#print axioms IUT.q9mt_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
