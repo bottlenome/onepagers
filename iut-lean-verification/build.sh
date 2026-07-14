@@ -2782,6 +2782,11 @@ import IUT
 #print axioms IUT.q3re_val_compat
 #print axioms IUT.q3re_dense
 #print axioms IUT.q3re_exists
+#print axioms IUT.q9td_e9_decomp
+#print axioms IUT.q9td_act_faithful_lattice
+#print axioms IUT.q9td_act_faithful_mu
+#print axioms IUT.q9td_two_dir_orthogonal
+#print axioms IUT.q9td_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

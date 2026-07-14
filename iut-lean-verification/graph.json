@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 641,
-  "verified_theorem_total": 2773,
-  "choice_free_count": 552,
+  "module_count": 642,
+  "verified_theorem_total": 2778,
+  "choice_free_count": 553,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7872,6 +7872,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3RatEmbed.lean"
+    },
+    {
+      "id": "Q3Etale9TwoDir",
+      "label": "Q3Etale9TwoDir",
+      "milestone": null,
+      "title": "Q3Etale9TwoDir",
+      "pillar": "A",
+      "decl_count": 56,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Etale9TwoDir.lean"
     }
   ],
   "edges": [
@@ -11213,6 +11225,10 @@
     },
     {
       "source": "Q3KummerYPow",
+      "target": "Q3Etale9TwoDir"
+    },
+    {
+      "source": "Q3KummerYPow",
       "target": "Q3KummerDualityReal"
     },
     {
@@ -11278,6 +11294,10 @@
     {
       "source": "Q3Mu3ThetaGroup",
       "target": "Q3Mu3Rigidity"
+    },
+    {
+      "source": "Q3Mu9Completeness",
+      "target": "Q3Etale9TwoDir"
     },
     {
       "source": "Q3Mu9Completeness",
@@ -11369,6 +11389,10 @@
     },
     {
       "source": "Q3TateCurveL9",
+      "target": "Q3Etale9TwoDir"
+    },
+    {
+      "source": "Q3TateCurveL9",
       "target": "Q3Mu9ThetaGroup"
     },
     {
@@ -11406,6 +11430,10 @@
     {
       "source": "Q3TateDeck",
       "target": "Q3TemperedThetaClass"
+    },
+    {
+      "source": "Q3TatePi1Etale",
+      "target": "Q3Etale9TwoDir"
     },
     {
       "source": "Q3TatePi1Etale",
@@ -12362,6 +12390,10 @@
     {
       "source": "TateModuleZ3",
       "target": "CyclotomeRecoveryLimit"
+    },
+    {
+      "source": "TateModuleZ3",
+      "target": "Q3Etale9TwoDir"
     },
     {
       "source": "TateModuleZ3",
