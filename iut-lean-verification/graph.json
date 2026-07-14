@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 640,
-  "verified_theorem_total": 2767,
-  "choice_free_count": 551,
+  "module_count": 641,
+  "verified_theorem_total": 2773,
+  "choice_free_count": 552,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7860,6 +7860,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3WildRamFiltrationReal.lean"
+    },
+    {
+      "id": "Q3RatEmbed",
+      "label": "Q3RatEmbed",
+      "milestone": null,
+      "title": "Q3RatEmbed",
+      "pillar": "A",
+      "decl_count": 33,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3RatEmbed.lean"
     }
   ],
   "edges": [
@@ -11221,6 +11233,10 @@
     },
     {
       "source": "Q3LocalField",
+      "target": "Q3RatEmbed"
+    },
+    {
+      "source": "Q3LocalField",
       "target": "Q3UnitsGroup"
     },
     {
@@ -11550,6 +11566,10 @@
     {
       "source": "Rationals",
       "target": "PadicValuationQ"
+    },
+    {
+      "source": "Rationals",
+      "target": "Q3RatEmbed"
     },
     {
       "source": "Rationals",
@@ -12956,6 +12976,10 @@
       "target": "PrimitiveRoot"
     },
     {
+      "source": "Zp3Complete",
+      "target": "Q3RatEmbed"
+    },
+    {
       "source": "Zp3ValuationRing",
       "target": "Q3LocalField"
     },
@@ -13002,6 +13026,10 @@
     {
       "source": "ZpUnits",
       "target": "Q3RamifiedQuadratic"
+    },
+    {
+      "source": "ZpUnits",
+      "target": "Q3RatEmbed"
     },
     {
       "source": "ZpUnits",

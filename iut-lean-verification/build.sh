@@ -2776,6 +2776,12 @@ import IUT
 #print axioms IUT.q9wr_different
 #print axioms IUT.q9wr_matches_wcd
 #print axioms IUT.q9wr_exists
+#print axioms IUT.q3re_map_mul
+#print axioms IUT.q3re_map_add
+#print axioms IUT.q3re_map_inj
+#print axioms IUT.q3re_val_compat
+#print axioms IUT.q3re_dense
+#print axioms IUT.q3re_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
