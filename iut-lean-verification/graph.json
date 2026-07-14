@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 642,
-  "verified_theorem_total": 2778,
-  "choice_free_count": 553,
+  "module_count": 643,
+  "verified_theorem_total": 2781,
+  "choice_free_count": 554,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7884,6 +7884,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Etale9TwoDir.lean"
+    },
+    {
+      "id": "Q3Mu27DescentSpike",
+      "label": "Q3Mu27DescentSpike",
+      "milestone": null,
+      "title": "Q3Mu27DescentSpike",
+      "pillar": "A",
+      "decl_count": 65,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu27DescentSpike.lean"
     }
   ],
   "edges": [
@@ -11193,6 +11205,10 @@
     },
     {
       "source": "Q3KummerCubeIdent",
+      "target": "Q3Mu27DescentSpike"
+    },
+    {
+      "source": "Q3KummerCubeIdent",
       "target": "Q3Mu9Completeness"
     },
     {
@@ -11305,6 +11321,10 @@
     },
     {
       "source": "Q3Mu9Completeness",
+      "target": "Q3Mu27DescentSpike"
+    },
+    {
+      "source": "Q3Mu9Completeness",
       "target": "Q3Mu9ThetaGroup"
     },
     {
@@ -11406,6 +11426,10 @@
     {
       "source": "Q3TateCuspidalization",
       "target": "Q3KummerDescentSpike"
+    },
+    {
+      "source": "Q3TateCuspidalization",
+      "target": "Q3Mu27DescentSpike"
     },
     {
       "source": "Q3TateCuspidalization",

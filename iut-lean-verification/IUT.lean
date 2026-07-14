@@ -646,3 +646,4 @@ import IUT.Q3KummerDualityReal
 import IUT.Q3WildRamFiltrationReal
 import IUT.Q3RatEmbed
 import IUT.Q3Etale9TwoDir
+import IUT.Q3Mu27DescentSpike

@@ -2787,6 +2787,9 @@ import IUT
 #print axioms IUT.q9td_act_faithful_mu
 #print axioms IUT.q9td_two_dir_orthogonal
 #print axioms IUT.q9td_exists
+#print axioms IUT.q27cs_descent_even
+#print axioms IUT.q27cs_descent_odd
+#print axioms IUT.q27cs_descent_all
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
