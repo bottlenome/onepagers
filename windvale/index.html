@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>WINDVALE — 風渡りの冒険</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -56,6 +56,33 @@
   #mapcanvas { border:1px solid #3b4a63; border-radius:8px; cursor:crosshair; background:#060a12; }
   .pot { min-height:34px; font-size:22px; letter-spacing:4px; margin:8px 0; }
   #titleScreen .logo { font-size:13px; color:#7d8aa0; letter-spacing:4px; margin-bottom:6px; }
+
+  /* ---- touch controls ---- */
+  #wrap, canvas#game { touch-action:none; }
+  #weaponbar { pointer-events:auto; }
+  #weaponbar .wslot { cursor:pointer; }
+  #touchui { display:none; position:absolute; inset:0; z-index:10; pointer-events:none; }
+  body.touch #touchui { display:block; }
+  body.touch #hint { display:none; }
+  body.touch #minimap { bottom:auto; top:76px; }
+  body.touch #bufficon { top:214px; }
+  #touchui > div { position:absolute; pointer-events:auto; touch-action:none;
+    user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; }
+  #joy { left:34px; bottom:34px; width:130px; height:130px; border-radius:50%;
+    background:rgba(255,255,255,.07); border:2px solid rgba(255,255,255,.28); }
+  #joyknob { position:absolute; left:50%; top:50%; width:54px; height:54px; margin:-27px 0 0 -27px;
+    border-radius:50%; background:rgba(255,255,255,.28); border:2px solid rgba(255,255,255,.55);
+    pointer-events:none; }
+  .tbtn { border-radius:50%; background:rgba(0,0,0,.42); border:2px solid rgba(255,255,255,.38);
+    color:#fff; display:flex; align-items:center; justify-content:center; flex-direction:column;
+    text-shadow:0 1px 2px rgba(0,0,0,.8); }
+  .tbtn:active { background:rgba(255,215,94,.35); }
+  .tbtn small { font-size:9px; color:#e2e8f0; line-height:1; margin-top:1px; }
+  #btnAtk { right:36px; bottom:40px; width:88px; height:88px; font-size:34px; }
+  #btnE { right:138px; bottom:32px; width:58px; height:58px; font-size:20px; }
+  #btnF { right:152px; bottom:104px; width:50px; height:50px; font-size:18px; }
+  #btnW { right:40px; bottom:144px; width:50px; height:50px; font-size:18px; }
+  #btnM { right:110px; bottom:170px; width:46px; height:46px; font-size:16px; }
 </style>
 </head>
 <body>
@@ -71,6 +98,15 @@
   <div class="hud" id="msgbox"></div>
   <div class="hud" id="hint">移動:WASD/矢印 ダッシュ:Shift 攻撃:Space/J 調べる:E 食べる:F 武器:1-5/Q マップ:M</div>
   <canvas id="minimap" width="132" height="132"></canvas>
+
+  <div id="touchui">
+    <div id="joy"><div id="joyknob"></div></div>
+    <div class="tbtn" id="btnAtk">⚔️<small>攻撃</small></div>
+    <div class="tbtn" id="btnE">🔍<small>調べる</small></div>
+    <div class="tbtn" id="btnF">🍲<small>食べる</small></div>
+    <div class="tbtn" id="btnW">🗡️<small>武器</small></div>
+    <div class="tbtn" id="btnM">🗺️</div>
+  </div>
 
   <div id="modal"><div class="box" id="modalBox"></div></div>
 
@@ -333,22 +369,25 @@ function heartsStr(){
   for(let i=0;i<p.maxHp;i++){ s += p.hp>=i+1?'❤️':(p.hp>=i+.5?'💔':'🖤'); }
   return s;
 }
+// 変化があった時だけDOMを書き換える (毎フレームのinnerHTML再構築を防ぐ)
+function setHTML(el,h){ if(el.__h!==h){ el.__h=h; el.innerHTML=h; } }
+function setText(el,t){ if(el.__t!==t){ el.__t=t; el.textContent=t; } }
 function updateHUD(){
   const p=G.p;
-  $('hearts').textContent = heartsStr();
-  $('matbar').innerHTML = Object.keys(MAT).map(k=>`<span>${MAT[k].i}${p.mats[k]}</span>`).join('')
-    + `<span>🍲${p.dishes.length}</span><span>💠${p.orbs}</span>` + (p.glider?'<span>🪂</span>':'');
-  $('objective').textContent = objective();
-  $('weatherIcon').textContent = G.weather==='rain' ? '🌧️ 雨 — 崖が滑る' : '';
+  setText($('hearts'), heartsStr());
+  setHTML($('matbar'), Object.keys(MAT).map(k=>`<span>${MAT[k].i}${p.mats[k]}</span>`).join('')
+    + `<span>🍲${p.dishes.length}</span><span>💠${p.orbs}</span>` + (p.glider?'<span>🪂</span>':''));
+  setText($('objective'), objective());
+  setText($('weatherIcon'), G.weather==='rain' ? '🌧️ 雨 — 崖が滑る' : '');
   let wb='';
   for(let i=0;i<5;i++){
     const w=p.inv[i];
     if(w){ const def=WPN[w.k];
       const pct = def.dur<0?100:Math.round(w.dur/def.dur*100);
-      wb+=`<div class="wslot${i===p.eq?' eq':''}"><span class="key">${i+1}</span>${def.i}<div class="dur"><i style="width:${pct}%;background:${pct<30?'#e66':'#6c6'}"></i></div></div>`;
+      wb+=`<div class="wslot${i===p.eq?' eq':''}" data-i="${i}"><span class="key">${i+1}</span>${def.i}<div class="dur"><i style="width:${pct}%;background:${pct<30?'#e66':'#6c6'}"></i></div></div>`;
     } else wb+=`<div class="wslot" style="opacity:.35"><span class="key">${i+1}</span>—</div>`;
   }
-  $('weaponbar').innerHTML=wb;
+  setHTML($('weaponbar'), wb);
   const b=$('bufficon');
   if(p.buffT>0){ b.style.display='block'; b.textContent=`💨 移動UP ${Math.ceil(p.buffT)}s`; }
   else b.style.display='none';
@@ -650,14 +689,15 @@ function update(dt){
   }
   // --- プレイヤー移動 ---
   let mx=input('right')-input('left'), my=input('down')-input('up');
-  if(mx&&my){ mx*=.707; my*=.707; }
+  if(TOUCH.active){ mx=TOUCH.x; my=TOUCH.y; }
+  const ml=Math.hypot(mx,my); if(ml>1){ mx/=ml; my/=ml; }
   if(mx||my){ p.fx=mx; p.fy=my; const l=Math.hypot(p.fx,p.fy); p.fx/=l; p.fy/=l; }
   const curTile=tileAt(p.x,p.y);
   p.mode=modeOf(curTile,p.glider);
   let spd=88;
   if(curTile===T.FOREST) spd*=.82;
   if(p.buffT>0) spd*=1.18;
-  const dashing = keys.dash && p.mode==='walk' && p.st>1 && (mx||my);
+  const dashing = (keys.dash||TOUCH.dash) && p.mode==='walk' && p.st>1 && (mx||my);
   if(dashing) spd*=1.75;
   if(p.mode==='swim') spd*=.55;
   if(p.mode==='climb') spd*=.45;
@@ -963,6 +1003,62 @@ addEventListener('keydown',e=>{
   else if(/^Digit[1-5]$/.test(e.code)){ const n=+e.code.slice(5)-1; if(G.p.inv[n]) G.p.eq=n; }
 });
 addEventListener('keyup',e=>{ const k=KEYMAP[e.code]; if(k) keys[k]=false; });
+
+// ---------- touch controls ----------
+const TOUCH={active:false,x:0,y:0,dash:false};
+function setupTouch(){
+  if(matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window || navigator.maxTouchPoints>0)
+    document.body.classList.add('touch');
+  // 初タッチで後付け表示 (判定漏れ対策)
+  addEventListener('touchstart',()=>document.body.classList.add('touch'),{once:true,passive:true});
+
+  const joy=$('joy'), knob=$('joyknob');
+  let pid=null;
+  const setKnob=(x,y)=>{ knob.style.transform=`translate(${x*38}px,${y*38}px)`; };
+  const stick=e=>{
+    const r=joy.getBoundingClientRect();
+    let dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
+    let dy=(e.clientY-(r.top+r.height/2))/(r.height/2);
+    const l=Math.hypot(dx,dy); if(l>1){ dx/=l; dy/=l; }
+    TOUCH.active=true; TOUCH.x=dx; TOUCH.y=dy; TOUCH.dash=Math.hypot(dx,dy)>.88;
+    setKnob(dx,dy);
+  };
+  joy.addEventListener('pointerdown',e=>{ pid=e.pointerId; joy.setPointerCapture(pid); stick(e); e.preventDefault(); });
+  joy.addEventListener('pointermove',e=>{ if(e.pointerId===pid) stick(e); });
+  const joyEnd=e=>{ if(pid===null||e.pointerId!==pid) return;
+    pid=null; TOUCH.active=false; TOUCH.dash=false; TOUCH.x=TOUCH.y=0; setKnob(0,0); };
+  joy.addEventListener('pointerup',joyEnd);
+  joy.addEventListener('pointercancel',joyEnd);
+
+  const inGame=()=>G&&G.started&&!G.over&&!G.modal;
+  const bind=(id,fn)=>{ $(id).addEventListener('pointerdown',e=>{ e.preventDefault(); fn(); }); };
+  // 攻撃は押しっぱなしで連打 (クールダウンはplayerAttack側が管理)
+  let atkTimer=null;
+  $('btnAtk').addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    if(inGame()) playerAttack();
+    clearInterval(atkTimer);
+    atkTimer=setInterval(()=>{ if(inGame()) playerAttack(); },160);
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(ev=>
+    $('btnAtk').addEventListener(ev,()=>clearInterval(atkTimer)));
+  bind('btnE',()=>{ if(inGame()) interact(); });
+  bind('btnF',()=>{ if(inGame()) eat(); });
+  bind('btnW',()=>{ if(inGame()&&G.p.inv.length) G.p.eq=(G.p.eq+1)%G.p.inv.length; });
+  bind('btnM',()=>{ if(!G||!G.started||G.over||G.modal) return; openMap(); });
+
+  // モーダルは背景タップでも閉じられる (ゲームオーバー/エンディング中は除く)
+  $('modal').addEventListener('pointerdown',e=>{
+    if(e.target.id==='modal' && G && !G.over && !G.ending) closeModal();
+  });
+
+  // 武器スロットをタップ/クリックで装備
+  $('weaponbar').addEventListener('pointerdown',e=>{
+    const s=e.target.closest('.wslot'); if(!s||!s.dataset.i) return;
+    const i=+s.dataset.i; if(G&&G.started&&G.p.inv[i]) G.p.eq=i;
+  });
+}
+setupTouch();
 
 // ---------- boot / loop ----------
 function fitScreen(){
