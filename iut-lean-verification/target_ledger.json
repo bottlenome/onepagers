@@ -70,7 +70,7 @@
           "id": "B1",
           "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)",
           "weight": 20,
-          "status": 0.5
+          "status": 0.6
         },
         {
           "id": "B2",
@@ -100,7 +100,7 @@
           "id": "B6",
           "title": "Kummer 理論(実 Galois コホモロジー上)",
           "weight": 10,
-          "status": 0
+          "status": 0.15
         }
       ]
     },
