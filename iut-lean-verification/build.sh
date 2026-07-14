@@ -2765,6 +2765,11 @@ import IUT
 #print axioms IUT.q9mb_kill_new_layer
 #print axioms IUT.q9mb_admissible_iff
 #print axioms IUT.q9mb_exists
+#print axioms IUT.q9kd_chi_faithful
+#print axioms IUT.q9kd_class_nontrivial
+#print axioms IUT.q9kd_hom_exhaust
+#print axioms IUT.q9kd_kummer_iso
+#print axioms IUT.q9kd_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 638,
-  "verified_theorem_total": 2756,
-  "choice_free_count": 549,
+  "module_count": 639,
+  "verified_theorem_total": 2761,
+  "choice_free_count": 550,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7836,6 +7836,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu9TmzBridge.lean"
+    },
+    {
+      "id": "Q3KummerDualityReal",
+      "label": "Q3KummerDualityReal",
+      "milestone": null,
+      "title": "Q3KummerDualityReal",
+      "pillar": "B",
+      "decl_count": 58,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerDualityReal.lean"
     }
   ],
   "edges": [
@@ -11169,6 +11181,10 @@
     },
     {
       "source": "Q3KummerYPow",
+      "target": "Q3KummerDualityReal"
+    },
+    {
+      "source": "Q3KummerYPow",
       "target": "Q3Mu9Rigidity"
     },
     {
@@ -11222,6 +11238,10 @@
     {
       "source": "Q3Mu3ThetaGroup",
       "target": "Q3Mu3Rigidity"
+    },
+    {
+      "source": "Q3Mu9Completeness",
+      "target": "Q3KummerDualityReal"
     },
     {
       "source": "Q3Mu9Completeness",

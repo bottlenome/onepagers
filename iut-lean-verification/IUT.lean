@@ -642,3 +642,4 @@ import IUT.Q3TateCurveL9
 import IUT.Q3Mu9ThetaGroup
 import IUT.Q3Mu9Rigidity
 import IUT.Q3Mu9TmzBridge
+import IUT.Q3KummerDualityReal
