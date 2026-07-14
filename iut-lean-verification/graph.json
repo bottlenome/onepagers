@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 639,
-  "verified_theorem_total": 2761,
-  "choice_free_count": 550,
+  "module_count": 640,
+  "verified_theorem_total": 2767,
+  "choice_free_count": 551,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7848,6 +7848,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerDualityReal.lean"
+    },
+    {
+      "id": "Q3WildRamFiltrationReal",
+      "label": "Q3WildRamFiltrationReal",
+      "milestone": null,
+      "title": "Q3WildRamFiltrationReal",
+      "pillar": "B",
+      "decl_count": 26,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3WildRamFiltrationReal.lean"
     }
   ],
   "edges": [
@@ -11160,6 +11172,10 @@
       "target": "Q3Mu9Completeness"
     },
     {
+      "source": "Q3KummerCubeIdent",
+      "target": "Q3WildRamFiltrationReal"
+    },
+    {
       "source": "Q3KummerCubic",
       "target": "Q3KummerCubeIdent"
     },
@@ -11178,6 +11194,10 @@
     {
       "source": "Q3KummerPiSplit",
       "target": "Q3TateCurveL9"
+    },
+    {
+      "source": "Q3KummerPiSplit",
+      "target": "Q3WildRamFiltrationReal"
     },
     {
       "source": "Q3KummerYPow",
@@ -11202,6 +11222,10 @@
     {
       "source": "Q3LocalField",
       "target": "Q3UnitsGroup"
+    },
+    {
+      "source": "Q3LocalField",
+      "target": "Q3WildRamFiltrationReal"
     },
     {
       "source": "Q3MonoThetaRigidity",
@@ -11334,6 +11358,10 @@
     {
       "source": "Q3TateCurveL9",
       "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "Q3TateCurveL9",
+      "target": "Q3WildRamFiltrationReal"
     },
     {
       "source": "Q3TateCuspidalization",
@@ -12870,6 +12898,10 @@
     {
       "source": "WildConductorDiscriminant",
       "target": "MultiJumpWildDiscriminant"
+    },
+    {
+      "source": "WildConductorDiscriminant",
+      "target": "Q3WildRamFiltrationReal"
     },
     {
       "source": "Zmod3PowUnits",

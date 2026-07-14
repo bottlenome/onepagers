@@ -2770,6 +2770,12 @@ import IUT
 #print axioms IUT.q9kd_hom_exhaust
 #print axioms IUT.q9kd_kummer_iso
 #print axioms IUT.q9kd_exists
+#print axioms IUT.q9wr_sigma_pi_eq
+#print axioms IUT.q9wr_G3_trivial
+#print axioms IUT.q9wr_break
+#print axioms IUT.q9wr_different
+#print axioms IUT.q9wr_matches_wcd
+#print axioms IUT.q9wr_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

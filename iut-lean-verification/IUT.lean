@@ -643,3 +643,4 @@ import IUT.Q3Mu9ThetaGroup
 import IUT.Q3Mu9Rigidity
 import IUT.Q3Mu9TmzBridge
 import IUT.Q3KummerDualityReal
+import IUT.Q3WildRamFiltrationReal
