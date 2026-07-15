@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 643,
-  "verified_theorem_total": 2781,
-  "choice_free_count": 554,
+  "module_count": 644,
+  "verified_theorem_total": 2786,
+  "choice_free_count": 555,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7896,6 +7896,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu27DescentSpike.lean"
+    },
+    {
+      "id": "Q3HasseArfReal",
+      "label": "Q3HasseArfReal",
+      "milestone": null,
+      "title": "Q3HasseArfReal",
+      "pillar": "B",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3HasseArfReal.lean"
     }
   ],
   "edges": [
@@ -9800,6 +9812,10 @@
       "target": "HasseArfAbelian"
     },
     {
+      "source": "HasseArfUnconditional",
+      "target": "Q3HasseArfReal"
+    },
+    {
       "source": "HigherUnitFiltration",
       "target": "RamifiedNormFiltration"
     },
@@ -11488,6 +11504,10 @@
       "target": "Q3TateCurve"
     },
     {
+      "source": "Q3WildRamFiltrationReal",
+      "target": "Q3HasseArfReal"
+    },
+    {
       "source": "QuadraticNorm",
       "target": "Q3RamifiedQuadratic"
     },
@@ -11554,6 +11574,10 @@
     {
       "source": "RamifiedNormFiltration",
       "target": "MultiJumpWildDiscriminant"
+    },
+    {
+      "source": "RamifiedNormFiltration",
+      "target": "Q3HasseArfReal"
     },
     {
       "source": "RamifiedReciprocity",

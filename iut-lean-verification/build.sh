@@ -2790,6 +2790,11 @@ import IUT
 #print axioms IUT.q27cs_descent_even
 #print axioms IUT.q27cs_descent_odd
 #print axioms IUT.q27cs_descent_all
+#print axioms IUT.q9ha_upper_G2_real
+#print axioms IUT.q9ha_upper_G3_trivial_real
+#print axioms IUT.q9ha_break_transform
+#print axioms IUT.q9ha_hasse_arf_instance
+#print axioms IUT.q9ha_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
