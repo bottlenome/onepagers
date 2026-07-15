@@ -2804,6 +2804,10 @@ import IUT
 #print axioms IUT.q9nf_norm_filt
 #print axioms IUT.q9nf_zeta_is_norm
 #print axioms IUT.q9nf_retarget_sharp
+#print axioms IUT.q9cq_lambda_nontrivial
+#print axioms IUT.q9cq_lambda_zeta_indep
+#print axioms IUT.q9cq_rank_ge_two
+#print axioms IUT.q9cq_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

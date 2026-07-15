@@ -650,3 +650,4 @@ import IUT.Q3Mu27DescentSpike
 import IUT.Q3HasseArfReal
 import IUT.Q3ArtinConductorReal
 import IUT.Q3NormFiltrationSpike
+import IUT.Q3CubeQuotientReal

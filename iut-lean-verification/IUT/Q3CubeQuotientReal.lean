@@ -60,8 +60,8 @@ namespace IUT
     3·g.1（prodGrp/intGrp の成分ごと立方——第1成分は intGrp の加法で n+n+n=3n）。 -/
 theorem q9cq_cube_fst (g : q3rqLx.carrier) :
     (q3rqLx.mul (q3rqLx.mul g g) g).1 = 3 * g.1 := by
-  show (g.1 + g.1) + g.1 = 3 * g.1
-  omega
+  have key : ∀ n : Int, (n + n) + n = 3 * n := by intro n; omega
+  exact key g.1
 
 /-! ## q9cq-2: 一様化子クラス [λ] = (1, e_U) -/
 
@@ -81,8 +81,9 @@ theorem q9cq_lambda_nontrivial :
   obtain ⟨g, hg⟩ := hex
   have h1 : (q3rqLx.mul (q3rqLx.mul g g) g).1 = q9cq_lambdaClass.1 := congrArg Prod.fst hg
   rw [q9cq_cube_fst g] at h1
-  have h2 : (3 : Int) * g.1 = 1 := h1
-  omega
+  -- h1 : 3 * g.1 = 1（付値 3∤1）
+  have key : ∀ n : Int, 3 * n = 1 → False := by intro n hn; omega
+  exact key g.1 h1
 
 /-! ## q9cq-4: 円分クラス [ζ₃] = (0, ⟨ζ₃,·⟩)（q9kd と同一） -/
 
@@ -112,7 +113,11 @@ theorem q9cq_val_nontrivial (i : Int) (hi : ¬ (3 : Int) ∣ i) (u : q3rqU.carri
   obtain ⟨g, hg⟩ := hex
   have h1 : (q3rqLx.mul (q3rqLx.mul g g) g).1 = i := congrArg Prod.fst hg
   rw [q9cq_cube_fst g] at h1
-  omega
+  -- h1 : 3 * g.1 = i ⟹ 3∣i、矛盾
+  have key : ∀ n : Int, 3 * n = i → False := by
+    intro n hn
+    exact hi ⟨n, hn.symm⟩
+  exact key g.1 h1
 
 /-- i=1 の付値非立方（3∤1）。 -/
 theorem q9cq_val1_noncube (u : q3rqU.carrier) :

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 646,
-  "verified_theorem_total": 2795,
-  "choice_free_count": 557,
+  "module_count": 647,
+  "verified_theorem_total": 2799,
+  "choice_free_count": 558,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7932,6 +7932,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormFiltrationSpike.lean"
+    },
+    {
+      "id": "Q3CubeQuotientReal",
+      "label": "Q3CubeQuotientReal",
+      "milestone": null,
+      "title": "Q3CubeQuotientReal",
+      "pillar": "B",
+      "decl_count": 19,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CubeQuotientReal.lean"
     }
   ],
   "edges": [
@@ -11241,6 +11253,10 @@
     },
     {
       "source": "Q3KummerCubeIdent",
+      "target": "Q3CubeQuotientReal"
+    },
+    {
+      "source": "Q3KummerCubeIdent",
       "target": "Q3KummerPiSplit"
     },
     {
@@ -11274,6 +11290,10 @@
     {
       "source": "Q3KummerDualityReal",
       "target": "Q3ArtinConductorReal"
+    },
+    {
+      "source": "Q3KummerDualityReal",
+      "target": "Q3CubeQuotientReal"
     },
     {
       "source": "Q3KummerPiSplit",
