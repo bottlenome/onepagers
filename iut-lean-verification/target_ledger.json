@@ -82,13 +82,13 @@
           "id": "B3",
           "title": "実 Artin 導手/different(実表現・実分岐群上)",
           "weight": 20,
-          "status": 0
+          "status": 0.2
         },
         {
           "id": "B4",
           "title": "実 Hasse–Arf(実 Galois 群上)",
           "weight": 15,
-          "status": 0
+          "status": 0.1
         },
         {
           "id": "B5",
