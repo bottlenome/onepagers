@@ -648,3 +648,4 @@ import IUT.Q3RatEmbed
 import IUT.Q3Etale9TwoDir
 import IUT.Q3Mu27DescentSpike
 import IUT.Q3HasseArfReal
+import IUT.Q3ArtinConductorReal

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 644,
-  "verified_theorem_total": 2786,
-  "choice_free_count": 555,
+  "module_count": 645,
+  "verified_theorem_total": 2791,
+  "choice_free_count": 556,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7908,6 +7908,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3HasseArfReal.lean"
+    },
+    {
+      "id": "Q3ArtinConductorReal",
+      "label": "Q3ArtinConductorReal",
+      "milestone": null,
+      "title": "Q3ArtinConductorReal",
+      "pillar": "B",
+      "decl_count": 35,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ArtinConductorReal.lean"
     }
   ],
   "edges": [
@@ -11244,6 +11256,10 @@
       "target": "Q3Mu9Completeness"
     },
     {
+      "source": "Q3KummerDualityReal",
+      "target": "Q3ArtinConductorReal"
+    },
+    {
       "source": "Q3KummerPiSplit",
       "target": "Q3Mu9ThetaGroup"
     },
@@ -11502,6 +11518,10 @@
     {
       "source": "Q3UnitsGroup",
       "target": "Q3TateCurve"
+    },
+    {
+      "source": "Q3WildRamFiltrationReal",
+      "target": "Q3ArtinConductorReal"
     },
     {
       "source": "Q3WildRamFiltrationReal",
