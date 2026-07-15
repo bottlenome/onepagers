@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 645,
-  "verified_theorem_total": 2791,
-  "choice_free_count": 556,
+  "module_count": 646,
+  "verified_theorem_total": 2795,
+  "choice_free_count": 557,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7920,6 +7920,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ArtinConductorReal.lean"
+    },
+    {
+      "id": "Q3NormFiltrationSpike",
+      "label": "Q3NormFiltrationSpike",
+      "milestone": null,
+      "title": "Q3NormFiltrationSpike",
+      "pillar": "B",
+      "decl_count": 49,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormFiltrationSpike.lean"
     }
   ],
   "edges": [
@@ -11241,6 +11253,10 @@
     },
     {
       "source": "Q3KummerCubeIdent",
+      "target": "Q3NormFiltrationSpike"
+    },
+    {
+      "source": "Q3KummerCubeIdent",
       "target": "Q3WildRamFiltrationReal"
     },
     {
@@ -11526,6 +11542,10 @@
     {
       "source": "Q3WildRamFiltrationReal",
       "target": "Q3HasseArfReal"
+    },
+    {
+      "source": "Q3WildRamFiltrationReal",
+      "target": "Q3NormFiltrationSpike"
     },
     {
       "source": "QuadraticNorm",

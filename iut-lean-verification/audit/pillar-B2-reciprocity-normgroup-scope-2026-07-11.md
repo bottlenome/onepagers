@@ -169,3 +169,19 @@ crux `q9lr_zeta_not_norm : ¬∃ x, q3kUnitMem x ∧ q3kNormBase x = q3rqZeta` �
 - `/home/user/onepagers/iut-lean-verification/IUT/Q3LocalField.lean`・`Q3RatEmbed.lean`（ヘッダ＋正直限定——v_M は関係形のみ・total inverse 無し・一般元付値の choice-free 不能を確認）
 - B2 側既存モジュールのヘッダ本体（二重計上判定の根拠）: `NormGroup.lean`・`LocalReciprocity.lean`・`FullReciprocity.lean`・`LubinTateReciprocity.lean`・`LubinTateNormGroup.lean`・`HilbertSymbol.lean`・`HilbertSymbolReciprocity.lean`・`TameSymbol.lean`・`LocalBrauer.lean`・`BrauerInvariant.lean`・`ReciprocityBrauerCompat.lean`・`ReciprocityNondegenerate.lean`・`RamifiedReciprocity.lean`
 - 台帳: `target_ledger.json`（柱B 全 6 項目 weight/status）・先行スコープ `audit/pillar-B-cft-conductor-hasseArf-scope-2026-07-11.md` §5（B2 見送り判定）
+
+---
+
+## ★訂正（2026-07-11・q9nf de-risk スパイクによる）— 本文の crux「ζ₃∉N(M^×)」は数学的に誤り
+
+de-risk スパイク `IUT/Q3NormFiltrationSpike.lean`（q9nf）が本 scope の中心的主張を**反証**した。正直に記録する（§4・設計文書の誤りは消さず訂正で上書きする）。
+
+- **`q9nf_zeta_is_norm : ∃ x, q3kUnitMem x ∧ q3kNormBase x = q3rqZeta`**（証明 `⟨q3kZeta9, q9tl_zeta9_unit, q9tl_normBase_zeta9⟩`・axioms=[propext,Quot.sound]）。すなわち **ζ₃ は N(M^×) の元である**（witness ζ₉: N(ζ₉)=ζ₉·(ζ₃ζ₉)·(ζ₃²ζ₉)=ζ₉³=ζ₃）。しかもこれを支える `q9tl_normBase_zeta9`/`q9tl_zeta9_unit` は本 scope 作成時点で**既にコードベースに存在**していた。
+- 本文 §1 の誤りの根源: **Kummer ペアリング(σ,[ζ₃])≠1 と Hilbert 記号(ζ₃,ζ₃)₃ を混同**した。実際 (ζ₃,ζ₃)₃=(ζ₃,−1)₃⁻¹=1（−1 は立方）で ζ₃ は本当にノルム。ゆえに「ζ₃∉N を証明する」B2 実装は**偽命題を主語にする**もので、着工していれば §3(toy 主語)違反級の誤りになっていた。スパイクの敵対的検証がこれを未然に捕捉した。
+
+### de-risk の正味成果（machinery は本物・cracked）
+- U^(i)=1+π₉^i·O_M フィルトレーション＋**ノルム graded behavior** `q9nf_norm_expand`（embed N(1+t)=1+Tr(t)+E₂(t)+embed N(t)）・`q9nf_norm_filt`（N(U^(i))⊆U^(i+1)・1≤i≤5、i≤5 の cap は粗い座標 trace 界＝v_M 不在の正直な限界）を choice-free に実証。B2 の「未発明イディオム」の半分は retired。
+- ζ₃ の正確な位置 `q9nf_zeta_U3`/`q9nf_zeta_not_U4`（embed ζ₃∈U^(3)∖U^(4)）・trace は π₉⁶ 可除で level<6 の全 graded piece 上ゼロ写像（`q9nf_trace_kill`）。
+
+### 正しい retarget（後続 B2 の真の crux）
+真の非ノルムは graded level 6（上付き break t=2 ⇔ π₉⁶）に置く。候補 **4=1+3∉N(M^×)**（Artin: N_{L₂/ℚ₃}(4)=16≡7 mod 9・ζ₉↦ζ₉⁴≠id）。位置は `q9nf_retarget_witness`/`q9nf_retarget_sharp`（1+3∈U^(6)∖U^(7)）で確定。**B2 は実装前に crux を 4∉N へ retarget する再設計ラウンドが必須**——残る hard core は level-6 graded cokernel 同定（genuine な新規仕事）。

@@ -2800,6 +2800,10 @@ import IUT
 #print axioms IUT.q9ac_conductor_discriminant_real
 #print axioms IUT.q9ac_codim_spec
 #print axioms IUT.q9ac_exists
+#print axioms IUT.q9nf_norm_graded
+#print axioms IUT.q9nf_norm_filt
+#print axioms IUT.q9nf_zeta_is_norm
+#print axioms IUT.q9nf_retarget_sharp
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
