@@ -82,7 +82,8 @@
           "id": "B3",
           "title": "実 Artin 導手/different(実表現・実分岐群上)",
           "weight": 20,
-          "status": 0.2
+          "status": 0.26,
+          "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26)"
         },
         {
           "id": "B4",
