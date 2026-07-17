@@ -2808,6 +2808,11 @@ import IUT
 #print axioms IUT.q9cq_lambda_zeta_indep
 #print axioms IUT.q9cq_rank_ge_two
 #print axioms IUT.q9cq_exists
+#print axioms IUT.q9tw_lam2_not_dvd_diff
+#print axioms IUT.q9tw_different_tower_sharp
+#print axioms IUT.q9tw_different_transitivity
+#print axioms IUT.q9tw_disc_M_Q3
+#print axioms IUT.q9tw_exists
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 647,
-  "verified_theorem_total": 2799,
-  "choice_free_count": 558,
+  "module_count": 648,
+  "verified_theorem_total": 2804,
+  "choice_free_count": 559,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7944,6 +7944,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CubeQuotientReal.lean"
+    },
+    {
+      "id": "Q3TowerDifferentReal",
+      "label": "Q3TowerDifferentReal",
+      "milestone": null,
+      "title": "Q3TowerDifferentReal",
+      "pillar": "B",
+      "decl_count": 26,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TowerDifferentReal.lean"
     }
   ],
   "edges": [
@@ -11252,6 +11264,10 @@
       "target": "ProfinitePi1"
     },
     {
+      "source": "Q3ArtinConductorReal",
+      "target": "Q3TowerDifferentReal"
+    },
+    {
       "source": "Q3KummerCubeIdent",
       "target": "Q3CubeQuotientReal"
     },
@@ -11406,6 +11422,10 @@
     {
       "source": "Q3Mu9ThetaGroup",
       "target": "Q3Mu9Rigidity"
+    },
+    {
+      "source": "Q3NormFiltrationSpike",
+      "target": "Q3TowerDifferentReal"
     },
     {
       "source": "Q3RamifiedQuadratic",
