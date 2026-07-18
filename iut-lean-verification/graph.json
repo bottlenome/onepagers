@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 651,
-  "verified_theorem_total": 2813,
-  "choice_free_count": 562,
+  "module_count": 654,
+  "verified_theorem_total": 2820,
+  "choice_free_count": 565,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7992,6 +7992,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3GenLowerFiltrationReal.lean"
+    },
+    {
+      "id": "Q3ResidueFieldReal",
+      "label": "Q3ResidueFieldReal",
+      "milestone": null,
+      "title": "Q3ResidueFieldReal",
+      "pillar": "B",
+      "decl_count": 40,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ResidueFieldReal.lean"
+    },
+    {
+      "id": "Q3GradedNormBreak",
+      "label": "Q3GradedNormBreak",
+      "milestone": null,
+      "title": "Q3GradedNormBreak",
+      "pillar": "B",
+      "decl_count": 45,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3GradedNormBreak.lean"
+    },
+    {
+      "id": "Q3LocalReciprocityReal",
+      "label": "Q3LocalReciprocityReal",
+      "milestone": null,
+      "title": "q9rf 実残余体 𝔽₃・O_M 局所性",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3LocalReciprocityReal.lean"
     }
   ],
   "edges": [
@@ -10801,6 +10837,10 @@
     },
     {
       "source": "PadicDivision",
+      "target": "Q3ResidueFieldReal"
+    },
+    {
+      "source": "PadicDivision",
       "target": "ZpDomain"
     },
     {
@@ -11312,6 +11352,10 @@
       "target": "Q3TraceDifferentReal"
     },
     {
+      "source": "Q3GradedNormBreak",
+      "target": "Q3LocalReciprocityReal"
+    },
+    {
       "source": "Q3HasseArfReal",
       "target": "Q3HerbrandReal"
     },
@@ -11433,6 +11477,10 @@
     },
     {
       "source": "Q3Mu3Completeness",
+      "target": "Q3ResidueFieldReal"
+    },
+    {
+      "source": "Q3Mu3Completeness",
       "target": "Q3TateCurveL2"
     },
     {
@@ -11464,6 +11512,10 @@
       "target": "Q3Mu9TmzBridge"
     },
     {
+      "source": "Q3Mu9Completeness",
+      "target": "Q3ResidueFieldReal"
+    },
+    {
       "source": "Q3Mu9Rigidity",
       "target": "Q3Mu9TmzBridge"
     },
@@ -11474,6 +11526,10 @@
     {
       "source": "Q3NormFiltrationSpike",
       "target": "Q3GenLowerFiltrationReal"
+    },
+    {
+      "source": "Q3NormFiltrationSpike",
+      "target": "Q3ResidueFieldReal"
     },
     {
       "source": "Q3NormFiltrationSpike",
@@ -11506,6 +11562,10 @@
     {
       "source": "Q3RamifiedQuadratic",
       "target": "Q3TateCurveL2"
+    },
+    {
+      "source": "Q3ResidueFieldReal",
+      "target": "Q3GradedNormBreak"
     },
     {
       "source": "Q3TateCoverTower",

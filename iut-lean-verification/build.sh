@@ -2822,6 +2822,13 @@ import IUT
 #print axioms IUT.q9gl_sigma_diff_general
 #print axioms IUT.q9gl_G2_all
 #print axioms IUT.q9gl_sharp_witness
+#print axioms IUT.q9rf_div3
+#print axioms IUT.q9rf_kernel
+#print axioms IUT.q9rf_local
+#print axioms IUT.q9gn_norm_U2
+#print axioms IUT.q9gn_break_cancel
+#print axioms IUT.q9lr_four_not_norm
+#print axioms IUT.q9lr_step1
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

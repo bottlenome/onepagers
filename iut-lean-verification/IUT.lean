@@ -655,3 +655,6 @@ import IUT.Q3TowerDifferentReal
 import IUT.Q3TraceDifferentReal
 import IUT.Q3HerbrandReal
 import IUT.Q3GenLowerFiltrationReal
+import IUT.Q3ResidueFieldReal
+import IUT.Q3GradedNormBreak
+import IUT.Q3LocalReciprocityReal
