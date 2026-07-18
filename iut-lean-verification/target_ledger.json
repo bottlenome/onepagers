@@ -77,8 +77,8 @@
           "id": "B2",
           "title": "実局所類体論(相互写像・実)",
           "weight": 20,
-          "status": 0.22,
-          "note": "★ crux 4∉N q9lr (M1 q9rf+M2 q9gn+M3 q9lr): 初の実非ノルム・cokernel 非自明・integral-x 限定（audit +0.22→0.22）"
+          "status": 0.3,
+          "note": "★ crux 4∉N q9lr (M1 q9rf+M2 q9gn+M3 q9lr): 初の実非ノルム・cokernel 非自明・integral-x 限定（audit +0.22→0.22） | M4 q9rc [4] 位数3・元レベル ℤ/3 下界（4∉N∧16∉N∧64∈N・q9rc_z3_injects）audit +0.08→0.30"
         },
         {
           "id": "B3",
