@@ -2835,6 +2835,9 @@ import IUT
 #print axioms IUT.q9rg_hom
 #print axioms IUT.q9rg_inj
 #print axioms IUT.q9rg_gal_embeds
+#print axioms IUT.q9qc_gal_embeds
+#print axioms IUT.q9qc_gal_injective
+#print axioms IUT.q9qc_cong_of_proj_eq
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

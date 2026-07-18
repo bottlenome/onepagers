@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 656,
-  "verified_theorem_total": 2826,
-  "choice_free_count": 567,
+  "module_count": 657,
+  "verified_theorem_total": 2829,
+  "choice_free_count": 568,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8052,6 +8052,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ReciprocityGalReal.lean"
+    },
+    {
+      "id": "Q3CokernelObjectReal",
+      "label": "Q3CokernelObjectReal",
+      "milestone": "M4b",
+      "title": "q9rg",
+      "pillar": "B",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CokernelObjectReal.lean"
     }
   ],
   "edges": [
@@ -11600,6 +11612,10 @@
       "target": "Q3ReciprocityGalReal"
     },
     {
+      "source": "Q3ReciprocityGalReal",
+      "target": "Q3CokernelObjectReal"
+    },
+    {
       "source": "Q3ResidueFieldReal",
       "target": "Q3GradedNormBreak"
     },
@@ -11774,6 +11790,10 @@
     {
       "source": "QuotientGroup",
       "target": "PicardDivisor"
+    },
+    {
+      "source": "QuotientGroup",
+      "target": "Q3CokernelObjectReal"
     },
     {
       "source": "QuotientGroup",

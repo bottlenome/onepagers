@@ -660,3 +660,4 @@ import IUT.Q3GradedNormBreak
 import IUT.Q3LocalReciprocityReal
 import IUT.Q3ReciprocityCokernelReal
 import IUT.Q3ReciprocityGalReal
+import IUT.Q3CokernelObjectReal
