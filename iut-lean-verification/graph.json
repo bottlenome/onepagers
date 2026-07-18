@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 654,
-  "verified_theorem_total": 2820,
-  "choice_free_count": 565,
+  "module_count": 655,
+  "verified_theorem_total": 2823,
+  "choice_free_count": 566,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8028,6 +8028,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3LocalReciprocityReal.lean"
+    },
+    {
+      "id": "Q3ReciprocityCokernelReal",
+      "label": "Q3ReciprocityCokernelReal",
+      "milestone": null,
+      "title": "order-3 argument",
+      "pillar": "B",
+      "decl_count": 21,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ReciprocityCokernelReal.lean"
     }
   ],
   "edges": [
@@ -11450,6 +11462,10 @@
     {
       "source": "Q3LocalField",
       "target": "Q3WildRamFiltrationReal"
+    },
+    {
+      "source": "Q3LocalReciprocityReal",
+      "target": "Q3ReciprocityCokernelReal"
     },
     {
       "source": "Q3MonoThetaRigidity",

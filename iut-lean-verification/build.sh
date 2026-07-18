@@ -2829,6 +2829,9 @@ import IUT
 #print axioms IUT.q9gn_break_cancel
 #print axioms IUT.q9lr_four_not_norm
 #print axioms IUT.q9lr_step1
+#print axioms IUT.q9rc_order3
+#print axioms IUT.q9rc_foursq_not_norm
+#print axioms IUT.q9rc_z3_injects
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
