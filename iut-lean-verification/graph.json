@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 648,
-  "verified_theorem_total": 2804,
-  "choice_free_count": 559,
+  "module_count": 651,
+  "verified_theorem_total": 2813,
+  "choice_free_count": 562,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -7956,6 +7956,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TowerDifferentReal.lean"
+    },
+    {
+      "id": "Q3TraceDifferentReal",
+      "label": "Q3TraceDifferentReal",
+      "milestone": null,
+      "title": "Q3TraceDifferentReal",
+      "pillar": "B",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TraceDifferentReal.lean"
+    },
+    {
+      "id": "Q3HerbrandReal",
+      "label": "Q3HerbrandReal",
+      "milestone": null,
+      "title": "Q3HerbrandReal",
+      "pillar": "B",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3HerbrandReal.lean"
+    },
+    {
+      "id": "Q3GenLowerFiltrationReal",
+      "label": "Q3GenLowerFiltrationReal",
+      "milestone": null,
+      "title": "Q3GenLowerFiltrationReal",
+      "pillar": "B",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3GenLowerFiltrationReal.lean"
     }
   ],
   "edges": [
@@ -11265,7 +11301,19 @@
     },
     {
       "source": "Q3ArtinConductorReal",
+      "target": "Q3HerbrandReal"
+    },
+    {
+      "source": "Q3ArtinConductorReal",
       "target": "Q3TowerDifferentReal"
+    },
+    {
+      "source": "Q3ArtinConductorReal",
+      "target": "Q3TraceDifferentReal"
+    },
+    {
+      "source": "Q3HasseArfReal",
+      "target": "Q3HerbrandReal"
     },
     {
       "source": "Q3KummerCubeIdent",
@@ -11425,7 +11473,15 @@
     },
     {
       "source": "Q3NormFiltrationSpike",
+      "target": "Q3GenLowerFiltrationReal"
+    },
+    {
+      "source": "Q3NormFiltrationSpike",
       "target": "Q3TowerDifferentReal"
+    },
+    {
+      "source": "Q3NormFiltrationSpike",
+      "target": "Q3TraceDifferentReal"
     },
     {
       "source": "Q3RamifiedQuadratic",

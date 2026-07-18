@@ -2813,6 +2813,15 @@ import IUT
 #print axioms IUT.q9tw_different_transitivity
 #print axioms IUT.q9tw_disc_M_Q3
 #print axioms IUT.q9tw_exists
+#print axioms IUT.q9tf_trace_ideal_eq
+#print axioms IUT.q9tf_trace_not_pi7
+#print axioms IUT.q9tf_different_via_trace
+#print axioms IUT.q9hb_phi_psi
+#print axioms IUT.q9hb_upper_full_group
+#print axioms IUT.q9hb_hasse_arf_integer_jumps
+#print axioms IUT.q9gl_sigma_diff_general
+#print axioms IUT.q9gl_G2_all
+#print axioms IUT.q9gl_sharp_witness
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

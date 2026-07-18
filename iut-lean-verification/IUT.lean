@@ -652,3 +652,6 @@ import IUT.Q3ArtinConductorReal
 import IUT.Q3NormFiltrationSpike
 import IUT.Q3CubeQuotientReal
 import IUT.Q3TowerDifferentReal
+import IUT.Q3TraceDifferentReal
+import IUT.Q3HerbrandReal
+import IUT.Q3GenLowerFiltrationReal
