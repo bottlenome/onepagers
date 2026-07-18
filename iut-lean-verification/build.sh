@@ -2832,6 +2832,9 @@ import IUT
 #print axioms IUT.q9rc_order3
 #print axioms IUT.q9rc_foursq_not_norm
 #print axioms IUT.q9rc_z3_injects
+#print axioms IUT.q9rg_hom
+#print axioms IUT.q9rg_inj
+#print axioms IUT.q9rg_gal_embeds
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
