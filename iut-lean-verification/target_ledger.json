@@ -70,7 +70,8 @@
           "id": "B1",
           "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)",
           "weight": 20,
-          "status": 0.6
+          "status": 0.64,
+          "note": "q9gl general-element lower filtration ∀x σx−x∈(π₉³) (audit +0.04→0.64)"
         },
         {
           "id": "B2",
@@ -82,14 +83,15 @@
           "id": "B3",
           "title": "実 Artin 導手/different(実表現・実分岐群上)",
           "weight": 20,
-          "status": 0.26,
-          "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26)"
+          "status": 0.27,
+          "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27)"
         },
         {
           "id": "B4",
           "title": "実 Hasse–Arf(実 Galois 群上)",
           "weight": 15,
-          "status": 0.1
+          "status": 0.13,
+          "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13)"
         },
         {
           "id": "B5",
