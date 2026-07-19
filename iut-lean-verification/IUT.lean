@@ -665,3 +665,6 @@ import IUT.ThetaValueProdPerm
 import IUT.CyclotomeRecoveryTorsor
 import IUT.NNQMulHom
 import IUT.Q3TemperedPi1Deepen
+import IUT.NNQSemiring
+import IUT.Q3ValuationReal
+import IUT.Q3NormSurjGraded

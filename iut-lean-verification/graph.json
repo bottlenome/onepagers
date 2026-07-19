@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 661,
-  "verified_theorem_total": 2836,
-  "choice_free_count": 572,
+  "module_count": 664,
+  "verified_theorem_total": 2843,
+  "choice_free_count": 575,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8114,6 +8114,42 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedPi1Deepen.lean"
+    },
+    {
+      "id": "NNQSemiring",
+      "label": "NNQSemiring",
+      "milestone": "M270F",
+      "title": "非負有理数 ℚ≥0 の分配律建設と順序半環への昇格",
+      "pillar": "C",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NNQSemiring.lean"
+    },
+    {
+      "id": "Q3ValuationReal",
+      "label": "Q3ValuationReal",
+      "milestone": null,
+      "title": "Q3ValuationReal",
+      "pillar": "B",
+      "decl_count": 22,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ValuationReal.lean"
+    },
+    {
+      "id": "Q3NormSurjGraded",
+      "label": "Q3NormSurjGraded",
+      "milestone": "M1",
+      "title": "graded ノルムの per-level 全射性の",
+      "pillar": "B",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjGraded.lean"
     }
   ],
   "edges": [
@@ -10858,6 +10894,10 @@
       "target": "ThetaLinkMultiradial"
     },
     {
+      "source": "NNQMulHom",
+      "target": "NNQSemiring"
+    },
+    {
       "source": "NNQOrder",
       "target": "NNQMulHom"
     },
@@ -11462,6 +11502,10 @@
       "target": "Q3LocalReciprocityReal"
     },
     {
+      "source": "Q3GradedNormBreak",
+      "target": "Q3NormSurjGraded"
+    },
+    {
       "source": "Q3HasseArfReal",
       "target": "Q3HerbrandReal"
     },
@@ -11652,6 +11696,10 @@
     {
       "source": "Q3NormFiltrationSpike",
       "target": "Q3TraceDifferentReal"
+    },
+    {
+      "source": "Q3NormFiltrationSpike",
+      "target": "Q3ValuationReal"
     },
     {
       "source": "Q3RamifiedQuadratic",

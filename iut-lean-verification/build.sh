@@ -2845,6 +2845,13 @@ import IUT
 #print axioms IUT.nnqMul_mono
 #print axioms IUT.q3tpEtComp_not_surjective
 #print axioms IUT.q3tpEtComp_injective
+#print axioms IUT.nnq_left_distrib
+#print axioms IUT.nnqToQSemiringHom_exists
+#print axioms IUT.q9v_dvd_iff
+#print axioms IUT.q9v_val_mul
+#print axioms IUT.q9v_sigmaPi_val
+#print axioms IUT.q9ns_lambda_rec
+#print axioms IUT.q9ns_tr_pi5
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
