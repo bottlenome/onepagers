@@ -72,8 +72,8 @@
           "id": "B1",
           "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)",
           "weight": 20,
-          "status": 0.64,
-          "note": "q9gl general-element lower filtration ∀x σx−x∈(π₉³) (audit +0.04→0.64)"
+          "status": 0.66,
+          "note": "q9gl general-element lower filtration ∀x σx−x∈(π₉³) (audit +0.04→0.64) | q9v 実 v_M 付値関数（一様化子 submonoid・i_G(σ)=3 defined value）(audit +0.02→0.66・sub-display)"
         },
         {
           "id": "B2",
@@ -135,8 +135,8 @@
           "id": "C4",
           "title": "測度論的 log-volume(実測度・実積分)",
           "weight": 22,
-          "status": 0.52,
-          "note": "NNQMulHom nnqToQ 乗法保存+順序線形性 (audit +0.02→0.52)"
+          "status": 0.53,
+          "note": "NNQMulHom nnqToQ 乗法保存+順序線形性 (audit +0.02→0.52) | NNQSemiring 左分配律→順序半環+nnqToQ semiring hom (audit +0.01→0.53・柱C 41→42)"
         },
         {
           "id": "C5",
