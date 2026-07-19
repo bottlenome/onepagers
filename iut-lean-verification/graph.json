@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 664,
+  "module_count": 668,
   "verified_theorem_total": 2843,
-  "choice_free_count": 575,
+  "choice_free_count": 579,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8150,6 +8150,54 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjGraded.lean"
+    },
+    {
+      "id": "Q3DifferentValuation",
+      "label": "Q3DifferentValuation",
+      "milestone": null,
+      "title": "Q3DifferentValuation",
+      "pillar": "B",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3DifferentValuation.lean"
+    },
+    {
+      "id": "Q3DifferentIdeal",
+      "label": "Q3DifferentIdeal",
+      "milestone": null,
+      "title": "Q3DifferentIdeal",
+      "pillar": "B",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3DifferentIdeal.lean"
+    },
+    {
+      "id": "Q3RatFieldEmbed",
+      "label": "Q3RatFieldEmbed",
+      "milestone": null,
+      "title": "Q3RatFieldEmbed",
+      "pillar": "A",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3RatFieldEmbed.lean"
+    },
+    {
+      "id": "Q3TateCubeIsogeny",
+      "label": "Q3TateCubeIsogeny",
+      "milestone": null,
+      "title": "Q3TateCubeIsogeny",
+      "pillar": "A",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCubeIsogeny.lean"
     }
   ],
   "edges": [
@@ -11371,6 +11419,10 @@
     },
     {
       "source": "PrimeSpectrum",
+      "target": "Q3DifferentIdeal"
+    },
+    {
+      "source": "PrimeSpectrum",
       "target": "ResidueField"
     },
     {
@@ -11487,6 +11539,10 @@
     },
     {
       "source": "Q3ArtinConductorReal",
+      "target": "Q3DifferentValuation"
+    },
+    {
+      "source": "Q3ArtinConductorReal",
       "target": "Q3HerbrandReal"
     },
     {
@@ -11496,6 +11552,10 @@
     {
       "source": "Q3ArtinConductorReal",
       "target": "Q3TraceDifferentReal"
+    },
+    {
+      "source": "Q3DifferentValuation",
+      "target": "Q3DifferentIdeal"
     },
     {
       "source": "Q3GradedNormBreak",
@@ -11639,6 +11699,10 @@
     },
     {
       "source": "Q3Mu3Completeness",
+      "target": "Q3TateCubeIsogeny"
+    },
+    {
+      "source": "Q3Mu3Completeness",
       "target": "Q3TateCurveL2"
     },
     {
@@ -11726,6 +11790,10 @@
       "target": "Q3TateCurveL2"
     },
     {
+      "source": "Q3RatEmbed",
+      "target": "Q3RatFieldEmbed"
+    },
+    {
       "source": "Q3ReciprocityCokernelReal",
       "target": "Q3ReciprocityGalReal"
     },
@@ -11811,6 +11879,10 @@
     },
     {
       "source": "Q3TateCuspidalization",
+      "target": "Q3TateCubeIsogeny"
+    },
+    {
+      "source": "Q3TateCuspidalization",
       "target": "Q3ThetaGroup"
     },
     {
@@ -11864,6 +11936,10 @@
     {
       "source": "Q3UnitsGroup",
       "target": "Q3TateCurve"
+    },
+    {
+      "source": "Q3ValuationReal",
+      "target": "Q3DifferentValuation"
     },
     {
       "source": "Q3WildRamFiltrationReal",

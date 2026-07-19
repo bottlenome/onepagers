@@ -668,3 +668,7 @@ import IUT.Q3TemperedPi1Deepen
 import IUT.NNQSemiring
 import IUT.Q3ValuationReal
 import IUT.Q3NormSurjGraded
+import IUT.Q3DifferentValuation
+import IUT.Q3DifferentIdeal
+import IUT.Q3RatFieldEmbed
+import IUT.Q3TateCubeIsogeny
