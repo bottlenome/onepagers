@@ -35,13 +35,15 @@
           "id": "A5",
           "title": "実 tempered π₁^temp",
           "weight": 10,
-          "status": 0.2
+          "status": 0.23,
+          "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23)"
         },
         {
           "id": "A6",
           "title": "mono-anabelian 復元(π₁ から体/環を復元・実)",
           "weight": 14,
-          "status": 0.58
+          "status": 0.6,
+          "note": "crt realization-mult + base-point-free torsor (audit +0.02→0.60)"
         },
         {
           "id": "A7",
@@ -133,7 +135,8 @@
           "id": "C4",
           "title": "測度論的 log-volume(実測度・実積分)",
           "weight": 22,
-          "status": 0.5
+          "status": 0.52,
+          "note": "NNQMulHom nnqToQ 乗法保存+順序線形性 (audit +0.02→0.52)"
         },
         {
           "id": "C5",
