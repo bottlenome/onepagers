@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 657,
-  "verified_theorem_total": 2829,
-  "choice_free_count": 568,
+  "module_count": 661,
+  "verified_theorem_total": 2836,
+  "choice_free_count": 572,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8064,6 +8064,56 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CokernelObjectReal.lean"
+    },
+    {
+      "id": "ThetaValueProdPerm",
+      "label": "ThetaValueProdPerm",
+      "milestone": "M256F",
+      "title": "テータ値多ラベル積の任意並べ替え不変",
+      "pillar": "E",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ThetaValueProdPerm.lean"
+    },
+    {
+      "id": "CyclotomeRecoveryTorsor",
+      "label": "CyclotomeRecoveryTorsor",
+      "milestone": null,
+      "title": "CyclotomeRecoveryTorsor",
+      "pillar": "A",
+      "decl_count": 8,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryTorsor.lean"
+    },
+    {
+      "id": "NNQMulHom",
+      "label": "NNQMulHom",
+      "milestone": "M267F",
+      "title": "非負有理数 ℚ≥0 の乗法建設と比較射 nnqToQ の順序半環準同型への昇格",
+      "pillar": "C",
+      "decl_count": 23,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/NNQMulHom.lean"
+    },
+    {
+      "id": "Q3TemperedPi1Deepen",
+      "label": "Q3TemperedPi1Deepen",
+      "milestone": null,
+      "title": "Q3TemperedPi1Deepen",
+      "pillar": "A",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedPi1Deepen.lean"
     }
   ],
   "edges": [
@@ -8502,6 +8552,10 @@
     {
       "source": "CyclotomeRecovery",
       "target": "CyclotomicGKActionReal"
+    },
+    {
+      "source": "CyclotomeRecoveryCanonicity",
+      "target": "CyclotomeRecoveryTorsor"
     },
     {
       "source": "CyclotomeRecoveryLimit",
@@ -10361,6 +10415,10 @@
     },
     {
       "source": "LocalCFT",
+      "target": "Q3TemperedPi1Deepen"
+    },
+    {
+      "source": "LocalCFT",
       "target": "TemperedTower"
     },
     {
@@ -10798,6 +10856,14 @@
     {
       "source": "MultiradialRep",
       "target": "ThetaLinkMultiradial"
+    },
+    {
+      "source": "NNQOrder",
+      "target": "NNQMulHom"
+    },
+    {
+      "source": "NNQtoQHom",
+      "target": "NNQMulHom"
     },
     {
       "source": "NatPrimeParts",
@@ -11345,6 +11411,10 @@
     },
     {
       "source": "Profinite",
+      "target": "Q3TemperedPi1Deepen"
+    },
+    {
+      "source": "Profinite",
       "target": "QuotientGroup"
     },
     {
@@ -11722,6 +11792,10 @@
     {
       "source": "Q3TateTorsion",
       "target": "Q3TateCuspidalization"
+    },
+    {
+      "source": "Q3TemperedPi1",
+      "target": "Q3TemperedPi1Deepen"
     },
     {
       "source": "Q3TemperedPi1",
@@ -12793,6 +12867,10 @@
     },
     {
       "source": "TemperedTower",
+      "target": "Q3TemperedPi1Deepen"
+    },
+    {
+      "source": "TemperedTower",
       "target": "TemperedCommutator"
     },
     {
@@ -13106,6 +13184,10 @@
     {
       "source": "ThetaValueProdSwapAt",
       "target": "ThetaValueProdBlockSwap"
+    },
+    {
+      "source": "ThetaValueProdSwapAt",
+      "target": "ThetaValueProdPerm"
     },
     {
       "source": "ThetaValueSubgroup",

@@ -661,3 +661,7 @@ import IUT.Q3LocalReciprocityReal
 import IUT.Q3ReciprocityCokernelReal
 import IUT.Q3ReciprocityGalReal
 import IUT.Q3CokernelObjectReal
+import IUT.ThetaValueProdPerm
+import IUT.CyclotomeRecoveryTorsor
+import IUT.NNQMulHom
+import IUT.Q3TemperedPi1Deepen

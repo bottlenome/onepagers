@@ -2838,6 +2838,13 @@ import IUT
 #print axioms IUT.q9qc_gal_embeds
 #print axioms IUT.q9qc_gal_injective
 #print axioms IUT.q9qc_cong_of_proj_eq
+#print axioms IUT.thetaValProd_perm
+#print axioms IUT.crt_from_units_mul
+#print axioms IUT.crt_ratio_unique
+#print axioms IUT.nnqToQ_mul
+#print axioms IUT.nnqMul_mono
+#print axioms IUT.q3tpEtComp_not_surjective
+#print axioms IUT.q3tpEtComp_injective
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
