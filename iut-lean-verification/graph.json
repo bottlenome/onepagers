@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 672,
-  "verified_theorem_total": 2852,
-  "choice_free_count": 583,
+  "module_count": 673,
+  "verified_theorem_total": 2854,
+  "choice_free_count": 584,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8248,6 +8248,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryThetaKill.lean"
+    },
+    {
+      "id": "Q3NormSurjPeelBase",
+      "label": "Q3NormSurjPeelBase",
+      "milestone": "M1",
+      "title": "**基底 j=3 の単一 peel 段の剰余整合全射性**",
+      "pillar": "B",
+      "decl_count": 18,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjPeelBase.lean"
     }
   ],
   "edges": [
@@ -11834,6 +11846,10 @@
     {
       "source": "Q3NormFiltrationSpike",
       "target": "Q3ValuationReal"
+    },
+    {
+      "source": "Q3NormSurjGraded",
+      "target": "Q3NormSurjPeelBase"
     },
     {
       "source": "Q3RamifiedQuadratic",

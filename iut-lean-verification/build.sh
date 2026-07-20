@@ -2861,6 +2861,8 @@ import IUT
 #print axioms IUT.crk_torsor_reduction
 #print axioms IUT.crk_ratio_kill
 #print axioms IUT.crk_scope
+#print axioms IUT.q9np_peel_base
+#print axioms IUT.q9np_peel_base_step
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -676,3 +676,4 @@ import IUT.Q3Codifferent
 import IUT.BelyiCubicRamification
 import IUT.TateModuleEndoRing
 import IUT.CyclotomeRecoveryThetaKill
+import IUT.Q3NormSurjPeelBase
