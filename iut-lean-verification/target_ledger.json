@@ -81,8 +81,8 @@
      "id": "B2",
      "title": "実局所類体論(相互写像・実)",
      "weight": 20,
-     "status": 0.38,
-     "note": "★ crux 4∉N q9lr (M1 q9rf+M2 q9gn+M3 q9lr): 初の実非ノルム・cokernel 非自明・integral-x 限定（audit +0.22→0.22） | M4 q9rc [4] 位数3・元レベル ℤ/3 下界（4∉N∧16∉N∧64∈N・q9rc_z3_injects）audit +0.08→0.30 | M4b q9rg Gal↪cokernel 埋込＋q9rcCongMod 同値律（cap(a) 解消・subgroup ⟨[4]⟩）audit +0.04→0.34 | M4c q9qc literal 商群 U_{L₂}/N(U_M) Grp + Gal↪it（cap(a) 残解消・cosetRel↔q9rcCongMod 橋）audit +0.02→0.36 | q9np T3-M1 base-case j=3 peel-step residue surjectivity onto 𝔽₃ (twice-failed, now closed at base; audit +0.02→0.38)"
+     "status": 0.41,
+     "note": "★ crux 4∉N q9lr (M1 q9rf+M2 q9gn+M3 q9lr): 初の実非ノルム・cokernel 非自明・integral-x 限定（audit +0.22→0.22） | M4 q9rc [4] 位数3・元レベル ℤ/3 下界（4∉N∧16∉N∧64∈N・q9rc_z3_injects）audit +0.08→0.30 | M4b q9rg Gal↪cokernel 埋込＋q9rcCongMod 同値律（cap(a) 解消・subgroup ⟨[4]⟩）audit +0.04→0.34 | M4c q9qc literal 商群 U_{L₂}/N(U_M) Grp + Gal↪it（cap(a) 残解消・cosetRel↔q9rcCongMod 橋）audit +0.02→0.36 | q9np T3-M1 base-case j=3 peel-step residue surjectivity onto 𝔽₃ (twice-failed, now closed at base; audit +0.02→0.38) | q9npg T3-M1 general-j peel: base j=3 を全 j≥3 へ λ-再帰の完全帰納で昇格（∀j≥3 ∀c∈𝔽₃ level-3j 先頭剰余が 𝔽₃ へ全射・T3-M2 への per-level 入力）(audit +0.03→0.41)"
     },
     {
      "id": "B3",
