@@ -63,7 +63,8 @@
      "id": "A9",
      "title": "Belyi 化 / 遠アーベル幾何入力(実)",
      "weight": 10,
-     "status": 0.12
+     "status": 0.14,
+     "note": " | kmu(BLW-2) tripod ℤ/3×ℤ/3 商を実 Kummer 被覆 u³=t,v³=1−t/ℚ(ζ₃) の実デッキ群 μ₃×μ₃ として実現・分岐 locus {0,1,∞} 実算出・faithful deck order-9。F₂(BLW-1)未・bundle 不完全ゆえ ladder floor (audit +0.02→0.14)"
     }
    ]
   },
