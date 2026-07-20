@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 684,
+  "module_count": 685,
   "verified_theorem_total": 2865,
-  "choice_free_count": 595,
+  "choice_free_count": 596,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8386,6 +8386,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjComplete.lean"
     },
     {
+      "id": "Q3EtaleArithPi1",
+      "label": "Q3EtaleArithPi1",
+      "milestone": null,
+      "title": "Q3EtaleArithPi1",
+      "pillar": "A",
+      "decl_count": 27,
+      "choice_free": true,
+      "has_honest_scope": false,
+      "refs": [
+        "[IUTchI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3EtaleArithPi1.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -8996,6 +9010,10 @@
     {
       "source": "CyclotomicLimitIso",
       "target": "CyclotomicProjSurj"
+    },
+    {
+      "source": "CyclotomicLimitIso",
+      "target": "Q3EtaleArithPi1"
     },
     {
       "source": "CyclotomicLimitIso",
@@ -11804,6 +11822,10 @@
     {
       "source": "Q3DifferentValuation",
       "target": "Q3DifferentIdeal"
+    },
+    {
+      "source": "Q3Etale9TwoDir",
+      "target": "Q3EtaleArithPi1"
     },
     {
       "source": "Q3GradedNormBreak",
