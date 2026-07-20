@@ -2858,6 +2858,9 @@ import IUT
 #print axioms IUT.blr_riemann_hurwitz
 #print axioms IUT.tmer_comp_comm
 #print axioms IUT.tmer_char_add
+#print axioms IUT.crk_torsor_reduction
+#print axioms IUT.crk_ratio_kill
+#print axioms IUT.crk_scope
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

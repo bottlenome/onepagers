@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 671,
-  "verified_theorem_total": 2849,
-  "choice_free_count": 582,
+  "module_count": 672,
+  "verified_theorem_total": 2852,
+  "choice_free_count": 583,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8236,6 +8236,18 @@
         "[EtTh]"
       ],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleEndoRing.lean"
+    },
+    {
+      "id": "CyclotomeRecoveryThetaKill",
+      "label": "CyclotomeRecoveryThetaKill",
+      "milestone": null,
+      "title": "CyclotomeRecoveryThetaKill",
+      "pillar": "A",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/CyclotomeRecoveryThetaKill.lean"
     }
   ],
   "edges": [
@@ -8690,6 +8702,10 @@
     {
       "source": "CyclotomeRecoveryReal",
       "target": "CyclotomeRecoveryLimit"
+    },
+    {
+      "source": "CyclotomeRecoveryTorsor",
+      "target": "CyclotomeRecoveryThetaKill"
     },
     {
       "source": "CyclotomicAutExt",
@@ -11794,6 +11810,10 @@
     {
       "source": "Q3Mu9ThetaGroup",
       "target": "Q3Mu9Rigidity"
+    },
+    {
+      "source": "Q3Mu9TmzBridge",
+      "target": "CyclotomeRecoveryThetaKill"
     },
     {
       "source": "Q3NormFiltrationSpike",
