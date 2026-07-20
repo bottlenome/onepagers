@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 673,
-  "verified_theorem_total": 2854,
-  "choice_free_count": 584,
+  "module_count": 674,
+  "verified_theorem_total": 2856,
+  "choice_free_count": 585,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8260,6 +8260,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjPeelBase.lean"
+    },
+    {
+      "id": "Q3HasseArfIntegral",
+      "label": "Q3HasseArfIntegral",
+      "milestone": null,
+      "title": "Q3HasseArfIntegral",
+      "pillar": "B",
+      "decl_count": 17,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3HasseArfIntegral.lean"
     }
   ],
   "edges": [
@@ -11646,6 +11658,10 @@
     {
       "source": "Q3HasseArfReal",
       "target": "Q3HerbrandReal"
+    },
+    {
+      "source": "Q3HerbrandReal",
+      "target": "Q3HasseArfIntegral"
     },
     {
       "source": "Q3KummerCubeIdent",

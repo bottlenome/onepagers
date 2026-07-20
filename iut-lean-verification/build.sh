@@ -2863,6 +2863,8 @@ import IUT
 #print axioms IUT.crk_scope
 #print axioms IUT.q9np_peel_base
 #print axioms IUT.q9np_peel_base_step
+#print axioms IUT.q9hi_hasse_arf_integral
+#print axioms IUT.q9hi_real_lower_jump
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
