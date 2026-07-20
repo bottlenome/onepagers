@@ -684,4 +684,5 @@ import IUT.Q3TemperedThetaClassL9
 import IUT.Q3NormSurjSuccApprox
 import IUT.Q3FractionalCodifferent
 import IUT.TripodFreeGroup
+import IUT.Q3NormSurjApproxClose
 import IUT.TripodKummerMu3
