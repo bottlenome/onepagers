@@ -2872,6 +2872,8 @@ import IUT
 #print axioms IUT.q9nt_cyclotome_order9
 #print axioms IUT.q9na_lam_descent
 #print axioms IUT.q9na_tower_dvd
+#print axioms IUT.kmu_deck_faithful
+#print axioms IUT.kmu_deck_prod_faithful
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
