@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 679,
+  "module_count": 680,
   "verified_theorem_total": 2865,
-  "choice_free_count": 590,
+  "choice_free_count": 591,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8322,6 +8322,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjSuccApprox.lean"
     },
     {
+      "id": "Q3FractionalCodifferent",
+      "label": "Q3FractionalCodifferent",
+      "milestone": null,
+      "title": "Q3FractionalCodifferent",
+      "pillar": "B",
+      "decl_count": 32,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3FractionalCodifferent.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -11724,6 +11736,10 @@
     {
       "source": "Q3ArtinConductorReal",
       "target": "Q3TraceDifferentReal"
+    },
+    {
+      "source": "Q3Codifferent",
+      "target": "Q3FractionalCodifferent"
     },
     {
       "source": "Q3DifferentIdeal",
