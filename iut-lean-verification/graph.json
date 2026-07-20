@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 685,
+  "module_count": 686,
   "verified_theorem_total": 2865,
-  "choice_free_count": 596,
+  "choice_free_count": 597,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8400,6 +8400,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3EtaleArithPi1.lean"
     },
     {
+      "id": "Q3KummerNonic",
+      "label": "Q3KummerNonic",
+      "milestone": null,
+      "title": "Q3KummerNonic",
+      "pillar": "A",
+      "decl_count": 46,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonic.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -11870,6 +11882,10 @@
     {
       "source": "Q3KummerCubic",
       "target": "Q3KummerCubeIdent"
+    },
+    {
+      "source": "Q3KummerCubic",
+      "target": "Q3KummerNonic"
     },
     {
       "source": "Q3KummerCubic",

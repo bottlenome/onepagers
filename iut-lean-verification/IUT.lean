@@ -688,4 +688,5 @@ import IUT.Q3NormSurjApproxClose
 import IUT.TripodRealizationBundle
 import IUT.Q3NormSurjComplete
 import IUT.Q3EtaleArithPi1
+import IUT.Q3KummerNonic
 import IUT.TripodKummerMu3
