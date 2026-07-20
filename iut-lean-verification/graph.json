@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 680,
+  "module_count": 681,
   "verified_theorem_total": 2865,
-  "choice_free_count": 591,
+  "choice_free_count": 592,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8334,6 +8334,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3FractionalCodifferent.lean"
     },
     {
+      "id": "TripodFreeGroup",
+      "label": "TripodFreeGroup",
+      "milestone": null,
+      "title": "TripodFreeGroup",
+      "pillar": "A",
+      "decl_count": 51,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[GenEll]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodFreeGroup.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -10048,6 +10062,10 @@
     {
       "source": "GaloisFullnessConnected",
       "target": "PillarAFullnessProgram"
+    },
+    {
+      "source": "GaloisPi1Iso",
+      "target": "TripodFreeGroup"
     },
     {
       "source": "GaloisTheta",
