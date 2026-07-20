@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 682,
+  "module_count": 683,
   "verified_theorem_total": 2865,
-  "choice_free_count": 593,
+  "choice_free_count": 594,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8360,6 +8360,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjApproxClose.lean"
     },
     {
+      "id": "TripodRealizationBundle",
+      "label": "TripodRealizationBundle",
+      "milestone": null,
+      "title": "TripodRealizationBundle",
+      "pillar": "A",
+      "decl_count": 20,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[GenEll]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodRealizationBundle.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -13666,6 +13680,14 @@
     {
       "source": "TriSquare",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "TripodFreeGroup",
+      "target": "TripodRealizationBundle"
+    },
+    {
+      "source": "TripodKummerMu3",
+      "target": "TripodRealizationBundle"
     },
     {
       "source": "UnitDecomposition",
