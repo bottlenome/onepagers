@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 674,
-  "verified_theorem_total": 2856,
-  "choice_free_count": 585,
+  "module_count": 675,
+  "verified_theorem_total": 2858,
+  "choice_free_count": 586,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8272,6 +8272,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3HasseArfIntegral.lean"
+    },
+    {
+      "id": "Q3NormSurjPeelGeneral",
+      "label": "Q3NormSurjPeelGeneral",
+      "milestone": "M1",
+      "title": "**一般 level j≥3 の単一 peel 段の",
+      "pillar": "B",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjPeelGeneral.lean"
     }
   ],
   "edges": [
@@ -11866,6 +11878,10 @@
     {
       "source": "Q3NormSurjGraded",
       "target": "Q3NormSurjPeelBase"
+    },
+    {
+      "source": "Q3NormSurjPeelBase",
+      "target": "Q3NormSurjPeelGeneral"
     },
     {
       "source": "Q3RamifiedQuadratic",

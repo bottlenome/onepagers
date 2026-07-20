@@ -678,3 +678,4 @@ import IUT.TateModuleEndoRing
 import IUT.CyclotomeRecoveryThetaKill
 import IUT.Q3NormSurjPeelBase
 import IUT.Q3HasseArfIntegral
+import IUT.Q3NormSurjPeelGeneral

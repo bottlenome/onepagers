@@ -95,8 +95,8 @@
      "id": "B4",
      "title": "実 Hasse–Arf(実 Galois 群上)",
      "weight": 15,
-     "status": 0.13,
-     "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13)"
+     "status": 0.14,
+     "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13) | q9hi Hasse-Arf 積分整数性の理由（|G₀|∣Σ|G_i|=3∣6・φ(2)=2∈ℤ・実 π₉ jump に束縛）——ただし t₀=2 は φ 恒等域で退化的（audit +0.01→0.14）"
     },
     {
      "id": "B5",
