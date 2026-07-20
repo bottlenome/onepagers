@@ -36,8 +36,8 @@
      "id": "A5",
      "title": "実 tempered π₁^temp",
      "weight": 10,
-     "status": 0.23,
-     "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23)"
+     "status": 0.27,
+     "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23) | q3tpd(N1) tempered π₁ étale image dense+proper + q9nt(N2) wild level-9 tempered theta realization・χ-twist visible(Z₉⁻¹≠Z₉・mod-9 primitive root) (audit combined +0.04→0.27)"
     },
     {
      "id": "A6",
