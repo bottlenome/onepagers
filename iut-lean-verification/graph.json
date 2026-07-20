@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 675,
-  "verified_theorem_total": 2858,
-  "choice_free_count": 586,
+  "module_count": 676,
+  "verified_theorem_total": 2859,
+  "choice_free_count": 587,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8284,6 +8284,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjPeelGeneral.lean"
+    },
+    {
+      "id": "Q3TemperedEtDensity",
+      "label": "Q3TemperedEtDensity",
+      "milestone": null,
+      "title": "Q3TemperedEtDensity",
+      "pillar": "A",
+      "decl_count": 9,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedEtDensity.lean"
     }
   ],
   "edges": [
@@ -8570,6 +8582,10 @@
     {
       "source": "Compactness",
       "target": "LimitCompact"
+    },
+    {
+      "source": "Compactness",
+      "target": "Q3TemperedEtDensity"
     },
     {
       "source": "Composition",
@@ -12040,6 +12056,10 @@
       "target": "Q3TemperedThetaClass"
     },
     {
+      "source": "Q3TemperedPi1Deepen",
+      "target": "Q3TemperedEtDensity"
+    },
+    {
       "source": "Q3ThetaGroup",
       "target": "Q3MonoThetaRigidity"
     },
@@ -13458,6 +13478,10 @@
     {
       "source": "Topology",
       "target": "Compactness"
+    },
+    {
+      "source": "Topology",
+      "target": "Q3TemperedEtDensity"
     },
     {
       "source": "Topology",

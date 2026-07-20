@@ -2867,6 +2867,7 @@ import IUT
 #print axioms IUT.q9hi_real_lower_jump
 #print axioms IUT.q9npg_peel_general
 #print axioms IUT.q9npg_tr_lead
+#print axioms IUT.q3tpd_dense_proper
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

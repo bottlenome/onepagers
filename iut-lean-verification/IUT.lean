@@ -679,3 +679,4 @@ import IUT.CyclotomeRecoveryThetaKill
 import IUT.Q3NormSurjPeelBase
 import IUT.Q3HasseArfIntegral
 import IUT.Q3NormSurjPeelGeneral
+import IUT.Q3TemperedEtDensity
