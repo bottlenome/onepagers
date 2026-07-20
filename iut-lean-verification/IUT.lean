@@ -672,3 +672,6 @@ import IUT.Q3DifferentValuation
 import IUT.Q3DifferentIdeal
 import IUT.Q3RatFieldEmbed
 import IUT.Q3TateCubeIsogeny
+import IUT.Q3Codifferent
+import IUT.BelyiCubicRamification
+import IUT.TateModuleEndoRing

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 668,
+  "module_count": 671,
   "verified_theorem_total": 2843,
-  "choice_free_count": 579,
+  "choice_free_count": 582,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8198,6 +8198,44 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCubeIsogeny.lean"
+    },
+    {
+      "id": "Q3Codifferent",
+      "label": "Q3Codifferent",
+      "milestone": null,
+      "title": "Q3Codifferent",
+      "pillar": "B",
+      "decl_count": 15,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Codifferent.lean"
+    },
+    {
+      "id": "BelyiCubicRamification",
+      "label": "BelyiCubicRamification",
+      "milestone": null,
+      "title": "BelyiCubicRamification",
+      "pillar": "A",
+      "decl_count": 16,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/BelyiCubicRamification.lean"
+    },
+    {
+      "id": "TateModuleEndoRing",
+      "label": "TateModuleEndoRing",
+      "milestone": null,
+      "title": "TateModuleEndoRing",
+      "pillar": "A",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleEndoRing.lean"
     }
   ],
   "edges": [
@@ -8368,6 +8406,10 @@
     {
       "source": "ArtinConductor",
       "target": "ConductorDiscriminant"
+    },
+    {
+      "source": "BelyiCubicReal",
+      "target": "BelyiCubicRamification"
     },
     {
       "source": "Binomial2",
@@ -8684,6 +8726,10 @@
     {
       "source": "CyclotomicCharIso",
       "target": "TateModuleEndo"
+    },
+    {
+      "source": "CyclotomicCharIso",
+      "target": "TateModuleEndoRing"
     },
     {
       "source": "CyclotomicDifferent",
@@ -11554,6 +11600,10 @@
       "target": "Q3TraceDifferentReal"
     },
     {
+      "source": "Q3DifferentIdeal",
+      "target": "Q3Codifferent"
+    },
+    {
       "source": "Q3DifferentValuation",
       "target": "Q3DifferentIdeal"
     },
@@ -12871,6 +12921,10 @@
     },
     {
       "source": "TateModuleEndo",
+      "target": "TateModuleEndoRing"
+    },
+    {
+      "source": "TateModuleEndo",
       "target": "TateModuleIndeterminacy"
     },
     {
@@ -12908,6 +12962,10 @@
     {
       "source": "TateModuleZ3",
       "target": "TateModuleEndo"
+    },
+    {
+      "source": "TateModuleZ3",
+      "target": "TateModuleEndoRing"
     },
     {
       "source": "TateModuleZ3",
@@ -13476,6 +13534,10 @@
     {
       "source": "Zmod3PowUnits",
       "target": "TateModuleEndo"
+    },
+    {
+      "source": "Zmod3PowUnits",
+      "target": "TateModuleEndoRing"
     },
     {
       "source": "Zmod3PowUnits",

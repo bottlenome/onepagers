@@ -2852,6 +2852,12 @@ import IUT
 #print axioms IUT.q9v_sigmaPi_val
 #print axioms IUT.q9ns_lambda_rec
 #print axioms IUT.q9ns_tr_pi5
+#print axioms IUT.q9cd_trace_image_eq
+#print axioms IUT.q9cd_codiff_sharp
+#print axioms IUT.blr_ram0_exact
+#print axioms IUT.blr_riemann_hurwitz
+#print axioms IUT.tmer_comp_comm
+#print axioms IUT.tmer_char_add
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
