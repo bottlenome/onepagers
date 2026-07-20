@@ -686,4 +686,5 @@ import IUT.Q3FractionalCodifferent
 import IUT.TripodFreeGroup
 import IUT.Q3NormSurjApproxClose
 import IUT.TripodRealizationBundle
+import IUT.Q3NormSurjComplete
 import IUT.TripodKummerMu3

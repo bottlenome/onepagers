@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 683,
+  "module_count": 684,
   "verified_theorem_total": 2865,
-  "choice_free_count": 594,
+  "choice_free_count": 595,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8374,6 +8374,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodRealizationBundle.lean"
     },
     {
+      "id": "Q3NormSurjComplete",
+      "label": "Q3NormSurjComplete",
+      "milestone": "M3a",
+      "title": "**完備性への可除性ブリッジ（level-k 判定・分離性）**",
+      "pillar": "B",
+      "decl_count": 12,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjComplete.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -12026,6 +12038,10 @@
       "target": "Q3ValuationReal"
     },
     {
+      "source": "Q3NormSurjApproxClose",
+      "target": "Q3NormSurjComplete"
+    },
+    {
       "source": "Q3NormSurjGraded",
       "target": "Q3NormSurjPeelBase"
     },
@@ -13824,6 +13840,10 @@
     {
       "source": "ZmodOrder",
       "target": "PrimitiveRoot"
+    },
+    {
+      "source": "Zp3Complete",
+      "target": "Q3NormSurjComplete"
     },
     {
       "source": "Zp3Complete",
