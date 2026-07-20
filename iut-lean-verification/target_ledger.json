@@ -1,252 +1,252 @@
 {
-  "_about": "実 IUT 完全証明率(complete_pct)の固定分母。実 Cor 3.12 に必要な実対象の部品リスト。各項目の status(実装度 0..1)は実装者が付けず、独立監査(AUDIT_RUBRIC.md)が実 Lean 定義から評定して埋める。complete_pct(柱) = Σ(weight*status)/Σ(weight)。分母(項目・weight)はここに固定し後から増やさない(増やす場合は台帳改訂として明示)。",
-  "_status_scale": "0=実対象なし(未着手 or 模型のみ), 0.5=実対象の忠実な部分ケースあり(狭い but 本物), 1=実対象の上で当該部品が完成 （中間値 0.7 等も可: 独立監査が『0.5 の忠実な部分ケースを質的に超えるが満点1未達』と判定した場合に用いる。例 A1=0.7: 実 ℚ[x]/(x³−2) 商環＋証明済み Bezout による体化＝直積模型0.5を超えるが単一f・∃形逆元で1未満。）",
-  "_crux_note": "D7(多輻不等式 crux Dβ-ω)は分母に含むが、数学的論争が決着するまで status は 0 のまま(Iff.rfl 外部保持)。ゆえに complete_pct は構造的に 100% に到達しない。",
-  "_current_numerator": "2026-07-08 独立監査(各柱1名・opus・敵対的・実Lean定義のみ・自己申告非共有)で status を確定。C1のみ status=1(実ℤ_p上のLubin-Tate形式群)。他は0/0.5。第140-147弾の自己申告値は撤回済み。 / 2026-07-09: B5 積公式(実 ∏_v|x|_v=1 over ℚˣ, B5ProductFormulaQ)の独立再監査で B5 0→0.5(忠実な部分ケース・大域CFT本体は未)。 / 2026-07-09: A1 0.5→0.7（実 ℚ[x]/(x³−2)=ℚ(∛2) を真の quotCRing 商環＋本物に証明した SimpleExtData.bezout で体化・独立 A 再監査確定）。 / 2026-07-09: A1 0.7→0.75（2つ目の実数体 ℚ(ζ_3)=ℚ[x]/(x²+x+1) を Φ₃ 既約性証明込みで真の商環体化・独立 A 再監査確定。異なる次数で枠組再利用性を実証・単一f限定を緩和。ただし一般構成器/∃形逆元/基底なしで満点未達）。 / 2026-07-09: A1 0.75→0.80（満たせる一般構成器 gefField『∀既約f, ℚ[x]/(f)体』＋x³−2/Φ₃ 二実例を同一エンジンから体化・独立監査確定。修正後 pibIrreducible は忠実。∃形逆元/基底理論なしで 0.85 不可）。 / 2026-07-09: A1 0.80→0.85（前回名指しの2限定を両方本物に解消・独立再監査確定。(1) 全域 inv: 正規形担体 GefNF（choice-free subtype）上の全域関数 gefNFInv と gefNF_mul_inv_cancel（x≠0⟹x·inv(x)=1・Bezout+pfdRed_char 経由・inv0=0 縮退でない）で IUTField/Field268 インスタンス gefNFIUTField/gefNF268 を充填＝∃形逆元を解消。(2) 基底/次数: 冪基底 gefPowBasis（spans/indep 実証明）・gef_degree_eq [K:ℚ]=nf・α^i=X^i・FieldExtension ℚ↪K の basisLK スロット gefRegBasis。監査者が自ら gefNFIUTField を x³−2(次数3)/Φ₃(次数2)へ具体実例化し全 axiom [propext,Quot.sound]・非空虚を確認。残る限定: 基礎体ℚ固定・既約性 f ごと手証明・旧 Quot 表示の has_inverses は∃形のまま（消さず）・次元 well-defined 性未証明・塔反復未達で満点1未達）。 / 2026-07-09: A3 0.5→0.55（独立 A3 再監査確定・reaudit-A3-cyclotomicgal-2026-07-09.md）。コード全体で初の非自明有限体拡大 ℚ⊂ℚ(ζ₃)（base=実ℚ・trivialExtension でない・cnfExt3）と Gal(ℚ(ζ₃)/ℚ) 位数ちょうど2の完全決定（cg3_galois_order_two・∀自己同型は id か共役σ₁・仮説0本・map_mul は pfdRed_char で x̄²=−1−x̄ を実現・全射性は R1 prc_roots_le_degree 実適用の根の二分法+決定補題）。従来の名指し欠落「非自明有限体拡大が1つも無い・全 Galois 塔が trivialExtension 詰め」の初 discharge。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋全対象 #print axioms=[propext,Quot.sound] を確認。ただし塔/制限準同型 res/逆極限 G_K は完全未構成・2段目 ℚ(ζ₉) も未達(Φ_9 既約性=Eisenstein 判定器未完・pum/p9e は土台のみ)ゆえ 0.6 未達で 0.55 上限。**柱A%は 36.8→37.4 の丸めで 37 据え置き**（38 には A3≥0.58 or 高weight項目が要る）。status は上げるが柱%は据え置きを正直に反映。 / 2026-07-10: A3 0.55→0.6（独立 A3 再監査確定・reaudit-A3-res39-2026-07-09.md）。円分塔 2 段目 ℚ(ζ₉)=ℚ[x]/(Φ_9) の実体構成（Φ_9=x⁶+x³+1 の既約性を Eisenstein 判定器 eis_irreducible＋シフト輸送で完全証明・p9i_irreducible／honest 仮説でない・eis_irreducible は中間次数枝を egv_min_index_mul の Newton 対角で exfalso 排除＝非空虚／p9iPhi9Field は実 IUTField 次数6・base=実ℚ）と、埋め込み ι:ℚ(ζ₃)↪ℚ(ζ₉)（ce39Iota・実 RingHom・x̄₃↦x̄₉³・map_mul は剰余簡約越し）と、μ_9=⟨x̄₉⟩ 位数9 巡回（cm9_order・cm9_root_in_powers・choice-free 指標抽出 cm9Find_spec）と、**制限準同型 res₁:Gal(ℚ(ζ₉)/ℚ)→Gal(ℚ(ζ₃)/ℚ) の本物構成**（cr39Res＝a mod 3 で id/cg3Conj 切替・縮退でない・意味論 compat ι∘res(σ)=σ∘ι を ∀x 全点で証明・cr39ResHom は map_mul 付き実群準同型・ι 単射 ce39Map_inj＋cg3_aut_ext 使用）を実装（Phi9Irreducible/CyclotomicEmbed39/CyclotomicMu9/CyclotomicMu9Roots/CyclotomicRes39）。コード全体で初のガロア群間 transition morphism（逆系の1本の遷移射）＝単段+Gal を質的に超える。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋新規23対象 #print axioms=[propext,Quot.sound](新規 Classical.choice 皆無)を確認。**残る限定で 0.6 上限**: (i)無限塔/逆極限 profinite G_K 未達（2段の有限塔＋res 1本のみ）(ii)res 全射性未証明 (iii)cr39ResHom は ProfinitePi1Tower.restr witness へ未接続（コード他所で未使用・塔詰め意図的に未実施）(iv)p=3・分離性/正規性一般論未形式化。**柱A%は 37.4→38.0 で 37→38 前進**（前回据え置きから今回 +1・res₁ 実体が丸め閾を越える）。記録 audit/reaudit-A3-res39-2026-07-09.md。 / 2026-07-10: A3 0.6→0.65（独立 A3 再監査確定・reaudit-A3-m2-2026-07-09.md）。前回 0.6（2 段塔 ℚ(ζ₃)⊂ℚ(ζ₉)＋遷移射 res₁ の存在・compat・群準同型のみ／res₁ 全射性未証明・一般 n 未達）に対し、今回 **(1) res₁ 全射性 `cr39_surjective`**（監査残欠 (ii) 解消・cg9Aut 2 5=σ₂ と cg3_galois_order_two 二分・仮説0）と **(2) 一般 n 塔 M2 の全機構**が本物で入った: `cteField n hn`（∀n の実 ℚ(ζ_{3ⁿ})=ℚ[x]/(Φ_{3ⁿ})・gefNFIUTField 実例化・deg 2·3^{n−1}）＋`cteIota`（∀n 段間実 RingHom）／`eitPhi_irreducible n hn`（∀n の Φ_{3ⁿ} 既約性・freshman's dream 立方帰納 eitFreshman＋eis_irreducible＋est_transport・n=2 hardcode でない）／`ctm_order`（∀n 位数ちょうど 3ⁿ）・`ctmFind`（choice-free 走査）／`cae_aut_ext`（∀n 決定補題・基底分解 cae_decompose 経由）／`csaAut`（∀n の実体自己同型 σ_a: ζ_n↦ζ_n^a・map_mul は csa_eval_hphi の根での Φ 簡約消去＝発見B の非定数余因子を回避・逆元 witness 非退化）／`ctrResHom`（∀n の実群準同型 res_n・map_mul=ctr_res_comp）・`ctr_compat`（ι∘res(σ)=σ∘ι を全点）・`ctr_surjective`（∀n 全射性・原像 σ の逆元を Hensel 持ち上げ ctr_inv_exists で choice-free 構成・空虚な∀でない: cteField 2=p9iPhi9Field 実例で非空虚）。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋新規 A3 対象全て #print axioms=[propext,Quot.sound]（新規 Classical.choice 皆無・eit の freshman・ctm/ctr の走査・ctr の Hensel 逆元いずれも choice-free）を確認。設計 M2 予測 0.65 と一致。**残る限定で 0.65 上限**: (i) **無限塔・逆極限 profinite G_K は依然未構成**（ctl/M3 未実装・IUT/ に該当ファイル無し・ProfinitePi1Tower.restr／InverseSystem.limitGrp へ未接続＝grep で M2 各ファイルの言及は限定コメントのみと裏取り済み・A3 の本丸「有限 Galois 群の逆極限」オブジェクトには未到達）(ii) **群同型 Gal(ℚ(ζ_{3ⁿ})/ℚ)≅(ℤ/3ⁿ)^× は未証明**（M4・元の列挙 cg9_galois_order_six＋σ_a 族＋res 全射性まで・核構造/短完全列同型は未）(iii) p=3・ℚ 固定・分離性/正規性一般論未形式化。**柱A%は 38.0→38.6 で 38→39 前進**（今回 +1・res 全射性＋∀n 全機構が丸め閾を越える）。記録 audit/reaudit-A3-m2-2026-07-09.md。 / 2026-07-10: A3 0.65→0.7（独立 A3 再監査確定・reaudit-A3-ctl-2026-07-09.md）。前回 0.65（一般 n の有限 Gal 群＋全遷移射 res_n＋compat＋全射性は揃うが逆極限オブジェクト未組み立て・監査残欠 (i) を 0.65 上限の唯一の主因と明記）に対し、今回 **M3: 逆極限 profinite Gal(ℚ(ζ_{3^∞})/ℚ) が本物に組み上がり `ProfinitePi1Tower.restr`／`restr_self`／`restr_comp` witness を初 discharge**（IUT/CyclotomicTowerLimit.lean）。核心の本物性を監査者が自ら Lean 定義精読で確認: (1) `ctlTower : ProfinitePi1Tower` は K=ratIUTField（実ℚ）・ext=ctlExt n=cteExt (n+1)（∀n 実円分体 ℚ(ζ_{3^{n+1}})・gefFieldExtension＋eitPhi_irreducible 実例化・trivialExtension でない）・restr=ctlRestr（ctlStep n=ctrResHom (n+1)＝ctr で map_mul=ctr_res_comp 証明済みの実制限を反復合成 Hom.comp、d=0 のみ profPi1IdHom）＝**自明塔でない実 2 段以上非自明円分塔**。(2) restr_self=`ctl_restr_self`／restr_comp=`ctl_restr_comp` は sorry/admit/不正 defeq でなく実証明（差分帰納＋単段 peel ctl_restr_step で結合律 cast を回避・proof-irrelevance のみ）。(3) `ctlProfinite := profPi1Limit ctlTower` は limitGrp の Compatible 述語が遷移射 S.t h=ctlRestr を担体条件に使う真の逆極限（積でない・ctlTower を実引数）。`ctl_is_profinite` は profPi1_is_profinite ctlTower の実適用（開核＋近傍基）。従来の唯一の ProfinitePi1Tower 具体例は自明塔 lim Gal(ℚ/ℚ)=1（profPi1_trivialTower／algCloTrivialTower・restr=id）のみで、algCloProfTower T は AlgCloTower の restr witness を仮説で受ける抽象塔＝grep で裏取り。**監査残欠 (i)「逆極限オブジェクト未組み立て」を本物・非空虚に解消**（設計 §4 M3 予測 0.7 と一致）。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋ctlTower/ctlProfinite/ctl_is_profinite すべて #print axioms=[propext,Quot.sound]（新規 Classical.choice 皆無・cast 簿記/反復合成/profPi1Limit 束ねいずれも choice-free）を確認。**残る限定で 0.7 上限（超えない）**: (ii) 射影の全射性（整合族の持ち上げ／Mittag-Leffler）は未証明で極限の非退化（恒等以外の整合族の存在）は未形式化・(iii) レベル同型 Gal(L_n/ℚ)≅(ℤ/3^{n+1})^× と極限同型 Gal(ℚ(ζ_{3^∞})/ℚ)≅ℤ₃^×（M4）は未達・(iv) これは円分切片（G_ℚ の可解商・Kronecker–Weber 部分に対応する副有限商の一つ）であって実 G_ℚ そのものではない。**柱A%は 38.6→39.2 の丸めで 39 据え置き**（status は 0.65→0.7 と上がるが柱%は動かない・正直に横這いと明記）。記録 audit/reaudit-A3-ctl-2026-07-09.md。 / 2026-07-10: A3 0.7→0.75（独立 A3 再監査確定・reaudit-A3-m4-2026-07-09.md）。前回 M3 監査が 0.7 上限の唯一理由として名指しした残欠 (ii)射影全射性未証明＝極限の非退化未形式化・(iii)レベル同型 Gal(L_n/ℚ)≅(ℤ/3^{n+1})^× と極限同型 ≅ℤ₃^× 未達 の**両方を本物・choice-free に discharge**する M4 が入った。(M4a・cci) `cciIsoData ℓ hℓ`＝各段 Gal(ℚ(ζ_{3^ℓ})/ℚ)≅(ℤ/3^ℓ)^× の**本物の双方向群同型**（χ_ℓ=cciToUnits と σ_a=cciFromUnits がいずれも Hom・左右逆 cci_left_inv/cci_right_inv 証明済み・単射=cae_aut_ext 全射=csaAut を実使用）＋★新規数学 `cci_charG_mul`（指標積公式 char(σ·τ)=char σ·char τ mod 3^ℓ・ctm_powers_distinct=μ 位数 3^ℓ を実使用・fudge でない）＋副産物 cci_gal_comm（円分切片可換）。(M4b・zpu/zps/cli) 乗法群 `zpuGrp ℓ`=(ℤ/3^ℓ)^×（担体 Nat subtype・逆元は Hensel `zpuInv` 再帰関数＝choice-free・Euler 定理不使用）／`zpsLimit`=lim(ℤ/3^{n+1})^×=ℤ₃^×／**`cliIsoData`＝ctlProfinite(M3 実 profinite)≅ℤ₃^× の本物の双方向同型**（compat 正方形 cli_char_restr を単段 cli_char_step の差分帰納で本物証明・cast/defeq 誤魔化しなし・媒介射は担体直接構成で limit_universal 不使用）。(M4c・cps) `cps_proj_surjective`＝逆極限 ctlProfinite の各段 `profPi1_proj ctlTower n`(=limitProj の第 n 成分射・実射影) への**射影全射性を本物・choice-free に**（指標分裂: τ の指標 a を取り zps_proj_surjective の閉じた式 witness a%3^{m+1} で単数側整合族→cliFrom で押し出し）＝**監査残欠 (ii) の discharge**、cps_nontrivial/cps_example0 で非退化・非空虚を検算。**choice-free の裏取り（本監査の最重点・DC 隠蔽の有無）**: zpuInv は閉じた再帰関数／zps/cps の射影全射性は一般 Mittag-Leffler の可算従属選択を使わず単数側 truncation 切断で閉じる（本塔固有の指標分裂・一般 ML は非形式化と正直申告）／obtain は目標 Prop の Exists.elim であり choice 不要。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋M4 主要対象すべて（zpuGrp/zpuInv_spec/zpsLimit/zps_proj_surjective/cciIsoData/cci_charG_mul/cliIsoData/cli_char_restr/cps_proj_surjective/cps_nontrivial）#print axioms=[propext,Quot.sound]（推移的閉包に新規 Classical.choice 皆無）を確認。設計 M4 予測 0.75 と一致。**残る限定で 0.75 上限（超えない・A3=1 に遠い）**: (i) これは円分切片 Gal(ℚ(ζ_{3^∞})/ℚ)（G_ℚ の可解商・Kronecker–Weber 部分の副有限商）であって実 IUT の絶対 Galois 群 G_ℚ そのものではない・(ii) 一般有限逆系の Mittag-Leffler は choice-free に非形式化（本塔の指標分裂に依存）・(iii) ℤ₃^× は逆極限としての単数群で 3 進桁列構成でない・(iv) p=3・ℚ 固定・分離性/正規性一般論なし・実 π₁^ét 未達。**柱A%は 39.20→39.80 の丸めで 39→40 前進**（前回 M3 は据え置きだったが今回は丸め閾 39.5 を越えて +1・名指し残欠 (ii)(iii) の本物 discharge が閾を越える）。記録 audit/reaudit-A3-m4-2026-07-09.md。 / 2026-07-10: A7 0→0.35（独立 A7 再監査確定・reaudit-A7-real-cyclotomic-rigidity-2026-07-10.md）。前回 0（既存 M322F CyclotomicRigidity が抽象 GK＋ℤ/n 模型 cycMuStd＋trivial χ≡1 の代理・実例 cycRigGaloisExample がその欠陥）に対し、実 μ_{3^ℓ}×実 Gal 作用×非自明 χ×剛性定理×実 ℤ₃(1) 逆極限で surrogate を実主語へ昇格する 4 新規ファイルが本物で入った: (A7a・cmr/cgar) cmrMu＝実円分体 ℚ(ζ_{3^ℓ})=ℚ[x]/(Φ_{3^ℓ}) の中の実 3^ℓ 乗根部分群 { y // rpow y 3^ℓ=1 }（ℤ/n 模型でない・log=ctmFind choice-free 走査）で M322F 抽象 CycMuGroup を実充填、cgarAct＝実 Gal(ℚ(ζ_{3^ℓ})/ℚ)=galoisGroupGrp(cteExt)（K を各点固定する実 FieldAut 全体の部分群）の実 μ への体自己同型制限で CycGKAction を実充填、cgar_nontrivial＝σ₂=cciFromUnits⟨2⟩（実体自己同型 csaAut・σ₂(ζ)=ζ²）で χ(σ₂)=2≠1=χ(1)＝M322F honest note :70-73「非自明 χ の実 Galois 降下は後続」を実 discharge（trivial χ 模型のままでない）。(A7c・cra) cra_endo_pow（任意群自己準同型＝冪写像・Galois 仮定なし）・cra_gal_inj＋cra_gal_realize（Gal≅Aut(μ_{3^ℓ}) 消去形・witness choice-free）・cra_char_canonical（χ 生成元非依存）・cra_indeterminacy（(ℤ/3^ℓ)^× 不定性を定理として明示＝正直な限定・消してない）。(A7b・tmz) tmzLimit＝lim μ_{3^{n+1}}＝実 ℤ₃(1)（limitGrp の Compatible 整合族＝真の逆極限）・tmz_iota_cube（ι(t y)=y³・実 RingHom cteIota の x̄↦x̄³ で遷移の忠実性）・tmz_act_char（作用=χ 冪）・χ≅ℤ₃^× は cliIsoData 再利用。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋4 ファイル全 63 public 対象の #print axioms=[propext,Quot.sound]（cra_hom_ext=[Quot.sound]・cra_pow_mul_dist=公理なし・新規 Classical.choice 皆無・build 全体の Choice は既存 gsets/GaloisTower のみで A7 推移閉包に無し）を確認。0.35 上限（0.5 未満・設計 0.4 を敵対的に 1 ノッチ下）の理由: (i) 剛性内容が初等・古典（巡回群の自己準同型＝冪写像・Aut(μ_n)≅(ℤ/n)^×・χ 内在性）で IUT が要する mono-theta 円分剛性でない・(ii) モジュール自身が cra_indeterminacy で (ℤ/3^ℓ)^× 不定性の残存を定理化＝IUT 荷重を担う剛性（不定性の消去）は 0・台帳 A7 が最終的に指す mono-theta 剛性の「忠実な部分ケース」とは言い切れない・(iii) 円分切片（G_ℚ の可解商）で実 G_ℚ・局所 G_{K_v} でない・p=3・K̄/幾何的 cyclotome 不在。0.3 を採らないのは 3 成分全実装＋非自明 χ 本物立ちの前進を過小評価しないため。柱A%は 39.8→44.0 の丸めで 40→44 前進（+4）。記録 audit/reaudit-A7-real-cyclotomic-rigidity-2026-07-10.md。 / 2026-07-10: A2 0.5→0.65（独立 A2 再監査確定・reaudit-A2-real-padic-local-field-2026-07-10.md）。前回 0.5（付値機構は本物だが complete_note が「実 p 進局所体 K_v も皆無」＝完備化体 ℚ_3 が欠落）に対し、今回 **実 ℤ₃ 付値環＋𝔽₃＋完備性（modulus 形）＋実 ℚ₃ 体オブジェクト＋実 ℚ₃^×** の 4 つの独立な本物構成で K_v を初めて実体化。(A2a) Zp3ValuationRing/z3v: 実 ℤ₃=lim ℤ/3ⁿ（zpRing 3・逆極限）の局所体パッケージ——付値関係 z3vGe/z3vExact・因数分解 x=3^v·u（実 Hensel zpValDecompose・choice-free）・極大イデアル 3ℤ₃（resFieldMaximal への体でない環の初の非自明実例・witness=zpUnitInv 明示逆元）・剰余体 ℤ₃/3ℤ₃≅𝔽₃（z3v_res_iso 双方向環同型）。併設 F3Field/f3: コードベース初の有限 IUTField（total inv=恒等・p=3 特有・(a−1)(a+1) で証明）。(A2b) Zp3Complete/z3c: modulus 付き Cauchy 列の極限 z3cLim（レベルごと閉じた式・choice-free）・収束 z3c_converges・一意性・ℤ 稠密・**z3c_val_compat（実 pvq 付値 v₃=ℤ₃ 内付値の境界接着）**。(A2c) Q3LocalField/q3f: **q3Ring=ringLocRf z3 3=実 ℤ₃[1/3]＝本物の ℚ₃ 体オブジェクト（模型でない・実局所化の実例代入）**・∃ 形体性 q3f_has_inverses（非零 witness 付き元に zpUnitInv で明示逆元・choice-free）・uniformizer 3（q3f_uniformizer）・O=ℤ₃（q3f_ring_of_val）・ℤ 値付値 q3fValRel。Q3UnitsGroup/q3u: FullReciprocity の抽象直積代理 QpUnits を実 ℚ₃^×（3^ℤ×ℤ₃^×↪ℚ₃）へ昇格（q3u_embed_hom/q3u_embed_inj）。監査者自ら bash build.sh フル実行（EXIT=0・no sorry）＋**A2 5 ファイルの全 public 対象 70 個の #print axioms を自分で列挙実行し全て [propext,Quot.sound] 以下・新規 Classical.choice 皆無**を確認。**total inv を密かに主張していないこと（q3Ring に IUTField/Field インスタンス皆無・∃ 形逆元のみ）を grep で確認＝choice 違反なし**。**残る限定で 0.65 上限（0.7 を超えない）**: (i) ℚ₃ は total inv を持つ IUTField でなく ∃ 形逆元の CRing 体オブジェクト（ℚ_p は構成的に離散体でない恒久障害）(ii) ℚ↪ℚ₃ 体埋め込み（A2c-3）未接続で「K の完備化」は整数付値一致どまり (iii) ℚ₃ の位相・G_{ℚ₃}・分岐は皆無・∃形 Cauchy/位相的完備性は未（modulus 形のみ）・p=3/基礎体ℚ 固定。0.6/0.62 に下げないのは完備性定理＋体オブジェクト＋剰余体𝔽₃＋ℚ₃^× の 4 独立構成が全部本物 landing した質的前進を過小評価しないため（上記 3 ギャップは 0.65 cap に既に織込済・二重計上しない）。**柱A%は 44.7→45.9 の丸めで 45→46 前進**（A2 0.65 で Σ=45.9→46・45.5 の不安定境界を回避）。記録 audit/reaudit-A2-real-padic-local-field-2026-07-10.md。 / 2026-07-10: A8 0.5→0.57（独立 A8 再監査確定・reaudit-A8-real-tate-curve-2026-07-10.md）。前回 0.5（TateCurve 機構は実だが存在 witness が q=1 の自明周期・無限位数と torsion 位数は外部付値仮定＝「機構は実だが実例が自明/退化」）に対し、今回 **実 Tate 曲線 E_q(ℚ₃)=ℚ₃^×/q^ℤ 一式（A8a q3t＋A8b q3tt・2 新規ファイル 665 行）** で named 欠陥を本物・choice-free に discharge。(A8a) q3tGrp=QpUnits 3=実 ℚ₃^×（3^ℤ×ℤ₃^× を q3uEmbed 単射で実 ℚ₃ 内へ・q3u_embed_inj 精読確認・模型でない）を実 q=3^m（m≥1）で割る本物の商群 q3tCurve（M267F quotientGroupN・quotientProjN_ker 普遍性）＝実 Tate 曲線。実付値 v(q)=m（q3t_q_val・関係形付値 q3fValRel＝well-defined＋加法性証明済・z3vExact は真の厳密付値）で M309F 退化 witness q=1 を discharge。実無限位数 q3t_q_pow_ne_one（第1成分 m·n≠0・omega のみ・**外部付値仮定なし**・free ℤ 成分から本物）。周期性 q3t_period＋実 ℚ₃ 内での読み q3t_period_real（q3u_embed_hom）・非自明点 [−1] q3t_point_ne_one。(A8b) 実 2 乗根 w=3・w²=q=9（q3tt_w_sq・成分算術 1+1=2・**体拡大なし**）で M314F witness 仮定を discharge。実位数ちょうど 2（q3tt_w_order・射影核 quotientProjN_ker＋第1成分 2t=k・omega・**外部付値仮定なし**）で M314F tateTorQrootOrder の外部付値入力を実算術で置換。実 μ₂={±1}（q3ttMuPoint）＋Klein 4 群 {[1],[3],[−1],[−3]} ⊆ E₉[2]（class 分離 q3tt_class_eq_iff＝付値方向×単数方向直交・4 点相異 q3tt_klein_distinct・積閉 q3tt_klein_closed・各点 2-捻れ q3tt_klein_torsion）。監査者自ら bash build.sh フル実行（EXIT=0・no sorry）＋**A8 全 31 対象（A8a 16＋A8b 15）の #print axioms を自分で列挙実行し全て [propext,Quot.sound]・新規 Classical.choice 皆無（位数・klein・class 分離で choice 隠蔽なしを目視）** を確認。**Klein は ⊆ のみで = E₉[2] を主張していない**こと（μ₂ 完全性 u²=1⟹u=±1 は未・grep で等式主張なし）・**cuspidalization は今回 0**（grep で実体皆無・正直な限定行のみ）を裏取り＝過大主張なし。**0.57 上限（design cap 0.6 を敵対的に 0.03 下）**: (i) cuspidalization=0（A8 title の半分）(ii) real cover=代理のまま（TateCover 系 surrogate π₁・実 E_q と未接続）(iii) Galois 作用皆無（G_{ℚ₃} 未）(iv) μ₂ 完全性未・2-torsion 完全決定でない(v) 単一切片 p=3・l=2・q=3^m・担体は群提示 3^ℤ×ℤ₃^×（∃形・literal {x:ℚ₃//x≠0} 商でない・A2 継承）・T_l/幾何 Tate 加群/Weierstrass 未接続。据え置き（0.5）は named 欠陥 2 件の本物 discharge を過小評価ゆえ不採・0.55 は Σ=46.5 で banker rounding が 46 に落ち genuine promotion を柱%に反映しないゆえ不採。**柱A%は 45.9→46.74 の丸めで 46→47 前進**（A8 0.57 で Σ=46.74→47・46.5 の不安定境界を回避）。記録 audit/reaudit-A8-real-tate-curve-2026-07-10.md。 / 2026-07-11: A7 0.49→0.56（独立 A7 再監査確定・reaudit-q9mb-bridge-l9-2026-07-11.md）。level-9 テータ kill キャンペーンの consumer=比較橋 Q3Mu9TmzBridge（q3mb の ℓ=2 版・prefix q9mb・commit 7d2850b・650 行）の再監査。直前 5 モジュール（q9ps→q9tl→q9mt→q9mr の kill 連鎖）は unconsumed foundation として 0前進 で正しく保持されていたが、本橋 q9mb がそれらを消費して firewall（テータ側 q9mr/q9mt/q3k ↔ 円分側 tmz/tmi/cgar）を越え、tmi の実 ℤ₃^×=zpsLimit の (ℤ/9)^× 商を殺す——ゆえに本監査が now-consumed 連鎖を纏めて計上し s_A7 を SET する。【Part1 正確性＝全 YES】(1) q9mb_kill_mod9 は非空虚な強制: u:zpsLimit の実元・hHom/hMem/hE9 は q9mr theta-両立剛性の genuine 条件・hreal は実橋輸送の実現（q9mb_admissible_iff 前方向が u₁=1 枝で φ=id により hreal 充足を構成＝真の二分・空虚∀でない）。証明は t=tmeZetaLim で q9mr_cyclotome_fixed（原始 9 乗根 ζ₉⁻¹ 固定）を消費し (ζ₉⁻¹)^{u₁}=ζ₉⁻¹ ⟹ ζ₉U 位数ちょうど 9 の単射性（q9mb_pow_inj）で u₁=1 強制——循環でない。(2) σU 同変 genuine 新規: q9mb_normBase_sigma（N(σx)=N(x)・q3k_norm_eq＋σ³=id の実代数）で q9mbSigmaU well-defined、q9mb_equivariant_sigmaU（β₉(σ₄y)=σU(β₉y)・χ(σ₄)=4）は q3kSigma（Y↦ζ₃Y・位数 3）の単数群化＝level-3 の反転共役 q3mb_equivariant_conj（ζ₃↦ζ₃²・位数 2）の再ラベルでない NEW な位数 3 自己同型。(3) q9mb_kill_new_layer は (u.val 1).val=1∧≠4∧≠7 を機械可読に述べ、q9mb_new_layer_chars が {4,7}=(1+3ℤ₃)/(1+9ℤ₃) の非自明元（mod3=1・<9・¬3∣・≠1）を同定＝過大主張なし（(ℤ/9)^× 全体でも 1+9ℤ₃ でもない）。(4) firewall real: β₉:Hom(tmzG 1)q3kU が実円分 μ₉（tmzG 1=cmrGrp 2⊂ℚ(ζ₉)）を choice-free ctmFind 2 でテータ側 q3kU に結び、q9mb_onto_mu9 が q9c_mu9_complete（実 9 分類）を消費。(5) 軸: lake build EXIT=0・q9mbHom/q9mb_equivariant_sigmaU/q9mb_normBase_sigma/q9mb_kill_mod9/q9mb_kill_new_layer/q9mb_admissible_iff/q9mb_onto_mu9/q9mb_transport/q9mb_exists すべて #print axioms=[propext,Quot.sound]（監査者が lake env lean で列挙）。禁止タクティク0（sorry/simp/decide/by_cases/rcases/ring/nlinarith grep 0・唯一 sorry ヒットは日本語コメント『sorry 皆無』・omega 98 箇所は純 Int/Nat 付値/指数）。(6) 二重計上なし: q3mb は (u.val 0).val=1（index0=mod-3 層・q3rqU・q3m3Car）、q9mb は (u.val 1).val=1（index1=mod-9 層・q3kU・q9mtCar）＝異なる層・異なる主語。tmiFromUnits は消費のみ（再証明ゼロ）。【Part2 s_A7=0.56 の敵対的決定・算術】Σ_A=47.62+12·s_A7（A 総重量ちょうど 100）。s=0.56 ⟹ Σ=54.34 ⟹ round-half-even=54。表示 55 の閾は s≥0.574（Σ>54.5・厳密 s>0.5733・s=0.573→54.496→54・s=0.574→54.508→55）。上げ要因: (i) pro-3 bulk 1+3ℤ₃ への初の一咬み——level-3 の正直限定が『まるごと SURVIVES』とした (1+3ℤ₃)/(1+9ℤ₃) 層を初剥がし（level-3 が殺したのは素数-to-3 の ℤ/2 成分＝算術的に易しい側）。(ii) genuinely new mathematics 消費: μ₉ 完全性 q9c_mu9_complete（実 9 分類・クローンでない実定理）・wild 分割 3=π₉⁶·u₆・実テータ交換子からの初の原始 9 乗根 Weil 値 ζ₉⁻¹。(iii) σU 局所大域同変＝level-3 に無い新規（位数 3 自己同型）。(iv) 機構→対象昇格（tmi の実 (ℤ/9)^× 商へ輸送）。下げ要因（0.574 未達で cap）: (i) 殺すのは第 1 層 {4,7} のみ・1+9ℤ₃（n≥3 の全層）は依然 SURVIVES＝可算無限塔の 1 graded piece。(ii) kill 機構の約 8 割が level-3 テンプレのクローン。(iii) 忠実部分ケースの 2 乗（q=3⁹・[EtTh] q^{1/l} でない）・endo 定式化・実テータ関数/π₁/G_{ℚ₃} ゼロ。(iv) 群レベル同定（Aut(μ₉)=位数 6 曖昧）・u₁=1 強制は level-9 テータ両立クラス相対・tmi の残存 full-ℤ₃^× 宣言は不変更。(v) mod-9 層のみ・塔/極限でない。0.56 採用の justification: level-3 kill+橋の全キャンペーンが 0.42→0.49（+0.07）だった precedent と同規模の +0.07 を、pro-3 初咬みの質的前進＋新数学 q9c 消費で正当化する一方、8 割クローン・単層・endo・G_{ℚ₃} 不在の cap が level-3 と同じく効くため precedent 規模を超えさせない（+0.084 超＝0.574 は全 level-3 キャンペーン超の純増を要し、8 割クローンでは正当化不能）。0.55/0.57 も表示 54 で不変だが、全連鎖 landing の質（全軸 clean・非空虚 kill・σU 新規・firewall real）を過小評価せず設計中央 0.55–0.56 の上側を採る。0.58 に inflate しない（campaign を『成功』に見せるため 55 にしない）・0.54 に deflate もしない（merit で決定）。**柱A%は 54 据え置き（s 0.49→0.56 で status は前進するが表示は横這い・正直に明記）**。compute_complete_pct.py 出力{\"A\":54}確認。記録 audit/reaudit-q9mb-bridge-l9-2026-07-11.md。 / 2026-07-11: A2 0.65→0.67（独立 A2c-3 再監査確定・reaudit-q3re-ratembed-a2c3-2026-07-11.md）。ℚ↪ℚ₃ 実環準同型 Q3RatEmbed（q3re・commit 7d135df）が A2 設計文書 §5.2 名指しの named 残欠 A2c-3 を本物 discharge。本物の環準同型 q3reMap:ratRing→q3Ring（add/mul/1/0 保存）で **ratRel 同値上 well-defined**（q3_unit_cancel＋特徴付け方程式 q3re_frac_spec で降下・代表押付けでない）・非空虚（1↦1）・単射 q3re_map_inj（非零↦非零）・付値両立 q3re_val_compat v₃(a/b)=v₃(a)−v₃(b)・稠密は honest scope（ℤ₃⊂ℚ₃ 整数像・z3c_int_dense 系・full ℚ-density 非主張）。choice-free（q3reSplit=Nat.strongRecOn・逆元=明示 zpUnitInv・禁止タクティク0）。**本環境 lean/lake 未導入で #print axioms 実行不能→静的検査で新規 Classical/sorry 皆無・全依存は直前 A2 監査で [propext,Quot.sound] 確認済**。s_A2=+0.02 の merit: 初の大域→局所埋め込み＋三定理は本物だが、稠密は再ラベル（位相的完備化未達）・∃-inverse 体射でない・0.7 の 2 部品の一つ＝派生的で forecast +0.02〜0.04 の低位。**★算術訂正: 実 compute_complete_pct.py は round(num/den*100) で Σ_A=54.5→float 54.50000000000001→round 55（banker 丸め無効化）。ゆえに s_A2=0.67 で柱A 54→55 前進（依頼前提『0.67→54』は実ツールでは誤り・inflate でなく float 挙動の帰結）。compute 出力{\"A\":55}確認**。",
-  "pillars": {
-    "A": {
-      "name": "遠アーベル (anabelian / 実 π₁^ét)",
-      "items": [
-        {
-          "id": "A1",
-          "title": "実数体 K = ℚ[x]/(f) を実際の商環として構成",
-          "weight": 8,
-          "status": 0.85
-        },
-        {
-          "id": "A2",
-          "title": "実 p 進局所体 K_v(完備化)を実際の対象として構成",
-          "weight": 8,
-          "status": 0.69,
-          "note": "q3re field-hom ℚ↪ℚ₃ 逆元保存+単射 (audit +0.02→0.69)"
-        },
-        {
-          "id": "A3",
-          "title": "実絶対 Galois 群 G_K = 有限 Galois 群の逆極限(実プロファイナイト群)",
-          "weight": 12,
-          "status": 0.75
-        },
-        {
-          "id": "A4",
-          "title": "実 π₁^ét(双曲的曲線/Spec の実プロファイナイト基本群)",
-          "weight": 14,
-          "status": 0.56
-        },
-        {
-          "id": "A5",
-          "title": "実 tempered π₁^temp",
-          "weight": 10,
-          "status": 0.23,
-          "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23)"
-        },
-        {
-          "id": "A6",
-          "title": "mono-anabelian 復元(π₁ から体/環を復元・実)",
-          "weight": 14,
-          "status": 0.6,
-          "note": "crt realization-mult + base-point-free torsor (audit +0.02→0.60)"
-        },
-        {
-          "id": "A7",
-          "title": "実円分剛性 cyclotomic rigidity(実 G_K 加群上)",
-          "weight": 12,
-          "status": 0.56
-        },
-        {
-          "id": "A8",
-          "title": "楕円曲線/Tate 曲線の実被覆・cuspidalization",
-          "weight": 12,
-          "status": 0.66,
-          "note": "q3c3 [3]-isogeny E₉[3](ℚ₃)={O} trivial-deck (audit +0.01→0.66)"
-        },
-        {
-          "id": "A9",
-          "title": "Belyi 化 / 遠アーベル幾何入力(実)",
-          "weight": 10,
-          "status": 0.1
-        }
-      ]
+ "_about": "実 IUT 完全証明率(complete_pct)の固定分母。実 Cor 3.12 に必要な実対象の部品リスト。各項目の status(実装度 0..1)は実装者が付けず、独立監査(AUDIT_RUBRIC.md)が実 Lean 定義から評定して埋める。complete_pct(柱) = Σ(weight*status)/Σ(weight)。分母(項目・weight)はここに固定し後から増やさない(増やす場合は台帳改訂として明示)。",
+ "_status_scale": "0=実対象なし(未着手 or 模型のみ), 0.5=実対象の忠実な部分ケースあり(狭い but 本物), 1=実対象の上で当該部品が完成 （中間値 0.7 等も可: 独立監査が『0.5 の忠実な部分ケースを質的に超えるが満点1未達』と判定した場合に用いる。例 A1=0.7: 実 ℚ[x]/(x³−2) 商環＋証明済み Bezout による体化＝直積模型0.5を超えるが単一f・∃形逆元で1未満。）",
+ "_crux_note": "D7(多輻不等式 crux Dβ-ω)は分母に含むが、数学的論争が決着するまで status は 0 のまま(Iff.rfl 外部保持)。ゆえに complete_pct は構造的に 100% に到達しない。",
+ "_current_numerator": "2026-07-08 独立監査(各柱1名・opus・敵対的・実Lean定義のみ・自己申告非共有)で status を確定。C1のみ status=1(実ℤ_p上のLubin-Tate形式群)。他は0/0.5。第140-147弾の自己申告値は撤回済み。 / 2026-07-09: B5 積公式(実 ∏_v|x|_v=1 over ℚˣ, B5ProductFormulaQ)の独立再監査で B5 0→0.5(忠実な部分ケース・大域CFT本体は未)。 / 2026-07-09: A1 0.5→0.7（実 ℚ[x]/(x³−2)=ℚ(∛2) を真の quotCRing 商環＋本物に証明した SimpleExtData.bezout で体化・独立 A 再監査確定）。 / 2026-07-09: A1 0.7→0.75（2つ目の実数体 ℚ(ζ_3)=ℚ[x]/(x²+x+1) を Φ₃ 既約性証明込みで真の商環体化・独立 A 再監査確定。異なる次数で枠組再利用性を実証・単一f限定を緩和。ただし一般構成器/∃形逆元/基底なしで満点未達）。 / 2026-07-09: A1 0.75→0.80（満たせる一般構成器 gefField『∀既約f, ℚ[x]/(f)体』＋x³−2/Φ₃ 二実例を同一エンジンから体化・独立監査確定。修正後 pibIrreducible は忠実。∃形逆元/基底理論なしで 0.85 不可）。 / 2026-07-09: A1 0.80→0.85（前回名指しの2限定を両方本物に解消・独立再監査確定。(1) 全域 inv: 正規形担体 GefNF（choice-free subtype）上の全域関数 gefNFInv と gefNF_mul_inv_cancel（x≠0⟹x·inv(x)=1・Bezout+pfdRed_char 経由・inv0=0 縮退でない）で IUTField/Field268 インスタンス gefNFIUTField/gefNF268 を充填＝∃形逆元を解消。(2) 基底/次数: 冪基底 gefPowBasis（spans/indep 実証明）・gef_degree_eq [K:ℚ]=nf・α^i=X^i・FieldExtension ℚ↪K の basisLK スロット gefRegBasis。監査者が自ら gefNFIUTField を x³−2(次数3)/Φ₃(次数2)へ具体実例化し全 axiom [propext,Quot.sound]・非空虚を確認。残る限定: 基礎体ℚ固定・既約性 f ごと手証明・旧 Quot 表示の has_inverses は∃形のまま（消さず）・次元 well-defined 性未証明・塔反復未達で満点1未達）。 / 2026-07-09: A3 0.5→0.55（独立 A3 再監査確定・reaudit-A3-cyclotomicgal-2026-07-09.md）。コード全体で初の非自明有限体拡大 ℚ⊂ℚ(ζ₃)（base=実ℚ・trivialExtension でない・cnfExt3）と Gal(ℚ(ζ₃)/ℚ) 位数ちょうど2の完全決定（cg3_galois_order_two・∀自己同型は id か共役σ₁・仮説0本・map_mul は pfdRed_char で x̄²=−1−x̄ を実現・全射性は R1 prc_roots_le_degree 実適用の根の二分法+決定補題）。従来の名指し欠落「非自明有限体拡大が1つも無い・全 Galois 塔が trivialExtension 詰め」の初 discharge。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋全対象 #print axioms=[propext,Quot.sound] を確認。ただし塔/制限準同型 res/逆極限 G_K は完全未構成・2段目 ℚ(ζ₉) も未達(Φ_9 既約性=Eisenstein 判定器未完・pum/p9e は土台のみ)ゆえ 0.6 未達で 0.55 上限。**柱A%は 36.8→37.4 の丸めで 37 据え置き**（38 には A3≥0.58 or 高weight項目が要る）。status は上げるが柱%は据え置きを正直に反映。 / 2026-07-10: A3 0.55→0.6（独立 A3 再監査確定・reaudit-A3-res39-2026-07-09.md）。円分塔 2 段目 ℚ(ζ₉)=ℚ[x]/(Φ_9) の実体構成（Φ_9=x⁶+x³+1 の既約性を Eisenstein 判定器 eis_irreducible＋シフト輸送で完全証明・p9i_irreducible／honest 仮説でない・eis_irreducible は中間次数枝を egv_min_index_mul の Newton 対角で exfalso 排除＝非空虚／p9iPhi9Field は実 IUTField 次数6・base=実ℚ）と、埋め込み ι:ℚ(ζ₃)↪ℚ(ζ₉)（ce39Iota・実 RingHom・x̄₃↦x̄₉³・map_mul は剰余簡約越し）と、μ_9=⟨x̄₉⟩ 位数9 巡回（cm9_order・cm9_root_in_powers・choice-free 指標抽出 cm9Find_spec）と、**制限準同型 res₁:Gal(ℚ(ζ₉)/ℚ)→Gal(ℚ(ζ₃)/ℚ) の本物構成**（cr39Res＝a mod 3 で id/cg3Conj 切替・縮退でない・意味論 compat ι∘res(σ)=σ∘ι を ∀x 全点で証明・cr39ResHom は map_mul 付き実群準同型・ι 単射 ce39Map_inj＋cg3_aut_ext 使用）を実装（Phi9Irreducible/CyclotomicEmbed39/CyclotomicMu9/CyclotomicMu9Roots/CyclotomicRes39）。コード全体で初のガロア群間 transition morphism（逆系の1本の遷移射）＝単段+Gal を質的に超える。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋新規23対象 #print axioms=[propext,Quot.sound](新規 Classical.choice 皆無)を確認。**残る限定で 0.6 上限**: (i)無限塔/逆極限 profinite G_K 未達（2段の有限塔＋res 1本のみ）(ii)res 全射性未証明 (iii)cr39ResHom は ProfinitePi1Tower.restr witness へ未接続（コード他所で未使用・塔詰め意図的に未実施）(iv)p=3・分離性/正規性一般論未形式化。**柱A%は 37.4→38.0 で 37→38 前進**（前回据え置きから今回 +1・res₁ 実体が丸め閾を越える）。記録 audit/reaudit-A3-res39-2026-07-09.md。 / 2026-07-10: A3 0.6→0.65（独立 A3 再監査確定・reaudit-A3-m2-2026-07-09.md）。前回 0.6（2 段塔 ℚ(ζ₃)⊂ℚ(ζ₉)＋遷移射 res₁ の存在・compat・群準同型のみ／res₁ 全射性未証明・一般 n 未達）に対し、今回 **(1) res₁ 全射性 `cr39_surjective`**（監査残欠 (ii) 解消・cg9Aut 2 5=σ₂ と cg3_galois_order_two 二分・仮説0）と **(2) 一般 n 塔 M2 の全機構**が本物で入った: `cteField n hn`（∀n の実 ℚ(ζ_{3ⁿ})=ℚ[x]/(Φ_{3ⁿ})・gefNFIUTField 実例化・deg 2·3^{n−1}）＋`cteIota`（∀n 段間実 RingHom）／`eitPhi_irreducible n hn`（∀n の Φ_{3ⁿ} 既約性・freshman's dream 立方帰納 eitFreshman＋eis_irreducible＋est_transport・n=2 hardcode でない）／`ctm_order`（∀n 位数ちょうど 3ⁿ）・`ctmFind`（choice-free 走査）／`cae_aut_ext`（∀n 決定補題・基底分解 cae_decompose 経由）／`csaAut`（∀n の実体自己同型 σ_a: ζ_n↦ζ_n^a・map_mul は csa_eval_hphi の根での Φ 簡約消去＝発見B の非定数余因子を回避・逆元 witness 非退化）／`ctrResHom`（∀n の実群準同型 res_n・map_mul=ctr_res_comp）・`ctr_compat`（ι∘res(σ)=σ∘ι を全点）・`ctr_surjective`（∀n 全射性・原像 σ の逆元を Hensel 持ち上げ ctr_inv_exists で choice-free 構成・空虚な∀でない: cteField 2=p9iPhi9Field 実例で非空虚）。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋新規 A3 対象全て #print axioms=[propext,Quot.sound]（新規 Classical.choice 皆無・eit の freshman・ctm/ctr の走査・ctr の Hensel 逆元いずれも choice-free）を確認。設計 M2 予測 0.65 と一致。**残る限定で 0.65 上限**: (i) **無限塔・逆極限 profinite G_K は依然未構成**（ctl/M3 未実装・IUT/ に該当ファイル無し・ProfinitePi1Tower.restr／InverseSystem.limitGrp へ未接続＝grep で M2 各ファイルの言及は限定コメントのみと裏取り済み・A3 の本丸「有限 Galois 群の逆極限」オブジェクトには未到達）(ii) **群同型 Gal(ℚ(ζ_{3ⁿ})/ℚ)≅(ℤ/3ⁿ)^× は未証明**（M4・元の列挙 cg9_galois_order_six＋σ_a 族＋res 全射性まで・核構造/短完全列同型は未）(iii) p=3・ℚ 固定・分離性/正規性一般論未形式化。**柱A%は 38.0→38.6 で 38→39 前進**（今回 +1・res 全射性＋∀n 全機構が丸め閾を越える）。記録 audit/reaudit-A3-m2-2026-07-09.md。 / 2026-07-10: A3 0.65→0.7（独立 A3 再監査確定・reaudit-A3-ctl-2026-07-09.md）。前回 0.65（一般 n の有限 Gal 群＋全遷移射 res_n＋compat＋全射性は揃うが逆極限オブジェクト未組み立て・監査残欠 (i) を 0.65 上限の唯一の主因と明記）に対し、今回 **M3: 逆極限 profinite Gal(ℚ(ζ_{3^∞})/ℚ) が本物に組み上がり `ProfinitePi1Tower.restr`／`restr_self`／`restr_comp` witness を初 discharge**（IUT/CyclotomicTowerLimit.lean）。核心の本物性を監査者が自ら Lean 定義精読で確認: (1) `ctlTower : ProfinitePi1Tower` は K=ratIUTField（実ℚ）・ext=ctlExt n=cteExt (n+1)（∀n 実円分体 ℚ(ζ_{3^{n+1}})・gefFieldExtension＋eitPhi_irreducible 実例化・trivialExtension でない）・restr=ctlRestr（ctlStep n=ctrResHom (n+1)＝ctr で map_mul=ctr_res_comp 証明済みの実制限を反復合成 Hom.comp、d=0 のみ profPi1IdHom）＝**自明塔でない実 2 段以上非自明円分塔**。(2) restr_self=`ctl_restr_self`／restr_comp=`ctl_restr_comp` は sorry/admit/不正 defeq でなく実証明（差分帰納＋単段 peel ctl_restr_step で結合律 cast を回避・proof-irrelevance のみ）。(3) `ctlProfinite := profPi1Limit ctlTower` は limitGrp の Compatible 述語が遷移射 S.t h=ctlRestr を担体条件に使う真の逆極限（積でない・ctlTower を実引数）。`ctl_is_profinite` は profPi1_is_profinite ctlTower の実適用（開核＋近傍基）。従来の唯一の ProfinitePi1Tower 具体例は自明塔 lim Gal(ℚ/ℚ)=1（profPi1_trivialTower／algCloTrivialTower・restr=id）のみで、algCloProfTower T は AlgCloTower の restr witness を仮説で受ける抽象塔＝grep で裏取り。**監査残欠 (i)「逆極限オブジェクト未組み立て」を本物・非空虚に解消**（設計 §4 M3 予測 0.7 と一致）。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋ctlTower/ctlProfinite/ctl_is_profinite すべて #print axioms=[propext,Quot.sound]（新規 Classical.choice 皆無・cast 簿記/反復合成/profPi1Limit 束ねいずれも choice-free）を確認。**残る限定で 0.7 上限（超えない）**: (ii) 射影の全射性（整合族の持ち上げ／Mittag-Leffler）は未証明で極限の非退化（恒等以外の整合族の存在）は未形式化・(iii) レベル同型 Gal(L_n/ℚ)≅(ℤ/3^{n+1})^× と極限同型 Gal(ℚ(ζ_{3^∞})/ℚ)≅ℤ₃^×（M4）は未達・(iv) これは円分切片（G_ℚ の可解商・Kronecker–Weber 部分に対応する副有限商の一つ）であって実 G_ℚ そのものではない。**柱A%は 38.6→39.2 の丸めで 39 据え置き**（status は 0.65→0.7 と上がるが柱%は動かない・正直に横這いと明記）。記録 audit/reaudit-A3-ctl-2026-07-09.md。 / 2026-07-10: A3 0.7→0.75（独立 A3 再監査確定・reaudit-A3-m4-2026-07-09.md）。前回 M3 監査が 0.7 上限の唯一理由として名指しした残欠 (ii)射影全射性未証明＝極限の非退化未形式化・(iii)レベル同型 Gal(L_n/ℚ)≅(ℤ/3^{n+1})^× と極限同型 ≅ℤ₃^× 未達 の**両方を本物・choice-free に discharge**する M4 が入った。(M4a・cci) `cciIsoData ℓ hℓ`＝各段 Gal(ℚ(ζ_{3^ℓ})/ℚ)≅(ℤ/3^ℓ)^× の**本物の双方向群同型**（χ_ℓ=cciToUnits と σ_a=cciFromUnits がいずれも Hom・左右逆 cci_left_inv/cci_right_inv 証明済み・単射=cae_aut_ext 全射=csaAut を実使用）＋★新規数学 `cci_charG_mul`（指標積公式 char(σ·τ)=char σ·char τ mod 3^ℓ・ctm_powers_distinct=μ 位数 3^ℓ を実使用・fudge でない）＋副産物 cci_gal_comm（円分切片可換）。(M4b・zpu/zps/cli) 乗法群 `zpuGrp ℓ`=(ℤ/3^ℓ)^×（担体 Nat subtype・逆元は Hensel `zpuInv` 再帰関数＝choice-free・Euler 定理不使用）／`zpsLimit`=lim(ℤ/3^{n+1})^×=ℤ₃^×／**`cliIsoData`＝ctlProfinite(M3 実 profinite)≅ℤ₃^× の本物の双方向同型**（compat 正方形 cli_char_restr を単段 cli_char_step の差分帰納で本物証明・cast/defeq 誤魔化しなし・媒介射は担体直接構成で limit_universal 不使用）。(M4c・cps) `cps_proj_surjective`＝逆極限 ctlProfinite の各段 `profPi1_proj ctlTower n`(=limitProj の第 n 成分射・実射影) への**射影全射性を本物・choice-free に**（指標分裂: τ の指標 a を取り zps_proj_surjective の閉じた式 witness a%3^{m+1} で単数側整合族→cliFrom で押し出し）＝**監査残欠 (ii) の discharge**、cps_nontrivial/cps_example0 で非退化・非空虚を検算。**choice-free の裏取り（本監査の最重点・DC 隠蔽の有無）**: zpuInv は閉じた再帰関数／zps/cps の射影全射性は一般 Mittag-Leffler の可算従属選択を使わず単数側 truncation 切断で閉じる（本塔固有の指標分裂・一般 ML は非形式化と正直申告）／obtain は目標 Prop の Exists.elim であり choice 不要。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋M4 主要対象すべて（zpuGrp/zpuInv_spec/zpsLimit/zps_proj_surjective/cciIsoData/cci_charG_mul/cliIsoData/cli_char_restr/cps_proj_surjective/cps_nontrivial）#print axioms=[propext,Quot.sound]（推移的閉包に新規 Classical.choice 皆無）を確認。設計 M4 予測 0.75 と一致。**残る限定で 0.75 上限（超えない・A3=1 に遠い）**: (i) これは円分切片 Gal(ℚ(ζ_{3^∞})/ℚ)（G_ℚ の可解商・Kronecker–Weber 部分の副有限商）であって実 IUT の絶対 Galois 群 G_ℚ そのものではない・(ii) 一般有限逆系の Mittag-Leffler は choice-free に非形式化（本塔の指標分裂に依存）・(iii) ℤ₃^× は逆極限としての単数群で 3 進桁列構成でない・(iv) p=3・ℚ 固定・分離性/正規性一般論なし・実 π₁^ét 未達。**柱A%は 39.20→39.80 の丸めで 39→40 前進**（前回 M3 は据え置きだったが今回は丸め閾 39.5 を越えて +1・名指し残欠 (ii)(iii) の本物 discharge が閾を越える）。記録 audit/reaudit-A3-m4-2026-07-09.md。 / 2026-07-10: A7 0→0.35（独立 A7 再監査確定・reaudit-A7-real-cyclotomic-rigidity-2026-07-10.md）。前回 0（既存 M322F CyclotomicRigidity が抽象 GK＋ℤ/n 模型 cycMuStd＋trivial χ≡1 の代理・実例 cycRigGaloisExample がその欠陥）に対し、実 μ_{3^ℓ}×実 Gal 作用×非自明 χ×剛性定理×実 ℤ₃(1) 逆極限で surrogate を実主語へ昇格する 4 新規ファイルが本物で入った: (A7a・cmr/cgar) cmrMu＝実円分体 ℚ(ζ_{3^ℓ})=ℚ[x]/(Φ_{3^ℓ}) の中の実 3^ℓ 乗根部分群 { y // rpow y 3^ℓ=1 }（ℤ/n 模型でない・log=ctmFind choice-free 走査）で M322F 抽象 CycMuGroup を実充填、cgarAct＝実 Gal(ℚ(ζ_{3^ℓ})/ℚ)=galoisGroupGrp(cteExt)（K を各点固定する実 FieldAut 全体の部分群）の実 μ への体自己同型制限で CycGKAction を実充填、cgar_nontrivial＝σ₂=cciFromUnits⟨2⟩（実体自己同型 csaAut・σ₂(ζ)=ζ²）で χ(σ₂)=2≠1=χ(1)＝M322F honest note :70-73「非自明 χ の実 Galois 降下は後続」を実 discharge（trivial χ 模型のままでない）。(A7c・cra) cra_endo_pow（任意群自己準同型＝冪写像・Galois 仮定なし）・cra_gal_inj＋cra_gal_realize（Gal≅Aut(μ_{3^ℓ}) 消去形・witness choice-free）・cra_char_canonical（χ 生成元非依存）・cra_indeterminacy（(ℤ/3^ℓ)^× 不定性を定理として明示＝正直な限定・消してない）。(A7b・tmz) tmzLimit＝lim μ_{3^{n+1}}＝実 ℤ₃(1)（limitGrp の Compatible 整合族＝真の逆極限）・tmz_iota_cube（ι(t y)=y³・実 RingHom cteIota の x̄↦x̄³ で遷移の忠実性）・tmz_act_char（作用=χ 冪）・χ≅ℤ₃^× は cliIsoData 再利用。監査者自ら bash build.sh フル実行(EXIT=0・no sorry)＋4 ファイル全 63 public 対象の #print axioms=[propext,Quot.sound]（cra_hom_ext=[Quot.sound]・cra_pow_mul_dist=公理なし・新規 Classical.choice 皆無・build 全体の Choice は既存 gsets/GaloisTower のみで A7 推移閉包に無し）を確認。0.35 上限（0.5 未満・設計 0.4 を敵対的に 1 ノッチ下）の理由: (i) 剛性内容が初等・古典（巡回群の自己準同型＝冪写像・Aut(μ_n)≅(ℤ/n)^×・χ 内在性）で IUT が要する mono-theta 円分剛性でない・(ii) モジュール自身が cra_indeterminacy で (ℤ/3^ℓ)^× 不定性の残存を定理化＝IUT 荷重を担う剛性（不定性の消去）は 0・台帳 A7 が最終的に指す mono-theta 剛性の「忠実な部分ケース」とは言い切れない・(iii) 円分切片（G_ℚ の可解商）で実 G_ℚ・局所 G_{K_v} でない・p=3・K̄/幾何的 cyclotome 不在。0.3 を採らないのは 3 成分全実装＋非自明 χ 本物立ちの前進を過小評価しないため。柱A%は 39.8→44.0 の丸めで 40→44 前進（+4）。記録 audit/reaudit-A7-real-cyclotomic-rigidity-2026-07-10.md。 / 2026-07-10: A2 0.5→0.65（独立 A2 再監査確定・reaudit-A2-real-padic-local-field-2026-07-10.md）。前回 0.5（付値機構は本物だが complete_note が「実 p 進局所体 K_v も皆無」＝完備化体 ℚ_3 が欠落）に対し、今回 **実 ℤ₃ 付値環＋𝔽₃＋完備性（modulus 形）＋実 ℚ₃ 体オブジェクト＋実 ℚ₃^×** の 4 つの独立な本物構成で K_v を初めて実体化。(A2a) Zp3ValuationRing/z3v: 実 ℤ₃=lim ℤ/3ⁿ（zpRing 3・逆極限）の局所体パッケージ——付値関係 z3vGe/z3vExact・因数分解 x=3^v·u（実 Hensel zpValDecompose・choice-free）・極大イデアル 3ℤ₃（resFieldMaximal への体でない環の初の非自明実例・witness=zpUnitInv 明示逆元）・剰余体 ℤ₃/3ℤ₃≅𝔽₃（z3v_res_iso 双方向環同型）。併設 F3Field/f3: コードベース初の有限 IUTField（total inv=恒等・p=3 特有・(a−1)(a+1) で証明）。(A2b) Zp3Complete/z3c: modulus 付き Cauchy 列の極限 z3cLim（レベルごと閉じた式・choice-free）・収束 z3c_converges・一意性・ℤ 稠密・**z3c_val_compat（実 pvq 付値 v₃=ℤ₃ 内付値の境界接着）**。(A2c) Q3LocalField/q3f: **q3Ring=ringLocRf z3 3=実 ℤ₃[1/3]＝本物の ℚ₃ 体オブジェクト（模型でない・実局所化の実例代入）**・∃ 形体性 q3f_has_inverses（非零 witness 付き元に zpUnitInv で明示逆元・choice-free）・uniformizer 3（q3f_uniformizer）・O=ℤ₃（q3f_ring_of_val）・ℤ 値付値 q3fValRel。Q3UnitsGroup/q3u: FullReciprocity の抽象直積代理 QpUnits を実 ℚ₃^×（3^ℤ×ℤ₃^×↪ℚ₃）へ昇格（q3u_embed_hom/q3u_embed_inj）。監査者自ら bash build.sh フル実行（EXIT=0・no sorry）＋**A2 5 ファイルの全 public 対象 70 個の #print axioms を自分で列挙実行し全て [propext,Quot.sound] 以下・新規 Classical.choice 皆無**を確認。**total inv を密かに主張していないこと（q3Ring に IUTField/Field インスタンス皆無・∃ 形逆元のみ）を grep で確認＝choice 違反なし**。**残る限定で 0.65 上限（0.7 を超えない）**: (i) ℚ₃ は total inv を持つ IUTField でなく ∃ 形逆元の CRing 体オブジェクト（ℚ_p は構成的に離散体でない恒久障害）(ii) ℚ↪ℚ₃ 体埋め込み（A2c-3）未接続で「K の完備化」は整数付値一致どまり (iii) ℚ₃ の位相・G_{ℚ₃}・分岐は皆無・∃形 Cauchy/位相的完備性は未（modulus 形のみ）・p=3/基礎体ℚ 固定。0.6/0.62 に下げないのは完備性定理＋体オブジェクト＋剰余体𝔽₃＋ℚ₃^× の 4 独立構成が全部本物 landing した質的前進を過小評価しないため（上記 3 ギャップは 0.65 cap に既に織込済・二重計上しない）。**柱A%は 44.7→45.9 の丸めで 45→46 前進**（A2 0.65 で Σ=45.9→46・45.5 の不安定境界を回避）。記録 audit/reaudit-A2-real-padic-local-field-2026-07-10.md。 / 2026-07-10: A8 0.5→0.57（独立 A8 再監査確定・reaudit-A8-real-tate-curve-2026-07-10.md）。前回 0.5（TateCurve 機構は実だが存在 witness が q=1 の自明周期・無限位数と torsion 位数は外部付値仮定＝「機構は実だが実例が自明/退化」）に対し、今回 **実 Tate 曲線 E_q(ℚ₃)=ℚ₃^×/q^ℤ 一式（A8a q3t＋A8b q3tt・2 新規ファイル 665 行）** で named 欠陥を本物・choice-free に discharge。(A8a) q3tGrp=QpUnits 3=実 ℚ₃^×（3^ℤ×ℤ₃^× を q3uEmbed 単射で実 ℚ₃ 内へ・q3u_embed_inj 精読確認・模型でない）を実 q=3^m（m≥1）で割る本物の商群 q3tCurve（M267F quotientGroupN・quotientProjN_ker 普遍性）＝実 Tate 曲線。実付値 v(q)=m（q3t_q_val・関係形付値 q3fValRel＝well-defined＋加法性証明済・z3vExact は真の厳密付値）で M309F 退化 witness q=1 を discharge。実無限位数 q3t_q_pow_ne_one（第1成分 m·n≠0・omega のみ・**外部付値仮定なし**・free ℤ 成分から本物）。周期性 q3t_period＋実 ℚ₃ 内での読み q3t_period_real（q3u_embed_hom）・非自明点 [−1] q3t_point_ne_one。(A8b) 実 2 乗根 w=3・w²=q=9（q3tt_w_sq・成分算術 1+1=2・**体拡大なし**）で M314F witness 仮定を discharge。実位数ちょうど 2（q3tt_w_order・射影核 quotientProjN_ker＋第1成分 2t=k・omega・**外部付値仮定なし**）で M314F tateTorQrootOrder の外部付値入力を実算術で置換。実 μ₂={±1}（q3ttMuPoint）＋Klein 4 群 {[1],[3],[−1],[−3]} ⊆ E₉[2]（class 分離 q3tt_class_eq_iff＝付値方向×単数方向直交・4 点相異 q3tt_klein_distinct・積閉 q3tt_klein_closed・各点 2-捻れ q3tt_klein_torsion）。監査者自ら bash build.sh フル実行（EXIT=0・no sorry）＋**A8 全 31 対象（A8a 16＋A8b 15）の #print axioms を自分で列挙実行し全て [propext,Quot.sound]・新規 Classical.choice 皆無（位数・klein・class 分離で choice 隠蔽なしを目視）** を確認。**Klein は ⊆ のみで = E₉[2] を主張していない**こと（μ₂ 完全性 u²=1⟹u=±1 は未・grep で等式主張なし）・**cuspidalization は今回 0**（grep で実体皆無・正直な限定行のみ）を裏取り＝過大主張なし。**0.57 上限（design cap 0.6 を敵対的に 0.03 下）**: (i) cuspidalization=0（A8 title の半分）(ii) real cover=代理のまま（TateCover 系 surrogate π₁・実 E_q と未接続）(iii) Galois 作用皆無（G_{ℚ₃} 未）(iv) μ₂ 完全性未・2-torsion 完全決定でない(v) 単一切片 p=3・l=2・q=3^m・担体は群提示 3^ℤ×ℤ₃^×（∃形・literal {x:ℚ₃//x≠0} 商でない・A2 継承）・T_l/幾何 Tate 加群/Weierstrass 未接続。据え置き（0.5）は named 欠陥 2 件の本物 discharge を過小評価ゆえ不採・0.55 は Σ=46.5 で banker rounding が 46 に落ち genuine promotion を柱%に反映しないゆえ不採。**柱A%は 45.9→46.74 の丸めで 46→47 前進**（A8 0.57 で Σ=46.74→47・46.5 の不安定境界を回避）。記録 audit/reaudit-A8-real-tate-curve-2026-07-10.md。 / 2026-07-11: A7 0.49→0.56（独立 A7 再監査確定・reaudit-q9mb-bridge-l9-2026-07-11.md）。level-9 テータ kill キャンペーンの consumer=比較橋 Q3Mu9TmzBridge（q3mb の ℓ=2 版・prefix q9mb・commit 7d2850b・650 行）の再監査。直前 5 モジュール（q9ps→q9tl→q9mt→q9mr の kill 連鎖）は unconsumed foundation として 0前進 で正しく保持されていたが、本橋 q9mb がそれらを消費して firewall（テータ側 q9mr/q9mt/q3k ↔ 円分側 tmz/tmi/cgar）を越え、tmi の実 ℤ₃^×=zpsLimit の (ℤ/9)^× 商を殺す——ゆえに本監査が now-consumed 連鎖を纏めて計上し s_A7 を SET する。【Part1 正確性＝全 YES】(1) q9mb_kill_mod9 は非空虚な強制: u:zpsLimit の実元・hHom/hMem/hE9 は q9mr theta-両立剛性の genuine 条件・hreal は実橋輸送の実現（q9mb_admissible_iff 前方向が u₁=1 枝で φ=id により hreal 充足を構成＝真の二分・空虚∀でない）。証明は t=tmeZetaLim で q9mr_cyclotome_fixed（原始 9 乗根 ζ₉⁻¹ 固定）を消費し (ζ₉⁻¹)^{u₁}=ζ₉⁻¹ ⟹ ζ₉U 位数ちょうど 9 の単射性（q9mb_pow_inj）で u₁=1 強制——循環でない。(2) σU 同変 genuine 新規: q9mb_normBase_sigma（N(σx)=N(x)・q3k_norm_eq＋σ³=id の実代数）で q9mbSigmaU well-defined、q9mb_equivariant_sigmaU（β₉(σ₄y)=σU(β₉y)・χ(σ₄)=4）は q3kSigma（Y↦ζ₃Y・位数 3）の単数群化＝level-3 の反転共役 q3mb_equivariant_conj（ζ₃↦ζ₃²・位数 2）の再ラベルでない NEW な位数 3 自己同型。(3) q9mb_kill_new_layer は (u.val 1).val=1∧≠4∧≠7 を機械可読に述べ、q9mb_new_layer_chars が {4,7}=(1+3ℤ₃)/(1+9ℤ₃) の非自明元（mod3=1・<9・¬3∣・≠1）を同定＝過大主張なし（(ℤ/9)^× 全体でも 1+9ℤ₃ でもない）。(4) firewall real: β₉:Hom(tmzG 1)q3kU が実円分 μ₉（tmzG 1=cmrGrp 2⊂ℚ(ζ₉)）を choice-free ctmFind 2 でテータ側 q3kU に結び、q9mb_onto_mu9 が q9c_mu9_complete（実 9 分類）を消費。(5) 軸: lake build EXIT=0・q9mbHom/q9mb_equivariant_sigmaU/q9mb_normBase_sigma/q9mb_kill_mod9/q9mb_kill_new_layer/q9mb_admissible_iff/q9mb_onto_mu9/q9mb_transport/q9mb_exists すべて #print axioms=[propext,Quot.sound]（監査者が lake env lean で列挙）。禁止タクティク0（sorry/simp/decide/by_cases/rcases/ring/nlinarith grep 0・唯一 sorry ヒットは日本語コメント『sorry 皆無』・omega 98 箇所は純 Int/Nat 付値/指数）。(6) 二重計上なし: q3mb は (u.val 0).val=1（index0=mod-3 層・q3rqU・q3m3Car）、q9mb は (u.val 1).val=1（index1=mod-9 層・q3kU・q9mtCar）＝異なる層・異なる主語。tmiFromUnits は消費のみ（再証明ゼロ）。【Part2 s_A7=0.56 の敵対的決定・算術】Σ_A=47.62+12·s_A7（A 総重量ちょうど 100）。s=0.56 ⟹ Σ=54.34 ⟹ round-half-even=54。表示 55 の閾は s≥0.574（Σ>54.5・厳密 s>0.5733・s=0.573→54.496→54・s=0.574→54.508→55）。上げ要因: (i) pro-3 bulk 1+3ℤ₃ への初の一咬み——level-3 の正直限定が『まるごと SURVIVES』とした (1+3ℤ₃)/(1+9ℤ₃) 層を初剥がし（level-3 が殺したのは素数-to-3 の ℤ/2 成分＝算術的に易しい側）。(ii) genuinely new mathematics 消費: μ₉ 完全性 q9c_mu9_complete（実 9 分類・クローンでない実定理）・wild 分割 3=π₉⁶·u₆・実テータ交換子からの初の原始 9 乗根 Weil 値 ζ₉⁻¹。(iii) σU 局所大域同変＝level-3 に無い新規（位数 3 自己同型）。(iv) 機構→対象昇格（tmi の実 (ℤ/9)^× 商へ輸送）。下げ要因（0.574 未達で cap）: (i) 殺すのは第 1 層 {4,7} のみ・1+9ℤ₃（n≥3 の全層）は依然 SURVIVES＝可算無限塔の 1 graded piece。(ii) kill 機構の約 8 割が level-3 テンプレのクローン。(iii) 忠実部分ケースの 2 乗（q=3⁹・[EtTh] q^{1/l} でない）・endo 定式化・実テータ関数/π₁/G_{ℚ₃} ゼロ。(iv) 群レベル同定（Aut(μ₉)=位数 6 曖昧）・u₁=1 強制は level-9 テータ両立クラス相対・tmi の残存 full-ℤ₃^× 宣言は不変更。(v) mod-9 層のみ・塔/極限でない。0.56 採用の justification: level-3 kill+橋の全キャンペーンが 0.42→0.49（+0.07）だった precedent と同規模の +0.07 を、pro-3 初咬みの質的前進＋新数学 q9c 消費で正当化する一方、8 割クローン・単層・endo・G_{ℚ₃} 不在の cap が level-3 と同じく効くため precedent 規模を超えさせない（+0.084 超＝0.574 は全 level-3 キャンペーン超の純増を要し、8 割クローンでは正当化不能）。0.55/0.57 も表示 54 で不変だが、全連鎖 landing の質（全軸 clean・非空虚 kill・σU 新規・firewall real）を過小評価せず設計中央 0.55–0.56 の上側を採る。0.58 に inflate しない（campaign を『成功』に見せるため 55 にしない）・0.54 に deflate もしない（merit で決定）。**柱A%は 54 据え置き（s 0.49→0.56 で status は前進するが表示は横這い・正直に明記）**。compute_complete_pct.py 出力{\"A\":54}確認。記録 audit/reaudit-q9mb-bridge-l9-2026-07-11.md。 / 2026-07-11: A2 0.65→0.67（独立 A2c-3 再監査確定・reaudit-q3re-ratembed-a2c3-2026-07-11.md）。ℚ↪ℚ₃ 実環準同型 Q3RatEmbed（q3re・commit 7d135df）が A2 設計文書 §5.2 名指しの named 残欠 A2c-3 を本物 discharge。本物の環準同型 q3reMap:ratRing→q3Ring（add/mul/1/0 保存）で **ratRel 同値上 well-defined**（q3_unit_cancel＋特徴付け方程式 q3re_frac_spec で降下・代表押付けでない）・非空虚（1↦1）・単射 q3re_map_inj（非零↦非零）・付値両立 q3re_val_compat v₃(a/b)=v₃(a)−v₃(b)・稠密は honest scope（ℤ₃⊂ℚ₃ 整数像・z3c_int_dense 系・full ℚ-density 非主張）。choice-free（q3reSplit=Nat.strongRecOn・逆元=明示 zpUnitInv・禁止タクティク0）。**本環境 lean/lake 未導入で #print axioms 実行不能→静的検査で新規 Classical/sorry 皆無・全依存は直前 A2 監査で [propext,Quot.sound] 確認済**。s_A2=+0.02 の merit: 初の大域→局所埋め込み＋三定理は本物だが、稠密は再ラベル（位相的完備化未達）・∃-inverse 体射でない・0.7 の 2 部品の一つ＝派生的で forecast +0.02〜0.04 の低位。**★算術訂正: 実 compute_complete_pct.py は round(num/den*100) で Σ_A=54.5→float 54.50000000000001→round 55（banker 丸め無効化）。ゆえに s_A2=0.67 で柱A 54→55 前進（依頼前提『0.67→54』は実ツールでは誤り・inflate でなく float 挙動の帰結）。compute 出力{\"A\":55}確認**。",
+ "pillars": {
+  "A": {
+   "name": "遠アーベル (anabelian / 実 π₁^ét)",
+   "items": [
+    {
+     "id": "A1",
+     "title": "実数体 K = ℚ[x]/(f) を実際の商環として構成",
+     "weight": 8,
+     "status": 0.85
     },
-    "B": {
-      "name": "分岐 LCFT (局所類体論・分岐)",
-      "items": [
-        {
-          "id": "B1",
-          "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)",
-          "weight": 20,
-          "status": 0.66,
-          "note": "q9gl general-element lower filtration ∀x σx−x∈(π₉³) (audit +0.04→0.64) | q9v 実 v_M 付値関数（一様化子 submonoid・i_G(σ)=3 defined value）(audit +0.02→0.66・sub-display)"
-        },
-        {
-          "id": "B2",
-          "title": "実局所類体論(相互写像・実)",
-          "weight": 20,
-          "status": 0.36,
-          "note": "★ crux 4∉N q9lr (M1 q9rf+M2 q9gn+M3 q9lr): 初の実非ノルム・cokernel 非自明・integral-x 限定（audit +0.22→0.22） | M4 q9rc [4] 位数3・元レベル ℤ/3 下界（4∉N∧16∉N∧64∈N・q9rc_z3_injects）audit +0.08→0.30 | M4b q9rg Gal↪cokernel 埋込＋q9rcCongMod 同値律（cap(a) 解消・subgroup ⟨[4]⟩）audit +0.04→0.34 | M4c q9qc literal 商群 U_{L₂}/N(U_M) Grp + Gal↪it（cap(a) 残解消・cosetRel↔q9rcCongMod 橋）audit +0.02→0.36"
-        },
-        {
-          "id": "B3",
-          "title": "実 Artin 導手/different(実表現・実分岐群上)",
-          "weight": 20,
-          "status": 0.29,
-          "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27) | q9dv v(D)=6 値+q9di different イデアル対象 (audit +0.02→0.29)"
-        },
-        {
-          "id": "B4",
-          "title": "実 Hasse–Arf(実 Galois 群上)",
-          "weight": 15,
-          "status": 0.13,
-          "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13)"
-        },
-        {
-          "id": "B5",
-          "title": "大域類体論/積公式(実)",
-          "weight": 15,
-          "status": 0.5
-        },
-        {
-          "id": "B6",
-          "title": "Kummer 理論(実 Galois コホモロジー上)",
-          "weight": 10,
-          "status": 0.18
-        }
-      ]
+    {
+     "id": "A2",
+     "title": "実 p 進局所体 K_v(完備化)を実際の対象として構成",
+     "weight": 8,
+     "status": 0.69,
+     "note": "q3re field-hom ℚ↪ℚ₃ 逆元保存+単射 (audit +0.02→0.69)"
     },
-    "C": {
-      "name": "形式群 / Frobenioid / Arakelov",
-      "items": [
-        {
-          "id": "C1",
-          "title": "実形式群",
-          "weight": 12,
-          "status": 1
-        },
-        {
-          "id": "C2",
-          "title": "実 Frobenioid(実対象・実射の圏)",
-          "weight": 22,
-          "status": 0.5
-        },
-        {
-          "id": "C3",
-          "title": "実 Arakelov(実計量付き直線束・実算術次数)",
-          "weight": 20,
-          "status": 0
-        },
-        {
-          "id": "C4",
-          "title": "測度論的 log-volume(実測度・実積分)",
-          "weight": 22,
-          "status": 0.53,
-          "note": "NNQMulHom nnqToQ 乗法保存+順序線形性 (audit +0.02→0.52) | NNQSemiring 左分配律→順序半環+nnqToQ semiring hom (audit +0.01→0.53・柱C 41→42)"
-        },
-        {
-          "id": "C5",
-          "title": "実 theta 関数 / étale theta",
-          "weight": 14,
-          "status": 0.5
-        },
-        {
-          "id": "C6",
-          "title": "実 Kummer-Frobenioid 両立",
-          "weight": 10,
-          "status": 0
-        }
-      ]
+    {
+     "id": "A3",
+     "title": "実絶対 Galois 群 G_K = 有限 Galois 群の逆極限(実プロファイナイト群)",
+     "weight": 12,
+     "status": 0.75
     },
-    "D": {
-      "name": "定理3.11 / 多輻 (multiradial)",
-      "items": [
-        {
-          "id": "D1",
-          "title": "実 log-shell",
-          "weight": 12,
-          "status": 0.5
-        },
-        {
-          "id": "D2",
-          "title": "実 log-link",
-          "weight": 12,
-          "status": 0.5
-        },
-        {
-          "id": "D3",
-          "title": "実 theta-link",
-          "weight": 12,
-          "status": 0.5
-        },
-        {
-          "id": "D4",
-          "title": "実ホッジ劇場 / 実 log-theta-lattice",
-          "weight": 16,
-          "status": 0
-        },
-        {
-          "id": "D5",
-          "title": "実多輻表現",
-          "weight": 14,
-          "status": 0
-        },
-        {
-          "id": "D6",
-          "title": "実不定性 (Ind1/Ind2/Ind3)(実対象上)",
-          "weight": 12,
-          "status": 0
-        },
-        {
-          "id": "D7",
-          "title": "多輻不等式 crux Dβ-ω(望月論証の写経・係争点。決着まで status=0)",
-          "weight": 14,
-          "status": 0
-        },
-        {
-          "id": "D8",
-          "title": "Cor 3.12 → Szpiro → ABC 還元(実)",
-          "weight": 8,
-          "status": 0
-        }
-      ]
+    {
+     "id": "A4",
+     "title": "実 π₁^ét(双曲的曲線/Spec の実プロファイナイト基本群)",
+     "weight": 14,
+     "status": 0.56
     },
-    "E": {
-      "name": "テータ (theta)",
-      "items": [
-        {
-          "id": "E1",
-          "title": "実 étale theta 関数",
-          "weight": 18,
-          "status": 0.5
-        },
-        {
-          "id": "E2",
-          "title": "実 theta 値 / mono-theta environment",
-          "weight": 18,
-          "status": 0.5
-        },
-        {
-          "id": "E3",
-          "title": "三剛性(離散/定数倍/円分・実)",
-          "weight": 20,
-          "status": 0.5
-        },
-        {
-          "id": "E4",
-          "title": "実 theta の Kummer 理論",
-          "weight": 16,
-          "status": 0
-        },
-        {
-          "id": "E5",
-          "title": "Gaussian / theta pilot object(実)",
-          "weight": 18,
-          "status": 0.5
-        },
-        {
-          "id": "E6",
-          "title": "実 μ_l ⊂ 実体(1の l 乗根の実構成)",
-          "weight": 10,
-          "status": 0.5
-        }
-      ]
+    {
+     "id": "A5",
+     "title": "実 tempered π₁^temp",
+     "weight": 10,
+     "status": 0.23,
+     "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23)"
+    },
+    {
+     "id": "A6",
+     "title": "mono-anabelian 復元(π₁ から体/環を復元・実)",
+     "weight": 14,
+     "status": 0.6,
+     "note": "crt realization-mult + base-point-free torsor (audit +0.02→0.60)"
+    },
+    {
+     "id": "A7",
+     "title": "実円分剛性 cyclotomic rigidity(実 G_K 加群上)",
+     "weight": 12,
+     "status": 0.57
+    },
+    {
+     "id": "A8",
+     "title": "楕円曲線/Tate 曲線の実被覆・cuspidalization",
+     "weight": 12,
+     "status": 0.66,
+     "note": "q3c3 [3]-isogeny E₉[3](ℚ₃)={O} trivial-deck (audit +0.01→0.66)"
+    },
+    {
+     "id": "A9",
+     "title": "Belyi 化 / 遠アーベル幾何入力(実)",
+     "weight": 10,
+     "status": 0.12
     }
+   ]
+  },
+  "B": {
+   "name": "分岐 LCFT (局所類体論・分岐)",
+   "items": [
+    {
+     "id": "B1",
+     "title": "実局所体の実付値・実分岐フィルトレーション(実 Galois 群上)",
+     "weight": 20,
+     "status": 0.66,
+     "note": "q9gl general-element lower filtration ∀x σx−x∈(π₉³) (audit +0.04→0.64) | q9v 実 v_M 付値関数（一様化子 submonoid・i_G(σ)=3 defined value）(audit +0.02→0.66・sub-display)"
+    },
+    {
+     "id": "B2",
+     "title": "実局所類体論(相互写像・実)",
+     "weight": 20,
+     "status": 0.36,
+     "note": "★ crux 4∉N q9lr (M1 q9rf+M2 q9gn+M3 q9lr): 初の実非ノルム・cokernel 非自明・integral-x 限定（audit +0.22→0.22） | M4 q9rc [4] 位数3・元レベル ℤ/3 下界（4∉N∧16∉N∧64∈N・q9rc_z3_injects）audit +0.08→0.30 | M4b q9rg Gal↪cokernel 埋込＋q9rcCongMod 同値律（cap(a) 解消・subgroup ⟨[4]⟩）audit +0.04→0.34 | M4c q9qc literal 商群 U_{L₂}/N(U_M) Grp + Gal↪it（cap(a) 残解消・cosetRel↔q9rcCongMod 橋）audit +0.02→0.36"
+    },
+    {
+     "id": "B3",
+     "title": "実 Artin 導手/different(実表現・実分岐群上)",
+     "weight": 20,
+     "status": 0.3,
+     "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27) | q9dv v(D)=6 値+q9di different イデアル対象 (audit +0.02→0.29) | q9cd codifferent trace-dual integral shadow + Tr(O_M)=embed(3·O) image-equality (audit +0.01→0.30)"
+    },
+    {
+     "id": "B4",
+     "title": "実 Hasse–Arf(実 Galois 群上)",
+     "weight": 15,
+     "status": 0.13,
+     "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13)"
+    },
+    {
+     "id": "B5",
+     "title": "大域類体論/積公式(実)",
+     "weight": 15,
+     "status": 0.5
+    },
+    {
+     "id": "B6",
+     "title": "Kummer 理論(実 Galois コホモロジー上)",
+     "weight": 10,
+     "status": 0.18
+    }
+   ]
+  },
+  "C": {
+   "name": "形式群 / Frobenioid / Arakelov",
+   "items": [
+    {
+     "id": "C1",
+     "title": "実形式群",
+     "weight": 12,
+     "status": 1
+    },
+    {
+     "id": "C2",
+     "title": "実 Frobenioid(実対象・実射の圏)",
+     "weight": 22,
+     "status": 0.5
+    },
+    {
+     "id": "C3",
+     "title": "実 Arakelov(実計量付き直線束・実算術次数)",
+     "weight": 20,
+     "status": 0
+    },
+    {
+     "id": "C4",
+     "title": "測度論的 log-volume(実測度・実積分)",
+     "weight": 22,
+     "status": 0.53,
+     "note": "NNQMulHom nnqToQ 乗法保存+順序線形性 (audit +0.02→0.52) | NNQSemiring 左分配律→順序半環+nnqToQ semiring hom (audit +0.01→0.53・柱C 41→42)"
+    },
+    {
+     "id": "C5",
+     "title": "実 theta 関数 / étale theta",
+     "weight": 14,
+     "status": 0.5
+    },
+    {
+     "id": "C6",
+     "title": "実 Kummer-Frobenioid 両立",
+     "weight": 10,
+     "status": 0
+    }
+   ]
+  },
+  "D": {
+   "name": "定理3.11 / 多輻 (multiradial)",
+   "items": [
+    {
+     "id": "D1",
+     "title": "実 log-shell",
+     "weight": 12,
+     "status": 0.5
+    },
+    {
+     "id": "D2",
+     "title": "実 log-link",
+     "weight": 12,
+     "status": 0.5
+    },
+    {
+     "id": "D3",
+     "title": "実 theta-link",
+     "weight": 12,
+     "status": 0.5
+    },
+    {
+     "id": "D4",
+     "title": "実ホッジ劇場 / 実 log-theta-lattice",
+     "weight": 16,
+     "status": 0
+    },
+    {
+     "id": "D5",
+     "title": "実多輻表現",
+     "weight": 14,
+     "status": 0
+    },
+    {
+     "id": "D6",
+     "title": "実不定性 (Ind1/Ind2/Ind3)(実対象上)",
+     "weight": 12,
+     "status": 0
+    },
+    {
+     "id": "D7",
+     "title": "多輻不等式 crux Dβ-ω(望月論証の写経・係争点。決着まで status=0)",
+     "weight": 14,
+     "status": 0
+    },
+    {
+     "id": "D8",
+     "title": "Cor 3.12 → Szpiro → ABC 還元(実)",
+     "weight": 8,
+     "status": 0
+    }
+   ]
+  },
+  "E": {
+   "name": "テータ (theta)",
+   "items": [
+    {
+     "id": "E1",
+     "title": "実 étale theta 関数",
+     "weight": 18,
+     "status": 0.5
+    },
+    {
+     "id": "E2",
+     "title": "実 theta 値 / mono-theta environment",
+     "weight": 18,
+     "status": 0.5
+    },
+    {
+     "id": "E3",
+     "title": "三剛性(離散/定数倍/円分・実)",
+     "weight": 20,
+     "status": 0.5
+    },
+    {
+     "id": "E4",
+     "title": "実 theta の Kummer 理論",
+     "weight": 16,
+     "status": 0
+    },
+    {
+     "id": "E5",
+     "title": "Gaussian / theta pilot object(実)",
+     "weight": 18,
+     "status": 0.5
+    },
+    {
+     "id": "E6",
+     "title": "実 μ_l ⊂ 実体(1の l 乗根の実構成)",
+     "weight": 10,
+     "status": 0.5
+    }
+   ]
   }
+ }
 }

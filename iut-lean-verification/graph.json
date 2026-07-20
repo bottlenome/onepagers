@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
   "module_count": 671,
-  "verified_theorem_total": 2843,
+  "verified_theorem_total": 2849,
   "choice_free_count": 582,
   "nodes": [
     {
