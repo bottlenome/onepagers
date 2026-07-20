@@ -30,7 +30,8 @@
      "id": "A4",
      "title": "実 π₁^ét(双曲的曲線/Spec の実プロファイナイト基本群)",
      "weight": 14,
-     "status": 0.56
+     "status": 0.58,
+     "note": " | q3ap 算術 π₁^ét 完全列 1→π₁^geom→Π^arith→G→1（(ℤ₃(1)×ℤ₃)⋊Gal・実 profinite 両側）+ 外 Galois 定理 s(σ)ι(z)s(σ)⁻¹=ι(σ·z)∀σ + χ-同変（E_{3⁹}[9] 実曲線）(audit +0.02→0.58)"
     },
     {
      "id": "A5",
