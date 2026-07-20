@@ -234,4 +234,231 @@ theorem kmu_sigma_ne_id : kmuPolyScale kmuZeta kmuVar ≠ kmuVar := by
     CRing.mul_one kmuK kmuZeta] at hc
   exact hc
 
+/-! ## tkm-3: 基礎座標 t = u³ と定数のデッキ固定 -/
+
+/-- **tkm-3a: 基礎座標 t = u³** ∈ K[u]（被覆関係 u³ = t の右辺の実現）。 -/
+def kmuT : Poly kmuK := ⟨psSingle kmuK kmuK.one 3, ⟨4, fun i hi => if_neg (by omega)⟩⟩
+
+/-- **tkm-3b: デッキ σ_ζ は基礎座標 t = u³ を固定**（σ_ζ(u³) = (ζu)³ = ζ³u³ = u³）。
+    「σ∘ι = ι（デッキは基礎環 K[t] を動かさない）」の生成元での顕示。 -/
+theorem kmu_sigma_fixes_t : kmuPolyScale kmuZeta kmuT = kmuT := by
+  apply Subtype.ext
+  funext n
+  show kmuK.mul (rpow kmuK kmuZeta n) (psSingle kmuK kmuK.one 3 n)
+    = psSingle kmuK kmuK.one 3 n
+  cases Nat.decEq n 3 with
+  | isTrue he =>
+    rw [he, show psSingle kmuK kmuK.one 3 3 = kmuK.one from if_pos rfl,
+      kmu_zeta_rpow3, kmuK.one_mul kmuK.one]
+  | isFalse hne =>
+    rw [show psSingle kmuK kmuK.one 3 n = kmuK.zero from if_neg hne,
+      CRing.mul_zero kmuK (rpow kmuK kmuZeta n)]
+
+/-- **tkm-3c: デッキ σ_z は定数 K を固定**（M86F `psScale_psC`）。 -/
+theorem kmu_sigma_fixes_const (z : kmuK.carrier) (c : kmuK.carrier) :
+    (kmuSigma z).map ((polyC kmuK).map c) = (polyC kmuK).map c :=
+  Subtype.ext (psScale_psC kmuK z c)
+
+/-! ## tkm-4: 固定係数定理（Kummer descent の核） -/
+
+/-- **tkm-4a: 基礎係数条件** — p の台が 3 の倍数の次数のみ（= K[u³] = K[t] の像）。 -/
+def kmuBaseSupport (p : Poly kmuK) : Prop := ∀ n, n % 3 ≠ 0 → p.val n = kmuK.zero
+
+/-- **tkm-4b: ζ の冪の周期性** rpow ζ (3q+r) = rpow ζ r（ζ³=1）。 -/
+theorem kmu_zeta_pow_period (r : Nat) :
+    ∀ q, rpow kmuK kmuZeta (3 * q + r) = rpow kmuK kmuZeta r := by
+  intro q
+  induction q with
+  | zero => rw [show 3 * 0 + r = r from by omega]
+  | succ q ih =>
+    rw [show 3 * (q + 1) + r = (3 * q + r) + 3 from by omega,
+      rpow_add kmuK kmuZeta (3 * q + r) 3, kmu_zeta_rpow3,
+      CRing.mul_one kmuK (rpow kmuK kmuZeta (3 * q + r)), ih]
+
+/-- **tkm-4c: ζ^n = ζ^{n mod 3}**。 -/
+theorem kmu_zeta_pow_mod (n : Nat) :
+    rpow kmuK kmuZeta n = rpow kmuK kmuZeta (n % 3) := by
+  have e : 3 * (n / 3) + n % 3 = n := by omega
+  calc rpow kmuK kmuZeta n
+      = rpow kmuK kmuZeta (3 * (n / 3) + n % 3) := by rw [e]
+    _ = rpow kmuK kmuZeta (n % 3) := kmu_zeta_pow_period (n % 3) (n / 3)
+
+/-- **tkm-4d: 3∣n なら ζ^n = 1**。 -/
+theorem kmu_zeta_pow_eq_one_of_mod0 (n : Nat) (h : n % 3 = 0) :
+    rpow kmuK kmuZeta n = kmuK.one := by
+  rw [kmu_zeta_pow_mod n, h]
+  rfl
+
+/-- **tkm-4e: 3∤n なら ζ^n ≠ 1**（ζ^1 = ζ ≠ 1・ζ^2 = ζ² ≠ 1・周期性）。 -/
+theorem kmu_zeta_pow_ne_one (n : Nat) (h : n % 3 ≠ 0) :
+    rpow kmuK kmuZeta n ≠ kmuK.one := by
+  rw [kmu_zeta_pow_mod n]
+  have hm : n % 3 = 1 ∨ n % 3 = 2 := by omega
+  cases hm with
+  | inl h1 =>
+    rw [h1]
+    show kmuK.mul (rpow kmuK kmuZeta 0) kmuZeta ≠ kmuK.one
+    rw [show rpow kmuK kmuZeta 0 = kmuK.one from rfl, kmuK.one_mul kmuZeta]
+    exact kmu_zeta_ne_one
+  | inr h2 =>
+    rw [h2]
+    show kmuK.mul (rpow kmuK kmuZeta 1) kmuZeta ≠ kmuK.one
+    rw [show rpow kmuK kmuZeta 1 = kmuZeta from by
+      show kmuK.mul (rpow kmuK kmuZeta 0) kmuZeta = kmuZeta
+      rw [show rpow kmuK kmuZeta 0 = kmuK.one from rfl, kmuK.one_mul kmuZeta]]
+    exact kmu_zetaSq_ne_one
+
+/-- **tkm-4f: 固定 ⟹ 基礎係数**（σf = f の各係数 (ζ^n−1)·f_n = 0・3∤n で ζ^n≠1・整域）。 -/
+theorem kmu_fixed_imp_base (p : Poly kmuK)
+    (h : kmuPolyScale kmuZeta p = p) : kmuBaseSupport p := by
+  intro n hn
+  have hcoeff : kmuK.mul (rpow kmuK kmuZeta n) (p.val n) = p.val n :=
+    congrFun (congrArg Subtype.val h) n
+  have hne : rpow kmuK kmuZeta n ≠ kmuK.one := kmu_zeta_pow_ne_one n hn
+  have hsub : kmuK.add (rpow kmuK kmuZeta n) (kmuK.neg kmuK.one) ≠ kmuK.zero := by
+    intro hz
+    exact hne (CRing.eq_of_sub_eq_zero kmuK hz)
+  apply kmu_no_zero_div (kmuK.add (rpow kmuK kmuZeta n) (kmuK.neg kmuK.one)) (p.val n) _ hsub
+  rw [CRing.right_distrib kmuK (rpow kmuK kmuZeta n) (kmuK.neg kmuK.one) (p.val n),
+    CRing.neg_mul kmuK kmuK.one (p.val n), kmuK.one_mul (p.val n), hcoeff,
+    CRing.add_neg kmuK (p.val n)]
+
+/-- **tkm-4g: 基礎係数 ⟹ 固定**（3∣n で ζ^n=1・3∤n で f_n=0）。 -/
+theorem kmu_base_imp_fixed (p : Poly kmuK)
+    (h : kmuBaseSupport p) : kmuPolyScale kmuZeta p = p := by
+  apply Subtype.ext
+  funext n
+  show kmuK.mul (rpow kmuK kmuZeta n) (p.val n) = p.val n
+  cases Nat.decEq (n % 3) 0 with
+  | isTrue he =>
+    rw [kmu_zeta_pow_eq_one_of_mod0 n he, kmuK.one_mul (p.val n)]
+  | isFalse hne =>
+    rw [h n hne, CRing.mul_zero kmuK (rpow kmuK kmuZeta n)]
+
+/-- **定理 (tkm-4h): 固定係数定理 = Kummer descent の核** —
+    σ_ζ f = f ⟺ f の台が 3 の倍数の次数のみ（= 基礎環 K[t] = K[u³] の像）。
+    デッキ変換 σ_ζ の固定環がちょうど基礎環 K[t] であること（Kummer 降下）。 -/
+theorem kmu_kummer_descent (p : Poly kmuK) :
+    kmuPolyScale kmuZeta p = p ↔ kmuBaseSupport p :=
+  ⟨kmu_fixed_imp_base p, kmu_base_imp_fixed p⟩
+
+/-- **tkm-4i: 基礎座標 t = u³ は基礎環に属する**。 -/
+theorem kmu_t_base : kmuBaseSupport kmuT := by
+  intro n hn
+  show psSingle kmuK kmuK.one 3 n = kmuK.zero
+  apply if_neg
+  intro he
+  omega
+
+/-! ## tkm-5: 実 μ₃ = {a : K // a³=1}（本物の 1 の 3 乗根群） -/
+
+/-- **定理 (tkm-5a): 実 μ₃(K) = 1 の 3 乗根群** — 担体 {a : K // a³=1}、乗法は
+    K の乗法（`rpow_one_mul_closed` で閉じる）、単位 1、逆元 a²（a·a²=a³=1）。
+    Kummer 被覆 u³=t の**実デッキ群 = 実 μ₃ ⊂ K^×**。 -/
+def kmuMu3 : Grp where
+  carrier := { a : kmuK.carrier // rpow kmuK a 3 = kmuK.one }
+  mul := fun a b => ⟨kmuK.mul a.val b.val, rpow_one_mul_closed kmuK 3 a.property b.property⟩
+  one := ⟨kmuK.one, rpow_one_base kmuK 3⟩
+  inv := fun a => ⟨kmuK.mul a.val a.val, by
+    rw [rpow_mul_dist kmuK a.val a.val 3, a.property, kmuK.one_mul kmuK.one]⟩
+  mul_assoc := fun a b c => Subtype.ext (kmuK.mul_assoc a.val b.val c.val)
+  one_mul := fun a => Subtype.ext (kmuK.one_mul a.val)
+  inv_mul := fun a => Subtype.ext (by
+    show kmuK.mul (kmuK.mul a.val a.val) a.val = kmuK.one
+    have e : rpow kmuK a.val 3 = kmuK.mul (kmuK.mul a.val a.val) a.val := by
+      show kmuK.mul (kmuK.mul (kmuK.mul kmuK.one a.val) a.val) a.val = _
+      rw [kmuK.one_mul a.val]
+    rw [← e]; exact a.property)
+
+/-- **tkm-5b: μ₃ の生成元 ζ = ζ₃**。 -/
+def kmuMu3Zeta : kmuMu3.carrier := ⟨kmuZeta, kmu_zeta_rpow3⟩
+
+/-- **tkm-5c: ζ² ∈ μ₃**。 -/
+def kmuMu3ZetaSq : kmuMu3.carrier :=
+  ⟨kmuK.mul kmuZeta kmuZeta, by
+    rw [rpow_mul_dist kmuK kmuZeta kmuZeta 3, kmu_zeta_rpow3, kmuK.one_mul kmuK.one]⟩
+
+/-- **tkm-5d: 1 ≠ ζ**（μ₃ 内）。 -/
+theorem kmu_mu3_one_ne_zeta : kmuMu3.one ≠ kmuMu3Zeta := by
+  intro h
+  exact kmu_zeta_ne_one (congrArg Subtype.val h).symm
+
+/-- **tkm-5e: 1 ≠ ζ²**（μ₃ 内）。 -/
+theorem kmu_mu3_one_ne_zetaSq : kmuMu3.one ≠ kmuMu3ZetaSq := by
+  intro h
+  exact kmu_zetaSq_ne_one (congrArg Subtype.val h).symm
+
+/-- **tkm-5f: ζ ≠ ζ²**（μ₃ 内）。μ₃ は少なくとも 3 元 {1,ζ,ζ²} を持つ。 -/
+theorem kmu_mu3_zeta_ne_zetaSq : kmuMu3Zeta ≠ kmuMu3ZetaSq := by
+  intro h
+  exact kmu_zeta_ne_zetaSq (congrArg Subtype.val h)
+
+/-! ## tkm-6: 実デッキ作用 GAction μ₃（u 被覆）と忠実性 -/
+
+/-- **定理 (tkm-6a): 実デッキ作用** — μ₃ は被覆環 K[u] に係数スケーリングで
+    genuine に作用する（`GAction kmuMu3`・作用則は M86F `psScale_one_base` /
+    `psScale_comp`）。σ_g(f) = (n ↦ g^n·f_n)。 -/
+def kmuDeck : GAction kmuMu3 where
+  carrier := Poly kmuK
+  act := fun g p => kmuPolyScale g.val p
+  act_one := fun p => Subtype.ext (psScale_one_base kmuK p.val)
+  act_mul := fun g h p => Subtype.ext (psScale_comp kmuK g.val h.val p.val).symm
+
+/-- **定理 (tkm-6b): デッキ作用は忠実**（faithful）— 生成元 u = X 上の作用
+    g·u = g·X の係数 1 が g をそのまま読み出すので、g ↦ (g·u) は単射。
+    「μ₃ = 実デッキ群」（作用が群を忠実に表現する）。 -/
+theorem kmu_deck_faithful (g h : kmuMu3.carrier)
+    (hgh : kmuDeck.act g kmuVar = kmuDeck.act h kmuVar) : g = h := by
+  apply Subtype.ext
+  have hc : kmuK.mul (rpow kmuK g.val 1) (psX kmuK 1)
+      = kmuK.mul (rpow kmuK h.val 1) (psX kmuK 1) :=
+    congrFun (congrArg Subtype.val hgh) 1
+  rw [show psX kmuK 1 = kmuK.one from if_pos rfl,
+    show rpow kmuK g.val 1 = g.val from by
+      show kmuK.mul (rpow kmuK g.val 0) g.val = g.val
+      rw [show rpow kmuK g.val 0 = kmuK.one from rfl, kmuK.one_mul g.val],
+    show rpow kmuK h.val 1 = h.val from by
+      show kmuK.mul (rpow kmuK h.val 0) h.val = h.val
+      rw [show rpow kmuK h.val 0 = kmuK.one from rfl, kmuK.one_mul h.val],
+    CRing.mul_one kmuK g.val, CRing.mul_one kmuK h.val] at hc
+  exact hc
+
+/-! ## tkm-8: μ₃ × μ₃ の実 Grp・実作用（位数 9・二 μ₃ 因子・忠実） -/
+
+/-- **tkm-8a: デッキ群 μ₃ × μ₃**（u 被覆 × v 被覆の結合塔のデッキ群）。
+    tripod 基本群 F₂ の ℤ/3×ℤ/3 商の実現先。 -/
+def kmuMu3Sq : Grp := prodGrp kmuMu3 kmuMu3
+
+/-- **定理 (tkm-8b): μ₃×μ₃ の実デッキ作用**（第 1 因子は u 被覆・第 2 因子は
+    v 被覆に係数スケーリングで作用）。genuine な `GAction kmuMu3Sq`。 -/
+def kmuDeckProd : GAction kmuMu3Sq where
+  carrier := Poly kmuK × Poly kmuK
+  act := fun g p => (kmuPolyScale g.1.val p.1, kmuPolyScale g.2.val p.2)
+  act_one := fun p => by
+    have e1 : kmuPolyScale kmuK.one p.1 = p.1 := Subtype.ext (psScale_one_base kmuK p.1.val)
+    have e2 : kmuPolyScale kmuK.one p.2 = p.2 := Subtype.ext (psScale_one_base kmuK p.2.val)
+    show (kmuPolyScale kmuK.one p.1, kmuPolyScale kmuK.one p.2) = p
+    rw [e1, e2]
+  act_mul := fun g h p => by
+    show (kmuPolyScale (kmuK.mul g.1.val h.1.val) p.1,
+          kmuPolyScale (kmuK.mul g.2.val h.2.val) p.2)
+      = (kmuPolyScale g.1.val (kmuPolyScale h.1.val p.1),
+          kmuPolyScale g.2.val (kmuPolyScale h.2.val p.2))
+    rw [show kmuPolyScale (kmuK.mul g.1.val h.1.val) p.1
+          = kmuPolyScale g.1.val (kmuPolyScale h.1.val p.1) from
+        Subtype.ext (psScale_comp kmuK g.1.val h.1.val p.1.val).symm,
+      show kmuPolyScale (kmuK.mul g.2.val h.2.val) p.2
+          = kmuPolyScale g.2.val (kmuPolyScale h.2.val p.2) from
+        Subtype.ext (psScale_comp kmuK g.2.val h.2.val p.2.val).symm]
+
+/-- **定理 (tkm-8c): μ₃×μ₃ の作用は忠実**（成分ごとに生成元 (u,v) 上で単射）。
+    ℤ/3×ℤ/3 が忠実に実デッキ変換として実現される。 -/
+theorem kmu_deck_prod_faithful (g h : kmuMu3Sq.carrier)
+    (hgh : kmuDeckProd.act g (kmuVar, kmuVar) = kmuDeckProd.act h (kmuVar, kmuVar)) :
+    g = h := by
+  have h1 : g.1 = h.1 := kmu_deck_faithful g.1 h.1 (congrArg Prod.fst hgh)
+  have h2 : g.2 = h.2 := kmu_deck_faithful g.2 h.2 (congrArg Prod.snd hgh)
+  show (g.1, g.2) = (h.1, h.2)
+  rw [h1, h2]
+
 end IUT
