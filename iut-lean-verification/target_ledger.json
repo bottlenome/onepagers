@@ -89,8 +89,8 @@
      "id": "B3",
      "title": "実 Artin 導手/different(実表現・実分岐群上)",
      "weight": 20,
-     "status": 0.3,
-     "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27) | q9dv v(D)=6 値+q9di different イデアル対象 (audit +0.02→0.29) | q9cd codifferent trace-dual integral shadow + Tr(O_M)=embed(3·O) image-equality (audit +0.01→0.30)"
+     "status": 0.32,
+     "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27) | q9dv v(D)=6 値+q9di different イデアル対象 (audit +0.02→0.29) | q9cd codifferent trace-dual integral shadow + Tr(O_M)=embed(3·O) image-equality (audit +0.01→0.30) | q9fc 分数逆 different 𝔡⁻¹=(π₉⁻⁶) を実 fractional ideal 化（符号付 π₉-adic 付値表現・𝔡·𝔡⁻¹=O_M 両包含・実 different D に anchor・q9cd の deferred を昇格）(audit +0.02→0.32)"
     },
     {
      "id": "B4",
