@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 676,
-  "verified_theorem_total": 2859,
-  "choice_free_count": 587,
+  "module_count": 677,
+  "verified_theorem_total": 2861,
+  "choice_free_count": 588,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8296,6 +8296,18 @@
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedEtDensity.lean"
+    },
+    {
+      "id": "Q3TemperedThetaClassL9",
+      "label": "Q3TemperedThetaClassL9",
+      "milestone": null,
+      "title": "Q3TemperedThetaClassL9",
+      "pillar": "A",
+      "decl_count": 40,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedThetaClassL9.lean"
     }
   ],
   "edges": [
@@ -8434,6 +8446,10 @@
     {
       "source": "ArithPilot",
       "target": "IndAction"
+    },
+    {
+      "source": "ArithTemperedPi1",
+      "target": "Q3TemperedThetaClassL9"
     },
     {
       "source": "ArithTemperedPi1",
@@ -11776,6 +11792,10 @@
       "target": "Q3TateCurveL9"
     },
     {
+      "source": "Q3KummerYPow",
+      "target": "Q3TemperedThetaClassL9"
+    },
+    {
       "source": "Q3LocalField",
       "target": "Q3RatEmbed"
     },
@@ -11866,6 +11886,10 @@
     {
       "source": "Q3Mu9ThetaGroup",
       "target": "Q3Mu9Rigidity"
+    },
+    {
+      "source": "Q3Mu9ThetaGroup",
+      "target": "Q3TemperedThetaClassL9"
     },
     {
       "source": "Q3Mu9TmzBridge",
@@ -12058,6 +12082,10 @@
     {
       "source": "Q3TemperedPi1Deepen",
       "target": "Q3TemperedEtDensity"
+    },
+    {
+      "source": "Q3TemperedThetaClass",
+      "target": "Q3TemperedThetaClassL9"
     },
     {
       "source": "Q3ThetaGroup",
@@ -13102,6 +13130,10 @@
     {
       "source": "TemperedPi1Etale",
       "target": "Q3TemperedThetaClass"
+    },
+    {
+      "source": "TemperedPi1Etale",
+      "target": "Q3TemperedThetaClassL9"
     },
     {
       "source": "TemperedThetaCommutator",

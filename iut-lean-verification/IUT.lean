@@ -680,3 +680,4 @@ import IUT.Q3NormSurjPeelBase
 import IUT.Q3HasseArfIntegral
 import IUT.Q3NormSurjPeelGeneral
 import IUT.Q3TemperedEtDensity
+import IUT.Q3TemperedThetaClassL9

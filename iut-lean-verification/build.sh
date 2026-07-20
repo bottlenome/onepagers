@@ -2868,6 +2868,8 @@ import IUT
 #print axioms IUT.q9npg_peel_general
 #print axioms IUT.q9npg_tr_lead
 #print axioms IUT.q3tpd_dense_proper
+#print axioms IUT.q9nt_chi_visible
+#print axioms IUT.q9nt_cyclotome_order9
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
