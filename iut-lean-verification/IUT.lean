@@ -690,4 +690,6 @@ import IUT.Q3NormSurjComplete
 import IUT.Q3EtaleArithPi1
 import IUT.Q3KummerNonic
 import IUT.TateModuleEndRingZ3Iso
+import IUT.Q3NormSurjCompleteLimit
+import IUT.Q3EtaleArithPi1Weil
 import IUT.TripodKummerMu3

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 687,
+  "module_count": 689,
   "verified_theorem_total": 2865,
-  "choice_free_count": 598,
+  "choice_free_count": 600,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8427,6 +8427,32 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleEndRingZ3Iso.lean"
     },
     {
+      "id": "Q3NormSurjCompleteLimit",
+      "label": "Q3NormSurjCompleteLimit",
+      "milestone": "M3",
+      "title": "**完備性の残り全段（M3a-2/3・M3b・M3c）＝",
+      "pillar": "B",
+      "decl_count": 44,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NormSurjCompleteLimit.lean"
+    },
+    {
+      "id": "Q3EtaleArithPi1Weil",
+      "label": "Q3EtaleArithPi1Weil",
+      "milestone": null,
+      "title": "Q3EtaleArithPi1Weil",
+      "pillar": "A",
+      "decl_count": 47,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[IUTchI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3EtaleArithPi1Weil.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -9165,6 +9191,10 @@
     {
       "source": "CyclotomicRigidity",
       "target": "WeilPairing"
+    },
+    {
+      "source": "CyclotomicRigidityAut",
+      "target": "Q3EtaleArithPi1Weil"
     },
     {
       "source": "CyclotomicRigidityAut",
@@ -11859,6 +11889,10 @@
       "target": "Q3EtaleArithPi1"
     },
     {
+      "source": "Q3EtaleArithPi1",
+      "target": "Q3EtaleArithPi1Weil"
+    },
+    {
       "source": "Q3GradedNormBreak",
       "target": "Q3LocalReciprocityReal"
     },
@@ -12097,6 +12131,10 @@
     {
       "source": "Q3NormSurjApproxClose",
       "target": "Q3NormSurjComplete"
+    },
+    {
+      "source": "Q3NormSurjComplete",
+      "target": "Q3NormSurjCompleteLimit"
     },
     {
       "source": "Q3NormSurjGraded",
@@ -13833,6 +13871,10 @@
     {
       "source": "WeightedGauss",
       "target": "GaussPilotWeighted"
+    },
+    {
+      "source": "WeilGaloisEquiv",
+      "target": "Q3EtaleArithPi1Weil"
     },
     {
       "source": "WeilGaloisEquiv",
