@@ -696,4 +696,5 @@ import IUT.Q3UnitTameDecomp
 import IUT.Q3KummerNonicSplit
 import IUT.Q3ReciprocityIndexReal
 import IUT.Q3KummerNonicYPow
+import IUT.Q3TateCurveL27
 import IUT.TripodKummerMu3

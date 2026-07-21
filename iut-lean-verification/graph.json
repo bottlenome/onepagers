@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 693,
+  "module_count": 694,
   "verified_theorem_total": 2865,
-  "choice_free_count": 604,
+  "choice_free_count": 605,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8501,6 +8501,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonicYPow.lean"
     },
     {
+      "id": "Q3TateCurveL27",
+      "label": "Q3TateCurveL27",
+      "milestone": null,
+      "title": "Q3TateCurveL27",
+      "pillar": "A",
+      "decl_count": 69,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCurveL27.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -12021,6 +12035,10 @@
       "target": "Q3KummerNonicYPow"
     },
     {
+      "source": "Q3KummerNonicSplit",
+      "target": "Q3TateCurveL27"
+    },
+    {
       "source": "Q3KummerPiSplit",
       "target": "Q3Mu9ThetaGroup"
     },
@@ -12327,6 +12345,10 @@
     {
       "source": "Q3TateCurveL9",
       "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "Q3TateCurveL9",
+      "target": "Q3TateCurveL27"
     },
     {
       "source": "Q3TateCurveL9",
