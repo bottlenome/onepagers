@@ -44,10 +44,12 @@ node test_engine.mjs               # headless Chromium (WebGPU SwiftShader) で�
 node smoke_real.mjs                # 実モデル1.2GBでのスモークテスト（低速）
 ```
 
-検証結果（2026-07-21）:
+検証結果（2026-07-21、headless Chromium + WebGPU SwiftShader）:
 
 - logits がリファレンス実装と max 3.5e-3 で一致（スケール ±10.7）、greedy 8トークン完全一致
 - トークナイザは HF tokenizers と 10ケース（日本語・絵文字・byte fallback・空文字等）完全一致
+- 実モデル(1.2GB)スモークテスト成功: "The capital of France is" → "Paris. Paris"（greedy 3トークン）。
+  読込+パック 53s、GPUバッファ合計 402MB（見積り通り）。SwiftShader(CPUエミュレーション)で 0.94 tok/s — 実GPUでは大幅に高速化する見込み
 
 ## タスク
 
