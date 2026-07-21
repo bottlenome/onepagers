@@ -697,4 +697,7 @@ import IUT.Q3KummerNonicSplit
 import IUT.Q3ReciprocityIndexReal
 import IUT.Q3KummerNonicYPow
 import IUT.Q3TateCurveL27
+import IUT.Q3KummerNonicRegular
+import IUT.Q3Mu27Completeness
+import IUT.Q3Discriminant
 import IUT.TripodKummerMu3

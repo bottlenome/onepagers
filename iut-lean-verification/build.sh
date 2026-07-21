@@ -2874,6 +2874,11 @@ import IUT
 #print axioms IUT.q9na_tower_dvd
 #print axioms IUT.kmu_deck_faithful
 #print axioms IUT.kmu_deck_prod_faithful
+#print axioms IUT.q9ds_disc_gen
+#print axioms IUT.q9ds_disc_sharp
+#print axioms IUT.q27ci_norm_unit_wedge
+#print axioms IUT.q27ci_descent_all_of_unit
+#print axioms IUT.q27c_mu27_complete_of_mu3
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

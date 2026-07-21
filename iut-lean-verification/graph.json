@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 694,
-  "verified_theorem_total": 2865,
-  "choice_free_count": 605,
+  "module_count": 697,
+  "verified_theorem_total": 2870,
+  "choice_free_count": 608,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8515,6 +8515,42 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCurveL27.lean"
     },
     {
+      "id": "Q3KummerNonicRegular",
+      "label": "Q3KummerNonicRegular",
+      "milestone": null,
+      "title": "Q3KummerNonicRegular",
+      "pillar": "A",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonicRegular.lean"
+    },
+    {
+      "id": "Q3Mu27Completeness",
+      "label": "Q3Mu27Completeness",
+      "milestone": null,
+      "title": "Q3Mu27Completeness",
+      "pillar": "A",
+      "decl_count": 30,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu27Completeness.lean"
+    },
+    {
+      "id": "Q3Discriminant",
+      "label": "Q3Discriminant",
+      "milestone": null,
+      "title": "Q3Discriminant",
+      "pillar": "B",
+      "decl_count": 50,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Discriminant.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -9389,6 +9425,10 @@
     {
       "source": "EisFaithful",
       "target": "Premises311Real"
+    },
+    {
+      "source": "EisFaithful",
+      "target": "Q3Discriminant"
     },
     {
       "source": "EisTowerRings",
@@ -11947,6 +11987,10 @@
       "target": "Q3Codifferent"
     },
     {
+      "source": "Q3DifferentIdeal",
+      "target": "Q3Discriminant"
+    },
+    {
       "source": "Q3DifferentValuation",
       "target": "Q3DifferentIdeal"
     },
@@ -12035,6 +12079,14 @@
       "target": "Q3KummerNonicYPow"
     },
     {
+      "source": "Q3KummerNonic",
+      "target": "Q3Mu27Completeness"
+    },
+    {
+      "source": "Q3KummerNonicSplit",
+      "target": "Q3KummerNonicRegular"
+    },
+    {
       "source": "Q3KummerNonicSplit",
       "target": "Q3TateCurveL27"
     },
@@ -12111,6 +12163,10 @@
       "target": "Q3Mu3Rigidity"
     },
     {
+      "source": "Q3Mu27DescentSpike",
+      "target": "Q3KummerNonicRegular"
+    },
+    {
       "source": "Q3Mu3Completeness",
       "target": "Q3KummerCubeIdent"
     },
@@ -12157,6 +12213,10 @@
     {
       "source": "Q3Mu9Completeness",
       "target": "Q3KummerDualityReal"
+    },
+    {
+      "source": "Q3Mu9Completeness",
+      "target": "Q3Mu27Completeness"
     },
     {
       "source": "Q3Mu9Completeness",
@@ -12340,6 +12400,10 @@
     },
     {
       "source": "Q3TateCurveL9",
+      "target": "Q3KummerNonicRegular"
+    },
+    {
+      "source": "Q3TateCurveL9",
       "target": "Q3Mu9ThetaGroup"
     },
     {
@@ -12429,6 +12493,14 @@
     {
       "source": "Q3ThetaGroup",
       "target": "Q3TemperedThetaClass"
+    },
+    {
+      "source": "Q3TowerDifferentReal",
+      "target": "Q3Discriminant"
+    },
+    {
+      "source": "Q3UnitTameDecomp",
+      "target": "Q3Discriminant"
     },
     {
       "source": "Q3UnitTameDecomp",
@@ -13017,6 +13089,10 @@
     {
       "source": "RegularPowers",
       "target": "LambdaValuation"
+    },
+    {
+      "source": "RegularPowers",
+      "target": "Q3Discriminant"
     },
     {
       "source": "RegularReal",
