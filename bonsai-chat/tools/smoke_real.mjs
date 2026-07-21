@@ -71,7 +71,7 @@ const t0 = Date.now();
 await page.evaluate(async () => {
   await window.__bonsai.initEngine();
   await window.__bonsai.loadModel();
-}, null, { timeout: 0 });
+});
 clearInterval(poll);
 console.log(`モデル読込完了: ${((Date.now() - t0) / 1000).toFixed(0)}s, GPUバッファ合計: ${await page.evaluate(() => (window.__bonsai.state.engine.gpuBytes / 1e6).toFixed(0))}MB`);
 
