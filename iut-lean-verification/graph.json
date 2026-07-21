@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 692,
+  "module_count": 693,
   "verified_theorem_total": 2865,
-  "choice_free_count": 603,
+  "choice_free_count": 604,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8489,6 +8489,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ReciprocityIndexReal.lean"
     },
     {
+      "id": "Q3KummerNonicYPow",
+      "label": "Q3KummerNonicYPow",
+      "milestone": null,
+      "title": "Q3KummerNonicYPow",
+      "pillar": "A",
+      "decl_count": 114,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonicYPow.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -12005,6 +12017,10 @@
       "target": "Q3KummerNonicSplit"
     },
     {
+      "source": "Q3KummerNonic",
+      "target": "Q3KummerNonicYPow"
+    },
+    {
       "source": "Q3KummerPiSplit",
       "target": "Q3Mu9ThetaGroup"
     },
@@ -12023,6 +12039,10 @@
     {
       "source": "Q3KummerYPow",
       "target": "Q3KummerDualityReal"
+    },
+    {
+      "source": "Q3KummerYPow",
+      "target": "Q3KummerNonicYPow"
     },
     {
       "source": "Q3KummerYPow",

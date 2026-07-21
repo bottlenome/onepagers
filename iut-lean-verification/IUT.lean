@@ -695,4 +695,5 @@ import IUT.Q3EtaleArithPi1Weil
 import IUT.Q3UnitTameDecomp
 import IUT.Q3KummerNonicSplit
 import IUT.Q3ReciprocityIndexReal
+import IUT.Q3KummerNonicYPow
 import IUT.TripodKummerMu3
