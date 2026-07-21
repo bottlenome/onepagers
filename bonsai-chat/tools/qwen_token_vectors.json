@@ -1,0 +1,172 @@
+[
+ {
+  "text": "Hello, world!",
+  "ids": [
+   9707,
+   11,
+   1879,
+   0
+  ],
+  "decoded": "Hello, world!"
+ },
+ {
+  "text": "The capital of France is",
+  "ids": [
+   785,
+   6722,
+   315,
+   9625,
+   374
+  ],
+  "decoded": "The capital of France is"
+ },
+ {
+  "text": "こんにちは、世界！日本語のテスト。",
+  "ids": [
+   89015,
+   5373,
+   99489,
+   6313,
+   101059,
+   102819,
+   15767,
+   140592,
+   1773
+  ],
+  "decoded": "こんにちは、世界！日本語のテスト。"
+ },
+ {
+  "text": "  leading spaces and\nnewlines\t tabs",
+  "ids": [
+   220,
+   6388,
+   12621,
+   323,
+   198,
+   931,
+   7969,
+   197,
+   22398
+  ],
+  "decoded": "  leading spaces and\nnewlines\t tabs"
+ },
+ {
+  "text": "emoji 🎋 and symbols ©®™ …",
+  "ids": [
+   37523,
+   11162,
+   236,
+   233,
+   323,
+   17738,
+   7240,
+   11909,
+   16109,
+   4593
+  ],
+  "decoded": "emoji 🎋 and symbols ©®™ …"
+ },
+ {
+  "text": "1234567890 3.14159",
+  "ids": [
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   15,
+   220,
+   18,
+   13,
+   16,
+   19,
+   16,
+   20,
+   24
+  ],
+  "decoded": "1234567890 3.14159"
+ },
+ {
+  "text": "Bonsai is a ternary-weight LLM.",
+  "ids": [
+   33,
+   2382,
+   2143,
+   374,
+   264,
+   71617,
+   658,
+   12635,
+   444,
+   10994,
+   13
+  ],
+  "decoded": "Bonsai is a ternary-weight LLM."
+ },
+ {
+  "text": "混ざった English と 日本語 mixed",
+  "ids": [
+   100235,
+   74594,
+   123857,
+   6364,
+   220,
+   19182,
+   75402,
+   21894,
+   102819,
+   9519
+  ],
+  "decoded": "混ざった English と 日本語 mixed"
+ },
+ {
+  "text": "",
+  "ids": [],
+  "decoded": ""
+ },
+ {
+  "text": "▁literal metasymbol",
+  "ids": [
+   10417,
+   223,
+   35785,
+   2270,
+   300,
+   4001
+  ],
+  "decoded": "▁literal metasymbol"
+ },
+ {
+  "text": "I'm sure it's O'Brien's",
+  "ids": [
+   40,
+   2776,
+   2704,
+   432,
+   594,
+   506,
+   61461,
+   594
+  ],
+  "decoded": "I'm sure it's O'Brien's"
+ },
+ {
+  "text": "<|im_start|>user\nこんにちは<|im_end|>\n<|im_start|>assistant\n",
+  "ids": [
+   151644,
+   872,
+   198,
+   89015,
+   151645,
+   198,
+   151644,
+   77091,
+   198
+  ],
+  "decoded": "user\nこんにちは\nassistant\n"
+ }
+]

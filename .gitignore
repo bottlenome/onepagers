@@ -5,3 +5,5 @@ Thumbs.db
 .claude/
 bonsai-chat/tools/tokenizer.json
 bonsai-chat/tools/realmodel/
+bonsai-chat/tools/qwen_tokenizer.json
+bonsai-chat/tools/realmodel-tb17/

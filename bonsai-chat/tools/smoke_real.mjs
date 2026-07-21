@@ -1,9 +1,12 @@
 #!/usr/bin/env node
-// 実モデル (deepgrove/Bonsai 1.2GB) のスモークテスト。
+// 実モデルのスモークテスト。curl でローカルに取得し同一オリジン配信して実行する。
 // SwiftShader (CPUエミュレーション) では非常に遅いので、短いプロンプト + 数トークンのみ。
-// 使い方: node smoke_real.mjs [--tokens 3] [--prompt "The capital of France is"]
+// 使い方:
+//   node smoke_real.mjs                    # deepgrove Bonsai 0.5B (1.2GB)
+//   node smoke_real.mjs --model tb17       # Ternary Bonsai 1.7B mlx-2bit (0.48GB)
+//   node smoke_real.mjs --tokens 5 --prompt "..."
 import { createServer } from "node:http";
-import { readFileSync, statSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
+import { readFileSync, statSync, existsSync, mkdirSync } from "node:fs";
 import { join, extname, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
@@ -11,27 +14,42 @@ import { spawnSync } from "node:child_process";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, "..", "..");
 const PORT = 8874;
+const argv = process.argv;
+const arg = (name, dflt) => argv.includes(name) ? argv[argv.indexOf(name) + 1] : dflt;
+const MODEL = arg("--model", "deepgrove");
+const N_TOK = Number(arg("--tokens", MODEL === "deepgrove" ? "3" : "8"));
 
-// 実モデルを curl でローカルに用意 (ブラウザからは同一オリジン配信 — プロキシ/証明書問題を回避)
-const RM = join(HERE, "realmodel");
+const SPECS = {
+  deepgrove: {
+    dir: "realmodel", family: "qllama",
+    hf: "https://huggingface.co/deepgrove/Bonsai/resolve/main/",
+    prompt: arg("--prompt", "The capital of France is"),
+    buildIds: (page, base, prompt) => page.evaluate((t) => window.__bonsai.encode(t), prompt),
+    tokType: "sp",
+  },
+  tb17: {
+    dir: "realmodel-tb17", family: "mlx",
+    hf: "https://huggingface.co/prism-ml/Ternary-Bonsai-1.7B-mlx-2bit/resolve/main/",
+    prompt: arg("--prompt", "<|im_start|>user\nWhat is the capital of France? Answer in one word.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"),
+    buildIds: (page, base, prompt) => page.evaluate((t) => window.__bonsai.encode(t), prompt),
+    tokType: "bl",
+  },
+};
+const spec = SPECS[MODEL];
+if (!spec) { console.error("unknown --model:", MODEL); process.exit(1); }
+
+// モデルファイルを curl で用意
+const RM = join(HERE, spec.dir);
 mkdirSync(RM, { recursive: true });
-const HF = "https://huggingface.co/deepgrove/Bonsai/resolve/main/";
 for (const f of ["config.json", "model.safetensors", "tokenizer.json"]) {
   const dst = join(RM, f);
-  if (f === "tokenizer.json" && !existsSync(dst) && existsSync(join(HERE, "tokenizer.json"))) {
-    copyFileSync(join(HERE, "tokenizer.json"), dst);
-    continue;
-  }
   if (!existsSync(dst)) {
     console.log("downloading", f, "…");
-    const r = spawnSync("curl", ["-sSL", "--fail", HF + f, "-o", dst + ".part"], { stdio: "inherit" });
+    const r = spawnSync("curl", ["-sSL", "--fail", spec.hf + f, "-o", dst + ".part"], { stdio: "inherit" });
     if (r.status !== 0) { console.error("download failed:", f); process.exit(1); }
     spawnSync("mv", [dst + ".part", dst]);
   }
 }
-const argv = process.argv;
-const N_TOK = argv.includes("--tokens") ? Number(argv[argv.indexOf("--tokens") + 1]) : 3;
-const PROMPT = argv.includes("--prompt") ? argv[argv.indexOf("--prompt") + 1] : "The capital of France is";
 
 const pwPath = process.env.PLAYWRIGHT_PKG || "/opt/node22/lib/node_modules/playwright/index.mjs";
 const { chromium } = await import(pwPath);
@@ -55,8 +73,8 @@ const page = await browser.newPage();
 page.on("pageerror", (e) => console.log("[pageerror]", e.message));
 page.on("console", (m) => { if (m.type() === "error") console.log("[page]", m.text()); });
 
-const baseUrl = `http://127.0.0.1:${PORT}/bonsai-chat/tools/realmodel/`;
-await page.goto(`http://127.0.0.1:${PORT}/bonsai-chat/index.html?nocache=1&base=${encodeURIComponent(baseUrl)}`);
+const baseUrl = `http://127.0.0.1:${PORT}/bonsai-chat/tools/${spec.dir}/`;
+await page.goto(`http://127.0.0.1:${PORT}/bonsai-chat/index.html?nocache=1&base=${encodeURIComponent(baseUrl)}&family=${spec.family}`);
 await page.waitForFunction(() => window.__bonsai?.ready, null, { timeout: 20000 });
 
 const poll = setInterval(async () => {
@@ -66,7 +84,7 @@ const poll = setInterval(async () => {
   } catch {}
 }, 5000);
 
-console.log("エンジン初期化 + モデル読込開始 (1.2GB DL + パック)…");
+console.log(`[${MODEL}] エンジン初期化 + モデル読込開始…`);
 const t0 = Date.now();
 await page.evaluate(async () => {
   await window.__bonsai.initEngine();
@@ -75,9 +93,10 @@ await page.evaluate(async () => {
 clearInterval(poll);
 console.log(`モデル読込完了: ${((Date.now() - t0) / 1000).toFixed(0)}s, GPUバッファ合計: ${await page.evaluate(() => (window.__bonsai.state.engine.gpuBytes / 1e6).toFixed(0))}MB`);
 
-await page.evaluate((url) => window.__bonsai.loadTokenizer(url), baseUrl + "tokenizer.json");
-const ids = await page.evaluate((t) => window.__bonsai.encode(t), PROMPT);
-console.log(`prompt: ${JSON.stringify(PROMPT)} -> ${ids.length} tokens [${ids}]`);
+await page.evaluate(({ url, type }) => window.__bonsai.loadTokenizer(url, type),
+  { url: baseUrl + "tokenizer.json", type: spec.tokType });
+const ids = await spec.buildIds(page, baseUrl, spec.prompt);
+console.log(`prompt: ${JSON.stringify(spec.prompt.slice(0, 80))} -> ${ids.length} tokens`);
 
 console.log(`greedy ${N_TOK} tokens 生成中 (SwiftShaderなので低速)…`);
 const t1 = Date.now();
