@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 691,
+  "module_count": 692,
   "verified_theorem_total": 2865,
-  "choice_free_count": 602,
+  "choice_free_count": 603,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8477,6 +8477,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonicSplit.lean"
     },
     {
+      "id": "Q3ReciprocityIndexReal",
+      "label": "Q3ReciprocityIndexReal",
+      "milestone": "M4",
+      "title": "Q3ReciprocityIndexReal",
+      "pillar": "B",
+      "decl_count": 13,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ReciprocityIndexReal.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -11901,6 +11913,10 @@
       "target": "Q3FractionalCodifferent"
     },
     {
+      "source": "Q3CokernelObjectReal",
+      "target": "Q3ReciprocityIndexReal"
+    },
+    {
       "source": "Q3DifferentIdeal",
       "target": "Q3Codifferent"
     },
@@ -12173,6 +12189,10 @@
       "target": "Q3NormSurjCompleteLimit"
     },
     {
+      "source": "Q3NormSurjCompleteLimit",
+      "target": "Q3ReciprocityIndexReal"
+    },
+    {
       "source": "Q3NormSurjGraded",
       "target": "Q3NormSurjPeelBase"
     },
@@ -12367,6 +12387,10 @@
     {
       "source": "Q3ThetaGroup",
       "target": "Q3TemperedThetaClass"
+    },
+    {
+      "source": "Q3UnitTameDecomp",
+      "target": "Q3ReciprocityIndexReal"
     },
     {
       "source": "Q3UnitsGroup",
