@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 690,
+  "module_count": 691,
   "verified_theorem_total": 2865,
-  "choice_free_count": 601,
+  "choice_free_count": 602,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8465,6 +8465,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3UnitTameDecomp.lean"
     },
     {
+      "id": "Q3KummerNonicSplit",
+      "label": "Q3KummerNonicSplit",
+      "milestone": null,
+      "title": "Q3KummerNonicSplit",
+      "pillar": "A",
+      "decl_count": 50,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonicSplit.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -11973,6 +11985,10 @@
       "target": "Q3ReciprocityGalReal"
     },
     {
+      "source": "Q3KummerNonic",
+      "target": "Q3KummerNonicSplit"
+    },
+    {
       "source": "Q3KummerPiSplit",
       "target": "Q3Mu9ThetaGroup"
     },
@@ -12123,6 +12139,10 @@
     {
       "source": "Q3NormFiltrationSpike",
       "target": "Q3GenLowerFiltrationReal"
+    },
+    {
+      "source": "Q3NormFiltrationSpike",
+      "target": "Q3KummerNonicSplit"
     },
     {
       "source": "Q3NormFiltrationSpike",
