@@ -69,7 +69,7 @@ node smoke_real.mjs --model tb17   # 実モデル Ternary 1.7B スモーク
 - **MLX パック順序**: 実モデルの量子化テンソルを unpacked 版と照合し LSB-first・`w=scale·q+bias` を誤差0で確認
 - **トークナイザ**: HF tokenizers と SP-BPE / ByteLevel BPE 各12ケース（日本語・絵文字・special tokens・空文字等）完全一致
 - **実モデル 0.5B**: "The capital of France is" → "Paris. Paris"。GPU 402MB、読込+パック53s
-- **実モデル Ternary 1.7B**: チャットテンプレートで首都質問 → 応答生成を確認（下記タスク参照）
+- **実モデル Ternary 1.7B**: チャットテンプレートで "What is the capital of France? Answer in one word." → **"Paris"** + `<|im_end|>` を正しく生成。GPU 720MB、読込+変換18s（パック済み形式のため変換が軽い）
 
 ## タスク
 
