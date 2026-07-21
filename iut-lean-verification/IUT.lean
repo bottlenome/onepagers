@@ -692,4 +692,5 @@ import IUT.Q3KummerNonic
 import IUT.TateModuleEndRingZ3Iso
 import IUT.Q3NormSurjCompleteLimit
 import IUT.Q3EtaleArithPi1Weil
+import IUT.Q3UnitTameDecomp
 import IUT.TripodKummerMu3
