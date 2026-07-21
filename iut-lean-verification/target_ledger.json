@@ -51,7 +51,8 @@
      "id": "A7",
      "title": "実円分剛性 cyclotomic rigidity(実 G_K 加群上)",
      "weight": 12,
-     "status": 0.57
+     "status": 0.58,
+     "note": " | trz 両側環同型 End(ℤ₃(1))≅ℤ₃=zpRing3（trzToZ3 RingHom+choice-free 逆元 tmiPowHom∘zmod_finite+両 roundtrip・trzEndRing CRing 束ね）で tmer 限定(1)(2) を discharge・CHARACTERIZE(not KILL) (audit +0.01→0.58)"
     },
     {
      "id": "A8",
