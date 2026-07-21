@@ -689,4 +689,5 @@ import IUT.TripodRealizationBundle
 import IUT.Q3NormSurjComplete
 import IUT.Q3EtaleArithPi1
 import IUT.Q3KummerNonic
+import IUT.TateModuleEndRingZ3Iso
 import IUT.TripodKummerMu3

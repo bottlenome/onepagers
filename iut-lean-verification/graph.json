@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 686,
+  "module_count": 687,
   "verified_theorem_total": 2865,
-  "choice_free_count": 597,
+  "choice_free_count": 598,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8405,11 +8405,26 @@
       "milestone": null,
       "title": "Q3KummerNonic",
       "pillar": "A",
-      "decl_count": 46,
+      "decl_count": 102,
       "choice_free": true,
       "has_honest_scope": true,
       "refs": [],
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerNonic.lean"
+    },
+    {
+      "id": "TateModuleEndRingZ3Iso",
+      "label": "TateModuleEndRingZ3Iso",
+      "milestone": null,
+      "title": "TateModuleEndRingZ3Iso",
+      "pillar": "A",
+      "decl_count": 24,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]",
+        "[IUTchI]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TateModuleEndRingZ3Iso.lean"
     },
     {
       "id": "TripodKummerMu3",
@@ -9610,6 +9625,10 @@
     {
       "source": "Finiteness",
       "target": "TateCoverCat"
+    },
+    {
+      "source": "Finiteness",
+      "target": "TateModuleEndRingZ3Iso"
     },
     {
       "source": "FlStar",
@@ -13216,6 +13235,10 @@
       "target": "TateModuleIndeterminacy"
     },
     {
+      "source": "TateModuleEndoRing",
+      "target": "TateModuleEndRingZ3Iso"
+    },
+    {
       "source": "TateModuleIndeterminacy",
       "target": "CyclotomeRecoveryCanonicity"
     },
@@ -13226,6 +13249,10 @@
     {
       "source": "TateModuleIndeterminacy",
       "target": "Q3Mu9TmzBridge"
+    },
+    {
+      "source": "TateModuleIndeterminacy",
+      "target": "TateModuleEndRingZ3Iso"
     },
     {
       "source": "TateModuleZ3",
@@ -13894,6 +13921,10 @@
     {
       "source": "Zp3ValuationRing",
       "target": "Q3RamifiedQuadratic"
+    },
+    {
+      "source": "Zp3ValuationRing",
+      "target": "TateModuleEndRingZ3Iso"
     },
     {
       "source": "Zp3ValuationRing",
