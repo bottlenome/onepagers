@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 697,
-  "verified_theorem_total": 2870,
-  "choice_free_count": 608,
+  "module_count": 698,
+  "verified_theorem_total": 2873,
+  "choice_free_count": 609,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8551,6 +8551,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Discriminant.lean"
     },
     {
+      "id": "TripodTwinCover",
+      "label": "TripodTwinCover",
+      "milestone": null,
+      "title": "TripodTwinCover",
+      "pillar": "A",
+      "decl_count": 50,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[GenEll]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodTwinCover.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -8881,6 +8895,10 @@
     {
       "source": "Composition",
       "target": "RootAdjunction"
+    },
+    {
+      "source": "Composition",
+      "target": "TripodTwinCover"
     },
     {
       "source": "ConductorDiscriminant",
@@ -10727,6 +10745,10 @@
       "target": "ResidueTower"
     },
     {
+      "source": "LTErrorDivisible",
+      "target": "TripodTwinCover"
+    },
+    {
       "source": "LTIterate",
       "target": "FormalGroupCapstone"
     },
@@ -11429,6 +11451,10 @@
     {
       "source": "PSFunctor",
       "target": "RootAdjunction"
+    },
+    {
+      "source": "PSFunctor",
+      "target": "TripodTwinCover"
     },
     {
       "source": "PadicAbsValueQ",
@@ -13989,6 +14015,10 @@
     {
       "source": "TripodKummerMu3",
       "target": "TripodRealizationBundle"
+    },
+    {
+      "source": "TripodRealizationBundle",
+      "target": "TripodTwinCover"
     },
     {
       "source": "UnitDecomposition",

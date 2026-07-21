@@ -700,4 +700,5 @@ import IUT.Q3TateCurveL27
 import IUT.Q3KummerNonicRegular
 import IUT.Q3Mu27Completeness
 import IUT.Q3Discriminant
+import IUT.TripodTwinCover
 import IUT.TripodKummerMu3

@@ -2879,6 +2879,9 @@ import IUT
 #print axioms IUT.q27ci_norm_unit_wedge
 #print axioms IUT.q27ci_descent_all_of_unit
 #print axioms IUT.q27c_mu27_complete_of_mu3
+#print axioms IUT.ttc_composite_descent
+#print axioms IUT.ttc_deck_faithful
+#print axioms IUT.ttc_f2_deck_surjective
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
