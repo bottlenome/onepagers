@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonsai Chat — 三値LLMをWebGPUで動かす</title>
+<style>
+  :root {
+    --bg: #10141a; --panel: #171d26; --panel2: #1e2632; --border: #2b3648;
+    --text: #dfe7f2; --dim: #8ba0bb; --accent: #4ade80; --accent2: #38bdf8;
+    --warn: #fbbf24; --err: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  header h1 { font-size: 18px; margin: 0; }
+  header .sub { color: var(--dim); font-size: 12px; }
+  main { flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 14px 16px 120px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  label { font-size: 12px; color: var(--dim); }
+  select, input[type=number], input[type=text] {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 8px; font-size: 13px;
+  }
+  input[type=number] { width: 70px; }
+  button {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 7px 14px; font-size: 13px; cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: var(--accent2); }
+  button:disabled { opacity: .45; cursor: default; }
+  button.primary { background: #14532d; border-color: #16a34a; }
+  button.danger { background: #450a0a; border-color: #b91c1c; }
+  #status { font-size: 12px; color: var(--dim); }
+  #barWrap { height: 8px; background: var(--panel2); border-radius: 4px; overflow: hidden; margin-top: 8px; display: none; }
+  #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width .15s; }
+  #stats { font-size: 11px; color: var(--dim); margin-top: 6px; }
+  #chat { display: flex; flex-direction: column; gap: 10px; }
+  .msg { border-radius: 10px; padding: 10px 12px; white-space: pre-wrap; word-break: break-word; font-size: 14px; line-height: 1.65; }
+  .msg.user { background: #1c2a3a; border: 1px solid #2c4a6b; align-self: flex-end; max-width: 85%; }
+  .msg.bot { background: var(--panel); border: 1px solid var(--border); align-self: flex-start; max-width: 95%; }
+  .msg.bot .meta { color: var(--dim); font-size: 11px; margin-top: 6px; }
+  .inputbar {
+    position: fixed; bottom: 0; left: 0; right: 0; background: rgba(16,20,26,.96);
+    border-top: 1px solid var(--border); padding: 10px 16px;
+  }
+  .inputbar .inner { max-width: 900px; margin: 0 auto; display: flex; gap: 8px; }
+  textarea {
+    flex: 1; background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 10px; font-size: 14px; resize: none; min-height: 42px; max-height: 140px;
+    font-family: inherit;
+  }
+  details { color: var(--dim); font-size: 13px; }
+  details summary { cursor: pointer; color: var(--text); }
+  details code { background: var(--panel2); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  .notice { color: var(--warn); font-size: 13px; }
+  .error { color: var(--err); font-size: 13px; }
+  a { color: var(--accent2); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🌱 Bonsai Chat</h1>
+  <span class="sub">三値(1.58bit)LLM <a href="https://huggingface.co/deepgrove/Bonsai" target="_blank" rel="noopener">deepgrove/Bonsai 0.5B</a> を自作WebGPUカーネルでブラウザ実行</span>
+</header>
+<main>
+  <div class="panel">
+    <div class="row">
+      <button id="loadBtn" class="primary">モデルを読み込む</button>
+      <button id="clearCacheBtn">キャッシュ削除</button>
+      <span id="status">未読込</span>
+    </div>
+    <div id="barWrap"><div id="bar"></div></div>
+    <div id="stats"></div>
+    <div id="gpuNotice" class="error" style="display:none; margin-top:8px;"></div>
+    <div class="notice" style="margin-top:8px;">
+      初回はモデル本体 約1.2GB をHugging Faceからダウンロードし、ブラウザ内で三値2bit形式にパックしてキャッシュします（2回目以降は約300MBの読込のみ）。
+    </div>
+  </div>
+
+  <div class="panel row">
+    <label>モード
+      <select id="mode">
+        <option value="qa">簡易Q&A</option>
+        <option value="completion">自由補完</option>
+      </select>
+    </label>
+    <label>temperature <input id="temp" type="number" min="0" max="2" step="0.1" value="0.7"></label>
+    <label>top-p <input id="topp" type="number" min="0" max="1" step="0.05" value="0.9"></label>
+    <label>最大トークン <input id="maxtok" type="number" min="1" max="1024" step="16" value="200"></label>
+  </div>
+
+  <div id="chat"></div>
+
+  <div class="panel" style="margin-top:12px;">
+    <details>
+      <summary>技術メモ: なぜWebLLMではなく自作エンジンか</summary>
+      <p>Bonsai は線形層の重みが三値 {-1, 0, +1}（＋出力チャネル毎のスケール）で学習された 1.58bit LLM。
+      WebLLM/MLC の prebuilt には三値量子化が存在せず、bf16 展開でコンパイルすると低ビットの利点（メモリ・帯域）が消える。
+      本ページは PrismML が llama.cpp をフォークして三値カーネルを整備したのに倣い、WebGPU の WGSL カーネルを自作して三値のまま実行する。</p>
+      <ul>
+        <li>重みは safetensors をストリーミング取得し、ブラウザ内で <code>clamp(-1,1).round()</code> → 2bit/重み にパック（16重み/u32）</li>
+        <li>行列積カーネルは 2bit を展開しながら f32 積和 → 行スケール適用。埋め込み・lm_head・LayerNorm は f16 格納（<code>unpack2x16float</code> でデコード、shader-f16 拡張不要）</li>
+        <li>KVキャッシュも f16 パック。GPUメモリ 約400MB（三値重み 104MB + f16部 197MB + KV 100MB）</li>
+        <li>パック済み重みは OPFS にキャッシュされ、2回目以降はダウンロード不要</li>
+        <li>Bonsai は事前学習のみのベースモデル（チャット調整なし）。簡易Q&Aモードはプロンプト整形のみで実現しているため、応答品質は控えめ</li>
+      </ul>
+    </details>
+  </div>
+</main>
+
+<div class="inputbar">
+  <div class="inner">
+    <textarea id="input" placeholder="モデル読込後に入力（Enterで送信 / Shift+Enterで改行）" disabled></textarea>
+    <button id="sendBtn" class="primary" type="button" disabled>送信</button>
+    <button id="contBtn" type="button" disabled title="直前の出力の続きを生成">続き</button>
+    <button id="stopBtn" class="danger" type="button" disabled>停止</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+ * Bonsai Chat — 三値LLM WebGPU 推論エンジン
+ * deepgrove/Bonsai (QLlama 0.5B) 専用。依存ライブラリなし。
+ * ============================================================ */
+
+const params = new URLSearchParams(location.search);
+const MODEL_BASE = params.get("base") || "https://huggingface.co/deepgrove/Bonsai/resolve/main/";
+const USE_CACHE = !params.get("nocache");
+const LOAD_TOKENIZER = !params.get("notok");
+const CACHE_KEY = "bonsai-05b-tern-v1";
+const LS = { temp: "bonsai.temp", topp: "bonsai.topp", maxtok: "bonsai.maxtok", mode: "bonsai.mode" };
+
+// ---------- f16 / bf16 変換 ----------
+const HAS_F16A = typeof Float16Array !== "undefined";
+
+function f32ToF16Bits(val) {
+  // scalar fallback (RNE)
+  F32B[0] = val;
+  const x = U32B[0];
+  const sign = (x >>> 16) & 0x8000;
+  let exp = (x >>> 23) & 0xff, mant = x & 0x7fffff;
+  if (exp === 0xff) return sign | 0x7c00 | (mant ? 0x200 : 0);
+  const e = exp - 112;
+  if (e >= 0x1f) return sign | 0x7c00;
+  if (e <= 0) {
+    if (e < -10) return sign;
+    mant |= 0x800000;
+    const shift = 14 - e, half = mant >>> shift, rem = mant & ((1 << shift) - 1), hw = 1 << (shift - 1);
+    return sign | (half + ((rem > hw || (rem === hw && (half & 1))) ? 1 : 0));
+  }
+  let half = (e << 10) | (mant >>> 13);
+  const rem = mant & 0x1fff;
+  if (rem > 0x1000 || (rem === 0x1000 && (half & 1))) half++;
+  return sign | half;
+}
+const F32B = new Float32Array(1), U32B = new Uint32Array(F32B.buffer);
+
+function bf16ToF32Array(u16) {
+  const n = u16.length, u32 = new Uint32Array(n);
+  for (let i = 0; i < n; i++) u32[i] = u16[i] << 16;
+  return new Float32Array(u32.buffer);
+}
+function packF16Pairs(f32) {
+  // f32 配列 → f16 ビット×2/u32 (奇数長は 0 パディング)
+  const n = f32.length, nw = (n + 1) >> 1;
+  if (HAS_F16A) {
+    const h = new Float16Array(nw * 2);
+    h.set(f32.subarray(0, n));
+    return new Uint32Array(h.buffer, 0, nw);
+  }
+  const u16 = new Uint16Array(nw * 2);
+  for (let i = 0; i < n; i++) u16[i] = f32ToF16Bits(f32[i]);
+  return new Uint32Array(u16.buffer, 0, nw);
+}
+function roundHalfEven(x) {
+  const r = Math.round(x);
+  return (Math.abs(x % 1) === 0.5 && (r % 2 !== 0)) ? r - Math.sign(x) : r;
+}
+function packTernary(f32, N, K) {
+  // 潜在重み → clamp(-1,1)+round → 2bit コード (00=0, 01=+1, 10=-1), 16重み/u32
+  const KP = Math.ceil(K / 16), out = new Uint32Array(N * KP);
+  for (let r = 0; r < N; r++) {
+    const rowIn = r * K, rowOut = r * KP;
+    for (let w = 0; w < KP; w++) {
+      let word = 0;
+      const kb = w * 16, kmax = Math.min(16, K - kb);
+      for (let i = 0; i < kmax; i++) {
+        const t = roundHalfEven(Math.max(-1, Math.min(1, f32[rowIn + kb + i])));
+        if (t === 1) word |= 1 << (2 * i);
+        else if (t === -1) word |= 2 << (2 * i);
+      }
+      out[rowOut + w] = word >>> 0;
+    }
+  }
+  return out;
+}
+
+// ---------- safetensors ストリーミング ----------
+async function* streamSafetensors(url, onProgress) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`fetch ${url}: ${resp.status}`);
+  const total = Number(resp.headers.get("content-length")) || 0;
+  const reader = resp.body.getReader();
+  let buf = new Uint8Array(0), bufStart = 0, received = 0;
+
+  async function ensure(absEnd) {
+    while (bufStart + buf.length < absEnd) {
+      const { done, value } = await reader.read();
+      if (done) throw new Error("safetensors: 予期しないEOF");
+      const nb = new Uint8Array(buf.length + value.length);
+      nb.set(buf); nb.set(value, buf.length);
+      buf = nb;
+      received += value.length;
+      if (onProgress) onProgress(received, total);
+    }
+  }
+  function take(absBegin, absEnd) {
+    const s = buf.subarray(absBegin - bufStart, absEnd - bufStart);
+    return s;
+  }
+  function drop(absPos) {
+    if (absPos - bufStart > (32 << 20)) { buf = buf.slice(absPos - bufStart); bufStart = absPos; }
+  }
+
+  await ensure(8);
+  const hlen = Number(new DataView(buf.buffer, buf.byteOffset, 8).getBigUint64(0, true));
+  await ensure(8 + hlen);
+  const header = JSON.parse(new TextDecoder().decode(take(8, 8 + hlen)));
+  delete header.__metadata__;
+  const dataStart = 8 + hlen;
+  const entries = Object.entries(header)
+    .map(([name, v]) => ({ name, dtype: v.dtype, shape: v.shape, begin: dataStart + v.data_offsets[0], end: dataStart + v.data_offsets[1] }))
+    .sort((a, b) => a.begin - b.begin);
+  yield { header: entries };
+  for (const e of entries) {
+    await ensure(e.end);
+    yield { entry: e, bytes: take(e.begin, e.end) };
+    drop(e.end);
+  }
+}
+
+// ---------- OPFS キャッシュ ----------
+async function opfsDir(create) {
+  try {
+    const root = await navigator.storage.getDirectory();
+    return await root.getDirectoryHandle(CACHE_KEY, { create: !!create });
+  } catch { return null; }
+}
+async function opfsLoad() {
+  const dir = await opfsDir(false);
+  if (!dir) return null;
+  try {
+    const metaFile = await (await dir.getFileHandle("meta.json")).getFile();
+    const meta = JSON.parse(await metaFile.text());
+    if (meta.ver !== 1) return null;
+    const dataFile = await (await dir.getFileHandle("data.bin")).getFile();
+    return { meta, dataFile };
+  } catch { return null; }
+}
+async function opfsClear() {
+  try {
+    const root = await navigator.storage.getDirectory();
+    await root.removeEntry(CACHE_KEY, { recursive: true });
+  } catch {}
+}
+
+// ---------- トークナイザ (Llama SP-BPE) ----------
+class SPTokenizer {
+  constructor(tj) {
+    this.vocab = new Map(Object.entries(tj.model.vocab));
+    this.byId = [];
+    for (const [tok, id] of this.vocab) this.byId[id] = tok;
+    this.ranks = new Map();
+    tj.model.merges.forEach((m, i) => {
+      const [a, b] = Array.isArray(m) ? m : m.split(" ");
+      this.ranks.set(a + " " + b, i);
+    });
+    this.special = new Set((tj.added_tokens || []).map(a => a.id));
+    this.byteRe = /^<0x([0-9A-F]{2})>$/;
+  }
+  encode(text) {
+    if (text === "") return [];
+    const norm = "▁" + text.replaceAll(" ", "▁");
+    let sym = Array.from(norm);
+    for (;;) {
+      let best = Infinity, bi = -1;
+      for (let i = 0; i + 1 < sym.length; i++) {
+        const r = this.ranks.get(sym[i] + " " + sym[i + 1]);
+        if (r !== undefined && r < best) { best = r; bi = i; }
+      }
+      if (bi < 0) break;
+      const a = sym[bi], b = sym[bi + 1], merged = a + b;
+      const out = [];
+      for (let i = 0; i < sym.length; i++) {
+        if (i + 1 < sym.length && sym[i] === a && sym[i + 1] === b) { out.push(merged); i++; }
+        else out.push(sym[i]);
+      }
+      sym = out;
+    }
+    const ids = [];
+    const enc = new TextEncoder();
+    for (const s of sym) {
+      const id = this.vocab.get(s);
+      if (id !== undefined) { ids.push(id); continue; }
+      for (const byte of enc.encode(s)) {
+        const bt = `<0x${byte.toString(16).toUpperCase().padStart(2, "0")}>`;
+        const bid = this.vocab.get(bt);
+        ids.push(bid !== undefined ? bid : 0);
+      }
+    }
+    return ids;
+  }
+  decode(ids) {
+    const bytes = [];
+    const enc = new TextEncoder();
+    for (const id of ids) {
+      if (this.special.has(id)) continue;
+      const tok = this.byId[id];
+      if (tok === undefined) continue;
+      const m = this.byteRe.exec(tok);
+      if (m) { bytes.push(parseInt(m[1], 16)); continue; }
+      for (const b of enc.encode(tok.replaceAll("▁", " "))) bytes.push(b);
+    }
+    let text = new TextDecoder().decode(new Uint8Array(bytes));
+    if (text.startsWith(" ")) text = text.slice(1); // decoder: Strip 1 leading space
+    return text;
+  }
+}
+
+// ---------- WGSL カーネル ----------
+const WGSL = {
+  gemvTern: (N, K) => {
+    const KP = Math.ceil(K / 16);
+    return `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> W: array<u32>;
+@group(0) @binding(2) var<storage, read> S: array<u32>;
+@group(0) @binding(3) var<storage, read_write> Y: array<f32>;
+fn scaleAt(r: u32) -> f32 {
+  let p = unpack2x16float(S[r >> 1u]);
+  return select(p.x, p.y, (r & 1u) == 1u);
+}
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let r = gid.x;
+  if (r >= ${N}u) { return; }
+  var acc = 0.0;
+  let base = r * ${KP}u;
+  for (var w = 0u; w < ${KP}u; w++) {
+    let word = W[base + w];
+    let kb = w * 16u;
+    for (var i = 0u; i < 16u; i++) {
+      let c = (word >> (2u * i)) & 3u;
+      acc += X[kb + i] * (f32(c & 1u) - f32(c >> 1u));
+    }
+  }
+  Y[r] = acc * scaleAt(r);
+}`;
+  },
+  gemvF16: (N, K) => `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> W: array<u32>;
+@group(0) @binding(2) var<storage, read_write> Y: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let r = gid.x;
+  if (r >= ${N}u) { return; }
+  var acc = 0.0;
+  let base = r * ${K / 2}u;
+  for (var w = 0u; w < ${K / 2}u; w++) {
+    let p = unpack2x16float(W[base + w]);
+    acc += X[2u * w] * p.x + X[2u * w + 1u] * p.y;
+  }
+  Y[r] = acc;
+}`,
+  rmsnorm: (N, EPS) => `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> G: array<u32>;
+@group(0) @binding(2) var<storage, read_write> Y: array<f32>;
+var<workgroup> red: array<f32, 256>;
+fn gAt(i: u32) -> f32 {
+  let p = unpack2x16float(G[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+@compute @workgroup_size(256)
+fn main(@builtin(local_invocation_id) l: vec3<u32>) {
+  let lid = l.x;
+  var s = 0.0;
+  for (var i = lid; i < ${N}u; i += 256u) { let v = X[i]; s += v * v; }
+  red[lid] = s;
+  workgroupBarrier();
+  for (var st = 128u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] += red[lid + st]; }
+    workgroupBarrier();
+  }
+  let rms = 1.0 / sqrt(red[0] / ${N}.0 + ${EPS});
+  for (var i = lid; i < ${N}u; i += 256u) { Y[i] = X[i] * rms * gAt(i); }
+}`,
+  rope: (NHEADS, HD, THETA) => {
+    const HALF = HD / 2;
+    return `
+@group(0) @binding(0) var<storage, read_write> B: array<f32>;
+@group(0) @binding(1) var<uniform> U: vec4<u32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${NHEADS * HALF}u) { return; }
+  let h = i / ${HALF}u;
+  let j = i % ${HALF}u;
+  let inv = pow(f32(${THETA}), -f32(2u * j) / ${HD}.0);
+  let ang = f32(U.y) * inv;
+  let c = cos(ang);
+  let s = sin(ang);
+  let a = B[h * ${HD}u + j];
+  let b = B[h * ${HD}u + j + ${HALF}u];
+  B[h * ${HD}u + j] = a * c - b * s;
+  B[h * ${HD}u + j + ${HALF}u] = b * c + a * s;
+}`;
+  },
+  kvStore: (KVD) => `
+@group(0) @binding(0) var<storage, read> K: array<f32>;
+@group(0) @binding(1) var<storage, read> V: array<f32>;
+@group(0) @binding(2) var<storage, read_write> KC: array<u32>;
+@group(0) @binding(3) var<storage, read_write> VC: array<u32>;
+@group(0) @binding(4) var<uniform> U: vec4<u32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${KVD / 2}u) { return; }
+  let off = U.y * ${KVD / 2}u + i;
+  KC[off] = pack2x16float(vec2<f32>(K[2u * i], K[2u * i + 1u]));
+  VC[off] = pack2x16float(vec2<f32>(V[2u * i], V[2u * i + 1u]));
+}`,
+  attn: (NH, NKV, HD, TMAX) => {
+    const GRP = NH / NKV, SCALE = 1 / Math.sqrt(HD);
+    return `
+@group(0) @binding(0) var<storage, read> Q: array<f32>;
+@group(0) @binding(1) var<storage, read> KC: array<u32>;
+@group(0) @binding(2) var<storage, read> VC: array<u32>;
+@group(0) @binding(3) var<storage, read_write> O: array<f32>;
+@group(0) @binding(4) var<uniform> U: vec4<u32>;
+var<workgroup> sc: array<f32, ${TMAX}>;
+var<workgroup> red: array<f32, 128>;
+fn kAt(t: u32, kv: u32, d: u32) -> f32 {
+  let idx = (t * ${NKV}u + kv) * ${HD}u + d;
+  let p = unpack2x16float(KC[idx >> 1u]);
+  return select(p.x, p.y, (idx & 1u) == 1u);
+}
+fn vAt(t: u32, kv: u32, d: u32) -> f32 {
+  let idx = (t * ${NKV}u + kv) * ${HD}u + d;
+  let p = unpack2x16float(VC[idx >> 1u]);
+  return select(p.x, p.y, (idx & 1u) == 1u);
+}
+@compute @workgroup_size(128)
+fn main(@builtin(workgroup_id) wid: vec3<u32>, @builtin(local_invocation_id) l: vec3<u32>) {
+  let h = wid.x;
+  let lid = l.x;
+  let kv = h / ${GRP}u;
+  let T = U.y + 1u;
+  for (var t = lid; t < T; t += 128u) {
+    var d0 = 0.0;
+    for (var d = 0u; d < ${HD}u; d++) { d0 += Q[h * ${HD}u + d] * kAt(t, kv, d); }
+    sc[t] = d0 * ${SCALE};
+  }
+  workgroupBarrier();
+  var m = -1.0e30;
+  for (var t = lid; t < T; t += 128u) { m = max(m, sc[t]); }
+  red[lid] = m;
+  workgroupBarrier();
+  for (var st = 64u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] = max(red[lid], red[lid + st]); }
+    workgroupBarrier();
+  }
+  let mx = red[0];
+  workgroupBarrier();
+  var s = 0.0;
+  for (var t = lid; t < T; t += 128u) {
+    let e = exp(sc[t] - mx);
+    sc[t] = e;
+    s += e;
+  }
+  red[lid] = s;
+  workgroupBarrier();
+  for (var st = 64u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] += red[lid + st]; }
+    workgroupBarrier();
+  }
+  let den = red[0];
+  workgroupBarrier();
+  for (var d = lid; d < ${HD}u; d += 128u) {
+    var acc = 0.0;
+    for (var t = 0u; t < T; t++) { acc += sc[t] * vAt(t, kv, d); }
+    O[h * ${HD}u + d] = acc / den;
+  }
+}`;
+  },
+  embed: (H) => `
+@group(0) @binding(0) var<storage, read> E: array<u32>;
+@group(0) @binding(1) var<storage, read_write> X: array<f32>;
+@group(0) @binding(2) var<uniform> U: vec4<u32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${H}u) { return; }
+  let idx = U.x * ${H}u + i;
+  let p = unpack2x16float(E[idx >> 1u]);
+  X[i] = select(p.x, p.y, (idx & 1u) == 1u);
+}`,
+  siluMul: (N) => `
+@group(0) @binding(0) var<storage, read_write> G: array<f32>;
+@group(0) @binding(1) var<storage, read> Up: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${N}u) { return; }
+  let g = G[i];
+  G[i] = g / (1.0 + exp(-g)) * Up[i];
+}`,
+  add: (N) => `
+@group(0) @binding(0) var<storage, read_write> X: array<f32>;
+@group(0) @binding(1) var<storage, read> T: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${N}u) { return; }
+  X[i] = X[i] + T[i];
+}`,
+};
+
+// ---------- 推論エンジン ----------
+class Engine {
+  constructor() { this.device = null; this.pos = 0; this.gpuBytes = 0; }
+
+  async init() {
+    if (!navigator.gpu) throw new Error("このブラウザは WebGPU に対応していません（Chrome / Edge 最新版のデスクトップ推奨）");
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) throw new Error("WebGPU アダプタを取得できませんでした");
+    this.device = await adapter.requestDevice();
+    this.device.lost.then((info) => {
+      if (info.reason !== "destroyed") setError("GPUデバイスが失われました: " + info.message);
+    });
+  }
+
+  buf(u32data, usage) {
+    const b = this.device.createBuffer({
+      size: Math.max(16, u32data.byteLength), usage, mappedAtCreation: true,
+    });
+    new Uint32Array(b.getMappedRange()).set(u32data);
+    b.unmap();
+    this.gpuBytes += Math.max(16, u32data.byteLength);
+    return b;
+  }
+  zeroBuf(bytes, usage) {
+    const b = this.device.createBuffer({ size: Math.max(16, bytes), usage });
+    this.gpuBytes += Math.max(16, bytes);
+    return b;
+  }
+
+  async loadModel(cfg, getTensor, onPhase) {
+    // getTensor(name) -> Promise<Uint32Array> (パック済み)
+    const d = this.device;
+    this.cfg = cfg;
+    const H = cfg.hidden_size, L = cfg.num_hidden_layers, I = cfg.intermediate_size;
+    const NH = cfg.num_attention_heads, NKV = cfg.num_key_value_heads;
+    const HD = cfg.head_dim || (H / NH), V = cfg.vocab_size;
+    const TMAX = cfg.max_position_embeddings;
+    const EPS = cfg.rms_norm_eps, THETA = cfg.rope_theta;
+    Object.assign(this, { H, L, I, NH, NKV, HD, V, TMAX });
+
+    const ST = GPUBufferUsage.STORAGE, CD = GPUBufferUsage.COPY_DST, CS = GPUBufferUsage.COPY_SRC;
+
+    // 重みバッファ
+    onPhase("GPUへ転送中…");
+    const W = this.W = {};
+    W.embed = this.buf(await getTensor("model.embed_tokens.weight"), ST);
+    W.lmHead = this.buf(await getTensor("lm_head.weight"), ST);
+    W.finalNorm = this.buf(await getTensor("model.norm.weight"), ST);
+    W.layers = [];
+    for (let i = 0; i < L; i++) {
+      const p = `model.layers.${i}.`, lw = {};
+      for (const [key, tn] of Object.entries({
+        ln1: "input_layernorm.weight", ln2: "post_attention_layernorm.weight",
+        q: "self_attn.q_proj.weight", qs: "self_attn.q_proj.scales",
+        k: "self_attn.k_proj.weight", ks: "self_attn.k_proj.scales",
+        v: "self_attn.v_proj.weight", vs: "self_attn.v_proj.scales",
+        o: "self_attn.o_proj.weight", os: "self_attn.o_proj.scales",
+        g: "mlp.gate_proj.weight", gs: "mlp.gate_proj.scales",
+        u: "mlp.up_proj.weight", us: "mlp.up_proj.scales",
+        dn: "mlp.down_proj.weight", dns: "mlp.down_proj.scales",
+      })) lw[key] = this.buf(await getTensor(p + tn), ST);
+      W.layers.push(lw);
+      onPhase(`GPUへ転送中… ${i + 1}/${L} 層`);
+    }
+
+    // 活性・KVバッファ
+    const B = this.B = {};
+    const f32 = (n) => this.zeroBuf(n * 4, ST);
+    B.x = f32(H); B.xn = f32(H); B.tmp = f32(H);
+    B.q = f32(NH * HD); B.k = f32(NKV * HD); B.v = f32(NKV * HD);
+    B.attnOut = f32(NH * HD);
+    B.gate = f32(I); B.up = f32(I);
+    B.logits = this.zeroBuf(V * 4, ST | CS);
+    B.staging = d.createBuffer({ size: V * 4, usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ });
+    B.uni = d.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | CD });
+    B.kc = []; B.vc = [];
+    for (let i = 0; i < L; i++) {
+      B.kc.push(this.zeroBuf(TMAX * NKV * HD * 2, ST));
+      B.vc.push(this.zeroBuf(TMAX * NKV * HD * 2, ST));
+    }
+
+    // パイプライン
+    onPhase("シェーダをコンパイル中…");
+    const mk = (code) => d.createComputePipelineAsync({
+      layout: "auto", compute: { module: d.createShaderModule({ code }), entryPoint: "main" },
+    });
+    const [pQ, pKV, pGU, pDn, pLm, pRms, pRopeQ, pRopeK, pKvS, pAttn, pEmb, pSilu, pAdd] = await Promise.all([
+      mk(WGSL.gemvTern(NH * HD, H)),
+      mk(WGSL.gemvTern(NKV * HD, H)),
+      mk(WGSL.gemvTern(I, H)),
+      mk(WGSL.gemvTern(H, I)),
+      mk(WGSL.gemvF16(V, H)),
+      mk(WGSL.rmsnorm(H, EPS)),
+      mk(WGSL.rope(NH, HD, THETA)),
+      mk(WGSL.rope(NKV, HD, THETA)),
+      mk(WGSL.kvStore(NKV * HD)),
+      mk(WGSL.attn(NH, NKV, HD, TMAX)),
+      mk(WGSL.embed(H)),
+      mk(WGSL.siluMul(I)),
+      mk(WGSL.add(H)),
+    ]);
+    // o_proj は (NH*HD)->H。NH*HD==H なら pQ と同型だが、汎用に別生成
+    const pO = await mk(WGSL.gemvTern(H, NH * HD));
+    this.P = { pQ, pKV, pGU, pDn, pLm, pRms, pRopeQ, pRopeK, pKvS, pAttn, pEmb, pSilu, pAdd, pO };
+
+    // バインドグループ
+    const bg = (pipe, entries) => d.createBindGroup({
+      layout: pipe.getBindGroupLayout(0),
+      entries: entries.map((r, i) => ({ binding: i, resource: { buffer: r } })),
+    });
+    this.G = {
+      emb: bg(pEmb, [W.embed, B.x, B.uni]),
+      ropeQ: bg(pRopeQ, [B.q, B.uni]),
+      ropeK: bg(pRopeK, [B.k, B.uni]),
+      silu: bg(pSilu, [B.gate, B.up]),
+      addTmp: bg(pAdd, [B.x, B.tmp]),
+      rmsFinal: bg(pRms, [B.x, W.finalNorm, B.xn]),
+      lm: bg(pLm, [B.xn, W.lmHead, B.logits]),
+      layers: W.layers.map((lw, i) => ({
+        rms1: bg(pRms, [B.x, lw.ln1, B.xn]),
+        rms2: bg(pRms, [B.x, lw.ln2, B.xn]),
+        q: bg(pQ, [B.xn, lw.q, lw.qs, B.q]),
+        k: bg(pKV, [B.xn, lw.k, lw.ks, B.k]),
+        v: bg(pKV, [B.xn, lw.v, lw.vs, B.v]),
+        o: bg(pO, [B.attnOut, lw.o, lw.os, B.tmp]),
+        g: bg(pGU, [B.xn, lw.g, lw.gs, B.gate]),
+        u: bg(pGU, [B.xn, lw.u, lw.us, B.up]),
+        dn: bg(pDn, [B.gate, lw.dn, lw.dns, B.tmp]),
+        kvs: bg(pKvS, [B.k, B.v, B.kc[i], B.vc[i], B.uni]),
+        attn: bg(pAttn, [B.q, B.kc[i], B.vc[i], B.attnOut, B.uni]),
+      })),
+    };
+    this.pos = 0;
+    onPhase(null);
+  }
+
+  reset() { this.pos = 0; }
+
+  async forwardToken(tok, wantLogits) {
+    const { device: d, P, G, B, H, I, NH, NKV, HD, V, L, TMAX } = this;
+    if (this.pos >= TMAX) throw new Error(`コンテキスト上限 (${TMAX}) に達しました`);
+    d.queue.writeBuffer(B.uni, 0, new Uint32Array([tok, this.pos, 0, 0]));
+    const enc = d.createCommandEncoder();
+    const pass = enc.beginComputePass();
+    const wg = (n) => Math.ceil(n / 64);
+    const run = (pipe, group, n) => { pass.setPipeline(pipe); pass.setBindGroup(0, group); pass.dispatchWorkgroups(n); };
+    run(P.pEmb, G.emb, wg(H));
+    for (let i = 0; i < L; i++) {
+      const g = G.layers[i];
+      run(P.pRms, g.rms1, 1);
+      run(P.pQ, g.q, wg(NH * HD));
+      run(P.pKV, g.k, wg(NKV * HD));
+      run(P.pKV, g.v, wg(NKV * HD));
+      run(P.pRopeQ, G.ropeQ, wg(NH * HD / 2));
+      run(P.pRopeK, G.ropeK, wg(NKV * HD / 2));
+      run(P.pKvS, g.kvs, wg(NKV * HD / 2));
+      run(P.pAttn, g.attn, NH);
+      run(P.pO, g.o, wg(H));
+      run(P.pAdd, G.addTmp, wg(H));
+      run(P.pRms, g.rms2, 1);
+      run(P.pGU, g.g, wg(I));
+      run(P.pGU, g.u, wg(I));
+      run(P.pSilu, G.silu, wg(I));
+      run(P.pDn, g.dn, wg(H));
+      run(P.pAdd, G.addTmp, wg(H));
+    }
+    if (wantLogits) {
+      run(P.pRms, G.rmsFinal, 1);
+      run(P.pLm, G.lm, wg(V));
+    }
+    pass.end();
+    if (wantLogits) enc.copyBufferToBuffer(B.logits, 0, B.staging, 0, V * 4);
+    d.queue.submit([enc.finish()]);
+    this.pos++;
+    if (!wantLogits) return null;
+    await B.staging.mapAsync(GPUMapMode.READ);
+    const out = new Float32Array(B.staging.getMappedRange().slice(0));
+    B.staging.unmap();
+    return out;
+  }
+}
+
+// ---------- モデル読込パイプライン ----------
+const state = {
+  engine: null, tokenizer: null, cfg: null,
+  loading: false, ready: false, generating: false, stopFlag: false,
+  lastIds: null, // 直前の全トークン列 (続き生成用)
+};
+
+function isTernaryName(name, headerNames) {
+  return name.endsWith(".weight") && headerNames.has(name.replace(/\.weight$/, ".scales"));
+}
+
+async function packAll(cfg, onProgress) {
+  // safetensors → パック済みテンソル群 { name: {kind, shape, data} }
+  const packed = new Map();
+  const url = MODEL_BASE + "model.safetensors";
+  let headerNames = null, count = 0, totalCount = 0;
+  for await (const item of streamSafetensors(url, (recv, total) => {
+    onProgress("download", recv, total);
+  })) {
+    if (item.header) {
+      headerNames = new Set(item.header.map(e => e.name));
+      totalCount = item.header.length;
+      continue;
+    }
+    const { entry, bytes } = item;
+    if (entry.dtype !== "BF16") throw new Error(`未対応 dtype: ${entry.dtype} (${entry.name})`);
+    const u16 = new Uint16Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
+    const f32 = bf16ToF32Array(u16);
+    let kind, data;
+    if (isTernaryName(entry.name, headerNames)) {
+      const [N, K] = entry.shape;
+      kind = "tern";
+      data = packTernary(f32, N, K);
+    } else {
+      kind = "f16";
+      data = packF16Pairs(f32);
+    }
+    packed.set(entry.name, { kind, shape: entry.shape, data });
+    count++;
+    onProgress("pack", count, totalCount);
+    await new Promise(r => setTimeout(r)); // UI 更新の隙間
+  }
+  return packed;
+}
+
+async function saveCache(cfg, packed) {
+  const dir = await opfsDir(true);
+  if (!dir) return;
+  try {
+    const dataHandle = await dir.getFileHandle("data.bin", { create: true });
+    const w = await dataHandle.createWritable();
+    const entries = [];
+    let off = 0;
+    for (const [name, t] of packed) {
+      await w.write(t.data);
+      entries.push({ name, kind: t.kind, shape: t.shape, offset: off, len: t.data.byteLength });
+      off += t.data.byteLength;
+    }
+    await w.close();
+    const metaHandle = await dir.getFileHandle("meta.json", { create: true });
+    const mw = await metaHandle.createWritable();
+    await mw.write(JSON.stringify({ ver: 1, cfg, entries }));
+    await mw.close();
+  } catch (e) {
+    console.warn("OPFS キャッシュ保存失敗:", e);
+    await opfsClear();
+  }
+}
+
+async function loadModelFlow() {
+  if (state.loading || state.ready) return;
+  state.loading = true;
+  els.loadBtn.disabled = true;
+  setError("");
+  try {
+    setStatus("初期化中…");
+    const engine = new Engine();
+    await engine.init();
+
+    // config
+    const cfgResp = await fetch(MODEL_BASE + "config.json");
+    if (!cfgResp.ok) throw new Error("config.json の取得に失敗しました");
+    const cfg = await cfgResp.json();
+    state.cfg = cfg;
+
+    // tokenizer (OPFS に生JSONをキャッシュ)
+    if (LOAD_TOKENIZER) {
+      setStatus("トークナイザ読込中…");
+      state.tokenizer = new SPTokenizer(await fetchTokenizerJson());
+    }
+
+    // 重み: キャッシュ or ダウンロード+パック
+    let getTensor;
+    const cached = USE_CACHE ? await opfsLoad() : null;
+    if (cached) {
+      setStatus("キャッシュから読込中…");
+      const idx = new Map(cached.meta.entries.map(e => [e.name, e]));
+      getTensor = async (name) => {
+        const e = idx.get(name);
+        if (!e) throw new Error("キャッシュ欠損: " + name);
+        const ab = await cached.dataFile.slice(e.offset, e.offset + e.len).arrayBuffer();
+        return new Uint32Array(ab);
+      };
+    } else {
+      const packed = await packAll(cfg, (phase, a, b) => {
+        if (phase === "download") {
+          const pct = b ? (a / b * 100) : 0;
+          setStatus(`ダウンロード中… ${(a / 1e6).toFixed(0)}MB${b ? ` / ${(b / 1e6).toFixed(0)}MB` : ""}`);
+          setBar(b ? pct * 0.9 : 0);
+        } else {
+          setStatus(`パック中… ${a}/${b} テンソル`);
+          setBar(90 + a / b * 10);
+        }
+      });
+      if (USE_CACHE) {
+        setStatus("キャッシュへ保存中…");
+        await saveCache(cfg, packed);
+      }
+      getTensor = async (name) => {
+        const t = packed.get(name);
+        if (!t) throw new Error("テンソル欠損: " + name);
+        return t.data;
+      };
+    }
+
+    await engine.loadModel(cfg, getTensor, (msg) => { if (msg) setStatus(msg); });
+    state.engine = engine;
+    state.ready = true;
+    setBar(null);
+    setStatus(`準備完了 — GPUメモリ ${(engine.gpuBytes / 1e6).toFixed(0)}MB / ctx ${engine.TMAX}`);
+    els.input.disabled = false;
+    els.sendBtn.disabled = false;
+    els.input.focus();
+  } catch (e) {
+    console.error(e);
+    setError(String(e.message || e));
+    setStatus("読込失敗");
+    setBar(null);
+    els.loadBtn.disabled = false;
+  } finally {
+    state.loading = false;
+  }
+}
+
+async function fetchTokenizerJson() {
+  // OPFS に生 tokenizer.json をキャッシュ
+  if (USE_CACHE) {
+    try {
+      const dir = await opfsDir(true);
+      try {
+        const f = await (await dir.getFileHandle("tokenizer.json")).getFile();
+        return JSON.parse(await f.text());
+      } catch {}
+      const resp = await fetch(MODEL_BASE + "tokenizer.json");
+      if (!resp.ok) throw new Error("tokenizer.json の取得に失敗しました");
+      const text = await resp.text();
+      const fh = await dir.getFileHandle("tokenizer.json", { create: true });
+      const w = await fh.createWritable();
+      await w.write(text);
+      await w.close();
+      return JSON.parse(text);
+    } catch (e) { console.warn("tokenizer cache:", e); }
+  }
+  const resp = await fetch(MODEL_BASE + "tokenizer.json");
+  if (!resp.ok) throw new Error("tokenizer.json の取得に失敗しました");
+  return await resp.json();
+}
+
+// ---------- サンプリング ----------
+function sample(logits, temp, topp) {
+  if (temp <= 0.01) {
+    let bi = 0;
+    for (let i = 1; i < logits.length; i++) if (logits[i] > logits[bi]) bi = i;
+    return bi;
+  }
+  const n = logits.length;
+  let mx = -Infinity;
+  for (let i = 0; i < n; i++) if (logits[i] > mx) mx = logits[i];
+  const probs = new Float64Array(n);
+  let sum = 0;
+  for (let i = 0; i < n; i++) { const p = Math.exp((logits[i] - mx) / temp); probs[i] = p; sum += p; }
+  for (let i = 0; i < n; i++) probs[i] /= sum;
+  // top-p
+  const idx = Array.from({ length: n }, (_, i) => i).sort((a, b) => probs[b] - probs[a]);
+  let cum = 0, cut = n;
+  for (let r = 0; r < n; r++) { cum += probs[idx[r]]; if (cum >= topp) { cut = r + 1; break; } }
+  let z = 0;
+  for (let r = 0; r < cut; r++) z += probs[idx[r]];
+  let u = Math.random() * z;
+  for (let r = 0; r < cut; r++) { u -= probs[idx[r]]; if (u <= 0) return idx[r]; }
+  return idx[0];
+}
+
+// ---------- 生成 ----------
+async function generate(promptIds, { maxTokens, temp, topp, stopStrings = [], onToken }) {
+  const eng = state.engine;
+  state.stopFlag = false;
+  const t0 = performance.now();
+  // prefill (最終トークンのみ logits)
+  let logits = null;
+  for (let i = 0; i < promptIds.length; i++) {
+    if (state.stopFlag) return { ids: [], reason: "stop" };
+    logits = await eng.forwardToken(promptIds[i], i === promptIds.length - 1);
+  }
+  const tPrefill = performance.now();
+  const genIds = [];
+  let reason = "length";
+  for (let s = 0; s < maxTokens; s++) {
+    if (state.stopFlag) { reason = "stop"; break; }
+    const next = sample(logits, temp, topp);
+    if (next === (state.cfg.eos_token_id ?? 2)) { reason = "eos"; break; }
+    genIds.push(next);
+    const text = onToken ? onToken(genIds) : null;
+    if (text !== null && stopStrings.some(ss => text.includes(ss))) { reason = "stopstr"; break; }
+    if (eng.pos >= eng.TMAX) { reason = "ctx"; break; }
+    logits = await eng.forwardToken(next, true);
+  }
+  const t1 = performance.now();
+  return {
+    ids: genIds, reason,
+    prefillTps: promptIds.length / ((tPrefill - t0) / 1000),
+    decodeTps: genIds.length / Math.max(1e-3, (t1 - tPrefill) / 1000),
+  };
+}
+
+// ---------- UI ----------
+const els = {};
+for (const id of ["loadBtn", "clearCacheBtn", "status", "barWrap", "bar", "stats", "gpuNotice",
+  "mode", "temp", "topp", "maxtok", "chat", "input", "sendBtn", "contBtn", "stopBtn"]) {
+  els[id] = document.getElementById(id);
+}
+function setStatus(t) { els.status.textContent = t; }
+function setError(t) { els.gpuNotice.style.display = t ? "" : "none"; els.gpuNotice.textContent = t; }
+function setBar(pct) {
+  els.barWrap.style.display = pct == null ? "none" : "";
+  if (pct != null) els.bar.style.width = Math.min(100, pct).toFixed(1) + "%";
+}
+function addMsg(cls, text) {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.textContent = text;
+  els.chat.appendChild(div);
+  div.scrollIntoView({ block: "end" });
+  return div;
+}
+
+for (const [key, el] of [["temp", els.temp], ["topp", els.topp], ["maxtok", els.maxtok], ["mode", els.mode]]) {
+  const saved = localStorage.getItem(LS[key]);
+  if (saved != null) el.value = saved;
+  el.addEventListener("change", () => localStorage.setItem(LS[key], el.value));
+}
+
+function buildPrompt(userText) {
+  if (els.mode.value === "qa") {
+    return { text: `Question: ${userText}\nAnswer:`, stops: ["\nQuestion:", "\nQ:"] };
+  }
+  return { text: userText, stops: [] };
+}
+
+async function runGeneration(promptIds, stops, isContinuation) {
+  state.generating = true;
+  els.sendBtn.disabled = true;
+  els.contBtn.disabled = true;
+  els.stopBtn.disabled = false;
+  const botDiv = isContinuation ? els.chat.lastElementChild : addMsg("bot", "…");
+  const prevText = isContinuation ? botDiv.dataset.text || "" : "";
+  try {
+    const res = await generate(promptIds, {
+      maxTokens: Math.max(1, Number(els.maxtok.value) || 200),
+      temp: Number(els.temp.value),
+      topp: Number(els.topp.value),
+      stopStrings: stops,
+      onToken: (ids) => {
+        const t = state.tokenizer.decode(ids);
+        botDiv.textContent = prevText + t;
+        botDiv.dataset.text = prevText + t;
+        return t;
+      },
+    });
+    let text = state.tokenizer.decode(res.ids);
+    for (const ss of stops) {
+      const i = text.indexOf(ss);
+      if (i >= 0) text = text.slice(0, i);
+    }
+    botDiv.dataset.text = prevText + text;
+    state.lastIds = [...(isContinuation ? state.lastIds : promptIds), ...res.ids];
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = `prefill ${res.prefillTps?.toFixed(1) ?? "-"} tok/s ・ decode ${res.decodeTps?.toFixed(1) ?? "-"} tok/s ・ ${res.ids.length} tokens (${res.reason})`;
+    botDiv.textContent = prevText + text;
+    botDiv.appendChild(meta);
+    botDiv.scrollIntoView({ block: "end" });
+    els.contBtn.disabled = false;
+  } catch (e) {
+    console.error(e);
+    botDiv.textContent = (botDiv.dataset.text || "") + `\n[エラー: ${e.message || e}]`;
+  } finally {
+    state.generating = false;
+    els.sendBtn.disabled = false;
+    els.stopBtn.disabled = true;
+  }
+}
+
+els.sendBtn.addEventListener("click", async () => {
+  const text = els.input.value.trim();
+  if (!text || !state.ready || state.generating) return;
+  els.input.value = "";
+  addMsg("user", text);
+  const { text: prompt, stops } = buildPrompt(text);
+  state.engine.reset();
+  const ids = state.tokenizer.encode(prompt);
+  if (ids.length >= state.engine.TMAX - 8) { addMsg("bot", "[プロンプトが長すぎます]"); return; }
+  await runGeneration(ids, stops, false);
+});
+els.contBtn.addEventListener("click", async () => {
+  if (!state.ready || state.generating || !state.lastIds) return;
+  // KV は保持されているので追加生成のみ (直近 logits を得るため最後のトークンを使わず、
+  // 現状態から続けるには最後の生成トークンを再投入せず sample 済み。簡便のため最後の1トークンを再フォワード)
+  const last = state.lastIds[state.lastIds.length - 1];
+  state.engine.pos = Math.max(0, state.engine.pos - 1);
+  await runGeneration([last], [], true);
+});
+els.stopBtn.addEventListener("click", () => { state.stopFlag = true; });
+els.input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+    e.preventDefault();
+    els.sendBtn.click();
+  }
+});
+els.loadBtn.addEventListener("click", loadModelFlow);
+els.clearCacheBtn.addEventListener("click", async () => {
+  await opfsClear();
+  setStatus("キャッシュを削除しました");
+});
+
+if (!navigator.gpu) {
+  setError("このブラウザは WebGPU に対応していません。Chrome / Edge のデスクトップ最新版をお試しください。");
+  els.loadBtn.disabled = true;
+}
+
+// ---------- テストフック ----------
+window.__bonsai = {
+  ready: true,
+  state,
+  async initEngine() {
+    const engine = new Engine();
+    await engine.init();
+    state.engine = engine;
+    return true;
+  },
+  async loadModel() {
+    const cfg = await (await fetch(MODEL_BASE + "config.json")).json();
+    state.cfg = cfg;
+    const packed = await packAll(cfg, (phase, a, b) => {
+      window.__loadProgress = `${phase} ${phase === "download" ? (a / 1e6).toFixed(0) + "MB/" + (b / 1e6).toFixed(0) + "MB" : a + "/" + b}`;
+    });
+    await state.engine.loadModel(cfg, async (n) => {
+      const t = packed.get(n);
+      if (!t) throw new Error("missing " + n);
+      return t.data;
+    }, () => {});
+    return true;
+  },
+  async forwardTokens(ids) {
+    state.engine.reset();
+    let logits = null;
+    for (let i = 0; i < ids.length; i++) logits = await state.engine.forwardToken(ids[i], i === ids.length - 1);
+    return Array.from(logits);
+  },
+  async greedy(ids, n) {
+    state.engine.reset();
+    let logits = null;
+    for (let i = 0; i < ids.length; i++) logits = await state.engine.forwardToken(ids[i], i === ids.length - 1);
+    const out = [];
+    for (let s = 0; s < n; s++) {
+      let bi = 0;
+      for (let i = 1; i < logits.length; i++) if (logits[i] > logits[bi]) bi = i;
+      out.push(bi);
+      logits = await state.engine.forwardToken(bi, true);
+    }
+    return out;
+  },
+  async loadTokenizer(url) {
+    const tj = await (await fetch(url)).json();
+    state.tokenizer = new SPTokenizer(tj);
+    return true;
+  },
+  encode: (t) => state.tokenizer.encode(t),
+  decode: (ids) => state.tokenizer.decode(ids),
+};
+</script>
+</body>
+</html>

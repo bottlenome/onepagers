@@ -3,3 +3,5 @@ Thumbs.db
 *.swp
 *~
 .claude/
+bonsai-chat/tools/tokenizer.json
+bonsai-chat/tools/realmodel/
