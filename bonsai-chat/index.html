@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonsai Chat — 三値/1bit LLMをWebGPUで動かす</title>
+<style>
+  :root {
+    --bg: #10141a; --panel: #171d26; --panel2: #1e2632; --border: #2b3648;
+    --text: #dfe7f2; --dim: #8ba0bb; --accent: #4ade80; --accent2: #38bdf8;
+    --warn: #fbbf24; --err: #f87171;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  header h1 { font-size: 18px; margin: 0; }
+  header .sub { color: var(--dim); font-size: 12px; }
+  main { flex: 1; max-width: 900px; width: 100%; margin: 0 auto; padding: 14px 16px 120px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  label { font-size: 12px; color: var(--dim); }
+  select, input[type=number], input[type=text] {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 8px; font-size: 13px; max-width: 100%;
+  }
+  input[type=number] { width: 70px; }
+  button {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 7px 14px; font-size: 13px; cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: var(--accent2); }
+  button:disabled { opacity: .45; cursor: default; }
+  button.primary { background: #14532d; border-color: #16a34a; }
+  button.danger { background: #450a0a; border-color: #b91c1c; }
+  #status { font-size: 12px; color: var(--dim); }
+  #barWrap { height: 8px; background: var(--panel2); border-radius: 4px; overflow: hidden; margin-top: 8px; display: none; }
+  #bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent2), var(--accent)); transition: width .15s; }
+  #gpuNotice { margin-top: 8px; }
+  #chat { display: flex; flex-direction: column; gap: 10px; }
+  .msg { border-radius: 10px; padding: 10px 12px; white-space: pre-wrap; word-break: break-word; font-size: 14px; line-height: 1.65; }
+  .msg.user { background: #1c2a3a; border: 1px solid #2c4a6b; align-self: flex-end; max-width: 85%; }
+  .msg.bot { background: var(--panel); border: 1px solid var(--border); align-self: flex-start; max-width: 95%; }
+  .msg.bot .meta { color: var(--dim); font-size: 11px; margin-top: 6px; }
+  .inputbar {
+    position: fixed; bottom: 0; left: 0; right: 0; background: rgba(16,20,26,.96);
+    border-top: 1px solid var(--border); padding: 10px 16px;
+  }
+  .inputbar .inner { max-width: 900px; margin: 0 auto; display: flex; gap: 8px; }
+  textarea {
+    flex: 1; background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 9px 10px; font-size: 14px; resize: none; min-height: 42px; max-height: 140px;
+    font-family: inherit;
+  }
+  details { color: var(--dim); font-size: 13px; }
+  details summary { cursor: pointer; color: var(--text); }
+  details code { background: var(--panel2); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  .notice { color: var(--warn); font-size: 13px; }
+  .error { color: var(--err); font-size: 13px; }
+  a { color: var(--accent2); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🌱 Bonsai Chat</h1>
+  <span class="sub">三値(1.58bit)/1bit LLM の Bonsai ファミリーを自作WebGPUカーネルで低ビットのままブラウザ実行</span>
+</header>
+<main>
+  <div class="panel">
+    <div class="row">
+      <label>モデル
+        <select id="modelSel"></select>
+      </label>
+      <label>コンテキスト
+        <select id="ctxSel">
+          <option value="512">512</option>
+          <option value="1024">1024</option>
+          <option value="2048" selected>2048</option>
+        </select>
+      </label>
+    </div>
+    <div class="row" style="margin-top:8px;">
+      <button id="loadBtn" class="primary">モデルを読み込む</button>
+      <button id="clearCacheBtn">キャッシュ削除</button>
+      <span id="status">未読込</span>
+    </div>
+    <div id="barWrap"><div id="bar"></div></div>
+    <div id="gpuNotice" class="error" style="display:none;"></div>
+    <div id="modelNote" class="notice" style="margin-top:8px;"></div>
+  </div>
+
+  <div class="panel row">
+    <label id="modeWrap">モード
+      <select id="mode">
+        <option value="qa">簡易Q&A</option>
+        <option value="completion">自由補完</option>
+      </select>
+    </label>
+    <label id="thinkWrap" style="display:none;"><input type="checkbox" id="think"> 思考モード(&lt;think&gt;)</label>
+    <label>temperature <input id="temp" type="number" min="0" max="2" step="0.1" value="0.7"></label>
+    <label>top-p <input id="topp" type="number" min="0" max="1" step="0.05" value="0.9"></label>
+    <label>最大トークン <input id="maxtok" type="number" min="1" max="1024" step="16" value="200"></label>
+    <button id="resetChatBtn" title="会話履歴をクリア">会話クリア</button>
+  </div>
+
+  <div id="chat"></div>
+
+  <div class="panel" style="margin-top:12px;">
+    <details>
+      <summary>技術メモ: なぜWebLLMではなく自作エンジンか</summary>
+      <p>Bonsai ファミリーは線形層の重みが三値 {-1, 0, +1}（1.58bit）またはバイナリ（1bit）で学習された低ビットLLM。
+      WebLLM/MLC の prebuilt には三値/1bit 量子化が存在せず、bf16 展開でコンパイルすると低ビットの利点（メモリ・帯域）が消える。
+      本ページは PrismML が llama.cpp をフォークして低ビットカーネルを整備したのに倣い、WebGPU の WGSL カーネルを自作して低ビットのまま実行する。</p>
+      <ul>
+        <li><b>Bonsai 0.5B (deepgrove)</b>: bf16 の潜在重みを取得しブラウザ内で <code>clamp(-1,1).round()</code> → 2bit/重み にパック（16重み/u32）＋出力チャネル毎スケール</li>
+        <li><b>Bonsai 1.7B/4B/8B (PrismML)</b>: Qwen3 アーキテクチャの MLX 量子化形式（group_size=128 の affine 量子化、1bit/2bit パック済み）をそのまま GPU に載せ、<code>w = scale·q + bias</code> をカーネル内でデコードしながら積和</li>
+        <li>計算は全て f32。fp16 格納部（スケール・バイアス・norm・KVキャッシュ等）は u32 パック＋<code>unpack2x16float</code> でデコードし、shader-f16 拡張に依存しない</li>
+        <li>Qwen3 系は QK-norm・YaRN RoPE・tied embeddings・&lt;think&gt;思考モードに対応</li>
+        <li>パック済み重みは OPFS にキャッシュされ、2回目以降はダウンロード不要</li>
+      </ul>
+    </details>
+  </div>
+</main>
+
+<div class="inputbar">
+  <div class="inner">
+    <textarea id="input" placeholder="モデル読込後に入力（Enterで送信 / Shift+Enterで改行）" disabled></textarea>
+    <button id="sendBtn" class="primary" type="button" disabled>送信</button>
+    <button id="contBtn" type="button" disabled title="直前の出力の続きを生成">続き</button>
+    <button id="stopBtn" class="danger" type="button" disabled>停止</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+ * Bonsai Chat — 低ビットLLM WebGPU 推論エンジン
+ * 対応ファミリー:
+ *  - qllama: deepgrove/Bonsai 0.5B (三値潜在重み bf16 → ブラウザ内 2bit パック)
+ *  - mlx:    prism-ml/Bonsai* (Qwen3 arch, MLX affine 量子化 1/2bit パック済み)
+ * 依存ライブラリなし。
+ * ============================================================ */
+
+const params = new URLSearchParams(location.search);
+const USE_CACHE = !params.get("nocache");
+const LOAD_TOKENIZER = !params.get("notok");
+const LS = { temp: "bonsai.temp", topp: "bonsai.topp", maxtok: "bonsai.maxtok", mode: "bonsai.mode", model: "bonsai.model", ctx: "bonsai.ctx", think: "bonsai.think" };
+
+const MODELS = [
+  { key: "bonsai-05b", family: "qllama", chat: false,
+    label: "Bonsai 0.5B 元祖 (deepgrove・三値・英語ベース / DL 1.2GB→キャッシュ0.3GB)",
+    note: "事前学習のみのベースモデル。チャット非対応のため補完/簡易Q&A向き。初回のみ1.2GBダウンロード後、ブラウザ内で三値2bitにパックしてキャッシュ(約0.3GB)します。",
+    base: "https://huggingface.co/deepgrove/Bonsai/resolve/main/" },
+  { key: "tb-17b", family: "mlx", chat: true,
+    label: "Ternary Bonsai 1.7B (三値・チャット対応 / DL 0.48GB) ★推奨",
+    note: "Qwen3 1.7B ベースの三値(2bit)モデル。チャット調整済み。ダウンロード約0.48GB。",
+    base: "https://huggingface.co/prism-ml/Ternary-Bonsai-1.7B-mlx-2bit/resolve/main/" },
+  { key: "b1-17b", family: "mlx", chat: true,
+    label: "Bonsai 1.7B 1bit (バイナリ・最軽量 / DL 0.27GB)",
+    note: "Qwen3 1.7B ベースの 1bit(バイナリ)モデル。最小ダウンロード約0.27GB。品質は三値版より低め。",
+    base: "https://huggingface.co/prism-ml/Bonsai-1.7B-mlx-1bit/resolve/main/" },
+  { key: "b1-4b", family: "mlx", chat: true,
+    label: "Bonsai 4B 1bit (DL 0.63GB)",
+    note: "Qwen3 4B ベースの 1bit モデル。ダウンロード約0.63GB。",
+    base: "https://huggingface.co/prism-ml/Bonsai-4B-mlx-1bit/resolve/main/" },
+  { key: "tb-4b", family: "mlx", chat: true,
+    label: "Ternary Bonsai 4B (三値・高品質 / DL 1.13GB)",
+    note: "Qwen3 4B ベースの三値モデル。ダウンロード約1.13GB。",
+    base: "https://huggingface.co/prism-ml/Ternary-Bonsai-4B-mlx-2bit/resolve/main/" },
+  { key: "b1-8b", family: "mlx", chat: true,
+    label: "Bonsai 8B 1bit (DL 1.28GB)",
+    note: "Qwen3 8B ベースの 1bit モデル。ダウンロード約1.28GB。GPUメモリに余裕のある環境向け。",
+    base: "https://huggingface.co/prism-ml/Bonsai-8B-mlx-1bit/resolve/main/" },
+  { key: "tb-8b", family: "mlx", chat: true,
+    label: "Ternary Bonsai 8B (三値・最高品質 / DL 2.3GB・要ハイエンドGPU)",
+    note: "Qwen3 8B ベースの三値モデル。ダウンロード約2.3GB。デスクトップの高性能GPU推奨。",
+    base: "https://huggingface.co/prism-ml/Ternary-Bonsai-8B-mlx-2bit/resolve/main/" },
+];
+
+function activeModel() {
+  if (params.get("base")) {
+    return { key: "test", family: params.get("family") || "qllama", chat: false,
+      label: "test", note: "", base: params.get("base") };
+  }
+  const key = els.modelSel ? els.modelSel.value : (localStorage.getItem(LS.model) || MODELS[0].key);
+  return MODELS.find(m => m.key === key) || MODELS[0];
+}
+const CACHE_VER = "v2";
+const cacheDirName = (m) => `bonsai-${m.key}-${CACHE_VER}`;
+
+// ---------- f16 / bf16 変換 ----------
+const HAS_F16A = typeof Float16Array !== "undefined";
+const F32B = new Float32Array(1), U32B = new Uint32Array(F32B.buffer);
+
+function f32ToF16Bits(val) {
+  F32B[0] = val;
+  const x = U32B[0];
+  const sign = (x >>> 16) & 0x8000;
+  let exp = (x >>> 23) & 0xff, mant = x & 0x7fffff;
+  if (exp === 0xff) return sign | 0x7c00 | (mant ? 0x200 : 0);
+  const e = exp - 112;
+  if (e >= 0x1f) return sign | 0x7c00;
+  if (e <= 0) {
+    if (e < -10) return sign;
+    mant |= 0x800000;
+    const shift = 14 - e, half = mant >>> shift, rem = mant & ((1 << shift) - 1), hw = 1 << (shift - 1);
+    return sign | (half + ((rem > hw || (rem === hw && (half & 1))) ? 1 : 0));
+  }
+  let half = (e << 10) | (mant >>> 13);
+  const rem = mant & 0x1fff;
+  if (rem > 0x1000 || (rem === 0x1000 && (half & 1))) half++;
+  return sign | half;
+}
+function bf16ToF32Array(u16) {
+  const n = u16.length, u32 = new Uint32Array(n);
+  for (let i = 0; i < n; i++) u32[i] = u16[i] << 16;
+  return new Float32Array(u32.buffer);
+}
+function packF16Pairs(f32) {
+  const n = f32.length, nw = (n + 1) >> 1;
+  if (HAS_F16A) {
+    const h = new Float16Array(nw * 2);
+    h.set(f32.subarray(0, n));
+    return new Uint32Array(h.buffer, 0, nw);
+  }
+  const u16 = new Uint16Array(nw * 2);
+  for (let i = 0; i < n; i++) u16[i] = f32ToF16Bits(f32[i]);
+  return new Uint32Array(u16.buffer, 0, nw);
+}
+function u16RawToU32(bytes) {
+  // f16 生バイト列 → u32 パック (奇数個は0パディング)
+  const n = bytes.byteLength >> 1, nw = (n + 1) >> 1;
+  const u16 = new Uint16Array(nw * 2);
+  u16.set(new Uint16Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + n * 2)));
+  return new Uint32Array(u16.buffer, 0, nw);
+}
+function roundHalfEven(x) {
+  const r = Math.round(x);
+  return (Math.abs(x % 1) === 0.5 && (r % 2 !== 0)) ? r - Math.sign(x) : r;
+}
+function packTernary(f32, N, K) {
+  const KP = Math.ceil(K / 16), out = new Uint32Array(N * KP);
+  for (let r = 0; r < N; r++) {
+    const rowIn = r * K, rowOut = r * KP;
+    for (let w = 0; w < KP; w++) {
+      let word = 0;
+      const kb = w * 16, kmax = Math.min(16, K - kb);
+      for (let i = 0; i < kmax; i++) {
+        const t = roundHalfEven(Math.max(-1, Math.min(1, f32[rowIn + kb + i])));
+        if (t === 1) word |= 1 << (2 * i);
+        else if (t === -1) word |= 2 << (2 * i);
+      }
+      out[rowOut + w] = word >>> 0;
+    }
+  }
+  return out;
+}
+
+// ---------- RoPE inv_freq (default / YaRN) ----------
+function computeRope(cfg) {
+  const HD = cfg.head_dim || (cfg.hidden_size / cfg.num_attention_heads);
+  const half = HD / 2, base = cfg.rope_theta || 10000;
+  const inv = new Float32Array(half);
+  for (let j = 0; j < half; j++) inv[j] = 1 / Math.pow(base, (2 * j) / HD);
+  let af = 1.0;
+  const rs = cfg.rope_scaling;
+  if (rs && (rs.rope_type === "yarn" || rs.type === "yarn")) {
+    const factor = rs.factor, orig = rs.original_max_position_embeddings || cfg.max_position_embeddings;
+    const betaFast = rs.beta_fast ?? 32, betaSlow = rs.beta_slow ?? 1;
+    const findDim = (nrot) => (HD * Math.log(orig / (nrot * 2 * Math.PI))) / (2 * Math.log(base));
+    const low = Math.max(Math.floor(findDim(betaFast)), 0);
+    const high = Math.min(Math.ceil(findDim(betaSlow)), half - 1);
+    for (let j = 0; j < half; j++) {
+      const ramp = Math.min(Math.max((j - low) / Math.max(high - low, 1e-3), 0), 1);
+      inv[j] = inv[j] * (1 - ramp) + (inv[j] / factor) * ramp;
+    }
+    af = rs.attention_factor ?? (0.1 * Math.log(factor) + 1.0);
+  }
+  return { inv, af };
+}
+
+// ---------- safetensors ストリーミング ----------
+async function* streamSafetensors(url, onProgress) {
+  const resp = await fetch(url);
+  if (!resp.ok) throw new Error(`fetch ${url}: ${resp.status}`);
+  const total = Number(resp.headers.get("content-length")) || 0;
+  const reader = resp.body.getReader();
+  let buf = new Uint8Array(0), bufStart = 0, received = 0;
+
+  async function ensure(absEnd) {
+    while (bufStart + buf.length < absEnd) {
+      const { done, value } = await reader.read();
+      if (done) throw new Error("safetensors: 予期しないEOF");
+      const nb = new Uint8Array(buf.length + value.length);
+      nb.set(buf); nb.set(value, buf.length);
+      buf = nb;
+      received += value.length;
+      if (onProgress) onProgress(received, total);
+    }
+  }
+  const take = (absBegin, absEnd) => buf.subarray(absBegin - bufStart, absEnd - bufStart);
+  function drop(absPos) {
+    if (absPos - bufStart > (32 << 20)) { buf = buf.slice(absPos - bufStart); bufStart = absPos; }
+  }
+
+  await ensure(8);
+  const hlen = Number(new DataView(buf.buffer, buf.byteOffset, 8).getBigUint64(0, true));
+  await ensure(8 + hlen);
+  const header = JSON.parse(new TextDecoder().decode(take(8, 8 + hlen)));
+  delete header.__metadata__;
+  const dataStart = 8 + hlen;
+  const entries = Object.entries(header)
+    .map(([name, v]) => ({ name, dtype: v.dtype, shape: v.shape, begin: dataStart + v.data_offsets[0], end: dataStart + v.data_offsets[1] }))
+    .sort((a, b) => a.begin - b.begin);
+  yield { header: entries };
+  for (const e of entries) {
+    await ensure(e.end);
+    yield { entry: e, bytes: take(e.begin, e.end) };
+    drop(e.end);
+  }
+}
+
+// ---------- OPFS キャッシュ ----------
+async function opfsDir(name, create) {
+  try {
+    const root = await navigator.storage.getDirectory();
+    return await root.getDirectoryHandle(name, { create: !!create });
+  } catch { return null; }
+}
+async function opfsLoad(name) {
+  const dir = await opfsDir(name, false);
+  if (!dir) return null;
+  try {
+    const metaFile = await (await dir.getFileHandle("meta.json")).getFile();
+    const meta = JSON.parse(await metaFile.text());
+    if (meta.ver !== 2) return null;
+    const dataFile = await (await dir.getFileHandle("data.bin")).getFile();
+    return { meta, dataFile };
+  } catch { return null; }
+}
+async function opfsClear(name) {
+  try {
+    const root = await navigator.storage.getDirectory();
+    await root.removeEntry(name, { recursive: true });
+  } catch {}
+}
+
+// ---------- トークナイザ 1: Llama SP-BPE (deepgrove Bonsai) ----------
+class SPTokenizer {
+  constructor(tj) {
+    this.vocab = new Map(Object.entries(tj.model.vocab));
+    this.byId = [];
+    for (const [tok, id] of this.vocab) this.byId[id] = tok;
+    this.ranks = new Map();
+    tj.model.merges.forEach((m, i) => {
+      const [a, b] = Array.isArray(m) ? m : m.split(" ");
+      this.ranks.set(a + " " + b, i);
+    });
+    this.special = new Set((tj.added_tokens || []).map(a => a.id));
+    this.byteRe = /^<0x([0-9A-F]{2})>$/;
+  }
+  encode(text) {
+    if (text === "") return [];
+    const norm = "▁" + text.replaceAll(" ", "▁");
+    let sym = Array.from(norm);
+    sym = bpeMerge(sym, this.ranks);
+    const ids = [];
+    const enc = new TextEncoder();
+    for (const s of sym) {
+      const id = this.vocab.get(s);
+      if (id !== undefined) { ids.push(id); continue; }
+      for (const byte of enc.encode(s)) {
+        const bt = `<0x${byte.toString(16).toUpperCase().padStart(2, "0")}>`;
+        const bid = this.vocab.get(bt);
+        ids.push(bid !== undefined ? bid : 0);
+      }
+    }
+    return ids;
+  }
+  decode(ids) {
+    const bytes = [];
+    const enc = new TextEncoder();
+    for (const id of ids) {
+      if (this.special.has(id)) continue;
+      const tok = this.byId[id];
+      if (tok === undefined) continue;
+      const m = this.byteRe.exec(tok);
+      if (m) { bytes.push(parseInt(m[1], 16)); continue; }
+      for (const b of enc.encode(tok.replaceAll("▁", " "))) bytes.push(b);
+    }
+    let text = new TextDecoder().decode(new Uint8Array(bytes));
+    if (text.startsWith(" ")) text = text.slice(1);
+    return text;
+  }
+}
+
+// 共通 BPE マージ (最良ランクのペアを左から順に統合)
+function bpeMerge(sym, ranks) {
+  for (;;) {
+    let best = Infinity, bi = -1;
+    for (let i = 0; i + 1 < sym.length; i++) {
+      const r = ranks.get(sym[i] + " " + sym[i + 1]);
+      if (r !== undefined && r < best) { best = r; bi = i; }
+    }
+    if (bi < 0) break;
+    const a = sym[bi], b = sym[bi + 1], merged = a + b;
+    const out = [];
+    for (let i = 0; i < sym.length; i++) {
+      if (i + 1 < sym.length && sym[i] === a && sym[i + 1] === b) { out.push(merged); i++; }
+      else out.push(sym[i]);
+    }
+    sym = out;
+  }
+  return sym;
+}
+
+// ---------- トークナイザ 2: ByteLevel BPE (Qwen3 系) ----------
+const BYTE2CHAR = (() => {
+  // GPT-2 bytes_to_unicode
+  const bs = [];
+  for (let i = 33; i <= 126; i++) bs.push(i);
+  for (let i = 161; i <= 172; i++) bs.push(i);
+  for (let i = 174; i <= 255; i++) bs.push(i);
+  const cs = bs.slice();
+  let n = 0;
+  for (let b = 0; b < 256; b++) {
+    if (!bs.includes(b)) { bs.push(b); cs.push(256 + n); n++; }
+  }
+  const map = new Array(256);
+  for (let i = 0; i < bs.length; i++) map[bs[i]] = String.fromCharCode(cs[i]);
+  return map;
+})();
+const CHAR2BYTE = (() => {
+  const m = new Map();
+  for (let b = 0; b < 256; b++) m.set(BYTE2CHAR[b], b);
+  return m;
+})();
+
+class BLTokenizer {
+  constructor(tj) {
+    this.vocab = new Map(Object.entries(tj.model.vocab));
+    this.byId = [];
+    for (const [tok, id] of this.vocab) this.byId[id] = tok;
+    this.ranks = new Map();
+    tj.model.merges.forEach((m, i) => {
+      const [a, b] = Array.isArray(m) ? m : m.split(" ");
+      this.ranks.set(a + " " + b, i);
+    });
+    this.added = (tj.added_tokens || []).slice().sort((a, b) => b.content.length - a.content.length);
+    this.specialIds = new Set(this.added.map(a => a.id));
+    for (const a of this.added) { this.byId[a.id] = a.content; }
+    // (?i:'s|'t|'re|'ve|'m|'ll|'d) を大小文字展開した Qwen 系 pre-tokenizer
+    this.splitRe = /'(?:[sS]|[tT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD])|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+/gu;
+  }
+  encode(text) {
+    if (text === "") return [];
+    const ids = [];
+    // added token (special含む) で分割
+    const parts = [];
+    let rest = text;
+    outer: while (rest.length) {
+      let bestIdx = -1, bestTok = null;
+      for (const a of this.added) {
+        const i = rest.indexOf(a.content);
+        if (i >= 0 && (bestIdx < 0 || i < bestIdx || (i === bestIdx && a.content.length > bestTok.content.length))) {
+          bestIdx = i; bestTok = a;
+        }
+      }
+      if (bestTok === null) { parts.push(rest); break outer; }
+      if (bestIdx > 0) parts.push(rest.slice(0, bestIdx));
+      parts.push({ id: bestTok.id });
+      rest = rest.slice(bestIdx + bestTok.content.length);
+    }
+    const enc = new TextEncoder();
+    for (const part of parts) {
+      if (typeof part !== "string") { ids.push(part.id); continue; }
+      const norm = part.normalize("NFC");
+      for (const piece of norm.match(this.splitRe) || []) {
+        let sym = [];
+        for (const b of enc.encode(piece)) sym.push(BYTE2CHAR[b]);
+        sym = bpeMerge(sym, this.ranks);
+        for (const s of sym) {
+          const id = this.vocab.get(s);
+          if (id !== undefined) ids.push(id);
+        }
+      }
+    }
+    return ids;
+  }
+  decode(ids) {
+    const bytes = [];
+    for (const id of ids) {
+      if (this.specialIds.has(id)) continue;
+      const tok = this.byId[id];
+      if (tok === undefined) continue;
+      for (const ch of tok) {
+        const b = CHAR2BYTE.get(ch);
+        if (b !== undefined) bytes.push(b);
+      }
+    }
+    return new TextDecoder().decode(new Uint8Array(bytes));
+  }
+}
+
+// ---------- WGSL カーネル ----------
+const WGSL = {
+  gemvTern: (N, K) => {
+    const KP = Math.ceil(K / 16);
+    return `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> W: array<u32>;
+@group(0) @binding(2) var<storage, read> S: array<u32>;
+@group(0) @binding(3) var<storage, read_write> Y: array<f32>;
+fn scaleAt(r: u32) -> f32 {
+  let p = unpack2x16float(S[r >> 1u]);
+  return select(p.x, p.y, (r & 1u) == 1u);
+}
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let r = gid.x;
+  if (r >= ${N}u) { return; }
+  var acc = 0.0;
+  let base = r * ${KP}u;
+  for (var w = 0u; w < ${KP}u; w++) {
+    let word = W[base + w];
+    let kb = w * 16u;
+    for (var i = 0u; i < 16u; i++) {
+      let c = (word >> (2u * i)) & 3u;
+      acc += X[kb + i] * (f32(c & 1u) - f32(c >> 1u));
+    }
+  }
+  Y[r] = acc * scaleAt(r);
+}`;
+  },
+  gemvMlx: (N, K, bits, GS) => {
+    const EPW = 32 / bits, MASK = (1 << bits) - 1;
+    const WPR = (K * bits) / 32, NG = K / GS, WPG = (GS * bits) / 32;
+    return `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> W: array<u32>;
+@group(0) @binding(2) var<storage, read> S: array<u32>;
+@group(0) @binding(3) var<storage, read> Bs: array<u32>;
+@group(0) @binding(4) var<storage, read_write> Y: array<f32>;
+fn sAt(i: u32) -> f32 {
+  let p = unpack2x16float(S[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+fn bAt(i: u32) -> f32 {
+  let p = unpack2x16float(Bs[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let r = gid.x;
+  if (r >= ${N}u) { return; }
+  var acc = 0.0;
+  for (var g = 0u; g < ${NG}u; g++) {
+    var qs = 0.0;
+    var xs = 0.0;
+    let wbase = r * ${WPR}u + g * ${WPG}u;
+    let kbase = g * ${GS}u;
+    for (var w = 0u; w < ${WPG}u; w++) {
+      let word = W[wbase + w];
+      let kb = kbase + w * ${EPW}u;
+      for (var i = 0u; i < ${EPW}u; i++) {
+        let q = f32((word >> (${bits}u * i)) & ${MASK}u);
+        let x = X[kb + i];
+        qs += q * x;
+        xs += x;
+      }
+    }
+    let si = r * ${NG}u + g;
+    acc += sAt(si) * qs + bAt(si) * xs;
+  }
+  Y[r] = acc;
+}`;
+  },
+  embedMlx: (H, bits, GS) => {
+    const EPW = 32 / bits, MASK = (1 << bits) - 1;
+    const WPR = (H * bits) / 32, NG = H / GS;
+    return `
+@group(0) @binding(0) var<storage, read> W: array<u32>;
+@group(0) @binding(1) var<storage, read> S: array<u32>;
+@group(0) @binding(2) var<storage, read> Bs: array<u32>;
+@group(0) @binding(3) var<storage, read_write> X: array<f32>;
+@group(0) @binding(4) var<uniform> U: vec4<u32>;
+fn sAt(i: u32) -> f32 {
+  let p = unpack2x16float(S[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+fn bAt(i: u32) -> f32 {
+  let p = unpack2x16float(Bs[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${H}u) { return; }
+  let row = U.x;
+  let word = W[row * ${WPR}u + i / ${EPW}u];
+  let q = f32((word >> (${bits}u * (i % ${EPW}u))) & ${MASK}u);
+  let si = row * ${NG}u + i / ${GS}u;
+  X[i] = sAt(si) * q + bAt(si);
+}`;
+  },
+  gemvF16: (N, K) => `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> W: array<u32>;
+@group(0) @binding(2) var<storage, read_write> Y: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let r = gid.x;
+  if (r >= ${N}u) { return; }
+  var acc = 0.0;
+  let base = r * ${K / 2}u;
+  for (var w = 0u; w < ${K / 2}u; w++) {
+    let p = unpack2x16float(W[base + w]);
+    acc += X[2u * w] * p.x + X[2u * w + 1u] * p.y;
+  }
+  Y[r] = acc;
+}`,
+  rmsnorm: (N, EPS) => `
+@group(0) @binding(0) var<storage, read> X: array<f32>;
+@group(0) @binding(1) var<storage, read> G: array<u32>;
+@group(0) @binding(2) var<storage, read_write> Y: array<f32>;
+var<workgroup> red: array<f32, 256>;
+fn gAt(i: u32) -> f32 {
+  let p = unpack2x16float(G[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+@compute @workgroup_size(256)
+fn main(@builtin(local_invocation_id) l: vec3<u32>) {
+  let lid = l.x;
+  var s = 0.0;
+  for (var i = lid; i < ${N}u; i += 256u) { let v = X[i]; s += v * v; }
+  red[lid] = s;
+  workgroupBarrier();
+  for (var st = 128u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] += red[lid + st]; }
+    workgroupBarrier();
+  }
+  let rms = 1.0 / sqrt(red[0] / ${N}.0 + ${EPS});
+  for (var i = lid; i < ${N}u; i += 256u) { Y[i] = X[i] * rms * gAt(i); }
+}`,
+  rmsHeads: (NHEADS, HD, EPS) => `
+@group(0) @binding(0) var<storage, read_write> B: array<f32>;
+@group(0) @binding(1) var<storage, read> G: array<u32>;
+var<workgroup> red: array<f32, 128>;
+fn gAt(i: u32) -> f32 {
+  let p = unpack2x16float(G[i >> 1u]);
+  return select(p.x, p.y, (i & 1u) == 1u);
+}
+@compute @workgroup_size(128)
+fn main(@builtin(workgroup_id) wid: vec3<u32>, @builtin(local_invocation_id) l: vec3<u32>) {
+  let h = wid.x;
+  let lid = l.x;
+  var v = 0.0;
+  if (lid < ${HD}u) { v = B[h * ${HD}u + lid]; }
+  red[lid] = v * v;
+  workgroupBarrier();
+  for (var st = 64u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] += red[lid + st]; }
+    workgroupBarrier();
+  }
+  let rms = 1.0 / sqrt(red[0] / ${HD}.0 + ${EPS});
+  if (lid < ${HD}u) { B[h * ${HD}u + lid] = v * rms * gAt(lid); }
+}`,
+  rope: (NHEADS, HD, AF) => {
+    const HALF = HD / 2;
+    return `
+@group(0) @binding(0) var<storage, read_write> B: array<f32>;
+@group(0) @binding(1) var<uniform> U: vec4<u32>;
+@group(0) @binding(2) var<storage, read> INV: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${NHEADS * HALF}u) { return; }
+  let h = i / ${HALF}u;
+  let j = i % ${HALF}u;
+  let ang = f32(U.y) * INV[j];
+  let c = cos(ang);
+  let s = sin(ang);
+  let a = B[h * ${HD}u + j];
+  let b = B[h * ${HD}u + j + ${HALF}u];
+  B[h * ${HD}u + j] = (a * c - b * s) * ${AF};
+  B[h * ${HD}u + j + ${HALF}u] = (b * c + a * s) * ${AF};
+}`;
+  },
+  kvStore: (KVD) => `
+@group(0) @binding(0) var<storage, read> K: array<f32>;
+@group(0) @binding(1) var<storage, read> V: array<f32>;
+@group(0) @binding(2) var<storage, read_write> KC: array<u32>;
+@group(0) @binding(3) var<storage, read_write> VC: array<u32>;
+@group(0) @binding(4) var<uniform> U: vec4<u32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${KVD / 2}u) { return; }
+  let off = U.y * ${KVD / 2}u + i;
+  KC[off] = pack2x16float(vec2<f32>(K[2u * i], K[2u * i + 1u]));
+  VC[off] = pack2x16float(vec2<f32>(V[2u * i], V[2u * i + 1u]));
+}`,
+  attn: (NH, NKV, HD, TMAX) => {
+    const GRP = NH / NKV, SCALE = 1 / Math.sqrt(HD);
+    return `
+@group(0) @binding(0) var<storage, read> Q: array<f32>;
+@group(0) @binding(1) var<storage, read> KC: array<u32>;
+@group(0) @binding(2) var<storage, read> VC: array<u32>;
+@group(0) @binding(3) var<storage, read_write> O: array<f32>;
+@group(0) @binding(4) var<uniform> U: vec4<u32>;
+var<workgroup> sc: array<f32, ${TMAX}>;
+var<workgroup> red: array<f32, 128>;
+fn kAt(t: u32, kv: u32, d: u32) -> f32 {
+  let idx = (t * ${NKV}u + kv) * ${HD}u + d;
+  let p = unpack2x16float(KC[idx >> 1u]);
+  return select(p.x, p.y, (idx & 1u) == 1u);
+}
+fn vAt(t: u32, kv: u32, d: u32) -> f32 {
+  let idx = (t * ${NKV}u + kv) * ${HD}u + d;
+  let p = unpack2x16float(VC[idx >> 1u]);
+  return select(p.x, p.y, (idx & 1u) == 1u);
+}
+@compute @workgroup_size(128)
+fn main(@builtin(workgroup_id) wid: vec3<u32>, @builtin(local_invocation_id) l: vec3<u32>) {
+  let h = wid.x;
+  let lid = l.x;
+  let kv = h / ${GRP}u;
+  let T = U.y + 1u;
+  for (var t = lid; t < T; t += 128u) {
+    var d0 = 0.0;
+    for (var d = 0u; d < ${HD}u; d++) { d0 += Q[h * ${HD}u + d] * kAt(t, kv, d); }
+    sc[t] = d0 * ${SCALE};
+  }
+  workgroupBarrier();
+  var m = -1.0e30;
+  for (var t = lid; t < T; t += 128u) { m = max(m, sc[t]); }
+  red[lid] = m;
+  workgroupBarrier();
+  for (var st = 64u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] = max(red[lid], red[lid + st]); }
+    workgroupBarrier();
+  }
+  let mx = red[0];
+  workgroupBarrier();
+  var s = 0.0;
+  for (var t = lid; t < T; t += 128u) {
+    let e = exp(sc[t] - mx);
+    sc[t] = e;
+    s += e;
+  }
+  red[lid] = s;
+  workgroupBarrier();
+  for (var st = 64u; st > 0u; st >>= 1u) {
+    if (lid < st) { red[lid] += red[lid + st]; }
+    workgroupBarrier();
+  }
+  let den = red[0];
+  workgroupBarrier();
+  for (var d = lid; d < ${HD}u; d += 128u) {
+    var acc = 0.0;
+    for (var t = 0u; t < T; t++) { acc += sc[t] * vAt(t, kv, d); }
+    O[h * ${HD}u + d] = acc / den;
+  }
+}`;
+  },
+  embedF16: (H) => `
+@group(0) @binding(0) var<storage, read> E: array<u32>;
+@group(0) @binding(1) var<storage, read_write> X: array<f32>;
+@group(0) @binding(2) var<uniform> U: vec4<u32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${H}u) { return; }
+  let idx = U.x * ${H}u + i;
+  let p = unpack2x16float(E[idx >> 1u]);
+  X[i] = select(p.x, p.y, (idx & 1u) == 1u);
+}`,
+  siluMul: (N) => `
+@group(0) @binding(0) var<storage, read_write> G: array<f32>;
+@group(0) @binding(1) var<storage, read> Up: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${N}u) { return; }
+  let g = G[i];
+  G[i] = g / (1.0 + exp(-g)) * Up[i];
+}`,
+  add: (N) => `
+@group(0) @binding(0) var<storage, read_write> X: array<f32>;
+@group(0) @binding(1) var<storage, read> T: array<f32>;
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
+  let i = gid.x;
+  if (i >= ${N}u) { return; }
+  X[i] = X[i] + T[i];
+}`,
+};
+
+// ---------- 推論エンジン ----------
+class Engine {
+  constructor() { this.device = null; this.pos = 0; this.gpuBytes = 0; }
+
+  async init() {
+    if (!navigator.gpu) throw new Error("このブラウザは WebGPU に対応していません（Chrome / Edge 最新版のデスクトップ推奨）");
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) throw new Error("WebGPU アダプタを取得できませんでした");
+    const requiredLimits = {
+      maxStorageBufferBindingSize: adapter.limits.maxStorageBufferBindingSize,
+      maxBufferSize: adapter.limits.maxBufferSize,
+    };
+    this.device = await adapter.requestDevice({ requiredLimits });
+    this.device.lost.then((info) => {
+      if (info.reason !== "destroyed") setError("GPUデバイスが失われました: " + info.message);
+    });
+  }
+  destroy() { try { this.device?.destroy(); } catch {} }
+
+  buf(u32data, usage) {
+    const b = this.device.createBuffer({
+      size: Math.max(16, u32data.byteLength), usage, mappedAtCreation: true,
+    });
+    new Uint32Array(b.getMappedRange()).set(u32data);
+    b.unmap();
+    this.gpuBytes += Math.max(16, u32data.byteLength);
+    return b;
+  }
+  zeroBuf(bytes, usage) {
+    const b = this.device.createBuffer({ size: Math.max(16, bytes), usage });
+    this.gpuBytes += Math.max(16, bytes);
+    return b;
+  }
+
+  async loadModel(model, cfg, getTensor, hasTensor, onPhase) {
+    const d = this.device;
+    this.family = model.family;
+    this.cfg = cfg;
+    const H = cfg.hidden_size, L = cfg.num_hidden_layers, I = cfg.intermediate_size;
+    const NH = cfg.num_attention_heads, NKV = cfg.num_key_value_heads;
+    const HD = cfg.head_dim || (H / NH), V = cfg.vocab_size;
+    const TMAX = Math.min(cfg.max_position_embeddings, Number(els.ctxSel?.value || 2048), 2048);
+    const EPS = cfg.rms_norm_eps;
+    Object.assign(this, { H, L, I, NH, NKV, HD, V, TMAX });
+    const isMlx = this.family === "mlx";
+    const bits = isMlx ? cfg.quantization.bits : 0;
+    const GS = isMlx ? cfg.quantization.group_size : 0;
+
+    const ST = GPUBufferUsage.STORAGE, CD = GPUBufferUsage.COPY_DST, CS = GPUBufferUsage.COPY_SRC;
+
+    // ---- 重みバッファ ----
+    onPhase("GPUへ転送中…");
+    const W = this.W = { layers: [] };
+    const get = async (n) => this.buf(await getTensor(n), ST);
+    if (isMlx) {
+      W.embW = await get("model.embed_tokens.weight");
+      W.embS = await get("model.embed_tokens.scales");
+      W.embB = await get("model.embed_tokens.biases");
+      if (hasTensor("lm_head.weight")) {
+        W.lmW = await get("lm_head.weight");
+        W.lmS = await get("lm_head.scales");
+        W.lmB = await get("lm_head.biases");
+      } else {
+        W.lmW = W.embW; W.lmS = W.embS; W.lmB = W.embB; // tied
+      }
+    } else {
+      W.embed = await get("model.embed_tokens.weight");
+      W.lmHead = await get("lm_head.weight");
+    }
+    W.finalNorm = await get("model.norm.weight");
+    for (let i = 0; i < L; i++) {
+      const p = `model.layers.${i}.`, lw = {};
+      const linNames = { q: "self_attn.q_proj", k: "self_attn.k_proj", v: "self_attn.v_proj", o: "self_attn.o_proj", g: "mlp.gate_proj", u: "mlp.up_proj", dn: "mlp.down_proj" };
+      lw.ln1 = await get(p + "input_layernorm.weight");
+      lw.ln2 = await get(p + "post_attention_layernorm.weight");
+      for (const [key, tn] of Object.entries(linNames)) {
+        lw[key] = await get(p + tn + ".weight");
+        lw[key + "s"] = await get(p + tn + ".scales");
+        if (isMlx) lw[key + "b"] = await get(p + tn + ".biases");
+      }
+      if (isMlx) {
+        lw.qn = await get(p + "self_attn.q_norm.weight");
+        lw.kn = await get(p + "self_attn.k_norm.weight");
+      }
+      W.layers.push(lw);
+      onPhase(`GPUへ転送中… ${i + 1}/${L} 層`);
+    }
+
+    // ---- 活性・KV・RoPE バッファ ----
+    const B = this.B = {};
+    const f32 = (n) => this.zeroBuf(n * 4, ST);
+    B.x = f32(H); B.xn = f32(H); B.tmp = f32(H);
+    B.q = f32(NH * HD); B.k = f32(NKV * HD); B.v = f32(NKV * HD);
+    B.attnOut = f32(NH * HD);
+    B.gate = f32(I); B.up = f32(I);
+    B.logits = this.zeroBuf(V * 4, ST | CS);
+    B.staging = d.createBuffer({ size: V * 4, usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ });
+    B.uni = d.createBuffer({ size: 16, usage: GPUBufferUsage.UNIFORM | CD });
+    const rope = computeRope(cfg);
+    B.inv = this.buf(new Uint32Array(rope.inv.buffer), ST);
+    const AF = rope.af.toPrecision(8);
+    B.kc = []; B.vc = [];
+    for (let i = 0; i < L; i++) {
+      B.kc.push(this.zeroBuf(TMAX * NKV * HD * 2, ST));
+      B.vc.push(this.zeroBuf(TMAX * NKV * HD * 2, ST));
+    }
+
+    // ---- パイプライン ----
+    onPhase("シェーダをコンパイル中…");
+    const mk = (code) => d.createComputePipelineAsync({
+      layout: "auto", compute: { module: d.createShaderModule({ code }), entryPoint: "main" },
+    });
+    const gemvCache = new Map();
+    const gemv = (N, K) => {
+      const key = `${N}_${K}`;
+      if (!gemvCache.has(key)) {
+        gemvCache.set(key, mk(isMlx ? WGSL.gemvMlx(N, K, bits, GS) : WGSL.gemvTern(N, K)));
+      }
+      return gemvCache.get(key);
+    };
+    const P = this.P = {};
+    [P.pQ, P.pKV, P.pGU, P.pDn, P.pO, P.pRms, P.pRopeQ, P.pRopeK, P.pKvS, P.pAttn, P.pSilu, P.pAdd] = await Promise.all([
+      gemv(NH * HD, H), gemv(NKV * HD, H), gemv(I, H), gemv(H, I), gemv(H, NH * HD),
+      mk(WGSL.rmsnorm(H, EPS)),
+      mk(WGSL.rope(NH, HD, AF)), mk(WGSL.rope(NKV, HD, AF)),
+      mk(WGSL.kvStore(NKV * HD)),
+      mk(WGSL.attn(NH, NKV, HD, TMAX)),
+      mk(WGSL.siluMul(I)), mk(WGSL.add(H)),
+    ]);
+    if (isMlx) {
+      [P.pEmb, P.pLm, P.pQNorm, P.pKNorm] = await Promise.all([
+        mk(WGSL.embedMlx(H, bits, GS)),
+        gemv(V, H),
+        mk(WGSL.rmsHeads(NH, HD, EPS)), mk(WGSL.rmsHeads(NKV, HD, EPS)),
+      ]);
+    } else {
+      [P.pEmb, P.pLm] = await Promise.all([mk(WGSL.embedF16(H)), mk(WGSL.gemvF16(V, H))]);
+    }
+
+    // ---- バインドグループ ----
+    const bg = (pipe, entries) => d.createBindGroup({
+      layout: pipe.getBindGroupLayout(0),
+      entries: entries.map((r, i) => ({ binding: i, resource: { buffer: r } })),
+    });
+    const gemvBg = (pipe, xBuf, lw, key, yBuf) => isMlx
+      ? bg(pipe, [xBuf, lw[key], lw[key + "s"], lw[key + "b"], yBuf])
+      : bg(pipe, [xBuf, lw[key], lw[key + "s"], yBuf]);
+    this.G = {
+      emb: isMlx ? bg(P.pEmb, [W.embW, W.embS, W.embB, B.x, B.uni]) : bg(P.pEmb, [W.embed, B.x, B.uni]),
+      ropeQ: bg(P.pRopeQ, [B.q, B.uni, B.inv]),
+      ropeK: bg(P.pRopeK, [B.k, B.uni, B.inv]),
+      silu: bg(P.pSilu, [B.gate, B.up]),
+      addTmp: bg(P.pAdd, [B.x, B.tmp]),
+      rmsFinal: bg(P.pRms, [B.x, W.finalNorm, B.xn]),
+      lm: isMlx ? bg(P.pLm, [B.xn, W.lmW, W.lmS, W.lmB, B.logits]) : bg(P.pLm, [B.xn, W.lmHead, B.logits]),
+      layers: W.layers.map((lw, i) => {
+        const g = {
+          rms1: bg(P.pRms, [B.x, lw.ln1, B.xn]),
+          rms2: bg(P.pRms, [B.x, lw.ln2, B.xn]),
+          q: gemvBg(P.pQ, B.xn, lw, "q", B.q),
+          k: gemvBg(P.pKV, B.xn, lw, "k", B.k),
+          v: gemvBg(P.pKV, B.xn, lw, "v", B.v),
+          o: gemvBg(P.pO, B.attnOut, lw, "o", B.tmp),
+          g: gemvBg(P.pGU, B.xn, lw, "g", B.gate),
+          u: gemvBg(P.pGU, B.xn, lw, "u", B.up),
+          dn: gemvBg(P.pDn, B.gate, lw, "dn", B.tmp),
+          kvs: bg(P.pKvS, [B.k, B.v, B.kc[i], B.vc[i], B.uni]),
+          attn: bg(P.pAttn, [B.q, B.kc[i], B.vc[i], B.attnOut, B.uni]),
+        };
+        if (isMlx) {
+          g.qn = bg(P.pQNorm, [B.q, lw.qn]);
+          g.kn = bg(P.pKNorm, [B.k, lw.kn]);
+        }
+        return g;
+      }),
+    };
+    this.pos = 0;
+    onPhase(null);
+  }
+
+  reset() { this.pos = 0; }
+
+  async forwardToken(tok, wantLogits) {
+    const { device: d, P, G, B, H, I, NH, NKV, HD, V, L, TMAX } = this;
+    if (this.pos >= TMAX) throw new Error(`コンテキスト上限 (${TMAX}) に達しました`);
+    const isMlx = this.family === "mlx";
+    d.queue.writeBuffer(B.uni, 0, new Uint32Array([tok, this.pos, 0, 0]));
+    const enc = d.createCommandEncoder();
+    const pass = enc.beginComputePass();
+    const wg = (n) => Math.ceil(n / 64);
+    const run = (pipe, group, n) => { pass.setPipeline(pipe); pass.setBindGroup(0, group); pass.dispatchWorkgroups(n); };
+    run(P.pEmb, G.emb, wg(H));
+    for (let i = 0; i < L; i++) {
+      const g = G.layers[i];
+      run(P.pRms, g.rms1, 1);
+      run(P.pQ, g.q, wg(NH * HD));
+      run(P.pKV, g.k, wg(NKV * HD));
+      run(P.pKV, g.v, wg(NKV * HD));
+      if (isMlx) {
+        run(P.pQNorm, g.qn, NH);
+        run(P.pKNorm, g.kn, NKV);
+      }
+      run(P.pRopeQ, G.ropeQ, wg(NH * HD / 2));
+      run(P.pRopeK, G.ropeK, wg(NKV * HD / 2));
+      run(P.pKvS, g.kvs, wg(NKV * HD / 2));
+      run(P.pAttn, g.attn, NH);
+      run(P.pO, g.o, wg(H));
+      run(P.pAdd, G.addTmp, wg(H));
+      run(P.pRms, g.rms2, 1);
+      run(P.pGU, g.g, wg(I));
+      run(P.pGU, g.u, wg(I));
+      run(P.pSilu, G.silu, wg(I));
+      run(P.pDn, g.dn, wg(H));
+      run(P.pAdd, G.addTmp, wg(H));
+    }
+    if (wantLogits) {
+      run(P.pRms, G.rmsFinal, 1);
+      run(P.pLm, G.lm, wg(V));
+    }
+    pass.end();
+    if (wantLogits) enc.copyBufferToBuffer(B.logits, 0, B.staging, 0, V * 4);
+    d.queue.submit([enc.finish()]);
+    this.pos++;
+    if (!wantLogits) return null;
+    await B.staging.mapAsync(GPUMapMode.READ);
+    const out = new Float32Array(B.staging.getMappedRange().slice(0));
+    B.staging.unmap();
+    return out;
+  }
+}
+
+// ---------- モデル読込パイプライン ----------
+const state = {
+  engine: null, tokenizer: null, cfg: null, model: null,
+  loading: false, ready: false, generating: false, stopFlag: false,
+  lastIds: null, history: [], headerNames: null,
+};
+
+function isTernaryName(name, headerNames) {
+  return name.endsWith(".weight") && headerNames.has(name.replace(/\.weight$/, ".scales"));
+}
+
+async function packAll(model, onProgress) {
+  const packed = new Map();
+  const url = model.base + "model.safetensors";
+  let headerNames = null, count = 0, totalCount = 0;
+  for await (const item of streamSafetensors(url, (recv, total) => {
+    onProgress("download", recv, total);
+  })) {
+    if (item.header) {
+      headerNames = new Set(item.header.map(e => e.name));
+      totalCount = item.header.length;
+      continue;
+    }
+    const { entry, bytes } = item;
+    let data;
+    if (model.family === "mlx") {
+      if (entry.dtype === "U32") {
+        data = new Uint32Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
+      } else if (entry.dtype === "F16") {
+        data = u16RawToU32(bytes);
+      } else if (entry.dtype === "BF16") {
+        data = packF16Pairs(bf16ToF32Array(new Uint16Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength))));
+      } else {
+        throw new Error(`未対応 dtype: ${entry.dtype} (${entry.name})`);
+      }
+    } else {
+      if (entry.dtype !== "BF16") throw new Error(`未対応 dtype: ${entry.dtype} (${entry.name})`);
+      const f32 = bf16ToF32Array(new Uint16Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)));
+      if (isTernaryName(entry.name, headerNames)) {
+        const [N, K] = entry.shape;
+        data = packTernary(f32, N, K);
+      } else {
+        data = packF16Pairs(f32);
+      }
+    }
+    packed.set(entry.name, { shape: entry.shape, data });
+    count++;
+    onProgress("pack", count, totalCount);
+    await new Promise(r => setTimeout(r));
+  }
+  return { packed, headerNames };
+}
+
+async function saveCache(model, cfg, packed) {
+  const dir = await opfsDir(cacheDirName(model), true);
+  if (!dir) return;
+  try {
+    const dataHandle = await dir.getFileHandle("data.bin", { create: true });
+    const w = await dataHandle.createWritable();
+    const entries = [];
+    let off = 0;
+    for (const [name, t] of packed) {
+      await w.write(t.data);
+      entries.push({ name, shape: t.shape, offset: off, len: t.data.byteLength });
+      off += t.data.byteLength;
+    }
+    await w.close();
+    const metaHandle = await dir.getFileHandle("meta.json", { create: true });
+    const mw = await metaHandle.createWritable();
+    await mw.write(JSON.stringify({ ver: 2, family: model.family, cfg, entries }));
+    await mw.close();
+  } catch (e) {
+    console.warn("OPFS キャッシュ保存失敗:", e);
+    await opfsClear(cacheDirName(model));
+  }
+}
+
+async function fetchTokenizerJson(model) {
+  if (USE_CACHE) {
+    try {
+      const dir = await opfsDir(cacheDirName(model), true);
+      try {
+        const f = await (await dir.getFileHandle("tokenizer.json")).getFile();
+        return JSON.parse(await f.text());
+      } catch {}
+      const resp = await fetch(model.base + "tokenizer.json");
+      if (!resp.ok) throw new Error("tokenizer.json の取得に失敗しました");
+      const text = await resp.text();
+      const fh = await dir.getFileHandle("tokenizer.json", { create: true });
+      const w = await fh.createWritable();
+      await w.write(text);
+      await w.close();
+      return JSON.parse(text);
+    } catch (e) { console.warn("tokenizer cache:", e); }
+  }
+  const resp = await fetch(model.base + "tokenizer.json");
+  if (!resp.ok) throw new Error("tokenizer.json の取得に失敗しました");
+  return await resp.json();
+}
+
+async function loadModelFlow() {
+  if (state.loading || state.ready) return;
+  state.loading = true;
+  els.loadBtn.disabled = true;
+  els.modelSel.disabled = true;
+  els.ctxSel.disabled = true;
+  setError("");
+  const model = activeModel();
+  state.model = model;
+  try {
+    setStatus("初期化中…");
+    const engine = new Engine();
+    await engine.init();
+
+    const cfgResp = await fetch(model.base + "config.json");
+    if (!cfgResp.ok) throw new Error("config.json の取得に失敗しました");
+    const cfg = await cfgResp.json();
+    state.cfg = cfg;
+
+    if (LOAD_TOKENIZER) {
+      setStatus("トークナイザ読込中…");
+      const tj = await fetchTokenizerJson(model);
+      state.tokenizer = model.family === "mlx" ? new BLTokenizer(tj) : new SPTokenizer(tj);
+    }
+
+    let getTensor, hasTensor;
+    const cached = USE_CACHE ? await opfsLoad(cacheDirName(model)) : null;
+    if (cached && cached.meta.family === model.family) {
+      setStatus("キャッシュから読込中…");
+      const idx = new Map(cached.meta.entries.map(e => [e.name, e]));
+      hasTensor = (name) => idx.has(name);
+      getTensor = async (name) => {
+        const e = idx.get(name);
+        if (!e) throw new Error("キャッシュ欠損: " + name);
+        const ab = await cached.dataFile.slice(e.offset, e.offset + e.len).arrayBuffer();
+        return new Uint32Array(ab);
+      };
+    } else {
+      const { packed } = await packAll(model, (phase, a, b) => {
+        if (phase === "download") {
+          const pct = b ? (a / b * 100) : 0;
+          setStatus(`ダウンロード中… ${(a / 1e6).toFixed(0)}MB${b ? ` / ${(b / 1e6).toFixed(0)}MB` : ""}`);
+          setBar(b ? pct * 0.9 : 0);
+        } else {
+          setStatus(`変換中… ${a}/${b} テンソル`);
+          setBar(90 + a / b * 10);
+        }
+      });
+      if (USE_CACHE) {
+        setStatus("キャッシュへ保存中…");
+        await saveCache(model, cfg, packed);
+      }
+      hasTensor = (name) => packed.has(name);
+      getTensor = async (name) => {
+        const t = packed.get(name);
+        if (!t) throw new Error("テンソル欠損: " + name);
+        return t.data;
+      };
+    }
+
+    await engine.loadModel(model, cfg, getTensor, hasTensor, (msg) => { if (msg) setStatus(msg); });
+    state.engine = engine;
+    state.ready = true;
+    state.history = [];
+    setBar(null);
+    setStatus(`準備完了 — GPUメモリ ${(engine.gpuBytes / 1e6).toFixed(0)}MB / ctx ${engine.TMAX}`);
+    els.input.disabled = false;
+    els.sendBtn.disabled = false;
+    els.modelSel.disabled = false; // 切替時は change ハンドラで再読込
+    updateModeUI();
+    els.input.focus();
+  } catch (e) {
+    console.error(e);
+    setError(String(e.message || e));
+    setStatus("読込失敗");
+    setBar(null);
+    els.loadBtn.disabled = false;
+    els.modelSel.disabled = false;
+    els.ctxSel.disabled = false;
+  } finally {
+    state.loading = false;
+  }
+}
+
+// ---------- サンプリング ----------
+function sample(logits, temp, topp) {
+  if (temp <= 0.01) {
+    let bi = 0;
+    for (let i = 1; i < logits.length; i++) if (logits[i] > logits[bi]) bi = i;
+    return bi;
+  }
+  const n = logits.length;
+  let mx = -Infinity;
+  for (let i = 0; i < n; i++) if (logits[i] > mx) mx = logits[i];
+  const probs = new Float64Array(n);
+  let sum = 0;
+  for (let i = 0; i < n; i++) { const p = Math.exp((logits[i] - mx) / temp); probs[i] = p; sum += p; }
+  for (let i = 0; i < n; i++) probs[i] /= sum;
+  const idx = Array.from({ length: n }, (_, i) => i).sort((a, b) => probs[b] - probs[a]);
+  let cum = 0, cut = n;
+  for (let r = 0; r < n; r++) { cum += probs[idx[r]]; if (cum >= topp) { cut = r + 1; break; } }
+  let z = 0;
+  for (let r = 0; r < cut; r++) z += probs[idx[r]];
+  let u = Math.random() * z;
+  for (let r = 0; r < cut; r++) { u -= probs[idx[r]]; if (u <= 0) return idx[r]; }
+  return idx[0];
+}
+
+function stopIdSet() {
+  const s = new Set();
+  const eos = state.cfg?.eos_token_id;
+  if (Array.isArray(eos)) eos.forEach(e => s.add(e)); else if (eos != null) s.add(eos);
+  if (state.model?.family === "mlx") s.add(151643); // <|endoftext|>
+  if (state.model?.family === "qllama") s.add(2);
+  return s;
+}
+
+// ---------- 生成 ----------
+async function generate(promptIds, { maxTokens, temp, topp, stopStrings = [], onToken }) {
+  const eng = state.engine;
+  state.stopFlag = false;
+  const stopIds = stopIdSet();
+  const t0 = performance.now();
+  let logits = null;
+  for (let i = 0; i < promptIds.length; i++) {
+    if (state.stopFlag) return { ids: [], reason: "stop" };
+    logits = await eng.forwardToken(promptIds[i], i === promptIds.length - 1);
+  }
+  const tPrefill = performance.now();
+  const genIds = [];
+  let reason = "length";
+  for (let s = 0; s < maxTokens; s++) {
+    if (state.stopFlag) { reason = "stop"; break; }
+    const next = sample(logits, temp, topp);
+    if (stopIds.has(next)) { reason = "eos"; break; }
+    genIds.push(next);
+    const text = onToken ? onToken(genIds) : null;
+    if (text !== null && stopStrings.some(ss => text.includes(ss))) { reason = "stopstr"; break; }
+    if (eng.pos >= eng.TMAX) { reason = "ctx"; break; }
+    logits = await eng.forwardToken(next, true);
+  }
+  const t1 = performance.now();
+  return {
+    ids: genIds, reason,
+    prefillTps: promptIds.length / ((tPrefill - t0) / 1000),
+    decodeTps: genIds.length / Math.max(1e-3, (t1 - tPrefill) / 1000),
+  };
+}
+
+// ---------- UI ----------
+const els = {};
+for (const id of ["loadBtn", "clearCacheBtn", "status", "barWrap", "bar", "gpuNotice", "modelNote",
+  "modelSel", "ctxSel", "mode", "modeWrap", "thinkWrap", "think", "temp", "topp", "maxtok",
+  "chat", "input", "sendBtn", "contBtn", "stopBtn", "resetChatBtn"]) {
+  els[id] = document.getElementById(id);
+}
+function setStatus(t) { els.status.textContent = t; }
+function setError(t) { els.gpuNotice.style.display = t ? "" : "none"; els.gpuNotice.textContent = t; }
+function setBar(pct) {
+  els.barWrap.style.display = pct == null ? "none" : "";
+  if (pct != null) els.bar.style.width = Math.min(100, pct).toFixed(1) + "%";
+}
+function addMsg(cls, text) {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.textContent = text;
+  els.chat.appendChild(div);
+  div.scrollIntoView({ block: "end" });
+  return div;
+}
+
+for (const m of MODELS) {
+  const opt = document.createElement("option");
+  opt.value = m.key;
+  opt.textContent = m.label;
+  els.modelSel.appendChild(opt);
+}
+{
+  const savedModel = localStorage.getItem(LS.model);
+  if (savedModel && MODELS.some(m => m.key === savedModel)) els.modelSel.value = savedModel;
+  const savedCtx = localStorage.getItem(LS.ctx);
+  if (savedCtx) els.ctxSel.value = savedCtx;
+}
+function updateModelNote() {
+  const m = activeModel();
+  els.modelNote.textContent = m.note || "";
+}
+function updateModeUI() {
+  const m = state.model || activeModel();
+  const chat = !!m.chat;
+  els.modeWrap.style.display = chat ? "none" : "";
+  els.thinkWrap.style.display = chat ? "" : "none";
+}
+els.modelSel.addEventListener("change", () => {
+  localStorage.setItem(LS.model, els.modelSel.value);
+  updateModelNote();
+  updateModeUI();
+  if (state.ready) location.reload(); // 読込済みなら再読込して切替 (選択は保存済み)
+});
+els.ctxSel.addEventListener("change", () => localStorage.setItem(LS.ctx, els.ctxSel.value));
+updateModelNote();
+updateModeUI();
+
+for (const [key, el] of [["temp", els.temp], ["topp", els.topp], ["maxtok", els.maxtok], ["mode", els.mode]]) {
+  const saved = localStorage.getItem(LS[key]);
+  if (saved != null) el.value = saved;
+  el.addEventListener("change", () => localStorage.setItem(LS[key], el.value));
+}
+{
+  const savedThink = localStorage.getItem(LS.think);
+  if (savedThink != null) els.think.checked = savedThink === "1";
+  els.think.addEventListener("change", () => localStorage.setItem(LS.think, els.think.checked ? "1" : "0"));
+}
+
+function buildQllamaPrompt(userText) {
+  if (els.mode.value === "qa") {
+    return { text: `Question: ${userText}\nAnswer:`, stops: ["\nQuestion:", "\nQ:"] };
+  }
+  return { text: userText, stops: [] };
+}
+function buildChatIds(userText, maxNew) {
+  // Qwen3 チャットテンプレート (履歴込み、ctx に収まるまで古い順に間引く)
+  const think = els.think.checked;
+  const hist = state.history.slice();
+  for (;;) {
+    let p = "";
+    for (const t of hist) p += `<|im_start|>${t.role}\n${t.text}<|im_end|>\n`;
+    p += `<|im_start|>user\n${userText}<|im_end|>\n<|im_start|>assistant\n`;
+    if (!think) p += "<think>\n\n</think>\n\n";
+    const ids = state.tokenizer.encode(p);
+    if (ids.length <= state.engine.TMAX - maxNew - 4 || hist.length === 0) return { ids, trimmed: state.history.length - hist.length };
+    hist.splice(0, 2); // 最古の user/assistant ペアを落とす
+  }
+}
+
+async function runGeneration(promptIds, stops, isContinuation, userText) {
+  state.generating = true;
+  els.sendBtn.disabled = true;
+  els.contBtn.disabled = true;
+  els.stopBtn.disabled = false;
+  const botDiv = isContinuation ? els.chat.lastElementChild : addMsg("bot", "…");
+  const prevText = isContinuation ? botDiv.dataset.text || "" : "";
+  try {
+    const res = await generate(promptIds, {
+      maxTokens: Math.max(1, Number(els.maxtok.value) || 200),
+      temp: Number(els.temp.value),
+      topp: Number(els.topp.value),
+      stopStrings: stops,
+      onToken: (ids) => {
+        const t = state.tokenizer.decode(ids);
+        botDiv.textContent = prevText + t;
+        botDiv.dataset.text = prevText + t;
+        return t;
+      },
+    });
+    let text = state.tokenizer.decode(res.ids);
+    for (const ss of stops) {
+      const i = text.indexOf(ss);
+      if (i >= 0) text = text.slice(0, i);
+    }
+    botDiv.dataset.text = prevText + text;
+    state.lastIds = [...(isContinuation ? state.lastIds : promptIds), ...res.ids];
+    if (!isContinuation && state.model?.chat && userText != null) {
+      state.history.push({ role: "user", text: userText });
+      state.history.push({ role: "assistant", text });
+    } else if (isContinuation && state.model?.chat && state.history.length) {
+      state.history[state.history.length - 1].text = botDiv.dataset.text;
+    }
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.textContent = `prefill ${res.prefillTps?.toFixed(1) ?? "-"} tok/s ・ decode ${res.decodeTps?.toFixed(1) ?? "-"} tok/s ・ ${res.ids.length} tokens (${res.reason})`;
+    botDiv.textContent = prevText + text;
+    botDiv.appendChild(meta);
+    botDiv.scrollIntoView({ block: "end" });
+    els.contBtn.disabled = false;
+  } catch (e) {
+    console.error(e);
+    botDiv.textContent = (botDiv.dataset.text || "") + `\n[エラー: ${e.message || e}]`;
+  } finally {
+    state.generating = false;
+    els.sendBtn.disabled = false;
+    els.stopBtn.disabled = true;
+  }
+}
+
+els.sendBtn.addEventListener("click", async () => {
+  const text = els.input.value.trim();
+  if (!text || !state.ready || state.generating) return;
+  els.input.value = "";
+  addMsg("user", text);
+  const maxNew = Math.max(1, Number(els.maxtok.value) || 200);
+  state.engine.reset();
+  let ids, stops = [];
+  if (state.model.chat) {
+    const built = buildChatIds(text, maxNew);
+    ids = built.ids;
+    stops = ["<|im_end|>"];
+  } else {
+    const built = buildQllamaPrompt(text);
+    ids = state.tokenizer.encode(built.text);
+    stops = built.stops;
+  }
+  if (ids.length >= state.engine.TMAX - 8) { addMsg("bot", "[プロンプトが長すぎます]"); return; }
+  await runGeneration(ids, stops, false, text);
+});
+els.contBtn.addEventListener("click", async () => {
+  if (!state.ready || state.generating || !state.lastIds) return;
+  const last = state.lastIds[state.lastIds.length - 1];
+  state.engine.pos = Math.max(0, state.engine.pos - 1);
+  await runGeneration([last], [], true, null);
+});
+els.stopBtn.addEventListener("click", () => { state.stopFlag = true; });
+els.resetChatBtn.addEventListener("click", () => {
+  state.history = [];
+  state.lastIds = null;
+  els.chat.innerHTML = "";
+  if (state.engine) state.engine.reset();
+});
+els.input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+    e.preventDefault();
+    els.sendBtn.click();
+  }
+});
+els.loadBtn.addEventListener("click", loadModelFlow);
+els.clearCacheBtn.addEventListener("click", async () => {
+  await opfsClear(cacheDirName(activeModel()));
+  setStatus("このモデルのキャッシュを削除しました");
+});
+
+if (!navigator.gpu) {
+  setError("このブラウザは WebGPU に対応していません。Chrome / Edge のデスクトップ最新版をお試しください。");
+  els.loadBtn.disabled = true;
+}
+
+// ---------- テストフック ----------
+window.__bonsai = {
+  ready: true,
+  state,
+  async initEngine() {
+    const engine = new Engine();
+    await engine.init();
+    state.engine = engine;
+    return true;
+  },
+  async loadModel() {
+    const model = activeModel();
+    state.model = model;
+    const cfg = await (await fetch(model.base + "config.json")).json();
+    state.cfg = cfg;
+    const { packed } = await packAll(model, (phase, a, b) => {
+      window.__loadProgress = `${phase} ${phase === "download" ? (a / 1e6).toFixed(0) + "MB/" + (b / 1e6).toFixed(0) + "MB" : a + "/" + b}`;
+    });
+    await state.engine.loadModel(model, cfg,
+      async (n) => {
+        const t = packed.get(n);
+        if (!t) throw new Error("missing " + n);
+        return t.data;
+      },
+      (n) => packed.has(n),
+      () => {});
+    return true;
+  },
+  async forwardTokens(ids) {
+    state.engine.reset();
+    let logits = null;
+    for (let i = 0; i < ids.length; i++) logits = await state.engine.forwardToken(ids[i], i === ids.length - 1);
+    return Array.from(logits);
+  },
+  async greedy(ids, n) {
+    state.engine.reset();
+    let logits = null;
+    for (let i = 0; i < ids.length; i++) logits = await state.engine.forwardToken(ids[i], i === ids.length - 1);
+    const out = [];
+    for (let s = 0; s < n; s++) {
+      let bi = 0;
+      for (let i = 1; i < logits.length; i++) if (logits[i] > logits[bi]) bi = i;
+      out.push(bi);
+      if (state.engine.pos >= state.engine.TMAX) break;
+      logits = await state.engine.forwardToken(bi, true);
+    }
+    return out;
+  },
+  async loadTokenizer(url, type) {
+    const tj = await (await fetch(url)).json();
+    state.tokenizer = type === "bl" ? new BLTokenizer(tj) : new SPTokenizer(tj);
+    return true;
+  },
+  encode: (t) => state.tokenizer.encode(t),
+  decode: (ids) => state.tokenizer.decode(ids),
+};
+</script>
+</body>
+</html>
