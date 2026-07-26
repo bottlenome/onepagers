@@ -45,7 +45,7 @@
           "title": "mono-anabelian 復元(π₁ から体/環を復元・実)",
           "weight": 14,
           "status": 0.61,
-          "note": "crt realization-mult + base-point-free torsor (audit +0.02→0.60)"
+          "note": "crt realization-mult + base-point-free torsor (audit +0.02→0.60) | q27cm(691行) が `q27cMu3Complete` を**完全に discharge** し μ₉/μ₂₇ 完全性が実 O_{M₂₇} 上で**無条件**化（q27c の正直限定 1 を削除でなく**証明で**解消・新ファイルで無条件形を export する正しいパターン）。監査は連鎖を端から端まで追跡し **conditional leak なし**（消費した q9c_m_mu3_complete/q9ci_cube*_raw/q27ci_*/q27ps_qnorm_one_add_three_unit はすべて各ファイルで無条件・q27cs シンボルは 0 使用＝「降下エンジン不要」の申告は真）、crux（a が無条件に単元）は非循環で q3kInv による本物の両側逆元、step6 は b²=0⟹b=0 を**使っておらず** reducedness 不要と確認。**それでも complete_pct は 0 前進**——本リポの precedent（level-9 の q9c/q9mt/q9mr はいずれも 0 前進で、level-9 キャンペーン全体は消費地点 q9mb で **一度だけ** A7 +0.07 として計上）に従い、ここで前払いすると来たるべき level-27 kill(q27mt/q27mr/q27mb) と**二重計上**になるため。加えて A6 の主語は π₁ からの体/環復元であり、本モジュールは π₁ も cyclotome も剛性も含まない実 p 進環の単数群捻れ算術。**未消費の基盤**として記録し、対価は q27mb 等が消費する時に一括計上する。(audit 0前進・0.61 据置)"
         },
         {
           "id": "A7",
