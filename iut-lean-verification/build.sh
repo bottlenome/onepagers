@@ -2897,6 +2897,10 @@ import IUT
 #print axioms IUT.tfc_fermat_relation
 #print axioms IUT.tfc_deck_faithful
 #print axioms IUT.tfc_full_descent
+#print axioms IUT.q9kh_H1_complete
+#print axioms IUT.q9kh_kummer_h1_iso
+#print axioms IUT.q9c3_cube_mod9
+#print axioms IUT.q9c3_rank_ge_three
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

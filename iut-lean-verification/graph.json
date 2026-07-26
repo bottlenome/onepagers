@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 703,
-  "verified_theorem_total": 2888,
-  "choice_free_count": 614,
+  "module_count": 705,
+  "verified_theorem_total": 2892,
+  "choice_free_count": 616,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8613,6 +8613,30 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TwoBreakHasseArfReal.lean"
     },
     {
+      "id": "Q3KummerH1Real",
+      "label": "Q3KummerH1Real",
+      "milestone": null,
+      "title": "Q3KummerH1Real",
+      "pillar": "B",
+      "decl_count": 29,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerH1Real.lean"
+    },
+    {
+      "id": "Q3CubeRankThree",
+      "label": "Q3CubeRankThree",
+      "milestone": null,
+      "title": "Q3CubeRankThree",
+      "pillar": "B",
+      "decl_count": 33,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CubeRankThree.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -10333,6 +10357,10 @@
     {
       "source": "GaloisCohomologyH1",
       "target": "Hilbert90"
+    },
+    {
+      "source": "GaloisCohomologyH1",
+      "target": "Q3KummerH1Real"
     },
     {
       "source": "GaloisCohomologyH1",
@@ -12080,6 +12108,10 @@
     },
     {
       "source": "Q3CubeQuotientReal",
+      "target": "Q3CubeRankThree"
+    },
+    {
+      "source": "Q3CubeQuotientReal",
       "target": "Q3ThetaKummerRealL9"
     },
     {
@@ -12173,6 +12205,10 @@
     {
       "source": "Q3KummerDualityReal",
       "target": "Q3CubeQuotientReal"
+    },
+    {
+      "source": "Q3KummerDualityReal",
+      "target": "Q3KummerH1Real"
     },
     {
       "source": "Q3KummerDualityReal",
@@ -12457,6 +12493,10 @@
     {
       "source": "Q3RatEmbed",
       "target": "Q3RatFieldEmbed"
+    },
+    {
+      "source": "Q3ReciprocityCokernelReal",
+      "target": "Q3CubeRankThree"
     },
     {
       "source": "Q3ReciprocityCokernelReal",
