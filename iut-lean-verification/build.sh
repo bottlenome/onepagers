@@ -2882,6 +2882,12 @@ import IUT
 #print axioms IUT.ttc_composite_descent
 #print axioms IUT.ttc_deck_faithful
 #print axioms IUT.ttc_f2_deck_surjective
+#print axioms IUT.q9ng_outer_theta_cyclotome
+#print axioms IUT.q9ng_symplectic_galois
+#print axioms IUT.q9ng_chi_twist
+#print axioms IUT.q9tk_class_nontrivial
+#print axioms IUT.q9tk_cocycle_cond
+#print axioms IUT.q9tk_kappa_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

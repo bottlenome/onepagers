@@ -701,4 +701,6 @@ import IUT.Q3KummerNonicRegular
 import IUT.Q3Mu27Completeness
 import IUT.Q3Discriminant
 import IUT.TripodTwinCover
+import IUT.Q3TemperedThetaGaloisL9
+import IUT.Q3ThetaKummerRealL9
 import IUT.TripodKummerMu3

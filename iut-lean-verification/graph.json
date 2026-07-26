@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 698,
-  "verified_theorem_total": 2873,
-  "choice_free_count": 609,
+  "module_count": 700,
+  "verified_theorem_total": 2879,
+  "choice_free_count": 611,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8565,6 +8565,30 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodTwinCover.lean"
     },
     {
+      "id": "Q3TemperedThetaGaloisL9",
+      "label": "Q3TemperedThetaGaloisL9",
+      "milestone": null,
+      "title": "Q3TemperedThetaGaloisL9",
+      "pillar": "A",
+      "decl_count": 49,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TemperedThetaGaloisL9.lean"
+    },
+    {
+      "id": "Q3ThetaKummerRealL9",
+      "label": "Q3ThetaKummerRealL9",
+      "milestone": null,
+      "title": "Q3ThetaKummerRealL9",
+      "pillar": "E",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ThetaKummerRealL9.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -12009,6 +12033,10 @@
       "target": "Q3ReciprocityIndexReal"
     },
     {
+      "source": "Q3CubeQuotientReal",
+      "target": "Q3ThetaKummerRealL9"
+    },
+    {
       "source": "Q3DifferentIdeal",
       "target": "Q3Codifferent"
     },
@@ -12023,6 +12051,10 @@
     {
       "source": "Q3Etale9TwoDir",
       "target": "Q3EtaleArithPi1"
+    },
+    {
+      "source": "Q3Etale9TwoDir",
+      "target": "Q3TemperedThetaGaloisL9"
     },
     {
       "source": "Q3EtaleArithPi1",
@@ -12095,6 +12127,10 @@
     {
       "source": "Q3KummerDualityReal",
       "target": "Q3ReciprocityGalReal"
+    },
+    {
+      "source": "Q3KummerDualityReal",
+      "target": "Q3TemperedThetaGaloisL9"
     },
     {
       "source": "Q3KummerNonic",
@@ -12273,8 +12309,16 @@
       "target": "Q3TemperedThetaClassL9"
     },
     {
+      "source": "Q3Mu9ThetaGroup",
+      "target": "Q3ThetaKummerRealL9"
+    },
+    {
       "source": "Q3Mu9TmzBridge",
       "target": "CyclotomeRecoveryThetaKill"
+    },
+    {
+      "source": "Q3Mu9TmzBridge",
+      "target": "Q3TemperedThetaGaloisL9"
     },
     {
       "source": "Q3NormFiltrationSpike",
@@ -12507,6 +12551,10 @@
     {
       "source": "Q3TemperedThetaClass",
       "target": "Q3TemperedThetaClassL9"
+    },
+    {
+      "source": "Q3TemperedThetaClassL9",
+      "target": "Q3TemperedThetaGaloisL9"
     },
     {
       "source": "Q3ThetaGroup",
@@ -13727,6 +13775,10 @@
     {
       "source": "ThetaKummerClass",
       "target": "LogKummerMonoTheta"
+    },
+    {
+      "source": "ThetaKummerClass",
+      "target": "Q3ThetaKummerRealL9"
     },
     {
       "source": "ThetaKummerClass",
