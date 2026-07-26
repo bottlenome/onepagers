@@ -2888,6 +2888,9 @@ import IUT
 #print axioms IUT.q9tk_class_nontrivial
 #print axioms IUT.q9tk_cocycle_cond
 #print axioms IUT.q9tk_kappa_unique
+#print axioms IUT.aml_norm_prod_section
+#print axioms IUT.aml_deg_section_indep
+#print axioms IUT.aml_deg_twist
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

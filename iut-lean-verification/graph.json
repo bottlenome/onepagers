@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 700,
-  "verified_theorem_total": 2879,
-  "choice_free_count": 611,
+  "module_count": 701,
+  "verified_theorem_total": 2882,
+  "choice_free_count": 612,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8589,6 +8589,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ThetaKummerRealL9.lean"
     },
     {
+      "id": "ArakelovMetrizedLineQ",
+      "label": "ArakelovMetrizedLineQ",
+      "milestone": "M474F",
+      "title": "ArakelovMetrizedLineQ",
+      "pillar": "C",
+      "decl_count": 43,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovMetrizedLineQ.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -8775,6 +8787,10 @@
     {
       "source": "ArtinConductor",
       "target": "ConductorDiscriminant"
+    },
+    {
+      "source": "B5ProductFormulaQ",
+      "target": "ArakelovMetrizedLineQ"
     },
     {
       "source": "BelyiCubicReal",

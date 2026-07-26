@@ -703,4 +703,5 @@ import IUT.Q3Discriminant
 import IUT.TripodTwinCover
 import IUT.Q3TemperedThetaGaloisL9
 import IUT.Q3ThetaKummerRealL9
+import IUT.ArakelovMetrizedLineQ
 import IUT.TripodKummerMu3
