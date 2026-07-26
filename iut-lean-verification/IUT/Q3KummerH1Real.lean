@@ -113,8 +113,13 @@ def q9khActHom (g : q9kdGCar) : Hom q9kdMu3 q9kdMu3 where
     | s2 => exact q3k_sigma2_mul a.val b.val
 
 /-- **K1-k1（★）`q9khModule`**: 実 Gal(M/L₂)=⟨σ⟩-加群 μ₃(O_M)。
-    M326F `galH1Module` の**初の実 instantiate**（作用は実環自己同型 σ の制限であり、
-    定義上自明な `galH1TrivialModule` ではない）。 -/
+    M326F `galH1Module` の実 instantiate（作用は実環自己同型 σ の制限であり、
+    定義上自明な `galH1TrivialModule` ではない）。
+    ★**正直な訂正（独立敵対監査 2026-07-21）**: 「**初の**実 instantiate」は**誤り**
+    （本ファイル自身の正直限定 8 と矛盾していた）。`Q3ThetaKummerRealL9` の
+    `q9tkModule` が先行し、しかも `q9tkModule = q9khModule` が **rfl** で成立する。
+    E4 監査の裁定により、この実 instantiate の計上先は **B6（本項）に一度だけ**であり
+    E4 ではない——ただし「初」ではない。 -/
 def q9khModule : galH1Module q9kdG where
   M := q9kdMu3
   comm := q9kh_mu3_comm
