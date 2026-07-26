@@ -37,8 +37,8 @@
           "id": "A5",
           "title": "実 tempered π₁^temp",
           "weight": 10,
-          "status": 0.27,
-          "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23) | q3tpd(N1) tempered π₁ étale image dense+proper + q9nt(N2) wild level-9 tempered theta realization・χ-twist visible(Z₉⁻¹≠Z₉・mod-9 primitive root) (audit combined +0.04→0.27)"
+          "status": 0.28,
+          "note": "q3tpEtComp π₁^temp⊊π₁^ét comparison (audit +0.03→0.23) | q3tpd(N1) tempered π₁ étale image dense+proper + q9nt(N2) wild level-9 tempered theta realization・χ-twist visible(Z₉⁻¹≠Z₉・mod-9 primitive root) (audit combined +0.04→0.27) | q9ng(N3) 実 Galois 作用 σ₉ を A5 実現側へ（σ₉³=id・全単射）+χ₉(σ)=4 を theta cyclotome 上で実現+symplectic Galois 同変+半直積 q9mtM⋊Gal(M/L₂) 完全列+outer-Galois headline+honest core σ₉(X)=uδ·X（exact 形・実 wild 単数 u₆ 消費）。設計 8 段全閉。監査 report-only 0.28（adversarial floor・理由: 約40%が q3ap クローン=A4 で計上済・新イディオム 0・σ₉ は σU の成分押し出し・headline から Ψ₉ が消去可能で temperedness は継承文脈であり証明の担い手でない・A5 の真のボトルネック=Berkovich/rigid 定義 は不変）(audit +0.01→0.28)"
         },
         {
           "id": "A6",

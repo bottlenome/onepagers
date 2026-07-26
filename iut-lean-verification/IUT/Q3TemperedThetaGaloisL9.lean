@@ -7,8 +7,15 @@
      昇格させる。作用の担体は実 M^×=q9tlMx=ℤ(v_π)×U₃ の実単数群化 σU=`q9mbSigmaU`
      （ノルム保存で well-defined・`q9mb_sigmaU_zeta`: σU(ζ₉U)=ζ₉U⁴）であり、
      Bool 軌道・surrogate 群・m202fVol 型 toy は一切主語にしない。
-     旗艦の主語はすべて **実 tempered テータ実現 Φ₉/Ψ₉**（`q9ntPhi`/`q9ntPsi`）の像であり、
-     Φ₉/Ψ₉ を消去すると命題が消滅する。）
+     旗艦の主語は **実 tempered テータ実現 Φ₉/Ψ₉**（`q9ntPhi`/`q9ntPsi`）の像である。
+     ただし「Φ₉/Ψ₉ を消去すると命題が消滅する」のは **deck 方向の命題**
+     （`q9ng_deck_theta_galois`・`q9ng_sigma9_deck`・`q9ng_sigma9_X`）に限る——
+     **正直な訂正（独立監査 2026-07-21 指摘）**: headline `q9ng_outer_theta_cyclotome` は
+     本ファイル自身の `q9ng_psi_cyc1`/`q9ng_psi_cyc4` により Ψ₉ が **消去可能**で、実質は
+     `Z₉ ∈ q9mtM` の ι-共役であり、flagship `q9ng_symplectic_galois` は `thetaGrp.carrier`
+     上の量化で deck 内容を持たない。さらに deck 方向 3 命題の証明も **ℤ の離散性を使わず**、
+     pro-3 deck でもそのまま通る。よって temperedness は本ファイルでは
+     **継承された文脈であって証明の担い手ではない**。当初ヘッダの全旗艦一括主張は誤りだった。）
 
   complete_pct 影響: **A5 N3（s_A5 0.27 → 予測 +0.02〜+0.03・独立敵対監査確定が条件）**。
      質的新規 3 点:
