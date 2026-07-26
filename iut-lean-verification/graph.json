@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 705,
-  "verified_theorem_total": 2892,
-  "choice_free_count": 616,
+  "module_count": 706,
+  "verified_theorem_total": 2895,
+  "choice_free_count": 617,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8637,6 +8637,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CubeRankThree.lean"
     },
     {
+      "id": "Q3Mu27Mu3Kernel",
+      "label": "Q3Mu27Mu3Kernel",
+      "milestone": null,
+      "title": "Q3Mu27Mu3Kernel",
+      "pillar": "A",
+      "decl_count": 32,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu27Mu3Kernel.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -12231,6 +12243,10 @@
       "target": "Q3Mu27Completeness"
     },
     {
+      "source": "Q3KummerNonicRegular",
+      "target": "Q3Mu27Mu3Kernel"
+    },
+    {
       "source": "Q3KummerNonicSplit",
       "target": "Q3KummerNonicRegular"
     },
@@ -12313,6 +12329,10 @@
     {
       "source": "Q3MonoThetaRigidity",
       "target": "Q3Mu3Rigidity"
+    },
+    {
+      "source": "Q3Mu27Completeness",
+      "target": "Q3Mu27Mu3Kernel"
     },
     {
       "source": "Q3Mu27DescentSpike",

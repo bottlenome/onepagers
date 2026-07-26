@@ -2901,6 +2901,9 @@ import IUT
 #print axioms IUT.q9kh_kummer_h1_iso
 #print axioms IUT.q9c3_cube_mod9
 #print axioms IUT.q9c3_rank_ge_three
+#print axioms IUT.q27cm_mu3_complete
+#print axioms IUT.q27cm_mu9_complete
+#print axioms IUT.q27cm_mu27_complete
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

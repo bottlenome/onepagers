@@ -707,5 +707,6 @@ import IUT.ArakelovMetrizedLineQ
 import IUT.Q3TwoBreakHasseArfReal
 import IUT.Q3KummerH1Real
 import IUT.Q3CubeRankThree
+import IUT.Q3Mu27Mu3Kernel
 import IUT.TripodFermatCover
 import IUT.TripodKummerMu3
