@@ -2891,6 +2891,12 @@ import IUT
 #print axioms IUT.aml_norm_prod_section
 #print axioms IUT.aml_deg_section_indep
 #print axioms IUT.aml_deg_twist
+#print axioms IUT.q27tb_tau_pi_eq
+#print axioms IUT.q27tb_G9_trivial_tau
+#print axioms IUT.q27tb_two_distinct_breaks
+#print axioms IUT.tfc_fermat_relation
+#print axioms IUT.tfc_deck_faithful
+#print axioms IUT.tfc_full_descent
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

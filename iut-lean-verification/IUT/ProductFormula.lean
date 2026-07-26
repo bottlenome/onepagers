@@ -1,10 +1,39 @@
 /-
-  IUT/ProductFormula.lean — M351F [実／本物]
-  分類: 実 (大域 log-volume・積公式 Σ_v log|x|_v=0)
-  complete_pct 影響: 柱C を前進（M341F p 進・M346F アルキメデス log-volume を大域 deg_ℝ(x)=
-    Σ_v log|x|_v へ束ね、積公式 Σ_v log|x|_v=0（∏_v|x|_v=1）＝Arakelov「次数0」を本物で
-    （K=ℚ）。主因子の次数=0＝deg_ℝ の well-defined 性）。
-  正直な限定: K=ℚ。一般数体は完全な素点理論を要し後続。
+  IUT/ProductFormula.lean — M351F [**模型**（当初 [実／本物] と誤記・下記訂正参照）]
+  分類: 模型 (自由重みベクトル上の形式的相殺。**実の積公式ではない**)
+
+  ══════════════════════════════════════════════════════════════════════
+  ★★ 正直な訂正（独立敵対監査 2026-07-21 で確認・§4 に従い削除も弱化もしない）★★
+
+  本モジュールの `pf_product_formula` は **循環的であり、実の積公式ではない**。
+  当初ヘッダの「積公式 … を本物で」「主因子の次数=0」という主張は **撤回する**。
+
+  確認された事実:
+   1. `pfRational` は ℚˣ の **模型**——`structure pfRational where sign : Bool; fin : RawDiv`
+      であり、有理数はどこにも存在しない。「ℚˣ の元」が **それ自身の付値ベクトル**である。
+      `QRat`/`ratRing` は一切使われない。
+   2. `logp : Nat → RReal` は **仮説ゼロの自由パラメータ**。`logp k` が第 k 素数の対数で
+      あることも、正であることさえも、どこにも課されていない。
+   3. **循環の核心**: 「log|x|_∞」は独立に定義されず、`pfArchDeg logp x := logVolGlobal logp x.fin`
+      すなわち **有限部と同じ付値ベクトルから定義**されている。ゆえに
+      `pf_product_formula` は実質 `v + (−v) = 0`——自由 ℤ 加群の元を任意の重みベクトルと
+      対にしただけの恒等式であり、**`logp := fun _ => realZero` でも `logp p = 42` でも
+      そのまま成立する**。素数性もアルキメデス絶対値も一切使われていない。
+   4. 計量付き直線束オブジェクトは存在せず、因子群のみ（`ardRaw = RawDiv × RReal`）。
+
+  下流への波及（同じ恒等式を内包する）: `ard_principal_degree_zero`(M356F)・
+  `ardPrincipalRaw`・`QuadraticProductFormula`(M366F・ℚ(√d) を本定理へ帰着させるため
+  「一般数体の忠実な部分ケース」主張は循環を継承)・`FrobArakelovBridge`(M361F)。
+
+  **台帳への影響なし**: B5=0.50 は循環でない実モジュール `B5ProductFormulaQ`
+  （実 ℚ・実 `arpAbs`/`pavAbs` 上の真の ∏_v|x|_v=1）に対して付与されており、C3 は元々 0。
+  よって減点（clawback）は不要で、これは **散文と限定の訂正**である。
+  実の積公式が要る場合は `IUT/B5ProductFormulaQ.lean` を使うこと。実 Arakelov 計量付き
+  直線束は `IUT/ArakelovMetrizedLineQ.lean`（実 ℚ・実 b5 消費・本モジュール非依存）。
+  ══════════════════════════════════════════════════════════════════════
+
+  正直な限定: K=ℚ。一般数体は完全な素点理論を要し後続。加えて上記のとおり
+    本モジュールの「積公式」は自由重み上の形式的相殺であって実の積公式ではない。
 -/
 import IUT.ArchHaarVolume
 import IUT.LogVolumeArch

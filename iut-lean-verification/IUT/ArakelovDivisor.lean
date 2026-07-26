@@ -5,6 +5,17 @@
     D̂ へ束ね、実次数 deg:D̂→ℝ（加法準同型）・主 Arakelov 因子の deg=0（M351F 積公式）＝
     Arakelov Picard 群上で deg が well-defined、を本物で）。
   正直な限定: K=ℚ（模型）・一般数体/コンパクト性込みの完全 Arakelov Pic は後続。
+
+  ★ 追加の正直な限定（独立敵対監査 2026-07-21・§4 に従い削除しない）:
+    本モジュールが消費する M351F `pf_product_formula` は **循環的**である
+    （「log|x|_∞」が有限部と同じ付値ベクトルから定義され、`logp` は仮説ゼロの自由
+     パラメータ。詳細は `IUT/ProductFormula.lean` ヘッダの訂正ブロック参照）。
+    したがって `ard_principal_degree_zero` および `ardPrincipalRaw` の
+    「主 Arakelov 因子の deg=0」は **実の積公式の帰結ではなく**、自由重みベクトル上の
+    形式的恒等式 v+(−v)=0 を継承したものである。ヘッダ冒頭の [実／本物] 分類は
+    この点において過大であり、本注記をもって訂正する。
+    実の積公式は `IUT/B5ProductFormulaQ.lean`、実の計量付き直線束は
+    `IUT/ArakelovMetrizedLineQ.lean`（本モジュール非依存）にある。
 -/
 import IUT.ProductFormula
 

@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 701,
-  "verified_theorem_total": 2882,
-  "choice_free_count": 612,
+  "module_count": 703,
+  "verified_theorem_total": 2888,
+  "choice_free_count": 614,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8601,6 +8601,32 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovMetrizedLineQ.lean"
     },
     {
+      "id": "Q3TwoBreakHasseArfReal",
+      "label": "Q3TwoBreakHasseArfReal",
+      "milestone": null,
+      "title": "Q3TwoBreakHasseArfReal",
+      "pillar": "B",
+      "decl_count": 85,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TwoBreakHasseArfReal.lean"
+    },
+    {
+      "id": "TripodFermatCover",
+      "label": "TripodFermatCover",
+      "milestone": null,
+      "title": "TripodFermatCover",
+      "pillar": "A",
+      "decl_count": 57,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[GenEll]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodFermatCover.lean"
+    },
+    {
       "id": "TripodKummerMu3",
       "label": "TripodKummerMu3",
       "milestone": null,
@@ -9503,6 +9529,10 @@
     {
       "source": "EisTowerRings",
       "target": "TowerTorsion"
+    },
+    {
+      "source": "EisTowerRings",
+      "target": "TripodFermatCover"
     },
     {
       "source": "EisensteinConjugates",
@@ -12085,6 +12115,10 @@
       "target": "Q3NormSurjGraded"
     },
     {
+      "source": "Q3HasseArfIntegral",
+      "target": "Q3TwoBreakHasseArfReal"
+    },
+    {
       "source": "Q3HasseArfReal",
       "target": "Q3HerbrandReal"
     },
@@ -12167,6 +12201,10 @@
     {
       "source": "Q3KummerNonicSplit",
       "target": "Q3TateCurveL27"
+    },
+    {
+      "source": "Q3KummerNonicSplit",
+      "target": "Q3TwoBreakHasseArfReal"
     },
     {
       "source": "Q3KummerPiSplit",
@@ -12479,6 +12517,10 @@
     {
       "source": "Q3TateCurveL2",
       "target": "Q3TateCurveL9"
+    },
+    {
+      "source": "Q3TateCurveL27",
+      "target": "Q3TwoBreakHasseArfReal"
     },
     {
       "source": "Q3TateCurveL9",
@@ -13421,6 +13463,10 @@
       "target": "RootAdjunction"
     },
     {
+      "source": "SimpleExtension",
+      "target": "TripodFermatCover"
+    },
+    {
       "source": "Skeleton",
       "target": "Diophantine"
     },
@@ -14087,6 +14133,10 @@
     {
       "source": "TripodRealizationBundle",
       "target": "TripodTwinCover"
+    },
+    {
+      "source": "TripodTwinCover",
+      "target": "TripodFermatCover"
     },
     {
       "source": "UnitDecomposition",

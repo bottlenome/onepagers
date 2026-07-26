@@ -14,9 +14,28 @@
      インスタンス）で**非自明**、3 乗ノルム Θ³ = ζ₃ ∈ L₂ の類は実立方剰余群
      L₂^×/(L₂^×)³ で**非立方**（q9cq 消費）。q9kd の正直な限定 1「一般 H¹ 形式論
      （galH1Module）への接続なし」という named gap を、μ₃(O_M) を係数加群に取ることで
-     初めて閉じる。toy 主語なし（m202fVol 型・Bool 軌道・surrogate 群を一切使わない）。
+     閉じる。toy 主語なし（m202fVol 型・Bool 軌道・surrogate 群を一切使わない）。
 
-  complete_pct 影響: **E4 0.00 →（監査次第・予測 0.10–0.20）— E4 初の実モジュール**。
+  ── **正直な訂正（独立敵対監査 2026-07-21・最重要）** ──────────────────────
+  当初ヘッダの「初めて」主張は **誤り**であり撤回する。監査が rfl で確認した事実:
+   * `q9tkTheta = q3kZeta9` — すなわち **Θ は文字通り ζ₉**。theta 群の元 g_{[ζ₉]} は
+     q 部自明・指数 0 ゆえ、中心化条件 qᵃw⁹=1 は a=0 で ζ₉⁹=1 に退化し、theta 群は
+     「ζ₉ ∈ μ₉」を超える制約を **一切課さない**。
+   * `q9tkModule = q9khModule`（並行 B6 モジュール `Q3KummerH1Real` と **定義的に同一**）、
+     `q9tkKappa = q9kdChiMap`、`q9tkClass = q9khDelta.map …`、旗艦 Kummer 関係式は
+     `q9kd_cocycle` そのもの。よって「H¹ 機構を初めて実対象で駆動」「q9kd の named gap を
+     初めて閉じる」はいずれも **偽**（q9kh が同一内容を持つ）。
+   * `q9tk_class_nontrivial` は真だが新規でない（`q9kh_delta_inj` の ≠ 半分・q9kh は
+     H¹ 全体を計算しており本モジュールより **強い**）。
+  本モジュールの真水は cancellation による乗数一意性・導出版 crossed-hom・torsor 不変性
+  の小補題数本のみで、**すべて generic Kummer**（theta 固有の内容はゼロ）。E4 の主語である
+  Θ^{2l}=q^{j²}（theta pilot vs q pilot の非対称性）は不在——ここでは Θ³=ζ₃ と
+  **単数**に落ち、q 側は `q9tk_q_cocycle_trivial` すなわち **自明**コサイクルである。
+  ─────────────────────────────────────────────────
+
+  complete_pct 影響: **E4 0.00 → 0.03（独立敵対監査確定・+0.03）**。当初予測 0.10–0.20 は
+  上記の二重計上により棄却された。実 galH1Module インスタンスは **一度だけ**計上され、
+  帰属は **B6**（generic Kummer）であって E4 ではない。
   新規（真水）は
    (1) Θ の「テータ群からの抽出」packaging（q9mt 所属・付値 0・μ₉ 完全性消費の三点で
        Θ が実テータ群データであることを固定）、
@@ -24,7 +43,8 @@
        キャンセル・q9kd は σ(ζ₉) の閉形式のみでコサイクル一意性を持たない）、
    (3) 実ガロア作用上の crossed-homomorphism 条件の**導出**（case-bash でなく
        σ の乗法性からの本物の導出）と μ₃-トーサー不変性（Θ↦ζΘ でコサイクル不変）、
-   (4) **実 galH1Module インスタンス**（M326F/M353F の H¹ 機構を初めて実対象で駆動）:
+   (4) 実 galH1Module インスタンス（M326F/M353F の H¹ 機構を実対象で駆動。**訂正: 「初めて」
+       ではない**——`q9tkModule = q9khModule` が rfl で成立し B6 の q9kh と同一内容）:
        B¹ = 0（σ が μ₃ を点別固定）と **[κ_Θ] ≠ 0 ∈ H¹(Gal(M/L₂), μ₃(O_M))**、
    (5) 立方ノルム Θ³ = ζ₃（ガロア固定・M353F-2 の実版）と実立方剰余群への着地
        （[Θ³] = [ζ₃] は非立方・[λ] と独立 = q9cq 消費）、実 Kummer 双対との同定
@@ -50,9 +70,12 @@
   4. q3k/q9kd/q9cq/q9mt の恒久限定を継承: O_M と単数群のみ（体化なし）・群提示の
      K-point の影・σ-only Galois（副有限化なし）・実テータ関数ゼロ・π₁ 同定ゼロ・
      q=3⁹ は忠実部分ケースの 2 乗・tmzLimit 比較橋なし。
-  5. **二重計上の firewall**: 上記консの既存定理は消費のみ（再証明 0 本）。本モジュールの
-     旗艦（q9tk_kummer_eq の一意性・q9tk_cocycle_cond・q9tk_class_nontrivial・
-     q9tk_torsor_invariance）は κ_Θ/q9tkModule を主語に持ち、これらを消すと命題が消滅する。
+  5. **二重計上（当初「firewall」主張は撤回）**: 既存定理は消費のみ（再証明 0 本）だが、
+     当初ここに書いた「旗艦は κ_Θ/q9tkModule を主語に持ち、これらを消すと命題が消滅する」
+     という firewall 主張は **実質的に誤導**であった。監査の指摘どおり κ_Θ = χ および
+     q9tkModule = q9khModule は **定義的同一**であり、旗艦は B6 対象を消しても生き残る
+     どころか **B6 対象そのもの**である（q9kh は import も消費宣言もしていないのに rfl 同値）。
+     したがって本モジュールは E4 としては **near-pure 二重計上**であり、監査は 0.03 を付けた。
 
   全て選択公理不使用（新規 Classical.choice を証明本体に導入しない・sorry 皆無）。
   #print axioms は [propext, Quot.sound] のみ。禁止タクティク不使用。
@@ -142,8 +165,9 @@ theorem q9tk_kappa_s_ne_one : (q9tkKappa q9kdGCar.s).val ≠ q3kOne := q9kd_z_ne
 
 /-- **q9tk-2c（★★ 旗艦）: 実 Kummer 関係式** σ_g(Θ) = κ_Θ(g)·Θ — 実環 O_M の等式。
     e: Θ = 1·Θ、s: σ(ζ₉) = ζ₃·ζ₉（`q9kd_cocycle` 消費）、s2: σ²(ζ₉) = ζ₃²·ζ₉
-    （`q9kd_cocycle2` 消費）。M353F の形式的 κ_Θ = `galH1Coboundary A Θ` が初めて
-    実 p 進対象の等式になる。 -/
+    （`q9kd_cocycle2` 消費）。M353F の形式的 κ_Θ = `galH1Coboundary A Θ` が
+    実 p 進対象の等式になる。**訂正（監査）**: Θ = ζ₉ ゆえ本式は `q9kd_cocycle`
+    そのものであり、theta 固有の新規内容ではない。 -/
 theorem q9tk_kummer_eq (g : q9kdGCar) :
     q9kdAct g q9tkTheta = q3kMul (q9tkKappa g).val q9tkTheta := by
   cases g with
@@ -215,7 +239,9 @@ def q9tkActHom (g : q9kdGCar) : Hom q9kdMu3 q9kdMu3 where
 
 /-- **q9tk-4b（★）: 実 G-加群** — M326F `galH1Module` の**実インスタンス**:
     G = 実 Gal(M/L₂) = ⟨σ⟩、M = 実 μ₃(O_M)、作用 = 実環自己同型 σ_g の制限。
-    q9kd 正直限定 1 の named gap「一般 H¹ 形式論への接続なし」を初めて閉じる。 -/
+    q9kd 正直限定 1 の named gap「一般 H¹ 形式論への接続なし」を閉じる。
+    **訂正（監査）**: 「初めて」ではない——`q9tkModule = q9khModule`（B6 の
+    `Q3KummerH1Real`）が rfl で成立。本インスタンスの計上先は B6 であって E4 ではない。 -/
 def q9tkModule : galH1Module q9kdG where
   M := q9kdMu3
   comm := fun a b => Subtype.ext (q3k_mul_comm a.val b.val)

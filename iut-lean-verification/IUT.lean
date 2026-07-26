@@ -704,4 +704,6 @@ import IUT.TripodTwinCover
 import IUT.Q3TemperedThetaGaloisL9
 import IUT.Q3ThetaKummerRealL9
 import IUT.ArakelovMetrizedLineQ
+import IUT.Q3TwoBreakHasseArfReal
+import IUT.TripodFermatCover
 import IUT.TripodKummerMu3

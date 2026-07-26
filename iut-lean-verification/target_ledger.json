@@ -134,7 +134,8 @@
           "id": "C3",
           "title": "実 Arakelov(実計量付き直線束・実算術次数)",
           "weight": 20,
-          "status": 0
+          "status": 0.05,
+          "note": "aml 実 ℚ 上の初の計量付き直線束（格子閉性・計量の斉次性/非負/正定値・テンソル乗法的かつ同型不変な次数）を実 b5_product_formula の上に建設（循環的 M351F 機構は import 閉包に一切含まれないことを監査が確認）。監査 0.05（forecast 下端）: headline §5 は B5 に定数を掛けたものでarithmetic 新規性ゼロ・格子は degree 理論が使わない Prop 述語・次数は (ℚ>0,×) で計量スケールも ℚ 限定ゆえ実 Arakelov 計量と Cor3.12 の不等式を表現できない。(audit +0.05→0.05)"
         },
         {
           "id": "C4",
@@ -235,7 +236,8 @@
           "id": "E4",
           "title": "実 theta の Kummer 理論",
           "weight": 16,
-          "status": 0
+          "status": 0.03,
+          "note": "q9tk 実 theta Kummer を試みたが監査で **near-pure 二重計上**と判明: Θ = ζ₉ が rfl で成立（theta 群は ζ₉∈μ₉ を超える制約を課さない）・q9tkModule = q9khModule(B6) / q9tkKappa = q9kdChiMap / 旗艦 Kummer 関係式 = q9kd_cocycle がいずれも rfl 同値。真水は cancellation 乗数一意性・導出版 crossed-hom・torsor 不変性の小補題のみで全て generic Kummer。E4 の主語 Θ^{2l}=q^{j²}（theta pilot vs q pilot 非対称）は不在で q 側は自明コサイクル。ヘッダの「初めて」主張 2 件は偽と確認され訂正済。実 galH1Module の計上先は B6（一度だけ）。(audit +0.03→0.03)"
         },
         {
           "id": "E5",
