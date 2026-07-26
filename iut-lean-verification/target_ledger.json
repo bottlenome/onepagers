@@ -65,8 +65,8 @@
           "id": "A9",
           "title": "Belyi 化 / 遠アーベル幾何入力(実)",
           "weight": 10,
-          "status": 0.18,
-          "note": " | kmu(BLW-2) tripod ℤ/3×ℤ/3 商を実 Kummer 被覆 u³=t,v³=1−t/ℚ(ζ₃) の実デッキ群 μ₃×μ₃ として実現・分岐 locus {0,1,∞} 実算出・faithful deck order-9。F₂(BLW-1)未・bundle 不完全ゆえ ladder floor (audit +0.02→0.14) | BLW-1 tfg(実 F₂・reduced words・assoc/faithful/universal)+BLW-4 trb(実現 hom F₂↠(ℤ/3)²・a↦(ζ,1)/b↦(1,ζ)・kernel=commutator+cubes)で bundle 完成 (audit +0.03→0.17) | ttc(BLW-3) 単一 twin-cover 環 K[u,v]（u,v,t=u³,1−v³ を1環に統合）+ 合成デッキを環自己同型 ttcSigma:RingHom・ttcDeck:GAction μ₃×μ₃・単一環 faithful ttc_deck_faithful・全群2変数 Kummer 降下 ttc_composite_descent(∀μ₃×μ₃ fixed⟺supp⊆3ℕ×3ℕ)・F₂ 全射 ttc_f2_deck_surjective。監査 report-only 0.18 決定（新規実対象だが fiber-product/Fermat cubic u³+v³=1 は named gap・F₂ tie は trb 転用）(audit +0.01→0.18)"
+          "status": 0.2,
+          "note": "kmu(BLW-2) tripod ℤ/3×ℤ/3 商を実 Kummer 被覆 u³=t,v³=1−t/ℚ(ζ₃) の実デッキ群 μ₃×μ₃ として実現・分岐 locus {0,1,∞} 実算出・faithful deck order-9。F₂(BLW-1)未・bundle 不完全ゆえ ladder floor (audit +0.02→0.14) | BLW-1 tfg(実 F₂・reduced words・assoc/faithful/universal)+BLW-4 trb(実現 hom F₂↠(ℤ/3)²・a↦(ζ,1)/b↦(1,ζ)・kernel=commutator+cubes)で bundle 完成 (audit +0.03→0.17) | ttc(BLW-3) 単一 twin-cover 環 K[u,v]（u,v,t=u³,1−v³ を1環に統合）+ 合成デッキを環自己同型 ttcSigma:RingHom・ttcDeck:GAction μ₃×μ₃・単一環 faithful ttc_deck_faithful・全群2変数 Kummer 降下 ttc_composite_descent(∀μ₃×μ₃ fixed⟺supp⊆3ℕ×3ℕ)・F₂ 全射 ttc_f2_deck_surjective。監査 report-only 0.18 決定（新規実対象だが fiber-product/Fermat cubic u³+v³=1 は named gap・F₂ tie は trb 転用）(audit +0.01→0.18) | tfc 本物の商環 K[u,v]/(u³+v³−1) を quotCRing で構成し ttc の named gap を **環レベルで**閉じる。非自明性が真に証明済（monic cubic 除算＋w_i=w_{i+3}(1−v³) 再帰の有限台消滅で u次数≤2 正規形の存在と一意性＝K[v] 上自由階数3）。デッキは関係不変性 g³=h³=1 から商へ降下し faithful も存続。[t]=[1−v³] が同一 tfcT について成立ゆえ対象は真に K[u]⊗_{K[t]}K[v]（A² の被覆でない）。監査 0.20: 証明エンジン約250行は既存の一般補題（poly_division_exists/poly_division_unique/poly_mul_g_bounded_zero）の再インスタンス化で新規数学でない・連結性/整数性/scheme/分岐 locus 定理は未達（「連結」tripod 被覆は未確立・分岐や t-線上 degree 9 の定理は本ファイルに無い）・π₁ 核は 0 のまま（A9 cap ≈0.35）。(audit +0.02→0.20)"
         }
       ]
     },
@@ -98,8 +98,8 @@
           "id": "B4",
           "title": "実 Hasse–Arf(実 Galois 群上)",
           "weight": 15,
-          "status": 0.14,
-          "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13) | q9hi Hasse-Arf 積分整数性の理由（|G₀|∣Σ|G_i|=3∣6・φ(2)=2∈ℤ・実 π₉ jump に束縛）——ただし t₀=2 は φ 恒等域で退化的（audit +0.01→0.14）"
+          "status": 0.17,
+          "note": "q9hb Herbrand φ inverse+σ² upper+Hasse-Arf ℤ/3 instance (audit +0.03→0.13) | q9hi Hasse-Arf 積分整数性の理由（|G₀|∣Σ|G_i|=3∣6・φ(2)=2∈ℤ・実 π₉ jump に束縛）——ただし t₀=2 は φ 恒等域で退化的（audit +0.01→0.14） | q27tb level-27 段の実 break t′=8 を sharp に証明（τ(π₂₇)−π₂₇=π₂₇⁹·u₂₇ ∧ ¬π₂₇¹⁰∣・実ノルム機構 N(π₂₇)=π₉ 等すべて証明済・非循環）。**ただし監査判定は TWO STAGE-WISE FACTS**: q27tb_two_distinct_breaks は σ の O_{M₉} 上の事実と τ の O_{M₂₇} 上の事実を Nat 不等号で接着した連言であり、単一群の上付きフィルトレーションの 2 jump ではない。位数 9 の合成群 Gal(M₂₇/L₂) も持ち上げ σ̃ も未構成、Herbrand 商両立性未証明ゆえ **記録された退化は破れていない**（単一 break の位数3群が 1 つ増えただけ）。Herbrand/整数性層は Nat 定義＋rfl/omega で、iff 固定は両辺独立証明可能ゆえ何も拘束しない。sharpness は q9wr_G3_trivial の構造的転写。stage different 18 は B3 材料・Nat 層は mjw/ajw（非計上模型）と重複。ヘッダの「初めて破る/初めて非空虚」は過大として訂正済。(audit +0.03→0.17)"
         },
         {
           "id": "B5",

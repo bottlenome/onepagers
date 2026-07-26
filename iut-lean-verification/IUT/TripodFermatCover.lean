@@ -62,11 +62,18 @@
   二重計上の排除（監査向け）:
    - `quotCRing`/`idealRel`/`quotOf`/`quot_exact_ideal`（M109）・rsum 汎用則
      （M39/M40）・BLW-1..4 の全定理は**消費のみ・再証明ゼロ**。
-   - 本ファイルの新言明: Fermat 元とその係数決定・モニック 3 次による
-     次数論法（`tfc_low_degree_zero`）・商の分離性/正規形（本物の割り算
-     `tfc_reduce`）・デッキの商への降下（環自己同型・GAction）・商レベルの
-     忠実性・商上の二変数 Kummer descent・座標同一視 t=u³ ∧ 1−t=v³・
-     u³+v³=1・F₂ 語による商被覆の全デッキ実現。
+   - 本ファイルの新言明: Fermat 元とその係数決定・デッキの商への降下
+     （関係不変性 g³=h³=1・環自己同型・GAction）・座標同一視 t=u³ ∧ 1−t=v³・
+     u³+v³=1・商上の二変数 Kummer descent・F₂ 語による商被覆の全デッキ実現。
+     ★**正直な訂正（独立敵対監査 2026-07-21）**: 当初ここに「新言明」として挙げていた
+     `tfc_low_degree_zero`（次数論法）と `tfc_reduce`（割り算）は **新規ではない**——
+     リポジトリに既に一般形で存在する `poly_mul_g_bounded_zero`(M147F-5・
+     `IUT/PolyWeierstrass.lean`)・`poly_division_exists`/`poly_division_unique`
+     (M152F-3・`IUT/PolyDivision.lean`) の **再インスタンス化**である
+     （任意 CRing R・任意 p≥2 の `towerStepPoly` に対して述べられており、
+      R=ttcBase, p=3, piR=0, lamR=kmuTwin が本ファイルの tfcFermat に一致）。
+     監査はこの約 250 行を「確立イディオムの再導出であって新規数学ではない」と判定した。
+     真に新規なのは商の形成・座標同一視・デッキ降下（tfc-6）であり、A9 は +0.02→0.20。
    - BLW-2 の kmu_branch_u/v は再輸出しない（分岐値言明の再計上なし）。
 
   全て選択公理不使用（`#print axioms` = [propext, Quot.sound]・ファイル末尾で
@@ -175,8 +182,12 @@ theorem tfc_sub_sub_cancel (R : CRing) (a b : R.carrier) :
 
 /-- **定理 (tfc-1h): 1 − t = v³ は商でも**同一の t について**成立** — BLW-3 では
     「1−t′ = v³」（別の座標 t′）だった関係が、同一視 t = t′ により同じ t の関係に
-    昇格。Q は t-直線上に乗り、u 被覆の分岐値 ⊆ {0,∞}・v 被覆の分岐値 ⊆ {1,∞}
-    （BLW-2 kmu_branch_u/v）が**同一の基礎座標**に適用可能になる（tripod 三点性）。 -/
+    昇格。Q は t-直線上に乗る。
+    ★**正直な訂正（監査）**: 「u 被覆の分岐値 ⊆ {0,∞}・v 被覆の分岐値 ⊆ {1,∞} が
+    同一の基礎座標に適用可能になる（tripod 三点性）」は **散文であって定理ではない**——
+    本ファイルは分岐 locus / ramification の定理を一切証明しておらず
+    （kmu_branch_u/v は意図的に再輸出していない）、また K[v] 上の階数 3 のみを示し
+    **t-線上の degree 9 は証明していない**。「三点性が実現された」とは読まないこと。 -/
 theorem tfc_one_sub_t :
     tfcRing.add tfcRing.one (tfcRing.neg tfcT)
       = tfcRing.mul tfcV (tfcRing.mul tfcV tfcV) := by
