@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 711,
-  "verified_theorem_total": 2910,
-  "choice_free_count": 621,
+  "module_count": 712,
+  "verified_theorem_total": 2914,
+  "choice_free_count": 622,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8711,6 +8711,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ArtinRepReal.lean"
     },
     {
+      "id": "Q3ThetaQPilotAsymL9",
+      "label": "Q3ThetaQPilotAsymL9",
+      "milestone": null,
+      "title": "Q3ThetaQPilotAsymL9",
+      "pillar": "E",
+      "decl_count": 36,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ThetaQPilotAsymL9.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -12629,6 +12643,10 @@
       "target": "Q3TatePi1Etale"
     },
     {
+      "source": "Q3TateCoverTower",
+      "target": "Q3ThetaQPilotAsymL9"
+    },
+    {
       "source": "Q3TateCurve",
       "target": "Q3RamifiedQuadratic"
     },
@@ -12759,6 +12777,10 @@
     {
       "source": "Q3TemperedThetaClassL9",
       "target": "Q3TemperedThetaGaloisL9"
+    },
+    {
+      "source": "Q3TemperedThetaClassL9",
+      "target": "Q3ThetaQPilotAsymL9"
     },
     {
       "source": "Q3ThetaGroup",

@@ -713,5 +713,6 @@ import IUT.Q3TateCuspidalizationL9
 import IUT.ArakelovMetrizedLineReal
 import IUT.Q3KummerFrobenioidReal
 import IUT.Q3ArtinRepReal
+import IUT.Q3ThetaQPilotAsymL9
 import IUT.TripodFermatCover
 import IUT.TripodKummerMu3

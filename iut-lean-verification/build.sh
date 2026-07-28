@@ -2919,6 +2919,10 @@ import IUT
 #print axioms IUT.q9ar_conductor_discriminant_real
 #print axioms IUT.q9ar_chi_fix_zero
 #print axioms IUT.q9ar_codim_unique
+#print axioms IUT.q9tq_thetaVal_pow9
+#print axioms IUT.q9tq_thetaVal_npow_ne_one
+#print axioms IUT.q9tq_delta_ne_one
+#print axioms IUT.q9tq_g3_pow
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
