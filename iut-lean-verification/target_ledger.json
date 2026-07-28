@@ -136,8 +136,8 @@
           "id": "C3",
           "title": "実 Arakelov(実計量付き直線束・実算術次数)",
           "weight": 20,
-          "status": 0.05,
-          "note": "aml 実 ℚ 上の初の計量付き直線束（格子閉性・計量の斉次性/非負/正定値・テンソル乗法的かつ同型不変な次数）を実 b5_product_formula の上に建設（循環的 M351F 機構は import 閉包に一切含まれないことを監査が確認）。監査 0.05（forecast 下端）: headline §5 は B5 に定数を掛けたものでarithmetic 新規性ゼロ・格子は degree 理論が使わない Prop 述語・次数は (ℚ>0,×) で計量スケールも ℚ 限定ゆえ実 Arakelov 計量と Cor3.12 の不等式を表現できない。(audit +0.05→0.05)"
+          "status": 0.12,
+          "note": "aml 実 ℚ 上の初の計量付き直線束（格子閉性・計量の斉次性/非負/正定値・テンソル乗法的かつ同型不変な次数）を実 b5_product_formula の上に建設（循環的 M351F 機構は import 閉包に一切含まれないことを監査が確認）。監査 0.05（forecast 下端）: headline §5 は B5 に定数を掛けたものでarithmetic 新規性ゼロ・格子は degree 理論が使わない Prop 述語・次数は (ℚ>0,×) で計量スケールも ℚ 限定ゆえ実 Arakelov 計量と Cor3.12 の不等式を表現できない。(audit +0.05→0.05) | arm(M480F・832行) R8 監査が名指しした 3 ブロッカーのうち 2 つを実対象で閉鎖: **計量スケールを ℚ→実 ℝ**（`armBundle.met : RReal`＝Bishop 正則 Cauchy 列・aml では非有理スケールの束は**形成すらできなかった**ので型レベルの真の拡大）+ **ℝ 値の次数関数** `armDeg`（`rinvPos` による関数・∃関係でない）+ **格子が load-bearing**（`arm_codeg_le_norm` は armMemNZ を本質的に消費——m=0 でも s=q·(1/2) でも偽・監査が反例方向を確認）→ Riemann-Roch 判定 `arm_riemann_roch_criterion`。import 閉包(130)に循環4モジュール不含・LogVolBridge は推移的に入るが grep で **本体での使用ゼロ**を監査確認。監査 0.12（実装者予測 0.13–0.18 の下）: ★blocker(ii) は**値の型が一致しただけで 1/3 しか閉じていない**（log を構成せず次数は乗法的のまま・C4 の log-volume に触れる定理はゼロ）・約60%が aml からの idiom transport・§5 は B5 の定数倍で**三重計上**ゆえ 0 点・ℝ 拡大は 6 行の range 定理に依存し**無理数スケールの witness を提示していない**（リポには CubeRootTwoIrrational があるのに未使用）。「free logp に依存しない初の ℝ 値算術次数」は監査が grep で**真と確認**（ただし log を持たないことで循環を回避しただけ）。(audit +0.07→0.12)"
         },
         {
           "id": "C4",
@@ -156,7 +156,8 @@
           "id": "C6",
           "title": "実 Kummer-Frobenioid 両立",
           "weight": 10,
-          "status": 0
+          "status": 0.08,
+          "note": "q9kf(720行): ★**構造的発見**——Frobenioid 層は**算術入力ゼロ**だった（付値は `PicDivValuation` パラメータで、リポ唯一の先行インスタンスは `picDivTrivialVal`＝`ord := fun _ _ => 0` ゆえ `div ≡ 0`・監査が定義箇所 grep で独立確認）。本モジュールが**初の非自明インスタンス**（実 L₂^× の λ 付値・実 ℚ₃^× の 3 進付値）を注入し、literal な実立方商 `q9kfCubeQuot` と誘導次数準同型 `q9kfDegClass`（全射・[λ]↦生成元・[ζ₃],[4] を核へ）を建設、さらに **自らの基盤が不十分であることを定理化**（`q9kf_pic_bookkeeping_artifact`: 実付値データに対し Pic が非自明——局所体の真の Picard 群は 0）。監査 0.08（実装者予測 0.15 の下・E4 の 0.03 よりは明確に上）: ★**real↔real ではなく real↔bookkeeping**——`q9kfOrdL = fun x => x.1` は既存の積群の第一射影ゆえ Frobenioid 側の定理は全て `x.1` を経由し `q9kf_deg_eq_val` は 0+v=v、`q9kf_comp_degree_six` は rfl、morphism 群は既存 `frobCFrobMor`(M331F) の n=3,2 での**再インスタンス化**。headline は B6 の算術を wrapper 経由で再輸出したもの（`q9kf_frobenioid_detects_lambda` は `q9cq_lambda_nontrivial` と**同一証明**）で約70-80%が B6 既計上。核は**計算されておらず**「3 次元中 1 を見る」は「既知 2 類が核にある」+「v(unit)=0」の言い換え。Θ-link 越しの Kummer 両立と Galois コホモロジー側は**前進ゼロ**ゆえ A6 precedent に従い基盤クレジットに留める。(audit +0.08→0.08)"
         }
       ]
     },
