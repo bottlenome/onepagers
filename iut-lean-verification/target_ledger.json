@@ -91,8 +91,8 @@
           "id": "B3",
           "title": "実 Artin 導手/different(実表現・実分岐群上)",
           "weight": 20,
-          "status": 0.34,
-          "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27) | q9dv v(D)=6 値+q9di different イデアル対象 (audit +0.02→0.29) | q9cd codifferent trace-dual integral shadow + Tr(O_M)=embed(3·O) image-equality (audit +0.01→0.30) | q9fc 分数逆 different 𝔡⁻¹=(π₉⁻⁶) を実 fractional ideal 化（符号付 π₉-adic 付値表現・𝔡·𝔡⁻¹=O_M 両包含・実 different D に anchor・q9cd の deferred を昇格）(audit +0.02→0.32) | q9ds discriminant 𝔇=N_{M/L₂}(𝔡)=(λ⁶) 実 norm-descend ideal object・sharpness ¬λ⁷∣N(D)・N(π₉)=ζ₃−1=λ·unit (audit +0.02→0.34)"
+          "status": 0.42,
+          "note": "q9tw tower different d(M/ℚ₃)=6+3·1=9 (audit +0.06→0.26) | q9tf trace-different Tr(O_M)=(π₉⁶) 2nd characterization (audit +0.01→0.27) | q9dv v(D)=6 値+q9di different イデアル対象 (audit +0.02→0.29) | q9cd codifferent trace-dual integral shadow + Tr(O_M)=embed(3·O) image-equality (audit +0.01→0.30) | q9fc 分数逆 different 𝔡⁻¹=(π₉⁻⁶) を実 fractional ideal 化（符号付 π₉-adic 付値表現・𝔡·𝔡⁻¹=O_M 両包含・実 different D に anchor・q9cd の deferred を昇格）(audit +0.02→0.32) | q9ds discriminant 𝔇=N_{M/L₂}(𝔡)=(λ⁶) 実 norm-descend ideal object・sharpness ¬λ⁷∣N(D)・N(π₉)=ζ₃−1=λ·unit (audit +0.02→0.34) | q9ar(1019行) B3 の表題「実表現」を初めて供給——`q9arRep` は **real base ring O_{L₂}=ℤ₃[ζ₃] 上の smul を持つ加群＋Galois act＋線形性 act_smul**（`q9kd_sigma_fixes_base` から実証明・rfl でない）。監査が全ファイル grep で「smul と act を同一 structure に持つのは本ファイルのみ」を確認（先行 G-加群は ℤ 加群で基底環スカラーも線形性公理も無し・achRep は Nat 2 本）。3 本の階数1自由部分表現（存在**と一意性**）・実 Kummer 指標・**非自明作用**。★**make-or-break の codim spec 判別性は PASS**——監査が自作 falsifier 7 本をコンパイルし、誤値は全て反証可能・spec は rep 同士も分離・実フィルトレーションは非定数で i≤2/i≥3 の二分が実際に効く、と確認。監査 0.42: codim の**数値は依然 stipulative**（V^{G_i}∈{0,V} は実計算だが 0/1 への読み替えは定義で、length/rank 理論なし）・**正則表現自身の conductor は未計算**（0/1 spec は codim 2 を表現できず和は手で組立）・discriminant 側とフィルトレーションと指標は既計上の消費・約55-60%が三重複製/wrapper/未使用補題/capstone。副次発見: `q9ar_G_eq_G0` は content-free iff で下流未使用、`q9ar_cond_disc_value` の statement は単独で rfl 可証、既約性は定義も証明もされていない（ヘッダのみの主張・訂正済）。(audit +0.08→0.42)"
         },
         {
           "id": "B4",
