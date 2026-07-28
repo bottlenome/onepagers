@@ -715,5 +715,6 @@ import IUT.Q3KummerFrobenioidReal
 import IUT.Q3ArtinRepReal
 import IUT.Q3ThetaQPilotAsymL9
 import IUT.Q3NonicGaloisLiftReal
+import IUT.TripodFermatDomain
 import IUT.TripodFermatCover
 import IUT.TripodKummerMu3

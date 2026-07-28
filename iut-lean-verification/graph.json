@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 713,
-  "verified_theorem_total": 2917,
-  "choice_free_count": 623,
+  "module_count": 714,
+  "verified_theorem_total": 2920,
+  "choice_free_count": 624,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8737,6 +8737,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NonicGaloisLiftReal.lean"
     },
     {
+      "id": "TripodFermatDomain",
+      "label": "TripodFermatDomain",
+      "milestone": null,
+      "title": "TripodFermatDomain",
+      "pillar": "A",
+      "decl_count": 134,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[GenEll]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodFermatDomain.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -9161,6 +9175,10 @@
     {
       "source": "Cq3BezoutChain",
       "target": "Cq3Irreducible"
+    },
+    {
+      "source": "Cq3BezoutChain",
+      "target": "TripodFermatDomain"
     },
     {
       "source": "Cq3Field",
@@ -9735,6 +9753,10 @@
       "target": "TorsionResidue"
     },
     {
+      "source": "EisensteinUpper",
+      "target": "TripodFermatDomain"
+    },
+    {
       "source": "EllipticCurve",
       "target": "EllipticJInvariant"
     },
@@ -9789,6 +9811,10 @@
     {
       "source": "EvaluationHom",
       "target": "SeparableEmbeddings"
+    },
+    {
+      "source": "EvaluationHom",
+      "target": "TripodFermatDomain"
     },
     {
       "source": "FactorTheorem",
@@ -10245,6 +10271,10 @@
     {
       "source": "FractionField",
       "target": "RingLocalization"
+    },
+    {
+      "source": "FractionField",
+      "target": "TripodFermatDomain"
     },
     {
       "source": "FractionalIdeal",
@@ -14325,6 +14355,10 @@
     {
       "source": "TriSquare",
       "target": "ThetaValueEval"
+    },
+    {
+      "source": "TripodFermatCover",
+      "target": "TripodFermatDomain"
     },
     {
       "source": "TripodFreeGroup",

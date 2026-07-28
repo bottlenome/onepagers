@@ -2926,6 +2926,9 @@ import IUT
 #print axioms IUT.q27gl_st3
 #print axioms IUT.q27gl_st_mul
 #print axioms IUT.q27gl_two_jumps_one_group
+#print axioms IUT.tfd_no_zero_div
+#print axioms IUT.tfd_fermat_prime
+#print axioms IUT.tfd_nine_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
