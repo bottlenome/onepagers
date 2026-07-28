@@ -2904,6 +2904,9 @@ import IUT
 #print axioms IUT.q27cm_mu3_complete
 #print axioms IUT.q27cm_mu9_complete
 #print axioms IUT.q27cm_mu27_complete
+#print axioms IUT.qpr_norm_mul
+#print axioms IUT.qpr_product_formula
+#print axioms IUT.qpr_global_product_formula
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

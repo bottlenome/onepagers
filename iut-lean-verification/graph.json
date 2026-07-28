@@ -1,7 +1,7 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 706,
-  "verified_theorem_total": 2895,
+  "module_count": 707,
+  "verified_theorem_total": 2898,
   "choice_free_count": 617,
   "nodes": [
     {
@@ -8649,6 +8649,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3Mu27Mu3Kernel.lean"
     },
     {
+      "id": "QuadraticProductFormulaReal",
+      "label": "QuadraticProductFormulaReal",
+      "milestone": "M366R",
+      "title": "実二次体 ℚ(√D) の実ノルム乗法性と",
+      "pillar": "B",
+      "decl_count": 39,
+      "choice_free": false,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/QuadraticProductFormulaReal.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -8853,6 +8865,10 @@
     {
       "source": "B5ProductFormulaQ",
       "target": "ArakelovMetrizedLineQ"
+    },
+    {
+      "source": "B5ProductFormulaQ",
+      "target": "QuadraticProductFormulaReal"
     },
     {
       "source": "BelyiCubicReal",
@@ -12717,6 +12733,10 @@
     {
       "source": "Q3WildRamFiltrationReal",
       "target": "Q3NormFiltrationSpike"
+    },
+    {
+      "source": "QuadraticField",
+      "target": "QuadraticProductFormulaReal"
     },
     {
       "source": "QuadraticNorm",
