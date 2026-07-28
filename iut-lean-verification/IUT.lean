@@ -709,5 +709,6 @@ import IUT.Q3KummerH1Real
 import IUT.Q3CubeRankThree
 import IUT.Q3Mu27Mu3Kernel
 import IUT.QuadraticProductFormulaReal
+import IUT.Q3TateCuspidalizationL9
 import IUT.TripodFermatCover
 import IUT.TripodKummerMu3

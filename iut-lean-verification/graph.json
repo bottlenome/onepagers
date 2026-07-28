@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 707,
-  "verified_theorem_total": 2898,
-  "choice_free_count": 617,
+  "module_count": 708,
+  "verified_theorem_total": 2901,
+  "choice_free_count": 618,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8661,6 +8661,20 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/QuadraticProductFormulaReal.lean"
     },
     {
+      "id": "Q3TateCuspidalizationL9",
+      "label": "Q3TateCuspidalizationL9",
+      "milestone": null,
+      "title": "Q3TateCuspidalizationL9",
+      "pillar": "A",
+      "decl_count": 63,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [
+        "[EtTh]"
+      ],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCuspidalizationL9.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -12157,6 +12171,10 @@
     {
       "source": "Q3Etale9TwoDir",
       "target": "Q3EtaleArithPi1"
+    },
+    {
+      "source": "Q3Etale9TwoDir",
+      "target": "Q3TateCuspidalizationL9"
     },
     {
       "source": "Q3Etale9TwoDir",
