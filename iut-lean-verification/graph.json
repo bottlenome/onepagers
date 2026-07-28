@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 714,
-  "verified_theorem_total": 2920,
-  "choice_free_count": 624,
+  "module_count": 715,
+  "verified_theorem_total": 2924,
+  "choice_free_count": 625,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8751,6 +8751,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/TripodFermatDomain.lean"
     },
     {
+      "id": "Q3CubeQuotientFull",
+      "label": "Q3CubeQuotientFull",
+      "milestone": null,
+      "title": "Q3CubeQuotientFull",
+      "pillar": "B",
+      "decl_count": 104,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3CubeQuotientFull.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -12262,6 +12274,10 @@
     },
     {
       "source": "Q3CubeRankThree",
+      "target": "Q3CubeQuotientFull"
+    },
+    {
+      "source": "Q3CubeRankThree",
       "target": "Q3KummerFrobenioidReal"
     },
     {
@@ -12611,6 +12627,10 @@
     {
       "source": "Q3NormSurjComplete",
       "target": "Q3NormSurjCompleteLimit"
+    },
+    {
+      "source": "Q3NormSurjCompleteLimit",
+      "target": "Q3CubeQuotientFull"
     },
     {
       "source": "Q3NormSurjCompleteLimit",

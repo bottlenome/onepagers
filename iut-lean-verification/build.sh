@@ -2929,6 +2929,10 @@ import IUT
 #print axioms IUT.tfd_no_zero_div
 #print axioms IUT.tfd_fermat_prime
 #print axioms IUT.tfd_nine_unique
+#print axioms IUT.q9k4_deep_cube
+#print axioms IUT.q9k4_cube_iff
+#print axioms IUT.q9k4_rank_ge_four
+#print axioms IUT.q9k4_exhaust
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
