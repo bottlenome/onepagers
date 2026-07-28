@@ -105,7 +105,8 @@
           "id": "B5",
           "title": "大域類体論/積公式(実)",
           "weight": 15,
-          "status": 0.5
+          "status": 0.51,
+          "note": "qpr(M366R) M351F 循環の修復ルート: 実 ℚ(√D)(qdfCarrier=実ℚ×実ℚ・qdfNorm=x₁²−D x₂²) 上で **任意の非平方 D** に対するノルム乗法性 qpr_norm_mul を実証明し、非退化 witness を b5 の仮説へ配線して積公式を移送。import 閉包(47)に ProductFormula/ArakelovDivisor/QuadraticProductFormula/FrobArakelovBridge/LogVolume を**一切含まない**ことを親が独立確認。監査 0.51: ★**輸出された「ℚ(√D) 積公式」は decisively b5∘N**——結論は r のみに言及し証明項は文字通り `b5_product_formula r (qpr_rep_ne_zero …)` で、既に B5 0.50 が購入済の b5 の**特殊化（論理的に弱い）**。K の素点は未構成で ∏_{v|p}|x|_v^{d_v}=|N(x)|_p も未証明。★実装者の新規性 grep が狭く、`qnm_mul`(QuadraticNorm.lean・D=−1 の実 ℚ 上ノルム乗法性)が**既存**——真の増分は「任意 D への一般化」のみ（ヘッダ訂正済）。defect 除去はリポの健全性としては実在するが、B5 の 0.50 は元々 M366F でなく実 B5ProductFormulaQ への評点ゆえ回復すべき失点はなく **0 点**。(audit +0.01→0.51)"
         },
         {
           "id": "B6",

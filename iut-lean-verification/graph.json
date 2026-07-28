@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 708,
-  "verified_theorem_total": 2901,
-  "choice_free_count": 618,
+  "module_count": 710,
+  "verified_theorem_total": 2907,
+  "choice_free_count": 620,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8675,6 +8675,30 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3TateCuspidalizationL9.lean"
     },
     {
+      "id": "ArakelovMetrizedLineReal",
+      "label": "ArakelovMetrizedLineReal",
+      "milestone": "M480F",
+      "title": "ArakelovMetrizedLineReal",
+      "pillar": "C",
+      "decl_count": 67,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/ArakelovMetrizedLineReal.lean"
+    },
+    {
+      "id": "Q3KummerFrobenioidReal",
+      "label": "Q3KummerFrobenioidReal",
+      "milestone": null,
+      "title": "Q3KummerFrobenioidReal",
+      "pillar": "C",
+      "decl_count": 66,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerFrobenioidReal.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -8879,6 +8903,10 @@
     {
       "source": "B5ProductFormulaQ",
       "target": "ArakelovMetrizedLineQ"
+    },
+    {
+      "source": "B5ProductFormulaQ",
+      "target": "ArakelovMetrizedLineReal"
     },
     {
       "source": "B5ProductFormulaQ",
@@ -10227,6 +10255,10 @@
     {
       "source": "FrobenioidCategory",
       "target": "FrobenioidThetaLink"
+    },
+    {
+      "source": "FrobenioidCategory",
+      "target": "Q3KummerFrobenioidReal"
     },
     {
       "source": "FrobenioidLogThetaLattice",
@@ -12157,6 +12189,10 @@
       "target": "Q3ThetaKummerRealL9"
     },
     {
+      "source": "Q3CubeRankThree",
+      "target": "Q3KummerFrobenioidReal"
+    },
+    {
       "source": "Q3DifferentIdeal",
       "target": "Q3Codifferent"
     },
@@ -12986,6 +13022,10 @@
     },
     {
       "source": "RealDivision",
+      "target": "ArakelovMetrizedLineReal"
+    },
+    {
+      "source": "RealDivision",
       "target": "ConvergenceCapstone"
     },
     {
@@ -13035,6 +13075,10 @@
     {
       "source": "RealInv",
       "target": "ApartInv"
+    },
+    {
+      "source": "RealInv",
+      "target": "ArakelovMetrizedLineReal"
     },
     {
       "source": "RealInv",
@@ -13107,6 +13151,10 @@
     {
       "source": "RealMul",
       "target": "RealOrder"
+    },
+    {
+      "source": "RealMulOrder",
+      "target": "ArakelovMetrizedLineReal"
     },
     {
       "source": "RealMulOrder",

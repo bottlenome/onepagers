@@ -2910,6 +2910,12 @@ import IUT
 #print axioms IUT.q9cu_ker9_eq_e9
 #print axioms IUT.q9cu_ker3_eq_e3
 #print axioms IUT.q9cu_open_strict_9_3
+#print axioms IUT.arm_deg_tensor
+#print axioms IUT.arm_riemann_roch_criterion
+#print axioms IUT.arm_codeg_le_norm
+#print axioms IUT.q9kf_deg_kummer_invariant
+#print axioms IUT.q9kf_degree_kummer_compatibility
+#print axioms IUT.q9kf_pic_bookkeeping_artifact
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

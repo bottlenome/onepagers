@@ -710,5 +710,7 @@ import IUT.Q3CubeRankThree
 import IUT.Q3Mu27Mu3Kernel
 import IUT.QuadraticProductFormulaReal
 import IUT.Q3TateCuspidalizationL9
+import IUT.ArakelovMetrizedLineReal
+import IUT.Q3KummerFrobenioidReal
 import IUT.TripodFermatCover
 import IUT.TripodKummerMu3
