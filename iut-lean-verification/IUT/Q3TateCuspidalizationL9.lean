@@ -37,8 +37,31 @@
    * q9cu-4  ★★★ **cuspidalization 開曲線塔**: `q9cuOpen9`=E∖E[9] → `q9cuOpen3`=E∖E[3] →
              `q9cuPunct`=E∖{O}（制限射 `q9cuStep1`/`q9cuStep2`・包含 `q9cuIncl93`/`q9cuIncl3P`・
              合成＝[9]-制限射 `q9cu_tower_comm`）・**各段の開部分が真に異なる**
-             （`q9cu_open_strict_9_3`: [3]∈E∖E[3] だが ∉E∖E[9]、`q9cu_open_strict_3_punct`:
-             [27]∈E∖{O} だが ∉E∖E[3]）——被覆塔が退化していないことの実 witness
+             （`q9cu_open_strict_9_3`・`q9cu_open_strict_3_punct`）
+  ══════════════════════════════════════════════════════════════════
+  ★ 正直な訂正（独立敵対監査 2026-07-21・親が code で独立確認・§4 に従い削除しない）★
+   1. 上の「[3]∈E∖E[3] だが ∉E∖E[9]」という読み方は **誤り**。`q9cu_open_strict_9_3` の
+      **statement には開部分（subtype）が一切現れない**——実体は
+      `q9cuPow3.map q9tl3pt ≠ one ∧ q9cuPow9.map q9tl3pt = one` すなわち **コンパクト台
+      `q9tlCurve` 上の捻れ述語の連言**であり、しかも証明は
+      `⟨q9tl_3_tor 3 _ _, q9tl_3pt_pow9⟩`＝**既存 q9tl 補題 2 本の連言で新規証明ゼロ**。
+      したがって「開部分をコンパクト E に置き換えると偽になる」という falsifier は
+      **成立しない**（置き換える開部分が statement に無い）。
+   2. 旗艦 `q9cu_tower_comm` も証明は `q9cu_pow3_pow3 x.val`＝**コンパクト曲線の恒等式
+      (x³)³=x⁹** であり、3 つの subtype をコンパクト台に置換しても statement・証明とも
+      そのまま通る。よって本ファイルの内容は「**コンパクト曲線の捻れフィルトレーションに
+      subtype の装飾を付けたもの**」であって、punctured 対象についての主張ではない。
+      punctured 固有の真の内容は `q9cu_open9_sub3` と `q9cuStep1` の well-definedness
+      （いずれも E[3]⊆E[9] の対偶・各 3 行）に限られる。
+   3. **新たに判明した gap**: 旗艦の塔の始域 `q9cuOpen9` は本ファイル・リポ全体を通じて
+      **非空であることが一度も証明されていない**（`Nonempty`/witness 皆無）。
+      `q9cuOpen3`・`q9cuPunct` は [3]・[27] で inhabited だが、塔の頂点は未証明であり、
+      Lean の知る限り `q9cu_tower_comm`/`q9cuStep1` は **空型上の量化かもしれない**。
+   4. ker[9] の ★★ 見出しの順方向は `exact q9td_phi_surjective x h` の **1 行**であり、
+      その実質は A4（0.59）で既に計上済の定理。ファイルの約 40% は transport/capstone/
+      自己クローンで新規数学を含まない。
+   監査結果 **A8 0.66 → 0.67（+0.01）**。cap 0.72–0.75 は不変。
+  ══════════════════════════════════════════════════════════════════
    * q9cu-5  ファイバー＝cusp 剰余類（`q9cu_fiber9_coset`/`q9cu_fiber3_coset`）・
              デッキは開部分を保つ（`q9cu_deck9_open`/`q9cu_deck3_open9`）・自由（`q9cu_deck_free`）
    * q9cu-6  ★ **[9]・[3] は M 点で非全射**（`q9cu_pow9_not_surjective`/`q9cu_pow3_not_surjective`・

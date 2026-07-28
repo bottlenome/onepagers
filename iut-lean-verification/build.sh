@@ -2916,6 +2916,9 @@ import IUT
 #print axioms IUT.q9kf_deg_kummer_invariant
 #print axioms IUT.q9kf_degree_kummer_compatibility
 #print axioms IUT.q9kf_pic_bookkeeping_artifact
+#print axioms IUT.q9ar_conductor_discriminant_real
+#print axioms IUT.q9ar_chi_fix_zero
+#print axioms IUT.q9ar_codim_unique
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 

@@ -58,8 +58,8 @@
           "id": "A8",
           "title": "楕円曲線/Tate 曲線の実被覆・cuspidalization",
           "weight": 12,
-          "status": 0.66,
-          "note": "q3c3 [3]-isogeny E₉[3](ℚ₃)={O} trivial-deck (audit +0.01→0.66)"
+          "status": 0.67,
+          "note": "q3c3 [3]-isogeny E₉[3](ℚ₃)={O} trivial-deck (audit +0.01→0.66) | q9cu(664行) level-9 実 Tate 曲線上の初の自己同種写像 [3]/[9]・ker[9]=有理 9-捻れ・**E[3](M)≅(ℤ/3)² は真に新規**（q9td は 9-捻れのみ・q3c3 は別体・q3tl は別曲線）・開曲線 2 段塔。監査 0.67: ★**実装者の falsifier が反証された**——`q9cu_open_strict_9_3` の statement には**開部分が現れず**コンパクト台上の捻れ述語の連言で、証明も既存 q9tl 補題 2 本の連言（新規ゼロ）。旗艦 `q9cu_tower_comm` の証明も `q9cu_pow3_pow3 x.val`＝コンパクト曲線の恒等式で、subtype をコンパクト台に置換しても通る。よって「コンパクト曲線の捻れフィルトレーション＋subtype 装飾」であって punctured 対象の主張ではない。★**新 gap**: 塔の始域 `q9cuOpen9` の非空性が未証明（空型上の量化かもしれない）。ker[9] 見出しの順方向は `q9td_phi_surjective` 1 行＝A4 既計上。約 40% が transport/capstone/自己クローン。cuspidal inertia=0・開曲線 π₁ 未・cap 0.72–0.75 不変。(audit +0.01→0.67)"
         },
         {
           "id": "A9",

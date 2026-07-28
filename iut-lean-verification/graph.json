@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 710,
-  "verified_theorem_total": 2907,
-  "choice_free_count": 620,
+  "module_count": 711,
+  "verified_theorem_total": 2910,
+  "choice_free_count": 621,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8699,6 +8699,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3KummerFrobenioidReal.lean"
     },
     {
+      "id": "Q3ArtinRepReal",
+      "label": "Q3ArtinRepReal",
+      "milestone": null,
+      "title": "Q3ArtinRepReal",
+      "pillar": "B",
+      "decl_count": 83,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ArtinRepReal.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -12155,6 +12167,10 @@
     {
       "source": "ProfiniteTopology",
       "target": "ProfinitePi1"
+    },
+    {
+      "source": "Q3ArtinConductorReal",
+      "target": "Q3ArtinRepReal"
     },
     {
       "source": "Q3ArtinConductorReal",
