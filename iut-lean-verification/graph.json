@@ -1,8 +1,8 @@
 {
   "generated_from": "IUT.lean + IUT/*.lean + build.sh",
-  "module_count": 712,
-  "verified_theorem_total": 2914,
-  "choice_free_count": 622,
+  "module_count": 713,
+  "verified_theorem_total": 2917,
+  "choice_free_count": 623,
   "nodes": [
     {
       "id": "Arithmetic",
@@ -8725,6 +8725,18 @@
       "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3ThetaQPilotAsymL9.lean"
     },
     {
+      "id": "Q3NonicGaloisLiftReal",
+      "label": "Q3NonicGaloisLiftReal",
+      "milestone": null,
+      "title": "Q3NonicGaloisLiftReal",
+      "pillar": "B",
+      "decl_count": 85,
+      "choice_free": true,
+      "has_honest_scope": true,
+      "refs": [],
+      "github_url": "https://github.com/bottlenome/onepagers/blob/main/iut-lean-verification/IUT/Q3NonicGaloisLiftReal.lean"
+    },
+    {
       "id": "TripodFermatCover",
       "label": "TripodFermatCover",
       "milestone": null,
@@ -12251,6 +12263,10 @@
       "target": "Q3EtaleArithPi1Weil"
     },
     {
+      "source": "Q3GenLowerFiltrationReal",
+      "target": "Q3NonicGaloisLiftReal"
+    },
+    {
       "source": "Q3GradedNormBreak",
       "target": "Q3LocalReciprocityReal"
     },
@@ -12797,6 +12813,10 @@
     {
       "source": "Q3TowerDifferentReal",
       "target": "Q3Discriminant"
+    },
+    {
+      "source": "Q3TwoBreakHasseArfReal",
+      "target": "Q3NonicGaloisLiftReal"
     },
     {
       "source": "Q3UnitTameDecomp",

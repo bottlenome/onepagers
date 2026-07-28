@@ -2923,6 +2923,9 @@ import IUT
 #print axioms IUT.q9tq_thetaVal_npow_ne_one
 #print axioms IUT.q9tq_delta_ne_one
 #print axioms IUT.q9tq_g3_pow
+#print axioms IUT.q27gl_st3
+#print axioms IUT.q27gl_st_mul
+#print axioms IUT.q27gl_two_jumps_one_group
 EOF
 lake env lean /tmp/iut_check_axioms.lean
 
