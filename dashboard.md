@@ -45,3 +45,9 @@ onepagers/
 3. `<project名>/docs/tasks/` を作成（詳細タスク用）
 4. ルートの `index.html` のグリッドにカードを追加
 5. このファイルのプロジェクト一覧テーブルに行を追加
+
+## アクセス解析
+
+- Cloudflare Web Analytics（無料・手動設置）で一覧と11作品を比較。Open Chatbot / Bonsai Chat は対象外。
+- IUT 詳細レポートは直接閲覧のみ集計し、マップ内の埋め込み表示は除外。
+- [アクセス解析について](privacy.html) / [運用・検証](docs/tasks/web-analytics.md)

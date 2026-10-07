@@ -505,3 +505,9 @@ iut-lean-verification/
 | 実体建設の続き: 分岐部分（O^× の構造論 = 主単数 filtration の ℤ_p 加群構造・Lubin–Tate）・rec の Galois 群に対する同型性の実証明 | todo |
 | 実体建設の続き: ℤ_p の構成 → 局所体の構造論 → 局所類体論（M10 の公理化フィールドの実証明化） | todo |
 | M2 実体（prime-strip 圏論データ）の形式化 | todo |
+
+## アクセス解析
+
+- 公開サイトのみ Cloudflare Web Analytics でページ閲覧を集計（Cookie 不使用）。
+- 入力内容や保存データは送信しない。ローカルコピーと埋め込み表示は対象外。
+- 詳細: [アクセス解析について](../privacy.html) / [運用・検証](../docs/tasks/web-analytics.md)

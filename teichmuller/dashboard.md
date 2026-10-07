@@ -96,3 +96,9 @@ teichmuller/
 - 論争についても公平に記載（証明の受容状況は2025年時点でも未決着）
 - 姉妹プロジェクト `verify-teichmuller-errors/` で系3.12 の独立検証を実施済み
 - 姉妹プロジェクト `iut-lean-verification/` で pdf/ を一次資料とした Lean 4 形式検証を実施済み（論争の二分法を機械証明）
+
+## アクセス解析
+
+- 公開サイトのみ Cloudflare Web Analytics でページ閲覧を集計（Cookie 不使用）。
+- 入力内容や保存データは送信しない。ローカルコピーと埋め込み表示は対象外。
+- 詳細: [アクセス解析について](../privacy.html) / [運用・検証](../docs/tasks/web-analytics.md)

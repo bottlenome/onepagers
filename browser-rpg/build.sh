@@ -64,6 +64,11 @@ cat src/plugins/social.js >> "$OUT"
 # --- Main ---
 cat src/main.js >> "$OUT"
 
-echo '</script></body></html>' >> "$OUT"
+cat <<'HTMLFOOT' >> "$OUT"
+</script>
+<p data-onepagers-privacy style="margin:1rem auto;padding:0 .75rem;text-align:center;font-size:.75rem;line-height:1.6;color:#94a3b8">アクセス解析: Cloudflare（Cookie 不使用） · <a href="../privacy.html" style="color:#7dd3fc" target="_blank" rel="noopener">送信する情報と対象ページ</a></p>
+<script defer src="../analytics.js"></script>
+</body></html>
+HTMLFOOT
 
 echo "✓ Built $OUT ($(wc -c < "$OUT") bytes)"
