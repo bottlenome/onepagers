@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アクセス解析について - OnePagers</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0f172a; color: #e2e8f0; font: 1rem/1.8 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { max-width: 48rem; margin: auto; padding: 2rem 1.25rem; }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.15rem; margin-top: 2rem; }
+    a { color: #7dd3fc; } li { margin: .5rem 0; }
+    .muted { color: #94a3b8; }
+  </style>
+</head>
+<body>
+<main>
+  <a href="index.html">← OnePagers</a>
+  <h1>アクセス解析について</h1>
+  <p>作品の利用状況を把握して改善するため、公開サイトの一覧と一部の作品で Cloudflare Web Analytics を利用します。</p>
+  <h2>Cloudflare に送られる情報</h2>
+  <p>閲覧ページのパス、参照元、ブラウザー・OS・端末の種類、ページの表示速度などの情報が送られます。国別の集計も行われます。</p>
+  <ul>
+    <li>このアクセス解析は Cookie やローカルストレージを使いません。</li>
+    <li>チャットやフォームの入力内容、ゲームのセーブデータは解析に送りません。</li>
+    <li>閲覧ページと参照元の URL のクエリ文字列（? 以降）やフラグメント（# 以降）は解析に送りません。</li>
+    <li>通信時には Cloudflare が IP アドレスを受け取りますが、Cloudflare の説明では処理するデータセンターで破棄し、主要なデータベースやログには保存しません。</li>
+  </ul>
+  <h2>対象と対象外</h2>
+  <p>一覧ページと、Open Chatbot・Bonsai Chat を除く各作品が対象です。IUT の詳細レポートは直接開いた場合のみ対象で、マップ内への埋め込み表示は二重計測しません。チャットの2作品、この説明ページ、ダウンロードしたローカルのコピーでは、この解析を読み込みません。</p>
+  <h2>詳しい説明</h2>
+  <p><a href="https://developers.cloudflare.com/speed/observatory/rum-beacon/" rel="noreferrer">Cloudflare のデータ収集・プライバシーの説明</a><br>
+  <a href="https://developers.cloudflare.com/web-analytics/faq/" rel="noreferrer">Cloudflare Web Analytics FAQ</a><br>
+  <a href="https://www.cloudflare.com/privacypolicy/" rel="noreferrer">Cloudflare プライバシーポリシー</a></p>
+  <p class="muted">広告ブロッカー等により解析が無効でも、作品は利用できます。</p>
+</main>
+</body>
+</html>

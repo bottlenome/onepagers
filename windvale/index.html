@@ -120,6 +120,7 @@
       <button id="btnNew">はじめから</button>
       <button id="btnCont" style="display:none">つづきから</button>
     </div>
+    <p data-onepagers-privacy style="margin:1rem auto;padding:0 .75rem;text-align:center;font-size:.75rem;line-height:1.6;color:#94a3b8">アクセス解析: Cloudflare（Cookie 不使用） · <a href="../privacy.html" style="color:#7dd3fc" target="_blank" rel="noopener">送信する情報と対象ページ</a></p>
     <div class="ctrl">
       移動: WASD / 矢印キー ｜ ダッシュ: Shift ｜ 攻撃: Space / J ｜ 調べる・開ける: E<br>
       料理を食べる: F ｜ 武器切替: 1〜5 / Q ｜ マップ&ワープ: M<br>
@@ -1100,5 +1101,6 @@ $('btnNew').onclick=()=>{ sfx('pick'); startGame(false); };
 $('btnCont').onclick=()=>{ sfx('pick'); startGame(true); };
 if(localStorage.getItem(SAVE_KEY)) $('btnCont').style.display='inline-block';
 </script>
+<script defer src="../analytics.js"></script>
 </body>
 </html>
